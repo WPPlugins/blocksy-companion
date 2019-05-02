@@ -6,7 +6,8 @@ class Dashboard {
 	public function __construct() {
 		add_action(
 			'admin_enqueue_scripts',
-			[ $this, 'enqueue_static' ]
+			[ $this, 'enqueue_static' ],
+			100
 		);
 	}
 
@@ -16,10 +17,15 @@ class Dashboard {
 
 		$data = get_plugin_data(BLOCKSY__FILE__);
 
+		$deps = apply_filters('blocksy-dashboard-scripts-dependencies', [
+			'wp-i18n',
+			'ct-options-scripts'
+		]);
+
 		wp_enqueue_script(
 			'blocksy-dashboard-scripts',
 			BLOCKSY_URL . 'static/bundle/dashboard.js',
-			['wp-i18n', 'ct-dashboard-scripts'],
+			$deps,
 			$data['Version'],
 			true
 		);

@@ -1,8 +1,6 @@
 <?php
 
-require_once dirname( __FILE__ ) . '/helpers.php';
-
-class Blocksy_Widget_Ct_Instagram extends Blocksy_Widget_Factory {
+class Blocksy_Widget_Ct_Instagram extends BlocksyWidgetFactory {
 	protected function get_config() {
 		return [
 			'name' => 'Instagram',

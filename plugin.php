@@ -21,8 +21,10 @@ class Plugin {
 	public $extensions_api = null;
 
 	public $dashboard = null;
-
 	public $theme_integration = null;
+
+	// Features
+	public $feat_google_analytics = null;
 
 	/**
 	 * Instance.
@@ -46,6 +48,11 @@ class Plugin {
 			return;
 		}
 
+		add_action('widgets_init', [
+			'BlocksyWidgetFactory',
+			'register_all_widgets',
+		]);
+
 		$this->extensions_api = new ExtensionsManagerApi();
 		$this->theme_integration = new ThemeIntegration();
 	}
@@ -61,7 +68,10 @@ class Plugin {
 		}
 
 		$this->extensions = new ExtensionsManager();
+
 		$this->dashboard = new Dashboard();
+
+		$this->feat_google_analytics = new GoogleAnalytics();
 	}
 
 	/**
@@ -92,7 +102,7 @@ class Plugin {
 	}
 
 	private function check_if_blocksy_is_activated() {
-		return wp_get_theme()->get('Name') === 'Blocksy';
+		return strpos(wp_get_theme()->get('Name'), 'Blocksy') !== false;
 	}
 }
 

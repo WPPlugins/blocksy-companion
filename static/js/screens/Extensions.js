@@ -2,42 +2,25 @@ import {
 	createElement,
 	Component,
 	useEffect,
-	useState
+	useState,
+	Fragment
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'
+import useExtensionReadme from '../helpers/useExtensionReadme'
+import useActivationAction from '../helpers/useActivationAction'
 
 let exts_status_cache = null
 
 const Extension = ({ extension, onExtsSync }) => {
-	const [isLoading, setIsLoading] = useState(false)
-
-	const makeAction = async (ext, actionName) => {
-		const body = new FormData()
-		body.append('ext', ext)
-		body.append('action', actionName)
-
-		setIsLoading(true)
-
-		try {
-			await fetch(ctDashboardLocalizations.ajax_url, {
-				method: 'POST',
-				body
-			})
-
-			onExtsSync()
-		} catch (e) {}
-
-		await new Promise(r => setTimeout(() => r(), 1000))
-
-		setIsLoading(false)
-	}
+	const [showReadme, readme] = useExtensionReadme(extension)
+	const [isLoading, activationAction] = useActivationAction(extension, () => {
+		onExtsSync()
+	})
 
 	return (
-		<li>
-			<h4 className="ct-extension-title">
-				{extension.config.name}
-			</h4>
+		<li className={classnames({ active: !!extension.__object })}>
+			<h4 className="ct-extension-title">{extension.config.name}</h4>
 
 			{extension.config.description && (
 				<div className="ct-extension-description">
@@ -50,19 +33,27 @@ const Extension = ({ extension, onExtsSync }) => {
 					className="ct-button"
 					data-button="white"
 					disabled={isLoading}
-					onClick={() =>
-						makeAction(
-							extension.name,
-							extension.__object
-								? 'blocksy_extension_deactivate'
-								: 'blocksy_extension_activate'
-						)
-					}>
+					onClick={() => activationAction()}>
 					{isLoading
 						? __('Loading')
-						: extension.__object ? __('Deactivate') : __('Activate')}
+						: extension.__object
+							? __('Deactivate')
+							: __('Activate')}
 				</button>
+
+				{extension.readme && (
+					<button
+						onClick={() => showReadme()}
+						data-button="white"
+						className="ct-minimal-button ct-instruction">
+						<svg width="16" height="16" viewBox="0 0 24 24">
+							<path d="M12,2C6.477,2,2,6.477,2,12s4.477,10,10,10s10-4.477,10-10S17.523,2,12,2z M12,17L12,17c-0.552,0-1-0.448-1-1v-4 c0-0.552,0.448-1,1-1h0c0.552,0,1,0.448,1,1v4C13,16.552,12.552,17,12,17z M12.5,9h-1C11.224,9,11,8.776,11,8.5v-1 C11,7.224,11.224,7,11.5,7h1C12.776,7,13,7.224,13,7.5v1C13,8.776,12.776,9,12.5,9z" />
+						</svg>
+					</button>
+				)}
 			</div>
+
+			{readme}
 		</li>
 	)
 }
@@ -117,15 +108,38 @@ const Extensions = () => {
 
 			{!isLoading &&
 				exts.length > 0 && (
-					<ul>
-						{exts.map(ext => (
-							<Extension
-								key={ext.name}
-								extension={ext}
-								onExtsSync={() => syncExts()}
-							/>
-						))}
-					</ul>
+					<Fragment>
+						<div className="ct-info">
+							<i />
+
+							<p>
+								{__(
+									'Supercharge your website with the help of this extensions. Display your Instagram feed, add a Trending Posts widget, collect subscribers and more...'
+								)}
+							</p>
+						</div>
+
+						<ul>
+							{exts.map(ext => {
+								let CustomComponent = {
+									extension: Extension
+								}
+
+								ctEvents.trigger('ct:extensions:card', {
+									CustomComponent,
+									extension: ext
+								})
+
+								return (
+									<CustomComponent.extension
+										key={ext.name}
+										extension={ext}
+										onExtsSync={() => syncExts()}
+									/>
+								)
+							})}
+						</ul>
+					</Fragment>
 				)}
 		</div>
 	)

@@ -5,6 +5,11 @@ namespace Blocksy;
 class ExtensionsManagerApi {
 	public function __construct() {
 		$this->attach_ajax_actions();
+
+		if (wp_doing_ajax()) {
+			$manager = Plugin::instance()->extensions;
+			$manager->do_extensions_preboot();
+		}
 	}
 
 	protected $ajax_actions = [
@@ -16,14 +21,14 @@ class ExtensionsManagerApi {
 
 	public function blocksy_extensions_status() {
 		$this->check_capability( 'edit_plugins' );
+		$manager = Plugin::instance()->extensions;
 
-		$manager = new ExtensionsManager();
 		wp_send_json_success($manager->get_extensions());
 	}
 
 	public function blocksy_extension_activate() {
 		$this->check_capability( 'edit_plugins' );
-		$manager = new ExtensionsManager();
+		$manager = Plugin::instance()->extensions;
 
 		$manager->activate_extension($this->get_extension_from_request());
 
@@ -32,7 +37,7 @@ class ExtensionsManagerApi {
 
 	public function blocksy_extension_deactivate() {
 		$this->check_capability( 'edit_plugins' );
-		$manager = new ExtensionsManager();
+		$manager = Plugin::instance()->extensions;
 
 		$manager->deactivate_extension($this->get_extension_from_request());
 
@@ -40,7 +45,7 @@ class ExtensionsManagerApi {
 	}
 
 	public function check_capability( $cap = 'install_plugins' ) {
-		$manager = new ExtensionsManager();
+		$manager = Plugin::instance()->extensions;
 
 		if ( ! $manager->can( $cap ) ) {
 			wp_send_json_error();

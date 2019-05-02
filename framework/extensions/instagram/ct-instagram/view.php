@@ -16,7 +16,6 @@ if ( empty( $title ) ) {
 
 $images_per_row = blocksy_akg( 'instagram_images_per_row', $atts, '2' );
 
-
 echo $before_widget . $before_title . $title . $after_title;
 
 $photos_number = intval( blocksy_default_akg( 'photos_number', $atts, '6' ) );
@@ -29,11 +28,6 @@ $widget_data = json_encode(
 );
 
 ?>
-
-<?php if ( false && ! empty( $instagram_photos ) ) { ?>
-	<ul data-row="<?php echo $images_per_row; ?>">
-	</ul>
-<?php } ?>
 
 <ul
 	class="ct-loading"

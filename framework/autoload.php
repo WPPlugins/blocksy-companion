@@ -24,7 +24,14 @@ class Autoloader {
 		'ExtensionsManager' => 'framework/extensions-manager.php',
 		'ExtensionsManagerApi' => 'framework/extensions-manager-api.php',
 		'Dashboard' => 'framework/dashboard.php',
-		'ThemeIntegration' => 'framework/theme-integration.php'
+		'ThemeIntegration' => 'framework/theme-integration.php',
+
+		'GoogleAnalytics' => 'framework/features/google-analytics.php',
+
+		/**
+		 * No namespace
+		 */
+		'_BlocksyWidgetFactory' => 'framework/widgets-manager.php'
 	];
 
 	/**
@@ -77,13 +84,22 @@ class Autoloader {
 	 * @param string $class Class name.
 	 */
 	private static function autoload( $class ) {
-		if ( 0 !== strpos( $class, __NAMESPACE__ . '\\' ) ) {
+		if (
+			0 !== strpos( $class, __NAMESPACE__ . '\\' )
+			&&
+			! isset( self::$classes_map[ '_' . $class ] )
+		) {
 			return;
 		}
 
 		$relative_class_name = preg_replace( '/^' . __NAMESPACE__ . '\\\/', '', $class );
 
 		$final_class_name = __NAMESPACE__ . '\\' . $relative_class_name;
+
+		if ( isset( self::$classes_map[ '_' . $relative_class_name ] ) ) {
+			$final_class_name = $relative_class_name;
+			$relative_class_name = '_' . $relative_class_name;
+		}
 
 		if ( ! class_exists( $final_class_name ) ) {
 			self::load_class( $relative_class_name );
