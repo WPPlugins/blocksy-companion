@@ -1,14 +1,12 @@
-<h1><?php echo __('Instructions', 'blc'); ?></h1>
+<h2><?php echo __('Instructions', 'blc'); ?></h2>
 
 <p>
 	<?php echo __('After installing and activating the Mailchimp extension you will have two possibilities to show your subscribe form:', 'blc') ?>
 </p>
 
-<ol>
+<ol class="ct-modal-list">
 	<li>
-		<b>
-			<?php echo __('Mailchimp Widget', 'blc') ?>
-		</b>
+		<h4><?php echo __('Mailchimp Widget', 'blc') ?></h4>
 		<i>
 		<?php
 			echo sprintf(
@@ -23,9 +21,7 @@
 	</li>
 
 	<li>
-		<b>
-			<?php echo __('Mailchimp Block', 'blc') ?>
-		</b>
+		<h4><?php echo __('Mailchimp Block', 'blc') ?></h4>
 		<i>
 		<?php
 			echo sprintf(
@@ -39,5 +35,3 @@
 		</i>
 	</li>
 </ol>
-
-

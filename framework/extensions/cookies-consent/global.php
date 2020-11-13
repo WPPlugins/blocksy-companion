@@ -1,44 +1,66 @@
 <?php
 
-// Cookie
-$cookieContentColor = blocksy_get_colors( get_theme_mod(
-	'cookieContentColor',
-	[ 'default' => [ 'color' => 'var(--paletteColor3)' ] ]
-));
+// Content color
+blc_call_fn(['fn' => 'blocksy_output_colors'], [
+	'value' => get_theme_mod('cookieContentColor'),
+	'default' => [
+		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+	],
+	'css' => $css,
+	'variables' => [
+		'default' => [
+			'selector' => '.cookie-notification',
+			'variable' => 'color'
+		],
 
-$css->put(
-	':root',
-	"--cookieContentColor: {$cookieContentColor['default']}"
-);
+		'hover' => [
+			'selector' => '.cookie-notification',
+			'variable' => 'colorHover'
+		],
+	],
+]);
 
-$cookieButtonBackground = blocksy_get_colors( get_theme_mod(
-	'cookieButtonBackground',
-	[
+// Button color
+blc_call_fn(['fn' => 'blocksy_output_colors'], [
+	'value' => get_theme_mod('cookieButtonBackground'),
+	'default' => [
 		'default' => [ 'color' => 'var(--paletteColor1)' ],
 		'hover' => [ 'color' => 'var(--paletteColor2)' ],
-	]
-));
+	],
+	'css' => $css,
+	'variables' => [
+		'default' => [
+			'selector' => '.cookie-notification',
+			'variable' => 'buttonInitialColor'
+		],
 
-$css->put(
-	'.cookie-notification',
-	"--buttonInitialColor: {$cookieButtonBackground['default']}"
-);
+		'hover' => [
+			'selector' => '.cookie-notification',
+			'variable' => 'buttonHoverColor'
+		]
+	],
+]);
 
-$css->put(
-	'.cookie-notification',
-	"--buttonHoverColor: {$cookieButtonBackground['hover']}"
-);
 
-$cookieBackground = blocksy_get_colors( get_theme_mod(
-	'cookieBackground',
-	[ 'default' => [ 'color' => '#ffffff' ] ]
-));
-
-$css->put(
-	':root',
-	"--cookieBackground: {$cookieBackground['default']}"
-);
+// Background color
+blc_call_fn(['fn' => 'blocksy_output_colors'], [
+	'value' => get_theme_mod('cookieBackground'),
+	'default' => [
+		'default' => [ 'color' => '#ffffff' ],
+	],
+	'css' => $css,
+	'variables' => [
+		'default' => [
+			'selector' => '.cookie-notification',
+			'variable' => 'backgroundColor'
+		],
+	],
+]);
 
 $cookieMaxWidth = get_theme_mod( 'cookieMaxWidth', 400 );
-$css->put( ':root', '--cookieMaxWidth: ' . $cookieMaxWidth . 'px' );
+$css->put(
+	'.cookie-notification',
+	'--maxWidth: ' . $cookieMaxWidth . 'px'
+);
 

@@ -1,6 +1,7 @@
 import './variables'
+import ctEvents from 'ct-events'
 
-import { renderWithStrategy } from '../../../instagram/static/js/sync/helpers'
+import { renderWithStrategy } from './sync/helpers'
 
 const maybeAnimateCookiesConsent = cb => {
 	if (document.querySelector('.cookie-notification')) return
@@ -23,9 +24,11 @@ const render = () => {
 		return
 	}
 
-	notification.querySelector('p').innerHTML = wp.customize(
-		'cookie_consent_content'
-	)()
+	if (notification.querySelector('.ct-cookies-content')) {
+		notification.querySelector(
+			'.ct-cookies-content'
+		).innerHTML = wp.customize('cookie_consent_content')()
+	}
 
 	notification.querySelector('button.ct-accept').innerHTML = wp.customize(
 		'cookie_consent_button_text'
@@ -41,7 +44,7 @@ const render = () => {
 	)
 
 	if (didInsert) {
-		setTimeout(() => window.ctEvents.trigger('blocksy:cookies:init'))
+		setTimeout(() => ctEvents.trigger('blocksy:cookies:init'))
 	}
 }
 
@@ -52,3 +55,11 @@ wp.customize('cookie_consent_content', val =>
 )
 wp.customize('cookie_consent_button_text', val => val.bind(to => render()))
 wp.customize('cookie_consent_type', val => val.bind(to => render()))
+
+wp.customize('forms_cookie_consent_content', val =>
+	val.bind(to =>
+		[...document.querySelectorAll('.gdpr-confirm-policy label')].map(
+			el => (el.innerHTML = to)
+		)
+	)
+)

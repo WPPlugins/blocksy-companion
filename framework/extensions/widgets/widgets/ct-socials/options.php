@@ -43,65 +43,15 @@ $options = [
 			],
 
 			[
-				'id' => 'gplus',
-				'enabled' => true,
-			],
-
-			[
 				'id' => 'instagram',
 				'enabled' => true,
 			],
 		],
 
-		'settings' => [
-			'facebook' => [
-				'label' => __( 'Facebook', 'blc' ),
-			],
-
-			'twitter' => [
-				'label' => __( 'Twitter', 'blc' ),
-			],
-
-			'gplus' => [
-				'label' => __( 'Google Plus', 'blc' ),
-			],
-
-			'instagram' => [
-				'label' => __( 'Instagram', 'blc' ),
-			],
-
-			'pinterest' => [
-				'label' => __( 'Pinterest', 'blc' ),
-			],
-
-			'dribbble' => [
-				'label' => __( 'Dribbble', 'blc' ),
-			],
-
-			'linkedin' => [
-				'label' => __( 'LinkedIn', 'blc' ),
-			],
-
-			'medium' => [
-				'label' => __( 'Medium', 'blc' ),
-			],
-
-			'patreon' => [
-				'label' => __( 'Patreon', 'blc' ),
-			],
-
-			'vk' => [
-				'label' => __( 'VK', 'blc' ),
-			],
-
-			'youtube' => [
-				'label' => __( 'YouTube', 'blc' ),
-			],
-
-			'vimeo' => [
-				'label' => __( 'Vimeo', 'blc' ),
-			],
-		],
+		'settings' => blc_call_fn([
+			'fn' => 'blocksy_get_social_networks_list',
+			'default' => []
+		])
 	],
 
 	'social_icons_size' => [
@@ -119,14 +69,14 @@ $options = [
 	],
 
 	'social_type' => [
-		'label' => __( 'Icons Type', 'blc' ),
+		'label' => __( 'Icons Shape Type', 'blc' ),
 		'type' => 'ct-radio',
 		'value' => 'simple',
 		'view' => 'text',
 		'design' => 'block',
 		'setting' => [ 'transport' => 'postMessage' ],
 		'choices' => [
-			'simple' => __( 'Simple', 'blc' ),
+			'simple' => __( 'None', 'blc' ),
 			'rounded' => __( 'Rounded', 'blc' ),
 			'square' => __( 'Square', 'blc' ),
 		],
@@ -138,15 +88,15 @@ $options = [
 		'options' => [
 
 			'social_icons_fill' => [
-				'label' => __( 'Icons Fill Type', 'blc' ),
+				'label' => __( 'Shape Fill Type', 'blc' ),
 				'type' => 'ct-radio',
 				'value' => 'outline',
 				'view' => 'text',
 				'design' => 'block',
 				'setting' => [ 'transport' => 'postMessage' ],
 				'choices' => [
-					'outline' => __( 'Outline', 'blc' ),
 					'solid' => __( 'Solid', 'blc' ),
+					'outline' => __( 'Outline', 'blc' ),
 				],
 			],
 

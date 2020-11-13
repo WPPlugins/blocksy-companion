@@ -27,11 +27,16 @@ class BlocksyWidgetFactory extends WP_Widget {
 	public static function register_all_widgets() {
 		$all_widgets = apply_filters('blocksy_widgets_paths', []);
 
-		foreach ( $all_widgets as $widget ) {
-			$prefix = basename( $widget );
+		foreach ($all_widgets as $widget) {
+			$prefix = basename($widget);
 
 			include_once $widget . '/widget.php';
-			register_widget( 'Blocksy_Widget_' . blocksy_dirname_to_classname( $prefix ) );
+
+			$class_name = explode('-', $prefix);
+			$class_name = array_map('ucfirst', $class_name);
+			$class_name = implode('_', $class_name);
+
+			register_widget('Blocksy_Widget_' . $class_name);
 		}
 	}
 
@@ -64,29 +69,30 @@ class BlocksyWidgetFactory extends WP_Widget {
 			$config = array_merge( $config, $this->get_config() );
 		}
 
+		$name = blocksy_akg(
+			'name',
+			$config,
+			__('Default widget name', 'blc')
+		);
+
+		$description = blocksy_akg(
+			'description',
+			$config,
+			__('Display online support infomation', 'blc')
+		);
+
+		unset($config['name']);
+		unset($config['description']);
+
 		$this->prefix = $prefix;
 
 		parent::__construct(
 			false,
-			blocksy_akg(
-				'name',
-				$config,
-				__(
-					'Default widget name',
-					'blocksy'
-				)
-			),
-			[
-				'description' => blocksy_akg(
-					'description',
-					$config,
-					__(
-						'Display online support infomation',
-						'blocksy'
-					)
-				),
+			'&#10;' . $name,
+			array_merge([
+				'description' => $description,
 				'classname' => $prefix . '-widget',
-			]
+			], $config)
 		);
 	}
 
@@ -98,14 +104,15 @@ class BlocksyWidgetFactory extends WP_Widget {
 			return;
 		}
 
-		$instance = blocksy_akg( blocksy_post_name(), $instance, [] );
+		$instance = blocksy_akg('ct_options', $instance, []);
 
-		if ( ! $instance ) {
+		if (! $instance) {
 			$instance = [];
 		}
 
 		// @codingStandardsIgnoreLine
-		echo blocksy_render_view(
+		echo blc_call_fn(
+			['fn' => 'blocksy_render_view'],
 			$file_path,
 			array_merge(
 				[ 'atts' => $instance ],
@@ -120,9 +127,10 @@ class BlocksyWidgetFactory extends WP_Widget {
 		if ( file_exists( $this->get_path() . '/options.php' ) ) {
 			$options = blocksy_akg(
 				'options',
-				blocksy_get_variables_from_file(
+				blc_call_fn(
+					['fn' => 'blocksy_get_variables_from_file'],
 					$this->get_path() . '/options.php',
-					[ 'options' => [] ]
+					['options' => []]
 				)
 			);
 		}
@@ -133,7 +141,7 @@ class BlocksyWidgetFactory extends WP_Widget {
 			$this->options = [
 				'title' => [
 					'type' => 'text',
-					'label' => __( 'Widget Title', 'blocksy' ),
+					'label' => __( 'Widget Title', 'blc' ),
 					'field_attr' => [ 'id' => 'widget-title' ],
 				],
 			];
@@ -147,8 +155,8 @@ class BlocksyWidgetFactory extends WP_Widget {
 	 * @param array $old_instance old widget values.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$new_instance[ $this->prefix ][ blocksy_post_name() ] = json_decode(
-			$new_instance[ $this->prefix ][ blocksy_post_name() ],
+		$new_instance[ $this->prefix ][ 'ct_options' ] = json_decode(
+			$new_instance[ $this->prefix ][ 'ct_options' ],
 			true
 		);
 
@@ -158,10 +166,11 @@ class BlocksyWidgetFactory extends WP_Widget {
 	public function form( $values ) {
 		$this->read_options();
 
-		echo blocksy_output_options_panel(
+		echo blc_call_fn(
+			['fn' => 'blocksy_output_options_panel'],
 			[
 				'options' => $this->options,
-				'values' => blocksy_akg( blocksy_post_name(), $values ),
+				'values' => blocksy_akg('ct_options', $values),
 				'id_prefix' => 'ct-widget-options-' . $this->get_field_id(
 					$this->prefix
 				),

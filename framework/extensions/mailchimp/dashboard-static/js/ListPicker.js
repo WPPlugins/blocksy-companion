@@ -61,29 +61,28 @@ const ListPicker = ({ listId, apiKey, onChange }) => {
 		setListsLoading(false)
 	}
 
-	useEffect(
-		() => {
-			if (!apiKey) {
-				setLists([])
-				return
-			}
+	useEffect(() => {
+		if (!apiKey) {
+			setLists([])
+			return
+		}
 
-			if (apiKey.indexOf('-') === -1) {
-				setLists([])
-				return
-			}
+		if (apiKey.indexOf('-') === -1) {
+			setLists([])
+			return
+		}
 
-			maybeFetchLists()
-		},
-		[apiKey]
-	)
+		maybeFetchLists()
+	}, [apiKey])
 
 	return lists.length === 0 ? (
 		<div className="ct-select-input">
 			<input
 				disabled
 				placeholder={
-					isLoadingLists ? __('Loading') : __('Invalid API Key...')
+					isLoadingLists
+						? __('Loading', 'blc')
+						: __('Invalid API Key...', 'blc')
 				}
 			/>
 		</div>
@@ -111,7 +110,7 @@ const ListPicker = ({ listId, apiKey, onChange }) => {
 							onFocus: () => openMenu(),
 							onClick: () => openMenu()
 						})}
-						placeholder={__('Select list...')}
+						placeholder={__('Select list...', 'blc')}
 						readOnly
 					/>
 

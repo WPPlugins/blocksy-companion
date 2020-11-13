@@ -29,7 +29,7 @@ function blocksy_ext_cookies_consent_output($forced = false) {
 	);
 
 	$button_text = get_theme_mod('cookie_consent_button_text', __('Accept', 'blc'));
-	$period = get_theme_mod('cookie_consent_period', 'onemonth');
+	$period = get_theme_mod('cookie_consent_period', 'forever');
 	$type = get_theme_mod('cookie_consent_type', 'type-1');
 
 	$class = 'container';
@@ -43,15 +43,14 @@ function blocksy_ext_cookies_consent_output($forced = false) {
 	?>
 
 
-	<div class="cookie-notification ct-fade-in-start" data-period="<?php esc_attr_e($period) ?>" data-type="<?php esc_attr_e($type) ?>">
+	<div class="cookie-notification ct-fade-in-start" data-period="<?php echo esc_attr($period) ?>" data-type="<?php echo esc_attr($type) ?>">
 
-		<div class="<?php esc_attr_e($class) ?>">
-
+		<div class="<?php echo esc_attr($class) ?>">
 			<?php if (!empty($content)) { ?>
-				<p><?php echo esc_html($content) ?></p>
+				<div class="ct-cookies-content"><?php echo wp_kses_post($content) ?></div>
 			<?php } ?>
 
-			<button class="ct-accept"><?php echo esc_html($button_text) ?></button>
+			<button type="submit" class="ct-button ct-accept"><?php echo esc_html($button_text) ?></button>
 
 			<?php if ($type === 'type-1' || is_customize_preview()) { ?>
 				<button class="ct-close">×</button>
@@ -64,23 +63,27 @@ function blocksy_ext_cookies_consent_output($forced = false) {
 	return ob_get_clean();
 }
 
-function blocksy_ext_cookies_checkbox() {
+function blocksy_ext_cookies_checkbox($prefix = '') {
 	ob_start();
 
-	$message = sprintf(
-		__('I accept the %s', 'blc'),
+	if (! empty($prefix)) {
+		$prefix = '_' . $prefix;
+	}
+
+	$message = get_theme_mod(
+		'forms_cookie_consent_content',
 		sprintf(
-			'<a href="' . site_url('/privacy-policy') . '">%s</a>',
-			__('Privacy Policy', 'blc')
+			__('I accept the %sPrivacy Policy%s', 'blc'),
+			'<a href="/privacy-policy">',
+			'</a>'
 		)
 	);
 
 	?>
 
-	<div class="gdpr-confirm-policy">
-		<input id="gdprconfirm" name="gdprconfirm" type="checkbox" required />
-		<label for="gdprconfirm"><?php echo $message ?></label>
-	</div>
+	<p class="gdpr-confirm-policy">
+		<input id="gdprconfirm<?php echo $prefix ?>" name="gdprconfirm" type="checkbox" required /><label for="gdprconfirm<?php echo $prefix ?>"><?php echo $message ?></label>
+	</p>
 
 	<?php
 

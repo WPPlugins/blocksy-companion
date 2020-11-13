@@ -7,48 +7,120 @@
  * @package Blocksy
  */
 
-$items = intval( blocksy_default_akg( 'posts_number', $atts, 5 ) );
+$post_type = blocksy_default_akg('post_type_source', $atts, 'post');
 
-$date_query = [];
+$query_args = [
+	'order' => 'DESC',
+	'ignore_sticky_posts' => true,
+	'post_type' => $post_type
+];
 
-$days = blocksy_default_akg( 'days', $atts, 'all_time' );
+if ($post_type !== 'page') {
+	$source = blocksy_default_akg('post_source', $atts, 'categories');
 
-if ( $days && 'all_time' !== $days ) {
-	$time = time() - ( intval( $days ) * 24 * 60 * 60 );
+	if ($source === 'categories') {
+		$date_query = [];
 
-	$date_query = array(
-		'after'     => date( 'F jS, Y', $time ),
-		'before'    => date( 'F jS, Y' ),
-		'inclusive' => true,
-	);
+		$days = blocksy_default_akg('days', $atts, 'all_time');
+
+		if ($days && 'all_time' !== $days) {
+			$time = time() - (intval($days) * 24 * 60 * 60);
+
+			$date_query = [
+				'after' => date('F jS, Y', $time),
+				'before' => date('F jS, Y'),
+				'inclusive' => true,
+			];
+		}
+
+		$cat_option_id = 'category';
+		$taxonomy = 'category';
+
+		if ($post_type !== 'post') {
+			$cat_option_id = $post_type . '_taxonomy';
+			$taxonomies = get_object_taxonomies($post_type);
+
+			if (count($taxonomies) > 0) {
+				$taxonomy = $taxonomies[0];
+			}
+		}
+
+		$cat_id = blocksy_default_akg($cat_option_id, $atts, 'all_categories');
+		$cat_id = (empty($cat_id) || 'all_categories' === $cat_id) ? '' : $cat_id;
+
+		$query_args['orderby'] = ('recent' === blocksy_default_akg(
+			'type', $atts, 'recent'
+		)) ? 'post_date' : 'comment_count';
+
+		$query_args['date_query'] = $date_query;
+
+		if (! empty($cat_id)) {
+			$query_args['tax_query'] = [
+				[
+					'taxonomy' => $taxonomy,
+					'field' => 'term_id',
+					'terms' => [$cat_id]
+				]
+			];
+		}
+
+		$query_args['posts_per_page'] = intval(
+			blocksy_default_akg('posts_number', $atts, 5)
+		);
+	}
+
+	if ($source === 'custom') {
+		$post_id = blocksy_default_akg('post_id', $atts, '');
+
+		$query_args['orderby'] = 'post__in';
+		$query_args['post__in'] = ['__INEXISTING__'];
+
+		if (! empty(trim($post_id))) {
+			$query_args['post__in'] = explode(',', str_replace(' ', '', trim(
+				$post_id
+			)));
+		}
+	}
 }
 
-$fw_cat_id = blocksy_default_akg( 'category', $atts, 'all_categories' );
-$fw_cat_id = ( empty( $category ) || 'all_categories' === $category ) ? '' : $category;
+if ($post_type === 'page') {
+	$source = blocksy_default_akg('page_source', $atts, 'default');
 
-$type = blocksy_default_akg( 'type', $atts, 'recent' );
+	if ($source === 'default') {
+		$query_args['posts_per_page'] = intval(
+			blocksy_default_akg('page_number', $atts, 5)
+		);
+	}
 
-$query = new WP_Query(
-	[
-		'post_type' => 'post',
-		'order' => 'DESC',
-		'posts_per_page' => $items,
-		'date_query' => $date_query,
-		'cat' => $fw_cat_id,
-		'orderby' => ( 'recent' === $type ) ? 'post_date' : 'comment_count',
-	]
-);
+	if ($source === 'custom') {
+		$post_id = blocksy_default_akg('page_id', $atts, '');
+
+		$query_args['orderby'] = 'post__in';
+		$query_args['post__in'] = ['__INEXISTING__'];
+
+		if (! empty(trim($post_id))) {
+			$query_args['post__in'] = explode(',', str_replace(' ', '', trim(
+				$post_id
+			)));
+		}
+	}
+}
+
+$query = new WP_Query($query_args);
 
 // Post thumbnail
-$has_thumbnail = blocksy_default_akg( 'display_photo', $atts, 'no' ) === 'yes';
-$data_thumbnail = '';
+$has_thumbnail = false;
 
-if ( $has_thumbnail ) {
-	$data_thumbnail = ' data-thumbnail="true"';
+$posts_type = blocksy_default_akg('posts_type', $atts, 'small-thumbs');
+$type_output = 'data-type="' . esc_attr($posts_type) . '"';
+
+if ($posts_type !== 'no-thumbs' && $posts_type !== 'numbered' ) {
+	$has_thumbnail = true;
 }
 
 // Post meta
 $has_meta = blocksy_default_akg( 'display_date', $atts, 'no' ) === 'yes';
+
 
 // Comments
 $has_comments = blocksy_default_akg( 'display_comments', $atts, 'no' ) === 'yes';
@@ -65,49 +137,78 @@ echo $before_title . wp_kses_post( $title ) . $after_title;
 ?>
 
 <?php if ( $query->have_posts() ) { ?>
-	<ul <?php echo wp_kses( $data_thumbnail, [] ); ?>>
+	<ul <?php echo $type_output ?>>
 		<?php while ( $query->have_posts() ) { ?>
 			<?php $query->the_post(); ?>
 
 			<li>
-				<?php
-				if ( $has_thumbnail ) {
-					echo wp_kses_post(
-						blocksy_image(
-							[
-								'attachment_id' => get_post_thumbnail_id(),
-								'ratio' => '1/1',
-								'tag_name' => 'a',
-								'html_atts' => [
-									'href' => get_permalink(),
-								],
-							]
-						)
-					);
-				}
-				?>
+				<a href="<?php echo esc_url( get_permalink() ); ?>">
+					<?php
+					if ( $has_thumbnail ) {
+						$size = 'thumbnail';
+						$ratio = '1/1';
 
-				<div class="ct-entry-content">
-					<a href="<?php echo esc_url( get_permalink() ); ?>" class="ct-post-title">
-						<?php echo wp_kses_post(get_the_title()); ?>
-					</a>
+						if ( $posts_type === 'large-thumbs' ) {
+							$size = 'medium';
+							$ratio = '4/3';
+						}
 
-					<?php if ( $has_meta || $has_comments ) { ?>
-						<div class="ct-entry-meta">
-							<?php if ( $has_meta ) { ?>
-								<span>
-									<?php echo esc_attr( get_the_time( 'M j, Y' ) ); ?>
-								</span>
-							<?php } ?>
+						if (
+							$posts_type === 'large-small'
+							&&
+							$query->current_post === 0
+						) {
+							$size = 'medium';
+							$ratio = '4/3';
+						}
 
-							<?php if ( $has_comments && get_comments_number() > 0 ) { ?>
-								<span>
-									<?php echo wp_kses_post( get_comments_number_text( '', '1 Comment', '% Comments' ) ); ?>
-								</span>
-							<?php } ?>
+						echo wp_kses_post(
+							blc_call_fn(
+								['fn' => 'blocksy_image'],
+								[
+									'attachment_id' => get_post_thumbnail_id(),
+									'ratio' => $ratio,
+									'tag_name' => 'div',
+									'size' => $size,
+								]
+							)
+						);
+					}
+					?>
+
+					<div class="ct-entry-content">
+						<div class="ct-post-title">
+							<?php echo wp_kses_post(get_the_title()); ?>
 						</div>
-					<?php } ?>
-				</div>
+
+						<?php
+							if (blocksy_default_akg('display_excerpt', $atts, 'no') === 'yes') {
+								echo blocksy_entry_excerpt(
+									blocksy_default_akg('excerpt_lenght', $atts, '10'),
+									'ct-entry-excerpt',
+									get_the_ID()
+								);
+							}
+						?>
+
+						<?php if ( $has_meta || $has_comments ) { ?>
+							<div class="ct-entry-meta">
+								<?php if ( $has_meta ) { ?>
+									<span>
+										<?php echo esc_attr(get_the_time(get_option('date_format', 'M j, Y'))); ?>
+
+									</span>
+								<?php } ?>
+
+								<?php if ( $has_comments && get_comments_number() > 0 ) { ?>
+									<span>
+										<?php echo wp_kses_post( get_comments_number_text( '', '1 Comment', '% Comments' ) ); ?>
+									</span>
+								<?php } ?>
+							</div>
+						<?php } ?>
+					</div>
+				</a>
 			</li>
 		<?php } ?>
 	</ul>

@@ -5,10 +5,16 @@ class BlocksyMailchimpManager {
 	}
 
 	public function get_settings() {
+		$option = get_option('blocksy_ext_mailchimp_credentials', []);
+
+		if (empty($option)) {
+			$option = [];
+		}
+
 		return array_merge([
 			'api_key' => null,
 			'list_id' => null
-		], get_option('blocksy_ext_mailchimp_credentials', []));
+		], $option);
 	}
 
 	public function set_settings($vals) {
@@ -18,15 +24,15 @@ class BlocksyMailchimpManager {
 		], $vals));
 	}
 
-	public function can( $capability = 'manage_options' ) {
-		if ( is_multisite() ) {
+	public function can($capability = 'manage_options') {
+		if (is_multisite()) {
 			// Only network admin can change files that affects the entire network.
 			$can = current_user_can_for_blog( get_current_blog_id(), $capability );
 		} else {
 			$can = current_user_can( $capability );
 		}
 
-		if ( $can ) {
+		if ($can) {
 			// Also you can use this method to get the capability.
 			$can = $capability;
 		}
@@ -42,7 +48,6 @@ class BlocksyMailchimpManager {
 		if (strpos($api_key, '-') === false) {
 			return 'api_key_invalid';
 		}
-
 
 		$region = explode('-', $api_key);
 
@@ -71,7 +76,12 @@ class BlocksyMailchimpManager {
 				return [
 					'name' => $list['name'],
 					'id' => $list['id'],
-					'subscribe_url_long' => $list['subscribe_url_long']
+					'subscribe_url_long' => $list['subscribe_url_long'],
+					'subscribe_url_long_json' => $this->transform_subscribe_url(
+						$list['subscribe_url_long']
+					),
+
+					'has_gdpr_fields' => $list['marketing_permissions']
 				];
 			}, $body['lists']);
 		} else {
@@ -79,7 +89,15 @@ class BlocksyMailchimpManager {
 		}
 	}
 
-	public function get_form_url_for($maybe_custom_list = null) {
+	public function transform_subscribe_url($url) {
+		return str_replace(
+			'subscribe',
+			'subscribe/post-json',
+			$url . '&c=callback'
+		);
+	}
+
+	public function get_form_url_and_gdpr_for($maybe_custom_list = null) {
 		$settings = $this->get_settings();
 
 		if (! isset($settings['api_key'])) {
@@ -105,16 +123,25 @@ class BlocksyMailchimpManager {
 		}
 
 		if (! $settings['list_id']) {
-			return $lists[0]['subscribe_url_long'];
+			return [
+				'form_url' => $lists[0]['subscribe_url_long'],
+				'has_gdpr_fields' => $lists[0]['has_gdpr_fields']
+			];
 		}
 
 		foreach ($lists as $single_list) {
 			if ($single_list['id'] === $settings['list_id']) {
-				return $single_list['subscribe_url_long'];
+				return [
+					'form_url' => $single_list['subscribe_url_long'],
+					'has_gdpr_fields' => $single_list['has_gdpr_fields']
+				];
 			}
 		}
 
-		return $lists[0]['subscribe_url_long'];
+		return [
+			'form_url' => $lists[0]['subscribe_url_long'],
+			'has_gdpr_fields' => $lists[0]['has_gdpr_fields']
+		];
 	}
 }
 

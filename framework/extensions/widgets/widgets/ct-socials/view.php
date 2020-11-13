@@ -20,7 +20,8 @@ $fill = blocksy_default_akg('social_icons_fill', $atts, 'outline');
  * blocksy_social_icons() function is already properly escaped.
  * Escaping it again here would cause SVG icons to not be outputed
  */
-echo blocksy_social_icons(
+echo blc_call_fn(
+	['fn' => 'blocksy_social_icons'],
 	blocksy_default_akg(
 		'socials',
 		$atts,
@@ -36,19 +37,16 @@ echo blocksy_social_icons(
 			],
 
 			[
-				'id' => 'gplus',
-				'enabled' => true,
-			],
-
-			[
 				'id' => 'instagram',
 				'enabled' => true,
 			],
 		]
 	),
-	$size . '-' . $type . (
-		$type === 'simple' ? '' : '-' . $fill
-	)
+	[
+		'size' => $size,
+		'fill' => $fill,
+		'type' => $type
+	]
 );
 
 echo wp_kses_post($after_widget);

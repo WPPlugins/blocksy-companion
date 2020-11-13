@@ -1,5 +1,6 @@
 import ctEvents from 'ct-events'
 import cookie from 'js-cookie'
+import { onDocumentLoaded } from './helpers'
 
 const initCookies = () => {
 	const notification = document.querySelector('.cookie-notification')
@@ -52,10 +53,10 @@ const initCookies = () => {
 	})
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+onDocumentLoaded(() => {
 	initCookies()
 
-	window.ctEvents.on('blocksy:cookies:init', () => {
+	ctEvents.on('blocksy:cookies:init', () => {
 		initCookies()
 	})
 })

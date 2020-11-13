@@ -79,11 +79,14 @@ $options = [
 						'label' => __('Link (optional)', 'blc'),
 						'design' => 'inline',
 					]
-				]
+				],
+
+				'clone' => true
 			],
 
 			'phone' => [
 				'label' => __( 'Phone', 'blc' ),
+				'clone' => true,
 				'options' => [
 
 					'title' => [
@@ -112,6 +115,7 @@ $options = [
 
 			'mobile' => [
 				'label' => __( 'Mobile', 'blc' ),
+				'clone' => true,
 				'options' => [
 					'title' => [
 						'type' => 'text',
@@ -137,8 +141,37 @@ $options = [
 				]
 			],
 
+			'hours' => [
+				'label' => __( 'Work Hours', 'blc' ),
+				'clone' => true,
+				'options' => [
+					'title' => [
+						'type' => 'text',
+						'label' => __('Title', 'blc'),
+						'value' => __('Opening hours', 'blc'),
+						'design' => 'inline',
+					],
+
+					'content' => [
+						'type' => 'text',
+						'label' => __('Content', 'blc'),
+						'value' => '9AM - 5PM',
+						'design' => 'inline',
+					],
+
+					'link' => [
+						'type' => 'text',
+						'label' => __('Link (optional)', 'blc'),
+						'value' => '',
+						'design' => 'inline',
+					],
+
+				]
+			],
+
 			'fax' => [
 				'label' => __( 'Fax', 'blc' ),
+				'clone' => true,
 				'options' => [
 					'title' => [
 						'type' => 'text',
@@ -166,6 +199,7 @@ $options = [
 
 			'email' => [
 				'label' => __( 'Email', 'blc' ),
+				'clone' => true,
 				'options' => [
 					'title' => [
 						'type' => 'text',
@@ -193,6 +227,7 @@ $options = [
 
 			'website' => [
 				'label' => __( 'Website', 'blc' ),
+				'clone' => true,
 				'options' => [
 					'title' => [
 						'type' => 'text',
@@ -214,20 +249,12 @@ $options = [
 						'value' => 'https://creativethemes.com',
 						'design' => 'inline',
 					],
-
 				]
 			],
 		],
 	],
 
-	'contact_link_target' => [
-		'type'  => 'ct-switch',
-		'label' => __( 'Open link in new tab', 'blc' ),
-		'value' => 'no',
-		'disableRevertButton' => true,
-	],
-
-	'contact_icons_size' => [
+	'contacts_icons_size' => [
 		'label' => __( 'Icons Size', 'blc' ),
 		'type' => 'ct-radio',
 		'value' => 'medium',
@@ -241,15 +268,15 @@ $options = [
 		],
 	],
 
-	'contact_icons_type' => [
-		'label' => __( 'Icons Type', 'blc' ),
+	'contacts_icon_shape' => [
+		'label' => __( 'Icons Shape Type', 'blc' ),
 		'type' => 'ct-radio',
 		'value' => 'rounded',
 		'view' => 'text',
 		'design' => 'block',
 		'setting' => [ 'transport' => 'postMessage' ],
 		'choices' => [
-			'simple' => __( 'Simple', 'blc' ),
+			'simple' => __( 'None', 'blc' ),
 			'rounded' => __( 'Rounded', 'blc' ),
 			'square' => __( 'Square', 'blc' ),
 		],
@@ -257,22 +284,29 @@ $options = [
 
 	blocksy_rand_md5() => [
 		'type' => 'ct-condition',
-		'condition' => [ 'contact_icons_type' => '!simple' ],
+		'condition' => [ 'contacts_icon_shape' => '!simple' ],
 		'options' => [
 
-			'contact_icons_fill' => [
-				'label' => __( 'Icons Fill Type', 'blc' ),
+			'contacts_icon_fill_type' => [
+				'label' => __( 'Shape Fill Type', 'blc' ),
 				'type' => 'ct-radio',
 				'value' => 'outline',
 				'view' => 'text',
 				'design' => 'block',
 				'setting' => [ 'transport' => 'postMessage' ],
 				'choices' => [
-					'outline' => __( 'Outline', 'blc' ),
 					'solid' => __( 'Solid', 'blc' ),
+					'outline' => __( 'Outline', 'blc' ),
 				],
 			],
 
 		],
+	],
+
+	'contact_link_target' => [
+		'type'  => 'ct-switch',
+		'label' => __( 'Open link in new tab', 'blc' ),
+		'value' => 'no',
+		'disableRevertButton' => true,
 	],
 ];

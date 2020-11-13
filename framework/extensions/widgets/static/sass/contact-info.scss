@@ -1,45 +1,38 @@
-.ct-contact-info-widget {
+[class*="ct-contact-info"] {
 
 	ul {
-		font-size: 15px;
-		margin-top: 30px;
-
-		li {
-			display: flex;
-			align-items: center;
-			margin-bottom: 20px;
-		}
+		--contentSpacing: 0;
 	}
 
-	i {
-		margin-right: 18px;
-
-		svg {
-			opacity: 0.9;
-		}
+	li {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		grid-column-gap: 15px;
+		align-items: center;
 	}
 
 	.contact-info {
 		display: flex;
 		flex-direction: column;
+		color: var(--color);
 	}
 
 	.contact-title {
 		font-weight: 600;
 	}
 
-	// fill type
-	[data-icons*="solid"] {
+	.ct-contact-info-text {
+		margin-bottom: 20px;
+	}
+}
 
-		i {
-			background: rgba(218, 222, 228, 0.3);
-			transition: color 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955),
-						background 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-		}
 
-		li:hover i {
-			color: #fff;
-			background: var(--paletteColor1);
-		}
+// widget
+.ct-contact-info-widget {
+	--listItemSpacing: 20px;
+
+	.contact-info {
+		font-size: 15px;
+		line-height: 1.4;
 	}
 }

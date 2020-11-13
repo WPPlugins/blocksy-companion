@@ -55,7 +55,9 @@ const ListPickerImplementation = ({ value, onChange }) => {
 			<input
 				disabled
 				placeholder={
-					isLoadingLists ? __('Loading...') : __('Invalid API Key...')
+					isLoadingLists
+						? __('Loading...', 'blc')
+						: __('Invalid API Key...', 'blc')
 				}
 			/>
 		</div>
@@ -83,7 +85,7 @@ const ListPickerImplementation = ({ value, onChange }) => {
 							onFocus: () => openMenu(),
 							onClick: () => openMenu()
 						})}
-						placeholder={__('Select list...')}
+						placeholder={__('Select list...', 'blc')}
 						readOnly
 					/>
 

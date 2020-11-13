@@ -4,11 +4,12 @@ namespace Blocksy;
 
 class GoogleAnalytics {
 	public function __construct() {
-
 		add_filter(
-			'blocksy_misc_end_section_customizer_options',
+			'blocksy_engagement_general_start_customizer_options',
 			[$this, 'generate_google_analytics_opts']
 		);
+
+		if (is_admin()) return;
 
 		add_action('print_footer_scripts', function () {
 			if (is_admin()) return;
@@ -21,8 +22,7 @@ class GoogleAnalytics {
 
 			$analytics_id = get_theme_mod('analytics_id', '');
 
-			if (empty($analytics_id)) return;
-
+			if (! empty($analytics_id)) {
 			?>
 
 			<!-- Google Analytics -->
@@ -40,43 +40,69 @@ class GoogleAnalytics {
 			<!-- End Google Analytics -->
 
 			<?php
+			};
+
+			$analytics_v4_id = get_theme_mod('analytics_v4_id', '');
+
+			if (! empty($analytics_v4_id)) {
+			?>
+
+			<!-- Global site tag (gtag.js) - Google Analytics v4 -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $analytics_v4_id ?>"></script>
+			<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', '<?php echo $analytics_v4_id?>');
+			</script>
+			<!-- End Google Analytics v4 -->
+
+			<?php
+			};
+
+
 		});
 	}
 
 	public function generate_google_analytics_opts($options) {
-		$options['google_analytics'] = [
-			'title' => __('Google Analytics', 'blocksy'),
-			'container' => [ 'priority' => 7 ],
-			'options' => [
+		$options[] = [
+			'analytics_id' => [
+				'label' => __( 'Google Analytics', 'blc' ),
+				'type' => 'text',
+				'design' => 'block',
+				'divider' => 'bottom',
+				'value' => '',
+				'desc' => __( 'Insert your Google Analytics tracking ID.', 'blc' ),
+				'disableRevertButton' => true,
+				'setting' => [ 'transport' => 'postMessage' ],
+			],
 
-				'integrations_section_options' => [
-					'type' => 'ct-options',
-					'setting' => [ 'transport' => 'postMessage' ],
-					'inner-options' => [
-						blocksy_rand_md5() => [
-							'label' => __( 'Google Analytics', 'blc' ),
-							'type' => 'ct-title',
-						],
+			'analytics_v4_id' => [
+				'label' => __( 'Google Analytics v4', 'blc' ),
+				'type' => 'text',
+				'design' => 'block',
+				'divider' => 'bottom',
+				'value' => '',
+				'desc' => sprintf(
+					__(
+						'Insert your Google Analytics v4 tracking ID. Instructions on how to activate this for your site can be found %shere%s.',
+						'blc'
+					),
+					'<a href="https://support.google.com/analytics/answer/9744165?hl=en">',
+					'</a>'
+				),
+				'disableRevertButton' => true,
+				'setting' => [ 'transport' => 'postMessage' ],
+			],
 
-						'analytics_id' => [
-							'label' => __( 'Tracking ID', 'blc' ),
-							'type' => 'text',
-							'design' => 'inline',
-							'value' => '',
-							'setting' => [ 'transport' => 'postMessage' ],
-						],
-
-						'ip_anonymization' => [
-							'label' => __( 'IP Anonymization', 'blc' ),
-							'type' => 'ct-switch',
-							'value' => 'no',
-							'desc' => __( 'Enable Google Analytics IP anonymization feature <a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization">(more info)</a>.', 'blc' ),
-							'setting' => [ 'transport' => 'postMessage' ],
-						],
-					],
-				],
-
-			]
+			'ip_anonymization' => [
+				'label' => __( 'IP Anonymization', 'blc' ),
+				'type' => 'ct-switch',
+				'value' => 'no',
+				'desc' => __( 'Enable Google Analytics IP anonymization feature <a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization">(more info)</a>.', 'blc' ),
+				'setting' => [ 'transport' => 'postMessage' ],
+			],
 		];
 
 		return $options;

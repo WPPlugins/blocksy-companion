@@ -5,6 +5,7 @@ import {
 	useState,
 	Fragment
 } from '@wordpress/element'
+import ctEvents from 'ct-events'
 
 import Mailchimp from './Mailchimp'
 

@@ -7,8 +7,8 @@ import {
 } from '@wordpress/element'
 
 import { Transition } from 'react-spring/renderprops'
-import { Dialog, DialogOverlay, DialogContent } from '@reach/dialog'
 import EditCredentials from '../EditCredentials'
+import { __, sprintf } from 'ct-i18n'
 
 const useActivationWithRequirements = (extension, cb = () => {}) => {
 	const [isLoading, setIsLoading] = useState(false)
@@ -36,8 +36,6 @@ const useActivationWithRequirements = (extension, cb = () => {}) => {
 			cb()
 		} catch (e) {}
 
-		await new Promise(r => setTimeout(() => r(), 1000))
-
 		setIsLoading(false)
 	}
 
@@ -54,14 +52,15 @@ const useActivationWithRequirements = (extension, cb = () => {}) => {
 		isLoading,
 		handleActionWithRequirements,
 		<Fragment>
-			{extension.__object &&
-				extension.data.api_key && (
-					<button 
-						className="ct-minimal-button ct-config-btn dashicons dashicons-admin-generic"
-						title="Edit Credentials"
-						onClick={() => setIsEditingCredentials(true)}>
-					</button>
-				)}
+			{extension.__object && extension.data.api_key && (
+				<button
+					className="ct-button ct-config-btn"
+					data-button="white"
+					title="Edit Credentials"
+					onClick={() => setIsEditingCredentials(true)}>
+					{__('Configure', 'blc')}
+				</button>
+			)}
 
 			<EditCredentials
 				isEditingCredentials={isEditingCredentials}

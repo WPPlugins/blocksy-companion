@@ -3,20 +3,19 @@ import {
 	Component,
 	useEffect,
 	useState,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 
-import { Transition } from 'react-spring/renderprops'
-import { Dialog, DialogOverlay, DialogContent } from '@reach/dialog'
 import classnames from 'classnames'
 import { __, sprintf } from 'ct-i18n'
 import ListPicker from './ListPicker'
+import Overlay from '../../../../../static/js/helpers/Overlay'
 
 const EditCredentials = ({
 	extension,
 	isEditingCredentials,
 	setIsEditingCredentials,
-	onCredentialsValidated
+	onCredentialsValidated,
 }) => {
 	const [apiKey, setApiKey] = useState(extension.data.api_key)
 	const [listId, setListId] = useState(extension.data.list_id)
@@ -36,7 +35,7 @@ const EditCredentials = ({
 		try {
 			const response = await fetch(ctDashboardLocalizations.ajax_url, {
 				method: 'POST',
-				body
+				body,
 			})
 
 			if (response.status === 200) {
@@ -55,102 +54,83 @@ const EditCredentials = ({
 			makeKeyInvalid(true)
 		}
 
-		await new Promise(r => setTimeout(() => r(), 1000))
+		await new Promise((r) => setTimeout(() => r(), 1000))
 
 		setIsLoading(false)
 	}
 
 	return (
-		<Transition
+		<Overlay
 			items={isEditingCredentials}
-			config={{ duration: 200 }}
-			from={{ opacity: 0, y: -10 }}
-			enter={{ opacity: 1, y: 0 }}
-			leave={{ opacity: 0, y: 10 }}>
-			{isEditingCredentials =>
-				isEditingCredentials &&
-				(props => (
-					<DialogOverlay
-						style={{ opacity: props.opacity }}
-						onDismiss={() => setIsEditingCredentials(false)}>
-						<DialogContent
-							style={{
-								transform: `translate3d(0px, ${props.y}px, 0px)`
-							}}>
-							<button
-								className="close-button"
-								onClick={() => setIsEditingCredentials(false)}>
-								×
-							</button>
+			onDismiss={() => setIsEditingCredentials(false)}
+			className={'ct-mailchimp-modal'}
+			render={() => (
+				<div
+					className={classnames(
+						'ct-modal-content',
+						{
+							'ct-key-invalid': isApiKeyInvalid,
+						}
+					)}>
+					
+					<h2>{__('MailChimp Credentials', 'blc')}</h2>
 
-							<div
-								className={classnames(
-									'ct-mailchimp-edit-credentials ct-extension-config',
-									{
-										'ct-key-invalid': isApiKeyInvalid
+					<p
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'Enter your MailChimp credentials in the form below. More info on how to generate an API key can be found %shere%s.',
+									'blc'
+								),
+								'<a target="_blank" href="https://mailchimp.com/help/about-api-keys/">',
+								'</a>'
+							),
+						}}
+					/>
+
+					<div className="mailchimp-credentials">
+						<section>
+							<label>{__('API Key', 'blc')}</label>
+
+							<div className="ct-option-input">
+								<input
+									type="text"
+									onChange={({ target: { value } }) =>
+										setApiKey(value)
 									}
-								)}>
-								<h1>{__('MailChimp Credentials')}</h1>
-								<p
-									dangerouslySetInnerHTML={{
-										__html: sprintf(
-											__(
-												'Enter your MailChimp credentials in the form below. More info on how to generate an API key can be found %s.'
-											),
-
-											sprintf(
-												'<a target="_blank" href="https://mailchimp.com/help/about-api-keys/">%s</a>',
-												__('here')
-											)
-										)
-									}}
+									value={apiKey || ''}
 								/>
-
-								<ul className="mailchimp-credentials">
-									<li>
-										<label>{__('API Key')}</label>
-
-										<input
-											type="text"
-											onChange={({ target: { value } }) =>
-												setApiKey(value)
-											}
-											value={apiKey || ''}
-										/>
-									</li>
-
-									<li>
-										<label>{__('List ID')}</label>
-
-										<ListPicker
-											listId={listId}
-											onChange={id => setListId(id)}
-											apiKey={apiKey}
-										/>
-									</li>
-
-									<li>
-										<button
-											className="ct-button"
-											data-button="blue"
-											disabled={
-												!apiKey || !listId || isLoading
-											}
-											onClick={() =>
-												attemptToSaveCredentials()
-											}>
-											{isLoading
-												? __('Loading...')
-												: __('Activate')}
-										</button>
-									</li>
-								</ul>
 							</div>
-						</DialogContent>
-					</DialogOverlay>
-				))
-			}
-		</Transition>
+						</section>
+
+						<section>
+							<label>{__('List ID', 'blc')}</label>
+
+							<ListPicker
+								listId={listId}
+								onChange={(id) => setListId(id)}
+								apiKey={apiKey}
+							/>
+						</section>
+
+						<section>
+							<label>&nbsp;</label>
+							<button
+								className="ct-button"
+								data-button="blue"
+								disabled={!apiKey || !listId || isLoading}
+								onClick={() => attemptToSaveCredentials()}>
+								{isLoading
+									? __('Loading...', 'blc')
+									: !extension.__object
+									? __('Activate', 'blc')
+									: __('Save Settings', 'blc')}
+							</button>
+						</section>
+					</div>
+				</div>
+			)}
+		/>
 	)
 }
 

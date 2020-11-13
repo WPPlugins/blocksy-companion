@@ -9,7 +9,7 @@ $options = [
 	'inner-options' => [
 
 		blocksy_rand_md5() => [
-			'title' => __( 'General', 'blocksy' ),
+			'title' => __( 'General', 'blc' ),
 			'type' => 'tab',
 			'options' => [
 
@@ -70,6 +70,11 @@ $options = [
 					],
 				],
 
+				blocksy_rand_md5() => [
+					'type' => 'ct-divider',
+					'attr' => [ 'data-type' => 'small' ],
+				],
+
 				'has_mailchimp_name' => [
 					'type'  => 'ct-switch',
 					'label' => __( 'Name Field', 'blc' ),
@@ -78,10 +83,36 @@ $options = [
 					'setting' => [ 'transport' => 'postMessage' ],
 				],
 
+				blocksy_rand_md5() => [
+					'type' => 'ct-condition',
+					'condition' => [ 'has_mailchimp_name' => 'yes' ],
+					'options' => [
+
+						'mailchimp_name_label' => [
+							'type' => 'text',
+							'label' => __( 'Name Label', 'blc' ),
+							'design' => 'inline',
+							'value' => __( 'Your name', 'blc' ),
+							'disableRevertButton' => true,
+							'setting' => [ 'transport' => 'postMessage' ],
+						],
+
+					],
+				],
+
+				'mailchimp_mail_label' => [
+					'type' => 'text',
+					'label' => __( 'Mail Label', 'blc' ),
+					'design' => 'inline',
+					'value' => __( 'Your email', 'blc' ),
+					'disableRevertButton' => true,
+					'setting' => [ 'transport' => 'postMessage' ],
+				],
+
 				'mailchimp_button_text' => [
 					'type' => 'text',
-					'label' => __( 'Button Text', 'blc' ),
-					'design' => 'block',
+					'label' => __( 'Button Label', 'blc' ),
+					'design' => 'inline',
 					'value' => __( 'Subscribe', 'blc' ),
 					'disableRevertButton' => true,
 					'setting' => [ 'transport' => 'postMessage' ],
@@ -89,11 +120,10 @@ $options = [
 
 				blocksy_rand_md5() => [
 					'type' => 'ct-divider',
-					'attr' => [ 'data-type' => 'small' ],
 				],
 
 				'mailchimp_subscribe_visibility' => [
-					'label' => __( 'Visibility', 'blocksy' ),
+					'label' => __( 'Visibility', 'blc' ),
 					'type' => 'ct-visibility',
 					'design' => 'block',
 					'setting' => [ 'transport' => 'postMessage' ],
@@ -104,9 +134,9 @@ $options = [
 					],
 
 					'choices' => blocksy_ordered_keys([
-						'desktop' => __( 'Desktop', 'blocksy' ),
-						'tablet' => __( 'Tablet', 'blocksy' ),
-						'mobile' => __( 'Mobile', 'blocksy' ),
+						'desktop' => __( 'Desktop', 'blc' ),
+						'tablet' => __( 'Tablet', 'blc' ),
+						'mobile' => __( 'Mobile', 'blc' ),
 					]),
 				],
 
@@ -114,32 +144,43 @@ $options = [
 		],
 
 		blocksy_rand_md5() => [
-			'title' => __( 'Design', 'blocksy' ),
+			'title' => __( 'Design', 'blc' ),
 			'type' => 'tab',
 			'options' => [
 
 				'mailchimpContent' => [
-					'label' => __( 'Content Color', 'blocksy' ),
+					'label' => __( 'Content Color', 'blc' ),
 					'type'  => 'ct-color-picker',
 					'design' => 'inline',
 					'setting' => [ 'transport' => 'postMessage' ],
 
 					'value' => [
 						'default' => [
-							'color' => 'var(--paletteColor3)',
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+
+						'hover' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
 						],
 					],
 
 					'pickers' => [
 						[
-							'title' => __( 'Initial', 'blocksy' ),
+							'title' => __( 'Initial', 'blc' ),
 							'id' => 'default',
+							'inherit' => 'var(--color)'
+						],
+
+						[
+							'title' => __( 'Hover', 'blc' ),
+							'id' => 'hover',
+							'inherit' => 'var(--linkHoverColor)'
 						],
 					],
 				],
 
 				'mailchimpButton' => [
-					'label' => __( 'Button Color', 'blocksy' ),
+					'label' => __( 'Button Color', 'blc' ),
 					'type'  => 'ct-color-picker',
 					'design' => 'inline',
 					'setting' => [ 'transport' => 'postMessage' ],
@@ -156,64 +197,39 @@ $options = [
 
 					'pickers' => [
 						[
-							'title' => __( 'Initial', 'blocksy' ),
+							'title' => __( 'Initial', 'blc' ),
 							'id' => 'default',
 						],
 
 						[
-							'title' => __( 'Hover', 'blocksy' ),
+							'title' => __( 'Hover', 'blc' ),
 							'id' => 'hover',
 						],
 					],
 				],
 
 				'mailchimpBackground' => [
-					'label' => __( 'Background Color', 'blocksy' ),
+					'label' => __( 'Background Color', 'blc' ),
 					'type'  => 'ct-color-picker',
 					'design' => 'inline',
 					'setting' => [ 'transport' => 'postMessage' ],
 
 					'value' => [
 						'default' => [
-							'color' => Blocksy_Css_Injector::get_skip_rule_keyword(),
+							'color' => '#ffffff',
 						],
 					],
 
 					'pickers' => [
 						[
-							'title' => __( 'Initial', 'blocksy' ),
+							'title' => __( 'Initial', 'blc' ),
 							'id' => 'default',
 						],
 					],
-				],
-
-				'mailchimpShadow' => [
-					'label' => __( 'Shadow Color', 'blocksy' ),
-					'type'  => 'ct-color-picker',
-					'design' => 'inline',
-					'setting' => [ 'transport' => 'postMessage' ],
-
-					'value' => [
-						'default' => [
-							'color' => 'rgba(210, 213, 218, 0.4)',
-						],
-					],
-
-					'pickers' => [
-						[
-							'title' => __( 'Initial', 'blocksy' ),
-							'id' => 'default',
-						],
-					],
-				],
-
-				blocksy_rand_md5() => [
-					'type' => 'ct-divider',
-					'attr' => [ 'data-type' => 'small' ],
 				],
 
 				'mailchimpSpacing' => [
-					'label' => __( 'Container Inner Spacing', 'blocksy' ),
+					'label' => __( 'Container Inner Spacing', 'blc' ),
 					'type' => 'ct-slider',
 					'value' => '40px',
 					'units' => blocksy_units_config([
@@ -224,7 +240,27 @@ $options = [
 						],
 					]),
 					'responsive' => true,
+					'divider' => 'top',
 					'setting' => [ 'transport' => 'postMessage' ],
+				],
+
+				'mailchimpShadow' => [
+					'label' => __( 'Shadow', 'blocksy' ),
+					'type' => 'ct-box-shadow',
+					'responsive' => true,
+					'divider' => 'top',
+					'setting' => [ 'transport' => 'postMessage' ],
+					'value' => blocksy_box_shadow_value([
+						'enable' => true,
+						'h_offset' => 0,
+						'v_offset' => 50,
+						'blur' => 90,
+						'spread' => 0,
+						'inset' => false,
+						'color' => [
+							'color' => 'rgba(210, 213, 218, 0.4)',
+						],
+					])
 				],
 
 			],

@@ -3,7 +3,6 @@
 require_once dirname( __FILE__ ) . '/mailchimp-manager.php';
 
 class BlocksyExtensionMailchimpPreBoot {
-
 	public function __construct() {
 		add_action(
 			'wp_ajax_blocksy_ext_mailchimp_maybe_get_lists',
