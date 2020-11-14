@@ -5,6 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Stable tag: 1.7.33
 
 == Description ==
 
@@ -23,6 +24,9 @@ This plugin runs and adds its enhacements only if the Blocksy theme is installed
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.33: 2020-11-14
+- Fix: Minor issues
+
 1.7.32: 2020-11-13
 - Fix: Show "Global Header" not default
 - Fix: Show which footer is customized
