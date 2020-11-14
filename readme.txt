@@ -5,13 +5,12 @@ Requires PHP: 7.0
 Tested up to: 5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.33
+Stable tag: 1.7.35
 
 == Description ==
 
-Blocksy Companion adds the extensions system to the Blocksy dashboard and introduces the Instagram extension.
-
-This plugin runs and adds its enhacements only if the Blocksy theme is installed and active.
+Blocksy Companion is a plugin that turns Blocksy theme in to a powerful Swiss army knife.
+It runs and adds its enhacements only if the Blocksy theme is installed and active.
 
 = Minimum Requirements =
 
@@ -24,6 +23,12 @@ This plugin runs and adds its enhacements only if the Blocksy theme is installed
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.35: 2020-11-14
+- Fix: Minor issue
+
+1.7.34: 2020-11-14
+- Fix: Minor issue
+
 1.7.33: 2020-11-14
 - Fix: Minor issues
 
