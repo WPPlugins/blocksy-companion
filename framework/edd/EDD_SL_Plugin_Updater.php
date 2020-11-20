@@ -87,8 +87,6 @@ class EDD_SL_Plugin_Updater {
 			return $_transient_data;
 		}
 
-		print_r($_transient_data);
-
 		if (! empty($_transient_data->response) && !empty($_transient_data->response[$this->name]) && false === $this->wp_override) {
 			return $_transient_data;
 		}
