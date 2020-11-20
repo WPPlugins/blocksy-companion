@@ -158,6 +158,19 @@ class Plugin
         if ( !$has_beta ) {
             return;
         }
+        add_action( 'init', function () use( $has_beta ) {
+            if ( !function_exists( '\\blc_fs' ) ) {
+                return;
+            }
+            $data = get_plugin_data( BLOCKSY__FILE__ );
+            new \EDD_SL_Plugin_Updater( 'https://creativethemes.com/', BLOCKSY__FILE__, [
+                'version' => $data['Version'],
+                'license' => '123',
+                'item_id' => 515,
+                'author'  => 'CreativeThemes',
+                'beta'    => false,
+            ] );
+        } );
         add_action( 'after_setup_theme', function () {
             $theme = wp_get_theme( get_template() );
             if ( !$this->check_if_blocksy_is_activated( true ) ) {
