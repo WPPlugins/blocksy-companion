@@ -235,14 +235,13 @@ export const mountStickyHeader = () => {
 
 						const stickyShrink = parseFloat(
 							getComputedStyle(logo).getPropertyValue(
-								'--stickyShrink'
-							) || 100
+								'--logoStickyShrink'
+							) || 1
 						)
 
-						const stickyHeight =
-							(initialHeight * stickyShrink) / 100
+						const stickyHeight = initialHeight * stickyShrink
 
-						if (stickyShrink === 100) {
+						if (stickyShrink === 1) {
 							return
 						}
 
@@ -251,7 +250,7 @@ export const mountStickyHeader = () => {
 
 						logo.style.setProperty(
 							'--logo-shrink-height',
-							`${computeLinearScale(
+							computeLinearScale(
 								[
 									startPosition,
 									startPosition +
@@ -262,7 +261,7 @@ export const mountStickyHeader = () => {
 														rowStickyHeight
 										),
 								],
-								[100, stickyShrink],
+								[1, stickyShrink],
 								clamp(
 									startPosition,
 									startPosition +
@@ -275,7 +274,7 @@ export const mountStickyHeader = () => {
 
 									scrollY
 								)
-							)}%`
+							)
 						)
 					}
 				})

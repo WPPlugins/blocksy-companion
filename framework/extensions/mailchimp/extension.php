@@ -121,7 +121,7 @@ class BlocksyExtensionMailchimp {
 		}, 5);
 
 		add_action(
-			'customize_controls_enqueue_scripts',
+			'customize_preview_init',
 			function () {
 				if (! function_exists('get_plugin_data')) {
 					require_once( ABSPATH . 'wp-admin/includes/plugin.php' );

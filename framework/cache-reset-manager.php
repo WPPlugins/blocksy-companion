@@ -5,6 +5,13 @@ namespace Blocksy;
 class CacheResetManager {
 	public function __construct() {
 		add_action(
+			'blocksy:cache-manager:purge-all',
+			function () {
+				$this->run_cache_purge();
+			}
+		);
+
+		add_action(
 			'upgrader_process_complete',
 			[$this, 'handle_update'],
 			10, 2

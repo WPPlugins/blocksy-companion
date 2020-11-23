@@ -1,12 +1,12 @@
 import {
 	checkAndReplace,
-	responsiveClassesFor
+	responsiveClassesFor,
 } from '../../../cookies-consent/static/js/sync/helpers'
 
 import './variables'
 
-wp.customize('mailchimp_subscribe_visibility', val =>
-	val.bind(to => {
+wp.customize('mailchimp_subscribe_visibility', (val) =>
+	val.bind((to) => {
 		const block = document.querySelector('.ct-mailchimp-block')
 		responsiveClassesFor('mailchimp_subscribe_visibility', block)
 	})
@@ -20,7 +20,7 @@ if (
 		id: 'mailchimp_single_post_enabled',
 		strategy: 'append',
 
-		parent_selector: '.content-area article',
+		parent_selector: '.site-main article',
 		selector: '.ct-mailchimp-block',
 		fragment_id: 'blocksy-mailchimp-subscribe',
 
@@ -30,7 +30,7 @@ if (
 			'mailchimp_title',
 			'mailchimp_text',
 			'mailchimp_name_label',
-			'mailchimp_mail_label'
+			'mailchimp_mail_label',
 		],
 
 		whenInserted: () => {
@@ -45,8 +45,11 @@ if (
 			responsiveClassesFor('mailchimp_subscribe_visibility', block)
 
 			if (wp.customize('has_mailchimp_name')() !== 'yes') {
+				block.querySelector('[data-fields]').dataset.fields = 1
 				block.querySelector('[name="FNAME"]').remove()
 			} else {
+				block.querySelector('[data-fields]').dataset.fields = 2
+
 				block
 					.querySelector('[name="FNAME"]')
 					.setAttribute(
@@ -66,13 +69,13 @@ if (
 				'mailchimp_button_text'
 			)()
 
-			block.querySelector('h4').innerHTML = wp.customize(
+			block.querySelector('h3').innerHTML = wp.customize(
 				'mailchimp_title'
 			)()
 
 			block.querySelector(
 				'.ct-mailchimp-description'
 			).innerHTML = wp.customize('mailchimp_text')()
-		}
+		},
 	})
 }

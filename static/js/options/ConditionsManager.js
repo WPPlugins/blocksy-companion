@@ -85,6 +85,7 @@ const ConditionsManager = ({ value, onChange }) => {
 					})}
 					key={index}>
 					<Select
+						key="first"
 						option={{
 							inputClassName: 'ct-condition-type',
 							selectInputStart: () => (
@@ -112,7 +113,9 @@ const ConditionsManager = ({ value, onChange }) => {
 					/>
 
 					<Select
+						key="second"
 						option={{
+							appendToBody: true,
 							placeholder: __('Select rule', 'blc'),
 							choices:
 								condition.category === 'user'
@@ -145,7 +148,9 @@ const ConditionsManager = ({ value, onChange }) => {
 						condition.rule === 'custom_post_type_ids' ||
 						condition.rule === 'page_ids') && (
 						<Select
+							key="third"
 							option={{
+								appendToBody: true,
 								defaultToFirstItem: false,
 								placeholder:
 									condition.rule === 'post_ids'

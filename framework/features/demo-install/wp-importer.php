@@ -26,9 +26,10 @@ function blc_load_xml_file($url) {
 		]));
 	} else if (function_exists('curl_init')) {
 		$curl = curl_init($url);
+
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 
 		$result = curl_exec($curl);
 		curl_close($curl);
