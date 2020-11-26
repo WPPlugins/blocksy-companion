@@ -265,6 +265,9 @@ class ExtensionsManager
         if ( !$this->extensions[$id]['path'] ) {
             return false;
         }
+        if ( isset( $this->extensions[$id]['config']['hidden'] ) && $this->extensions[$id]['config']['hidden'] ) {
+            return;
+        }
         if ( isset( $this->extensions[$id]['__object'] ) ) {
             return;
         }
