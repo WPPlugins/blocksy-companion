@@ -214,6 +214,51 @@ class ConditionsManager {
 			}
 		}
 
+		if ($rule['rule'] === 'post_with_taxonomy_ids') {
+			if (is_tax() || is_category() || is_tag()) {
+				$tax_id = get_queried_object_id();
+
+				if (
+					isset($rule['payload'])
+					&&
+					isset($rule['payload']['taxonomy_id'])
+					&&
+					$tax_id
+					&&
+					intval($tax_id) === intval($rule['payload']['taxonomy_id'])
+				) {
+					return true;
+				}
+			}
+		}
+
+		if ($rule['rule'] === 'post_with_taxonomy_ids') {
+			$is_blocksy_page = blocksy_is_page();
+
+			if (is_singular() || $is_blocksy_page) {
+				$post_id = get_the_ID();
+
+				if ($is_blocksy_page) {
+					$post_id = $is_blocksy_page;
+				}
+
+				global $post;
+
+				if (
+					isset($rule['payload'])
+					&&
+					isset($rule['payload']['taxonomy_id'])
+					&&
+					$post_id
+				) {
+					return has_term(
+						$rule['payload']['taxonomy_id'],
+						get_term($rule['payload']['taxonomy_id'])->taxonomy
+					);
+				}
+			}
+		}
+
 		return false;
 	}
 
@@ -376,6 +421,11 @@ class ConditionsManager {
 					[
 						'id' => 'taxonomy_ids',
 						'title' => __('Taxonomy ID', 'blc')
+					],
+
+					[
+						'id' => 'post_with_taxonomy_ids',
+						'title' => __('Post with Taxonomy ID', 'blc')
 					],
 				]
 			],

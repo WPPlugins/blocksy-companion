@@ -157,6 +157,39 @@ $options = [
 				],
 			],
 
+			blocksy_rand_md5() => [
+				'type' => 'ct-condition',
+				'condition' => [
+					'any' => [
+						'login_style/label' => true,
+						'loggedin_style/label' => true
+					]
+				],
+				'options' => [
+					blocksy_rand_md5() => [
+						'type' => 'ct-divider',
+					],
+
+					'account_label_visibility' => [
+						'label' => __( 'Label Visibility', 'blc' ),
+						'type' => 'ct-visibility',
+						'design' => 'block',
+						// 'allow_empty' => true,
+						'setting' => [ 'transport' => 'postMessage' ],
+						'value' => [
+							'desktop' => true,
+							'tablet' => true,
+							'mobile' => true,
+						],
+
+						'choices' => blocksy_ordered_keys([
+							'desktop' => __( 'Desktop', 'blocksy' ),
+							'tablet' => __( 'Tablet', 'blocksy' ),
+							'mobile' => __( 'Mobile', 'blocksy' ),
+						]),
+					],
+				],
+			],
 		],
 	],
 

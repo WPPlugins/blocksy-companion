@@ -115,6 +115,23 @@ $options = [
 			),
 		],
 
+		blocksy_rand_md5() => [
+			'type' => 'ct-condition',
+			'condition' => [
+				'posts_type' => 'small-thumbs|large-thumbs|large-small',
+			],
+			'options' => [
+
+				'post_widget_image_ratio' => [
+					'label' => __( 'Image Ratio', 'blocksy' ),
+					'type' => 'ct-ratio',
+					'value' => 'original',
+					'design' => 'inline',
+				],
+
+			],
+		],
+
 		'post_type_source' => [
 			'type' => 'ct-select',
 			'label' => __( 'Post Type', 'blc' ),

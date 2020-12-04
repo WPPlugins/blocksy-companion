@@ -89,6 +89,17 @@ const Extension = ({ extension, onExtsSync }) => {
 						</svg>
 					</button>
 				)}
+
+				{extension.config &&
+					extension.config.buttons &&
+					extension.config.buttons.map(({ text, url }, index) => (
+						<a
+							href={url}
+							className="ct-button ct-config-btn"
+							dataButton="white">
+							{text}
+						</a>
+					))}
 			</div>
 
 			{readme}

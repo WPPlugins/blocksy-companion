@@ -5,12 +5,12 @@ Requires PHP: 7.0
 Tested up to: 5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.39
+Stable tag: 1.7.40
 
 == Description ==
 
-Blocksy Companion is a plugin that turns Blocksy theme in to a powerful Swiss army knife.
-It runs and adds its enhacements only if the Blocksy theme is installed and active.
+Blocksy Companion is a plugin that turns Blocksy theme into a powerful Swiss army knife.
+It runs and adds its enhancements only if the Blocksy theme is installed and active.
 
 = Minimum Requirements =
 
@@ -23,6 +23,12 @@ It runs and adds its enhacements only if the Blocksy theme is installed and acti
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.40: 2020-12-04
+- New: Add ratio option in Posts widget
+
+1.7.39.1: 2020-12-02
+- Improvement: Various changes across multiple components
+
 1.7.39: 2020-11-26
 - Improvement: Various changes across multiple components
 

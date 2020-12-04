@@ -37,7 +37,8 @@ const ConditionsManager = ({ value, onChange }) => {
 		condition.rule === 'post_ids' ||
 		condition.rule === 'page_ids' ||
 		condition.rule === 'custom_post_type_ids' ||
-		condition.rule === 'taxonomy_ids'
+		condition.rule === 'taxonomy_ids' ||
+		condition.rule === 'post_with_taxonomy_ids'
 
 	useEffect(() => {
 		Promise.all(
@@ -191,7 +192,8 @@ const ConditionsManager = ({ value, onChange }) => {
 						/>
 					)}
 
-					{condition.rule === 'taxonomy_ids' && (
+					{(condition.rule === 'taxonomy_ids' ||
+						condition.rule === 'post_with_taxonomy_ids') && (
 						<Select
 							option={{
 								defaultToFirstItem: false,

@@ -4,7 +4,7 @@ const activateScreen = (
 	el,
 	{
 		// login | register | forgot
-		screen = 'login'
+		screen = 'login',
 	}
 ) => {
 	if (el.querySelector('ul') && el.querySelector(`ul .ct-${screen}`)) {
@@ -16,14 +16,14 @@ const activateScreen = (
 	el.querySelector(`.ct-${screen}-form`).classList.add('active')
 }
 
-const handleAccountModal = el => {
+const handleAccountModal = (el) => {
 	if (!el) {
 		return
 	}
 
-	;['login', 'register', 'forgot-password'].map(screen => {
-		Array.from(el.querySelectorAll(`.ct-${screen}`)).map(itemEl => {
-			itemEl.addEventListener('click', e => {
+	;['login', 'register', 'forgot-password'].map((screen) => {
+		Array.from(el.querySelectorAll(`.ct-${screen}`)).map((itemEl) => {
+			itemEl.addEventListener('click', (e) => {
 				e.preventDefault()
 
 				activateScreen(el, { screen })
@@ -34,24 +34,24 @@ const handleAccountModal = el => {
 
 export const mountAccount = () => {
 	Array.from(document.querySelectorAll('.ct-header-account > a[href]')).map(
-		el => {
+		(el) => {
 			if (el.hasSearchEventListener) {
 				return
 			}
 
 			el.hasSearchEventListener = true
 
-			el.addEventListener('click', e => {
+			el.addEventListener('click', (e) => {
 				activateScreen(document.querySelector(el.hash), {
-					screen: 'login'
+					screen: 'login',
 				})
 
 				ctEvents.trigger('ct:overlay:handle-click', {
 					e,
 					href: el.hash,
 					options: {
-						isModal: true
-					}
+						isModal: true,
+					},
 				})
 			})
 

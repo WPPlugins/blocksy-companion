@@ -5,6 +5,7 @@ import {
 	assembleSelector,
 	mutateSelector,
 	getRootSelectorFor,
+	responsiveClassesFor,
 } from 'blocksy-customizer-sync'
 import { markImagesAsLoaded } from '../../../../extensions/cookies-consent/static/js/lazy-load-helpers'
 
@@ -162,6 +163,14 @@ ctEvents.on(
 					}
 
 					markImagesAsLoaded(img.parentNode)
+				})
+			})
+		}
+
+		if (optionId === 'account_label_visibility') {
+			updateAndSaveEl(selector, (el) => {
+				;[...el.querySelectorAll('.ct-label')].map((label) => {
+					responsiveClassesFor(optionValue, label)
 				})
 			})
 		}

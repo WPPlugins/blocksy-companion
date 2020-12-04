@@ -57,8 +57,23 @@ class Plugin
             if ( !current_user_can( 'edit_theme_options' ) ) {
                 wp_send_json_error();
             }
-            $future_value = ( Plugin::instance()->user_wants_beta_updates() ? 'no' : 'yes' );
+            $future_value_bool = Plugin::instance()->user_wants_beta_updates();
+            $future_value = ( $future_value_bool ? 'no' : 'yes' );
             update_option( 'blocksy_has_beta_updates', $future_value );
+            $reflector = new \ReflectionObject( blc_fs() );
+            $get_api_user_scope = $reflector->getMethod( 'get_api_user_scope' );
+            $get_api_user_scope->setAccessible( true );
+            $user = $get_api_user_scope->invoke( blc_fs() )->call( '', 'put', [
+                'plugin_id' => blc_fs()->get_id(),
+                'is_beta'   => !$future_value_bool,
+                'fields'    => 'is_beta',
+            ] );
+            $_user = $reflector->getProperty( '_user' );
+            $_user->setAccessible( true );
+            $_user->getValue( blc_fs() )->is_beta = $user->is_beta;
+            $_store_user = $reflector->getMethod( '_store_user' );
+            $_store_user->setAccessible( true );
+            $_store_user->invoke( blc_fs() );
             wp_send_json_success( [] );
         } );
         add_action( 'widgets_init', [ 'BlocksyWidgetFactory', 'register_all_widgets' ] );

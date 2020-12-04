@@ -61,6 +61,18 @@ if ($current_user_id) {
 	);
 }
 
+$label_class = 'ct-label';
+
+$label_class .= ' ' . blocksy_visibility_classes(blocksy_akg(
+	'account_label_visibility',
+	$atts,
+	[
+		'desktop' => true,
+		'tablet' => true,
+		'mobile' => true,
+	]
+));
+
 ?>
 
 <div
@@ -74,7 +86,7 @@ if ($current_user_id) {
 			<?php } ?>
 
 			<?php if ($loggedin_style['label'] || is_customize_preview()) { ?>
-				<span class="ct-label" <?php echo !$loggedin_style['label'] ? 'hidden' : ''?>>
+				<span class="<?php echo $label_class ?>" <?php echo ! $login_style['label'] ? 'hidden' : ''?>>
 					<?php echo $loggedin_label; ?>
 				</span>
 			<?php } ?>
@@ -90,7 +102,7 @@ if ($current_user_id) {
 			<?php } ?>
 
 			<?php if ($login_style['label'] | is_customize_preview()) { ?>
-				<span class="ct-label" <?php echo ! $login_style['label'] ? 'hidden' : ''?>>
+				<span class="<?php echo $label_class ?>" <?php echo ! $login_style['label'] ? 'hidden' : ''?>>
 					<?php echo $login_label; ?>
 				</span>
 			<?php } ?>

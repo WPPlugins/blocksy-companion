@@ -146,11 +146,15 @@ echo $before_title . wp_kses_post( $title ) . $after_title;
 					<?php
 					if ( $has_thumbnail ) {
 						$size = 'thumbnail';
-						$ratio = '1/1';
+						$ratio = blocksy_default_akg('post_widget_image_ratio', $atts, '1/1');
+						
 
 						if ( $posts_type === 'large-thumbs' ) {
 							$size = 'medium';
-							$ratio = '4/3';
+						}
+
+						if ( $posts_type === 'rounded' ) {
+							$ratio = '1/1';
 						}
 
 						if (

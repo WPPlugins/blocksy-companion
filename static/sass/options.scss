@@ -2,6 +2,12 @@
 @import 'options/animated-checkbox';
 
 .toplevel_page_ct-dashboard {
+
+	.wp-menu-image img {
+		max-width: 18px;
+		height: auto;
+	}
+
 	a[href*='ct-dashboard-pricing'] {
 		display: none !important;
 	}
@@ -15,4 +21,8 @@
 	.upgrade {
 		display: none;
 	}
+}
+
+.fs-field-beta_program {
+	display: none;
 }
