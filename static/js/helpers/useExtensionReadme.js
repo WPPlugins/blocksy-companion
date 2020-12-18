@@ -5,7 +5,6 @@ import {
 	useState,
 	Fragment
 } from '@wordpress/element'
-import { Transition } from 'react-spring/renderprops'
 import { Dialog, DialogOverlay, DialogContent } from './reach/dialog'
 // import '@reach/dialog/styles.css'
 import Overlay from './Overlay'

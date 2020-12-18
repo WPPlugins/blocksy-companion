@@ -2,10 +2,10 @@
 Tags: widget, widgets
 Requires at least: 5.2
 Requires PHP: 7.0
-Tested up to: 5.5
+Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.40
+Stable tag: 1.7.40.2
 
 == Description ==
 
@@ -23,6 +23,17 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.41: 2020-12-18
+- New: Sticky header new behavior (scroll down -> hide header, scroll top -> show header
+- Fix: Don't show Config buttons if the extension is not activated
+
+1.7.40.2: 2020-12-15
+- New: Sticky header new behavior (scroll down -> hide header, scroll top -> show header
+- Fix: Don't show Config buttons if the extension is not activated
+
+1.7.40.1: 2020-12-07
+- Improvement: Sticky calculation logic
+
 1.7.40: 2020-12-04
 - New: Add ratio option in Posts widget
 

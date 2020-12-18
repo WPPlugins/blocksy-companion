@@ -3,13 +3,12 @@ import {
 	Component,
 	useEffect,
 	useState,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'
 import useExtensionReadme from '../helpers/useExtensionReadme'
 import useActivationAction from '../helpers/useActivationAction'
-import { Transition, animated } from 'react-spring/renderprops'
 import fileSaver from 'file-saver'
 import Overlay from '../helpers/Overlay'
 
@@ -39,7 +38,7 @@ const SiteExport = () => {
 		try {
 			const response = await fetch(ctDashboardLocalizations.ajax_url, {
 				method: 'POST',
-				body
+				body,
 			})
 
 			if (response.status === 200) {
@@ -47,7 +46,7 @@ const SiteExport = () => {
 
 				if (success) {
 					var blob = new Blob([JSON.stringify(data.demo)], {
-						type: 'text/plain;charset=utf-8'
+						type: 'text/plain;charset=utf-8',
 					})
 
 					fileSaver.saveAs(blob, `${name}.json`)
@@ -66,7 +65,7 @@ const SiteExport = () => {
 		<div className="ct-export">
 			<button
 				className="ct-button"
-				onClick={e => {
+				onClick={(e) => {
 					setIsShowing(true)
 				}}>
 				{__('Site export')}
@@ -133,9 +132,7 @@ const SiteExport = () => {
 								value={plugins}
 								onChange={({ target: { value } }) =>
 									setPlugins(value)
-								}
-							>
-							</textarea>
+								}></textarea>
 						</label>
 
 						<button

@@ -5,17 +5,17 @@ import {
 	useState,
 	useContext,
 	createContext,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import {
 	Dialog,
 	DialogOverlay,
-	DialogContent
+	DialogContent,
 } from '../../helpers/reach/dialog'
 
 import Overlay from '../../helpers/Overlay'
 
-import { Transition } from 'react-spring/renderprops'
+import { Transition } from 'blocksy-options'
 import { __ } from 'ct-i18n'
 import cn from 'classnames'
 import DashboardContext from '../../DashboardContext'
@@ -38,7 +38,7 @@ const DemoToInstall = ({ location, navigate }) => {
 		currentDemo,
 		pluginsStatus,
 		currentlyInstalledDemo: globalCurrentlyInstalledDemo,
-		setCurrentDemo
+		setCurrentDemo,
 	} = useContext(DemosContext)
 
 	const { is_child_theme } = useContext(DashboardContext)
@@ -55,8 +55,8 @@ const DemoToInstall = ({ location, navigate }) => {
 			options: true,
 			widgets: true,
 			content: true,
-			erase_content: true
-		}
+			erase_content: true,
+		},
 	})
 
 	const [currentConfigurationStep, setCurrentConfigurationStep] = useState(0)
@@ -69,8 +69,8 @@ const DemoToInstall = ({ location, navigate }) => {
 		'builder',
 		'plugins',
 		'content',
-		'installer'
-	].filter(step => {
+		'installer',
+	].filter((step) => {
 		if (!currentDemo) {
 			return false
 		}
@@ -111,11 +111,11 @@ const DemoToInstall = ({ location, navigate }) => {
 					.reduce(
 						(currentPlugins, currentVariation) => [
 							...currentPlugins,
-							...(currentVariation.plugins || [])
+							...(currentVariation.plugins || []),
 						],
 						[]
 					)
-					.filter(plugin => !pluginsStatus[plugin]).length === 0
+					.filter((plugin) => !pluginsStatus[plugin]).length === 0
 			) {
 				return false
 			}
@@ -157,29 +157,29 @@ const DemoToInstall = ({ location, navigate }) => {
 
 			child_theme: true,
 
-			plugins: demoVariations[0].plugins.map(plugin => ({
+			plugins: demoVariations[0].plugins.map((plugin) => ({
 				plugin,
-				enabled: true
+				enabled: true,
 			})),
 
 			content: {
 				options: true,
 				widgets: true,
 				content: true,
-				erase_content: true
-			}
+				erase_content: true,
+			},
 		})
 	}, [currentDemo])
 
 	return (
 		<Overlay
 			items={currentDemo}
-			isVisible={currentDemo =>
+			isVisible={(currentDemo) =>
 				currentDemo && currentDemo.indexOf(':hide') === -1
 			}
 			className={cn('ct-demo-modal', {
 				'ct-demo-installer':
-					stepName === 'installer' || stepName === 'modify_demo'
+					stepName === 'installer' || stepName === 'modify_demo',
 			})}
 			onDismiss={() => {
 				if (stepName === 'installer' && !installerBlockingReleased) {
@@ -200,14 +200,14 @@ const DemoToInstall = ({ location, navigate }) => {
 							config={(key, phase) => {
 								return phase === 'leave'
 									? {
-											duration: 150
+											duration: 150,
 									  }
 									: {
 											delay: 150,
-											duration: 150
+											duration: 150,
 									  }
 							}}>
-							{stepName => props => (
+							{(stepName) => (props) => (
 								<Fragment>
 									{stepName === 'modify_demo' && (
 										<ModifyDemo
@@ -313,7 +313,7 @@ const DemoToInstall = ({ location, navigate }) => {
 										configurationSteps.length - 1 ? null : (
 											<li
 												className={cn({
-													active: step === stepName
+													active: step === stepName,
 												})}
 												key={step}>
 												{index + 1}
@@ -330,7 +330,7 @@ const DemoToInstall = ({ location, navigate }) => {
 									getStepsForDemoConfiguration({
 										demoConfiguration,
 										pluginsStatus,
-										is_child_theme
+										is_child_theme,
 									}).length === 0
 								}
 								onClick={() => {

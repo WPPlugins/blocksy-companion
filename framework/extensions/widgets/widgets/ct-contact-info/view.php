@@ -47,7 +47,9 @@ $contact_information = blocksy_default_akg(
 echo $before_widget;
 
 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-echo $before_title . wp_kses_post( $title ) . $after_title;
+if (! empty($title)) {
+	echo $before_title . wp_kses_post($title) . $after_title;
+}
 
 ?>
 

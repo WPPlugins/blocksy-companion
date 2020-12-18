@@ -11,7 +11,7 @@ import { __ } from 'ct-i18n'
 import classnames from 'classnames'
 import useExtensionReadme from '../helpers/useExtensionReadme'
 import useActivationAction from '../helpers/useActivationAction'
-import { Transition, animated } from 'react-spring/renderprops'
+import { Transition, animated } from 'blocksy-options'
 import DemosList from './DemoInstall/DemosList'
 import DemoToInstall from './DemoInstall/DemoToInstall'
 

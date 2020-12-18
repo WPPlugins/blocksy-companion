@@ -3,10 +3,9 @@ import {
 	Component,
 	useEffect,
 	useState,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 
-import { Transition } from 'react-spring/renderprops'
 import EditCredentials from '../EditCredentials'
 import { __, sprintf } from 'ct-i18n'
 
@@ -30,7 +29,7 @@ const useActivationWithRequirements = (extension, cb = () => {}) => {
 		try {
 			await fetch(ctDashboardLocalizations.ajax_url, {
 				method: 'POST',
-				body
+				body,
 			})
 
 			cb()
@@ -74,7 +73,7 @@ const useActivationWithRequirements = (extension, cb = () => {}) => {
 					setIsEditingCredentials(false)
 				}}
 			/>
-		</Fragment>
+		</Fragment>,
 	]
 }
 

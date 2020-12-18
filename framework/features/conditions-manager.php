@@ -157,7 +157,7 @@ class ConditionsManager {
 		}
 
 		if (strpos($rule['rule'], 'post_type_archive_') !== false) {
-			return is_archive(str_replace(
+			return is_post_type_archive(str_replace(
 				'post_type_archive_',
 				'',
 				$rule['rule']

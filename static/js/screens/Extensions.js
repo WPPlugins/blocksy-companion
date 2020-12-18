@@ -10,7 +10,7 @@ import { __ } from 'ct-i18n'
 import classnames from 'classnames'
 import useExtensionReadme from '../helpers/useExtensionReadme'
 import useActivationAction from '../helpers/useActivationAction'
-import { Transition, animated } from 'react-spring/renderprops'
+import { Transition, animated } from 'blocksy-options'
 import SubmitSupport from '../helpers/SubmitSupport'
 import ctEvents from 'ct-events'
 
@@ -90,7 +90,8 @@ const Extension = ({ extension, onExtsSync }) => {
 					</button>
 				)}
 
-				{extension.config &&
+				{extension.__object &&
+					extension.config &&
 					extension.config.buttons &&
 					extension.config.buttons.map(({ text, url }, index) => (
 						<a

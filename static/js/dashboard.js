@@ -54,6 +54,10 @@ ctEvents.on('ct:dashboard:home:before', (r) => {
 })
 
 ctEvents.on('ct:dashboard:home:after', (r) => {
+	if (ctDashboardLocalizations.plugin_data.hide_beta_updates) {
+		return
+	}
+
 	r.content = <BetaConsent />
 })
 

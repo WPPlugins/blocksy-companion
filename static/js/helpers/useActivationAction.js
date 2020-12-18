@@ -7,7 +7,6 @@ import {
 	Fragment
 } from '@wordpress/element'
 import { __, sprintf } from 'ct-i18n'
-import { Transition } from 'react-spring/renderprops'
 import { Dialog, DialogOverlay, DialogContent } from './reach/dialog'
 import Overlay from './Overlay'
 

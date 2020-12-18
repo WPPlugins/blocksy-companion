@@ -15,8 +15,8 @@ const initCookies = () => {
 			notification.classList.remove('ct-fade-in-end')
 		})
 	})
-	;[...notification.querySelectorAll('button')].map(el => {
-		el.addEventListener('click', e => {
+	;[...notification.querySelectorAll('button')].map((el) => {
+		el.addEventListener('click', (e) => {
 			e.preventDefault()
 
 			if (el.classList.contains('ct-accept')) {
@@ -28,14 +28,14 @@ const initCookies = () => {
 					threemonths: 3 * 31 * 864e5,
 					sixmonths: 6 * 31 * 864e5,
 					oneyear: 365 * 864e5,
-					forever: 10000 * 864e5
+					forever: 10000 * 864e5,
 				}
 
 				cookie.set('blocksy_cookies_consent_accepted', 'true', {
 					expires: new Date(
 						new Date() * 1 +
 							periods[el.closest('[data-period]').dataset.period]
-					)
+					),
 				})
 			}
 
@@ -72,7 +72,7 @@ function whenTransitionEnds(el, cb) {
 		cb()
 	}
 
-	const onEnd = e => {
+	const onEnd = (e) => {
 		if (e.target === el) {
 			end()
 		}

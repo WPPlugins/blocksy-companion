@@ -2,7 +2,7 @@ import { createElement, Component, Fragment } from '@wordpress/element'
 
 import { sprintf, __ } from 'ct-i18n'
 import classnames from 'classnames'
-import { Transition } from 'react-spring/renderprops'
+import { Transition } from 'blocksy-options'
 
 import InstallCompleted from './Installer/InstallCompleted'
 
@@ -16,7 +16,7 @@ const DemoInstaller = ({ demoConfiguration, style }) => {
 		stepName,
 		stepsDescriptors,
 		lastMessage,
-		progress
+		progress,
 	} = useInstaller(demoConfiguration)
 
 	return (
@@ -30,14 +30,14 @@ const DemoInstaller = ({ demoConfiguration, style }) => {
 				config={(key, phase) => {
 					return phase === 'leave'
 						? {
-								duration: 300
-							}
+								duration: 300,
+						  }
 						: {
 								delay: 300,
-								duration: 300
-							}
+								duration: 300,
+						  }
 				}}>
-				{isCompleted => props => (
+				{(isCompleted) => (props) => (
 					<div style={props}>
 						{isCompleted ? (
 							<InstallCompleted />
@@ -82,14 +82,14 @@ const DemoInstaller = ({ demoConfiguration, style }) => {
 										? `: ${getMessageForAction(
 												lastMessage,
 												stepsDescriptors
-											)}`
+										  )}`
 										: ''}
 									<span>{Math.round(progress)}%</span>
 								</div>
 
 								<div
 									style={{
-										'--progress': `${progress}%`
+										'--progress': `${progress}%`,
 									}}
 									className="ct-installer-progress">
 									<div />

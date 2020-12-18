@@ -212,6 +212,7 @@ $options = [
 						'id' => 'transparentAccountHeaderColor',
 						'label' => __('Transparent State', 'blc'),
 						'condition' => [
+							'row' => '!offcanvas',
 							'builderSettings/has_transparent_header' => 'yes',
 						],
 					],
@@ -220,6 +221,7 @@ $options = [
 						'id' => 'stickyAccountHeaderColor',
 						'label' => __('Sticky State', 'blc'),
 						'condition' => [
+							'row' => '!offcanvas',
 							'builderSettings/has_sticky_header' => 'yes',
 						],
 					],

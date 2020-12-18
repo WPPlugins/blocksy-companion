@@ -93,6 +93,7 @@ class CacheResetManager {
 		if (class_exists('WP_Optimize') && defined('WPO_PLUGIN_MAIN_PATH')) {
 			if (! class_exists('WP_Optimize_Cache_Commands')) include_once(WPO_PLUGIN_MAIN_PATH . 'cache/class-cache-commands.php');
 			if (! class_exists('WP_Optimize_Minify_Commands')) include_once(WPO_PLUGIN_MAIN_PATH . 'minify/class-wp-optimize-minify-commands.php');
+			if (! class_exists('WP_Optimize_Minify_Cache_Functions')) include_once(WPO_PLUGIN_MAIN_PATH . 'minify/class-wp-optimize-minify-cache-functions.php');
 
 			if (class_exists('WP_Optimize_Cache_Commands')) {
 				$wpoptimize_cache_commands = new \WP_Optimize_Cache_Commands();

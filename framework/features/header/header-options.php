@@ -71,6 +71,7 @@ $options = [
 					'shrink' => __('Default', 'blc'),
 					'slide' => __('Slide Down', 'blc'),
 					'fade' => __('Fade', 'blc'),
+					'auto-hide' => __('Auto Hide/Show', 'blc'),
 				]),
 			],
 

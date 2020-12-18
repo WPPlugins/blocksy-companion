@@ -13,7 +13,6 @@ import { __ } from 'ct-i18n'
 import cn from 'classnames'
 
 import DashboardContext from '../../../DashboardContext'
-import { Transition } from 'react-spring/renderprops'
 
 const InstallCompleted = () => {
 	const { home_url, customizer_url } = useContext(DashboardContext)

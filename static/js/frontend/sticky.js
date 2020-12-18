@@ -34,6 +34,7 @@ const getRowStickyHeight = (el) => {
 
 function isInViewport(element) {
 	const rect = element.getBoundingClientRect()
+
 	return (
 		rect.top >= 0 &&
 		rect.left >= 0 &&
@@ -45,11 +46,15 @@ function isInViewport(element) {
 }
 
 const getStartPositionFor = (stickyContainer) => {
-	if (stickyContainer.dataset.sticky.indexOf('shrink') === -1) {
+	if (
+		stickyContainer.dataset.sticky.indexOf('shrink') === -1 &&
+		stickyContainer.dataset.sticky.indexOf('auto-hide') === -1
+	) {
 		return stickyContainer.parentNode.getBoundingClientRect().height + 200
 	}
 
-	const stickyOffset = 0
+	const stickyOffset =
+		stickyContainer.closest('header').getBoundingClientRect().top + scrollY
 
 	const row = stickyContainer.parentNode
 
@@ -86,6 +91,8 @@ export const mountStickyHeader = () => {
 		return
 	}
 
+	let prevScrollY = window.scrollY
+
 	const compute = () => {
 		const stickyContainer = document.querySelector(
 			`[data-device="${getCurrentScreen()}"] [data-sticky]`
@@ -115,6 +122,89 @@ export const mountStickyHeader = () => {
 
 			return sum + rowInitialHeight
 		}, 0)
+
+		if (stickyComponents.indexOf('auto-hide') > -1) {
+			if (window.scrollY < startPosition) {
+				prevScrollY = window.scrollY
+			}
+
+			if (isSticky && window.scrollY - prevScrollY < -5) {
+				if (stickyContainer.dataset.sticky.indexOf('yes') === -1) {
+					stickyContainer.dataset.sticky = [
+						'yes-start',
+						...stickyComponents,
+					].join(':')
+
+					requestAnimationFrame(() => {
+						stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+							'yes-start',
+							'yes-end'
+						)
+
+						setTimeout(() => {
+							stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+								'yes-end',
+								'yes'
+							)
+						}, 200)
+					})
+				}
+
+				setTransparencyFor(stickyContainer, 'no')
+
+				stickyContainer.parentNode.style.setProperty(
+					'--minHeight',
+					`${containerInitialHeight}px`
+				)
+			} else {
+				if (!isSticky) {
+					stickyContainer.dataset.sticky = stickyComponents.join(':')
+
+					stickyContainer.parentNode.removeAttribute('style')
+
+					Array.from(
+						stickyContainer.querySelectorAll('[data-row]')
+					).map((row) => row.removeAttribute('style'))
+					setTransparencyFor(stickyContainer, 'yes')
+
+					prevScrollY = window.scrollY
+					return
+				}
+
+				if (
+					stickyContainer.dataset.sticky.indexOf('yes-hide') === -1 &&
+					stickyContainer.dataset.sticky.indexOf('yes:') > -1 &&
+					window.scrollY - prevScrollY > 5
+				) {
+					stickyContainer.dataset.sticky = [
+						'yes-hide-start',
+						...stickyComponents,
+					].join(':')
+
+					requestAnimationFrame(() => {
+						stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+							'yes-hide-start',
+							'yes-hide-end'
+						)
+
+						setTimeout(() => {
+							stickyContainer.dataset.sticky = stickyComponents.join(
+								':'
+							)
+
+							stickyContainer.parentNode.removeAttribute('style')
+
+							Array.from(
+								stickyContainer.querySelectorAll('[data-row]')
+							).map((row) => row.removeAttribute('style'))
+							setTransparencyFor(stickyContainer, 'yes')
+						}, 200)
+					})
+				}
+			}
+
+			prevScrollY = window.scrollY
+		}
 
 		if (
 			stickyComponents.indexOf('slide') > -1 ||

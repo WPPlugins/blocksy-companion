@@ -31,6 +31,7 @@ $users_can_register = get_option('users_can_register');
 
 				<form name="loginform" id="loginform" action="<?php echo wp_login_url() ?>" method="post">
 					<?php do_action('woocommerce_login_form_start'); ?>
+					<?php do_action('blocksy:account:modal:login:start'); ?>
 
 					<p class="login-username">
 						<label for="user_login"><?php echo __('Email Address', 'blc') ?></label>
@@ -61,6 +62,7 @@ $users_can_register = get_option('users_can_register');
 						<input type="hidden" name="redirect_to" value="<?php echo blocksy_current_url() ?>">
 					</p>
 
+					<?php do_action('blocksy:account:modal:login:end'); ?>
 					<?php do_action('woocommerce_login_form_end'); ?>
 				</form>
 			</section>
@@ -70,6 +72,7 @@ $users_can_register = get_option('users_can_register');
 
 					<form name="registerform" id="registerform" action="<?php echo wp_registration_url() ?>" method="post" novalidate="novalidate">
 						<?php do_action('woocommerce_register_form_start') ?>
+						<?php do_action('blocksy:account:modal:register:start'); ?>
 
 						<p>
 							<label for="user_login_register"><?php echo __('Username', 'blc') ?></label>
@@ -93,6 +96,7 @@ $users_can_register = get_option('users_can_register');
 							<input type="hidden" name="redirect_to" value="<?php echo blocksy_current_url() ?>">
 						</p>
 
+						<?php do_action('blocksy:account:modal:register:end'); ?>
 						<?php do_action('woocommerce_register_form_end') ?>
 					</form>
 
@@ -101,6 +105,8 @@ $users_can_register = get_option('users_can_register');
 
 			<section class="ct-forgot-password-form">
 				<form name="lostpasswordform" id="lostpasswordform" action="<?php echo wp_lostpassword_url() ?>" method="post">
+					<?php do_action('blocksy:account:modal:lostpassword:start'); ?>
+
 					<p>
 						<label for="user_login_forgot"><?php echo __('Username or Email Address', 'blc')?></label>
 						<input type="text" name="user_login" id="user_login_forgot" class="input" value="" size="20" autocapitalize="off" required>
@@ -113,6 +119,8 @@ $users_can_register = get_option('users_can_register');
 
 						<input type="hidden" name="redirect_to" value="<?php echo blocksy_current_url() ?>">
 					</p>
+
+					<?php do_action('blocksy:account:modal:lostpassword:end'); ?>
 				</form>
 
 				<a href="<?php echo wp_login_url() ?>" class="ct-back-to-login ct-login">

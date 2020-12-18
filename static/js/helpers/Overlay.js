@@ -8,7 +8,7 @@ import {
 	Fragment,
 } from '@wordpress/element'
 import { Dialog, DialogOverlay, DialogContent } from './reach/dialog'
-import { Transition } from 'react-spring/renderprops'
+import { Transition } from 'blocksy-options'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'
 
