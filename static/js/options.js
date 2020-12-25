@@ -1,6 +1,8 @@
 import { createElement, Fragment, Component } from '@wordpress/element'
 import { Fill } from '@wordpress/components'
 import DisplayCondition from './options/DisplayCondition'
+import CustomizerOptionsManager from './options/CustomizerOptionsManager'
+
 import { onDocumentLoaded } from '../../framework/extensions/cookies-consent/static/js/helpers'
 
 import ctEvents from 'ct-events'
@@ -29,4 +31,5 @@ ctEvents.on('blocksy:options:before-option', (args) => {
 
 ctEvents.on('blocksy:options:register', (opts) => {
 	opts['blocksy-display-condition'] = DisplayCondition
+	opts['blocksy-customizer-options-manager'] = CustomizerOptionsManager
 })

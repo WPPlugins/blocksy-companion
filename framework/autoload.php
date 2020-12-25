@@ -36,6 +36,7 @@ class Autoloader {
 			'Cli' => 'framework/cli.php',
 
 			'DynamicCss' => 'framework/features/dynamic-css.php',
+			'CustomizerOptionsManager' => 'framework/features/customizer-options-manager.php',
 			'DemoInstall' => 'framework/features/demo-install.php',
 			'DemoInstallContentExport' => 'framework/features/demo-install/content-export.php',
 			'DemoInstallWidgetsExport' => 'framework/features/demo-install/widgets-export.php',

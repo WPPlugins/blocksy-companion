@@ -79,6 +79,20 @@ class DemoInstallOptionsInstaller {
 			exit;
 		}
 
+		$options = $demo_content['options'];
+		$this->import_options($options);
+
+		if ($this->has_streaming) {
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'complete',
+				'error' => false,
+			]);
+
+			exit;
+		}
+	}
+
+	public function import_options($options) {
 		if ($this->has_streaming) {
 			Plugin::instance()->demo->emit_sse_message([
 				'action' => 'import_mods_images',
@@ -86,11 +100,12 @@ class DemoInstallOptionsInstaller {
 			]);
 		}
 
-		$options = $demo_content['options'];
 		$options['mods'] = $this->import_images(
 			$demo_content,
 			$options['mods']
 		);
+
+		global $wp_customize;
 
 		if ($this->has_streaming) {
 			Plugin::instance()->demo->emit_sse_message([
@@ -98,8 +113,6 @@ class DemoInstallOptionsInstaller {
 				'error' => false,
 			]);
 		}
-
-		global $wp_customize;
 
 		do_action('customize_save', $wp_customize);
 
@@ -167,15 +180,6 @@ class DemoInstallOptionsInstaller {
 			$options['wp_css']
 		) {
 			wp_update_custom_css_post($options['wp_css']);
-		}
-
-		if ($this->has_streaming) {
-			Plugin::instance()->demo->emit_sse_message([
-				'action' => 'complete',
-				'error' => false,
-			]);
-
-			exit;
 		}
 	}
 

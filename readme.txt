@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.40.2
+Stable tag: 1.7.43
 
 == Description ==
 
@@ -23,6 +23,16 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.43: 2020-12-25
+- New: Customizer import/export
+- Improvement: Shrink logo functionality doesn't work when sticky header is set to Auto Hide/Show
+
+1.7.42: 2020-12-21
+- Improvement: General fixes and improvements
+
+1.7.41.1: 2020-12-21
+- Fix: Fix freeze for icon picker option
+
 1.7.41: 2020-12-18
 - New: Sticky header new behavior (scroll down -> hide header, scroll top -> show header
 - Fix: Don't show Config buttons if the extension is not activated

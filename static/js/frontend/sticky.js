@@ -128,6 +128,13 @@ export const mountStickyHeader = () => {
 				prevScrollY = window.scrollY
 			}
 
+			if (isSticky && window.scrollY - prevScrollY === 0) {
+				document.body.style.setProperty(
+					'--headerStickyHeightAnimated',
+					`0px`
+				)
+			}
+
 			if (isSticky && window.scrollY - prevScrollY < -5) {
 				if (stickyContainer.dataset.sticky.indexOf('yes') === -1) {
 					stickyContainer.dataset.sticky = [
@@ -151,6 +158,7 @@ export const mountStickyHeader = () => {
 				}
 
 				setTransparencyFor(stickyContainer, 'no')
+				document.body.removeAttribute('style')
 
 				stickyContainer.parentNode.style.setProperty(
 					'--minHeight',
@@ -167,6 +175,11 @@ export const mountStickyHeader = () => {
 					).map((row) => row.removeAttribute('style'))
 					setTransparencyFor(stickyContainer, 'yes')
 
+					document.body.style.setProperty(
+						'--headerStickyHeightAnimated',
+						`0px`
+					)
+
 					prevScrollY = window.scrollY
 					return
 				}
@@ -180,6 +193,11 @@ export const mountStickyHeader = () => {
 						'yes-hide-start',
 						...stickyComponents,
 					].join(':')
+
+					document.body.style.setProperty(
+						'--headerStickyHeightAnimated',
+						`0px`
+					)
 
 					requestAnimationFrame(() => {
 						stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(

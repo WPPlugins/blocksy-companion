@@ -89,6 +89,7 @@ class Plugin
         $this->theme_integration = new ThemeIntegration();
         $this->demo = new DemoInstall();
         $this->dynamic_css = new DynamicCss();
+        new CustomizerOptionsManager();
     }
     
     /**
