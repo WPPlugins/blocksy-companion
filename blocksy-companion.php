@@ -3,7 +3,7 @@
 /*
 Plugin Name: Blocksy Companion
 Description: This plugin is the companion for the Blocksy theme, it runs and adds its enhacements only if the Blocksy theme is installed and active.
-Version: 1.7.43
+Version: 1.7.44
 Author: CreativeThemes
 Author URI: https://creativethemes.com
 Text Domain: blc
@@ -26,6 +26,9 @@ if ( function_exists( 'blc_fs' ) ) {
         global  $blc_fs ;
         
         if ( !isset( $blc_fs ) ) {
+            if ( !defined( 'WP_FS__PRODUCT_5115_MULTISITE' ) ) {
+                define( 'WP_FS__PRODUCT_5115_MULTISITE', true );
+            }
             require_once dirname( __FILE__ ) . '/freemius/start.php';
             $has_account = true;
             $instance = \Freemius::instance( 5115, 'blocksy-companion', true );

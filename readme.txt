@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.43
+Stable tag: 1.7.44
 
 == Description ==
 
@@ -23,6 +23,11 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.44: 2020-12-28
+- New: Author box new social profiles: Pinterest, WordPress, GitHub, Medium, YouTube, Vimeo, VKontakte, Odnoklassniki, TikTok
+- Improvement: Allow all declared taxonomies in conditions
+- Improvement: Improve WooCommerce banner position
+
 1.7.43: 2020-12-25
 - New: Customizer import/export
 - Improvement: Shrink logo functionality doesn't work when sticky header is set to Auto Hide/Show

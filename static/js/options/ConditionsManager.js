@@ -60,20 +60,21 @@ const ConditionsManager = ({ value, onChange }) => {
 			allPostsCache = all
 		})
 
-		Promise.all(
-			['categories', 'tags'].map((type) =>
-				fetch(
-					`${blocksy_admin.rest_url}wp/v2/${type}${
-						blocksy_admin.rest_url.indexOf('?') > -1 ? '&' : '?'
-					}_embed&per_page=100`
-				).then((r) => r.json())
-			)
-		).then((results) => {
-			let all = results.reduce((r, current) => [...r, ...current], [])
-
-			setAllTaxonomies(all)
-			allTaxonomiesCache = all
-		})
+		fetch(
+			`${wp.ajax.settings.url}?action=blocksy_conditions_get_all_taxonomies`,
+			{
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				method: 'POST',
+			}
+		)
+			.then((r) => r.json())
+			.then(({ data: { taxonomies } }) => {
+				setAllTaxonomies(taxonomies)
+				allTaxonomiesCache = taxonomies
+			})
 	}, [])
 
 	return (
@@ -201,6 +202,9 @@ const ConditionsManager = ({ value, onChange }) => {
 								choices: allTaxonomies.map((taxonomy) => ({
 									key: taxonomy.id,
 									value: taxonomy.name,
+									...(taxonomy.group
+										? { group: taxonomy.group }
+										: {}),
 								})),
 								search: true,
 							}}

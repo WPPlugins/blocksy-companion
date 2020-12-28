@@ -91,6 +91,10 @@
 	.ct-cookies-content {
 		line-height: 1.4;
 
+		> *:last-child {
+			margin-bottom: 0;
+		}
+
 		a {
 			text-decoration: underline;
 			color: var(--colorHover);

@@ -4,6 +4,54 @@ namespace Blocksy;
 
 class ThemeIntegration {
 	public function __construct() {
+		add_action('wp_ajax_blocksy_conditions_get_all_taxonomies', function () {
+			if (! current_user_can('manage_options')) {
+				wp_send_json_error();
+			}
+
+			$cpts = blocksy_manager()->post_types->get_supported_post_types();
+
+			$cpts[] = 'post';
+			$cpts[] = 'page';
+			$cpts[] = 'product';
+
+			$taxonomies = [];
+
+			foreach ($cpts as $cpt) {
+				$taxonomies = array_merge($taxonomies, array_values(array_diff(
+					get_object_taxonomies($cpt),
+					['post_format']
+				)));
+			}
+
+			$terms = [];
+
+			foreach ($taxonomies as $taxonomy) {
+				$local_terms = array_map(function ($tax) {
+					return [
+						'id' => $tax->term_id,
+						'name' => $tax->name
+					];
+				}, get_terms(['taxonomy' => $taxonomy]));
+
+				if (empty($local_terms)) {
+					continue;
+				}
+
+				$terms[] = [
+					'id' => $taxonomy,
+					'name' => $taxonomy,
+					'group' => get_taxonomy($taxonomy)->label
+				];
+
+				$terms = array_merge($terms, $local_terms);
+			}
+
+			wp_send_json_success([
+				'taxonomies' => $terms
+			]);
+		});
+
 		add_filter(
 			'blocksy_add_menu_page',
 			function ($res, $options) {
@@ -42,6 +90,15 @@ class ThemeIntegration {
 				$fields['linkedin'] = __( 'LinkedIn', 'blc' );
 				$fields['dribbble'] = __( 'Dribbble', 'blc' );
 				$fields['instagram'] = __( 'Instagram', 'blc' );
+				$fields['pinterest'] = __( 'Pinterest', 'blc' );
+				$fields['wordpress'] = __( 'WordPress', 'blc' );
+				$fields['github'] = __( 'GitHub', 'blc' );
+				$fields['medium'] = __( 'Medium', 'blc' );
+				$fields['youtube'] = __( 'YouTube', 'blc' );
+				$fields['vimeo'] = __( 'Vimeo', 'blc' );
+				$fields['vkontakte'] = __( 'VKontakte', 'blc' );
+				$fields['odnoklassniki'] = __( 'Odnoklassniki', 'blc' );
+				$fields['tiktok'] = __( 'TikTok', 'blc' );
 
 				return $fields;
 			}
