@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname( __FILE__ ) . '/helpers.php';
+require_once dirname(__FILE__) . '/helpers.php';
 
 class BlocksyExtensionCookiesConsent {
 	public static function onActivation() {

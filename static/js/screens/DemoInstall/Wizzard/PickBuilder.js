@@ -5,7 +5,7 @@ import {
 	useState,
 	useContext,
 	createContext,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'
@@ -17,7 +17,7 @@ const PickBuilder = ({ demoConfiguration, setDemoConfiguration, style }) => {
 		currentDemo,
 		demos_list,
 		pluginsStatus,
-		setCurrentDemo
+		setCurrentDemo,
 	} = useContext(DemosContext)
 
 	const [properDemoName, _] = (currentDemo || '').split(':')
@@ -72,7 +72,7 @@ const PickBuilder = ({ demoConfiguration, setDemoConfiguration, style }) => {
 						)}
 					</p>
 
-					<ul>
+					<ul data-count={demosCollection.length}>
 						{demosCollection
 							.sort((a, b) => {
 								if (a.builder < b.builder) {
@@ -92,16 +92,16 @@ const PickBuilder = ({ demoConfiguration, setDemoConfiguration, style }) => {
 											builder ===
 											(demoConfiguration.builder === null
 												? demosCollection[0].builder
-												: demoConfiguration.builder)
+												: demoConfiguration.builder),
 									})}
 									onClick={() =>
 										setDemoConfiguration({
 											...demoConfiguration,
 											builder,
-											plugins: plugins.map(plugin => ({
+											plugins: plugins.map((plugin) => ({
 												plugin,
-												enabled: true
-											}))
+												enabled: true,
+											})),
 										})
 									}>
 									<figure>
@@ -115,7 +115,7 @@ const PickBuilder = ({ demoConfiguration, setDemoConfiguration, style }) => {
 														null
 															? demosCollection[0]
 																	.builder
-															: demoConfiguration.builder)
+															: demoConfiguration.builder),
 												}
 											)}>
 											<svg

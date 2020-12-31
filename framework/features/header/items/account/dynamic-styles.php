@@ -5,38 +5,39 @@ if (! isset($root_selector)) {
 }
 
 // Icon size
-blocksy_output_responsive([
-	'css' => $css,
-	'tablet_css' => $tablet_css,
-	'mobile_css' => $mobile_css,
-	'selector' => blc_call_fn([
-		'fn' => 'blocksy_assemble_selector',
-		'default' => $root_selector
-	], $root_selector),
-	'variableName' => 'icon-size',
-	'value' => blocksy_akg('accountHeaderIconSize', $atts, [
-		'mobile' => 15,
-		'tablet' => 15,
-		'desktop' => 15,
-	])
-]);
+$accountHeaderIconSize = blocksy_akg( 'accountHeaderIconSize', $atts, 15 );
+
+if ($accountHeaderIconSize !== 15) {
+	blocksy_output_responsive([
+		'css' => $css,
+		'tablet_css' => $tablet_css,
+		'mobile_css' => $mobile_css,
+		'selector' => blc_call_fn([
+			'fn' => 'blocksy_assemble_selector',
+			'default' => $root_selector
+		], $root_selector),
+		'variableName' => 'icon-size',
+		'value' => $accountHeaderIconSize,
+	]);
+}
+
 
 // Avatar size
-blocksy_output_responsive([
-	'css' => $css,
-	'tablet_css' => $tablet_css,
-	'mobile_css' => $mobile_css,
-	'selector' => blc_call_fn([
-		'fn' => 'blocksy_assemble_selector',
-		'default' => $root_selector
-	], $root_selector),
-	'variableName' => 'avatar-size',
-	'value' => blocksy_akg('accountHeaderAvatarSize', $atts, [
-		'mobile' => 22,
-		'tablet' => 22,
-		'desktop' => 22,
-	])
-]);
+$accountHeaderAvatarSize = blocksy_akg( 'accountHeaderAvatarSize', $atts, 18 );
+
+if ($accountHeaderAvatarSize !== 18) {
+	blocksy_output_responsive([
+		'css' => $css,
+		'tablet_css' => $tablet_css,
+		'mobile_css' => $mobile_css,
+		'selector' => blc_call_fn([
+			'fn' => 'blocksy_assemble_selector',
+			'default' => $root_selector
+		], $root_selector),
+		'variableName' => 'avatar-size',
+		'value' => $accountHeaderAvatarSize,
+	]);
+}
 
 
 // Modal background

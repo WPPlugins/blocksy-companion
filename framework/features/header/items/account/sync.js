@@ -9,16 +9,6 @@ import {
 } from 'blocksy-customizer-sync'
 import { markImagesAsLoaded } from '../../../../extensions/cookies-consent/static/js/lazy-load-helpers'
 
-/*
-				selector: assembleSelector(
-					mutateSelector({
-						selector: getRootSelectorFor({ itemId }),
-						operation: 'suffix',
-						to_add: '.ct-button',
-					})
-				),
-*/
-
 ctEvents.on(
 	'ct:header:sync:collect-variable-descriptors',
 	(variableDescriptors) => {

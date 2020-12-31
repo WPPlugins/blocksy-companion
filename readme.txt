@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.44
+Stable tag: 1.7.45
 
 == Description ==
 
@@ -23,6 +23,11 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.45: 2020-12-31
+- New: Add affiliate marketing extension
+- New: Add option to export widgets settings
+- Fix: Fix account element colors sync not working
+
 1.7.44: 2020-12-28
 - New: Author box new social profiles: Pinterest, WordPress, GitHub, Medium, YouTube, Vimeo, VKontakte, Odnoklassniki, TikTok
 - Improvement: Allow all declared taxonomies in conditions

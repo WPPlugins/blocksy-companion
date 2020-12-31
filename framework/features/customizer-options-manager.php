@@ -27,8 +27,12 @@ class CustomizerOptionsManager {
 				wp_send_json_error();
 			}
 
+			if (! isset($_POST['strategy'])) {
+				wp_send_json_error();
+			}
+
 			wp_send_json_success([
-				'data' => serialize($this->get_data())
+				'data' => serialize($this->get_data(null, $_POST['strategy']))
 			]);
 		});
 
@@ -43,11 +47,21 @@ class CustomizerOptionsManager {
 
 			$data = @unserialize(wp_unslash($_POST['data']));
 
-			$importer = new DemoInstallOptionsInstaller([
-				'has_streaming' => false
-			]);
+			if (isset($data['mods'])) {
+				$importer = new DemoInstallOptionsInstaller([
+					'has_streaming' => false
+				]);
 
-			$importer->import_options($data);
+				$importer->import_options($data);
+			}
+
+			if (isset($data['blocksy_widgets'])) {
+				$importer = new DemoInstallWidgetsInstaller([
+					'has_streaming' => false
+				]);
+
+				$importer->import_data($data['blocksy_widgets']);
+			}
 
 			wp_send_json_success([]);
 		});
@@ -99,53 +113,62 @@ class CustomizerOptionsManager {
 		});
 	}
 
-	private function get_data($theme_slug = null) {
-		if (! $theme_slug) {
-			$theme_slug = get_option('stylesheet');
-		}
+	private function get_data($theme_slug = null, $strategy = 'options') {
+		$data = [];
 
-		global $wp_customize;
+		if (strpos($strategy, 'options') !== false) {
+			if (! $theme_slug) {
+				$theme_slug = get_option('stylesheet');
+			}
 
-		$mods = $this->get_theme_mods($theme_slug);
-		$data = [
-			'template' => $theme_slug,
-			'mods' => $mods ? $mods : array(),
-			'options' => array()
-		];
+			global $wp_customize;
 
-		$core_options = [
-			'blogname',
-			'blogdescription',
-			'show_on_front',
-			'page_on_front',
-			'page_for_posts',
-		];
+			$mods = $this->get_theme_mods($theme_slug);
+			$data = [
+				'template' => $theme_slug,
+				'mods' => $mods ? $mods : array(),
+				'options' => array()
+			];
 
-		$settings = $wp_customize->settings();
+			$core_options = [
+				'blogname',
+				'blogdescription',
+				'show_on_front',
+				'page_on_front',
+				'page_for_posts',
+			];
 
-		foreach ($settings as $key => $setting) {
-			if ( 'option' == $setting->type ) {
-				// Don't save widget data.
-				if ( 'widget_' === substr( strtolower( $key ), 0, 7 ) ) {
-					continue;
+			$settings = $wp_customize->settings();
+
+			foreach ($settings as $key => $setting) {
+				if ('option' === $setting->type) {
+					// Don't save widget data.
+					if ('widget_' === substr(strtolower($key), 0, 7)) {
+						continue;
+					}
+
+					// Don't save sidebar data.
+					if ('sidebars_' === substr(strtolower($key), 0, 9)) {
+						continue;
+					}
+
+					// Don't save core options.
+					if (in_array($key, $core_options)) {
+						continue;
+					}
+
+					$data['options'][$key] = $setting->value();
 				}
+			}
 
-				// Don't save sidebar data.
-				if ( 'sidebars_' === substr( strtolower( $key ), 0, 9 ) ) {
-					continue;
-				}
-
-				// Don't save core options.
-				if ( in_array( $key, $core_options ) ) {
-					continue;
-				}
-
-				$data['options'][$key] = $setting->value();
+			if (function_exists('wp_get_custom_css_post')) {
+				$data['wp_css'] = wp_get_custom_css();
 			}
 		}
 
-		if (function_exists('wp_get_custom_css_post')) {
-			$data['wp_css'] = wp_get_custom_css();
+		if (strpos($strategy, 'widgets') !== false) {
+			$widgets = new DemoInstallWidgetsExport();
+			$data['blocksy_widgets'] = json_decode($widgets->export());
 		}
 
 		return $data;
