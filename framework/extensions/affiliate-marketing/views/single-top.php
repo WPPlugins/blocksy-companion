@@ -142,11 +142,13 @@ if (! empty($product_button_label)) {
 	echo '<a href="#post-' . get_the_ID() . '" class="ct-button">';
 	echo $product_read_content_button_label;
 
+	/*
 	echo blc_get_icon([
 		'icon_descriptor' => blocksy_akg('product_read_content_button_icon', $atts, [
 			'icon' => 'fas fa-arrow-down'
 		]),
 	]);
+	 */
 
 	echo '</a>';
 }
@@ -155,11 +157,13 @@ if (! empty($product_button_label) && ! empty($product_link)) {
 	echo '<a href="' . esc_url($product_link) . '" class="ct-button">';
 	echo $product_button_label;
 
+	/*
 	echo blc_get_icon([
 		'icon_descriptor' => blocksy_akg('product_button_icon', $atts, [
 			'icon' => 'fas fa-cart-arrow-down'
 		]),
 	]);
+	 */
 
 	echo '</a>';
 }

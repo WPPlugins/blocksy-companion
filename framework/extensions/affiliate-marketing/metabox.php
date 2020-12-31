@@ -32,6 +32,7 @@ $options = [
 				'value' => '#'
 			],
 
+			/*
 			'product_button_icon' => [
 				'type' => 'icon-picker',
 				'label' => __('Button Icon', 'blc'),
@@ -40,6 +41,7 @@ $options = [
 					'icon' => 'fas fa-shopping-cart'
 				]
 			],
+			 */
 
 			blocksy_rand_md5() => [
 				'type' => 'ct-divider',
@@ -52,6 +54,7 @@ $options = [
 				'value' => __('Read More', 'blc')
 			],
 
+			/*
 			'product_read_content_button_icon' => [
 				'type' => 'icon-picker',
 				'label' => __('Button Icon', 'blc'),
@@ -60,6 +63,7 @@ $options = [
 					'icon' => 'fas fa-arrow-down'
 				]
 			],
+			 */
 
 			blocksy_rand_md5() => [
 				'type' => 'ct-divider',
