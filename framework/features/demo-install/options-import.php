@@ -181,6 +181,25 @@ class DemoInstallOptionsInstaller {
 		) {
 			wp_update_custom_css_post($options['wp_css']);
 		}
+
+		/**
+		 * Temporary work around until Elementor comes up with something better
+		 */
+		if (class_exists('\Elementor\Plugin')) {
+			$default_post_id = \Elementor\Plugin::$instance->kits_manager->get_active_id();
+
+			if (
+				! empty($default_post_id)
+				&&
+				isset($options['elementor_active_kit_settings'])
+			) {
+				update_post_meta(
+					$default_post_id,
+					'_elementor_page_settings',
+					$options['elementor_active_kit_settings']
+				);
+			}
+		}
 	}
 
 	private function import_images($demo_content, $mods) {

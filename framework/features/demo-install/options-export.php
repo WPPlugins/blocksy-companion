@@ -79,6 +79,23 @@ class DemoInstallOptionsExport {
 			$data['wp_css'] = wp_get_custom_css();
 		}
 
+		/**
+		 * Temporary work around until Elementor comes up with something better
+		 */
+		if (class_exists('\Elementor\Plugin')) {
+			$default_post_id = \Elementor\Plugin::$instance->kits_manager->get_active_id();
+
+			if (! empty($default_post_id)) {
+				$global_data = get_post_meta(
+					$default_post_id,
+					'_elementor_page_settings',
+					true
+				);
+
+				$data['elementor_active_kit_settings'] = $global_data;
+			}
+		}
+
 		return $data;
 
 		return serialize($data);

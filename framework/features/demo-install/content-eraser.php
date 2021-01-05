@@ -44,8 +44,12 @@ class DemoInstallContentEraser {
 			"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='blocksy_demos_imported_post'"
 		);
 
+		$_GET['force_delete_kit'] = '1';
+
 		foreach ($post_ids as $post_id) {
+			ob_start();
 			wp_delete_post($post_id, true);
+			ob_get_clean();
 		}
 	}
 
