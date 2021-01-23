@@ -136,9 +136,9 @@ echo $before_title . wp_kses_post( $title ) . $after_title;
 
 ?>
 
-<?php if ( $query->have_posts() ) { ?>
+<?php if ($query->have_posts()) { ?>
 	<ul <?php echo $type_output ?>>
-		<?php while ( $query->have_posts() ) { ?>
+		<?php while ($query->have_posts()) { ?>
 			<?php $query->the_post(); ?>
 
 			<li>
@@ -147,7 +147,6 @@ echo $before_title . wp_kses_post( $title ) . $after_title;
 					if ( $has_thumbnail ) {
 						$size = 'thumbnail';
 						$ratio = blocksy_default_akg('post_widget_image_ratio', $atts, '1/1');
-						
 
 						if ( $posts_type === 'large-thumbs' ) {
 							$size = 'medium';

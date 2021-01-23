@@ -166,7 +166,9 @@ export const mountStickyHeader = () => {
 				)
 			} else {
 				if (!isSticky) {
-					stickyContainer.dataset.sticky = stickyComponents.join(':')
+					stickyContainer.dataset.sticky = stickyComponents
+						.filter((c) => c !== 'yes-end')
+						.join(':')
 
 					stickyContainer.parentNode.removeAttribute('style')
 
@@ -261,16 +263,18 @@ export const mountStickyHeader = () => {
 					stickyContainer.dataset.sticky.indexOf('yes-hide') === -1 &&
 					stickyContainer.dataset.sticky.indexOf('yes:') > -1
 				) {
-					if (Math.abs(window.scrollY - startPosition) > 50) {
+					if (Math.abs(window.scrollY - startPosition) > 10) {
 						stickyContainer.dataset.sticky = stickyComponents.join(
 							':'
 						)
 
-						stickyContainer.parentNode.removeAttribute('style')
+						setTimeout(() => {
+							stickyContainer.parentNode.removeAttribute('style')
 
-						Array.from(
-							stickyContainer.querySelectorAll('[data-row]')
-						).map((row) => row.removeAttribute('style'))
+							Array.from(
+								stickyContainer.querySelectorAll('[data-row]')
+							).map((row) => row.removeAttribute('style'))
+						}, 300)
 
 						setTransparencyFor(stickyContainer, 'yes')
 					} else {
@@ -290,15 +294,18 @@ export const mountStickyHeader = () => {
 									':'
 								)
 
-								stickyContainer.parentNode.removeAttribute(
-									'style'
-								)
-
-								Array.from(
-									stickyContainer.querySelectorAll(
-										'[data-row]'
+								setTimeout(() => {
+									stickyContainer.parentNode.removeAttribute(
+										'style'
 									)
-								).map((row) => row.removeAttribute('style'))
+
+									Array.from(
+										stickyContainer.querySelectorAll(
+											'[data-row]'
+										)
+									).map((row) => row.removeAttribute('style'))
+								}, 300)
+
 								setTransparencyFor(stickyContainer, 'yes')
 							}, 200)
 						})

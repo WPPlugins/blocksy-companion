@@ -3,56 +3,14 @@
 require_once dirname(__FILE__) . '/helpers.php';
 
 class BlocksyExtensionCookiesConsent {
-	public static function onActivation() {
-		do_action('wpsc_add_cookie', 'blocksy_cookies_consent_accepted');
-
-		if (function_exists('flush_rocket_htaccess')) {
-			add_filter('rocket_cache_dynamic_cookies', function ($cookies) {
-				$cookies[] = 'blocksy_cookies_consent_accepted';
-				return $cookies;
-			});
-
-			// Update the WP Rocket rules on the .htaccess file.
-			flush_rocket_htaccess();
-			// Regenerate the config file.
-			rocket_generate_config_file();
-			// Clear WP Rocket cache.
-			rocket_clean_domain();
-		}
-	}
-
-	public static function onDeactivation() {
-		do_action('wpsc_delete_cookie', 'blocksy_cookies_consent_accepted');
-
-		if (function_exists('flush_rocket_htaccess')) {
-			add_filter('rocket_cache_dynamic_cookies', function ($cookies) {
-				return array_diff(
-					$cookies,
-					[ 'blocksy_cookies_consent_accepted' ]
-				);
-			}, 200);
-
-			// Update the WP Rocket rules on the .htaccess file.
-			flush_rocket_htaccess();
-			// Regenerate the config file.
-			rocket_generate_config_file();
-			// Clear WP Rocket cache.
-			rocket_clean_domain();
-		}
-	}
-
 	public static function should_display_notification() {
 		return !isset($_COOKIE['blocksy_cookies_consent_accepted']);
 	}
 
 	public function __construct() {
-		add_action('blocksy:footer:after', function () {
-			echo blocksy_ext_cookies_consent_output();
-		});
-
-		add_filter('rocket_cache_dynamic_cookies', function ($cookies) {
-			$cookies[] = 'blocksy_cookies_consent_accepted';
-			return $cookies;
+		add_filter('blocksy:footer:offcanvas-drawer', function ($els) {
+			$els[] = blocksy_ext_cookies_consent_output();
+			return $els;
 		});
 
 		add_filter('blocksy-async-scripts-handles', function ($d) {
@@ -95,12 +53,6 @@ class BlocksyExtensionCookiesConsent {
 				return;
 			}
 
-			if (! BlocksyExtensionCookiesConsent::should_display_notification()) {
-				if (! is_customize_preview()) {
-					return;
-				}
-			}
-
 			wp_enqueue_style(
 				'blocksy-ext-cookies-consent-styles',
 				BLOCKSY_URL . 'framework/extensions/cookies-consent/static/bundle/main.css',
@@ -131,7 +83,7 @@ class BlocksyExtensionCookiesConsent {
 				'fn' => 'blocksy_get_options',
 				'default' => 'array'
 			],
-			dirname( __FILE__ ) . '/customizer.php',
+			dirname(__FILE__) . '/customizer.php',
 			[], false
 		);
 

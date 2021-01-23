@@ -4,13 +4,13 @@ onDocumentLoaded(() => {
 	;[
 		...document.querySelectorAll(
 			'.ct-mailchimp-widget-form, .ct-mailchimp-block-form'
-		)
-	].map(el => {
+		),
+	].map((el) => {
 		if (el.matches('[data-skip-submit]')) {
 			return
 		}
 
-		el.addEventListener('submit', e => {
+		el.addEventListener('submit', (e) => {
 			e.preventDefault()
 			const form = e.target
 

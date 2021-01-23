@@ -12,10 +12,32 @@ if ($accountHeaderIconSize !== 15) {
 		'css' => $css,
 		'tablet_css' => $tablet_css,
 		'mobile_css' => $mobile_css,
-		'selector' => blc_call_fn([
-			'fn' => 'blocksy_assemble_selector',
-			'default' => $root_selector
-		], $root_selector),
+		'selector' => blocksy_assemble_selector(
+			blocksy_mutate_selector([
+				'selector' => [$root_selector[0]],
+				'operation' => 'suffix',
+				'to_add' => '[data-state="out"]'
+			])
+		),
+		'variableName' => 'icon-size',
+		'value' => $accountHeaderIconSize,
+	]);
+}
+
+$accountHeaderIconSize = blocksy_akg( 'account_loggedin_icon_size', $atts, 15 );
+
+if ($accountHeaderIconSize !== 15) {
+	blocksy_output_responsive([
+		'css' => $css,
+		'tablet_css' => $tablet_css,
+		'mobile_css' => $mobile_css,
+		'selector' => blocksy_assemble_selector(
+			blocksy_mutate_selector([
+				'selector' => [$root_selector[0]],
+				'operation' => 'suffix',
+				'to_add' => '[data-state="in"]'
+			])
+		),
 		'variableName' => 'icon-size',
 		'value' => $accountHeaderIconSize,
 	]);
@@ -39,8 +61,31 @@ if ($accountHeaderAvatarSize !== 18) {
 	]);
 }
 
-
 // Modal background
+blocksy_output_background_css([
+	'selector' => blc_call_fn([
+		'fn' => 'blocksy_assemble_selector',
+		'default' => $root_selector
+	], blc_call_fn([
+		'fn' => 'blocksy_mutate_selector',
+	], [
+		'selector' => [$root_selector[0]],
+		'operation' => 'suffix',
+		'to_add' => '#account-modal .ct-account-form'
+	])),
+	'css' => $css,
+	'value' => blocksy_akg('accountHeaderFormBackground', $atts,
+		blocksy_background_default_value([
+			'backgroundColor' => [
+				'default' => [
+					'color' => '#ffffff'
+				],
+			],
+		])
+	)
+]);
+
+// Modal backdrop
 blocksy_output_background_css([
 	'selector' => blc_call_fn([
 		'fn' => 'blocksy_assemble_selector',
@@ -57,13 +102,40 @@ blocksy_output_background_css([
 		blocksy_background_default_value([
 			'backgroundColor' => [
 				'default' => [
-					'color' => 'rgba(18, 21, 25, 0.7)'
+					'color' => 'rgba(18, 21, 25, 0.6)'
 				],
 			],
 		])
 	)
 ]);
 
+blocksy_output_box_shadow([
+	'css' => $css,
+	'tablet_css' => $tablet_css,
+	'mobile_css' => $mobile_css,
+	'selector' => blc_call_fn([
+		'fn' => 'blocksy_assemble_selector',
+		'default' => $root_selector
+	], blc_call_fn([
+		'fn' => 'blocksy_mutate_selector',
+	], [
+		'selector' => [$root_selector[0]],
+		'operation' => 'suffix',
+		'to_add' => '#account-modal .ct-account-form'
+	])),
+	'value' => blocksy_akg('account_form_shadow', $atts, blocksy_box_shadow_value([
+		'enable' => true,
+		'h_offset' => 0,
+		'v_offset' => 0,
+		'blur' => 70,
+		'spread' => 0,
+		'inset' => false,
+		'color' => [
+			'color' => 'rgba(0, 0, 0, 0.35)',
+		],
+	])),
+	'responsive' => true
+]);
 
 // Item margin
 blocksy_output_spacing([
@@ -81,6 +153,29 @@ blocksy_output_spacing([
 			'linked' => true,
 		])
 	)
+]);
+
+blocksy_output_font_css([
+	'font_value' => blocksy_akg( 'account_label_font', $atts,
+		blocksy_typography_default_values([
+			'size' => '12px',
+			'variation' => 'n6',
+			'text-transform' => 'uppercase',
+		])
+	),
+	'css' => $css,
+	'tablet_css' => $tablet_css,
+	'mobile_css' => $mobile_css,
+	'selector' => blc_call_fn([
+		'fn' => 'blocksy_assemble_selector',
+		'default' => $root_selector
+	], blc_call_fn([
+		'fn' => 'blocksy_mutate_selector',
+	], [
+		'selector' => [$root_selector[0]],
+		'operation' => 'suffix',
+		'to_add' => '.ct-header-account .ct-label'
+	])),
 ]);
 
 // default state

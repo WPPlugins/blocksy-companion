@@ -3,6 +3,7 @@ import {
 	updateAndSaveEl,
 	handleBackgroundOptionFor,
 	assembleSelector,
+	typographyOption,
 	mutateSelector,
 	getRootSelectorFor,
 	responsiveClassesFor,
@@ -14,8 +15,26 @@ ctEvents.on(
 	(variableDescriptors) => {
 		variableDescriptors['account'] = ({ itemId }) => ({
 			accountHeaderIconSize: {
-				selector: assembleSelector(getRootSelectorFor({ itemId })),
+				selector: assembleSelector(
+					mutateSelector({
+						selector: [getRootSelectorFor({ itemId })[0]],
+						operation: 'suffix',
+						to_add: '[data-state="out"]',
+					})
+				),
+				variable: 'icon-size',
+				responsive: true,
+				unit: 'px',
+			},
 
+			account_loggedin_icon_size: {
+				selector: assembleSelector(
+					mutateSelector({
+						selector: [getRootSelectorFor({ itemId })[0]],
+						operation: 'suffix',
+						to_add: '[data-state="in"]',
+					})
+				),
 				variable: 'icon-size',
 				responsive: true,
 				unit: 'px',
@@ -29,9 +48,18 @@ ctEvents.on(
 			},
 
 			...handleBackgroundOptionFor({
-				id: 'accountHeaderBackground',
-				selector: '#account-modal',
+				id: 'accountHeaderFormBackground',
+				selector: assembleSelector(
+					mutateSelector({
+						selector: [getRootSelectorFor({ itemId })[0]],
+						operation: 'suffix',
+						to_add: '#account-modal .ct-account-form',
+					})
+				),
+			}),
 
+			...handleBackgroundOptionFor({
+				id: 'accountHeaderBackground',
 				selector: assembleSelector(
 					mutateSelector({
 						selector: [getRootSelectorFor({ itemId })[0]],
@@ -41,6 +69,19 @@ ctEvents.on(
 				),
 			}),
 
+			cart_panel_shadow: {
+				selector: assembleSelector(
+					mutateSelector({
+						selector: [getRootSelectorFor({ itemId })[0]],
+						operation: 'suffix',
+						to_add: '#account-modal .ct-account-form',
+					})
+				),
+				type: 'box-shadow',
+				variable: 'box-shadow',
+				responsive: true,
+			},
+
 			accountHeaderMargin: {
 				selector: assembleSelector(getRootSelectorFor({ itemId })),
 				type: 'spacing',
@@ -48,6 +89,17 @@ ctEvents.on(
 				responsive: true,
 				important: true,
 			},
+
+			...typographyOption({
+				id: 'account_label_font',
+				selector: assembleSelector(
+					mutateSelector({
+						selector: [getRootSelectorFor({ itemId })[0]],
+						operation: 'suffix',
+						to_add: '.ct-header-account .ct-label',
+					})
+				),
+			}),
 
 			// default state
 			accountHeaderColor: [
@@ -134,33 +186,26 @@ ctEvents.on(
 	({ values: { loggedin_style, loggedin_label }, optionId, optionValue }) => {
 		const selector = '[data-id="account"]'
 
-		if (optionId === 'loggedin_style' || optionId === 'loggedin_label') {
-			updateAndSaveEl(selector, (el) => {
-				;[...el.querySelectorAll('.ct-label')].map((label) => {
-					label.removeAttribute('hidden')
-
-					if (!loggedin_style.label) {
-						label.hidden = true
-					}
-
-					label.innerHTML = loggedin_label
-				})
-				;[...el.querySelectorAll('.ct-image-container')].map((img) => {
-					img.removeAttribute('hidden')
-
-					if (!loggedin_style.avatar) {
-						img.hidden = true
-					}
-
-					markImagesAsLoaded(img.parentNode)
-				})
-			})
-		}
-
 		if (optionId === 'account_label_visibility') {
 			updateAndSaveEl(selector, (el) => {
 				;[...el.querySelectorAll('.ct-label')].map((label) => {
 					responsiveClassesFor(optionValue, label)
+				})
+			})
+		}
+
+		if (optionId === 'loggedin_label') {
+			updateAndSaveEl(selector, (el) => {
+				;[...el.querySelectorAll('.ct-label')].map((label) => {
+					label.innerHTML = optionValue
+				})
+			})
+		}
+
+		if (optionId === 'login_label') {
+			updateAndSaveEl(selector, (el) => {
+				;[...el.querySelectorAll('.ct-label')].map((label) => {
+					label.innerHTML = optionValue
 				})
 			})
 		}

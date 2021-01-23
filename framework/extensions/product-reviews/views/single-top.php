@@ -1,7 +1,7 @@
 <?php
 
 $atts = blocksy_get_post_options(null, [
-	'meta_id' => 'blocksy_affiliate_marketing_options'
+	'meta_id' => 'blocksy_product_review_options'
 ]);
 
 $gallery_images = array_map(function ($item) {
@@ -13,7 +13,7 @@ $thumb_id = get_post_thumbnail_id();
 if ($thumb_id) {
 	array_unshift($gallery_images, intval($thumb_id));
 } else {
-	$gallery_images = [null];
+	$gallery_images = [];
 }
 
 echo '<section class="ct-product-hero">';

@@ -3,7 +3,7 @@ import {
 	Component,
 	useEffect,
 	useState,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'

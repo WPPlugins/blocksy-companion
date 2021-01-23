@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.47
+Stable tag: 1.7.49
 
 == Description ==
 
@@ -23,6 +23,27 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.49: 2021-01-23
+- New: Account element: add AJAX functionality
+- New: Account element: add support for social login plugins
+- New: Account element: Improve logged in/out state
+- New: Filter for `blocksy_output_companion_notice()`
+- New: Product Reviews extension
+- New: blocksy_posts shortcode with customizer options inherit
+- Improvement: Search box text colors
+- Fix: Fix sticky effect glitch (fade and slide effects)
+- Fix: Improve auto show/hide sticky header
+- Fix: Fix multiple file-saver instances on the same page conflict
+- Fix: Starter sites importer fix for PHP8
+- Fix: Resolve caching plugins problem with cookie consent
+
+1.7.48.1: 2021-01-19
+- New: Filter for `blocksy_output_companion_notice()`
+- Improvement: Search box text colors
+- Fix: Fix sticky effect glitch (fade and slide effects)
+- Fix: Improve auto show/hide sticky header
+- Fix: Fix multiple file-saver instances on the same page conflict
+
 1.7.47: 2021-01-05
 - Improvement: Export/Import for current Elementor Kit
 

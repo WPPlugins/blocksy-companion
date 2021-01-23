@@ -15,13 +15,6 @@ class BlocksyExtensionTrending {
 				return;
 			}
 
-			wp_enqueue_style(
-				'blocksy-ext-trending-styles',
-				BLOCKSY_URL . 'framework/extensions/trending/static/bundle/main.css',
-				['ct-main-styles'],
-				$data['Version']
-			);
-
 			wp_enqueue_script(
 				'blocksy-ext-trending-scripts',
 				BLOCKSY_URL . 'framework/extensions/trending/static/bundle/main.js',

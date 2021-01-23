@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname( __FILE__ ) . '/mailchimp-manager.php';
+require_once dirname(__FILE__) . '/mailchimp-manager.php';
 
 class BlocksyExtensionMailchimpPreBoot {
 	public function __construct() {

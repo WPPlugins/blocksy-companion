@@ -4,7 +4,7 @@ import {
 	useEffect,
 	useContext,
 	useState,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import { __, sprintf } from 'ct-i18n'
 import { Dialog, DialogOverlay, DialogContent } from './reach/dialog'
@@ -38,8 +38,12 @@ const useActivationAction = (extension, cb = () => {}) => {
 		try {
 			await fetch(ctDashboardLocalizations.ajax_url, {
 				method: 'POST',
-				body
+				body,
 			})
+
+			if (extension.config.require_refresh) {
+				location.reload()
+			}
 
 			cb()
 		} catch (e) {}
@@ -89,7 +93,7 @@ const useActivationAction = (extension, cb = () => {}) => {
 					</div>
 				)}
 			/>
-		) : null
+		) : null,
 	]
 }
 

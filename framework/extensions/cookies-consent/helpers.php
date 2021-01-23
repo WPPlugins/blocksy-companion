@@ -17,11 +17,13 @@ function blocksy_ext_cookies_consent_output($forced = false) {
 		blc_ext_cookies_consent_cache();
 	}
 
+	/*
 	if (! BlocksyExtensionCookiesConsent::should_display_notification()) {
 		if (! $forced) {
 			return;
 		}
 	}
+	 */
 
 	$content = get_theme_mod(
 		'cookie_consent_content',

@@ -80,7 +80,7 @@ class DemoInstallOptionsInstaller {
 		}
 
 		$options = $demo_content['options'];
-		$this->import_options($options);
+		$this->import_options($options, $demo_content);
 
 		if ($this->has_streaming) {
 			Plugin::instance()->demo->emit_sse_message([
@@ -92,7 +92,7 @@ class DemoInstallOptionsInstaller {
 		}
 	}
 
-	public function import_options($options) {
+	public function import_options($options, $demo_content = null) {
 		if ($this->has_streaming) {
 			Plugin::instance()->demo->emit_sse_message([
 				'action' => 'import_mods_images',
@@ -100,10 +100,12 @@ class DemoInstallOptionsInstaller {
 			]);
 		}
 
-		$options['mods'] = $this->import_images(
-			$demo_content,
-			$options['mods']
-		);
+		if ($demo_content) {
+			$options['mods'] = $this->import_images(
+				$demo_content,
+				$options['mods']
+			);
+		}
 
 		global $wp_customize;
 

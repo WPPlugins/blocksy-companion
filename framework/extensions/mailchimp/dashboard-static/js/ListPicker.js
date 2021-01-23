@@ -3,7 +3,7 @@ import {
 	Component,
 	useEffect,
 	useState,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import Downshift from 'downshift'
 import { __ } from 'ct-i18n'
@@ -14,7 +14,7 @@ const ListPicker = ({ listId, apiKey, onChange }) => {
 	const [isLoadingLists, setListsLoading] = useState(false)
 
 	let [{ controller }, setAbortState] = useState({
-		controller: null
+		controller: null,
 	})
 
 	const maybeFetchLists = async () => {
@@ -28,7 +28,7 @@ const ListPicker = ({ listId, apiKey, onChange }) => {
 			controller = new AbortController()
 
 			setAbortState({
-				controller
+				controller,
 			})
 		}
 
@@ -41,7 +41,7 @@ const ListPicker = ({ listId, apiKey, onChange }) => {
 			const response = await fetch(ctDashboardLocalizations.ajax_url, {
 				method: 'POST',
 				signal: controller.signal,
-				body
+				body,
 			})
 			if (response.status === 200) {
 				const body = await response.json()
@@ -89,8 +89,8 @@ const ListPicker = ({ listId, apiKey, onChange }) => {
 	) : (
 		<Downshift
 			selectedItem={listId || ''}
-			onChange={selection => onChange(selection)}
-			itemToString={item =>
+			onChange={(selection) => onChange(selection)}
+			itemToString={(item) =>
 				item ? (lists.find(({ id }) => id === item) || {}).name : ''
 			}>
 			{({
@@ -102,13 +102,13 @@ const ListPicker = ({ listId, apiKey, onChange }) => {
 				inputValue,
 				highlightedIndex,
 				selectedItem,
-				openMenu
+				openMenu,
 			}) => (
 				<div className="ct-select-input">
 					<input
 						{...getInputProps({
 							onFocus: () => openMenu(),
-							onClick: () => openMenu()
+							onClick: () => openMenu(),
 						})}
 						placeholder={__('Select list...', 'blc')}
 						readOnly
@@ -117,7 +117,7 @@ const ListPicker = ({ listId, apiKey, onChange }) => {
 					{isOpen && (
 						<div
 							{...getMenuProps({
-								className: 'ct-select-dropdown'
+								className: 'ct-select-dropdown',
 							})}>
 							{lists.map((item, index) => (
 								<div
@@ -131,9 +131,9 @@ const ListPicker = ({ listId, apiKey, onChange }) => {
 												active:
 													highlightedIndex === index,
 												selected:
-													selectedItem === item.id
+													selectedItem === item.id,
 											}
-										)
+										),
 									})}>
 									{item.name}
 								</div>

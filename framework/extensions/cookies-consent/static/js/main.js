@@ -7,6 +7,11 @@ const initCookies = () => {
 
 	if (!notification) return
 
+	if (cookie.get('blocksy_cookies_consent_accepted')) {
+		notification.remove()
+		return
+	}
+
 	requestAnimationFrame(() => {
 		notification.classList.remove('ct-fade-in-start')
 		notification.classList.add('ct-fade-in-end')

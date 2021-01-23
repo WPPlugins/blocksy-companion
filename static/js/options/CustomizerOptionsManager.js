@@ -1,6 +1,6 @@
 import { useRef, useState, createElement, Fragment } from '@wordpress/element'
 import { __ } from 'ct-i18n'
-import fileSaver from 'file-saver'
+import saveAs from './file-saver'
 import { Overlay } from 'blocksy-options'
 
 import classnames from 'classnames'
@@ -288,8 +288,14 @@ const CustomizerOptionsManager = () => {
 									}}>
 									{
 										{
-											options: __('Customizer settings', 'blc'),
-											widgets: __('Widgets settings', 'blc'),
+											options: __(
+												'Customizer settings',
+												'blc'
+											),
+											widgets: __(
+												'Widgets settings',
+												'blc'
+											),
 										}[component]
 									}
 									<span
@@ -311,7 +317,9 @@ const CustomizerOptionsManager = () => {
 							))}
 						</div>
 
-						<div className="ct-modal-actions has-divider" data-buttons="2">
+						<div
+							className="ct-modal-actions has-divider"
+							data-buttons="2">
 							<button
 								onClick={(e) => {
 									e.preventDefault()
@@ -360,7 +368,7 @@ const CustomizerOptionsManager = () => {
 																	}
 																)
 
-																fileSaver.saveAs(
+																saveAs(
 																	blob,
 																	`blocksy-export.dat`
 																)

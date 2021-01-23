@@ -10,8 +10,8 @@
 class Blocksy_Widget_Ct_Mailchimp extends BlocksyWidgetFactory {
 	protected function get_config() {
 		return [
-			'name' => __('Mailchimp Subscribe', 'blc'),
-			'description' => __('Mailchimp subscribe form', 'blc'),
+			'name' => __('Newsletter Subscribe', 'blc'),
+			'description' => __('Newsletter subscribe form', 'blc'),
 		];
 	}
 

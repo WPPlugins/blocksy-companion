@@ -10,6 +10,7 @@ import classnames from 'classnames'
 import { __, sprintf } from 'ct-i18n'
 import ListPicker from './ListPicker'
 import Overlay from '../../../../../static/js/helpers/Overlay'
+import { Select } from 'blocksy-options'
 
 const EditCredentials = ({
 	extension,
@@ -66,20 +67,16 @@ const EditCredentials = ({
 			className={'ct-mailchimp-modal'}
 			render={() => (
 				<div
-					className={classnames(
-						'ct-modal-content',
-						{
-							'ct-key-invalid': isApiKeyInvalid,
-						}
-					)}>
-					
-					<h2>{__('MailChimp Credentials', 'blc')}</h2>
+					className={classnames('ct-modal-content', {
+						'ct-key-invalid': isApiKeyInvalid,
+					})}>
+					<h2>{__('API Credentials', 'blc')}</h2>
 
 					<p
 						dangerouslySetInnerHTML={{
 							__html: sprintf(
 								__(
-									'Enter your MailChimp credentials in the form below. More info on how to generate an API key can be found %shere%s.',
+									'Enter your Mailchimp API credentials in the form below. More info on how to generate an API key can be found %shere%s.',
 									'blc'
 								),
 								'<a target="_blank" href="https://mailchimp.com/help/about-api-keys/">',
@@ -87,6 +84,29 @@ const EditCredentials = ({
 							),
 						}}
 					/>
+
+					{null && (
+						<Fragment>
+							<h4>{__('Pick service', 'blc')}</h4>
+
+							<Select
+								onChange={(copy) => {}}
+								option={{
+									placeholder: __(
+										'Pick Mailing Service',
+										'blocksy'
+									),
+									choices: [
+										{
+											key: 'mailchimp',
+											value: 'Mailchimp',
+										},
+									],
+								}}
+								value={'mailchimp'}
+							/>
+						</Fragment>
+					)}
 
 					<div className="mailchimp-credentials">
 						<section>

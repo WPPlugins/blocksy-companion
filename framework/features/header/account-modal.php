@@ -6,13 +6,15 @@ $users_can_register = get_option('users_can_register');
 ?>
 
 <div id="account-modal" class="ct-panel" data-behaviour="modal">
-	<div class="close-button">
-		<span class="ct-trigger closed">
-			<span></span>
-		</span>
+	<div class="ct-panel-actions">
+		<div class="close-button">
+			<span class="ct-trigger closed">
+				<span></span>
+			</span>
+		</div>
 	</div>
 
-	<div class="content-container" data-align="middle">
+	<div class="ct-panel-content">
 		<div class="ct-account-form">
 			<?php if ($users_can_register) { ?>
 				<ul>
@@ -54,6 +56,8 @@ $users_can_register = get_option('users_can_register');
 						</a>
 					</p>
 
+					<?php do_action('login_form') ?>
+
 					<p class="login-submit">
 						<button name="wp-submit" class="ct-button">
 							<?php echo __('Log In', 'blc') ?>
@@ -84,6 +88,8 @@ $users_can_register = get_option('users_can_register');
 							<input type="email" name="user_email" id="user_email" class="input" value="" size="25">
 						</p>
 
+						<?php do_action('register_form') ?>
+
 						<p id="reg_passmail">
 							<?php echo __('Registration confirmation will be emailed to you', 'blc') ?>
 						</p>
@@ -93,7 +99,7 @@ $users_can_register = get_option('users_can_register');
 								<?php echo __('Register', 'blc') ?>
 							</button>
 
-							<input type="hidden" name="redirect_to" value="<?php echo blocksy_current_url() ?>">
+							<!-- <input type="hidden" name="redirect_to" value="<?php echo blocksy_current_url() ?>"> -->
 						</p>
 
 						<?php do_action('blocksy:account:modal:register:end'); ?>
@@ -117,7 +123,7 @@ $users_can_register = get_option('users_can_register');
 							<?php echo __('Get New Password', 'blc') ?>
 						</button>
 
-						<input type="hidden" name="redirect_to" value="<?php echo blocksy_current_url() ?>">
+						<!-- <input type="hidden" name="redirect_to" value="<?php echo blocksy_current_url() ?>"> -->
 					</p>
 
 					<?php do_action('blocksy:account:modal:lostpassword:end'); ?>

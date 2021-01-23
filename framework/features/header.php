@@ -22,6 +22,22 @@ class HeaderAdditions {
 			50
 		);
 
+		add_filter('blocksy:header:selective_refresh', function ($selective_refresh) {
+			$selective_refresh[] = [
+				'id' => 'header_placements_item:account',
+				'fallback_refresh' => false,
+				'container_inclusive' => true,
+				'selector' => 'header [data-id="account"]',
+				'settings' => ['header_placements'],
+				'render_callback' => function () {
+					$header = new \Blocksy_Header_Builder_Render();
+					echo $header->render_single_item('account');
+				}
+			];
+
+			return $selective_refresh;
+		});
+
 		add_filter('blocksy:header:device-wrapper-attr', function ($attr, $device) {
 			$transparent_result = $this->current_screen_has_transparent();
 
@@ -213,7 +229,7 @@ class HeaderAdditions {
 			return $paths;
 		});
 
-		add_action('wp_footer', function () {
+		add_filter('blocksy:footer:offcanvas-drawer', function ($els) {
 			if (! class_exists('Blocksy_Header_Builder_Render')) {
 				return;
 			}
@@ -221,13 +237,19 @@ class HeaderAdditions {
 			$render = new \Blocksy_Header_Builder_Render();
 
 			if (! $render->contains_item('account')) {
-				return;
+				return $els;
 			}
 
-			echo blc_call_fn(
+			remove_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
+
+			$els[] = blc_call_fn(
 				['fn' => 'blocksy_render_view'],
 				dirname(__FILE__) . '/header/account-modal.php'
 			);
+
+			add_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
+
+			return $els;
 		});
 
 		add_filter('blocksy:header:settings', function ($opt) {

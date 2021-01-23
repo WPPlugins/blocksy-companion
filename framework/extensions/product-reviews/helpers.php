@@ -1,13 +1,13 @@
 <?php
 
-function blocksy_get_aff_product_overall_score($post_id = null) {
+function blocksy_get_product_review_overall_score($post_id = null) {
 	if (! $post_id) {
 		global $post;
 		$post_id = $post->ID;
 	}
 
 	$atts = blocksy_get_post_options($post_id, [
-		'meta_id' => 'blocksy_affiliate_marketing_options'
+		'meta_id' => 'blocksy_product_review_options'
 	]);
 
 	$scores = blocksy_akg('scores', $atts, []);

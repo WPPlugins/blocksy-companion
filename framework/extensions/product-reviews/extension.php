@@ -2,12 +2,12 @@
 
 require_once dirname(__FILE__) . '/helpers.php';
 
-class BlocksyExtensionAffiliateMarketing {
+class BlocksyExtensionProductReviews {
 	public function __construct() {
 		add_filter(
 			'blocksy:options:cpt:page-title-args',
 			function ($args, $cpt) {
-				if ($cpt === 'blc-aff-product') {
+				if ($cpt === 'blc-product-review') {
 					$args['has_hero_type'] = false;
 				}
 
@@ -16,15 +16,13 @@ class BlocksyExtensionAffiliateMarketing {
 			10, 2
 		);
 
-		add_action(
-			'init', [$this, 'declare_cpt']
-		);
+		add_action('init', [$this, 'declare_cpt']);
 
 		add_action('load-post.php', [$this, 'init_metabox']);
 		add_action('load-post-new.php', [$this, 'init_metabox']);
 
 		add_filter('blocksy:single:has-default-hero', function ($def) {
-			if (! is_singular('blc-aff-product')) {
+			if (! is_singular('blc-product-review')) {
 				return $def;
 			}
 
@@ -34,7 +32,7 @@ class BlocksyExtensionAffiliateMarketing {
 		add_filter(
 			'blocksy:hero:type-1:default-alignment',
 			function ($default, $prefix) {
-				if ($prefix === 'blc-aff-product_single') {
+				if ($prefix === 'blc-product-review_single') {
 					return 'center';
 				}
 
@@ -44,17 +42,17 @@ class BlocksyExtensionAffiliateMarketing {
 		);
 
 		add_filter('blocksy:archive:render-card-layers', function ($layers, $prefix) {
-			if ($prefix !== 'blc-aff-product_archive') {
+			if ($prefix !== 'blc-product-review_archive') {
 				return $layers;
 			}
 
-			$layers['overall_score'] = blocksy_get_aff_product_overall_score();
+			$layers['overall_score'] = blocksy_get_product_review_overall_score();
 
 			return $layers;
 		}, 10, 2);
 
 		add_filter('blocksy:posts-listing:archive-order:default', function ($default, $prefix) {
-			if ($prefix !== 'blc-aff-product_archive') {
+			if ($prefix !== 'blc-product-review_archive') {
 				return $default;
 			}
 
@@ -67,7 +65,7 @@ class BlocksyExtensionAffiliateMarketing {
 		}, 10, 2);
 
 		add_filter('blocksy:options:posts-listing-archive-order', function ($option, $prefix) {
-			if ($prefix !== 'blc-aff-product_archive') {
+			if ($prefix !== 'blc-product-review_archive') {
 				return $option;
 			}
 
@@ -98,7 +96,7 @@ class BlocksyExtensionAffiliateMarketing {
 		add_action(
 			'blocksy:content:top',
 			function () {
-				if (! is_singular('blc-aff-product')) {
+				if (! is_singular('blc-product-review')) {
 					return;
 				}
 
@@ -122,8 +120,8 @@ class BlocksyExtensionAffiliateMarketing {
 			}
 
 			wp_enqueue_style(
-				'blocksy-ext-affiliate-marketing-styles',
-				BLOCKSY_URL . 'framework/extensions/affiliate-marketing/static/bundle/main.css',
+				'blocksy-ext-product-reviews-styles',
+				BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/main.css',
 				['ct-main-styles'],
 				$data['Version']
 			);
@@ -136,22 +134,24 @@ class BlocksyExtensionAffiliateMarketing {
 	}
 
 	public function declare_cpt() {
-		register_post_type('blc-aff-product', [
-			'label' => __('Affiliate Products', 'blc'),
-			'description' => __( 'Affiliate Products', 'blc'),
-			'menu_icon' => 'dashicons-money-alt',
+		$settings = $this->get_settings();
+
+		register_post_type('blc-product-review', [
+			'label' => __('Product Reviews', 'blc'),
+			'description' => __( 'Product Reviews', 'blc'),
+			'menu_icon' => 'dashicons-star-filled',
 			'labels' => [
-				'name' => __('Affiliate Products', 'blc'),
-				'singular_name' => __('Affiliate Product', 'blc'),
-				'menu_name' => __('Affiliate Products', 'blc'),
-				'parent_item_colon' => __('Parent Affiliate Product', 'blc'),
-				'all_items' => __('All Affiliate Products', 'blc'),
-				'view_item' => __('View Affiliate Product', 'blc'),
-				'add_new_item' => __('Add New Affiliate Product', 'blc'),
-				'add_new' => __('Add New', 'blc'),
-				'edit_item' => __('Edit Affiliate Product', 'blc'),
-				'update_item' => __('Update Affiliate Product', 'blc'),
-				'search_items' => __('Search Affiliate Product', 'blc'),
+				'name' => __('Product Reviews', 'blc'),
+				'singular_name' => __('Product Review', 'blc'),
+				'menu_name' => __('Product Reviews', 'blc'),
+				'parent_item_colon' => __('Parent Product Review', 'blc'),
+				'all_items' => __('All Reviews', 'blc'),
+				'view_item' => __('View Product Review', 'blc'),
+				'add_new_item' => __('Add New Product Review', 'blc'),
+				'add_new' => __('Add New Review', 'blc'),
+				'edit_item' => __('Edit Product Review', 'blc'),
+				'update_item' => __('Update Product Review', 'blc'),
+				'search_items' => __('Search Product Review', 'blc'),
 				'not_found' => __('Not Found', 'blc'),
 				'not_found_in_trash' => __('Not found in Trash', 'blc')
 			],
@@ -173,13 +173,16 @@ class BlocksyExtensionAffiliateMarketing {
 			'exclude_from_search' => false,
 			// 'taxonomies' => array('post_tag'),
 			'publicly_queryable' => true,
-			'capability_type' => 'page'
+			'capability_type' => 'page',
+			'rewrite' => [
+				'slug' => $settings['single_slug']
+			],
 		]);
 
 		register_taxonomy(
-			'blc-aff-categories',
+			'blc-product-review-categories',
 			[
-				'blc-aff-product'
+				'blc-product-review'
 			],
 			[
 				'hierarchical' => true,
@@ -199,7 +202,10 @@ class BlocksyExtensionAffiliateMarketing {
 				'show_ui' => true,
 				'show_admin_column' => true,
 				'query_var' => true,
-				'rewrite' => array( 'slug' => 'blc-aff-category' ),
+                'show_in_rest' => true,
+				'rewrite' => [
+					'slug' => $settings['category_slug']
+				],
 			]
 		);
 	}
@@ -213,7 +219,7 @@ class BlocksyExtensionAffiliateMarketing {
 				__( 'Blocksy', 'blocksy' )
 			),
 			function ($post) {
-				$values = get_post_meta($post->ID, 'blocksy_affiliate_marketing_options');
+				$values = get_post_meta($post->ID, 'blocksy_product_review_options');
 
 				if (empty($values)) {
 					$values = [[]];
@@ -235,7 +241,7 @@ class BlocksyExtensionAffiliateMarketing {
 						'options' => $options,
 						'values' => $values[0],
 						'id_prefix' => 'ct-post-meta-options',
-						'name_prefix' => 'blocksy_affiliate_marketing_options',
+						'name_prefix' => 'blocksy_product_review_options',
 						'attr' => [
 							'class' => 'ct-meta-box',
 							'data-disable-reverse-button' => 'yes'
@@ -245,7 +251,7 @@ class BlocksyExtensionAffiliateMarketing {
 
 				wp_nonce_field(basename(__FILE__), 'blocksy_settings_meta_box');
 			},
-			'blc-aff-product', 'normal', 'default'
+			'blc-product-review', 'normal', 'default'
 		);
 	}
 
@@ -265,17 +271,46 @@ class BlocksyExtensionAffiliateMarketing {
 
 		$values = [];
 
-		if (isset($_POST['blocksy_affiliate_marketing_options'][blocksy_post_name()])) {
+		if (isset($_POST['blocksy_product_review_options'][blocksy_post_name()])) {
 			$values = json_decode(
-				wp_unslash($_POST['blocksy_affiliate_marketing_options'][blocksy_post_name()]),
+				wp_unslash($_POST['blocksy_product_review_options'][blocksy_post_name()]),
 				true
 			);
 		}
 
 		update_post_meta(
 			$post_id,
-			'blocksy_affiliate_marketing_options',
+			'blocksy_product_review_options',
 			$values
 		);
+	}
+
+	public function get_settings() {
+		if (wp_doing_ajax()) {
+			$maybe_input = json_decode(file_get_contents('php://input'), true);
+
+			if (
+				$maybe_input
+				&&
+				isset($maybe_input['extension'])
+				&&
+				$maybe_input['extension'] === 'product-reviews'
+				&&
+				isset($maybe_input['extAction'])
+				&&
+				$maybe_input['extAction']['type'] === 'persist'
+			) {
+				return $maybe_input['extAction']['settings'];
+			}
+		}
+
+		return get_option('blocksy_ext_product_reviews_settings', [
+			'single_slug' => 'product-review',
+			'category_slug' => 'product-review-category',
+		]);
+	}
+
+	public function set_settings($value) {
+		update_option('blocksy_ext_product_reviews_settings', $value);
 	}
 }

@@ -1,11 +1,40 @@
+// conditions location
 .ct-condition-location {
 	display: grid;
 	grid-template-columns: 1fr 100px;
 	grid-column-gap: 10px;
-
+	padding-bottom: 20px;
+	border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
 	--x-select-dropdown-width: calc(100% + 110px);
 }
 
+.ct-new-condition-location {
+	--options-vertical-spacing: 20px;
+	padding: var(--options-horizontal-spacing, 0 14px);
+
+	.ct-new-location {
+		--options-horizontal-spacing: 0;
+
+		.ct-control {
+			padding-bottom: 20px;
+			border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+		}
+
+		button {
+			right: -24px;
+			width: 24px;
+		}
+	}
+
+	.button {
+		width: 100%;
+		margin-top: 20px;
+	}
+}
+
+
+
+// display conditions
 .ct-display-conditions {
 	padding: 30px 0;
 	margin: 10px 0 0 0;
@@ -17,7 +46,6 @@
 	grid-template-columns: var(--grid-template-columns);
 	grid-column-gap: 10px;
 	grid-row-gap: 10px;
-	position: relative;
 	padding-bottom: 20px;
 	margin-bottom: 20px;
 	border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
@@ -50,36 +78,9 @@
 		}
 	}
 
-
-
 	.ct-select-dropdown {
 		box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08), 
 					0px 0px 0px 1px rgba(221, 221, 221, 0.5);
-	}
-
-	button {
-		position: absolute;
-		top: 0;
-		right: -30px;
-		font-size: 18px;
-		line-height: 18px;
-		width: 30px;
-		height: 30px;
-		padding: 0;
-		border: none;
-		cursor: pointer;
-		appearance: none;
-		opacity: 0.5;
-		background: transparent;
-
-		&:focus {
-			outline: none;
-		}
-
-		&:hover {
-			opacity: 1;
-			color: #a00;
-		}
 	}
 }
 
@@ -126,6 +127,37 @@
 		--padding: 0 0 0 30px;
 	}
 }
+
+.ct-new-location,
+.ct-condition-group {
+	position: relative;
+
+	button {
+		position: absolute;
+		top: 0;
+		right: -30px;
+		font-size: 18px;
+		line-height: 18px;
+		width: 30px;
+		height: 30px;
+		padding: 0;
+		border: none;
+		cursor: pointer;
+		appearance: none;
+		opacity: 0.5;
+		background: transparent;
+
+		&:focus {
+			outline: none;
+		}
+
+		&:hover {
+			opacity: 1;
+			color: #a00;
+		}
+	}
+}
+
 
 .ct-conditions-actions {
 	display: grid;

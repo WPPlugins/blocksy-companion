@@ -4,6 +4,32 @@ namespace Blocksy;
 
 class ThemeIntegration {
 	public function __construct() {
+		add_shortcode('blocksy_posts', function ($args, $content) {
+			$args = wp_parse_args(
+				$args,
+				[
+					'post_type' => 'post',
+					'limit' => 5,
+
+					// post_date | comment_count
+					'orderby' => 'post_date',
+
+					// yes | no
+					'has_pagination' => 'yes'
+				]
+			);
+
+			$file_path = dirname(__FILE__) . '/views/blocksy-posts.php';
+
+			return blc_call_fn(
+				['fn' => 'blocksy_render_view'],
+				$file_path,
+				[
+					'args' => $args
+				]
+			);
+		});
+
 		add_action('wp_ajax_blocksy_conditions_get_all_taxonomies', function () {
 			if (! current_user_can('manage_options')) {
 				wp_send_json_error();
@@ -119,7 +145,6 @@ class ThemeIntegration {
 
 		add_filter('upload_mimes', function ($mimes) {
 			$mimes['svg'] = 'image/svg+xml';
-
 			return $mimes;
 		});
 
@@ -193,7 +218,6 @@ class ThemeIntegration {
 					}
 				}
 			}
-
 
 			return $changelogs;
 		});
@@ -281,8 +305,8 @@ class ThemeIntegration {
 		}
 	}
 
-	protected function svg_dimensions( $svg ) {
-		$svg = @simplexml_load_file( $svg );
+	protected function svg_dimensions($svg) {
+		$svg = @simplexml_load_file($svg);
 		$width = 0;
 		$height = 0;
 

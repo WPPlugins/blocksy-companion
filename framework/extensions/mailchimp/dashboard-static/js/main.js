@@ -3,7 +3,7 @@ import {
 	Component,
 	useEffect,
 	useState,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import ctEvents from 'ct-events'
 

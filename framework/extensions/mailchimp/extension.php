@@ -1,7 +1,7 @@
 <?php
 
-require_once dirname( __FILE__ ) . '/helpers.php';
-require_once dirname( __FILE__ ) . '/mailchimp-manager.php';
+require_once dirname(__FILE__) . '/helpers.php';
+require_once dirname(__FILE__) . '/mailchimp-manager.php';
 
 class BlocksyExtensionMailchimp {
 	public function __construct() {
@@ -13,7 +13,7 @@ class BlocksyExtensionMailchimp {
 		}, 10, 3);
 
 		add_filter('blocksy-options-scripts-dependencies', function ($d) {
-			$d[] = 'blocksy-ext-mailchimp-admin-scripts';
+			$d[] = 'blocksy-ext-newsletter-subscribe-admin-scripts';
 			return $d;
 		});
 
@@ -25,7 +25,7 @@ class BlocksyExtensionMailchimp {
 			$data = get_plugin_data(BLOCKSY__FILE__);
 
 			wp_register_script(
-				'blocksy-ext-mailchimp-admin-scripts',
+				'blocksy-ext-newsletter-subscribe-admin-scripts',
 				BLOCKSY_URL . 'framework/extensions/mailchimp/admin-static/bundle/main.js',
 				[],
 				$data['Version'],
@@ -33,8 +33,8 @@ class BlocksyExtensionMailchimp {
 			);
 
 			wp_localize_script(
-				'blocksy-ext-mailchimp-admin-scripts',
-				'blocksy_ext_mailchimp_localization',
+				'blocksy-ext-newsletter-subscribe-admin-scripts',
+				'blocksy_ext_newsletter_subscribe_localization',
 				[
 					'public_url' => BLOCKSY_URL . 'framework/extensions/mailchimp/admin-static/bundle/',
 				]
@@ -49,7 +49,7 @@ class BlocksyExtensionMailchimp {
 			$data = get_plugin_data(BLOCKSY__FILE__);
 
 			wp_register_script(
-				'blocksy-ext-mailchimp-admin-scripts',
+				'blocksy-ext-newsletter-subscribe-admin-scripts',
 				BLOCKSY_URL . 'framework/extensions/mailchimp/admin-static/bundle/main.js',
 				[],
 				$data['Version'],
@@ -57,8 +57,8 @@ class BlocksyExtensionMailchimp {
 			);
 
 			wp_localize_script(
-				'blocksy-ext-mailchimp-admin-scripts',
-				'blocksy_ext_mailchimp_localization',
+				'blocksy-ext-newsletter-subscribe-admin-scripts',
+				'blocksy_ext_newsletter_subscribe_localization',
 				[
 					'public_url' => BLOCKSY_URL . 'framework/extensions/mailchimp/admin-static/bundle/',
 				]
@@ -77,14 +77,14 @@ class BlocksyExtensionMailchimp {
 			}
 
 			wp_enqueue_style(
-				'blocksy-ext-mailchimp-styles',
+				'blocksy-ext-newsletter-subscribe-styles',
 				BLOCKSY_URL . 'framework/extensions/mailchimp/static/bundle/main.css',
 				['ct-main-styles'],
 				$data['Version']
 			);
 
 			wp_enqueue_script(
-				'blocksy-ext-mailchimp-scripts',
+				'blocksy-ext-newsletter-subscribe-scripts',
 				BLOCKSY_URL . 'framework/extensions/mailchimp/static/bundle/main.js',
 				[],
 				$data['Version'],
@@ -130,7 +130,7 @@ class BlocksyExtensionMailchimp {
 				$data = get_plugin_data(BLOCKSY__FILE__);
 
 				wp_enqueue_script(
-					'blocksy-mailchimp-customizer-sync',
+					'blocksy-newsletter-subscribe-customizer-sync',
 					BLOCKSY_URL . 'framework/extensions/mailchimp/admin-static/bundle/sync.js',
 					[ 'customize-preview', 'ct-events' ],
 					$data['Version'],
