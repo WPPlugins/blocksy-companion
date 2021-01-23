@@ -983,6 +983,7 @@ class Blocksy_WP_Import extends WP_Importer {
 		if ( 'draft' == $item['status'] )
 			return;
 
+
 		$menu_slug = false;
 		if ( isset($item['terms']) ) {
 			// loop through terms, assume first nav_menu term is correct menu
@@ -1017,7 +1018,7 @@ class Blocksy_WP_Import extends WP_Importer {
 			$_menu_item_object_id = $this->processed_terms[intval($_menu_item_object_id)];
 		} else if ( 'post_type' == $_menu_item_type && isset( $this->processed_posts[intval($_menu_item_object_id)] ) ) {
 			$_menu_item_object_id = $this->processed_posts[intval($_menu_item_object_id)];
-		} else if ( 'custom' != $_menu_item_type ) {
+		} else if ( 'custom' != $_menu_item_type  && 'post_type_archive' !== $_menu_item_type) {
 			// associated object is missing or not imported yet, we'll retry later
 			$this->missing_menu_items[] = $item;
 			return;
@@ -1050,6 +1051,7 @@ class Blocksy_WP_Import extends WP_Importer {
 			'menu-item-xfn' => $_menu_item_xfn,
 			'menu-item-status' => $item['status']
 		);
+
 
 		$id = wp_update_nav_menu_item( $menu_id, 0, $args );
 		if ( $id && ! is_wp_error( $id ) )

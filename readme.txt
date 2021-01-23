@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.49
+Stable tag: 1.7.50
 
 == Description ==
 
@@ -23,6 +23,10 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.50: 2021-01-24
+- Fix: Demo importer: Allow nav menu items of type post_type_archive
+- Fix: Allow sideloading SVG images
+
 1.7.49: 2021-01-23
 - New: Account element: add AJAX functionality
 - New: Account element: add support for social login plugins

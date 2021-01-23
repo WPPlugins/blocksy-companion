@@ -297,9 +297,10 @@ class DemoInstallOptionsInstaller {
 		}
 
 		// Set variables for storage, fix file filename for query strings.
-		preg_match('/[^\?]+\.(jpe?g|jpe|gif|png)\b/i', $file, $matches);
+		preg_match('/[^\?]+\.(jpe?g|jpe|gif|png|svg)\b/i', $file, $matches);
 
 		$file_array = [];
+
 		$file_array['name'] = basename($matches[0]);
 
 		// Download file to temp location.
