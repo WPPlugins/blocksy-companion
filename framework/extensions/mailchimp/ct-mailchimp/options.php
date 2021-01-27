@@ -95,10 +95,22 @@ $options = [
 		'disableRevertButton' => true,
 	],
 
+	'mailchimp_container' => [
+		'label' => __( 'Container Type', 'blc' ),
+		'type' => 'ct-select',
+		'value' => 'default',
+		'design' => 'inline',
+		'disableRevertButton' => true,
+		'choices' => [
+			'default' => __( 'Default', 'blc' ),
+			'boxed' => __( 'Boxed', 'blc' ),
+		],
+	],
+
 	'mailchimp_alignment' => [
 		'type' => 'ct-radio',
 		'label' => __( 'Content Alignment', 'blc' ),
-		'value' => 'center',
+		'value' => 'left',
 		'view' => 'text',
 		'design' => 'inline',
 		'attr' => [ 'data-type' => 'alignment' ],

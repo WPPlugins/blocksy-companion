@@ -13,6 +13,7 @@ class ThemeIntegration {
 
 					// post_date | comment_count
 					'orderby' => 'post_date',
+					'order' => 'DESC',
 
 					// yes | no
 					'has_pagination' => 'yes',

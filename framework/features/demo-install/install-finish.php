@@ -33,6 +33,9 @@ class DemoInstallFinalActions {
 
 		$this->handle_brizy_posts();
 
+		global $wp_rewrite;
+		$wp_rewrite->flush_rules();
+
 		Plugin::instance()->demo->emit_sse_message([
 			'action' => 'complete',
 			'error' => false,

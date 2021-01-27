@@ -13,7 +13,7 @@ if (get_query_var('paged')) {
 }
 
 $query_args = [
-	'order' => 'DESC',
+	'order' => $args['order'],
 	'ignore_sticky_posts' => true,
 	'post_type' => $args['post_type'],
 	'orderby' => $args['orderby'],
@@ -45,7 +45,6 @@ if (isset($args['term_ids']) && $args['term_ids']) {
 			'terms' => $term_id
 		];
 	}
-
 
 	$query_args['tax_query'] = $tax_query;
 }

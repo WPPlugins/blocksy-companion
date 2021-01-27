@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.52
+Stable tag: 1.7.54
 
 == Description ==
 
@@ -23,6 +23,15 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.54: 2021-01-28
+- Improvement: Improve search box when it is placed inside the middle column
+- Improvement: Flush permalinks after starter site install finish
+
+1.7.53: 2021-01-26
+- New: Newsletter widget - add boxed and default container style
+- Improvement: WooCommerce: improve mini cart colors
+- Improvement: WooCommerce: Floating cart scroll logic for single product
+
 1.7.52: 2021-01-25
 - New: Add term filtering for blocksy_posts shortcode
 

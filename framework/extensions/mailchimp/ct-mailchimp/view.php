@@ -45,8 +45,17 @@ if ($has_gdpr_fields) {
 	$skip_submit_output = 'data-skip-submit';
 }
 
+// container type
+$container = blocksy_default_akg( 'mailchimp_container', $atts, 'default' );
+
+$data_container = '';
+
+if ( $container !== 'default' ) {
+	$data_container = ' data-container=' . $container;
+}
+
 // Content alignment
-$alignment = blocksy_default_akg( 'mailchimp_alignment', $atts, 'center' );
+$alignment = blocksy_default_akg( 'mailchimp_alignment', $atts, 'left' );
 
 $name_label = blocksy_default_akg('mailchimp_name_label', $atts, __( 'Your name', 'blc' ));
 $email_label = blocksy_default_akg('mailchimp_mail_label', $atts, __( 'Your email', 'blc' ));
@@ -60,7 +69,7 @@ if ( $alignment !== 'left' ) {
 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 echo $before_widget;
 
-echo '<div class="ct-widget-inner"' . $data_alignment . '>';
+echo '<div class="ct-widget-inner"' . $data_alignment . '' . $data_container . '>';
 
 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 echo $before_title . wp_kses_post( $title ) . $after_title;
