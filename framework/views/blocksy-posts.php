@@ -15,7 +15,7 @@ if (get_query_var('paged')) {
 $query_args = [
 	'order' => $args['order'],
 	'ignore_sticky_posts' => true,
-	'post_type' => $args['post_type'],
+	'post_type' => explode(',', $args['post_type']),
 	'orderby' => $args['orderby'],
 	'posts_per_page' => $args['limit'],
 	'paged' => $paged,
@@ -56,8 +56,8 @@ $prefix = 'blog';
 $custom_post_types = blocksy_manager()->post_types->get_supported_post_types();
 
 foreach ($custom_post_types as $cpt) {
-	if ($cpt === $args['post_type']) {
-		$prefix = $args['post_type'] . '_archive';
+	if ($cpt === explode(',', $args['post_type'])[0]) {
+		$prefix = $cpt . '_archive';
 	}
 }
 

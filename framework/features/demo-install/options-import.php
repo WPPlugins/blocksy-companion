@@ -6,6 +6,8 @@ class DemoInstallOptionsInstaller {
 	protected $has_streaming = true;
 	protected $demo_name = null;
 
+	protected $sideloaded_images = [];
+
 	public function __construct($args = []) {
 		$args = wp_parse_args($args, [
 			'has_streaming' => true,
@@ -205,7 +207,7 @@ class DemoInstallOptionsInstaller {
 	}
 
 	private function import_images($demo_content, $mods) {
-		foreach ( $mods as $key => $val ) {
+		foreach ($mods as $key => $val) {
 			if ($this->is_image_url($val)) {
 				$data = $this->sideload_image($val);
 
@@ -225,7 +227,52 @@ class DemoInstallOptionsInstaller {
 				}
 			}
 
-			if ($key === 'custom_logo' && $val) {
+			if ($key === 'header_placements') {
+				foreach ($val['sections'] as $section_index => $section) {
+					foreach ($section['items'] as $item_index => $item) {
+						$mods['header_placements']['sections'][$section_index][
+							'items'
+						][$item_index]['values'] = $this->import_images(
+							$demo_content,
+							$item['values']
+						);
+					}
+				}
+			}
+
+			if ($key === 'custom_logo' && is_array($val) && isset($val['desktop'])) {
+				$maybe_url = $this->sideload_image_for_url(
+					$demo_content['url'],
+					$val['desktop']
+				);
+
+				if ($maybe_url) {
+					$data = $this->sideload_image($maybe_url);
+					$mods[$key]['desktop'] = $data->attachment_id;
+				}
+
+				$maybe_url = $this->sideload_image_for_url(
+					$demo_content['url'],
+					$val['tablet']
+				);
+
+				if ($maybe_url) {
+					$data = $this->sideload_image($maybe_url);
+					$mods[$key]['tablet'] = $data->attachment_id;
+				}
+
+				$maybe_url = $this->sideload_image_for_url(
+					$demo_content['url'],
+					$val['mobile']
+				);
+
+				if ($maybe_url) {
+					$data = $this->sideload_image($maybe_url);
+					$mods[$key]['mobile'] = $data->attachment_id;
+				}
+			}
+
+			if ($key === 'custom_logo' && is_numeric($val)) {
 				$maybe_url = $this->sideload_image_for_url(
 					$demo_content['url'],
 					$val
@@ -284,6 +331,10 @@ class DemoInstallOptionsInstaller {
 	}
 
 	private function sideload_image($file) {
+		if (isset($this->sideloaded_images[$file])) {
+			return $this->sideloaded_images[$file];
+		}
+
 		$data = new \stdClass();
 
 		if (! function_exists('media_handle_sideload')) {
@@ -320,6 +371,8 @@ class DemoInstallOptionsInstaller {
 			return $id;
 		}
 
+		update_post_meta($id, 'blocksy_demos_imported_post', true);
+
 		// Build the object to return.
 		$meta = wp_get_attachment_metadata($id);
 		$data->attachment_id = $id;
@@ -327,6 +380,8 @@ class DemoInstallOptionsInstaller {
 		$data->thumbnail_url = wp_get_attachment_thumb_url($id);
 		$data->height = $meta['height'];
 		$data->width = $meta['width'];
+
+		$this->sideloaded_images[$file] = $data;
 
 		return $data;
 	}

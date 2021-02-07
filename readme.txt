@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.54
+Stable tag: 1.7.55
 
 == Description ==
 
@@ -23,6 +23,17 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.55: 2021-02-07
+- New: Allow multiple post_type entries in blocksy_posts shortcode
+- Improvement: Correctly handle images export/import in customizer
+- Improvement: WooCommerce: 3 new mini-cart icons
+- Fix: Account header element avatar size
+
+1.7.54.2: 2021-02-02
+- New: Allow multiple post_type entries in blocksy_posts shortcode
+- Improvement: Correctly handle images export/import in customizer
+- Improvement: WooCommerce: 3 new mini-cart icons
+
 1.7.54: 2021-01-28
 - Improvement: Improve search box when it is placed inside the middle column
 - Improvement: Flush permalinks after starter site install finish

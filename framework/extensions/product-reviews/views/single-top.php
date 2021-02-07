@@ -57,24 +57,17 @@ if (count($gallery_images) > 1) {
 		'images_ratio' => '2/1'
 	];
 
+	$args['pills_images'] = $gallery_images;
+
 	if (count($gallery_images) <= 5) {
-		$args['pills_images'] = $gallery_images;
 	} else {
-		$args['has_pills'] = false;
+		$args['pills_have_arrows'] = true;
+		$args['pills_container_attr'] = [
+			'data-flexy' => 'no'
+		];
 	}
 
 	echo blocksy_flexy($args);
-
-	if (count($gallery_images) > 5) {
-		echo blocksy_flexy([
-			'images' => $gallery_images,
-			'size' => 'thumb',
-			'has_pills' => false,
-			'images_ratio' => '1/1',
-			'class' => 'flexy-draggable-pills',
-			'first_item_class' => 'active'
-		]);
-	}
 }
 
 echo blocksy_output_hero_section([

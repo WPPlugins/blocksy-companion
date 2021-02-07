@@ -32,6 +32,18 @@
 	}
 }
 
+.ct-control[data-location] {
+	--options-vertical-spacing: 20px;
+
+	&[data-design="inline"] input {
+		text-align: center;
+		--width: 100px;
+	}
+
+	&:after {
+		border-bottom-style: dashed;
+	}
+}
 
 
 // display conditions

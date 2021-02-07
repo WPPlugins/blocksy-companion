@@ -52,7 +52,15 @@ class CustomizerOptionsManager {
 					'has_streaming' => false
 				]);
 
-				$importer->import_options($data);
+				$demo_data = null;
+
+				if (isset($data['site_url'])) {
+					$demo_data = [
+						'url' => $data['site_url']
+					];
+				}
+
+				$importer->import_options($data, $demo_data);
 			}
 
 			if (isset($data['blocksy_widgets'])) {
@@ -126,6 +134,7 @@ class CustomizerOptionsManager {
 			$mods = $this->get_theme_mods($theme_slug);
 			$data = [
 				'template' => $theme_slug,
+				'site_url' => get_site_url(),
 				'mods' => $mods ? $mods : array(),
 				'options' => array()
 			];

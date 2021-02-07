@@ -83,7 +83,11 @@ if ($current_user_id) {
 	}
 
 	if ($loggedin_media === 'avatar') {
-		$avatar_size = intval(blocksy_akg('accountHeaderAvatarSize', $atts, 18));
+		$avatar_size = intval(
+			blocksy_expand_responsive_value(
+				blocksy_akg('accountHeaderAvatarSize', $atts, 18)
+			)['desktop']
+		);
 
 		$media_html = blocksy_simple_image(
 			get_avatar_url(
@@ -104,8 +108,6 @@ if ($current_user_id) {
 	if ($loggedin_media === 'icon') {
 		$account_loggedin_icon = blocksy_akg('account_loggedin_icon', $atts, 'type-1');
 		$icon_position = blocksy_akg('account_loggedin_icon_position', $atts, 'left');
-		$avatar_size = intval(blocksy_akg('accountHeaderAvatarSize', $atts, 18));
-
 		$media_html = $icon[$account_loggedin_icon];
 	}
 }

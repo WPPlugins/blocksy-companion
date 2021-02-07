@@ -197,6 +197,7 @@ const ConditionsManager = ({ value, onChange }) => {
 						condition.rule === 'post_with_taxonomy_ids') && (
 						<Select
 							option={{
+								appendToBody: true,
 								defaultToFirstItem: false,
 								placeholder: __('Select taxonomy', 'blc'),
 								choices: allTaxonomies.map((taxonomy) => ({
