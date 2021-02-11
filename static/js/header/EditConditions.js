@@ -4,19 +4,19 @@ import {
 	Component,
 	useContext,
 	useRef,
-	useState
+	useState,
 } from '@wordpress/element'
 import {
 	Overlay,
 	OptionsPanel,
 	getValueFromInput,
-	PlacementsDragDropContext
+	PlacementsDragDropContext,
 } from 'blocksy-options'
 import { __ } from 'ct-i18n'
 import useFetch from 'react-fetch-hook'
 
-import { createTrigger, useTrigger } from '../helpers/react-use-trigger'
-import { getLocalizations } from '../editor/utils/localizations'
+import createTrigger from 'react-use-trigger'
+import useTrigger from 'react-use-trigger/useTrigger'
 
 const requestTrigger = createTrigger()
 const EditConditions = ({ forcedEdit = false, headerId }) => {
@@ -32,14 +32,14 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 
 	const saveSettings = () => {
 		fetch(
-			`${wp.ajax.settings.url}?action=blocksy_header_update_all_conditions&nonce=${getLocalizations().dashboard_actions_nonce}`,
+			`${wp.ajax.settings.url}?action=blocksy_header_update_all_conditions`,
 			{
 				headers: {
 					Accept: 'application/json',
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
 				},
 				method: 'POST',
-				body: JSON.stringify(localConditions)
+				body: JSON.stringify(localConditions),
 			}
 		)
 			.then((r) => r.json())
@@ -49,11 +49,7 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 			})
 	}
 
-	const {
-		data: conditions,
-		isLoading,
-		error
-	} = useFetch(
+	const { data: conditions, isLoading, error } = useFetch(
 		`${blocksy_admin.ajax_url}?action=blocksy_header_get_all_conditions`,
 		{
 			method: 'POST',
@@ -66,7 +62,7 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 
 				return data.conditions
 			},
-			depends: [requestTriggerValue]
+			depends: [requestTriggerValue],
 		}
 	)
 
@@ -76,17 +72,15 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 				className="button-primary"
 				style={{ width: '100%' }}
 				onClick={(e) => {
-					e.preventDefault()
-					e.stopPropagation()
-
 					if (isLoading) {
 						return
 					}
+					e.preventDefault()
+					e.stopPropagation()
 
 					setIsEditing(true)
-				}}
-			>
-				{__('Add/Edit Conditions', 'blocksy-companion')}
+				}}>
+				{__('Add/Edit Conditions', 'blc')}
 			</button>
 
 			<Overlay
@@ -99,15 +93,11 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 				}}
 				render={() => (
 					<div className="ct-modal-content" ref={containerRef}>
-						<h2>
-							{sprintf(
-								__('Display Conditions', 'blocksy-companion')
-							)}
-						</h2>
+						<h2>{sprintf(__('Display Conditions', 'blc'))}</h2>
 						<p>
 							{__(
 								'Add one or more conditions in order to display your header.',
-								'blocksy-companion'
+								'blc'
 							)}
 						</p>
 
@@ -115,13 +105,13 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 							<OptionsPanel
 								onChange={(optionId, cond) => {
 									setConditions((localConditions) => [
-										...(
-											localConditions || conditions
-										).filter(({ id }) => id !== headerId),
+										...(localConditions || conditions).filter(
+											({ id }) => id !== headerId
+										),
 										{
 											id: headerId,
-											conditions: cond
-										}
+											conditions: cond,
+										},
 									])
 								}}
 								options={{
@@ -130,15 +120,15 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 										design: 'none',
 										value: [],
 										design: 'none',
-										label: false
-									}
+										label: false,
+									},
 								}}
 								value={{
 									conditions: (
 										(localConditions || conditions).find(
 											({ id }) => id === headerId
 										) || { conditions: [] }
-									).conditions
+									).conditions,
 								}}
 								hasRevertButton={false}
 							/>
@@ -146,11 +136,10 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 
 						<div className="ct-modal-actions has-divider">
 							<button
-								className="ct-ui-button ct-ui-button-primary"
+								className="button-primary"
 								disabled={!localConditions}
-								onClick={() => saveSettings()}
-							>
-								{__('Save Conditions', 'blocksy-companion')}
+								onClick={() => saveSettings()}>
+								{__('Save Conditions', 'blc')}
 							</button>
 						</div>
 					</div>

@@ -2,22 +2,28 @@
 
 namespace Blocksy;
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 class DemoInstallChildThemeInstaller {
 	public function import() {
-		if (! current_user_can('switch_themes')) {
-			wp_send_json_error([
-				'message' => __("Sorry, you don't have permission to install child themes.", 'blocksy-companion')
+		Plugin::instance()->demo->start_streaming();
+
+		if (! current_user_can('edit_theme_options')) {
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'complete',
+				'error' => 'No permission.',
 			]);
+
+			exit;
 		}
 
 		$theme = wp_get_theme();
 
 		if (is_child_theme()) {
-			wp_send_json_success();
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'complete',
+				'error' => false,
+			]);
+
+			exit;
 		}
 
 		$name = $theme . ' Child';
@@ -28,13 +34,12 @@ class DemoInstallChildThemeInstaller {
 		WP_Filesystem();
 		global $wp_filesystem;
 
-		if (! $wp_filesystem->exists($path)) {
-			if (! current_user_can('install_themes')) {
-				wp_send_json_error([
-					'message' => __("Sorry, you don't have permission to install child themes.", 'blocksy-companion')
-				]);
-			}
+		Plugin::instance()->demo->emit_sse_message([
+			'action' => 'import_install_child',
+			'error' => false,
+		]);
 
+		if (! $wp_filesystem->exists($path)) {
 			$wp_filesystem->mkdir( $path );
 
 			$wp_filesystem->put_contents(
@@ -54,9 +59,19 @@ class DemoInstallChildThemeInstaller {
 			update_option('allowedthemes', $allowed_themes);
 		}
 
+		Plugin::instance()->demo->emit_sse_message([
+			'action' => 'import_activate_child',
+			'error' => false,
+		]);
+
 		switch_theme($slug);
 
-		wp_send_json_success();
+		Plugin::instance()->demo->emit_sse_message([
+			'action' => 'complete',
+			'error' => false,
+		]);
+
+		exit;
 	}
 
 	private function get_style_css() {

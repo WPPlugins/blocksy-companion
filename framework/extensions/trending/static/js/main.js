@@ -1,16 +1,17 @@
-import { loadPage } from './trending-block'
-import { registerDynamicChunk } from 'blocksy-frontend'
+import { onDocumentLoaded } from '../../../cookies-consent/static/js/helpers'
+import ctEvents from 'ct-events'
+import { mount } from './trending-block'
 
-registerDynamicChunk('blocksy_ext_trending', {
-	mount: (el, { event }) => {
-		const loadingEl = el.closest('[data-page]')
+const initTrending = () => {
+	Array.from(
+		document.querySelectorAll('.ct-trending-block [data-page]')
+	).map(el => mount(el))
+}
 
-		if (el.classList.contains('ct-arrow-prev')) {
-			loadPage({ el: loadingEl, action: 'prev' })
-		}
+onDocumentLoaded(() => {
+	initTrending()
+})
 
-		if (el.classList.contains('ct-arrow-next')) {
-			loadPage({ el: loadingEl, action: 'next' })
-		}
-	},
+ctEvents.on('blocksy:frontend:init', () => {
+	initTrending()
 })

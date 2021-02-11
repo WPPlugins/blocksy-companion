@@ -2,13 +2,7 @@
 
 namespace Blocksy;
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 class DynamicCss {
-	private $wp_filesystem = null;
-
 	public function __construct() {
 		add_filter(
 			'blocksy:dynamic-css:has_files_cache',
@@ -49,15 +43,28 @@ class DynamicCss {
 			'blocksy_performance_end_customizer_options',
 			function ($opts) {
 				$opts['dynamic_css_file'] = [
-					'label' => __( 'Dynamic CSS Output', 'blocksy-companion' ),
+					'label' => __( 'Dynamic CSS Output', 'blc' ),
 					'type' => 'ct-radio',
 					'value' => 'file',
 					'view' => 'text',
-					'desc' => __( 'The strategy of outputting the dynamic CSS. File - all the CSS code will be placed in a static file, otherwise it will be placed inline in head.', 'blocksy-companion' ),
+					'desc' => __( 'The strategy of outputing the dynamic CSS. File - all the CSS code will be placed in a static file, otherwise it will be placed inline in head.', 'blc' ),
 					'choices' => [
-						'file' => __( 'File', 'blocksy-companion' ),
-						'inline' => __( 'Inline', 'blocksy-companion' ),
+						'file' => __( 'File', 'blc' ),
+						'inline' => __( 'Inline', 'blc' ),
 					],
+				];
+
+
+				$opts[blocksy_rand_md5()] = [
+					'type' => 'ct-divider',
+				];
+
+				$opts['emoji_scripts'] = [
+					'label' => __( 'Emojis Script', 'blc' ),
+					'type' => 'ct-switch',
+					'value' => 'no',
+					'setting' => [ 'transport' => 'postMessage' ],
+					'desc' => __( 'Disable WordPress emojis script if you don\'t use them in order to improve the performance. ', 'blc' )
 				];
 
 				$opts[blocksy_rand_md5()] = [
@@ -68,55 +75,25 @@ class DynamicCss {
 			}
 		);
 
-		add_action('current_screen', function () {
-			$screen = get_current_screen();
-
-			if ($screen->base === 'plugins') {
-				if (
-					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					isset($_GET['activate-multi'])
-					||
-					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					isset($_GET['activate'])
-					||
-					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					isset($_GET['deactivate'])
-					||
-					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					isset($_GET['deactivate-multi'])
-				) {
-					$this->generate_css_files();
-				}
+		add_action('updated_option', function($option_name, $old_value, $value) {
+			if ('active_plugins' === $option_name) {
+				$this->generate_css_files();
 			}
-		});
+		}, 10, 3);
 
-		add_action('blocksy:dynamic-css:refresh-caches', function () {
+		add_action('customize_save_after', function () {
 			$this->generate_css_files();
 		});
 
-		add_action('init', function () {
-			$this->enqueue_dynamic_css();
+		add_action('blocksy:dynamic-css:regenere_css_files', function () {
+			$this->generate_css_files();
 		});
 
-		// Needs to run very early.
-		// Will catch when the import is done and will refresh the dynamic CSS.
-		// All in One WP Migration compatibility.
-		add_action('ai1wm_status_import_done', function () {
-			/**
-			 * Fires when the dynamic CSS caches should be invalidated.
-			 *
-			 * Listeners drop their generated CSS files/transients so the
-			 * next request regenerates them.
-			 *
-			 * @since 1.6.2
-			 * @since 1.8.0 Renamed from `blocksy:dynamic-css:regenere_css_files`.
-			 */
-			do_action('blocksy:dynamic-css:refresh-caches');
-		});
+		$this->enqueue_dynamic_css();
 	}
 
 	public function should_use_files() {
-		return blocksy_companion_theme_functions()->blocksy_get_theme_mod('dynamic_css_file', 'file') === 'file';
+		return get_theme_mod('dynamic_css_file', 'file') === 'file';
 	}
 
 	public function get_chunks() {
@@ -130,15 +107,7 @@ class DynamicCss {
 	}
 
 	public function enqueue_dynamic_css() {
-		if (
-			is_admin()
-			||
-			is_login()
-		) {
-			return;
-		}
-
-		if (! blocksy_companion_theme_functions()->blocksy_has_dynamic_css_in_frontend()) {
+		if (is_admin()) {
 			return;
 		}
 
@@ -194,12 +163,9 @@ class DynamicCss {
 			}
 
 			$file = $theme_paths['css_path'] . '/' . $chunk['filename'];
+			$url = $theme_paths['css_url'] . '/' . $chunk['filename'];
 
-			if (
-				function_exists('blocksy_get_dynamic_css_file_content')
-				&&
-				$this->wp_filesystem
-			) {
+			if (function_exists('blocksy_get_dynamic_css_file_content')) {
 				$this->wp_filesystem->put_contents(
 					$file,
 					blocksy_get_dynamic_css_file_content(['context' => $chunk['context']])
@@ -208,7 +174,7 @@ class DynamicCss {
 		}
 	}
 
-	public function maybe_prepare_theme_uploads_path($args = []) {
+	private function maybe_prepare_theme_uploads_path($args = []) {
 		$args = wp_parse_args($args, [
 			'should_generate' => false,
 		]);
@@ -227,8 +193,6 @@ class DynamicCss {
 			'css'   => 'blocksy/css'
 		);
 
-		$theme_paths = [];
-
 		foreach($folders_in_uploads as $folder => $path) {
 			// Server path.
 			$theme_paths[
@@ -243,7 +207,7 @@ class DynamicCss {
 
 		// Custom css file.
 
-		if (! $this->has_direct_access($theme_paths['css_path'])) {
+		if (! $this->has_direct_access()) {
 			return false;
 		}
 
@@ -267,7 +231,7 @@ class DynamicCss {
 		return $theme_paths;
 	}
 
-	public function has_direct_access($context = null) {
+	public function has_direct_access( $context = null ) {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		WP_Filesystem();
 
@@ -276,35 +240,31 @@ class DynamicCss {
 
 		if ($wp_filesystem) {
 			if ($wp_filesystem->method !== 'direct') {
-				return false;
+				if ( is_wp_error( $wp_filesystem->errors ) && $wp_filesystem->errors->get_error_code() ) {
+					return true;
+				} else {
+					return $wp_filesystem->method === 'direct';
+				}
 			} else {
 				return true;
 			}
 		}
 
-		if (get_filesystem_method([], $context) === 'direct') {
+		if ( get_filesystem_method( [], $context ) === 'direct' ) {
 			ob_start();
 
-			$creds = request_filesystem_credentials(
-				admin_url(),
-				'',
-				false,
-				$context,
-				null
-			);
+			{
+				$creds = request_filesystem_credentials( admin_url(), '', false, $context, null );
+			}
 
 			ob_end_clean();
 
-			if (WP_Filesystem($creds)) {
+			if ( WP_Filesystem( $creds ) ) {
 				return true;
 			}
 		}
 
 		return false;
-	}
-
-	public function get_wp_filesystem() {
-		return $this->wp_filesystem;
 	}
 }
 

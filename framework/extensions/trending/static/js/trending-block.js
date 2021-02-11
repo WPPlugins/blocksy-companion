@@ -1,15 +1,17 @@
+import { markImagesAsLoaded } from '../../../cookies-consent/static/js/lazy-load-helpers'
+
 const store = {}
 
-const cachedFetch = (url) =>
+const cachedFetch = url =>
 	store[url]
-		? new Promise((resolve) => {
+		? new Promise(resolve => {
 				resolve(store[url])
 				if (!window.ct_customizer_localizations) {
 					store[url] = store[url].clone()
 				}
 		  })
-		: new Promise((resolve) =>
-				fetch(url).then((response) => {
+		: new Promise(resolve =>
+				fetch(url).then(response => {
 					resolve(response)
 
 					if (!window.ct_customizer_localizations) {
@@ -18,13 +20,13 @@ const cachedFetch = (url) =>
 				})
 		  )
 
-export const loadPage = (args = {}) => {
+const loadPage = (args = {}) => {
 	args = {
 		el: null,
 		// prev | next
 		action: null,
 
-		...args,
+		...args
 	}
 
 	if (!args.el) {
@@ -45,7 +47,7 @@ export const loadPage = (args = {}) => {
 		return
 	}
 
-	if (args.el.querySelectorAll('.ct-trending-block-item').length < 4) {
+	if (args.el.querySelectorAll('.ct-container > a').length < 4) {
 		if (currentPage === 1) {
 			return
 		}
@@ -57,76 +59,81 @@ export const loadPage = (args = {}) => {
 		}
 	}
 
-	args.el.querySelectorAll('.ct-trending-block-item').forEach((el, idx) => {
-		el.style.opacity = 0
-		el.style.transform = 'translateY(3px)'
-		el.style.transitionDelay = `${idx ? idx * 0.15 - 0.05 : 0}s`
-	})
+	args.el.classList.add('ct-loading')
 
 	let newPage = args.action === 'prev' ? currentPage - 1 : currentPage + 1
 
 	Promise.all([
-		new Promise((resolve) => {
+		new Promise(resolve => {
+			args.el.classList.add('ct-leave-active')
 			requestAnimationFrame(() => {
+				args.el.classList.remove('ct-leave-active')
+				args.el.classList.add('ct-leave')
+
 				setTimeout(() => resolve(), 650)
 			})
 		}),
 
 		cachedFetch(
 			`${ct_localizations.ajax_url}?action=blocksy_get_trending_posts&page=${newPage}`
-		).then((response) => response.json()),
+		).then(response => response.json())
 	]).then(([_, { success, data }]) => {
 		if (!success) {
 			return
 		}
 
 		let {
-			posts: { is_last_page, posts },
+			posts: { is_last_page, posts }
 		} = data
 
 		args.el.dataset.page = `${newPage}${is_last_page ? ':last' : ''}`
-		;[...args.el.querySelectorAll('.ct-trending-block-item')].map((el) =>
-			el.remove()
-		)
+		;[...args.el.querySelectorAll('a')].map(el => el.remove())
 
-		posts.map((post, idx) =>
+		posts.map(post =>
 			args.el.insertAdjacentHTML(
 				'beforeend',
-
-				`<div class="ct-trending-block-item" style="opacity: 0; transform: translateY(3px); transition-delay: ${
-					idx ? idx * 0.15 - 0.05 : 0
-				}s;">
-					${post.image}
-
-					<div class="ct-trending-block-item-content">
-						${post.taxonomy}
-						<a href="${post.url}" class="ct-post-title">
-							${post.title}
-						</a>
-						${post.price}
-					</div>
-				</a>`
+				`<a href="${post.url}">
+                        ${post.image}
+                        <span class="ct-item-title">
+                         ${post.title}
+                        </span>
+                    </a>`
 			)
 		)
 
 		setTimeout(() => {
-			args.el
-				.querySelectorAll('.ct-trending-block-item')
-				.forEach((el, idx) => {
-					el.style.opacity = 1
-					el.style.transform = 'translateY(0)'
-					el.style.transitionDelay = `${idx ? idx * 0.15 - 0.05 : 0}s`
-				})
+			args.el.classList.remove('ct-leave')
+			args.el.classList.add('ct-enter-active')
 
 			requestAnimationFrame(() => {
+				args.el.classList.remove('ct-enter-active')
+				args.el.classList.add('ct-active')
+
 				setTimeout(() => {
-					args.el
-						.querySelectorAll('.ct-trending-block-item')
-						.forEach((el) => {
-							el.removeAttribute('style')
-						})
+					args.el.classList.remove('ct-active')
+					args.el.classList.remove('ct-loading')
 				}, 650)
 			})
 		}, 50)
+
+		markImagesAsLoaded(args.el)
+	})
+}
+
+export const mount = el => {
+	if (el.hasListeners) {
+		return
+	}
+
+	el.hasListeners = true
+
+	el.querySelector('.ct-arrow-left').addEventListener('click', e => {
+		e.preventDefault()
+		loadPage({ el, action: 'prev' })
+	})
+
+	el.querySelector('.ct-arrow-right').addEventListener('click', e => {
+		e.preventDefault()
+		loadPage({ el, action: 'next' })
 	})
 }

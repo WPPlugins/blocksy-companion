@@ -1,22 +1,15 @@
+var scrolling = false
+
 import ctEvents from 'ct-events'
 import { getCurrentScreen } from 'blocksy-frontend'
 
-import { computeShrink } from './sticky/shrink'
-import { computeAutoHide } from './sticky/auto-hide'
-import { computeFadeSlide } from './sticky/fade-slide'
+const clamp = (min, max, value) => Math.max(min, Math.min(max, value))
 
-import {
-	getRowStickyHeight,
-	getRowInitialMinHeight,
-	maybeSetStickyHeightAnimated,
-} from './sticky/shrink-utils'
+const computeLinearScale = (domain, range, value) =>
+	range[0] +
+	((range[1] - range[0]) / (domain[1] - domain[0])) * (value - domain[0])
 
-import { clearShrinkCache } from './sticky/shrink-handle-middle-row'
-import { clearLogoShrinkCache } from './sticky/shrink-handle-logo'
-
-import { computeStartPositionForRowConfiguration } from './sticky/start-position'
-
-export const setTransparencyFor = (deviceContainer, value = 'yes') => {
+const setTransparencyFor = (deviceContainer, value = 'yes') => {
 	Array.from(
 		deviceContainer.querySelectorAll('[data-row][data-transparent-row]')
 	).map((el) => {
@@ -24,351 +17,461 @@ export const setTransparencyFor = (deviceContainer, value = 'yes') => {
 	})
 }
 
-var getParents = function (elem) {
-	var parents = []
+const getRowInitialHeight = (el) =>
+	parseFloat(getComputedStyle(el).getPropertyValue('--height'))
 
-	for (; elem && elem !== document; elem = elem.parentNode) {
-		parents.push(elem)
+const getRowStickyHeight = (el) => {
+	let styles = getComputedStyle(el)
+
+	let maybeShrink = styles.getPropertyValue('--stickyShrink')
+
+	if (!maybeShrink) {
+		return getRowInitialHeight(el)
 	}
 
-	return parents
+	return (parseFloat(maybeShrink) / 100) * getRowInitialHeight(el)
 }
 
-let cachedStartPosition = null
-let cachedContainerInitialHeight = {}
-let cachedHeaderInitialHeight = null
-let cachedStickyContainerHeight = null
-let forcedHeightSetForStickyContainer = false
+function isInViewport(element) {
+	const rect = element.getBoundingClientRect()
 
-const clearCache = () => {
-	clearShrinkCache()
-	clearLogoShrinkCache()
-
-	cachedStartPosition = null
-	cachedHeaderInitialHeight = null
-	cachedStickyContainerHeight = null
-	prevScrollY = null
-	forcedHeightSetForStickyContainer = false
-}
-
-ctEvents.on('blocksy:sticky:compute', () => {
-	setTimeout(() => {
-		clearCache()
-		compute()
-	}, 100)
-})
-
-if (window.wp && wp.customize && wp.customize.selectiveRefresh) {
-	let shouldSkipNext = false
-	wp.customize.selectiveRefresh.bind(
-		'partial-content-rendered',
-		(placement) => {
-			if (shouldSkipNext) {
-				return
-			}
-
-			shouldSkipNext = true
-			setTimeout(() => {
-				clearCache()
-				forcedHeightSetForStickyContainer = true
-				compute()
-				shouldSkipNext = false
-			}, 500)
-		}
+	return (
+		rect.top >= 0 &&
+		rect.left >= 0 &&
+		rect.bottom <=
+			(window.innerHeight || document.documentElement.clientHeight) &&
+		rect.right <=
+			(window.innerWidth || document.documentElement.clientWidth)
 	)
 }
 
 const getStartPositionFor = (stickyContainer) => {
-	if (cachedStartPosition) {
-		return cachedStartPosition
-	}
-
 	if (
 		stickyContainer.dataset.sticky.indexOf('shrink') === -1 &&
 		stickyContainer.dataset.sticky.indexOf('auto-hide') === -1
 	) {
-		// return stickyContainer.parentNode.getBoundingClientRect().height + 200
+		return stickyContainer.parentNode.getBoundingClientRect().height + 200
 	}
 
-	const headerRect = stickyContainer.closest('header').getBoundingClientRect()
-
-	// Round to avoid floating point dust (e.g. -0.00006) at fractional DPRs
-	// like 1.25 where headerRect.top + scrollY doesn't cancel out to exactly 0.
-	let stickyOffset = Math.round(headerRect.top + scrollY)
-
-	if (stickyOffset > 0) {
-		let element = document.elementFromPoint(0, 3)
-
-		if (element) {
-			if (
-				getParents(element)
-					.map((el) => {
-						let style = getComputedStyle(el)
-						return style.position
-					})
-					.indexOf('fixed') > -1
-			) {
-				stickyOffset -= element.getBoundingClientRect().height
-			}
-		}
-	}
-
-	if (
-		stickyContainer.dataset.sticky.indexOf('shrink') === -1 &&
-		stickyContainer.dataset.sticky.indexOf('auto-hide') === -1
-	) {
-		stickyOffset += 200
-	}
+	const stickyOffset =
+		stickyContainer.closest('header').getBoundingClientRect().top + scrollY
 
 	const row = stickyContainer.parentNode
 
-	const bodyComp = getComputedStyle(document.body)
-	let maybeDynamicOffset = parseFloat(
-		bodyComp.getPropertyValue('--header-sticky-offset') || 0
-	)
+	if (
+		row.parentNode.children.length === 1 ||
+		row.parentNode.children[0].classList.contains('ct-sticky-container')
+	) {
+		return stickyOffset
+	}
 
-	maybeDynamicOffset =
-		maybeDynamicOffset +
-		(parseFloat(bodyComp.getPropertyValue('--theme-frame-size')) || 0)
+	return Array.from(row.parentNode.children)
+		.reduce((result, el, index) => {
+			if (result.indexOf(0) > -1 || !el.dataset.row) {
+				return [...result, 0]
+			} else {
+				return [
+					...result,
 
-	const rowConfiguration = Array.from(row.parentNode.children)
-		.filter(
-			(el) =>
-				el.dataset.row || el.classList.contains('ct-sticky-container')
+					el.classList.contains('ct-sticky-container')
+						? 0
+						: el.getBoundingClientRect().height,
+				]
+			}
+		}, [])
+		.reduce((sum, height) => sum + height, stickyOffset)
+}
+
+let hasListener = false
+
+export const mountStickyHeader = () => {
+	const stickyHeader = document.querySelector('[data-sticky]')
+
+	if (!stickyHeader) {
+		return
+	}
+
+	let prevScrollY = window.scrollY
+
+	const compute = () => {
+		const stickyContainer = document.querySelector(
+			`[data-device="${getCurrentScreen()}"] [data-sticky]`
 		)
-		.map((el) => {
-			if (el.classList.contains('ct-sticky-container')) {
-				return {
-					sticky: true,
+
+		if (!stickyContainer) {
+			return
+		}
+
+		const startPosition = getStartPositionFor(stickyContainer)
+
+		const isSticky =
+			(startPosition > 0 &&
+				Math.abs(window.scrollY - startPosition) < 3) ||
+			window.scrollY > startPosition
+
+		const stickyComponents = stickyContainer.dataset.sticky
+			.split(':')
+			.filter((c) => c !== 'yes' && c !== 'no')
+
+		let containerInitialHeight = Array.from(
+			stickyContainer.querySelectorAll('[data-row]')
+		).reduce((sum, el) => {
+			let rowInitialHeight = parseFloat(
+				getComputedStyle(el).getPropertyValue('--height')
+			)
+
+			return sum + rowInitialHeight
+		}, 0)
+
+		if (stickyComponents.indexOf('auto-hide') > -1) {
+			if (window.scrollY < startPosition) {
+				prevScrollY = window.scrollY
+			}
+
+			if (isSticky && window.scrollY - prevScrollY === 0) {
+				document.body.style.setProperty(
+					'--headerStickyHeightAnimated',
+					`0px`
+				)
+			}
+
+			if (isSticky && window.scrollY - prevScrollY < -5) {
+				if (stickyContainer.dataset.sticky.indexOf('yes') === -1) {
+					stickyContainer.dataset.sticky = [
+						'yes-start',
+						...stickyComponents,
+					].join(':')
+
+					requestAnimationFrame(() => {
+						stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+							'yes-start',
+							'yes-end'
+						)
+
+						setTimeout(() => {
+							stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+								'yes-end',
+								'yes'
+							)
+						}, 200)
+					})
+				}
+
+				setTransparencyFor(stickyContainer, 'no')
+				document.body.removeAttribute('style')
+
+				stickyContainer.parentNode.style.setProperty(
+					'--minHeight',
+					`${containerInitialHeight}px`
+				)
+			} else {
+				if (!isSticky) {
+					stickyContainer.dataset.sticky = stickyComponents
+						.filter((c) => c !== 'yes-end')
+						.join(':')
+
+					stickyContainer.parentNode.removeAttribute('style')
+
+					Array.from(
+						stickyContainer.querySelectorAll('[data-row]')
+					).map((row) => row.removeAttribute('style'))
+					setTransparencyFor(stickyContainer, 'yes')
+
+					document.body.style.setProperty(
+						'--headerStickyHeightAnimated',
+						`0px`
+					)
+
+					prevScrollY = window.scrollY
+					return
+				}
+
+				if (
+					stickyContainer.dataset.sticky.indexOf('yes-hide') === -1 &&
+					stickyContainer.dataset.sticky.indexOf('yes:') > -1 &&
+					window.scrollY - prevScrollY > 5
+				) {
+					stickyContainer.dataset.sticky = [
+						'yes-hide-start',
+						...stickyComponents,
+					].join(':')
+
+					document.body.style.setProperty(
+						'--headerStickyHeightAnimated',
+						`0px`
+					)
+
+					requestAnimationFrame(() => {
+						stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+							'yes-hide-start',
+							'yes-hide-end'
+						)
+
+						setTimeout(() => {
+							stickyContainer.dataset.sticky = stickyComponents.join(
+								':'
+							)
+
+							stickyContainer.parentNode.removeAttribute('style')
+
+							Array.from(
+								stickyContainer.querySelectorAll('[data-row]')
+							).map((row) => row.removeAttribute('style'))
+							setTransparencyFor(stickyContainer, 'yes')
+						}, 200)
+					})
 				}
 			}
 
-			return {
-				height: el.getBoundingClientRect().height,
+			prevScrollY = window.scrollY
+		}
+
+		if (
+			stickyComponents.indexOf('slide') > -1 ||
+			stickyComponents.indexOf('fade') > -1
+		) {
+			if (isSticky) {
+				if (stickyContainer.dataset.sticky.indexOf('yes') === -1) {
+					stickyContainer.dataset.sticky = [
+						'yes-start',
+						...stickyComponents,
+					].join(':')
+
+					requestAnimationFrame(() => {
+						stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+							'yes-start',
+							'yes-end'
+						)
+
+						setTimeout(() => {
+							stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+								'yes-end',
+								'yes'
+							)
+						}, 200)
+					})
+				}
+
+				setTransparencyFor(stickyContainer, 'no')
+
+				stickyContainer.parentNode.style.setProperty(
+					'--minHeight',
+					`${containerInitialHeight}px`
+				)
+			} else {
+				if (
+					stickyContainer.dataset.sticky.indexOf('yes-hide') === -1 &&
+					stickyContainer.dataset.sticky.indexOf('yes:') > -1
+				) {
+					if (Math.abs(window.scrollY - startPosition) > 10) {
+						stickyContainer.dataset.sticky = stickyComponents.join(
+							':'
+						)
+
+						setTimeout(() => {
+							stickyContainer.parentNode.removeAttribute('style')
+
+							Array.from(
+								stickyContainer.querySelectorAll('[data-row]')
+							).map((row) => row.removeAttribute('style'))
+						}, 300)
+
+						setTransparencyFor(stickyContainer, 'yes')
+					} else {
+						stickyContainer.dataset.sticky = [
+							'yes-hide-start',
+							...stickyComponents,
+						].join(':')
+
+						requestAnimationFrame(() => {
+							stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+								'yes-hide-start',
+								'yes-hide-end'
+							)
+
+							setTimeout(() => {
+								stickyContainer.dataset.sticky = stickyComponents.join(
+									':'
+								)
+
+								setTimeout(() => {
+									stickyContainer.parentNode.removeAttribute(
+										'style'
+									)
+
+									Array.from(
+										stickyContainer.querySelectorAll(
+											'[data-row]'
+										)
+									).map((row) => row.removeAttribute('style'))
+								}, 300)
+
+								setTransparencyFor(stickyContainer, 'yes')
+							}, 200)
+						})
+					}
+				}
 			}
-		})
-
-	const actualStartPositionForRows =
-		computeStartPositionForRowConfiguration(rowConfiguration)
-
-	let finalResult = actualStartPositionForRows + stickyOffset
-
-	finalResult =
-		finalResult > 0 ? finalResult - maybeDynamicOffset : finalResult
-
-	let shouldWriteCache = true
-
-	// Dont write cache until store notice is visible. Sometimes the store notice
-	// appears too late and the sticky header is not positioned correctly.
-	//
-	// https://github.com/Creative-Themes/blocksy/issues/4617
-	const maybeStoreNotice = document.querySelector('.woocommerce-store-notice')
-
-	if (maybeStoreNotice) {
-		shouldWriteCache = false
-
-		if (maybeStoreNotice.offsetHeight > 0) {
-			shouldWriteCache = true
-		}
-	}
-
-	if (shouldWriteCache) {
-		cachedStartPosition = finalResult
-	}
-
-	return finalResult
-}
-
-let prevScrollY = null
-
-const compute = () => {
-	if (prevScrollY === scrollY) {
-		/*
-		requestAnimationFrame(() => {
-			compute()
-		})
-    */
-
-		return
-	}
-
-	const stickyContainer = document.querySelector(
-		`[data-device="${getCurrentScreen()}"] [data-sticky]`
-	)
-
-	if (!stickyContainer) {
-		return
-	}
-
-	const currentScreenWithTablet = getCurrentScreen({ withTablet: true })
-
-	let containerInitialHeight =
-		cachedContainerInitialHeight[currentScreenWithTablet]
-
-	const shouldSetHeight =
-		!containerInitialHeight || forcedHeightSetForStickyContainer
-
-	if (!containerInitialHeight || forcedHeightSetForStickyContainer) {
-		cachedContainerInitialHeight[currentScreenWithTablet] = [
-			...stickyContainer.querySelectorAll('[data-row]'),
-		].reduce((res, row) => {
-			return res + getRowInitialMinHeight(row)
-		}, 0)
-
-		containerInitialHeight =
-			cachedContainerInitialHeight[currentScreenWithTablet]
-	}
-
-	if (shouldSetHeight) {
-		forcedHeightSetForStickyContainer = false
-		stickyContainer.parentNode.style.height = `${containerInitialHeight}px`
-	}
-
-	let startPosition = getStartPositionFor(stickyContainer, {})
-
-	let headerInitialHeight = cachedHeaderInitialHeight
-
-	if (headerInitialHeight === null) {
-		const headerRect = stickyContainer
-			.closest('[data-device]')
-			.getBoundingClientRect()
-
-		headerInitialHeight = headerRect.height
-		cachedHeaderInitialHeight = headerInitialHeight
-	}
-
-	let stickyContainerHeight = cachedStickyContainerHeight
-
-	const stickyComponents = stickyContainer.dataset.sticky
-		.split(':')
-		.filter((c) => c !== 'yes' && c !== 'no' && c !== 'fixed')
-
-	if (!stickyContainerHeight) {
-		stickyContainerHeight = [
-			...stickyContainer.querySelectorAll('[data-row]'),
-		].reduce((res, row) => res + getRowStickyHeight(row), 0)
-		cachedStickyContainerHeight = parseInt(stickyContainerHeight)
-
-		maybeSetStickyHeightAnimated(() => {
-			return stickyComponents.indexOf('auto-hide') === -1
-				? // case when content is forcing the initial height to be bigger
-				  stickyContainerHeight >
-				  [...stickyContainer.querySelectorAll('[data-row]')].reduce(
-						(res, row) => res + getRowInitialMinHeight(row),
-						0
-				  )
-					? `${stickyContainerHeight}px`
-					: `${[
-							...stickyContainer.querySelectorAll('[data-row]'),
-					  ].reduce(
-							(res, row) => res + getRowStickyHeight(row),
-							0
-					  )}px`
-				: '0px'
-		})
-	}
-
-	let isSticky =
-		(startPosition > 0 && Math.abs(window.scrollY - startPosition) < 5) ||
-		window.scrollY > startPosition
-
-	if (stickyComponents.indexOf('shrink') > -1) {
-		isSticky =
-			startPosition > 0
-				? window.scrollY >= startPosition
-				: window.scrollY > 0
-	}
-
-	setTimeout(() => {
-		if (isSticky && document.body.dataset.header.indexOf('shrink') === -1) {
-			document.body.dataset.header = `${document.body.dataset.header}:shrink`
 		}
 
-		if (!isSticky && document.body.dataset.header.indexOf('shrink') > -1) {
-			document.body.dataset.header = document.body.dataset.header.replace(
-				':shrink',
-				''
-			)
-		}
-	}, 300)
+		if (stickyComponents.indexOf('shrink') > -1) {
+			if (isSticky) {
+				setTransparencyFor(stickyContainer, 'no')
 
-	let currentScrollY = scrollY
+				stickyContainer.parentNode.style.setProperty(
+					'--minHeight',
+					`${containerInitialHeight}px`
+				)
 
-	if (stickyComponents.indexOf('shrink') > -1) {
-		computeShrink({
-			stickyContainer,
-			stickyContainerHeight,
+				let containerStickyHeight = Array.from(
+					stickyContainer.querySelectorAll('[data-row]')
+				).reduce((sum, el, index) => {
+					let rowStickyHeight = getRowStickyHeight(el)
+					return sum + rowStickyHeight
+				}, 0)
 
-			containerInitialHeight,
-			isSticky,
-			startPosition,
-			stickyComponents,
-		})
-	}
+				;[
+					...stickyContainer.querySelectorAll('[data-row="middle"]'),
+				].map((row) => {
+					if (
+						row.querySelector(
+							'[data-id="logo"] .site-logo-container'
+						)
+					) {
+						const logo = row.querySelector(
+							'[data-id="logo"] .site-logo-container'
+						)
 
-	if (stickyComponents.indexOf('auto-hide') > -1) {
-		computeAutoHide({
-			stickyContainer,
-			isSticky,
-			startPosition,
-			stickyComponents,
+						let initialHeight = parseFloat(
+							getComputedStyle(logo).getPropertyValue(
+								'--maxHeight'
+							) || 50
+						)
 
-			containerInitialHeight,
-			stickyContainerHeight,
+						const stickyShrink = parseFloat(
+							getComputedStyle(logo).getPropertyValue(
+								'--logoStickyShrink'
+							) || 1
+						)
 
-			headerInitialHeight,
+						const stickyHeight = initialHeight * stickyShrink
 
-			currentScrollY,
-			prevScrollY,
-		})
-	}
+						if (stickyShrink === 1) {
+							return
+						}
 
-	if (
-		stickyComponents.indexOf('slide') > -1 ||
-		stickyComponents.indexOf('fade') > -1
-	) {
-		computeFadeSlide({
-			stickyContainer,
-			isSticky,
-			startPosition,
-			stickyComponents,
-		})
-	}
+						let rowInitialHeight = getRowInitialHeight(row)
+						let rowStickyHeight = getRowStickyHeight(row)
 
-	prevScrollY = currentScrollY
-}
+						logo.style.setProperty(
+							'--logo-shrink-height',
+							computeLinearScale(
+								[
+									startPosition,
+									startPosition +
+										Math.abs(
+											rowInitialHeight === rowStickyHeight
+												? initialHeight - stickyHeight
+												: rowInitialHeight -
+														rowStickyHeight
+										),
+								],
+								[1, stickyShrink],
+								clamp(
+									startPosition,
+									startPosition +
+										Math.abs(
+											rowInitialHeight === rowStickyHeight
+												? initialHeight - stickyHeight
+												: rowInitialHeight -
+														rowStickyHeight
+										),
 
-export const mountStickyHeader = () => {
-	if (!document.querySelector('header [data-sticky]')) {
-		return
-	}
+									scrollY
+								)
+							)
+						)
+					}
+				})
 
-	var prevWidth = window.width
+				if (
+					containerStickyHeight !== containerInitialHeight &&
+					stickyContainer.querySelector('[data-row="middle"]')
+				) {
+					;[stickyContainer.querySelector('[data-row="middle"]')].map(
+						(row) => {
+							let rowInitialHeight = getRowInitialHeight(row)
+							let rowStickyHeight = getRowStickyHeight(row)
 
-	window.addEventListener(
-		'resize',
-		(event) => {
-			if (window.width === prevWidth) {
-				return
+							row.style.setProperty(
+								'--shrinkHeight',
+								`${computeLinearScale(
+									[
+										startPosition,
+										startPosition +
+											Math.abs(
+												rowInitialHeight -
+													rowStickyHeight
+											),
+									],
+									[rowInitialHeight, rowStickyHeight],
+									clamp(
+										startPosition,
+
+										startPosition +
+											Math.abs(
+												rowInitialHeight -
+													rowStickyHeight
+											),
+
+										scrollY
+									)
+								)}px`
+							)
+						}
+					)
+				}
+			} else {
+				stickyContainer.parentNode.removeAttribute('style')
+
+				Array.from(
+					stickyContainer.querySelectorAll('[data-row]')
+				).map((row) => row.removeAttribute('style'))
+
+				Array.from(
+					stickyContainer.querySelectorAll(
+						'[data-row="middle"] .site-logo-container'
+					)
+				).map((el) => el.removeAttribute('style'))
+
+				setTransparencyFor(stickyContainer, 'yes')
 			}
 
-			prevWidth = window.width
+			const stickyComponents = stickyContainer.dataset.sticky
+				.split(':')
+				.filter((c) => c !== 'yes' && c !== 'no')
 
-			clearCache()
-			compute(event)
-			ctEvents.trigger('ct:header:update')
-		},
-		false
-	)
-
-	window.addEventListener('orientationchange', (event) => {
-		clearCache()
-		compute(event)
-		ctEvents.trigger('ct:header:update')
-	})
-
-	window.addEventListener('scroll', compute, false)
-	window.addEventListener('load', compute, false)
+			stickyContainer.dataset.sticky = (isSticky
+				? ['yes', ...stickyComponents]
+				: stickyComponents
+			).join(':')
+		}
+	}
 
 	compute()
+
+	if (!hasListener) {
+		hasListener = true
+
+		window.addEventListener('scroll', () => {
+			if (scrolling) return
+
+			scrolling = true
+
+			requestAnimationFrame(() => {
+				compute()
+				scrolling = false
+			})
+		})
+	}
 }

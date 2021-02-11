@@ -2,64 +2,40 @@ import {
 	createElement,
 	Fragment,
 	useEffect,
-	useState,
+	useState
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
-import { Switch } from 'blocksy-options'
+import { Switch, Select } from 'blocksy-options'
+import cls from 'classnames'
 import ConditionsManager from './ConditionsManager'
 import { Overlay } from 'blocksy-options'
 
 const DisplayCondition = ({
 	option: {
 		// inline | modal
-		display = 'inline',
-
-		filter = 'all',
-
-		modalTitle = __(
-			'Transparent Header Display Conditions',
-			'blocksy-companion'
-		),
-		modalDescription = __(
-			'Add one or more conditions to display the transparent header.',
-			'blocksy-companion'
-		),
-
-		addConditionButtonLabel = __(
-			'Add Display Condition',
-			'blocksy-companion'
-		),
+		display = 'inline'
 	},
 	value,
-	onChange,
+	onChange
 }) => {
 	const [isEditing, setIsEditing] = useState(false)
 	const [localValue, setLocalValue] = useState(null)
 
 	if (display === 'inline') {
-		return (
-			<ConditionsManager
-				filter={filter}
-				value={value}
-				onChange={onChange}
-				addConditionButtonLabel={addConditionButtonLabel}
-			/>
-		)
+		return <ConditionsManager value={value} onChange={onChange} />
 	}
 
 	return (
 		<Fragment>
 			<button
-				className="ct-ui-button ct-ui-button-primary"
+				className="button-primary"
 				style={{ width: '100%' }}
-				onClick={(e) => {
+				onClick={e => {
 					e.preventDefault()
 					setIsEditing(true)
 					setLocalValue(null)
 				}}>
-				{Object.keys(value).length > 0
-					? __('Edit Conditions', 'blocksy-companion')
-					: __('Add Conditions', 'blocksy-companion')}
+				{__('Add/Edit Conditions', 'blc')}
 			</button>
 
 			<Overlay
@@ -71,31 +47,32 @@ const DisplayCondition = ({
 				}}
 				render={() => (
 					<div className="ct-modal-content">
-						<h2>{modalTitle}</h2>
-						<p>{modalDescription}</p>
+						<h2>{__('Transparent Header Display Conditions', 'blc')}</h2>
+						<p>
+							{__(
+								'Add one or more conditions to display the transparent header.',
+								'blc'
+							)}
+						</p>
 
 						<div className="ct-modal-scroll">
 							<ConditionsManager
-								filter={filter}
 								value={localValue || value}
-								onChange={(value) => {
+								onChange={value => {
 									setLocalValue(value)
 								}}
-								addConditionButtonLabel={
-									addConditionButtonLabel
-								}
 							/>
 						</div>
 
 						<div className="ct-modal-actions has-divider">
 							<button
-								className="ct-ui-button ct-ui-button-primary"
+								className="button-primary"
 								disabled={!localValue}
 								onClick={() => {
 									onChange(localValue)
 									setIsEditing(false)
 								}}>
-								{__('Save Conditions', 'blocksy-companion')}
+								{__('Save Conditions', 'blc')}
 							</button>
 						</div>
 					</div>
