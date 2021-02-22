@@ -1,6 +1,6 @@
 import ctEvents from 'ct-events'
 import cookie from 'js-cookie'
-import { onDocumentLoaded } from './helpers'
+import { onDocumentLoaded } from 'blocksy-frontend'
 
 const initCookies = () => {
 	const notification = document.querySelector('.cookie-notification')

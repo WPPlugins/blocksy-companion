@@ -53,14 +53,6 @@ ctEvents.on('ct:dashboard:home:before', (r) => {
 	r.content = <OptIn />
 })
 
-ctEvents.on('ct:dashboard:home:after', (r) => {
-	if (ctDashboardLocalizations.plugin_data.hide_beta_updates) {
-		return
-	}
-
-	r.content = <BetaConsent />
-})
-
 ctEvents.on('ct:dashboard:heading:after', (r) => {
 	if (!ctDashboardLocalizations.plugin_data.is_pro) {
 		return
