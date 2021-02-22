@@ -208,6 +208,29 @@ blocksy_output_colors([
 	'responsive' => true
 ]);
 
+blocksy_output_colors([
+	'value' => blocksy_akg('header_account_icon_color', $atts),
+	'default' => [
+		'default' => [ 'color' => 'var(--color)' ],
+		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+	],
+	'css' => $css,
+	'tablet_css' => $tablet_css,
+	'mobile_css' => $mobile_css,
+	'variables' => [
+		'default' => [
+			'selector' => blocksy_assemble_selector($root_selector),
+			'variable' => 'icon-color'
+		],
+
+		'hover' => [
+			'selector' => blocksy_assemble_selector($root_selector),
+			'variable' => 'icon-hover-color'
+		],
+	],
+	'responsive' => true
+]);
+
 // transparent state
 if (isset($has_transparent_header) && $has_transparent_header) {
 	blocksy_output_colors([
@@ -245,6 +268,38 @@ if (isset($has_transparent_header) && $has_transparent_header) {
 					'to_add' => '[data-transparent-row="yes"]'
 				])),
 				'variable' => 'linkHoverColor'
+			],
+		],
+		'responsive' => true
+	]);
+
+	blocksy_output_colors([
+		'value' => blocksy_akg('transparent_header_account_icon_color', $atts),
+		'default' => [
+			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+			'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		],
+		'css' => $css,
+		'tablet_css' => $tablet_css,
+		'mobile_css' => $mobile_css,
+
+		'variables' => [
+			'default' => [
+				'selector' => blocksy_assemble_selector(blocksy_mutate_selector([
+					'selector' => $root_selector,
+					'operation' => 'between',
+					'to_add' => '[data-transparent-row="yes"]'
+				])),
+				'variable' => 'icon-color'
+			],
+
+			'hover' => [
+				'selector' => blocksy_assemble_selector(blocksy_mutate_selector([
+					'selector' => $root_selector,
+					'operation' => 'between',
+					'to_add' => '[data-transparent-row="yes"]'
+				])),
+				'variable' => 'icon-hover-color'
 			],
 		],
 		'responsive' => true
@@ -288,6 +343,38 @@ if (isset($has_sticky_header) && $has_sticky_header) {
 					'to_add' => '[data-sticky*="yes"]'
 				])),
 				'variable' => 'linkHoverColor'
+			],
+		],
+		'responsive' => true
+	]);
+
+	blocksy_output_colors([
+		'value' => blocksy_akg('sticky_header_account_icon_color', $atts),
+		'default' => [
+			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+			'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		],
+		'css' => $css,
+		'tablet_css' => $tablet_css,
+		'mobile_css' => $mobile_css,
+
+		'variables' => [
+			'default' => [
+				'selector' => blocksy_assemble_selector(blocksy_mutate_selector([
+					'selector' => $root_selector,
+					'operation' => 'between',
+					'to_add' => '[data-sticky*="yes"]'
+				])),
+				'variable' => 'icon-color'
+			],
+
+			'hover' => [
+				'selector' => blocksy_assemble_selector(blocksy_mutate_selector([
+					'selector' => $root_selector,
+					'operation' => 'between',
+					'to_add' => '[data-sticky*="yes"]'
+				])),
+				'variable' => 'icon-hover-color'
 			],
 		],
 		'responsive' => true

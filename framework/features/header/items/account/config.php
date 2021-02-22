@@ -17,6 +17,7 @@ $config = [
 		'login_style',
 		'accountHeaderIcon',
 		'accountHeaderIconPosition',
+		'accountHeaderAvatarPosition',
 
 		/*
 		'logo_type',

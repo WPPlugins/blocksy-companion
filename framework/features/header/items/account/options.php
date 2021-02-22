@@ -103,7 +103,7 @@ $options = [
 					],
 
 					'loggedin_media' => [
-						'label' => __( 'Media Type', 'blc' ),
+						'label' => __( 'View Type', 'blc' ),
 						'type' => 'ct-radio',
 						'design' => 'block',
 						'view' => 'text',
@@ -130,6 +130,18 @@ $options = [
 								'responsive' => true,
 								'divider' => 'top',
 								'setting' => [ 'transport' => 'postMessage' ],
+							],
+
+							'accountHeaderAvatarPosition' => [
+								'type' => 'ct-radio',
+								'label' => __( 'Avatar Alignment', 'blc' ),
+								'value' => 'left',
+								'view' => 'text',
+								'design' => 'block',
+								'choices' => [
+									'left' => __( 'Left', 'blc' ),
+									'right' => __( 'Right', 'blc' ),
+								],
 							],
 
 						],
@@ -215,14 +227,14 @@ $options = [
 					],
 
 					'loggedin_text' => [
-						'label' => __( 'Text Type', 'blc' ),
+						'label' => __( 'Label', 'blc' ),
 						'type' => 'ct-radio',
 						'design' => 'block',
 						'view' => 'text',
 						'setting' => [ 'transport' => 'postMessage' ],
 						'value' => 'label',
 						'choices' => [
-							'label' => __( 'Label', 'blc' ),
+							'label' => __( 'Text', 'blc' ),
 							'username' => __( 'Name', 'blc' ),
 							'none' => __( 'None', 'blc' ),
 						],
@@ -234,7 +246,7 @@ $options = [
 						'options' => [
 
 							'loggedin_label' => [
-								'label' => __( 'Custom Label', 'blc' ),
+								'label' => __( 'Label Text', 'blc' ),
 								'type' => 'text',
 								'design' => 'inline',
 								'divider' => 'top',
@@ -388,7 +400,7 @@ $options = [
 						'options' => [
 
 							'login_label' => [
-								'label' => __('Label', 'blc'),
+								'label' => __('Label Text', 'blc'),
 								'type' => 'text',
 								'design' => 'inline',
 								'divider' => 'top',
@@ -418,7 +430,7 @@ $options = [
 				],
 				'options' => [
 					'account_label_visibility' => [
-						'label' => __( 'Label/Name Visibility', 'blc' ),
+						'label' => __( 'Label Visibility', 'blc' ),
 						'type' => 'ct-visibility',
 						'design' => 'block',
 						'divider' => 'top',
@@ -447,7 +459,7 @@ $options = [
 
 			'account_label_font' => [
 				'type' => 'ct-typography',
-				'label' => __( 'Label/Name Font', 'blc' ),
+				'label' => __( 'Label Text Font', 'blc' ),
 				'value' => blocksy_typography_default_values([
 					'size' => '12px',
 					'variation' => 'n6',
@@ -458,7 +470,7 @@ $options = [
 
 			blocksy_rand_md5() => [
 				'type' => 'ct-labeled-group',
-				'label' => __( 'Label/Name Color', 'blc' ),
+				'label' => __( 'Label Text Color', 'blc' ),
 				'responsive' => true,
 				'choices' => [
 					[
@@ -577,6 +589,129 @@ $options = [
 						],
 					],
 
+				],
+			],
+
+			blocksy_rand_md5() => [
+				'type' => 'ct-divider',
+			],
+
+			blocksy_rand_md5() => [
+				'type' => 'ct-labeled-group',
+				'label' => __( 'Icon Color', 'blc' ),
+				'responsive' => true,
+				'choices' => [
+					[
+						'id' => 'header_account_icon_color',
+						'label' => __('Default State', 'blc')
+					],
+
+					[
+						'id' => 'transparent_header_account_icon_color',
+						'label' => __('Transparent State', 'blc'),
+						'condition' => [
+							'row' => '!offcanvas',
+							'builderSettings/has_transparent_header' => 'yes',
+						],
+					],
+
+					[
+						'id' => 'sticky_header_account_icon_color',
+						'label' => __('Sticky State', 'blc'),
+						'condition' => [
+							'row' => '!offcanvas',
+							'builderSettings/has_sticky_header' => 'yes',
+						],
+					],
+				],
+				'options' => [
+					'header_account_icon_color' => [
+						'label' => __( 'Icon Color', 'blc' ),
+						'type'  => 'ct-color-picker',
+						'design' => 'block:right',
+						'responsive' => true,
+						'setting' => [ 'transport' => 'postMessage' ],
+						'value' => [
+							'default' => [
+								'color' => 'var(--color)',
+							],
+
+							'hover' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+						],
+
+						'pickers' => [
+							[
+								'title' => __( 'Initial', 'blc' ),
+								'id' => 'default',
+							],
+
+							[
+								'title' => __( 'Hover', 'blc' ),
+								'id' => 'hover',
+								'inherit' => 'var(--paletteColor2)',
+							],
+						],
+					],
+
+					'transparent_header_account_icon_color' => [
+						'label' => __( 'Icon Color', 'blc' ),
+						'type'  => 'ct-color-picker',
+						'design' => 'block:right',
+						'responsive' => true,
+						'setting' => [ 'transport' => 'postMessage' ],
+						'value' => [
+							'default' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+
+							'hover' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+						],
+
+						'pickers' => [
+							[
+								'title' => __( 'Initial', 'blc' ),
+								'id' => 'default',
+							],
+
+							[
+								'title' => __( 'Hover', 'blc' ),
+								'id' => 'hover',
+							],
+						],
+					],
+
+					'sticky_header_account_icon_color' => [
+						'label' => __( 'Icon Color', 'blc' ),
+						'type'  => 'ct-color-picker',
+						'design' => 'block:right',
+						'responsive' => true,
+						'setting' => [ 'transport' => 'postMessage' ],
+						'value' => [
+							'default' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+
+							'hover' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+						],
+
+						'pickers' => [
+							[
+								'title' => __( 'Initial', 'blc' ),
+								'id' => 'default',
+							],
+
+							[
+								'title' => __( 'Hover', 'blc' ),
+								'id' => 'hover',
+							],
+						],
+					],
 				],
 			],
 

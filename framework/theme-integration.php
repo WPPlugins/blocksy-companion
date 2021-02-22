@@ -22,7 +22,13 @@ class ThemeIntegration {
 					'ignore_sticky_posts' => 'no',
 
 					'term_ids' => null,
-					'post_ids' => null
+					'exclude_term_ids' => null,
+					'post_ids' => null,
+
+					// archive | slider
+					'view' => 'archive',
+					'slider_image_ratio' => '2/1',
+					'slider_autoplay' => 'no',
 				]
 			);
 

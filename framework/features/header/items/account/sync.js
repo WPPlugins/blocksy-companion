@@ -118,6 +118,22 @@ ctEvents.on(
 				},
 			],
 
+			header_account_icon_color: [
+				{
+					selector: assembleSelector(getRootSelectorFor({ itemId })),
+					variable: 'icon-color',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(getRootSelectorFor({ itemId })),
+					variable: 'icon-hover-color',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+
 			// transparent state
 			transparentAccountHeaderColor: [
 				{
@@ -149,6 +165,34 @@ ctEvents.on(
 				},
 			],
 
+			transparent_header_account_icon_color: [
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-transparent-row="yes"]',
+						})
+					),
+					variable: 'icon-color',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-transparent-row="yes"]',
+						})
+					),
+					variable: 'icon-hover-color',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+
 			// sticky state
 			stickyAccountHeaderColor: [
 				{
@@ -173,6 +217,34 @@ ctEvents.on(
 						})
 					),
 					variable: 'linkHoverColor',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+
+			sticky_header_account_icon_color: [
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-sticky*="yes"]',
+						})
+					),
+					variable: 'icon-color',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-sticky*="yes"]',
+						})
+					),
+					variable: 'icon-hover-color',
 					type: 'color:hover',
 					responsive: true,
 				},

@@ -227,7 +227,7 @@ const handleAccountModal = (el) => {
 }
 
 export const mountAccount = () => {
-	Array.from(document.querySelectorAll('.ct-header-account > a[href]')).map(
+	Array.from(document.querySelectorAll('.ct-header-account[href]')).map(
 		(el) => {
 			if (el.hasSearchEventListener) {
 				return
@@ -236,6 +236,8 @@ export const mountAccount = () => {
 			el.hasSearchEventListener = true
 
 			el.addEventListener('click', (e) => {
+				e.preventDefault()
+
 				try {
 					document.querySelector(el.hash)
 				} catch (e) {

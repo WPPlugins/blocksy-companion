@@ -61,19 +61,18 @@ class Plugin
             $future_value = ( $future_value_bool ? 'no' : 'yes' );
             update_option( 'blocksy_has_beta_updates', $future_value );
             $reflector = new \ReflectionObject( blc_fs() );
-            $get_api_user_scope = $reflector->getMethod( 'get_api_user_scope' );
-            $get_api_user_scope->setAccessible( true );
-            $user = $get_api_user_scope->invoke( blc_fs() )->call( '', 'put', [
-                'plugin_id' => blc_fs()->get_id(),
-                'is_beta'   => !$future_value_bool,
-                'fields'    => 'is_beta',
+            $get_api_site_scope = $reflector->getMethod( 'get_api_site_scope' );
+            $get_api_site_scope->setAccessible( true );
+            $site = $get_api_site_scope->invoke( blc_fs() )->call( '', 'put', [
+                'is_beta' => !$future_value_bool,
+                'fields'  => 'is_beta',
             ] );
-            $_user = $reflector->getProperty( '_user' );
-            $_user->setAccessible( true );
-            $_user->getValue( blc_fs() )->is_beta = $user->is_beta;
-            $_store_user = $reflector->getMethod( '_store_user' );
-            $_store_user->setAccessible( true );
-            $_store_user->invoke( blc_fs() );
+            $_site = $reflector->getProperty( '_site' );
+            $_site->setAccessible( true );
+            $_site->getValue( blc_fs() )->is_beta = $site->is_beta;
+            $_store_site = $reflector->getMethod( '_store_site' );
+            $_store_site->setAccessible( true );
+            $_store_site->invoke( blc_fs() );
             wp_send_json_success( [] );
         } );
         add_action( 'widgets_init', [ 'BlocksyWidgetFactory', 'register_all_widgets' ] );
