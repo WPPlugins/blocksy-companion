@@ -41,6 +41,7 @@ const initCookies = () => {
 						new Date() * 1 +
 							periods[el.closest('[data-period]').dataset.period]
 					),
+					sameSite: 'lax',
 				})
 			}
 
