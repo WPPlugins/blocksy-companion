@@ -9,7 +9,6 @@ import DemoInstall from './screens/DemoInstall'
 import SiteExport from './screens/SiteExport'
 import DemoToInstall from './screens/DemoInstall/DemoToInstall'
 import OptIn from './screens/OptIn'
-import BetaConsent from './components/BetaConsent'
 
 ctEvents.on('ct:dashboard:routes', (r) => {
 	r.push({

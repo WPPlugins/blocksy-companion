@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.60
+Stable tag: 1.7.61
 
 == Description ==
 
@@ -23,6 +23,9 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.61: 2021-02-23
+- Fix: Dashboard JavaScript fixes
+
 1.7.60: 2021-02-22
 - Improvement: Refactor account header element
 - Fix: Account element custom link
