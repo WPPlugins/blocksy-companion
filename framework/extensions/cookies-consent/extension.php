@@ -35,7 +35,7 @@ class BlocksyExtensionCookiesConsent {
 				wp_enqueue_script(
 					'blocksy-cookies-consent-customizer-sync',
 					BLOCKSY_URL . 'framework/extensions/cookies-consent/static/bundle/sync.js',
-					[ 'ct-events', 'customize-preview' ],
+					[ 'ct-scripts', 'customize-preview' ],
 					$data['Version'],
 					true
 				);
@@ -55,7 +55,7 @@ class BlocksyExtensionCookiesConsent {
 
 			wp_enqueue_style(
 				'blocksy-ext-cookies-consent-styles',
-				BLOCKSY_URL . 'framework/extensions/cookies-consent/static/bundle/main.css',
+				BLOCKSY_URL . 'framework/extensions/cookies-consent/static/bundle/main.min.css',
 				['ct-main-styles'],
 				$data['Version']
 			);
@@ -63,7 +63,7 @@ class BlocksyExtensionCookiesConsent {
 			wp_enqueue_script(
 				'blocksy-ext-cookies-consent-scripts',
 				BLOCKSY_URL . 'framework/extensions/cookies-consent/static/bundle/main.js',
-				['ct-events', 'ct-scripts'],
+				['ct-scripts'],
 				$data['Version'],
 				true
 			);

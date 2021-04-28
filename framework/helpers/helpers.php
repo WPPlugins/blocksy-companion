@@ -4,6 +4,49 @@ function blc_get_ext($id) {
 	return \Blocksy\Plugin::instance()->extensions->get($id);
 }
 
+if (! function_exists('blc_load_xml_file')) {
+	function blc_load_xml_file($url, $useragent = '') {
+		set_time_limit(100);
+
+		if (ini_get('allow_url_fopen') == true) {
+			$context_options = [
+				"ssl" => [
+					"verify_peer"=>false,
+					"verify_peer_name"=>false,
+				]
+			];
+
+			if (! empty($useragent)) {
+				$context_options['http'] = [
+					'user_agent' => $useragent
+				];
+			}
+
+			return file_get_contents(
+				$url, false,
+				stream_context_create($context_options)
+			);
+		} else if (function_exists('curl_init')) {
+			$curl = curl_init($url);
+
+			if (! empty($useragent)) {
+				curl_setopt($curl, CURLOPT_USERAGENT, $user_agent);
+			}
+
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+			$result = curl_exec($curl);
+			curl_close($curl);
+
+			return $result;
+		} else {
+			throw new Exception("Can't load data.");
+		}
+	}
+}
+
 function blc_get_contacts_output($args = []) {
 	$args = wp_parse_args($args, [
 		'data' => [],
@@ -67,6 +110,7 @@ function blc_get_contacts_output($args = []) {
 
 	<ul <?php echo blocksy_attr_to_html($attr) ?>>
 		<?php foreach ($args['data'] as $single_layer) { ?>
+			<?php if (! $single_layer['enabled']) { continue; }?>
 			<li>
 				<span class="ct-icon-container">
 					<?php echo $svgs[$single_layer['id']] ?>

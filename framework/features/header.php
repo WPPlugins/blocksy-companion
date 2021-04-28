@@ -183,46 +183,28 @@ class HeaderAdditions {
 			10, 3
 		);
 
+		add_filter('blocksy:general:body-header-attr', function ($attr) {
+			if ($this->current_screen_has_sticky()) {
+				return $attr .= ':sticky';
+			}
+
+			return $attr;
+		});
+
 		add_filter('blocksy:header:dynamic-styles-args', function ($args) {
+			$check_transparent_conditions = false;
+
+			if (isset($args['check_transparent_conditions'])) {
+				$check_transparent_conditions = $args[
+					'check_transparent_conditions'
+				];
+			}
+
 			$args['has_transparent_header'] = $this->current_screen_has_transparent(false);
-			$args['has_sticky_header'] = $this->current_screen_has_sticky();
+			$args['has_sticky_header'] = $this->current_screen_has_sticky($args['section_id']);
 
 			return $args;
 		});
-
-		add_filter('blocksy:header:default_value', function ($value, $header_builder) {
-			$value['sections'][] = $header_builder->get_structure_for([
-				'id' => 'ct-custom-transparent',
-				'name' => __('Transparent', 'blocksy'),
-				'mode' => 'placements',
-				'settings' => [
-					'is_absolute' => 'yes'
-				],
-				'items' => [
-					'desktop' => [
-						'middle-row' => [
-							'start' => ['logo'],
-							'end' => ['menu', 'search']
-						]
-					],
-
-					'mobile' => [
-						'middle-row' => [
-							'start' => ['logo'],
-							'end' => ['trigger']
-						],
-
-						'offcanvas' => [
-							'start' => [
-								'mobile-menu',
-							]
-						]
-					]
-				]
-			]);
-
-			return $value;
-		}, 10, 2);
 
 		add_filter('blocksy:header:items-paths', function ($paths) {
 			$paths[] = dirname(__FILE__) . '/header/items';
@@ -309,14 +291,20 @@ class HeaderAdditions {
 
 		wp_enqueue_style(
 			'blocksy-styles',
-			BLOCKSY_URL . 'static/bundle/options.css',
+			BLOCKSY_URL . 'static/bundle/options.min.css',
 			[],
 			$data['Version']
 		);
 	}
 
 	public function current_screen_has_transparent($check_conditions = true) {
-		if (true || $this->has_transparent_header === '__DEFAULT__' || ! $check_conditions) {
+		if (
+			true
+			||
+			$this->has_transparent_header === '__DEFAULT__'
+			||
+			! $check_conditions
+		) {
 			$current_section = blocksy_manager()->header_builder->get_current_section();
 
 			if (! isset($current_section['settings'])) {
@@ -386,9 +374,18 @@ class HeaderAdditions {
 								]
 							]
 						))
-					) || (
-						$current_section['id'] !== 'type-1'
-					) || !$check_conditions
+					)
+					||
+					$current_section['id'] !== 'type-1'
+					||
+					! $check_conditions
+				)
+				&&
+				apply_filters(
+					'blocksy:header:transparent:current-screen-allowed',
+					true,
+					$current_section,
+					$transparent_result
 				)
 			) {
 				$this->has_transparent_header = $transparent_result;
@@ -398,21 +395,28 @@ class HeaderAdditions {
 		return $this->has_transparent_header;
 	}
 
-	public function current_screen_has_sticky() {
-		if ($this->has_sticky_header === '__DEFAULT__') {
-			$current_section = blocksy_manager()->header_builder->get_current_section();
+	public function current_screen_has_sticky($section_id = null) {
+		if (
+			$this->has_sticky_header !== '__DEFAULT__'
+			&&
+			! $section_id
+		) {
+			return $this->has_sticky_header;
+		}
 
-			if (! isset($current_section['settings'])) {
-				$current_section['settings'] = [];
-			}
+		$current_section = blocksy_manager()->header_builder->get_current_section(
+			$section_id
+		);
 
-			$atts = $current_section['settings'];
+		if (! isset($current_section['settings'])) {
+			$current_section['settings'] = [];
+		}
 
-			if (blocksy_akg('has_sticky_header', $atts, 'no') === 'no') {
-				$this->has_sticky_header = false;
-				return $this->has_sticky_header;
-			}
+		$atts = $current_section['settings'];
 
+		if (blocksy_akg('has_sticky_header', $atts, 'no') === 'no') {
+			$has_sticky_header_result = false;
+		} else {
 			$atts = $current_section['settings'];
 
 			$sticky_behaviour = blocksy_akg(
@@ -424,7 +428,7 @@ class HeaderAdditions {
 				]
 			);
 
-			$sticky_result = [
+			$has_sticky_header_result = [
 				'devices' => [],
 
 				// top
@@ -444,13 +448,15 @@ class HeaderAdditions {
 					continue;
 				}
 
-				$sticky_result['devices'][] = $device;
+				$has_sticky_header_result['devices'][] = $device;
 			}
-
-			$this->has_sticky_header = $sticky_result;
 		}
 
-		return $this->has_sticky_header;
+		if ($section_id) {
+			$this->has_sticky_header = $has_sticky_header_result;
+		}
+
+		return $has_sticky_header_result;
 	}
 
 	public function patch_conditions($post_id, $old_post_id) {

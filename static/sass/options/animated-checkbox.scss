@@ -1,7 +1,7 @@
 .ct-checkbox-container {
 	--checkMarkColor: #fff;
 	--background: rgba(179, 189, 201, 0.8);
-	--backgroundActive: #0e8ecc;
+	--backgroundActive: var(--accentColor);
 
 
 	display: flex;

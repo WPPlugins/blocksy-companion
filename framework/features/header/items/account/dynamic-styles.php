@@ -399,9 +399,9 @@ blocksy_output_colors([
 			], [
 				'selector' => [$root_selector[0]],
 				'operation' => 'suffix',
-				'to_add' => '#account-modal .close-button'
+				'to_add' => '#account-modal .ct-close-button'
 			])),
-			'variable' => 'closeButtonColor'
+			'variable' => 'icon-color'
 		],
 
 		'hover' => [
@@ -413,9 +413,9 @@ blocksy_output_colors([
 			], [
 				'selector' => [$root_selector[0]],
 				'operation' => 'suffix',
-				'to_add' => '#account-modal .close-button'
+				'to_add' => '#account-modal .ct-close-button'
 			])),
-			'variable' => 'closeButtonHoverColor'
+			'variable' => 'icon-hover-color'
 		]
 	],
 ]);
@@ -438,7 +438,7 @@ blocksy_output_colors([
 			], [
 				'selector' => [$root_selector[0]],
 				'operation' => 'suffix',
-				'to_add' => '#account-modal .close-button'
+				'to_add' => '#account-modal .ct-close-button'
 			])),
 			'variable' => 'closeButtonBackground'
 		],
@@ -452,7 +452,7 @@ blocksy_output_colors([
 			], [
 				'selector' => [$root_selector[0]],
 				'operation' => 'suffix',
-				'to_add' => '#account-modal .close-button'
+				'to_add' => '#account-modal .ct-close-button'
 			])),
 			'variable' => 'closeButtonHoverBackground'
 		]

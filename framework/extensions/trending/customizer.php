@@ -39,98 +39,121 @@ $options = [
 					'title' => __( 'General', 'blc' ),
 					'type' => 'tab',
 					'options' => [
-						'trending_block_post_type' => count($all_post_types) > 1 ? [
-							'label' => __( 'Post Type', 'blc' ),
-							'type' => 'ct-select',
-							'value' => 'post',
-							'design' => 'inline',
-							'setting' => [ 'transport' => 'postMessage' ],
-							'choices' => blocksy_ordered_keys($all_post_types),
-
-							'sync' => [
-								'selector' => '.ct-trending-block',
-								'render' => function () {
-									echo blc_get_trending_block();
-								}
-							],
-						] : [
-							'label' => __('Post Type', 'blc'),
-							'type' => 'hidden',
-							'value' => 'post',
-							'design' => 'none',
-							'setting' => ['transport' => 'postMessage'],
-						],
-
-						'trending_block_filter' => [
-							'label' => __( 'Trending From', 'blc' ),
-							'type' => 'ct-select',
-							'value' => 'all_time',
-							'view' => 'text',
-							'design' => 'inline',
-							'setting' => [ 'transport' => 'postMessage' ],
-							'choices' => blocksy_ordered_keys(
-								[
-									'all_time' => __( 'All Time', 'blc' ),
-									'last_24_hours' => __( 'Last 24 Hours', 'blc' ),
-									'last_7_days' => __( 'Last 7 Days', 'blc' ),
-									'last_month' => __( 'Last Month', 'blc' ),
-								]
-							),
-
-							'sync' => [
-								'selector' => '.ct-trending-block',
-								'render' => function () {
-									echo blocksy_get_trending_block();
-								}
-							],
-						],
-
-						blocksy_rand_md5() => [
-							'type' => 'ct-divider',
-						],
-
-						'trendingBlockContainerSpacing' => [
-							'label' => __( 'Container Inner Spacing', 'blc' ),
-							'type' => 'ct-slider',
-							'value' => [
-								'mobile' => '30px',
-								'tablet' => '30px',
-								'desktop' => '30px',
-							],
-							'units' => blocksy_units_config([
-								[
-									'unit' => 'px',
-									'min' => 0,
-									'max' => 100,
+						[
+							'trending_block_post_type' => count($all_post_types) > 1 ? [
+								'label' => __( 'Post Type', 'blc' ),
+								'type' => 'ct-select',
+								'value' => 'post',
+								'design' => 'inline',
+								'setting' => [ 'transport' => 'postMessage' ],
+								'choices' => blocksy_ordered_keys($all_post_types),
+								'sync' => [
+									'selector' => '.ct-trending-block',
+									'render' => function () {
+										echo blc_get_trending_block();
+									}
 								],
-							]),
-							'responsive' => true,
-							'sync' => 'live',
-						],
-
-						blocksy_rand_md5() => [
-							'type' => 'ct-divider',
-						],
-
-						'trending_block_visibility' => [
-							'label' => __( 'Container Visibility', 'blc' ),
-							'type' => 'ct-visibility',
-							'design' => 'block',
-							'sync' => 'live',
-
-							'value' => [
-								'desktop' => true,
-								'tablet' => true,
-								'mobile' => false,
+							] : [
+								'label' => __('Post Type', 'blc'),
+								'type' => 'hidden',
+								'value' => 'post',
+								'design' => 'none',
+								'setting' => ['transport' => 'postMessage'],
 							],
 
-							'choices' => blocksy_ordered_keys([
-								'desktop' => __( 'Desktop', 'blc' ),
-								'tablet' => __( 'Tablet', 'blc' ),
-								'mobile' => __( 'Mobile', 'blc' ),
-							]),
+							'trending_block_filter' => [
+								'label' => __( 'Trending From', 'blc' ),
+								'type' => 'ct-select',
+								'divider' => 'top',
+								'value' => 'all_time',
+								'view' => 'text',
+								'design' => 'inline',
+								'setting' => [ 'transport' => 'postMessage' ],
+								'choices' => blocksy_ordered_keys(
+									[
+										'all_time' => __( 'All Time', 'blc' ),
+										'last_24_hours' => __( 'Last 24 Hours', 'blc' ),
+										'last_7_days' => __( 'Last 7 Days', 'blc' ),
+										'last_month' => __( 'Last Month', 'blc' ),
+									]
+								),
+
+								'sync' => [
+									'selector' => '.ct-trending-block',
+									'render' => function () {
+										echo blocksy_get_trending_block();
+									}
+								],
+							],
+
+							blocksy_rand_md5() => [
+								'type' => 'ct-divider',
+							],
+
+							'trending_block_visibility' => [
+								'label' => __( 'Container Visibility', 'blc' ),
+								'type' => 'ct-visibility',
+								'design' => 'block',
+								'sync' => 'live',
+
+								'value' => [
+									'desktop' => true,
+									'tablet' => true,
+									'mobile' => false,
+								],
+
+								'choices' => blocksy_ordered_keys([
+									'desktop' => __( 'Desktop', 'blc' ),
+									'tablet' => __( 'Tablet', 'blc' ),
+									'mobile' => __( 'Mobile', 'blc' ),
+								]),
+							],
 						],
 
+						blc_fs()->is__premium_only() ? [
+
+							'trending_block_location' => [
+								'label' => __('Display Location', 'blc'),
+								'type' => 'ct-select',
+								'design' => 'inline',
+								'divider' => 'top',
+								'value' => 'blocksy:content:bottom',
+								'choices' => [
+									[
+										'key' => 'blocksy:content:bottom',
+										'value' => __('Before Footer', 'blc')
+									],
+
+									[
+										'key' => 'blocksy:footer:after',
+										'value' => __('After Footer', 'blc')
+									],
+
+									[
+										'key' => 'blocksy:header:after',
+										'value' => __('After Header', 'blc')
+									]
+								]
+							],
+
+							'trending_block_conditions' => [
+								'label' => __('Display Conditions', 'blc'),
+								'type' => 'blocksy-display-condition',
+								'divider' => 'top',
+								'value' => [
+									[
+										'type' => 'include',
+										'rule' => 'everywhere',
+									]
+								],
+								'display' => 'modal',
+
+								'modalTitle' => __('Trending Block Display Conditions', 'blc'),
+								'modalDescription' => __('Add one or more conditions to display the trending block.', 'blc'),
+								'design' => 'block',
+								'sync' => 'live'
+							],
+						] : [],
 					],
 				],
 
@@ -191,10 +214,26 @@ $options = [
 							'value' => blocksy_background_default_value([
 								'backgroundColor' => [
 									'default' => [
-										'color' => '#e0e3e8',
+										'color' => 'var(--paletteColor5)',
 									],
 								],
 							])
+						],
+
+						'trendingBlockContainerSpacing' => [
+							'label' => __( 'Container Inner Spacing', 'blc' ),
+							'type' => 'ct-slider',
+							'divider' => 'top',
+							'value' => '30px',
+							'units' => blocksy_units_config([
+								[
+									'unit' => 'px',
+									'min' => 0,
+									'max' => 100,
+								],
+							]),
+							'responsive' => true,
+							'sync' => 'live',
 						],
 
 					],

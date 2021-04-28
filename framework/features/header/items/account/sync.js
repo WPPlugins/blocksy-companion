@@ -83,6 +83,34 @@ ctEvents.on(
 					responsive: true,
 				},
 
+				account_close_button_color: [
+					{
+						selector: '#account-modal .ct-close-button',
+						variable: 'icon-color',
+						type: 'color:default',
+					},
+
+					{
+						selector: '#account-modal .ct-close-button',
+						variable: 'icon-hover-color',
+						type: 'color:hover',
+					},
+				],
+
+				account_close_button_shape_color: [
+					{
+						selector: '#account-modal .ct-close-button',
+						variable: 'closeButtonBackground',
+						type: 'color:default',
+					},
+
+					{
+						selector: '#account-modal .ct-close-button',
+						variable: 'closeButtonHoverBackground',
+						type: 'color:hover',
+					},
+				],
+
 				accountHeaderMargin: {
 					selector: assembleSelector(getRootSelectorFor({ itemId })),
 					type: 'spacing',

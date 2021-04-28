@@ -56,3 +56,15 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 		background-size: 250px;
 		background-position: 0 5px;
 }
+
+// beta modal
+.ct-beta-updates-consent {
+	--modal-width: 450px;
+	--modal-min-height: 330px;
+	--modal-padding: 45px;
+	text-align: center;
+
+	.ct-modal-content p {
+		margin-bottom: 1.2em;
+	}
+}

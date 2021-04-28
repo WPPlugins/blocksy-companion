@@ -178,6 +178,7 @@ class DemoInstall {
 
 	public function fetch_all_demos() {
 		$request = wp_remote_get('https://demo.creativethemes.com/?route=get_all');
+
 		// $request = wp_remote_get('https://demo.creativethemes.BROKEN/?route=get_all');
 
 		if (is_wp_error($request)) {

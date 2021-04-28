@@ -20,7 +20,7 @@ const cachedFetch = (url) =>
 				})
 		  )
 
-const loadPage = (args = {}) => {
+export const loadPage = (args = {}) => {
 	args = {
 		el: null,
 		// prev | next
@@ -117,23 +117,5 @@ const loadPage = (args = {}) => {
 		}, 50)
 
 		markImagesAsLoaded(args.el)
-	})
-}
-
-export const mount = (el) => {
-	if (el.hasListeners) {
-		return
-	}
-
-	el.hasListeners = true
-
-	el.querySelector('.ct-arrow-left').addEventListener('click', (e) => {
-		e.preventDefault()
-		loadPage({ el, action: 'prev' })
-	})
-
-	el.querySelector('.ct-arrow-right').addEventListener('click', (e) => {
-		e.preventDefault()
-		loadPage({ el, action: 'next' })
 	})
 }

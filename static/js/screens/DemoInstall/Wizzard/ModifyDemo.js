@@ -5,7 +5,7 @@ import {
 	useState,
 	useContext,
 	createContext,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'
@@ -18,7 +18,7 @@ const ModifyDemo = ({ style, nextStep }) => {
 		setCurrentlyInstalledDemo,
 		setCurrentDemo,
 		currentDemo,
-		demos_list
+		demos_list,
 	} = useContext(DemosContext)
 
 	const [currentStep, setCurrentStep] = useState(0)
@@ -35,26 +35,26 @@ const ModifyDemo = ({ style, nextStep }) => {
 	const stepsDescriptors = {
 		erase_content: {
 			title: __('Erase content', 'blc'),
-			query_string: `action=blocksy_demo_erase_content&wp_customize=on`
+			query_string: `action=blocksy_demo_erase_content&wp_customize=on`,
 		},
 
 		deactivate_demo_plugins: {
 			title: __('Deactivate demo plugins', 'blc'),
 			query_string: `action=blocksy_demo_deactivate_plugins&plugins=${demoVariations[0].plugins.join(
 				':'
-			)}`
+			)}`,
 		},
 
 		deregister_current_demo: {
 			title: __('Erase content', 'blc'),
-			query_string: `action=blocksy_demo_deregister_current_demo`
-		}
+			query_string: `action=blocksy_demo_deregister_current_demo`,
+		},
 	}
 
 	const stepsForConfiguration = [
 		'erase_content',
 		'deactivate_demo_plugins',
-		'deregister_current_demo'
+		'deregister_current_demo',
 	]
 
 	const stepName = stepsForConfiguration[currentStep]
@@ -66,7 +66,7 @@ const ModifyDemo = ({ style, nextStep }) => {
 			`${ctDashboardLocalizations.ajax_url}?${stepDescriptor.query_string}`
 		)
 
-		evtSource.onmessage = e => {
+		evtSource.onmessage = (e) => {
 			var data = JSON.parse(e.data)
 
 			if (data.action === 'complete') {
@@ -122,7 +122,7 @@ const ModifyDemo = ({ style, nextStep }) => {
 					<div className="ct-modify-actions">
 						<button
 							className="ct-demo-btn ct-dismiss"
-							onClick={e => {
+							onClick={(e) => {
 								e.preventDefault()
 								setCurrentDemo(`${properDemoName}:hide`)
 							}}>
@@ -141,7 +141,7 @@ const ModifyDemo = ({ style, nextStep }) => {
 					<div className="ct-modify-actions">
 						<button
 							className="ct-demo-btn demo-remove"
-							onClick={e => {
+							onClick={(e) => {
 								setRunningState('loading')
 								e.preventDefault()
 								fireOffNextStep()
@@ -152,7 +152,7 @@ const ModifyDemo = ({ style, nextStep }) => {
 
 						<button
 							className="ct-demo-btn"
-							onClick={e => {
+							onClick={(e) => {
 								e.preventDefault()
 								nextStep()
 							}}>

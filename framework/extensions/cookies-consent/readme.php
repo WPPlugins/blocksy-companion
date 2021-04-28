@@ -20,19 +20,3 @@
 		</i>
 	</li>
 </ul>
-
-<div class="extension-notice">
-	<h4><?php echo __('Known problems with caching plugins', 'blc'); ?></h4>
-
-	<p>
-		<?php
-			echo sprintf(
-				__('Please read %s to find out more information.', 'blc'),
-				sprintf(
-					'<a href="https://creativethemes.com/blocksy/docs/extensions/cookies-consent/#cache/">%s</a>',
-					__('this article', 'blc')
-				)
-			);
-		?>
-	</p>
-</div>

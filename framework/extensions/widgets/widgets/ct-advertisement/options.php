@@ -63,6 +63,13 @@ $options = [
 				'filledLabel' => __('Change Image', 'blc'),
 			],
 
+			'ad_image_ratio' => [
+				'label' => __( 'Image Ratio', 'blocksy' ),
+				'type' => 'ct-ratio',
+				'value' => 'original',
+				'design' => 'inline',
+			],
+
 			'ad_link' => [
 				'type' => 'text',
 				'label' => __( 'Ad URL', 'blc' ),

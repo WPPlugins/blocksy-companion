@@ -1,5 +1,23 @@
 <?php
 
+$link_options = [
+	'profile' => __( 'Profile Page', 'blc' ),
+	'dashboard' => __( 'Dashboard Page', 'blc' ),
+	// 'menu' => __( 'Menu', 'blc' ),
+	'custom' => __( 'Custom Link', 'blc' ),
+	'logout' => __( 'Logout', 'blc' ),
+];
+
+$logout_link_options = [
+	'modal' => __( 'Modal', 'blc' ),
+	'custom' => __( 'Custom Link', 'blc' ),
+];
+
+if (class_exists('WooCommerce')) {
+	$link_options['woocommerce_account'] = __('WooCommerce Account', 'blc');
+	$logout_link_options['woocommerce_account'] = __('WooCommerce Account', 'blc');
+}
+
 $options = [
 	blocksy_rand_md5() => [
 		'type' => 'ct-title',
@@ -45,15 +63,7 @@ $options = [
 						'value' => 'profile',
 						'view' => 'text',
 						'design' => 'inline',
-						'choices' => blocksy_ordered_keys(
-							[
-								'profile' => __( 'Profile Page', 'blc' ),
-								'dashboard' => __( 'Dashboard Page', 'blc' ),
-								// 'menu' => __( 'Menu', 'blc' ),
-								'custom' => __( 'Custom Link', 'blc' ),
-								'logout' => __( 'Logout', 'blc' ),
-							]
-						),
+						'choices' => blocksy_ordered_keys($link_options)
 					],
 
 					blocksy_rand_md5() => [
@@ -304,12 +314,7 @@ $options = [
 						'view' => 'text',
 						'design' => 'inline',
 						'setting' => [ 'transport' => 'postMessage' ],
-						'choices' => blocksy_ordered_keys(
-							[
-								'modal' => __( 'Modal', 'blc' ),
-								'custom' => __( 'Custom Link', 'blc' ),
-							]
-						),
+						'choices' => blocksy_ordered_keys($logout_link_options)
 					],
 
 					blocksy_rand_md5() => [
@@ -788,7 +793,7 @@ $options = [
 
 			blocksy_rand_md5() => [
 				'type' => 'ct-condition',
-				'condition' => [ 
+				'condition' => [
 					'account_state' => 'out',
 					'login_account_action' => 'modal'
 				],

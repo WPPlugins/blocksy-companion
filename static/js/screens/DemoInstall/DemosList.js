@@ -5,7 +5,7 @@ import {
 	useState,
 	createContext,
 	useContext,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'
@@ -18,7 +18,8 @@ const DemosList = () => {
 		currentlyInstalledDemo,
 		demos_list,
 		setCurrentDemo,
-		demo_error
+		demo_error,
+		setInstallerBlockingReleased,
 	} = useContext(DemosContext)
 	const { Link } = useContext(DashboardContext)
 
@@ -29,11 +30,11 @@ const DemosList = () => {
 					(v, i) =>
 						demos_list.map(({ name }) => name).indexOf(v.name) === i
 				)
-				.map(demo => (
+				.map((demo) => (
 					<li
 						key={demo.name}
 						className={classnames('ct-single-demo', {
-							'ct-is-pro': demo.is_pro
+							'ct-is-pro': demo.is_pro,
 						})}>
 						<figure>
 							<img src={demo.screenshot} />
@@ -68,7 +69,7 @@ const DemosList = () => {
 							</section>
 
 							{demo.is_pro && (
-								<a onClick={e => e.preventDefault()} href="#">
+								<a onClick={(e) => e.preventDefault()} href="#">
 									PRO
 								</a>
 							)}
@@ -86,7 +87,10 @@ const DemosList = () => {
 								</a>
 								<button
 									className="ct-button-primary"
-									onClick={() => setCurrentDemo(demo.name)}
+									onClick={() => {
+										setInstallerBlockingReleased(false)
+										setCurrentDemo(demo.name)
+									}}
 									disabled={!!demo_error}>
 									{currentlyInstalledDemo &&
 									currentlyInstalledDemo.demo.indexOf(

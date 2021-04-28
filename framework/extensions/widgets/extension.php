@@ -25,7 +25,7 @@ class BlocksyExtensionWidgets {
 
 			wp_enqueue_style(
 				'blocksy-ext-widgets-styles',
-				BLOCKSY_URL . 'framework/extensions/widgets/static/bundle/main.css',
+				BLOCKSY_URL . 'framework/extensions/widgets/static/bundle/main.min.css',
 				[
 					'ct-main-styles'
 				],

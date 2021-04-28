@@ -6,7 +6,11 @@ class ConditionsManager {
 	public function __construct() {
 	}
 
-	public function condition_matches($rules = []) {
+	public function condition_matches($rules = [], $args = []) {
+		$args = wp_parse_args($args, [
+			'relation' => 'OR'
+		]);
+
 		if (empty($rules)) {
 			return false;
 		}
@@ -38,7 +42,16 @@ class ConditionsManager {
 
 		if (! empty($all_includes)) {
 			// If at least one inclusion is true - return true
-			if (! empty($resolved_includes)) {
+			if ($args['relation'] === 'OR' && ! empty($resolved_includes)) {
+				return true;
+			}
+
+			// For AND relation all includes need to be resolved
+			if (
+				$args['relation'] === 'AND'
+				&&
+				count($resolved_includes) === count($all_includes)
+			) {
 				return true;
 			}
 		}
@@ -196,6 +209,16 @@ class ConditionsManager {
 			}
 		}
 
+		if (
+			$rule['rule'] === 'current_language'
+			&&
+			function_exists('blocksy_get_current_language')
+			&&
+			! empty($payload['language'])
+		) {
+			return $payload['language'] === blocksy_get_current_language();
+		}
+
 		if ($rule['rule'] === 'taxonomy_ids') {
 			if (is_tax() || is_category() || is_tag()) {
 				$tax_id = get_queried_object_id();
@@ -291,6 +314,7 @@ class ConditionsManager {
 					]
 				]
 			],
+
 			[
 				'title' => __('Basic', 'blc'),
 				'rules' => [
@@ -467,8 +491,113 @@ class ConditionsManager {
 			[
 				'title' => __('User Roles', 'blc'),
 				'rules' => $this->get_user_roles_rules()
+            ],
+		],
+
+		(
+			function_exists('blocksy_get_current_language')
+			&&
+			blocksy_get_current_language() !== '__NOT_KNOWN__'
+		) ? [
+			[
+				'title' => __('Languages', 'blc'),
+				'rules' => [
+					[
+						'id' => 'current_language',
+						'title' => __('Current Language', 'blc')
+					]
+				]
 			]
-		]);
+		] : []);
+	}
+
+	public function humanize_conditions($conditions) {
+		$result = [];
+
+		foreach ($conditions as $condition) {
+			$type = $condition['type'] === 'include' ? __('Include', 'blc') : __(
+				'Exclude', 'blc'
+			);
+
+			$maybe_descriptor = $this->find_rule_descriptor(
+				$condition['rule']
+			);
+
+			if (! $maybe_descriptor) {
+				continue;
+			}
+
+			$to_append = $type . ' ' . $maybe_descriptor['title'];
+
+			if (
+				(
+					$condition['rule'] === 'post_ids'
+					||
+					$condition['rule'] === 'page_ids'
+					||
+					$condition['rule'] === 'custom_post_type_ids'
+				) && isset($condition['payload']['post_id'])
+			) {
+				$to_append .= ' (<a href="' . get_edit_post_link(
+					$condition['payload']['post_id']
+				) . '" target="_blank">' . get_the_title($condition['payload']['post_id']) . '</a>)';
+			}
+
+			if (
+				(
+					$condition['rule'] === 'taxonomy_ids'
+					||
+					$condition['rule'] === 'post_with_taxonomy_ids'
+				) && isset($condition['payload']['taxonomy_id'])
+			) {
+				$tax = get_term_by(
+					'term_taxonomy_id',
+					$condition['payload']['taxonomy_id']
+				);
+
+				$to_append .= ' (<a href="' . get_edit_term_link(
+					$condition['payload']['taxonomy_id']
+				) . '" target="_blank">' . $tax->name . '</a>)';
+			}
+
+			if ($condition['rule'] === 'current_language') {
+				$to_append = null;
+
+				if (
+					isset($condition['payload']['language'])
+					&&
+					function_exists('blocksy_get_all_i18n_languages')
+				) {
+					foreach (blocksy_get_all_i18n_languages() as $lang) {
+						if ($lang['id'] === $condition['payload']['language']) {
+							$to_append = $type . ' ' . $lang['name'] . ' ' . __(
+								'Language', 'blc'
+							);
+						}
+					}
+				}
+			}
+
+			if ($to_append) {
+				$result[] = $to_append;
+			}
+		}
+
+		return $result;
+	}
+
+	private function find_rule_descriptor($rule) {
+		$all = $this->get_all_rules();
+
+		foreach ($all as $rules_group) {
+			foreach ($rules_group['rules'] as $single_rule) {
+				if ($single_rule['id'] === $rule) {
+					return $single_rule;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	private function get_user_roles_rules() {

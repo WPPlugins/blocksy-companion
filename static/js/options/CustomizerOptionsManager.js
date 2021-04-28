@@ -1,4 +1,10 @@
-import { useRef, useState, createElement, Fragment } from '@wordpress/element'
+import {
+	useRef,
+	useState,
+	useEffect,
+	createElement,
+	Fragment,
+} from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import saveAs from './file-saver'
 import { Overlay } from 'blocksy-options'
@@ -8,16 +14,72 @@ import classnames from 'classnames'
 const CustomizerOptionsManager = () => {
 	const [futureConfig, setFutureConfig] = useState(null)
 	const [isCopyingOptions, setIsCopyingOptions] = useState(null)
+	const [isDraggedOver, setIsDraggerOver] = useState(false)
 
 	const [isExporting, setIsExporting] = useState(false)
 	const [dataToExport, setDataToExport] = useState(['options'])
 
 	const inputRef = useRef()
 
+	const dropZoneRef = useRef()
+
+	useEffect(() => {
+		const onDragOver = (e) => {
+			e.stopPropagation()
+			e.preventDefault()
+			e.dataTransfer.dropEffect = 'copy'
+
+			setIsDraggerOver(true)
+		}
+
+		const onDragLeave = (e) => {
+			e.stopPropagation()
+			e.preventDefault()
+			setIsDraggerOver(false)
+		}
+
+		const onDrop = (e) => {
+			e.stopPropagation()
+			e.preventDefault()
+
+			setIsDraggerOver(false)
+
+			const files = Array.from(e.dataTransfer.files || [])
+			const items = Array.from(e.dataTransfer.items || [])
+
+			if (items.length > 0) {
+				const futureConfig = e.dataTransfer.items[0].getAsFile()
+				setFutureConfig(futureConfig)
+			} else {
+				if (files.length > 0) {
+					setFutureConfig(files[0])
+				}
+			}
+		}
+
+		dropZoneRef.current.addEventListener('dragover', onDragOver, false)
+		dropZoneRef.current.addEventListener('dragleave', onDragLeave, false)
+		dropZoneRef.current.addEventListener('drop', onDrop, false)
+
+		return () => {
+			dropZoneRef.current.removeEventListener(
+				'dragover',
+				onDragOver,
+				false
+			)
+			dropZoneRef.current.removeEventListener(
+				'dragleave',
+				onDragLeave,
+				false
+			)
+			dropZoneRef.current.removeEventListener('drop', onDrop, false)
+		}
+	}, [])
+
 	return (
 		<div className="ct-import-export">
 			<div className="ct-title" data-type="simple">
-				<h3>{__('Export', 'blc')}</h3>
+				<h3>{__('Export Options', 'blc')}</h3>
 
 				<div className="ct-option-description">
 					{__(
@@ -43,7 +105,7 @@ const CustomizerOptionsManager = () => {
 			</div>
 
 			<div className="ct-title" data-type="simple">
-				<h3>{__('Import', 'blc')}</h3>
+				<h3>{__('Import Options', 'blc')}</h3>
 
 				<div className="ct-option-description">
 					{__(
@@ -60,13 +122,19 @@ const CustomizerOptionsManager = () => {
 					<div className="ct-file-upload">
 						<button
 							type="button"
-							className="button ct-upload-button"
+							className={classnames('button ct-upload-button', {
+								active: isDraggedOver,
+							})}
+							ref={dropZoneRef}
 							onClick={() => {
 								inputRef.current.click()
 							}}>
 							{futureConfig
 								? futureConfig.name
-								: __('Click to upload a file...', 'blc')}
+								: __(
+										'Click or drop to upload a file...',
+										'blc'
+								  )}
 						</button>
 
 						<input
@@ -85,6 +153,10 @@ const CustomizerOptionsManager = () => {
 							className="button"
 							onClick={(e) => {
 								e.preventDefault()
+
+								if (!futureConfig) {
+									return
+								}
 
 								var reader = new FileReader()
 								reader.readAsText(futureConfig, 'UTF-8')
@@ -201,7 +273,9 @@ const CustomizerOptionsManager = () => {
 								)}
 						</p>
 
-						<div className="ct-modal-actions has-divider" data-buttons="2">
+						<div
+							className="ct-modal-actions has-divider"
+							data-buttons="2">
 							<button
 								onClick={(e) => {
 									e.preventDefault()

@@ -5,14 +5,14 @@ import {
 	useState,
 	useContext,
 	createContext,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'
 import { DemosContext } from '../../DemoInstall'
 import Checkbox from '../../../helpers/Checkbox'
 
-export const getNameForPlugin = plugin =>
+export const getNameForPlugin = (plugin) =>
 	((
 		{
 			coblocks: 'CoBlocks',
@@ -22,17 +22,18 @@ export const getNameForPlugin = plugin =>
 			brizy: 'Brizy',
 			getwid: 'Getwid',
 			'wpforms-lite': 'WPForms - Contact Form',
+			'recipe-card-blocks-by-wpzoom': 'Recipe Card Blocks by WPZOOM',
 			'stackable-ultimate-gutenberg-blocks':
-				'Stackable – Gutenberg Blocks'
+				'Stackable – Gutenberg Blocks',
 		}[plugin] || plugin
-	).replace(/\b\w/, v => v.toUpperCase()))
+	).replace(/\b\w/, (v) => v.toUpperCase()))
 
 const Plugins = ({ demoConfiguration, setDemoConfiguration, style }) => {
 	const {
 		currentDemo,
 		demos_list,
 		pluginsStatus,
-		setCurrentDemo
+		setCurrentDemo,
 	} = useContext(DemosContext)
 
 	const [properDemoName, _] = (currentDemo || '').split(':')
@@ -75,14 +76,14 @@ const Plugins = ({ demoConfiguration, setDemoConfiguration, style }) => {
 									setDemoConfiguration({
 										...demoConfiguration,
 										plugins: demoConfiguration.plugins.map(
-											demo =>
+											(demo) =>
 												demo.plugin === plugin
 													? {
 															...demo,
-															enabled: !enabled
+															enabled: !enabled,
 													  }
 													: demo
-										)
+										),
 									})
 								}>
 								{getNameForPlugin(plugin)}

@@ -14,32 +14,6 @@ if ( ! class_exists( 'WP_Importer' ) ) {
 // include WXR file parsers
 require dirname( __FILE__ ) . '/parsers.php';
 
-function blc_load_xml_file($url) {
-	set_time_limit(100);
-
-	if (ini_get('allow_url_fopen') == true) {
-		return file_get_contents($url, false, stream_context_create([
-			"ssl" => [
-				"verify_peer"=>false,
-				"verify_peer_name"=>false,
-			]
-		]));
-	} else if (function_exists('curl_init')) {
-		$curl = curl_init($url);
-
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-
-		$result = curl_exec($curl);
-		curl_close($curl);
-
-		return $result;
-	} else {
-		throw new Exception("Can't load data.");
-	}
-}
-
 if ( ! function_exists( 'wp_slash_strings_only' ) ) {
 	/**
 	 * Adds slashes to only string values in an array of values.

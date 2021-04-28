@@ -11,7 +11,7 @@ class GoogleAnalytics {
 
 		if (is_admin()) return;
 
-		add_action('print_footer_scripts', function () {
+		add_action('wp_print_scripts', function () {
 			if (is_admin()) return;
 
 			if (class_exists('BlocksyExtensionCookiesConsent')) {
@@ -60,8 +60,6 @@ class GoogleAnalytics {
 
 			<?php
 			};
-
-
 		});
 	}
 
@@ -86,7 +84,7 @@ class GoogleAnalytics {
 				'value' => '',
 				'desc' => sprintf(
 					__(
-						'Insert your Google Analytics v4 tracking ID. Instructions on how to activate this for your site can be found %shere%s.',
+						'Insert your Google Analytics measurement ID. More instructions can be found %shere%s.',
 						'blc'
 					),
 					'<a href="https://support.google.com/analytics/answer/9744165?hl=en">',

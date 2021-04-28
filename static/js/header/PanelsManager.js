@@ -75,6 +75,8 @@ const PanelsManager = () => {
 												<EditConditions headerId={id} />
 											),
 										},
+
+										divider: {type: 'ct-divider'}
 								  }
 								: {}),
 

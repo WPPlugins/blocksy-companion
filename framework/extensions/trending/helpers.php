@@ -66,11 +66,12 @@ if (! function_exists('blc_get_trending_posts_value')) {
 
 		$post_type = get_theme_mod('trending_block_post_type', 'post');
 
-		if ($post_type === 'product' && !class_exists('WooCommerce')) {
+		if ($post_type === 'product' && ! class_exists('WooCommerce')) {
 			$post_type = 'post';
 		}
 
-		$query = new WP_Query(
+		$query = new WP_Query(apply_filters(
+			'blocksy:trending-posts:query-args',
 			[
 				'post_type' => $post_type,
 				'order' => 'DESC',
@@ -81,7 +82,7 @@ if (! function_exists('blc_get_trending_posts_value')) {
 				'ignore_sticky_posts' => true,
 				'post_status' => 'publish'
 			]
-		);
+		));
 
 		if (! $query->have_posts()) {
 			return [
@@ -95,18 +96,27 @@ if (! function_exists('blc_get_trending_posts_value')) {
 		while ($query->have_posts()) {
 			$query->the_post();
 
-			$result[] = [
+			$individual_entry = [
 				'id' => get_the_ID(),
 				'attachment_id' => get_post_thumbnail_id(),
 				'title' => get_the_title(),
 				'url' => get_permalink(),
-				'image' => blc_call_fn(['fn' => 'blocksy_image'], [
-					'attachment_id' => get_post_thumbnail_id(),
-					'size' => 'thumbnail',
-					'ratio' => '1/1',
-					'tag_name' => 'div',
-				])
+				'image' => ''
 			];
+
+			if (get_post_thumbnail_id()) {
+				$individual_entry['image'] = blc_call_fn(
+					['fn' => 'blocksy_image'],
+					[
+						'attachment_id' => get_post_thumbnail_id(),
+						'size' => 'thumbnail',
+						'ratio' => '1/1',
+						'tag_name' => 'div',
+					]
+				);
+			}
+
+			$result[] = $individual_entry;
 		}
 
 		$is_last = intval($query->max_num_pages) === intval($args['paged']);
@@ -147,9 +157,18 @@ function blc_get_trending_block($forced = false) {
 		])
 	);
 
+	$attr = [
+		'class' => $class
+	];
+
+	if (is_customize_preview()) {
+		$attr['data-shortcut'] = 'border';
+		$attr['data-location'] = 'trending_posts_ext';
+	}
+
 	?>
 
-    <section class="<?php echo $class ?>">
+	<section <?php echo blocksy_attr_to_html($attr) ?>>
 		<div class="ct-container" <?php echo $data_page ?>>
 			<h5 class="ct-block-title">
 				<?php echo __('Trending now', 'blc') ?>
@@ -170,7 +189,7 @@ function blc_get_trending_block($forced = false) {
 					echo blocksy_html_tag(
 						'a',
 						[
-							'href' => $post['url']
+							'href' => $post['url'],
 						],
 
 						$post['image'] . blocksy_html_tag(

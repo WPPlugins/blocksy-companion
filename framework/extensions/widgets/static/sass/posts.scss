@@ -2,7 +2,7 @@
 	--listItemSpacing: 20px;
 
 	a {
-		display: var(--display, grid);
+		display: var(--display, flex);
 	}
 
 	.ct-image-container {
@@ -41,9 +41,9 @@
 	&[data-type="rounded"],
 	&[data-type="large-small"],
 	&[data-type="small-thumbs"] {
-		a {
-			grid-template-columns: 25% 1fr;
-			grid-column-gap: 20px;
+		.ct-image-container {
+			flex: 0 0 25%;
+			margin-inline-end: 20px;
 		}
 	}
 

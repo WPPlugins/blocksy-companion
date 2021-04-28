@@ -3,7 +3,7 @@
 $options = [
 
 	blocksy_rand_md5() => [
-		'title' => __( 'General', 'blocksy' ),
+		'title' => __( 'General', 'blc' ),
 		'type' => 'tab',
 		'options' => [
 
@@ -30,6 +30,12 @@ $options = [
 				'label' => __('Affiliate Link', 'blc'),
 				'design' => 'inline',
 				'value' => '#'
+			],
+
+			'product_link_target' => [
+				'label' => __( 'Open Link In New Tab', 'blc' ),
+				'type'  => 'ct-switch',
+				'value' => 'no',
 			],
 
 			/*
@@ -80,7 +86,7 @@ $options = [
 	],
 
 	blocksy_rand_md5() => [
-		'title' => __( 'Rating', 'blocksy' ),
+		'title' => __( 'Rating', 'blc' ),
 		'type' => 'tab',
 		'options' => [
 
@@ -188,7 +194,7 @@ $options = [
 	],
 
 	// blocksy_rand_md5() => [
-	// 	'title' => __( 'Design', 'blocksy' ),
+	// 	'title' => __( 'Design', 'blc' ),
 	// 	'type' => 'tab',
 	// 	'options' => [
 

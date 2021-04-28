@@ -26,7 +26,7 @@ class CacheResetManager {
 		if ($options['type'] === 'theme') {
 			if (in_array('blocksy', $options['themes'])) {
 				$this->run_cache_purge();
-				do_action('blocksy:dynamic-css:regenere_css_files');
+				do_action('blocksy:dynamic-css:refresh-caches');
 			}
 		}
 
@@ -39,7 +39,7 @@ class CacheResetManager {
 
 			if (in_array(BLOCKSY_PLUGIN_BASE, $plugins)) {
 				$this->run_cache_purge();
-				do_action('blocksy:dynamic-css:regenere_css_files');
+				do_action('blocksy:dynamic-css:refresh-caches');
 			}
 		}
 	}

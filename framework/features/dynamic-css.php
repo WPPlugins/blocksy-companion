@@ -64,7 +64,7 @@ class DynamicCss {
 					'type' => 'ct-switch',
 					'value' => 'no',
 					'setting' => [ 'transport' => 'postMessage' ],
-					'desc' => __( 'Disable WordPress emojis script if you don\'t use them in order to improve the performance. ', 'blc' )
+					'desc' => __( 'Enable this option if you want to remove WordPress emojis script in order to improve the performance.', 'blc' )
 				];
 
 				$opts[blocksy_rand_md5()] = [
@@ -81,11 +81,7 @@ class DynamicCss {
 			}
 		}, 10, 3);
 
-		add_action('customize_save_after', function () {
-			$this->generate_css_files();
-		});
-
-		add_action('blocksy:dynamic-css:regenere_css_files', function () {
+		add_action('blocksy:dynamic-css:refresh-caches', function () {
 			$this->generate_css_files();
 		});
 

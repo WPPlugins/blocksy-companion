@@ -2,8 +2,7 @@
 @import 'widget';
 @import 'single-block';
 
-
-form[class*="ct-mailchimp"] {
+form[class*='ct-mailchimp'] {
 	.button {
 		--buttonFontWeight: 600;
 	}
@@ -27,8 +26,8 @@ form[class*="ct-mailchimp"] {
 
 .subscribe-success {
 	button.button,
-	input[type="text"],
-	input[type="email"],
+	input[type='text'],
+	input[type='email'],
 	.gdpr-confirm-policy,
 	.ct-mailchimp-description {
 		display: none;

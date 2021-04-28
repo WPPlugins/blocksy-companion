@@ -53,8 +53,10 @@ const getStartPositionFor = (stickyContainer) => {
 		return stickyContainer.parentNode.getBoundingClientRect().height + 200
 	}
 
-	const stickyOffset =
-		stickyContainer.closest('header').getBoundingClientRect().top + scrollY
+	// stickyContainer.closest('header').getBoundingClientRect().top +
+	// TODO: compute items that are before the header & are not fixed
+	// scrollY
+	const stickyOffset = 0
 
 	const row = stickyContainer.parentNode
 
@@ -85,7 +87,7 @@ const getStartPositionFor = (stickyContainer) => {
 let hasListener = false
 
 export const mountStickyHeader = () => {
-	const stickyHeader = document.querySelector('[data-sticky]')
+	const stickyHeader = document.querySelector('header [data-sticky]')
 
 	if (!stickyHeader) {
 		return
@@ -106,7 +108,7 @@ export const mountStickyHeader = () => {
 
 		const isSticky =
 			(startPosition > 0 &&
-				Math.abs(window.scrollY - startPosition) < 3) ||
+				Math.abs(window.scrollY - startPosition) < 5) ||
 			window.scrollY > startPosition
 
 		const stickyComponents = stickyContainer.dataset.sticky
@@ -116,12 +118,27 @@ export const mountStickyHeader = () => {
 		let containerInitialHeight = Array.from(
 			stickyContainer.querySelectorAll('[data-row]')
 		).reduce((sum, el) => {
-			let rowInitialHeight = parseFloat(
+			let rowInitialHeight = el.getBoundingClientRect().height
+
+			/*
+            parseFloat(
 				getComputedStyle(el).getPropertyValue('--height')
 			)
+*/
 
 			return sum + rowInitialHeight
 		}, 0)
+
+		if (isSticky && document.body.dataset.header.indexOf('shrink') === -1) {
+			document.body.dataset.header = `${document.body.dataset.header}:shrink`
+		}
+
+		if (!isSticky && document.body.dataset.header.indexOf('shrink') > -1) {
+			document.body.dataset.header = document.body.dataset.header.replace(
+				':shrink',
+				''
+			)
+		}
 
 		if (stickyComponents.indexOf('auto-hide') > -1) {
 			if (window.scrollY < startPosition) {
@@ -403,31 +420,33 @@ export const mountStickyHeader = () => {
 							let rowInitialHeight = getRowInitialHeight(row)
 							let rowStickyHeight = getRowStickyHeight(row)
 
-							row.style.setProperty(
-								'--shrinkHeight',
-								`${computeLinearScale(
-									[
-										startPosition,
-										startPosition +
-											Math.abs(
-												rowInitialHeight -
-													rowStickyHeight
-											),
-									],
-									[rowInitialHeight, rowStickyHeight],
-									clamp(
-										startPosition,
+							if (rowInitialHeight !== rowStickyHeight) {
+								row.style.setProperty(
+									'--shrinkHeight',
+									`${computeLinearScale(
+										[
+											startPosition,
+											startPosition +
+												Math.abs(
+													rowInitialHeight -
+														rowStickyHeight
+												),
+										],
+										[rowInitialHeight, rowStickyHeight],
+										clamp(
+											startPosition,
 
-										startPosition +
-											Math.abs(
-												rowInitialHeight -
-													rowStickyHeight
-											),
+											startPosition +
+												Math.abs(
+													rowInitialHeight -
+														rowStickyHeight
+												),
 
-										scrollY
-									)
-								)}px`
-							)
+											scrollY
+										)
+									)}px`
+								)
+							}
 						}
 					)
 				}

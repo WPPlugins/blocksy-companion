@@ -146,7 +146,7 @@ class ExtensionsManager
         
         $activated[] = strtolower( $id );
         update_option( $this->get_option_name(), array_unique( $activated ) );
-        Plugin::instance()->dynamic_css->generate_css_files();
+        do_action( 'blocksy:dynamic-css:refresh-caches' );
     }
     
     public function deactivate_extension( $id )
@@ -164,7 +164,7 @@ class ExtensionsManager
             }
         }
         update_option( $this->get_option_name(), array_diff( $activated, [ $id ] ) );
-        Plugin::instance()->dynamic_css->generate_css_files();
+        do_action( 'blocksy:dynamic-css:refresh-caches' );
     }
     
     private function read_installed_extensions()

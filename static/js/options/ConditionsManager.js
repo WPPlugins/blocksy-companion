@@ -3,8 +3,11 @@ import cls from 'classnames'
 import { __ } from 'ct-i18n'
 import { Select } from 'blocksy-options'
 
+import PostIdPicker from './ConditionsManager/PostIdPicker'
+
 let allPostsCache = []
 let allTaxonomiesCache = []
+let allLanguagesCache = []
 
 const ConditionsManager = ({ value, onChange }) => {
 	const allRules = blocksy_admin.all_condition_rules
@@ -32,34 +35,17 @@ const ConditionsManager = ({ value, onChange }) => {
 
 	const [allPosts, setAllPosts] = useState(allPostsCache)
 	const [allTaxonomies, setAllTaxonomies] = useState(allTaxonomiesCache)
+	const [allLanguages, setAllLanguages] = useState(allLanguagesCache)
 
 	const hasAdditions = (condition) =>
 		condition.rule === 'post_ids' ||
 		condition.rule === 'page_ids' ||
 		condition.rule === 'custom_post_type_ids' ||
 		condition.rule === 'taxonomy_ids' ||
-		condition.rule === 'post_with_taxonomy_ids'
+		condition.rule === 'post_with_taxonomy_ids' ||
+		condition.rule === 'current_language'
 
 	useEffect(() => {
-		Promise.all(
-			['posts', 'pages', 'ct_cpt'].map((type) =>
-				fetch(
-					`${blocksy_admin.rest_url}wp/v2/${
-						type === 'ct_cpt' ? 'posts' : type
-					}${
-						blocksy_admin.rest_url.indexOf('?') > -1 ? '&' : '?'
-					}_embed&per_page=100${
-						type === 'ct_cpt' ? '&post_type=ct_cpt' : ''
-					}`
-				).then((r) => r.json())
-			)
-		).then((results) => {
-			let all = results.reduce((r, current) => [...r, ...current], [])
-
-			setAllPosts(all)
-			allPostsCache = all
-		})
-
 		fetch(
 			`${wp.ajax.settings.url}?action=blocksy_conditions_get_all_taxonomies`,
 			{
@@ -71,9 +57,12 @@ const ConditionsManager = ({ value, onChange }) => {
 			}
 		)
 			.then((r) => r.json())
-			.then(({ data: { taxonomies } }) => {
+			.then(({ data: { taxonomies, languages } }) => {
 				setAllTaxonomies(taxonomies)
 				allTaxonomiesCache = taxonomies
+
+				setAllLanguages(languages)
+				allLanguagesCache = languages
 			})
 	}, [])
 
@@ -149,32 +138,8 @@ const ConditionsManager = ({ value, onChange }) => {
 					{(condition.rule === 'post_ids' ||
 						condition.rule === 'custom_post_type_ids' ||
 						condition.rule === 'page_ids') && (
-						<Select
-							key="third"
-							option={{
-								appendToBody: true,
-								defaultToFirstItem: false,
-								placeholder:
-									condition.rule === 'post_ids'
-										? __('Select post', 'blc')
-										: condition.rule === 'page_ids'
-										? __('Select page', 'blc')
-										: __('Custom Post Type ID', 'blc'),
-								choices: allPosts
-									.filter(({ type }) =>
-										condition.rule === 'post_ids'
-											? type === 'post'
-											: condition.rule === 'page_ids'
-											? type === 'page'
-											: type !== 'post' && type !== 'page'
-									)
-									.map((post) => ({
-										key: post.id,
-										value: post.title.rendered,
-									})),
-								search: true,
-							}}
-							value={(condition.payload || {}).post_id || ''}
+						<PostIdPicker
+							condition={condition}
 							onChange={(post_id) => {
 								onChange(
 									value.map((r, i) => ({
@@ -209,7 +174,7 @@ const ConditionsManager = ({ value, onChange }) => {
 								})),
 								search: true,
 							}}
-							value={condition.payload.taxonomy_id || ''}
+							value={(condition.payload || {}).taxonomy_id || ''}
 							onChange={(taxonomy_id) => {
 								onChange(
 									value.map((r, i) => ({
@@ -219,6 +184,37 @@ const ConditionsManager = ({ value, onChange }) => {
 													payload: {
 														...condition.payload,
 														taxonomy_id,
+													},
+											  }
+											: r),
+									}))
+								)
+							}}
+						/>
+					)}
+
+					{condition.rule === 'current_language' && (
+						<Select
+							option={{
+								appendToBody: true,
+								defaultToFirstItem: false,
+								placeholder: __('Select language', 'blc'),
+								choices: allLanguages.map((language) => ({
+									key: language.id,
+									value: language.name,
+								})),
+								search: true,
+							}}
+							value={(condition.payload || {}).language || ''}
+							onChange={(language) => {
+								onChange(
+									value.map((r, i) => ({
+										...(i === index
+											? {
+													...condition,
+													payload: {
+														...condition.payload,
+														language,
 													},
 											  }
 											: r),

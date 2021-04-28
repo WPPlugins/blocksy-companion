@@ -26,7 +26,7 @@ blc_call_fn(['fn' => 'blocksy_output_background_css'], [
 		], [
 			'backgroundColor' => [
 				'default' => [
-					'color' => '#e0e3e8'
+					'color' => 'var(--paletteColor5)'
 				],
 			],
 		])
@@ -34,19 +34,19 @@ blc_call_fn(['fn' => 'blocksy_output_background_css'], [
 	'responsive' => true,
 ]);
 
-blc_call_fn(['fn' => 'blocksy_output_responsive'], [
-	'css' => $css,
-	'tablet_css' => $tablet_css,
-	'mobile_css' => $mobile_css,
-	'selector' => ".ct-trending-block",
-	'variableName' => 'padding',
-	'value' => get_theme_mod('trendingBlockContainerSpacing', [
-		'mobile' => '30px',
-		'tablet' => '30px',
-		'desktop' => '30px',
-	]),
-	'unit' => ''
-]);
+$container_inner_spacing = get_theme_mod( 'trendingBlockContainerSpacing', '30px' );
+
+if ($container_inner_spacing !== '30px') {
+	blc_call_fn(['fn' => 'blocksy_output_responsive'], [
+		'css' => $css,
+		'tablet_css' => $tablet_css,
+		'mobile_css' => $mobile_css,
+		'selector' => ".ct-trending-block",
+		'variableName' => 'padding',
+		'value' => $container_inner_spacing,
+		'unit' => ''
+	]);
+}
 
 blc_call_fn(['fn' => 'blocksy_output_colors'], [
 	'value' => get_theme_mod('trendingBlockFontColor'),

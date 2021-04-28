@@ -41,6 +41,6 @@
 
 	&:hover {
 		color: #fff;
-		background: var(--ct-buttonHoverColor, #0073aa);
+		background: var(--ct-buttonHoverColor, var(--accentColor));
 	}
 }

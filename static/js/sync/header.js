@@ -1,39 +1,22 @@
 import ctEvents from 'ct-events'
+import { withKeys } from 'blocksy-customizer-sync'
 
 ctEvents.on(
 	'ct:header:sync:collect-variable-descriptors',
 	(variableDescriptors) => {
-		/*
-		const handleBackgroundOptionForSpecific = id =>
-			handleBackgroundOptionFor({
-				id,
-				selector: 'header',
-				addToDescriptors: {
-					fullValue: true
-				},
+		variableDescriptors['global'] = ({ itemId }) => ({
+			transparent_behaviour: {
+				selector: `[data-header*="${document.body.dataset.header}"]`,
+				variable: 'has-transparent-header',
 				responsive: true,
-				valueExtractor: ({
-					is_absolute,
-					headerBackground,
-					absoluteHeaderBackground
-				}) =>
-					is_absolute === 'yes'
-						? absoluteHeaderBackground
-						: headerBackground
-			})
-
-		variableDescriptors['global'] = {
-			...handleBackgroundOptionForSpecific('is_absolute'),
-			...handleBackgroundOptionForSpecific('headerBackground'),
-			...handleBackgroundOptionForSpecific('absoluteHeaderBackground')
-		}
-
-		variableDescriptors['global'] = {
-			...handleBackgroundOptionForSpecific('is_absolute'),
-			...handleBackgroundOptionForSpecific('headerBackground'),
-			...handleBackgroundOptionForSpecific('absoluteHeaderBackground')
-		}
-        */
+				extractValue: (value) => ({
+					desktop: value.desktop ? 'var(--true)' : 'var(--false)',
+					tablet: value.mobile ? 'var(--true)' : 'var(--false)',
+					mobile: value.mobile ? 'var(--true)' : 'var(--false)',
+				}),
+				unit: '',
+			},
+		})
 	}
 )
 

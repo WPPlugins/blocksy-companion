@@ -37,7 +37,7 @@
 		}
 
 		button {
-			--buttonMinHeight: var(--formInputHeight);
+			--buttonMinHeight: var(--form-field-height, 40px);
 			--padding: 0 15px;
 			width: 100%;
 		}

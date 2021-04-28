@@ -262,6 +262,23 @@ class DemoInstallContentInstaller {
 			$header_builder->patch_header_value_for($wp_import->processed_terms);
 		}
 
+		$old_nav_menu_locations = get_theme_mod('nav_menu_locations', []);
+		$should_update_nav_menu_locations = false;
+
+		foreach ($old_nav_menu_locations as $location => $menu_id) {
+			if (isset($wp_import->processed_terms[$menu_id])) {
+				$should_update_nav_menu_locations = true;
+
+				$old_nav_menu_locations[
+					$location
+				] = $wp_import->processed_terms[$menu_id];
+			}
+		}
+
+		if ($should_update_nav_menu_locations) {
+			set_theme_mod('nav_menu_locations', $old_nav_menu_locations);
+		}
+
 		$this->clean_plugins_cache();
 		$this->assign_pages_ids($demo, $builder);
 

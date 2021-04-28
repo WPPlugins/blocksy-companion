@@ -165,17 +165,19 @@ echo $before_title . wp_kses_post( $title ) . $after_title;
 							$ratio = '4/3';
 						}
 
-						echo wp_kses_post(
-							blc_call_fn(
-								['fn' => 'blocksy_image'],
-								[
-									'attachment_id' => get_post_thumbnail_id(),
-									'ratio' => $ratio,
-									'tag_name' => 'div',
-									'size' => $size,
-								]
-							)
-						);
+						if (get_post_thumbnail_id()) {
+							echo wp_kses_post(
+								blc_call_fn(
+									['fn' => 'blocksy_image'],
+									[
+										'attachment_id' => get_post_thumbnail_id(),
+										'ratio' => $ratio,
+										'tag_name' => 'div',
+										'size' => $size,
+									]
+								)
+							);
+						}
 					}
 					?>
 

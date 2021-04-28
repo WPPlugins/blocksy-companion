@@ -1,6 +1,6 @@
 import ctEvents from 'ct-events'
 
-const activateScreen = (
+export const activateScreen = (
 	el,
 	{
 		// login | register | forgot
@@ -99,10 +99,16 @@ const maybeAddMessage = (container, html) => {
 	return { doc }
 }
 
-const handleAccountModal = (el) => {
+export const handleAccountModal = (el) => {
 	if (!el) {
 		return
 	}
+
+	if (el.hasListeners) {
+		return
+	}
+
+	el.hasListeners = true
 
 	el.addEventListener(
 		'click',
@@ -164,10 +170,15 @@ const handleAccountModal = (el) => {
 				return
 			}
 
-			fetch(maybeRegister.action, {
-				method: maybeRegister.method,
-				body: new FormData(maybeRegister),
-			})
+			fetch(
+				// maybeRegister.action,
+				`${ct_localizations.ajax_url}?action=blc_implement_user_registration`,
+
+				{
+					method: maybeRegister.method,
+					body: new FormData(maybeRegister),
+				}
+			)
 				.then((response) => response.text())
 				.then((html) => {
 					const { doc, hasError } = maybeAddErrors(
@@ -224,42 +235,4 @@ const handleAccountModal = (el) => {
 			})
 		})
 	})
-}
-
-export const mountAccount = () => {
-	Array.from(document.querySelectorAll('.ct-header-account[href]')).map(
-		(el) => {
-			if (el.hasSearchEventListener) {
-				return
-			}
-
-			el.hasSearchEventListener = true
-
-			el.addEventListener('click', (e) => {
-				try {
-					document.querySelector(el.hash)
-				} catch (e) {
-					return
-				}
-
-				e.preventDefault()
-
-				activateScreen(document.querySelector(el.hash), {
-					screen: 'login',
-				})
-
-				ctEvents.trigger('ct:overlay:handle-click', {
-					e,
-					href: el.hash,
-					options: {
-						isModal: true,
-					},
-				})
-			})
-
-			if (document.querySelector('#account-modal')) {
-				handleAccountModal(document.querySelector('#account-modal'))
-			}
-		}
-	)
 }

@@ -105,9 +105,9 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 							<OptionsPanel
 								onChange={(optionId, cond) => {
 									setConditions((localConditions) => [
-										...(localConditions || conditions).filter(
-											({ id }) => id !== headerId
-										),
+										...(
+											localConditions || conditions
+										).filter(({ id }) => id !== headerId),
 										{
 											id: headerId,
 											conditions: cond,

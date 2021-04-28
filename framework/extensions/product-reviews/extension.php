@@ -94,7 +94,7 @@ class BlocksyExtensionProductReviews {
 		}, 10, 2);
 
 		add_action(
-			'blocksy:content:top',
+			'blocksy:template:before',
 			function () {
 				if (! is_singular('blc-product-review')) {
 					return;
@@ -121,7 +121,7 @@ class BlocksyExtensionProductReviews {
 
 			wp_enqueue_style(
 				'blocksy-ext-product-reviews-styles',
-				BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/main.css',
+				BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/main.min.css',
 				['ct-main-styles'],
 				$data['Version']
 			);

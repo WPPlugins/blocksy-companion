@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.63
+Stable tag: 1.8.0
 
 == Description ==
 
@@ -23,6 +23,63 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.0: 2021-04-28
+- New: Account custom link pass through WPML
+- New: Ratio option for Advertisement widget
+- New: Header transparent/sticky condition filter
+- New: Implement PolyLang, TranslatePress and WPML conditions
+- Improvement: Starter sites improvements
+- Improvement: Product reviews affiliate link - target option
+- Improvement: Account element - sign up functionality compatibility with WooCommerce
+- Improvement: Starter site importer minor improvements
+- Fix: Correctly initialise widgets in customizer
+- Fix: Don't look at current screen when inserting sticky CSS
+- Fix: Product reviews extension featured image
+- Fix: Sticky header issue when logo has margin
+
+1.8.0-beta6: 2021-04-23
+- New: Implement PolyLang, TranslatePress and WPML conditions
+- Improvement: Starter sites improvements
+
+1.7.63.8: 2021-04-09
+- New: Account custom link pass through WPML
+- New: Ratio option for Advertisement widget
+- New: Header transparent/sticky condition filter
+- New: Implement PolyLang and WPML conditions
+- Improvement: Product reviews affiliate link - target option
+- Improvement: Account element - sign up functionality compatibility with WooCommerce
+- Improvement: Starter site importer minor improvements
+- Fix: Correctly initialise widgets in customizer
+- Fix: Don't look at current screen when inserting sticky CSS
+- Fix: Product reviews extension featured image
+- Fix: Sticky header issue when logo has margin
+
+1.7.63.7: 2021-04-06
+- New: Account custom link pass through WPML
+- New: Ratio option for Advertisement widget
+- New: Header transparent/sticky condition filter
+- New: Implement PolyLang and WPML conditions
+- Improvement: Product reviews affiliate link - target option
+- Improvement: Account element - sign up functionality compatibility with WooCommerce
+- Improvement: Starter site importer minor improvements
+- Fix: Correctly initialise widgets in customizer
+- Fix: Don't look at current screen when inserting sticky CSS
+- Fix: Product reviews extension featured image
+- Fix: Sticky header issue when logo has margin
+
+1.7.63.6: 2021-04-01
+- New: Account custom link pass through WPML
+- New: Ratio option for Advertisement widget
+- New: Header transparent/sticky condition filter
+- New: Implement PolyLang and WPML conditions
+- Improvement: Product reviews affiliate link - target option
+- Improvement: Account element register tab and WooCommerce
+- Improvement: Starter site importer minor improvements
+- Fix: Correctly initialise widgets in customizer
+- Fix: Don't look at current screen when inserting sticky CSS
+- Fix: Product reviews extension featured image
+- Fix: Sticky header issue when logo has margin
+
 1.7.63: 2021-02-24
 - Improvement: Cookies consent extension use SameSite=Lax in cookies
 - Fix: Correctly order scripts in trending and cookies consent

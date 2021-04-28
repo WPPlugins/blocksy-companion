@@ -2,7 +2,7 @@ import {
 	createElement,
 	Fragment,
 	useEffect,
-	useState
+	useState,
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import { Switch, Select } from 'blocksy-options'
@@ -13,10 +13,16 @@ import { Overlay } from 'blocksy-options'
 const DisplayCondition = ({
 	option: {
 		// inline | modal
-		display = 'inline'
+		display = 'inline',
+
+		modalTitle = __('Transparent Header Display Conditions', 'blc'),
+		modalDescription = __(
+			'Add one or more conditions to display the transparent header.',
+			'blc'
+		),
 	},
 	value,
-	onChange
+	onChange,
 }) => {
 	const [isEditing, setIsEditing] = useState(false)
 	const [localValue, setLocalValue] = useState(null)
@@ -30,7 +36,7 @@ const DisplayCondition = ({
 			<button
 				className="button-primary"
 				style={{ width: '100%' }}
-				onClick={e => {
+				onClick={(e) => {
 					e.preventDefault()
 					setIsEditing(true)
 					setLocalValue(null)
@@ -47,18 +53,13 @@ const DisplayCondition = ({
 				}}
 				render={() => (
 					<div className="ct-modal-content">
-						<h2>{__('Transparent Header Display Conditions', 'blc')}</h2>
-						<p>
-							{__(
-								'Add one or more conditions to display the transparent header.',
-								'blc'
-							)}
-						</p>
+						<h2>{modalTitle}</h2>
+						<p>{modalDescription}</p>
 
 						<div className="ct-modal-scroll">
 							<ConditionsManager
 								value={localValue || value}
-								onChange={value => {
+								onChange={(value) => {
 									setLocalValue(value)
 								}}
 							/>

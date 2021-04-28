@@ -16,6 +16,12 @@ if ($thumb_id) {
 	$gallery_images = [];
 }
 
+$target_output = '';
+
+if (blocksy_akg('product_link_target', $atts, 'no') === 'yes') {
+	$target_output = 'target="_blank" rel="noopener noreferrer"';
+}
+
 echo '<section class="ct-product-hero">';
 echo '<div class="ct-container">';
 if (count($gallery_images) === 1) {
@@ -147,7 +153,7 @@ if (! empty($product_button_label)) {
 }
 
 if (! empty($product_button_label) && ! empty($product_link)) {
-	echo '<a href="' . esc_url($product_link) . '" class="ct-button">';
+	echo '<a href="' . esc_url($product_link) . '" class="ct-button" ' . wp_kses_post($target_output) . '>';
 	echo $product_button_label;
 
 	/*

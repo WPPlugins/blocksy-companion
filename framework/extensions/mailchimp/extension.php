@@ -78,18 +78,30 @@ class BlocksyExtensionMailchimp {
 
 			wp_enqueue_style(
 				'blocksy-ext-newsletter-subscribe-styles',
-				BLOCKSY_URL . 'framework/extensions/mailchimp/static/bundle/main.css',
+				BLOCKSY_URL . 'framework/extensions/mailchimp/static/bundle/main.min.css',
 				['ct-main-styles'],
 				$data['Version']
 			);
+		});
 
-			wp_enqueue_script(
-				'blocksy-ext-newsletter-subscribe-scripts',
-				BLOCKSY_URL . 'framework/extensions/mailchimp/static/bundle/main.js',
-				['ct-scripts'],
-				$data['Version'],
-				true
-			);
+		add_filter('blocksy:frontend:dynamic-js-chunks', function ($chunks) {
+			$chunks[] = [
+				'id' => 'blocksy_ext_mailchimp',
+				'selector' => implode(', ', [
+					'.ct-mailchimp-widget-form:not([data-skip-submit])',
+					'.ct-mailchimp-block-form:not([data-skip-submit])'
+				]),
+				'url' => blc_call_fn(
+					[
+						'fn' => 'blocksy_cdn_url',
+						'default' => BLOCKSY_URL . 'framework/extensions/mailchimp/static/bundle/main.js'
+					],
+					BLOCKSY_URL . 'framework/extensions/mailchimp/static/bundle/main.js'
+				),
+				'trigger' => 'submit'
+			];
+
+			return $chunks;
 		});
 
 		add_filter('blocksy_widgets_paths', function ($all_widgets) {
@@ -132,7 +144,7 @@ class BlocksyExtensionMailchimp {
 				wp_enqueue_script(
 					'blocksy-newsletter-subscribe-customizer-sync',
 					BLOCKSY_URL . 'framework/extensions/mailchimp/admin-static/bundle/sync.js',
-					[ 'customize-preview', 'ct-events' ],
+					[ 'customize-preview', 'ct-scripts' ],
 					$data['Version'],
 					true
 				);

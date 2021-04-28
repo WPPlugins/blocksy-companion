@@ -51,18 +51,23 @@ class BlocksyMailchimpManager {
 
 		$region = explode('-', $api_key);
 
-		$response = wp_remote_get('https://' . $region[1] . '.api.mailchimp.com/3.0/lists', [
-			'headers' => [
-				'Authorization' => 'Basic ' . base64_encode('asd:' . $api_key)
+		$response = wp_remote_get(
+			'https://' . $region[1] . '.api.mailchimp.com/3.0/lists',
+			[
+				'headers' => [
+					'Authorization' => 'Basic ' . base64_encode(
+						'asd:' . $api_key
+					)
+				]
 			]
-		]);
+		);
 
-		if ( ! is_wp_error( $response ) ) {
-			if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+		if (! is_wp_error($response)) {
+			if (200 !== wp_remote_retrieve_response_code($response)) {
 				return 'api_key_invalid';
 			}
 
-			$body = json_decode(wp_remote_retrieve_body( $response ), true);
+			$body = json_decode(wp_remote_retrieve_body($response), true);
 
 			if (! $body) {
 				return 'api_key_invalid';

@@ -19,7 +19,8 @@ $config = [
 	],
 
 	'translation_keys' => [
-		['key' => 'login_label']
+		['key' => 'login_label'],
+		['key' => 'account_custom_page']
 	]
 ];
 

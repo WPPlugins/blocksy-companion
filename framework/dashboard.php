@@ -110,7 +110,14 @@ class Dashboard {
 					'connect_template' => $connect_template
 				];
 
-				if (Plugin::instance()->premium) {
+				if (
+					Plugin::instance()->premium
+					&&
+					is_callable([
+						Plugin::instance()->premium,
+						'user_wants_beta_updates'
+					])
+				) {
 					$result['has_beta_consent'] = Plugin::instance()->premium->user_wants_beta_updates();
 				}
 
@@ -141,7 +148,7 @@ class Dashboard {
 
 		wp_enqueue_style(
 			'blocksy-dashboard-styles',
-			BLOCKSY_URL . 'static/bundle/dashboard.css',
+			BLOCKSY_URL . 'static/bundle/dashboard.min.css',
 			[],
 			$data['Version']
 		);

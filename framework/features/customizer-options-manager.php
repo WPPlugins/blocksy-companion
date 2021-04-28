@@ -4,19 +4,10 @@ namespace Blocksy;
 
 class CustomizerOptionsManager {
 	public function __construct() {
-		add_filter('blocksy:options:general:bottom', function ($options) {
-			$options[blocksy_rand_md5()] = [
-				'label' => __( 'Customizer Import/Export', 'blocksy' ),
-				'type' => 'ct-panel',
-				'setting' => ['transport' => 'postMessage'],
-				'inner-options' => [
-
-					'importer' => [
-						'type' => 'blocksy-customizer-options-manager',
-						'design' => 'none',
-					],
-
-				],
+		add_filter('blocksy:options:manage-options:top', function ($options) {
+			$options['importer'] = [
+				'type' => 'blocksy-customizer-options-manager',
+				'design' => 'none',
 			];
 
 			return $options;

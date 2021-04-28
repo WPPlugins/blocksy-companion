@@ -121,9 +121,7 @@ class DemoInstallOptionsInstaller {
 		do_action('customize_save', $wp_customize);
 
 		foreach ($options['mods'] as $key => $val) {
-			if ($key === 'nav_menu_locations') continue;
 			if ($key === 'sidebars_widgets') continue;
-
 			do_action('customize_save_' . $key, $wp_customize);
 			set_theme_mod($key, $val);
 		}

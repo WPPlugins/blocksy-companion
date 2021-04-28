@@ -26,6 +26,10 @@ if ($account_link === 'custom') {
 	$link = blocksy_akg('account_custom_page', $atts, '');
 }
 
+if ($account_link === 'woocommerce_account' && class_exists('WooCommerce')) {
+	$link = get_permalink(get_option('woocommerce_myaccount_page_id'));
+}
+
 // Media
 $media_html = '';
 $loggedin_media = blocksy_akg('loggedin_media', $atts, 'avatar');
@@ -77,7 +81,7 @@ if (! empty($media_html)) {
 	$attr['data-label'] = $loggedin_label_position[$device];
 }
 
-$attr['href'] = $link;
+$attr['href'] = apply_filters('wpml_permalink', $link);
 $attr['aria-label'] = $loggedin_label;
 
 echo '<a ' . blocksy_attr_to_html($attr) . '>';

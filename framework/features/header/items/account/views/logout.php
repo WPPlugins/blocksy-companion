@@ -12,8 +12,14 @@ $loggedout_account_label_visibility = blocksy_akg(
 
 $link = '#account-modal';
 
-if (blocksy_akg('login_account_action', $atts, 'modal') === 'custom') {
+$login_account_action = blocksy_akg('login_account_action', $atts, 'modal');
+
+if ($login_account_action === 'custom') {
 	$link = blocksy_akg('loggedout_account_custom_page', $atts, '');
+}
+
+if ($login_account_action === 'woocommerce_account') {
+	$link = get_permalink(get_option('woocommerce_myaccount_page_id'));
 }
 
 $loggedout_label_position = blocksy_expand_responsive_value(

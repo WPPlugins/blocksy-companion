@@ -14,9 +14,13 @@ class DemoInstallFinalActions {
 			exit;
 		}
 
+		$wpforms_settings = get_option('wpforms_settings', []);
+		$wpforms_settings['disable-css'] = '2';
+		update_option('wpforms_settings', $wpforms_settings);
+
 		$this->replace_urls();
 
-		do_action('blocksy:dynamic-css:regenere_css_files');
+		do_action('blocksy:dynamic-css:refresh-caches');
 		Plugin::instance()->cache_manager->run_cache_purge();
 
 		if (class_exists('WC_REST_System_Status_Tools_V2_Controller')) {
@@ -35,6 +39,28 @@ class DemoInstallFinalActions {
 
 		global $wp_rewrite;
 		$wp_rewrite->flush_rules();
+
+		if (get_option('qubely_global_options')) {
+			$maybe_presets = json_decode(
+				get_option('qubely_global_options'),
+				true
+			);
+
+			if (
+				$maybe_presets
+				&&
+				isset($maybe_presets['activePreset'])
+				&&
+				$maybe_presets['activePreset'] !== 'theme'
+			) {
+				$maybe_presets['activePreset'] = 'theme';
+
+				update_option(
+					'qubely_global_options',
+					json_encode($maybe_presets)
+				);
+			}
+		}
 
 		Plugin::instance()->demo->emit_sse_message([
 			'action' => 'complete',

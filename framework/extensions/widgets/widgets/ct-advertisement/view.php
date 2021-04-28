@@ -29,7 +29,11 @@ $ad_link_target = blocksy_default_akg( 'ad_link_target', $atts, 'yes' );
 
 $image_output = blc_call_fn(['fn' => 'blocksy_image'], [
 	'attachment_id' => blocksy_default_akg( 'ad_image/attachment_id', $atts, null ),
-	'ratio' => 'original',
+	'ratio' => blocksy_default_akg(
+		'ad_image_ratio',
+		$atts,
+		'original'
+	),
 	'tag_name' => 'a',
 	'size' => 'large',
 	'html_atts' => array_merge([

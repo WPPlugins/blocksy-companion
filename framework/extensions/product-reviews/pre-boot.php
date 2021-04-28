@@ -21,7 +21,7 @@ class BlocksyExtensionProductReviewsPreBoot {
 
 			wp_enqueue_style(
 				'blocksy-ext-product-reviews-admin-dashboard-styles',
-				BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/main-admin.css',
+				BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/main-admin.min.css',
 				[],
 				$data['Version']
 			);
