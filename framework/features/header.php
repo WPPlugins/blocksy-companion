@@ -200,7 +200,9 @@ class HeaderAdditions {
 				];
 			}
 
-			$args['has_transparent_header'] = $this->current_screen_has_transparent(false);
+			$args['has_transparent_header'] = $this->current_screen_has_transparent(
+				$check_transparent_conditions
+			);
 			$args['has_sticky_header'] = $this->current_screen_has_sticky($args['section_id']);
 
 			return $args;
