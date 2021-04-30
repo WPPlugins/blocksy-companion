@@ -163,7 +163,6 @@ class CacheResetManager {
 		}
 
 		if (class_exists('\SiteGround_Optimizer\Supercacher\Supercacher')) {
-			\SiteGround_Optimizer\Supercacher\Supercacher::get_instance()->purge_everything();
 			do_action('siteground_delete_assets');
 		}
 
