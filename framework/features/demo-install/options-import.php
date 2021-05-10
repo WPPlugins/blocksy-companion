@@ -376,8 +376,11 @@ class DemoInstallOptionsInstaller {
 		$data->attachment_id = $id;
 		$data->url = wp_get_attachment_url($id);
 		$data->thumbnail_url = wp_get_attachment_thumb_url($id);
-		$data->height = $meta['height'];
-		$data->width = $meta['width'];
+
+		if ($meta && is_array($meta)) {
+			$data->height = $meta['height'];
+			$data->width = $meta['width'];
+		}
 
 		$this->sideloaded_images[$file] = $data;
 

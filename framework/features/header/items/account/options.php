@@ -219,9 +219,9 @@ $options = [
 						'allow_empty' => true,
 						'setting' => [ 'transport' => 'postMessage' ],
 						'value' => [
-							'desktop' => true,
-							'tablet' => true,
-							'mobile' => true,
+							'desktop' => false,
+							'tablet' => false,
+							'mobile' => false,
 						],
 
 						'choices' => blocksy_ordered_keys([
@@ -425,9 +425,9 @@ $options = [
 						'allow_empty' => true,
 						'setting' => [ 'transport' => 'postMessage' ],
 						'value' => [
-							'desktop' => true,
-							'tablet' => true,
-							'mobile' => true,
+							'desktop' => false,
+							'tablet' => false,
+							'mobile' => false,
 						],
 
 						'choices' => blocksy_ordered_keys([

@@ -54,6 +54,13 @@ $options = [
 		])
 	],
 
+	'link_target' => [
+		'type'  => 'ct-switch',
+		'label' => __( 'Open Links In New Tab', 'blc' ),
+		'value' => 'no',
+		'disableRevertButton' => true,
+	],
+
 	'social_icons_size' => [
 		'label' => __( 'Icons Size', 'blc' ),
 		'type' => 'ct-radio',

@@ -195,6 +195,14 @@ class ConditionsManager {
 
 				global $post;
 
+				if (intval($post_id) === 0 && isset($post->post_name)) {
+					$maybe_post = get_page_by_path($post->post_name);
+
+					if ($maybe_post) {
+						$post_id = $maybe_post->ID;
+					}
+				}
+
 				if (
 					isset($rule['payload'])
 					&&

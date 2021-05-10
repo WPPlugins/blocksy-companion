@@ -25,6 +25,8 @@ export const getNameForPlugin = (plugin) =>
 			'recipe-card-blocks-by-wpzoom': 'Recipe Card Blocks by WPZOOM',
 			'stackable-ultimate-gutenberg-blocks':
 				'Stackable – Gutenberg Blocks',
+
+			'mb-custom-post-type': 'MB Custom Post Types & Custom Taxonomies',
 		}[plugin] || plugin
 	).replace(/\b\w/, (v) => v.toUpperCase()))
 

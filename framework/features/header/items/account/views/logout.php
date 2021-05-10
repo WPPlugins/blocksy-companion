@@ -4,9 +4,9 @@ $loggedout_account_label_visibility = blocksy_akg(
 	'loggedout_account_label_visibility',
 	$atts,
 	[
-		'desktop' => true,
-		'tablet' => true,
-		'mobile' => true,
+		'desktop' => false,
+		'tablet' => false,
+		'mobile' => false,
 	]
 );
 

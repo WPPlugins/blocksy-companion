@@ -79,7 +79,6 @@ $options = [
 				'label' => __( 'Enable on', 'blc' ),
 				'type' => 'ct-visibility',
 				'design' => 'block',
-				'sync' => 'live',
 				'value' => [
 					'desktop' => true,
 					// 'tablet' => true,
@@ -91,6 +90,10 @@ $options = [
 					// 'tablet' => __('Tablet', 'blc'),
 					'mobile' => __('Mobile', 'blc'),
 				]),
+
+				'sync' => [
+					'id' => 'header_placements_1'
+				],
 			],
 		],
 	],

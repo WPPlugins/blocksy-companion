@@ -165,6 +165,10 @@ class DemoInstallContentInstaller {
 			'demo' => $demo . ':' . $builder
 		]);
 
+		if (! get_post_type_object('class')) {
+			register_post_type('class');
+		}
+
 		$wp_import = new \Blocksy_WP_Import();
 		$import_data = $wp_import->parse($url);
 

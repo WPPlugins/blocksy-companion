@@ -86,6 +86,10 @@ class CacheResetManager {
 			sg_cachepress_purge_cache();
 		}
 
+		if (function_exists('sg_cachepress_purge_everything')) {
+			sg_cachepress_purge_everything();
+		}
+
 		if (class_exists('LiteSpeed_Cache_Purge')) {
 			\LiteSpeed_Cache_Purge::purge_all('Clear Cache For Me');
 		}
@@ -160,10 +164,6 @@ class CacheResetManager {
 
 		if (class_exists('Swift_Performance_Cache')) {
 			\Swift_Performance_Cache::clear_all_cache();
-		}
-
-		if (class_exists('\SiteGround_Optimizer\Supercacher\Supercacher')) {
-			do_action('siteground_delete_assets');
 		}
 
 		if (class_exists('ShortPixelAI')) {
