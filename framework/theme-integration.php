@@ -176,7 +176,8 @@ class ThemeIntegration {
 
 			$query_args = [
 				'posts_per_page' => 10,
-				'post_type' => $maybe_input['post_type']
+				'post_type' => $maybe_input['post_type'],
+				'suppress_filters' => true
 			];
 
 			if (

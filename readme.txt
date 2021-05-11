@@ -2,10 +2,10 @@
 Tags: widget, widgets
 Requires at least: 5.2
 Requires PHP: 7.0
-Tested up to: 5.6
+Tested up to: 5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.6
+Stable tag: 1.8.6.1
 
 == Description ==
 
@@ -23,6 +23,9 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.6.1: 2021-05-12
+- Improvement: General fixes and improvements
+
 1.8.6: 2021-05-11
 - Improvement: General fixes and improvements
 
