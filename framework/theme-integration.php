@@ -177,7 +177,8 @@ class ThemeIntegration {
 			$query_args = [
 				'posts_per_page' => 10,
 				'post_type' => $maybe_input['post_type'],
-				'suppress_filters' => true
+				'suppress_filters' => true,
+				'lang' => ''
 			];
 
 			if (
@@ -204,7 +205,7 @@ class ThemeIntegration {
 			$posts_result = $query->posts;
 
 			if (isset($maybe_input['alsoInclude'])) {
-				$maybe_post = get_post($maybe_input['alsoInclude']);
+				$maybe_post = get_post($maybe_input['alsoInclude'], 'display');
 
 				if ($maybe_post) {
 					$posts_result[] = $maybe_post;

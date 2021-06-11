@@ -181,24 +181,78 @@ class ExtensionsManager
     
     private function register_fake_extensions()
     {
-        return;
-        $this->extensions['custom-fonts'] = [
+        $this->extensions['adobe-typekit'] = [
             'path'     => null,
             '__object' => null,
             'config'   => [
-            'name'        => __( 'Custom Fonts', 'blc' ),
-            'description' => __( 'Upload unlimited number of custom fonts.', 'blc' ),
+            'name'        => __( 'Adobe Typekit', 'blc' ),
+            'description' => __( 'Connect your Typekit account and use your fonts in any typography option.', 'blc' ),
             'pro'         => true,
         ],
             'readme'   => '',
             'data'     => null,
         ];
-        $this->extensions['sidebars'] = [
+        $this->extensions['custom-code-snippets'] = [
             'path'     => null,
             '__object' => null,
             'config'   => [
-            'name'        => __( 'Sidebars', 'blc' ),
-            'description' => __( 'Create unlimited number of custom sidebars.', 'blc' ),
+            'name'        => __( 'Custom Code Snippets', 'blc' ),
+            'description' => __( 'Add custom code snippets in your header and footer, globally and per post or page individually.', 'blc' ),
+            'pro'         => true,
+        ],
+            'readme'   => '',
+            'data'     => null,
+        ];
+        $this->extensions['custom-fonts'] = [
+            'path'     => null,
+            '__object' => null,
+            'config'   => [
+            'name'        => __( 'Custom Fonts', 'blc' ),
+            'description' => __( 'Upload unlimited number of custom fonts or variable fonts and use them in any typography option.', 'blc' ),
+            'pro'         => true,
+        ],
+            'readme'   => '',
+            'data'     => null,
+        ];
+        $this->extensions['local-google-fonts'] = [
+            'path'     => null,
+            '__object' => null,
+            'config'   => [
+            'name'        => __( 'Local Google Fonts', 'blc' ),
+            'description' => __( 'Serve Google Fonts from your own server for full GDPR compliancy.', 'blc' ),
+            'pro'         => true,
+        ],
+            'readme'   => '',
+            'data'     => null,
+        ];
+        $this->extensions['advanced-menu'] = [
+            'path'     => null,
+            '__object' => null,
+            'config'   => [
+            'name'        => __( 'Advanced Menu', 'blc' ),
+            'description' => __( 'Create beautiful mega menus, assign icons add badges to menu items, and content blocks inside menu items.', 'blc' ),
+            'pro'         => true,
+        ],
+            'readme'   => '',
+            'data'     => null,
+        ];
+        $this->extensions['shortcuts-bar'] = [
+            'path'     => null,
+            '__object' => null,
+            'config'   => [
+            'name'        => __( 'Shortcuts Bar', 'blc' ),
+            'description' => __( 'Transform your website into a app like by displaying a neat shortcuts bar at the bottom of the vieport.', 'blc' ),
+            'pro'         => true,
+        ],
+            'readme'   => '',
+            'data'     => null,
+        ];
+        $this->extensions['multiple-sidebars'] = [
+            'path'     => null,
+            '__object' => null,
+            'config'   => [
+            'name'        => __( 'Multiple Sidebars', 'blc' ),
+            'description' => __( 'Create unlimited number of sidebars and display them conditionaly on any page or post.', 'blc' ),
             'pro'         => true,
         ],
             'readme'   => '',
@@ -208,8 +262,19 @@ class ExtensionsManager
             'path'     => null,
             '__object' => null,
             'config'   => [
-            'name'        => __( 'White Label', 'blc' ),
-            'description' => __( 'Change theme/companion branding', 'blc' ),
+            'name'        => __( 'White Label (Agency Package)', 'blc' ),
+            'description' => __( 'Change the theme and companion plugin branding to your own custom one.', 'blc' ),
+            'pro'         => true,
+        ],
+            'readme'   => '',
+            'data'     => null,
+        ];
+        $this->extensions['woocommerce-extra'] = [
+            'path'     => null,
+            '__object' => null,
+            'config'   => [
+            'name'        => __( 'WooCommerce Extra', 'blc' ),
+            'description' => __( 'Increase the conversion rate by adding a product quick view modal, a floating cart. Control the single product gallery/slider and the layout, add a wishlits page.', 'blc' ),
             'pro'         => true,
         ],
             'readme'   => '',

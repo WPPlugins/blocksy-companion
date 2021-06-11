@@ -48,9 +48,13 @@ if ($post_type !== 'page') {
 		$cat_id = blocksy_default_akg($cat_option_id, $atts, 'all_categories');
 		$cat_id = (empty($cat_id) || 'all_categories' === $cat_id) ? '' : $cat_id;
 
-		$query_args['orderby'] = ('recent' === blocksy_default_akg(
-			'type', $atts, 'recent'
-		)) ? 'post_date' : 'comment_count';
+		$type = blocksy_default_akg('type', $atts, 'recent');
+
+		if ($type !== 'default') {
+			$query_args['orderby'] = (
+				'recent' === $type
+			) ? 'post_date' : 'comment_count';
+		}
 
 		$query_args['date_query'] = $date_query;
 

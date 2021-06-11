@@ -800,14 +800,47 @@ $options = [
 				'options' => [
 
 					blocksy_rand_md5() => [
-						'type' => 'ct-divider',
+						'type' => 'ct-title',
+						'label' => __( 'Modal Options', 'blocksy' ),
+					],
+
+					'account_modal_font_color' => [
+						'label' => __( 'Font Color', 'blc' ),
+						'type'  => 'ct-color-picker',
+						'design' => 'inline',
+						'divider' => 'bottom',
+						'setting' => [ 'transport' => 'postMessage' ],
+
+						'value' => [
+							'default' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+
+							'hover' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+						],
+
+						'pickers' => [
+							[
+								'title' => __( 'Initial', 'blc' ),
+								'id' => 'default',
+								'inherit' => 'var(--color)'
+							],
+
+							[
+								'title' => __( 'Hover', 'blc' ),
+								'id' => 'hover',
+								'inherit' => 'var(--linkHoverColor)'
+							],
+						],
 					],
 
 					'account_form_shadow' => [
-						'label' => __( 'Form Shadow', 'blc' ),
+						'label' => __( 'Modal Shadow', 'blc' ),
 						'type' => 'ct-box-shadow',
-						'design' => 'block',
-						'responsive' => true,
+						'design' => 'inline',
+						// 'responsive' => true,
 						'value' => blocksy_box_shadow_value([
 							'enable' => true,
 							'h_offset' => 0,
@@ -817,36 +850,6 @@ $options = [
 							'inset' => false,
 							'color' => [
 								'color' => 'rgba(0, 0, 0, 0.35)',
-							],
-						])
-					],
-
-					'accountHeaderFormBackground' => [
-						'label' => __( 'Form Background', 'blc' ),
-						'type'  => 'ct-background',
-						'design' => 'inline',
-						'divider' => 'top',
-						'setting' => [ 'transport' => 'postMessage' ],
-						'value' => blocksy_background_default_value([
-							'backgroundColor' => [
-								'default' => [
-									'color' => '#ffffff'
-								],
-							],
-						])
-					],
-
-					'accountHeaderBackground' => [
-						'label' => __( 'Form Backdrop', 'blc' ),
-						'type'  => 'ct-background',
-						'design' => 'inline',
-						'divider' => 'top',
-						'setting' => [ 'transport' => 'postMessage' ],
-						'value' => blocksy_background_default_value([
-							'backgroundColor' => [
-								'default' => [
-									'color' => 'rgba(18, 21, 25, 0.6)'
-								],
 							],
 						])
 					],
@@ -912,6 +915,36 @@ $options = [
 								'inherit' => 'rgba(0, 0, 0, 0.5)'
 							],
 						],
+					],
+
+					'accountHeaderFormBackground' => [
+						'label' => __( 'Modal Background', 'blc' ),
+						'type'  => 'ct-background',
+						'design' => 'inline',
+						'divider' => 'top',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'value' => blocksy_background_default_value([
+							'backgroundColor' => [
+								'default' => [
+									'color' => '#ffffff'
+								],
+							],
+						])
+					],
+
+					'accountHeaderBackground' => [
+						'label' => __( 'Modal Backdrop', 'blc' ),
+						'type'  => 'ct-background',
+						'design' => 'inline',
+						'divider' => 'top',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'value' => blocksy_background_default_value([
+							'backgroundColor' => [
+								'default' => [
+									'color' => 'rgba(18, 21, 25, 0.6)'
+								],
+							],
+						])
 					],
 
 				],

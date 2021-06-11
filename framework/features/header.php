@@ -214,8 +214,18 @@ class HeaderAdditions {
 		});
 
 		add_filter('blocksy:footer:offcanvas-drawer', function ($els) {
+			global $blocksy_has_default_header;
+
+			if (
+				! isset($blocksy_has_default_header)
+				||
+				! $blocksy_has_default_header
+			) {
+				return $els;
+			}
+
 			if (! class_exists('Blocksy_Header_Builder_Render')) {
-				return;
+				return $els;
 			}
 
 			$render = new \Blocksy_Header_Builder_Render();

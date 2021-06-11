@@ -70,18 +70,63 @@ if (! function_exists('blc_get_trending_posts_value')) {
 			$post_type = 'post';
 		}
 
+		$source = get_theme_mod('trending_block_post_source', 'categories');
+
+		$query_args = [
+			'post_type' => $post_type,
+			'order' => 'DESC',
+			'posts_per_page' => 4,
+			'orderby' => 'comment_count',
+			'paged' => $args['paged'],
+			'ignore_sticky_posts' => true,
+			'post_status' => 'publish'
+		];
+
+		if ($source === 'categories') {
+			$query_args['date_query'] = $date_query;
+			$cat_option_id = 'trending_block_category';
+			$taxonomy = 'category';
+
+			if ($post_type !== 'post') {
+				$cat_option_id = 'trending_block_' . $post_type . '_taxonomy';
+				$taxonomies = get_object_taxonomies($post_type);
+
+				if (count($taxonomies) > 0) {
+					$taxonomy = $taxonomies[0];
+				}
+			}
+
+			$cat_id = get_theme_mod($cat_option_id, 'all_categories');
+
+			$cat_id = (empty($cat_id) || 'all_categories' === $cat_id) ? '' : $cat_id;
+
+			if (! empty($cat_id)) {
+				$query_args['tax_query'] = [
+					[
+						'taxonomy' => $taxonomy,
+						'field' => 'term_id',
+						'terms' => [$cat_id]
+					]
+				];
+			}
+		}
+
+		if ($source === 'custom') {
+			$post_id = get_theme_mod('trending_block_post_id', '');
+
+			$query_args['orderby'] = 'post__in';
+			$query_args['post__in'] = ['__INEXISTING__'];
+
+			if (! empty(trim($post_id))) {
+				$query_args['post__in'] = explode(',', str_replace(' ', '', trim(
+					$post_id
+				)));
+			}
+		}
+
 		$query = new WP_Query(apply_filters(
 			'blocksy:trending-posts:query-args',
-			[
-				'post_type' => $post_type,
-				'order' => 'DESC',
-				'date_query' => $date_query,
-				'posts_per_page' => 4,
-				'orderby' => 'comment_count',
-				'paged' => $args['paged'],
-				'ignore_sticky_posts' => true,
-				'post_status' => 'publish'
-			]
+			$query_args
 		));
 
 		if (! $query->have_posts()) {
@@ -166,12 +211,17 @@ function blc_get_trending_block($forced = false) {
 		$attr['data-location'] = 'trending_posts_ext';
 	}
 
+	$trending_label = get_theme_mod(
+		'trending_block_label',
+		__('Trending now', 'blc')
+	);
+
 	?>
 
 	<section <?php echo blocksy_attr_to_html($attr) ?>>
 		<div class="ct-container" <?php echo $data_page ?>>
 			<h5 class="ct-block-title">
-				<?php echo __('Trending now', 'blc') ?>
+				<?php echo $trending_label ?>
 
 				<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
 

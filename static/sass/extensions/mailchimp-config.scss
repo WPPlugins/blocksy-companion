@@ -2,12 +2,22 @@
 	--modal-min-height: 300px;
 }
 
+.ct-newsletter-select-provider {
+	padding-top: 1.5em;
+	border-top: 1px dashed #eee;
+
+	p {
+		margin-top: 1em;
+		font-style: italic;
+	}
+}
+
 .mailchimp-credentials {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 10px;
-	margin: 5px 0 0 0;
-	padding: 25px 0 0 0;
+	margin-top: 1.5em;
+	padding-top: 1.5em;
 	border-top: 1px dashed #eee;
 
 	section {

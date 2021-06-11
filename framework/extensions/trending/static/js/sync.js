@@ -49,3 +49,17 @@ wp.customize('trending_block_visibility', (value) =>
 		)
 	)
 )
+
+wp.customize('trending_block_label', (value) =>
+	value.bind((to) => {
+		const title = document.querySelector(
+			'.ct-trending-block .ct-block-title'
+		)
+
+		if (title) {
+			const components = title.innerHTML.split('<svg')
+			components[0] = to
+			title.innerHTML = components.join('<svg')
+		}
+	})
+)

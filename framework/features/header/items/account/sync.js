@@ -80,8 +80,22 @@ ctEvents.on(
 					),
 					type: 'box-shadow',
 					variable: 'box-shadow',
-					responsive: true,
+					// responsive: true,
 				},
+
+				account_modal_font_color: [
+					{
+						selector: '#account-modal .ct-account-form',
+						variable: 'color',
+						type: 'color:default',
+					},
+
+					{
+						selector: '#account-modal .ct-account-form',
+						variable: 'linkHoverColor',
+						type: 'color:hover',
+					},
+				],
 
 				account_close_button_color: [
 					{

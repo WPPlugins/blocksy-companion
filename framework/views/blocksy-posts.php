@@ -94,7 +94,10 @@ if (
 	$query_args['tax_query'] = $tax_query;
 }
 
-$query = new WP_Query($query_args);
+$query = new WP_Query(apply_filters(
+	'blocksy:general:shortcodes:blocksy-posts:args',
+	$query_args
+));
 
 if ($args['view'] === 'slider') {
 	$items = '';

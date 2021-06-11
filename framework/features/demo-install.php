@@ -324,12 +324,16 @@ class DemoInstall {
 		flush();
 
 		// 2KB padding for IE
-		echo ':' . str_repeat( ' ', 2048 ) . "\n\n";
+		echo ':' . str_repeat(' ', 2048) . "\n\n";
 		// Time to run the import!
-		set_time_limit( 0 );
-		// Ensure we're not buffered.
-		wp_ob_end_flush_all();
-	}
+		set_time_limit(0);
+
+		remove_action('shutdown', 'wp_ob_end_flush_all', 1);
+
+		add_action('shutdown', function() {
+			while (@ob_end_flush());
+		});
+    }
 
 	public function emit_sse_message( $data ) {
 		echo "event: message\n";

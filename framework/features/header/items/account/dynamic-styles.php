@@ -111,8 +111,8 @@ blocksy_output_background_css([
 
 blocksy_output_box_shadow([
 	'css' => $css,
-	'tablet_css' => $tablet_css,
-	'mobile_css' => $mobile_css,
+	// 'tablet_css' => $tablet_css,
+	// 'mobile_css' => $mobile_css,
 	'selector' => blc_call_fn([
 		'fn' => 'blocksy_assemble_selector',
 		'default' => $root_selector
@@ -134,7 +134,7 @@ blocksy_output_box_shadow([
 			'color' => 'rgba(0, 0, 0, 0.35)',
 		],
 	])),
-	'responsive' => true
+	// 'responsive' => true
 ]);
 
 // Item margin
@@ -380,6 +380,45 @@ if (isset($has_sticky_header) && $has_sticky_header) {
 		'responsive' => true
 	]);
 }
+
+blocksy_output_colors([
+	'value' => blocksy_akg('account_modal_font_color', $atts),
+	'default' => [
+		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+	],
+	'css' => $css,
+
+	'variables' => [
+		'default' => [
+			'selector' => blc_call_fn([
+				'fn' => 'blocksy_assemble_selector',
+				'default' => $root_selector
+			], blc_call_fn([
+				'fn' => 'blocksy_mutate_selector',
+			], [
+				'selector' => [$root_selector[0]],
+				'operation' => 'suffix',
+				'to_add' => '#account-modal .ct-account-form'
+			])),
+			'variable' => 'color'
+		],
+
+		'hover' => [
+			'selector' => blc_call_fn([
+				'fn' => 'blocksy_assemble_selector',
+				'default' => $root_selector
+			], blc_call_fn([
+				'fn' => 'blocksy_mutate_selector',
+			], [
+				'selector' => [$root_selector[0]],
+				'operation' => 'suffix',
+				'to_add' => '#account-modal .ct-account-form'
+			])),
+			'variable' => 'linkHoverColor'
+		]
+	],
+]);
 
 blocksy_output_colors([
 	'value' => blocksy_akg('account_close_button_color', $atts),

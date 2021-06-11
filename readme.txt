@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.6.1
+Stable tag: 1.8.6.2
 
 == Description ==
 
@@ -23,6 +23,21 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.6.2: 2021-06-11
+- New: Trending posts extension custom module label option
+- New: Integration with Simple Custom Post Order plugin
+- New: Implement filter for blocksy posts shortcode wp query args
+- New: Header account item redirect URL filter
+- Improvement: More options for the trending posts block
+- Fix: Social widget alignment when inside footer column
+
+1.8.6.2-beta8: 2021-06-09
+- New: Integration with Simple Custom Post Order plugin
+- New: Implement filter for blocksy posts shortcode wp query args
+- New: Header account item redirect URL filter
+- Improvement: More options for the trending posts block
+- Fix: Social widget alignment when inside footer column
+
 1.8.6.1: 2021-05-12
 - Improvement: General fixes and improvements
 

@@ -1,11 +1,17 @@
-.ct-activation-action-modal {
-	color: #687c93;
+.ct-onboarding-modal{
+	--modal-width: 500px;
+	--modal-min-height: 360px;
+
 	text-align: center;
-	padding: 30px;
+
+	.close-button {
+		display: none;
+	}
 
 	svg {
-		width: 65px;
-		height: 65px;
+		width: 55px;
+		height: 55px;
+		margin: 0 auto 25px auto;
 	}
 	
 	h2 {

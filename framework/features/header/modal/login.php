@@ -1,4 +1,13 @@
-<?php //wp_login_form([]); ?>
+<?php
+
+// wp_login_form([]);
+
+$redirect_to_url = apply_filters(
+	'blocksy:account:modal:login:redirect_to',
+	blocksy_current_url()
+);
+
+?>
 
 <form name="loginform" id="loginform" action="<?php echo wp_login_url() ?>" method="post">
 	<?php do_action('woocommerce_login_form_start'); ?>
@@ -32,7 +41,7 @@
 			<?php echo __('Log In', 'blc') ?>
 		</button>
 
-		<input type="hidden" name="redirect_to" value="<?php echo blocksy_current_url() ?>">
+		<input type="hidden" name="redirect_to" value="<?php echo $redirect_to_url ?>">
 	</p>
 
 	<?php do_action('blocksy:account:modal:login:end'); ?>

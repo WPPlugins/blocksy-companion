@@ -348,7 +348,7 @@ export const mountStickyHeader = () => {
 				}, 0)
 
 				;[
-					...stickyContainer.querySelectorAll('[data-row="middle"]'),
+					...stickyContainer.querySelectorAll('[data-row*="middle"]'),
 				].map((row) => {
 					if (
 						row.querySelector(
@@ -413,42 +413,42 @@ export const mountStickyHeader = () => {
 
 				if (
 					containerStickyHeight !== containerInitialHeight &&
-					stickyContainer.querySelector('[data-row="middle"]')
+					stickyContainer.querySelector('[data-row*="middle"]')
 				) {
-					;[stickyContainer.querySelector('[data-row="middle"]')].map(
-						(row) => {
-							let rowInitialHeight = getRowInitialHeight(row)
-							let rowStickyHeight = getRowStickyHeight(row)
+					;[
+						stickyContainer.querySelector('[data-row*="middle"]'),
+					].map((row) => {
+						let rowInitialHeight = getRowInitialHeight(row)
+						let rowStickyHeight = getRowStickyHeight(row)
 
-							if (rowInitialHeight !== rowStickyHeight) {
-								row.style.setProperty(
-									'--shrinkHeight',
-									`${computeLinearScale(
-										[
-											startPosition,
-											startPosition +
-												Math.abs(
-													rowInitialHeight -
-														rowStickyHeight
-												),
-										],
-										[rowInitialHeight, rowStickyHeight],
-										clamp(
-											startPosition,
+						if (rowInitialHeight !== rowStickyHeight) {
+							row.style.setProperty(
+								'--shrinkHeight',
+								`${computeLinearScale(
+									[
+										startPosition,
+										startPosition +
+											Math.abs(
+												rowInitialHeight -
+													rowStickyHeight
+											),
+									],
+									[rowInitialHeight, rowStickyHeight],
+									clamp(
+										startPosition,
 
-											startPosition +
-												Math.abs(
-													rowInitialHeight -
-														rowStickyHeight
-												),
+										startPosition +
+											Math.abs(
+												rowInitialHeight -
+													rowStickyHeight
+											),
 
-											scrollY
-										)
-									)}px`
-								)
-							}
+										scrollY
+									)
+								)}px`
+							)
 						}
-					)
+					})
 				}
 			} else {
 				stickyContainer.parentNode.removeAttribute('style')
@@ -459,7 +459,7 @@ export const mountStickyHeader = () => {
 
 				Array.from(
 					stickyContainer.querySelectorAll(
-						'[data-row="middle"] .site-logo-container'
+						'[data-row*="middle"] .site-logo-container'
 					)
 				).map((el) => el.removeAttribute('style'))
 

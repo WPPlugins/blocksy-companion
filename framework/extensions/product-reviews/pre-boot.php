@@ -15,7 +15,7 @@ class BlocksyExtensionProductReviewsPreBoot {
 			wp_enqueue_script(
 				'blocksy-ext-product-reviews-admin-dashboard-scripts',
 				BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/dashboard.js',
-				['ct-options-scripts'],
+				['ct-options-scripts', 'ct-dashboard-scripts'],
 				$data['Version']
 			);
 
