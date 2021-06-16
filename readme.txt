@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.6.2
+Stable tag: 1.8.6.3
 
 == Description ==
 
@@ -23,6 +23,9 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.6.3: 2021-06-16
+- Improvement: General fixes and improvements
+
 1.8.6.2: 2021-06-11
 - New: Trending posts extension custom module label option
 - New: Integration with Simple Custom Post Order plugin

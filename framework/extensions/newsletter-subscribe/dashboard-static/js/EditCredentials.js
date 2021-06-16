@@ -121,7 +121,7 @@ const EditCredentials = ({
 									dangerouslySetInnerHTML={{
 										__html: sprintf(
 											__(
-												'This optyion is available only in Blocksy premium %sversion%s.',
+												'This option is available only in Blocksy premium %sversion%s.',
 												'blc'
 											),
 
