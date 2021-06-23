@@ -36,8 +36,23 @@ class CustomizerOptionsManager {
 				wp_send_json_error();
 			}
 
-			$data = @unserialize(wp_unslash($_POST['data']));
+			if (! isset($_POST['nonce'])) {
+				wp_send_json_error();
+			}
 
+			if (! wp_verify_nonce($_POST['nonce'], 'ct-customizer-reset')) {
+				wp_send_json_error();
+			}
+
+			// Ensure only stdClass is allowed
+			// We need it for properly decoding widget data. Custom classes
+			// besides stdClass are not allowed.
+			$data = @unserialize(wp_unslash($_POST['data']), [
+				'allowed_classes' => ['stdClass']
+			]);
+
+			// The above code will only import stuff from $data['mods']
+			// that is actually a customizer control. Everything else will be ignored
 			if (isset($data['mods'])) {
 				$importer = new DemoInstallOptionsInstaller([
 					'has_streaming' => false
@@ -45,7 +60,7 @@ class CustomizerOptionsManager {
 
 				$demo_data = null;
 
-				if (isset($data['site_url'])) {
+				if (isset($data['site_url']) && is_string($data['site_url'])) {
 					$demo_data = [
 						'url' => $data['site_url']
 					];
@@ -54,6 +69,9 @@ class CustomizerOptionsManager {
 				$importer->import_options($data, $demo_data);
 			}
 
+			// Will only import $data['blocksy_widgets'] that has an actual
+			// widget. Everything else is going to be ignored from being
+			// processed.
 			if (isset($data['blocksy_widgets'])) {
 				$importer = new DemoInstallWidgetsInstaller([
 					'has_streaming' => false

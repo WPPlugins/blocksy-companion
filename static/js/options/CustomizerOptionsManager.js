@@ -167,6 +167,12 @@ const CustomizerOptionsManager = () => {
 										'action',
 										'blocksy_customizer_import'
 									)
+
+									body.append(
+										'nonce',
+										ct_customizer_localizations.customizer_reset_none
+									)
+
 									body.append('wp_customize', 'on')
 									body.append('data', evt.target.result)
 
