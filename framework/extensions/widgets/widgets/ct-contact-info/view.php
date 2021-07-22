@@ -64,7 +64,8 @@ echo blc_call_fn(['fn' => 'blc_get_contacts_output'], [
 	'link_target' => blocksy_default_akg('contact_link_target', $atts, 'no'),
 	'type' => blocksy_akg('contacts_icon_shape', $atts, 'rounded'),
 	'fill' => blocksy_akg('contacts_icon_fill_type', $atts, 'outline'),
-	'size' => blocksy_akg('contacts_icons_size', $atts, 'medium')
+	'size' => blocksy_akg('contacts_icons_size', $atts, 'medium'),
+	'direction' => 'vertical'
 ]);
 
 echo wp_kses_post($after_widget);

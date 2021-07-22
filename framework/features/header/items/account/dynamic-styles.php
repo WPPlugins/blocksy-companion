@@ -4,6 +4,8 @@ if (! isset($root_selector)) {
 	$root_selector = ['.ct-header-account'];
 }
 
+$forms_type =  get_theme_mod('forms_type', 'classic-forms');
+
 // Icon size
 $accountHeaderIconSize = blocksy_akg( 'accountHeaderIconSize', $atts, 15 );
 
@@ -419,6 +421,126 @@ blocksy_output_colors([
 		]
 	],
 ]);
+
+blocksy_output_colors([
+	'value' => blocksy_akg('account_modal_form_text_color', $atts),
+	'default' => [
+		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		'focus' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+	],
+	'css' => $css,
+
+	'variables' => [
+		'default' => [
+			'selector' => blc_call_fn([
+				'fn' => 'blocksy_assemble_selector',
+				'default' => $root_selector
+			], blc_call_fn([
+				'fn' => 'blocksy_mutate_selector',
+			], [
+				'selector' => [$root_selector[0]],
+				'operation' => 'suffix',
+				'to_add' => '#account-modal form'
+			])),
+			'variable' => 'form-text-initial-color'
+		],
+
+		'focus' => [
+			'selector' => blc_call_fn([
+				'fn' => 'blocksy_assemble_selector',
+				'default' => $root_selector
+			], blc_call_fn([
+				'fn' => 'blocksy_mutate_selector',
+			], [
+				'selector' => [$root_selector[0]],
+				'operation' => 'suffix',
+				'to_add' => '#account-modal form'
+			])),
+			'variable' => 'form-text-focus-color'
+		]
+	],
+]);
+
+blocksy_output_colors([
+	'value' => blocksy_akg('account_modal_form_border_color', $atts),
+	'default' => [
+		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		'focus' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+	],
+	'css' => $css,
+
+	'variables' => [
+		'default' => [
+			'selector' => blc_call_fn([
+				'fn' => 'blocksy_assemble_selector',
+				'default' => $root_selector
+			], blc_call_fn([
+				'fn' => 'blocksy_mutate_selector',
+			], [
+				'selector' => [$root_selector[0]],
+				'operation' => 'suffix',
+				'to_add' => '#account-modal form'
+			])),
+			'variable' => 'form-field-border-initial-color'
+		],
+
+		'focus' => [
+			'selector' => blc_call_fn([
+				'fn' => 'blocksy_assemble_selector',
+				'default' => $root_selector
+			], blc_call_fn([
+				'fn' => 'blocksy_mutate_selector',
+			], [
+				'selector' => [$root_selector[0]],
+				'operation' => 'suffix',
+				'to_add' => '#account-modal form'
+			])),
+			'variable' => 'form-field-border-focus-color'
+		]
+	],
+]);
+
+if ($forms_type !== 'classic-forms' || is_customize_preview()) {
+	blocksy_output_colors([
+		'value' => blocksy_akg('account_modal_form_background_color', $atts),
+		'default' => [
+			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+			'focus' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		],
+		'css' => $css,
+
+		'variables' => [
+			'default' => [
+				'selector' => blc_call_fn([
+					'fn' => 'blocksy_assemble_selector',
+					'default' => $root_selector
+				], blc_call_fn([
+					'fn' => 'blocksy_mutate_selector',
+				], [
+					'selector' => [$root_selector[0]],
+					'operation' => 'suffix',
+					'to_add' => '#account-modal form'
+				])),
+				'variable' => 'form-field-initial-background'
+			],
+
+			'focus' => [
+				'selector' => blc_call_fn([
+					'fn' => 'blocksy_assemble_selector',
+					'default' => $root_selector
+				], blc_call_fn([
+					'fn' => 'blocksy_mutate_selector',
+				], [
+					'selector' => [$root_selector[0]],
+					'operation' => 'suffix',
+					'to_add' => '#account-modal form'
+				])),
+				'variable' => 'form-field-focus-background'
+			]
+		],
+	]);
+}
+
 
 blocksy_output_colors([
 	'value' => blocksy_akg('account_close_button_color', $atts),

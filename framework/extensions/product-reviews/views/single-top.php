@@ -1,8 +1,12 @@
 <?php
 
-$atts = blocksy_get_post_options(null, [
-	'meta_id' => 'blocksy_product_review_options'
-]);
+$atts = apply_filters(
+	'blocksy:ext:product-reviews:frontend:atts',
+	blocksy_get_post_options(null, [
+		'meta_id' => 'blocksy_product_review_options'
+	]),
+	get_the_ID()
+);
 
 $gallery_images = array_map(function ($item) {
 	return $item['attachment_id'];
@@ -103,9 +107,13 @@ if (! empty($scores)) {
 
 	echo '<div class="ct-overall-score">';
 
-	$avg_score = round(array_reduce($scores, function ($carry, $score) {
-		return $carry + intval($score['score']);
-	}, 0) / count($scores) * 2) / 2;
+	$avg_score = apply_filters(
+		'blocksy:ext:product-reviews:overall-score',
+		round(array_reduce($scores, function ($carry, $score) {
+			return $carry + intval($score['score']);
+		}, 0) / count($scores) * 2) / 2,
+		$scores
+	);
 
 	echo '<span class="ct-average-score">' . $avg_score . '/5</span>';
 

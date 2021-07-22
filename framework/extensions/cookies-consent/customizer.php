@@ -199,7 +199,7 @@ $options = [
 					'label' => false,
 					'type' => 'wp-editor',
 					'value' => sprintf(
-						__('I accept the %sPrivacy Policy%s', 'blc'),
+						__('I accept the %sPrivacy Policy%s*', 'blc'),
 						'<a href="/privacy-policy">',
 						'</a>'
 					),

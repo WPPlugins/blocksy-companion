@@ -48,7 +48,7 @@ $options = [
 	],
 
 	blocksy_rand_md5() => [
-		'title' => __( 'General', 'blocksy' ),
+		'title' => __( 'General', 'blc' ),
 		'type' => 'tab',
 		'options' => [
 
@@ -164,32 +164,32 @@ $options = [
 
 									'type-1' => [
 										'src'   => blocksy_image_picker_file( 'account-1' ),
-										'title' => __( 'Type 1', 'blocksy' ),
+										'title' => __( 'Type 1', 'blc' ),
 									],
 
 									'type-2' => [
 										'src'   => blocksy_image_picker_file( 'account-2' ),
-										'title' => __( 'Type 2', 'blocksy' ),
+										'title' => __( 'Type 2', 'blc' ),
 									],
 
 									'type-3' => [
 										'src'   => blocksy_image_picker_file( 'account-3' ),
-										'title' => __( 'Type 3', 'blocksy' ),
+										'title' => __( 'Type 3', 'blc' ),
 									],
 
 									'type-4' => [
 										'src'   => blocksy_image_picker_file( 'account-4' ),
-										'title' => __( 'Type 4', 'blocksy' ),
+										'title' => __( 'Type 4', 'blc' ),
 									],
 
 									'type-5' => [
 										'src'   => blocksy_image_picker_file( 'account-5' ),
-										'title' => __( 'Type 5', 'blocksy' ),
+										'title' => __( 'Type 5', 'blc' ),
 									],
 
 									'type-6' => [
 										'src'   => blocksy_image_picker_file( 'account-6' ),
-										'title' => __( 'Type 6', 'blocksy' ),
+										'title' => __( 'Type 6', 'blc' ),
 									],
 								],
 							],
@@ -225,9 +225,9 @@ $options = [
 						],
 
 						'choices' => blocksy_ordered_keys([
-							'desktop' => __( 'Desktop', 'blocksy' ),
-							'tablet' => __( 'Tablet', 'blocksy' ),
-							'mobile' => __( 'Mobile', 'blocksy' ),
+							'desktop' => __( 'Desktop', 'blc' ),
+							'tablet' => __( 'Tablet', 'blc' ),
+							'mobile' => __( 'Mobile', 'blc' ),
 						]),
 					],
 
@@ -370,32 +370,32 @@ $options = [
 
 									'type-1' => [
 										'src'   => blocksy_image_picker_file( 'account-1' ),
-										'title' => __( 'Type 1', 'blocksy' ),
+										'title' => __( 'Type 1', 'blc' ),
 									],
 
 									'type-2' => [
 										'src'   => blocksy_image_picker_file( 'account-2' ),
-										'title' => __( 'Type 2', 'blocksy' ),
+										'title' => __( 'Type 2', 'blc' ),
 									],
 
 									'type-3' => [
 										'src'   => blocksy_image_picker_file( 'account-3' ),
-										'title' => __( 'Type 3', 'blocksy' ),
+										'title' => __( 'Type 3', 'blc' ),
 									],
 
 									'type-4' => [
 										'src'   => blocksy_image_picker_file( 'account-4' ),
-										'title' => __( 'Type 4', 'blocksy' ),
+										'title' => __( 'Type 4', 'blc' ),
 									],
 
 									'type-5' => [
 										'src'   => blocksy_image_picker_file( 'account-5' ),
-										'title' => __( 'Type 5', 'blocksy' ),
+										'title' => __( 'Type 5', 'blc' ),
 									],
 
 									'type-6' => [
 										'src'   => blocksy_image_picker_file( 'account-6' ),
-										'title' => __( 'Type 6', 'blocksy' ),
+										'title' => __( 'Type 6', 'blc' ),
 									],
 								],
 							],
@@ -431,9 +431,9 @@ $options = [
 						],
 
 						'choices' => blocksy_ordered_keys([
-							'desktop' => __( 'Desktop', 'blocksy' ),
-							'tablet' => __( 'Tablet', 'blocksy' ),
-							'mobile' => __( 'Mobile', 'blocksy' ),
+							'desktop' => __( 'Desktop', 'blc' ),
+							'tablet' => __( 'Tablet', 'blc' ),
+							'mobile' => __( 'Mobile', 'blc' ),
 						]),
 					],
 
@@ -494,7 +494,7 @@ $options = [
 
 
 	blocksy_rand_md5() => [
-		'title' => __( 'Design', 'blocksy' ),
+		'title' => __( 'Design', 'blc' ),
 		'type' => 'tab',
 		'options' => [
 
@@ -801,7 +801,7 @@ $options = [
 
 					blocksy_rand_md5() => [
 						'type' => 'ct-title',
-						'label' => __( 'Modal Options', 'blocksy' ),
+						'label' => __( 'Modal Options', 'blc' ),
 					],
 
 					'account_modal_font_color' => [
@@ -836,11 +836,111 @@ $options = [
 						],
 					],
 
+					'account_modal_form_text_color' => [
+						'label' => __( 'Input Font Color', 'blc' ),
+						'type'  => 'ct-color-picker',
+						'design' => 'inline',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'value' => [
+							'default' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+
+							'focus' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+						],
+
+						'pickers' => [
+							[
+								'title' => __( 'Initial', 'blc' ),
+								'id' => 'default',
+								'inherit' => 'var(--form-text-initial-color, var(--color))'
+							],
+
+							[
+								'title' => __( 'Focus', 'blc' ),
+								'id' => 'focus',
+								'inherit' => 'var(--form-text-focus-color, var(--color))'
+							],
+						],
+					],
+
+					'account_modal_form_border_color' => [
+						'label' => __( 'Input Border Color', 'blc' ),
+						'type'  => 'ct-color-picker',
+						'design' => 'inline',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'value' => [
+							'default' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+
+							'focus' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+						],
+
+						'pickers' => [
+							[
+								'title' => __( 'Initial', 'blc' ),
+								'id' => 'default',
+								'inherit' => 'var(--form-field-border-initial-color)'
+							],
+
+							[
+								'title' => __( 'Focus', 'blc' ),
+								'id' => 'focus',
+								'inherit' => 'var(--form-field-border-focus-color)'
+							],
+						],
+					],
+
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => ['forms_type' => 'classic-forms'],
+						'values_source' => 'global',
+						'options' => [
+
+							'account_modal_form_background_color' => [
+								'label' => __( 'Input Background Color', 'blc' ),
+								'type'  => 'ct-color-picker',
+								'design' => 'inline',
+								'setting' => [ 'transport' => 'postMessage' ],
+								'value' => [
+									'default' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+
+									'focus' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+								],
+
+								'pickers' => [
+									[
+										'title' => __( 'Initial', 'blc' ),
+										'id' => 'default',
+										'inherit' => 'var(--form-field-initial-background)'
+									],
+
+									[
+										'title' => __( 'Focus', 'blc' ),
+										'id' => 'focus',
+										'inherit' => 'var(--form-field-focus-background)'
+									],
+								],
+							],
+
+						],
+					],
+
 					'account_form_shadow' => [
 						'label' => __( 'Modal Shadow', 'blc' ),
 						'type' => 'ct-box-shadow',
 						'design' => 'inline',
 						// 'responsive' => true,
+						'divider' => 'top',
 						'value' => blocksy_box_shadow_value([
 							'enable' => true,
 							'h_offset' => 0,
@@ -963,7 +1063,7 @@ $options = [
 			],
 
 			'header_account_visibility' => [
-				'label' => __( 'Element Visibility', 'blocksy' ),
+				'label' => __( 'Element Visibility', 'blc' ),
 				'type' => 'ct-visibility',
 				'design' => 'block',
 				'setting' => [ 'transport' => 'postMessage' ],
@@ -974,8 +1074,8 @@ $options = [
 				],
 
 				'choices' => blocksy_ordered_keys([
-					'tablet' => __( 'Tablet', 'blocksy' ),
-					'mobile' => __( 'Mobile', 'blocksy' ),
+					'tablet' => __( 'Tablet', 'blc' ),
+					'mobile' => __( 'Mobile', 'blc' ),
 				]),
 			],
 

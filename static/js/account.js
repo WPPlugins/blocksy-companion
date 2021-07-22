@@ -2,45 +2,55 @@ import ctEvents from 'ct-events'
 import { registerDynamicChunk } from 'blocksy-frontend'
 import { handleAccountModal, activateScreen } from './frontend/account'
 
-if (document.querySelector('#account-modal')) {
-	handleAccountModal(document.querySelector('#account-modal'))
+const ensureAccountModalPresent = (cb) => {
+	const selector = '#account-modal'
+	try {
+		document.querySelector(selector)
+	} catch (e) {
+		return
+	}
+
+	if (document.querySelector(selector)) {
+		cb(document.querySelector(selector))
+		return
+	}
+
+	fetch(
+		`${ct_localizations.ajax_url}?action=blc_retrieve_account_modal`,
+
+		{
+			method: 'POST',
+		}
+	)
+		.then((response) => response.json())
+		.then(({ data: { html } }) => {
+			const drawerCanvas = document.querySelector('.ct-drawer-canvas')
+			drawerCanvas.insertAdjacentHTML('beforeend', html)
+
+			setTimeout(() => {
+				cb(document.querySelector(selector))
+			})
+		})
 }
 
 registerDynamicChunk('blocksy_account', {
 	mount: (el, { event }) => {
 		event.preventDefault()
 
-		if (el.closest('.must-log-in')) {
-			let maybeAccount = document.querySelector(
-				'.ct-header-account[href]'
-			)
+		ensureAccountModalPresent((accountModal) => {
+			handleAccountModal(accountModal)
 
-			if (maybeAccount) {
-				maybeAccount.click()
-			} else {
-				event.target.dynamicJsChunkStop()
-				event.target.click()
-			}
+			activateScreen(accountModal, {
+				screen: el.dataset.view || 'login',
+			})
 
-			return
-		}
-
-		try {
-			document.querySelector(el.hash)
-		} catch (e) {
-			return
-		}
-
-		activateScreen(document.querySelector(el.hash), {
-			screen: 'login',
-		})
-
-		ctEvents.trigger('ct:overlay:handle-click', {
-			e: event,
-			href: el.hash,
-			options: {
-				isModal: true,
-			},
+			ctEvents.trigger('ct:overlay:handle-click', {
+				e: event,
+				href: '#account-modal',
+				options: {
+					isModal: true,
+				},
+			})
 		})
 	},
 })

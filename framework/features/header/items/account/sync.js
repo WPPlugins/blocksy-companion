@@ -97,6 +97,48 @@ ctEvents.on(
 					},
 				],
 
+				account_modal_form_text_color: [
+					{
+						selector: '#account-modal form',
+						variable: 'form-text-initial-color',
+						type: 'color:default',
+					},
+
+					{
+						selector: '#account-modal form',
+						variable: 'form-text-focus-color',
+						type: 'color:focus',
+					},
+				],
+
+				account_modal_form_border_color: [
+					{
+						selector: '#account-modal form',
+						variable: 'form-field-border-initial-color',
+						type: 'color:default',
+					},
+
+					{
+						selector: '#account-modal form',
+						variable: 'form-field-border-focus-color',
+						type: 'color:focus',
+					},
+				],
+
+				account_modal_form_background_color: [
+					{
+						selector: '#account-modal form',
+						variable: 'form-field-initial-background',
+						type: 'color:default',
+					},
+
+					{
+						selector: '#account-modal form',
+						variable: 'form-field-focus-background',
+						type: 'color:focus',
+					},
+				],
+
 				account_close_button_color: [
 					{
 						selector: '#account-modal .ct-close-button',

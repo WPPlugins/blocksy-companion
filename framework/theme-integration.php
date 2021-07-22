@@ -18,7 +18,7 @@ class ThemeIntegration {
 			$chunks[] = [
 				'id' => 'blocksy_account',
 				'selector' => implode(', ', [
-					'.ct-header-account[data-state="out"][href*="account-modal"]',
+					'.ct-header-account[href*="account-modal"]',
 					'.must-log-in a'
 				]),
 				'url' => blc_call_fn(
@@ -84,6 +84,8 @@ class ThemeIntegration {
 					'view' => 'archive',
 					'slider_image_ratio' => '2/1',
 					'slider_autoplay' => 'no',
+
+					'filtering' => false
 				]
 			);
 
@@ -96,6 +98,13 @@ class ThemeIntegration {
 					'args' => $args
 				]
 			);
+		});
+
+		add_shortcode('blocksy_breadcrumbs', function ($args, $content) {
+			$breadcrumbs_builder = new \Blocksy_Breadcrumbs_Builder();
+			return $breadcrumbs_builder->render([
+				'class' => 'ct-breadcrumbs-shortcode'
+			]);
 		});
 
 		add_action('wp_ajax_blocksy_conditions_get_all_taxonomies', function () {
@@ -296,7 +305,7 @@ class ThemeIntegration {
 
 			if ('image/svg+xml' === $mime) {
 				$default_height = 100;
-				$default_width  = 100;
+				$default_width = 100;
 
 				$dimensions = $this->svg_dimensions(get_attached_file($attachment->ID));
 
@@ -394,35 +403,6 @@ class ThemeIntegration {
 				);
 			}
 		);
-
-		if (get_theme_mod('emoji_scripts', 'no') !== 'yes') {
-			remove_action('wp_head', 'print_emoji_detection_script', 7);
-			remove_action('admin_print_scripts', 'print_emoji_detection_script');
-			remove_action('wp_print_styles', 'print_emoji_styles');
-			remove_action('admin_print_styles', 'print_emoji_styles');
-			remove_filter('the_content_feed', 'wp_staticize_emoji');
-			remove_filter('comment_text_rss', 'wp_staticize_emoji');
-			remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
-
-			add_filter('tiny_mce_plugins', function ($plugins) {
-				if (is_array($plugins)) {
-					return array_diff($plugins, array('wpemoji'));
-				} else {
-					return array();
-				}
-			});
-
-			add_filter('wp_resource_hints', function ($urls, $relation_type) {
-				if ('dns-prefetch' === $relation_type) {
-					/** This filter is documented in wp-includes/formatting.php */
-					$emoji_svg_url = apply_filters('emoji_svg_url', 'https://s.w.org/images/core/emoji/2/svg/');
-
-					$urls = array_diff($urls, array($emoji_svg_url));
-				}
-
-				return $urls;
-			}, 10, 2);
-		}
 	}
 
 	protected function svg_dimensions($svg) {

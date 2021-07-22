@@ -18,9 +18,13 @@ function blocksy_get_product_review_overall_score($post_id = null) {
 
 	$output = '<div class="ct-overall-score-layer">';
 
-	$avg_score = round(array_reduce($scores, function ($carry, $score) {
-		return $carry + intval($score['score']);
-	}, 0) / count($scores) * 2) / 2;
+	$avg_score = apply_filters(
+		'blocksy:ext:product-reviews:overall-score',
+		round(array_reduce($scores, function ($carry, $score) {
+			return $carry + intval($score['score']);
+		}, 0) / count($scores) * 2) / 2,
+		$scores
+	);
 
 	$output .= '<span class="ct-score-label">';
 	$output .= __('Rating', 'blc');

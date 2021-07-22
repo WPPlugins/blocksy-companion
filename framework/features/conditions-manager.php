@@ -227,6 +227,14 @@ class ConditionsManager {
 			return $payload['language'] === blocksy_get_current_language();
 		}
 
+		if (
+			$rule['rule'] === 'bbpress_profile'
+			&&
+			function_exists('bbp_is_single_user_profile')
+		) {
+			return bbp_is_single_user_profile();
+		}
+
 		if ($rule['rule'] === 'taxonomy_ids') {
 			if (is_tax() || is_category() || is_tag()) {
 				$tax_id = get_queried_object_id();
@@ -516,6 +524,18 @@ class ConditionsManager {
 					]
 				]
 			]
+		] : [],
+
+		function_exists('bbp_is_single_user_profile') ? [
+			[
+				'title' => __('bbPress', 'blc'),
+				'rules' => [
+					[
+						'id' => 'bbpress_profile',
+						'title' => __('Profile', 'blc')
+					]
+				]
+			]
 		] : []);
 	}
 
@@ -527,9 +547,7 @@ class ConditionsManager {
 				'Exclude', 'blc'
 			);
 
-			$maybe_descriptor = $this->find_rule_descriptor(
-				$condition['rule']
-			);
+			$maybe_descriptor = $this->find_rule_descriptor($condition['rule']);
 
 			if (! $maybe_descriptor) {
 				continue;

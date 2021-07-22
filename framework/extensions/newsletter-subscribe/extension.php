@@ -113,7 +113,11 @@ class BlocksyExtensionNewsletterSubscribe {
 
 		add_filter(
 			'blocksy_single_posts_end_customizer_options',
-			function ($opts) {
+			function ($opts, $prefix) {
+				if ($prefix !== 'single_blog_post') {
+					return $opts;
+				}
+
 				$opts['newsletter_subscribe_single_post_enabled'] = blc_call_fn(
 					['fn' => 'blocksy_get_options'],
 					dirname( __FILE__ ) . '/customizer.php',
@@ -121,7 +125,8 @@ class BlocksyExtensionNewsletterSubscribe {
 				);
 
 				return $opts;
-			}
+			},
+			10, 2
 		);
 
 		add_filter('blocksy_extensions_metabox_post:elements:before', function ($opts) {

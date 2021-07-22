@@ -54,19 +54,6 @@ class DynamicCss {
 					],
 				];
 
-
-				$opts[blocksy_rand_md5()] = [
-					'type' => 'ct-divider',
-				];
-
-				$opts['emoji_scripts'] = [
-					'label' => __( 'Emojis Script', 'blc' ),
-					'type' => 'ct-switch',
-					'value' => 'no',
-					'setting' => [ 'transport' => 'postMessage' ],
-					'desc' => __( 'Enable this option if you want to remove WordPress emojis script in order to improve the performance.', 'blc' )
-				];
-
 				$opts[blocksy_rand_md5()] = [
 					'type' => 'ct-divider',
 				];

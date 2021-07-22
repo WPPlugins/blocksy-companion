@@ -99,7 +99,7 @@ const useActivationAction = (extension, cb = () => {}) => {
 
 						<p>
 							{__(
-								'Hurry up, we have a 15% off discount now 🤩',
+								'Hurry up, we have a 10% off discount now 🤩',
 								'blc'
 							)}
 						</p>
@@ -121,7 +121,7 @@ const useActivationAction = (extension, cb = () => {}) => {
 							</a>
 
 							<a
-								href="https://creativethemes.com/blocksy/pricing/?coupon=BlocksyLimited15&utm_source=getpro&utm_medium=dashboard&utm_campaign=BlocksyLimited15"
+								href="https://creativethemes.com/blocksy/pricing/?coupon=BlocksyLimited10&utm_source=getpro&utm_medium=dashboard&utm_campaign=BlocksyLimited10"
 								target="_blank"
 								className="button button-primary">
 								{__('Upgrade Now', 'blc')}

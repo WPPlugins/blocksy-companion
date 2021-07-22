@@ -1,6 +1,5 @@
 import {
 	createElement,
-	Component,
 	useState,
 	useContext,
 	Fragment,
@@ -19,7 +18,11 @@ import { Slot } from '@wordpress/components'
 import { __ } from 'ct-i18n'
 import EditConditions from './EditConditions'
 
+import { Overlay } from 'blocksy-options'
+
 const PanelsManager = () => {
+	const [isRemovingSection, setIsRemovingSection] = useState(false)
+
 	const secondaryItems =
 		ct_customizer_localizations.header_builder_data.secondary_items.header
 	const allItems = ct_customizer_localizations.header_builder_data.header
@@ -76,7 +79,7 @@ const PanelsManager = () => {
 											),
 										},
 
-										divider: {type: 'ct-divider'}
+										divider: { type: 'ct-divider' },
 								  }
 								: {}),
 
@@ -157,13 +160,7 @@ const PanelsManager = () => {
 														e.preventDefault()
 														e.stopPropagation()
 
-														builderValueDispatch({
-															type:
-																'REMOVE_BUILDER_SECTION',
-															payload: {
-																id,
-															},
-														})
+														setIsRemovingSection(id)
 													}}>
 													<i className="ct-tooltip-top">
 														{__(
@@ -188,6 +185,55 @@ const PanelsManager = () => {
 			<Slot name="PlacementsBuilderPanelsManagerAfter">
 				{(fills) => (fills.length === 0 ? null : fills)}
 			</Slot>
+
+			<Overlay
+				items={isRemovingSection}
+				className="ct-admin-modal ct-reset-options"
+				onDismiss={() => setIsRemovingSection(false)}
+				render={() => (
+					<div className="ct-modal-content">
+						<h2 className="ct-modal-title">
+							{__('Remove Header', 'blc')}
+						</h2>
+						<p>
+							{__(
+								'You are about to remove a custom header, are you sure you want to continue?',
+								'blc'
+							)}
+						</p>
+
+						<div
+							className="ct-modal-actions has-divider"
+							data-buttons="2">
+							<button
+								onClick={(e) => {
+									e.preventDefault()
+									e.stopPropagation()
+									setIsRemovingSection(false)
+								}}
+								className="button">
+								{__('Cancel', 'blc')}
+							</button>
+
+							<button
+								className="button button-primary"
+								onClick={(e) => {
+									e.preventDefault()
+									builderValueDispatch({
+										type: 'REMOVE_BUILDER_SECTION',
+										payload: {
+											id: isRemovingSection,
+										},
+									})
+
+									setIsRemovingSection(false)
+								}}>
+								{__('Confirm', 'blc')}
+							</button>
+						</div>
+					</div>
+				)}
+			/>
 		</Fragment>
 	)
 }

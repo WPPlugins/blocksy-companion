@@ -22,6 +22,7 @@ export const getNameForPlugin = (plugin) =>
 			brizy: 'Brizy',
 			getwid: 'Getwid',
 			'wpforms-lite': 'WPForms - Contact Form',
+			'simply-gallery-block': 'SimpLy Gallery Block & Lightbox',
 			'recipe-card-blocks-by-wpzoom': 'Recipe Card Blocks by WPZOOM',
 			'stackable-ultimate-gutenberg-blocks':
 				'Stackable – Gutenberg Blocks',

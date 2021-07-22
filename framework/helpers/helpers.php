@@ -6,7 +6,7 @@ function blc_get_ext($id) {
 
 if (! function_exists('blc_load_xml_file')) {
 	function blc_load_xml_file($url, $useragent = '') {
-		set_time_limit(100);
+		set_time_limit(300);
 
 		if (ini_get('allow_url_fopen') == true) {
 			$context_options = [
@@ -53,7 +53,8 @@ function blc_get_contacts_output($args = []) {
 		'link_target' => 'no',
 		'type' => 'rounded',
 		'fill' => 'outline',
-		'size' => ''
+		'size' => '',
+		'direction' => 'horizontal'
 	]);
 
 	$has_enabled_layer = false;
@@ -105,6 +106,8 @@ function blc_get_contacts_output($args = []) {
 	if (! empty($args['size'])) {
 		$attr['data-icon-size'] = $args['size'];
 	}
+
+	$attr['data-items-direction'] = $args['direction'];
 
 	ob_start(); ?>
 

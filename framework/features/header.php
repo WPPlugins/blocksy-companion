@@ -213,39 +213,6 @@ class HeaderAdditions {
 			return $paths;
 		});
 
-		add_filter('blocksy:footer:offcanvas-drawer', function ($els) {
-			global $blocksy_has_default_header;
-
-			if (
-				! isset($blocksy_has_default_header)
-				||
-				! $blocksy_has_default_header
-			) {
-				return $els;
-			}
-
-			if (! class_exists('Blocksy_Header_Builder_Render')) {
-				return $els;
-			}
-
-			$render = new \Blocksy_Header_Builder_Render();
-
-			if (! $render->contains_item('account')) {
-				return $els;
-			}
-
-			remove_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
-
-			$els[] = blc_call_fn(
-				['fn' => 'blocksy_render_view'],
-				dirname(__FILE__) . '/header/account-modal.php'
-			);
-
-			add_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
-
-			return $els;
-		});
-
 		add_filter('blocksy:header:settings', function ($opt) {
 			$opt = blc_call_fn(
 				[
@@ -258,6 +225,16 @@ class HeaderAdditions {
 
 			return $opt;
 		});
+
+		add_action(
+			'wp_ajax_blc_retrieve_account_modal',
+			[$this, 'blc_retrieve_account_modal']
+		);
+
+		add_action(
+			'wp_ajax_nopriv_blc_retrieve_account_modal',
+			[$this, 'blc_retrieve_account_modal']
+		);
 	}
 
 	public function enqueue_static() {
@@ -555,6 +532,21 @@ class HeaderAdditions {
 
 	public function set_conditions($conditions) {
 		set_theme_mod('blocksy_premium_header_conditions', $conditions);
+	}
+
+	public function blc_retrieve_account_modal() {
+		remove_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
+
+		$html = blc_call_fn(
+			['fn' => 'blocksy_render_view'],
+			dirname(__FILE__) . '/header/account-modal.php'
+		);
+
+		add_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
+
+		wp_send_json_success([
+			'html' => $html
+		]);
 	}
 }
 

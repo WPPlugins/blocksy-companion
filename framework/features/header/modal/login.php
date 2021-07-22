@@ -25,7 +25,7 @@ $redirect_to_url = apply_filters(
 
 	<p class="login-remember col-2">
 		<label>
-			<input name="rememberme" type="checkbox" id="rememberme" value="forever">
+			<input name="rememberme" type="checkbox" id="rememberme" class="ct-checkbox" value="forever">
 			<?php echo __('Remember Me', 'blc') ?>
 		</label>
 

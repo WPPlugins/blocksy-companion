@@ -7,6 +7,10 @@ export const activateScreen = (
 		screen = 'login',
 	}
 ) => {
+	if (!el.querySelector(`.ct-${screen}-form`)) {
+		screen = 'login'
+	}
+
 	if (el.querySelector('ul') && el.querySelector(`ul .ct-${screen}`)) {
 		el.querySelector('ul .active').classList.remove('active')
 		el.querySelector(`ul .ct-${screen}`).classList.add('active')

@@ -94,6 +94,16 @@ if (
 	$query_args['tax_query'] = $tax_query;
 }
 
+if (isset($_GET['blocksy_term_id'])) {
+	$query_args['tax_query'] = [
+		[
+			'field' => 'term_id',
+			'terms' => esc_sql($_GET['blocksy_term_id']),
+			'taxonomy' => get_term($_GET['blocksy_term_id'])->taxonomy
+		]
+	];
+}
+
 $query = new WP_Query(apply_filters(
 	'blocksy:general:shortcodes:blocksy-posts:args',
 	$query_args
@@ -138,13 +148,27 @@ if ($args['view'] === 'slider') {
 
 	$custom_post_types = blocksy_manager()->post_types->get_supported_post_types();
 
+	$preferred_post_type = explode(',', $args['post_type'])[0];
+
 	foreach ($custom_post_types as $cpt) {
-		if ($cpt === explode(',', $args['post_type'])[0]) {
+		if ($cpt === $preferred_post_type) {
 			$prefix = $cpt . '_archive';
 		}
 	}
 
 	echo '<div class="ct-posts-shortcode" data-prefix="' . $prefix . '">';
+
+	if (
+		$args['filtering']
+		&&
+		function_exists('blc_cpt_extra_filtering_output')
+	) {
+		blc_cpt_extra_filtering_output([
+			'prefix' => $prefix,
+			'post_type' => $preferred_post_type,
+			'links_strategy' => 'current_page'
+		]);
+	}
 
 	echo blocksy_render_archive_cards([
 		'prefix' => $prefix,
