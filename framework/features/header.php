@@ -537,9 +537,20 @@ class HeaderAdditions {
 	public function blc_retrieve_account_modal() {
 		remove_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
 
+		$url = home_url();
+
+		$body = json_decode(file_get_contents('php://input'), true);
+
+		if ($body && isset($body['current_url'])) {
+			$url = $body['current_url'];
+		}
+
 		$html = blc_call_fn(
 			['fn' => 'blocksy_render_view'],
-			dirname(__FILE__) . '/header/account-modal.php'
+			dirname(__FILE__) . '/header/account-modal.php',
+			[
+				'current_url' => $url
+			]
 		);
 
 		add_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);

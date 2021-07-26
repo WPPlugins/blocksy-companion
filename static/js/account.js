@@ -20,6 +20,9 @@ const ensureAccountModalPresent = (cb) => {
 
 		{
 			method: 'POST',
+			body: JSON.stringify({
+				current_url: location.href,
+			}),
 		}
 	)
 		.then((response) => response.json())

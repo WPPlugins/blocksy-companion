@@ -4,7 +4,7 @@
 
 $redirect_to_url = apply_filters(
 	'blocksy:account:modal:login:redirect_to',
-	blocksy_current_url()
+	$current_url
 );
 
 ?>

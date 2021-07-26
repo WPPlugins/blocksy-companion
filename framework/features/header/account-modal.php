@@ -1,5 +1,9 @@
 <?php
 
+if (! isset($current_url)) {
+	$current_url = home_url();
+}
+
 $users_can_register = get_option('users_can_register');
 
 if (get_option('woocommerce_enable_myaccount_registration') === 'yes') {
@@ -17,7 +21,9 @@ foreach ($form_views as $form_key => $value) {
 		'blocksy:header:account-modal:views:' . $form_key . '-form',
 		blocksy_render_view(
 			dirname(__FILE__) . '/modal/' . $form_key . '.php',
-			[]
+			[
+				'current_url' => $current_url
+			]
 		)
 	);
 }
