@@ -51,9 +51,15 @@ if ($post_type !== 'page') {
 		$type = blocksy_default_akg('type', $atts, 'recent');
 
 		if ($type !== 'default') {
-			$query_args['orderby'] = (
-				'recent' === $type
-			) ? 'post_date' : 'comment_count';
+			$orderby_map = [
+				'random' => 'rand',
+				'recent' => 'post_date',
+				'commented' => 'comment_count'
+			];
+
+			if (isset($orderby_map[$type])) {
+				$query_args['orderby'] = $orderby_map[$type];
+			}
 		}
 
 		$query_args['date_query'] = $date_query;

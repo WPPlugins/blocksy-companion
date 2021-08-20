@@ -191,13 +191,14 @@ $options = [
 			'type' => [
 				'type' => 'ct-select',
 				'label' => __('Sort by', 'blc'),
-				'value' => 'commented',
+				'value' => 'recent',
 				'design' => 'inline',
 				'choices' => blocksy_ordered_keys(
 					[
 						'default' => __('Default', 'blc'),
 						'recent' => __('Recent', 'blc'),
 						'commented' => __('Most Commented', 'blc'),
+						'random' => __('Random', 'blc'),
 					]
 				),
 			],

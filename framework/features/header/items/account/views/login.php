@@ -72,7 +72,7 @@ if (blocksy_akg('loggedin_text', $atts, 'label') === 'username') {
 }
 
 $loggedin_label_position = blocksy_expand_responsive_value(
-	blocksy_akg('loggedin_label_position', $atts, 'right')
+	blocksy_akg('loggedin_label_position', $atts, 'left')
 );
 
 $attr['data-state'] = 'in';
@@ -86,9 +86,9 @@ $attr['aria-label'] = $loggedin_label;
 
 echo '<a ' . blocksy_attr_to_html($attr) . '>';
 
-if (! empty($loggedin_label) && blocksy_some_device(
+if (! empty($loggedin_label) && (blocksy_some_device(
 	$loggedin_account_label_visibility
-)) {
+) || is_customize_preview())) {
 	echo '<span class="' . trim('ct-label ' . blocksy_visibility_classes(
 		$loggedin_account_label_visibility
 	)) . '">';

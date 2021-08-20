@@ -85,7 +85,10 @@ class ThemeIntegration {
 					'slider_image_ratio' => '2/1',
 					'slider_autoplay' => 'no',
 
-					'filtering' => false
+					'filtering' => false,
+
+					// 404 | skip
+					'no_results' => '404'
 				]
 			);
 
@@ -95,7 +98,8 @@ class ThemeIntegration {
 				['fn' => 'blocksy_render_view'],
 				$file_path,
 				[
-					'args' => $args
+					'args' => $args,
+					'content' => $content
 				]
 			);
 		});
@@ -296,30 +300,30 @@ class ThemeIntegration {
 			return $mimes;
 		});
 
-		add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment, $size = 'thumbnail') {
-			if (! isset($attachment->ID)) {
+		add_filter('wp_get_attachment_image_src', function ($image, $attachment_id, $size, $icon) {
+			if (! isset($attachment_id)) {
 				return $attr;
 			}
 
-			$mime = get_post_mime_type($attachment->ID);
+			$mime = get_post_mime_type($attachment_id);
 
 			if ('image/svg+xml' === $mime) {
 				$default_height = 100;
 				$default_width = 100;
 
-				$dimensions = $this->svg_dimensions(get_attached_file($attachment->ID));
+				$dimensions = $this->svg_dimensions(get_attached_file($attachment_id));
 
 				if ($dimensions) {
 					$default_height = $dimensions['height'];
 					$default_width = $dimensions['width'];
 				}
 
-				$attr['height'] = $default_height;
-				$attr['width'] = $default_width;
+				$image[2] = $default_height;
+				$image[1] = $default_width;
 			}
 
-			return $attr;
-		}, 10, 3);
+			return $image;
+		}, 10, 4);
 
 		add_filter('blocksy_changelogs_list', function ($changelogs) {
 			$changelog = null;

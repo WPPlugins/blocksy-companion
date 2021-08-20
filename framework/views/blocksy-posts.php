@@ -109,6 +109,14 @@ $query = new WP_Query(apply_filters(
 	$query_args
 ));
 
+if (! $query->have_posts() && $args['no_results'] === 'skip') {
+	return;
+}
+
+if (! empty($content)) {
+	echo $content;
+}
+
 if ($args['view'] === 'slider') {
 	$items = '';
 

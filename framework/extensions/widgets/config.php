@@ -1,5 +1,5 @@
 <?php
 
 $config = [
-	'description' => __('Popular/Recent Posts, Advertisement, Contact Info, Mailchimp Subscribe, Social Icons and more.', 'blc')
+	'description' => __('Add new handcrafted widgets to your sidebars! Social Network Icons, Newsletter Subscribe, Contact Info, Custom Ads and even a Popular/Recent Posts are the choices available.', 'blc')
 ];

@@ -66,12 +66,12 @@ class GoogleAnalytics {
 	public function generate_google_analytics_opts($options) {
 		$options[] = [
 			'analytics_id' => [
-				'label' => __( 'Google Analytics', 'blc' ),
+				'label' => __( 'Google Analytics v3', 'blc' ),
 				'type' => 'text',
 				'design' => 'block',
 				'divider' => 'bottom',
 				'value' => '',
-				'desc' => __( 'Insert your Google Analytics tracking ID.', 'blc' ),
+				'desc' => __( 'Link your Google Analytics 3 tracking ID.', 'blc' ),
 				'disableRevertButton' => true,
 				'setting' => [ 'transport' => 'postMessage' ],
 			],
@@ -84,7 +84,7 @@ class GoogleAnalytics {
 				'value' => '',
 				'desc' => sprintf(
 					__(
-						'Insert your Google Analytics measurement ID. More instructions can be found %shere%s.',
+						'Link your Google Analytics 4 tracking ID. More info and instructions can be found %shere%s.',
 						'blc'
 					),
 					'<a href="https://support.google.com/analytics/answer/9744165?hl=en">',
@@ -98,7 +98,14 @@ class GoogleAnalytics {
 				'label' => __( 'IP Anonymization', 'blc' ),
 				'type' => 'ct-switch',
 				'value' => 'no',
-				'desc' => __( 'Enable Google Analytics IP anonymization feature <a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization">(more info)</a>.', 'blc' ),
+				'desc' => sprintf(
+					__(
+						'Enable Google Analytics IP Anonymization for enhanced privacy. More info and instructions can be found %shere%s.',
+						'blc'
+					),
+					'<a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization">',
+					'</a>'
+				),
 				'setting' => [ 'transport' => 'postMessage' ],
 			],
 		];

@@ -47,7 +47,7 @@ class DynamicCss {
 					'type' => 'ct-radio',
 					'value' => 'file',
 					'view' => 'text',
-					'desc' => __( 'The strategy of outputing the dynamic CSS. File - all the CSS code will be placed in a static file, otherwise it will be placed inline in head.', 'blc' ),
+					'desc' => __( 'The strategy of outputting the dynamic CSS. File - all the CSS code will be placed in a static file, otherwise it will be placed inline in head.', 'blc' ),
 					'choices' => [
 						'file' => __( 'File', 'blc' ),
 						'inline' => __( 'Inline', 'blc' ),

@@ -128,7 +128,7 @@ const DemoInstall = ({ children, path, location }) => {
 									className="ct-demo-notification"
 									dangerouslySetInnerHTML={{
 										__html: __(
-											"Connection to <b>demo.creativethemes.com</b> server didn't worked -- this is required for downloading the starter sites. You need to contact your hosting provider to figure out why your server can't reach to our server."
+											"The connection to our <b>demo.creativethemes.com</b> server didn't worked. This connection is required for importing the starter sites from our demo content server. All you have to do is to contact your hosting provider and ask them to white list our demo server address."
 										),
 									}}
 								/>

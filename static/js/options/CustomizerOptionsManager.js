@@ -83,7 +83,7 @@ const CustomizerOptionsManager = () => {
 
 				<div className="ct-option-description">
 					{__(
-						'Click the button below to export the customization settings for this theme.',
+						'Easily export the theme customizer settings.',
 						'blc'
 					)}
 				</div>
@@ -109,7 +109,7 @@ const CustomizerOptionsManager = () => {
 
 				<div className="ct-option-description">
 					{__(
-						'Upload a file to import customization settings for this theme.',
+						'Easily import the theme customizer settings.',
 						'blc'
 					)}
 				</div>

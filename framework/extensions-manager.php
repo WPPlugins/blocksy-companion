@@ -309,6 +309,12 @@ class ExtensionsManager
         $class_name = array_map( 'ucfirst', $class_name );
         $class_name = 'BlocksyExtension' . implode( '', $class_name ) . 'PreBoot';
         $path = $this->extensions[$id]['path'];
+        if ( !$path ) {
+            return;
+        }
+        if ( !@is_readable( $path . '/pre-boot.php' ) ) {
+            return;
+        }
         if ( !file_exists( $path . '/pre-boot.php' ) ) {
             return;
         }
@@ -340,6 +346,12 @@ class ExtensionsManager
         $class_name = array_map( 'ucfirst', $class_name );
         $class_name = 'BlocksyExtension' . implode( '', $class_name );
         $path = $this->extensions[$id]['path'];
+        if ( !$path ) {
+            return;
+        }
+        if ( !@is_readable( $path . '/extension.php' ) ) {
+            return;
+        }
         if ( !file_exists( $path . '/extension.php' ) ) {
             return;
         }

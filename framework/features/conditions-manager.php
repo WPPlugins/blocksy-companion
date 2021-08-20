@@ -255,15 +255,18 @@ class ConditionsManager {
 
 		if ($rule['rule'] === 'post_with_taxonomy_ids') {
 			$is_blocksy_page = blocksy_is_page();
+			global $blocksy_is_quick_view;
 
-			if (is_singular() || $is_blocksy_page) {
+			if (is_singular() || $is_blocksy_page || true) {
 				$post_id = get_the_ID();
 
 				if ($is_blocksy_page) {
 					$post_id = $is_blocksy_page;
 				}
 
-				global $post;
+				if (wp_doing_ajax() && isset($_GET['product_id'])) {
+					$post_id = sanitize_text_field($_GET['product_id']);
+				}
 
 				if (
 					isset($rule['payload'])
@@ -274,7 +277,8 @@ class ConditionsManager {
 				) {
 					return has_term(
 						$rule['payload']['taxonomy_id'],
-						get_term($rule['payload']['taxonomy_id'])->taxonomy
+						get_term($rule['payload']['taxonomy_id'])->taxonomy,
+						$post_id
 					);
 				}
 			}

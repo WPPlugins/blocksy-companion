@@ -2,5 +2,5 @@
 
 $config = [
 	'name' => __('Cookies Consent', 'blc'),
-	'description' => __('Enable this extension in order to comply with the GDPR regulations.', 'blc')
+	'description' => __('Display a cookie acceptance box in order to comply with the privacy regulations in your country.', 'blc')
 ];

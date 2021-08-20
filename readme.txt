@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.7.5
+Stable tag: 1.8.8
 
 == Description ==
 
@@ -23,6 +23,16 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.8: 2021-08-20
+- New: Random order for posts widget
+- Fix: Trending module products category source
+- Fix: Header account items label position
+- Fix: WP Optimize clean caches correctly
+
+1.8.8-beta7: 2021-08-17
+- Fix: Header account items label position
+- Fix: WP Optimize clean caches correctly
+
 1.8.7.5: 2021-08-02
 - Improvement: General fixes and improvements
 

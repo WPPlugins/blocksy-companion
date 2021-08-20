@@ -5,7 +5,7 @@ import {
 	clamp,
 } from './shrink-utils'
 
-export const shrinkHandleLogo = ({ stickyContainer , startPosition}) => {
+export const shrinkHandleLogo = ({ stickyContainer, startPosition }) => {
 	;[...stickyContainer.querySelectorAll('[data-row*="middle"]')].map(
 		(row) => {
 			if (!row.querySelector('[data-id="logo"] .site-logo-container')) {
@@ -21,8 +21,10 @@ export const shrinkHandleLogo = ({ stickyContainer , startPosition}) => {
 			)
 
 			const stickyShrink = parseFloat(
-				getComputedStyle(logo).getPropertyValue('--logoStickyShrink') ||
-					1
+				getComputedStyle(logo)
+					.getPropertyValue('--logoStickyShrink')
+					.toString()
+					.replace(',', '.') || 1
 			)
 
 			const stickyHeight = initialHeight * stickyShrink

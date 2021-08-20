@@ -23,7 +23,7 @@ if ($login_account_action === 'woocommerce_account') {
 }
 
 $loggedout_label_position = blocksy_expand_responsive_value(
-	blocksy_akg('loggedout_label_position', $atts, 'right')
+	blocksy_akg('loggedout_label_position', $atts, 'left')
 );
 
 $attr['data-state'] = 'out';

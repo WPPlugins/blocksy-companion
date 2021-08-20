@@ -26,12 +26,12 @@
 		}
 
 		&:first-child {
-			border-right: 0;
+			border-inline-end: 0;
 			border-radius: 4px 0 0 4px;
 		}
 
 		&:last-child {
-			border-left: 0;
+			border-inline-start: 0;
 			border-radius: 0 4px 4px 0;
 		}
 	}
@@ -40,8 +40,8 @@
 
 
 .ct-config-btn {
-	margin-right: auto;
-	margin-left: 10px;
+	margin-inline-end: auto;
+	margin-inline-start: 10px;
 
 	&:before {
 		font-family: dashicons;

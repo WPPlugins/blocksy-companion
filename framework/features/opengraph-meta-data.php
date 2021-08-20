@@ -14,10 +14,10 @@ class OpenGraphMetaData {
 					],
 
 					'enable_opengraph' => [
-						'label' => __( 'Opengraph Meta Data', 'blc' ),
+						'label' => __( 'OpenGraph Meta Data', 'blc' ),
 						'type' => 'ct-switch',
 						'value' => 'no',
-						'desc' => __( 'Display a preview image and text excerpt when a link to your site is shared.', 'blc' ),
+						'desc' => __( 'Enable the OpenGraph rich meta data features for your website.', 'blc' ),
 					],
 
 					blocksy_rand_md5() => [

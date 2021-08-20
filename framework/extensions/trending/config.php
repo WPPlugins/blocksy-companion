@@ -2,5 +2,5 @@
 
 $config = [
 	'name' => __('Trending Posts', 'blc'),
-	'description' => __('Display a trending list of posts, products or custom post types at the bottom of your website.', 'blc')
+	'description' => __('Highlight your most popular posts or products based on the number of comments or reviews they have gotten in the specified period of time.', 'blc')
 ];
