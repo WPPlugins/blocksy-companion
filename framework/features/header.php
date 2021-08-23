@@ -201,8 +201,10 @@ class HeaderAdditions {
 			}
 
 			$args['has_transparent_header'] = $this->current_screen_has_transparent(
-				$check_transparent_conditions
+				$check_transparent_conditions,
+				$args['section_id']
 			);
+
 			$args['has_sticky_header'] = $this->current_screen_has_sticky($args['section_id']);
 
 			return $args;
@@ -286,7 +288,7 @@ class HeaderAdditions {
 		);
 	}
 
-	public function current_screen_has_transparent($check_conditions = true) {
+	public function current_screen_has_transparent($check_conditions = true, $current_section_id = null) {
 		if (
 			true
 			||
@@ -294,7 +296,9 @@ class HeaderAdditions {
 			||
 			! $check_conditions
 		) {
-			$current_section = blocksy_manager()->header_builder->get_current_section();
+			$current_section = blocksy_manager()->header_builder->get_current_section(
+				$current_section_id
+			);
 
 			if (! isset($current_section['settings'])) {
 				$current_section['settings'] = [];

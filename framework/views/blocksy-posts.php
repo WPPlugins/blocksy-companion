@@ -85,10 +85,11 @@ if (
 	}
 
 	if (count($to_include) > 1) {
-		$tax_query[] = $to_include;
+		$tax_query = array_merge($to_include, $tax_query);
 	}
+
 	if (count($to_exclude) > 1) {
-		$tax_query[] = $to_exclude;
+		$tax_query = array_merge($to_exclude, $tax_query);
 	}
 
 	$query_args['tax_query'] = $tax_query;

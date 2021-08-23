@@ -105,7 +105,7 @@ if (! empty($scores)) {
 
 	echo '</ul>';
 
-	echo '<div class="ct-overall-score">';
+	echo '<div class="ct-overall-score" ' . blocksy_schema_org_definitions('reviewRating') . '>';
 
 	$avg_score = apply_filters(
 		'blocksy:ext:product-reviews:overall-score',
@@ -115,7 +115,7 @@ if (! empty($scores)) {
 		$scores
 	);
 
-	echo '<span class="ct-average-score">' . $avg_score . '/5</span>';
+	echo '<span class="ct-average-score" ' . blocksy_schema_org_definitions('ratingValue') . '>' . $avg_score . '/5</span>';
 
 	echo '<div class="star-rating" role="img">';
 	$width = ( ( $avg_score / 5 ) * 100 );
