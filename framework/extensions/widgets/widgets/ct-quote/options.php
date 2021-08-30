@@ -40,6 +40,7 @@ $options = [
 		'type'  => 'ct-switch',
 		'label' => __( 'Author Label', 'blc' ),
 		'value' => 'yes',
+		'design' => 'inline-full',
 		'disableRevertButton' => true,
 	],
 

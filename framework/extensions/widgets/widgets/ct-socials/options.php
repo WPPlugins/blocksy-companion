@@ -56,9 +56,17 @@ $options = [
 
 	'link_target' => [
 		'type'  => 'ct-switch',
-		'label' => __( 'Open Links In New Tab', 'blc' ),
+		'label' => __( 'Open links in new tab', 'blc' ),
 		'value' => 'no',
+		'design' => 'inline-full',
 		'disableRevertButton' => true,
+	],
+
+	'link_nofollow' => [
+		'type'  => 'ct-switch',
+		'label' => __( 'Set links to nofollow', 'blc' ),
+		'value' => 'no',
+		'design' => 'inline-full',
 	],
 
 	'social_icons_size' => [

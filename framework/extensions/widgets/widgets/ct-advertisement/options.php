@@ -64,7 +64,7 @@ $options = [
 			],
 
 			'ad_image_ratio' => [
-				'label' => __( 'Image Ratio', 'blocksy' ),
+				'label' => __( 'Image Ratio', 'blc' ),
 				'type' => 'ct-ratio',
 				'value' => 'original',
 				'design' => 'inline',

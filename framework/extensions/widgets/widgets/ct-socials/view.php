@@ -24,6 +24,15 @@ if ($link_target === 'yes') {
 	$link_target = false;
 }
 
+
+$link_rel = blocksy_default_akg('link_nofollow', $atts, 'no');
+
+if ($link_rel === 'yes') {
+	$link_rel = 'noopener noreferrer nofollow';
+} else {
+	$link_rel = false;
+}
+
 /**
  * blocksy_social_icons() function is already properly escaped.
  * Escaping it again here would cause SVG icons to not be outputed
@@ -54,7 +63,8 @@ echo blc_call_fn(
 		'size' => $size,
 		'fill' => $fill,
 		'type' => $type,
-		'links_target' => $link_target
+		'links_target' => $link_target,
+		'links_rel' => $link_rel,
 	]
 );
 

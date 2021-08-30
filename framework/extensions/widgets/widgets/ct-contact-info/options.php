@@ -307,6 +307,7 @@ $options = [
 		'type'  => 'ct-switch',
 		'label' => __( 'Open link in new tab', 'blc' ),
 		'value' => 'no',
+		'design' => 'inline-full',
 		'disableRevertButton' => true,
 	],
 ];

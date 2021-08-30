@@ -14,6 +14,18 @@
 	@include media-breakpoint-only (md) {
 		--grid-template-columns: 1fr 1fr;
 	}
+
+	li {
+		position: relative;
+		padding-inline-start: 23px;
+	}
+
+	.ct-icon-container {
+		position: absolute;
+		left: 0;
+		top: 0.35em;
+		opacity: 0.9;
+	}
 }
 
 .ct-specs {

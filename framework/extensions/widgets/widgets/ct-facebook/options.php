@@ -29,24 +29,28 @@ $options = [
 		'type'  => 'ct-switch',
 		'label' => __( 'Profile Photos', 'blc' ),
 		'value' => 'yes',
+		'design' => 'inline-full',
 	],
 
 	'facebook_timeline' => [
 		'type'  => 'ct-switch',
 		'label' => __( 'Timeline', 'blc' ),
 		'value' => 'no',
+		'design' => 'inline-full',
 	],
 
 	'facebook_cover' => [
 		'type'  => 'ct-switch',
 		'label' => __( 'Cover Photo', 'blc' ),
 		'value' => 'no',
+		'design' => 'inline-full',
 	],
 
 	'facebook_small_header' => [
 		'type'  => 'ct-switch',
 		'label' => __( 'Small Header', 'blc' ),
 		'value' => 'no',
+		'design' => 'inline-full',
 	],
 
 ];

@@ -132,7 +132,7 @@ $options = [
 
 	'about_alignment' => [
 		'type' => 'ct-radio',
-		'label' => __( 'Alignment', 'blocksy' ),
+		'label' => __( 'Alignment', 'blc' ),
 		'value' => 'center',
 		'view' => 'text',
 		'attr' => [ 'data-type' => 'alignment' ],

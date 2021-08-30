@@ -123,7 +123,7 @@ $options = [
 			'options' => [
 
 				'post_widget_image_ratio' => [
-					'label' => __( 'Image Ratio', 'blocksy' ),
+					'label' => __( 'Image Ratio', 'blc' ),
 					'type' => 'ct-ratio',
 					'value' => 'original',
 					'design' => 'inline',
@@ -226,7 +226,7 @@ $options = [
 				'min' => 1,
 				'max' => 30,
 				'value' => 5,
-				'design' => 'inline',
+				'design' => 'inline-full',
 			],
 		],
 	],
@@ -240,11 +240,11 @@ $options = [
 		'options' => [
 
 			'post_id' => [
-				'label' => __( 'Posts ID', 'blocksy' ),
+				'label' => __( 'Posts ID', 'blc' ),
 				'type' => 'text',
 				'design' => 'inline',
 				'desc' => sprintf(
-					__('Separate posts ID by comma. How to find the %spost ID%s.', 'blocksy'),
+					__('Separate posts ID by comma. How to find the %spost ID%s.', 'blc'),
 					'<a href="https://www.wpbeginner.com/beginners-guide/how-to-find-post-category-tag-comments-or-user-id-in-wordpress/" target="_blank">',
 					'</a>'
 				),
@@ -262,11 +262,11 @@ $options = [
 		'options' => [
 
 			'page_id' => [
-				'label' => __( 'Pages ID', 'blocksy' ),
+				'label' => __( 'Pages ID', 'blc' ),
 				'type' => 'text',
 				'design' => 'inline',
 				'desc' => sprintf(
-					__('Separate pages ID by comma. How to find the %spage ID%s.', 'blocksy'),
+					__('Separate pages ID by comma. More info %shere%s.', 'blc'),
 					'<a href="https://www.wpbeginner.com/beginners-guide/how-to-find-post-category-tag-comments-or-user-id-in-wordpress/" target="_blank">',
 					'</a>'
 				),
@@ -288,7 +288,7 @@ $options = [
 				'min' => 1,
 				'max' => 30,
 				'value' => 5,
-				'design' => 'inline',
+				'design' => 'inline-full',
 			],
 		],
 	],
@@ -297,18 +297,21 @@ $options = [
 		'type'  => 'ct-switch',
 		'label' => __( 'Show Date', 'blc' ),
 		'value' => 'no',
+		'design' => 'inline-full',
 	],
 
 	'display_comments' => [
 		'type'  => 'ct-switch',
 		'label' => __( 'Show Comments', 'blc' ),
 		'value' => 'no',
+		'design' => 'inline-full',
 	],
 
 	'display_excerpt' => [
 		'type'  => 'ct-switch',
 		'label' => __( 'Show Excerpt', 'blc' ),
 		'value' => 'no',
+		'design' => 'inline-full',
 	],
 
 	blocksy_rand_md5() => [
@@ -322,7 +325,7 @@ $options = [
 				'min' => 5,
 				'max' => 30,
 				'value' => 10,
-				'design' => 'inline',
+				'design' => 'inline-full',
 			],
 
 		],

@@ -29,32 +29,32 @@ $options = [
 				'choices' => [
 					'middle' => [
 						'src' => blocksy_image_picker_url('sticky-main.svg'),
-						'title' => __('Only Main Row', 'blocksy'),
+						'title' => __('Only Main Row', 'blc'),
 					],
 
 					'top_middle' => [
 						'src' => blocksy_image_picker_url('sticky-top-main.svg'),
-						'title' => __('Top & Main Row', 'blocksy'),
+						'title' => __('Top & Main Row', 'blc'),
 					],
 
 					'entire_header' => [
 						'src' => blocksy_image_picker_url('sticky-all.svg'),
-						'title' => __('All Rows', 'blocksy'),
+						'title' => __('All Rows', 'blc'),
 					],
 
 					'middle_bottom' => [
 						'src' => blocksy_image_picker_url('sticky-main-bottom.svg'),
-						'title' => __('Main & Bottom Row', 'blocksy'),
+						'title' => __('Main & Bottom Row', 'blc'),
 					],
 
 					'top' => [
 						'src' => blocksy_image_picker_url('sticky-top.svg'),
-						'title' => __('Only Top Row', 'blocksy'),
+						'title' => __('Only Top Row', 'blc'),
 					],
 
 					'bottom' => [
 						'src' => blocksy_image_picker_url('sticky-bottom.svg'),
-						'title' => __('Only Bottom Row', 'blocksy'),
+						'title' => __('Only Bottom Row', 'blc'),
 					],
 				],
 			],

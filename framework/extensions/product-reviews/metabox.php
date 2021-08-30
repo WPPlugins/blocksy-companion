@@ -105,6 +105,7 @@ $options = [
 					'score' => [
 						'type' => 'ct-number',
 						'value' => 5,
+						'step' => 0.1,
 						'min' => 1,
 						'max' => 5
 					]

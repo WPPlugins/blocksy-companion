@@ -126,6 +126,22 @@ class BlocksyExtensionProductReviews {
 				$data['Version']
 			);
 		});
+
+		add_filter('blocksy_single_posts_post_elements_end', function ($options, $prefix) {
+			if ($prefix !== 'blc-product-review_single') {
+				return $options;
+			}
+
+			$options[$prefix . '_has_read_more'] = [
+				'label' => __('Read More Button', 'blc'),
+				'type' => 'ct-switch',
+				'value' => 'yes',
+				'sync' => blocksy_sync_single_post_container([
+					'prefix' => $prefix
+				])
+			];
+			return $options;
+		}, 10, 2);
 	}
 
 	public function init_metabox() {

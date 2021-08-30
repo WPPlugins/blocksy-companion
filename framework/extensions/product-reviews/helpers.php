@@ -21,8 +21,8 @@ function blocksy_get_product_review_overall_score($post_id = null) {
 	$avg_score = apply_filters(
 		'blocksy:ext:product-reviews:overall-score',
 		round(array_reduce($scores, function ($carry, $score) {
-			return $carry + intval($score['score']);
-		}, 0) / count($scores) * 2) / 2,
+			return $carry + floatval($score['score']);
+		}, 0) / count($scores) * 10) / 10,
 		$scores
 	);
 
@@ -33,7 +33,7 @@ function blocksy_get_product_review_overall_score($post_id = null) {
 	$output .= '<span class="ct-average-score">' . $avg_score . '/5</span>';
 
 	$output .= '<div class="star-rating" role="img">';
-	$width = ( ( $avg_score / 5 ) * 100 );
+	$width = (($avg_score / 5) * 100);
 	$output .= '<span style="width: ' . $width . '%;"></span>';
 	$output .= '</div>';
 

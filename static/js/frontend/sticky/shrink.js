@@ -46,12 +46,19 @@ export const computeShrink = ({
 			containerInitialHeight,
 			startPosition,
 		})
+
+		document.body.style.setProperty(
+			'--headerStickyHeightAnimated',
+			`${parseInt(stickyContainer.getBoundingClientRect().height)}px`
+		)
 	} else {
 		let containerInitialHeight = Array.from(
 			stickyContainer.querySelectorAll('[data-row]')
 		).reduce((sum, el) => {
 			return sum + getRowInitialHeight(el)
 		}, 0)
+
+		document.body.removeAttribute('style')
 
 		Array.from(stickyContainer.querySelectorAll('[data-row]')).map((row) =>
 			row.removeAttribute('style')

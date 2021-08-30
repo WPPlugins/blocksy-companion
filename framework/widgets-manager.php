@@ -96,7 +96,7 @@ class BlocksyWidgetFactory extends WP_Widget {
 		);
 	}
 
-	public function widget( $args, $instance ) {
+	public function widget($args, $instance) {
 		$file_path = $this->get_path() . '/view.php';
 
 		if ( ! file_exists( $file_path ) ) {
@@ -154,16 +154,23 @@ class BlocksyWidgetFactory extends WP_Widget {
 	 * @param array $new_instance new widget values.
 	 * @param array $old_instance old widget values.
 	 */
-	public function update( $new_instance, $old_instance ) {
-		$new_instance[ $this->prefix ][ 'ct_options' ] = json_decode(
-			$new_instance[ $this->prefix ][ 'ct_options' ],
-			true
-		);
+	public function update($new_instance, $old_instance) {
+		if (! isset($new_instance[$this->prefix])) {
+			return $new_instance;
+		}
 
-		return $new_instance[ $this->prefix ];
+		$to_save = $new_instance[$this->prefix]['ct_options'];
+
+		if (! is_array($to_save)) {
+			$to_save = json_decode($to_save, true);
+		}
+
+		$new_instance[$this->prefix]['ct_options'] = $to_save;
+
+		return $new_instance[$this->prefix];
 	}
 
-	public function form( $values ) {
+	public function form($values) {
 		$this->read_options();
 
 		echo blc_call_fn(

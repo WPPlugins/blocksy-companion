@@ -1,5 +1,7 @@
 <?php
 
+$prefix = 'blc-product-review_single';
+
 $atts = apply_filters(
 	'blocksy:ext:product-reviews:frontend:atts',
 	blocksy_get_post_options(null, [
@@ -96,7 +98,7 @@ if (! empty($scores)) {
 		echo '<span>' . $single_score['label'] . '</span>';
 
 		echo '<div class="star-rating" role="img">';
-		$width = ( ( intval($single_score['score']) / 5 ) * 100 );
+		$width = ((floatval($single_score['score']) / 5) * 100);
 
 		echo '<span style="width: ' . $width . '%;">Rated <strong class="rating">3</strong> out of 5</span>';
 		echo '</div>';
@@ -110,8 +112,8 @@ if (! empty($scores)) {
 	$avg_score = apply_filters(
 		'blocksy:ext:product-reviews:overall-score',
 		round(array_reduce($scores, function ($carry, $score) {
-			return $carry + intval($score['score']);
-		}, 0) / count($scores) * 2) / 2,
+			return $carry + floatval($score['score']);
+		}, 0) / count($scores) * 10) / 10,
 		$scores
 	);
 
@@ -145,7 +147,11 @@ $product_read_content_button_label = blocksy_akg(
 	__('Read More', 'blc')
 );
 
-if (! empty($product_button_label)) {
+if (
+	! empty($product_button_label)
+	&&
+	get_theme_mod($prefix . '_has_read_more', 'yes') === 'yes'
+) {
 	echo '<a href="#post-' . get_the_ID() . '" class="ct-button">';
 	echo $product_read_content_button_label;
 
@@ -183,7 +189,7 @@ $product_cons = blocksy_akg('product_cons', $atts, []);
 $product_description = blocksy_akg('product_description', $atts, '');
 
 if (! empty($product_description)) {
-	echo '<div class="ct-product-description">';
+	echo '<div class="ct-product-description" ' . blocksy_schema_org_definitions('reviewBody') . '>';
 
 	echo '<div class="entry-content">';
 	echo do_shortcode($product_description);
@@ -209,6 +215,13 @@ if (
 
 		foreach ($product_specs as $single_spec) {
 			echo '<li>';
+			echo blocksy_html_tag(
+				'span',
+				[
+					'class' => 'ct-icon-container'
+				],
+				"<svg width='13' height='13' viewBox='0 0 13 13'><path d='M5.3 0l-.2 1.7c-.8.2-1.5.7-2.1 1.2l-1.5-.7-1.2 2 1.4 1c-.1.5-.2.9-.2 1.3s.1.8.2 1.2l-1.4 1 1.2 2 1.5-.6c.6.6 1.3 1 2.1 1.2l.2 1.7h2.3l.2-1.7c.8-.2 1.5-.6 2.1-1.2l1.6.7 1.2-2-1.4-1c.1-.4.2-.8.2-1.2s-.1-.8-.2-1.2l1.4-1-1.2-2-1.5.5c-.6-.6-1.3-1-2.1-1.2L7.7 0H5.3zm1.2 4.5c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z'/></svg>"
+			);
 			echo '<b>' . blocksy_akg('label', $single_spec, '') . ': </b>';
 			echo blocksy_akg('value', $single_spec, '');
 			echo '</li>';
@@ -219,13 +232,20 @@ if (
 	}
 
 	if (! empty($product_pros)) {
-		echo '<div>';
+		echo '<div class="ct-product-review-pros" ' . blocksy_schema_org_definitions('positiveNotes') . '>';
 		echo '<h5>' . __('Pros', 'blc') . '</h5>';
 
 		echo '<ul>';
 
 		foreach ($product_pros as $single_pro) {
 			echo '<li>';
+			echo blocksy_html_tag(
+				'span',
+				[
+					'class' => 'ct-icon-container'
+				],
+				"<svg width='13' height='13' viewBox='0 0 13 13'><path d='M6.4.3c-.3 0-.5.3-.6.5l-.6 1.7-1.7 2c-.3.3-.4.5-.4.9v6c0 .7.6 1.3 1.3 1.3h5.2c.5 0 1-.3 1.1-.7l2-4.4c.2-.3.3-.6.3-.8v-.6c0-.7-.6-1.3-1.3-1.3H7.2s.7-1.6.7-2.7c0-1-.7-1.6-1.2-1.7-.2-.2-.2-.2-.3-.2zM1 4.8c-.5 0-1 .4-1 1v5.9c0 .6.4 1 1 1s1-.4 1-1V5.8c-.1-.5-.5-1-1-1z'/></svg>"
+			);
 			echo blocksy_akg('label', $single_pro, '');
 			echo '</li>';
 		}
@@ -235,13 +255,20 @@ if (
 	}
 
 	if (! empty($product_cons)) {
-		echo '<div>';
+		echo '<div class="ct-product-review-cons" ' . blocksy_schema_org_definitions('negativeNotes') . '>';
 		echo '<h5>' . __('Cons', 'blc') . '</h5>';
 
 		echo '<ul>';
 
 		foreach ($product_cons as $single_cons) {
 			echo '<li>';
+			echo blocksy_html_tag(
+				'span',
+				[
+					'class' => 'ct-icon-container'
+				],
+				"<svg width='13' height='13' viewBox='0 0 13 13'><path d='M6.6 12.6c.5-.2 1.2-.7 1.2-1.7 0-1.1-.7-2.7-.7-2.7h4.5c.7 0 1.3-.6 1.3-1.3v-.7c0-.3-.1-.5-.2-.8l-2-4.4c-.2-.4-.6-.7-1.1-.7H4.4c-.7 0-1.3.6-1.3 1.3v6c0 .3.1.6.3.9l1.7 2 .5 1.7c.1.3.3.5.6.5s.3 0 .4-.1zM1.9 7.2V1.4c0-.5-.4-1-1-1s-1 .3-1 1v5.9c0 .5.4 1 1 1s1-.6 1-1.1z'/></svg>"
+			);
 			echo blocksy_akg('label', $single_cons, '');
 			echo '</li>';
 		}
