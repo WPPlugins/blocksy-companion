@@ -26,15 +26,6 @@ const ListPickerImplementation = ({ value, onChange }) => {
 			'blocksy_ext_newsletter_subscribe_get_actual_lists'
 		)
 
-		body.append(
-			'nonce',
-			(
-				window.ctDashboardLocalizations ||
-				window.ct_localizations ||
-				window.ct_customizer_localizations
-			).dashboard_actions_nonce
-		)
-
 		try {
 			const response = await fetch(ajaxurl, {
 				method: 'POST',
@@ -69,8 +60,8 @@ const ListPickerImplementation = ({ value, onChange }) => {
 				disabled
 				placeholder={
 					isLoadingLists
-						? __('Loading...', 'blocksy-companion')
-						: __('Invalid API Key...', 'blocksy-companion')
+						? __('Loading...', 'blc')
+						: __('Invalid API Key...', 'blc')
 				}
 			/>
 		</div>
@@ -98,7 +89,7 @@ const ListPickerImplementation = ({ value, onChange }) => {
 							onFocus: () => openMenu(),
 							onClick: () => openMenu(),
 						})}
-						placeholder={__('Select list...', 'blocksy-companion')}
+						placeholder={__('Select list...', 'blc')}
 						readOnly
 					/>
 

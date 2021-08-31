@@ -2,58 +2,81 @@
 
 namespace Blocksy;
 
-/*
-add_action('blocksy:customizer:load:before', function () {
-	$_REQUEST['wp_customize'] = 'on';
-	_wp_customize_include();
-
-	global $wp_customize;
-
-	$wp_customize->wp_loaded();
-});
- */
-
-/**
- * Manages Blocksy theme extensions, tools, license activation, and starter site installation.
- *
- * ## EXAMPLES
- *
- *     # List all available extensions
- *     $ wp blocksy extension list
- *
- *     # Activate an extension
- *     $ wp blocksy extension activate custom-fonts
- *
- *     # Deactivate an extension
- *     $ wp blocksy extension deactivate custom-fonts
- *
- *     # List all available tools
- *     $ wp blocksy tool list
- *
- *     # Run a specific tool
- *     $ wp blocksy tool run tool-name
- *
- *     # List all available demos
- *     $ wp blocksy demo list
- *
- *     # Install a demo
- *     $ wp blocksy demo install demo-name
- *
- *     # Activate license
- *     $ wp blocksy license activate your-license-key
- *
- *     # Move all widgets to inactive area
- *     $ wp blocksy widgets drop
- */
 class Cli {
 	public function __construct() {
-		\WP_CLI::add_command('blocksy', $this);
+		\WP_CLI::add_command('blocksy demo plugins', function ($args) {
+			$plugins = [
+				'coblocks',
+				'elementor',
+				'contact-form-7',
+				'woocommerce'
+			];
 
-		new DemoCli();
-		new ToolCli();
-		new LicenseCli();
-		new ExtensionCli();
-		new WidgetsCli();
+			foreach ($plugins as $plugin) {
+				\WP_CLI::runcommand('plugin install ' . $plugin, [] );
+				\WP_CLI::runcommand('plugin activate ' . $plugin, [] );
+			}
+		});
+
+		\WP_CLI::add_command('blocksy demo options', function ($args) {
+			$options = new DemoInstallOptionsInstaller([
+				'has_streaming' => false,
+				'demo_name' => 'Main:elementor'
+			]);
+
+			$options->import();
+		});
+
+		\WP_CLI::add_command('blocksy widgets drop', function ($args) {
+			$sidebars_widgets = get_option('sidebars_widgets', array());
+
+			if (! isset($sidebars_widgets['wp_inactive_widgets'])) {
+				$sidebars_widgets['wp_inactive_widgets'] = [];
+			}
+
+			foreach ($sidebars_widgets as $sidebar_id => $widgets) {
+				if (! $widgets) continue;
+				if ($sidebar_id === 'wp_inactive_widgets') {
+					continue;
+				}
+
+				if ($sidebar_id === 'array_version') {
+					continue;
+				}
+
+				foreach ($widgets as $widget_id) {
+					$sidebars_widgets['wp_inactive_widgets'][] = $widget_id;
+				}
+
+				$sidebars_widgets[$sidebar_id] = [];
+			}
+
+			update_option('sidebars_widgets', $sidebars_widgets);
+			unset($sidebars_widgets['array_version']);
+
+			set_theme_mod('sidebars_widgets', [
+				'time' => time(),
+				'data' => $sidebars_widgets
+			]);
+		});
+
+		\WP_CLI::add_command('blocksy demo widgets', function ($args) {
+			$options = new DemoInstallWidgetsInstaller([
+				'has_streaming' => false,
+				'demo_name' => 'Blocksy News:elementor'
+			]);
+
+			$options->import();
+		});
+
+		\WP_CLI::add_command('blocksy demo content', function ($args) {
+			$options = new DemoInstallContentInstaller([
+				'has_streaming' => false,
+				'demo_name' => 'Main:elementor'
+			]);
+
+			$options->import();
+		});
 	}
 }
 

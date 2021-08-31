@@ -1,50 +1,44 @@
-@use "../../../../../static/sass/frontend/common-frontend/functions";
+.ct-product-info {
+	display: grid;
+	grid-template-columns: var(--grid-template-columns);
+	grid-column-gap: 40px;
+	grid-row-gap: 40px;
 
-.ct-product-hero {
-	
-	.ct-product-info {
-		display: grid;
-		grid-template-columns: var(--grid-template-columns);
-		grid-column-gap: 40px;
-		grid-row-gap: 40px;
-		border-top: 1px solid var(--theme-border-color);
-		padding-top: var(--theme-content-vertical-spacing, 60px);
+	border-top: 1px solid #ececec;
+	padding-top: var(--content-vertical-spacing, 60px);
 
-		@include functions.media-breakpoint-up (lg) {
-			--grid-template-columns: 1.5fr 1fr 1fr;
-		}
-
-		@include functions.media-breakpoint-only (md) {
-			--grid-template-columns: 1fr 1fr;
-		}
-
-		li {
-			position: relative;
-			padding-inline-start: 22px;
-		}
-
-		.ct-icon-container {
-			position: absolute;
-			inset-inline-start: 0;
-			top: 0.4em;
-			opacity: 0.8;
-			
-			--theme-icon-size: 13px;
-		}
+	@include media-breakpoint-up (lg) {
+		--grid-template-columns: 1.5fr 1fr 1fr;
 	}
 
-	.ct-specs {
-		@include functions.media-breakpoint-only (md) {
-			grid-column: 1/-1;
-		}
+	@include media-breakpoint-only (md) {
+		--grid-template-columns: 1fr 1fr;
+	}
 
-		ul {
-			display: grid;
-			grid-column-gap: 40px;
+	li {
+		position: relative;
+		padding-inline-start: 23px;
+	}
 
-			@include functions.media-breakpoint-up (md) {
-				grid-template-columns: repeat(2, 1fr);
-			}
+	.ct-icon-container {
+		position: absolute;
+		left: 0;
+		top: 0.35em;
+		opacity: 0.9;
+	}
+}
+
+.ct-specs {
+	@include media-breakpoint-only (md) {
+		grid-column: 1/-1;
+	}
+
+	ul {
+		display: grid;
+		grid-column-gap: 40px;
+
+		@include media-breakpoint-up (md) {
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 }

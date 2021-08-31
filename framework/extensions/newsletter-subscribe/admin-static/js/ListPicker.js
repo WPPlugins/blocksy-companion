@@ -11,7 +11,7 @@ const ListPicker = (props) => (
 		<Suspense
 			fallback={
 				<div className="ct-select-input">
-					<input disabled placeholder={__('Loading...', 'blocksy-companion')} />
+					<input disabled placeholder={__('Loading...', 'blc')} />
 				</div>
 			}>
 			<ListPickerImplementation {...props} />

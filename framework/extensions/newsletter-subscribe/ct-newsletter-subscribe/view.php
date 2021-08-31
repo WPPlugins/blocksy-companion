@@ -1,10 +1,4 @@
 <?php
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound, VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable, VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedUnsetVariable -- view scope, variables come from blocksy_companion_render_view()
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 /**
  * Newsletter Subscribe widget
  *
@@ -13,281 +7,118 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Blocksy
  */
 
+
+// Widget title
+$title = blocksy_default_akg( 'title', $atts, __( 'Newsletter', 'blc' ) );
+
+
+// Message
+$message = blocksy_default_akg( 'newsletter_subscribe_text', $atts, __( 'Enter your email address below to subscribe to our newsletter', 'blc' ) );
+
 // Button text
-$button_text = blocksy_companion_akg(
-	'newsletter_subscribe_button_text',
-	$atts,
-	__( 'Subscribe', 'blocksy-companion' )
-);
-
-$newsletter_subscribe_name_required = blocksy_companion_akg(
-	'newsletter_subscribe_name_required',
-	$atts,
-	'no'
-) === 'yes';
-
-
-
-$style = '';
-
-$newsletter_subscribe_height = (float) blocksy_companion_akg( 'newsletter_subscribe_height', $atts, '' );
-$newsletter_subscribe_gap    = (float) blocksy_companion_akg( 'newsletter_subscribe_gap', $atts, '' );
-
-if ( ! empty( $newsletter_subscribe_height ) ) {
-	$style .= '--theme-form-field-height:' . $newsletter_subscribe_height . 'px;';
-}
-
-if ( ! empty( $newsletter_subscribe_gap ) ) {
-	$style .= '--theme-form-field-gap:' . $newsletter_subscribe_gap . 'px;';
-}
-
-if ( isset( $atts['style']['border']['radius'] ) ) {
-	$atts['style']['border']['radius'] = blocksy_companion_sanitize_border_radius( $atts['style']['border']['radius'] );
-
-	$maybe_radius = $atts['style']['border']['radius'];
-
-	if (
-		is_array( $maybe_radius )
-		&&
-		! empty( $maybe_radius )
-	) {
-		if (
-			isset( $maybe_radius['topLeft'] )
-			&&
-			isset( $maybe_radius['topRight'] )
-			&&
-			isset( $maybe_radius['bottomLeft'] )
-			&&
-			isset( $maybe_radius['bottomRight'] )
-		) {
-			if (
-				$maybe_radius['topLeft'] === $maybe_radius['topRight']
-				&&
-				$maybe_radius['topLeft'] === $maybe_radius['bottomLeft']
-				&&
-				$maybe_radius['topLeft'] === $maybe_radius['bottomRight']
-			) {
-				$maybe_radius = $maybe_radius['topLeft'];
-			} else {
-				$style .= '--theme-form-field-border-radius:' . join(
-					' ',
-					array(
-						$atts['style']['border']['radius']['topLeft'] ?? '0px',
-						$atts['style']['border']['radius']['topRight'] ?? '0px',
-						$atts['style']['border']['radius']['bottomLeft'] ?? '0px',
-						$atts['style']['border']['radius']['bottomRight'] ?? '0px',
-					)
-				) . ';';
-			}
-		}
-	}
-
-	if (
-		gettype( $maybe_radius ) === 'string'
-		&&
-		! empty( $maybe_radius )
-	) {
-		$style .= '--theme-form-field-border-radius:' . $maybe_radius . ';';
-	}
-
-	unset( $atts['style']['border'] );
-}
-
-$colors = array(
-	'--theme-form-text-initial-color'             => blocksy_companion_akg( 'customInputFontColor', $atts, '' ),
-	'--theme-form-text-focus-color'               => blocksy_companion_akg( 'customInputFontColorFocus', $atts, '' ),
-	'--theme-form-field-border-initial-color'     => blocksy_companion_akg( 'customInputBorderColor', $atts, '' ),
-	'--theme-form-field-border-focus-color'       => blocksy_companion_akg( 'customInputBorderColorFocus', $atts, '' ),
-	'--theme-form-field-background-initial-color' => blocksy_companion_akg( 'customInputBackgroundColor', $atts, '' ),
-	'--theme-form-field-background-focus-color'   => blocksy_companion_akg( 'customInputBackgroundColorFocus', $atts, '' ),
-);
-
-if ( isset( $atts['inputFontColor'] ) ) {
-	$var                                       = $atts['inputFontColor'];
-	$colors['--theme-form-text-initial-color'] = "var(--wp--preset--color--$var)";
-}
-
-if ( isset( $atts['inputFontColorFocus'] ) ) {
-	$var                                     = $atts['inputFontColorFocus'];
-	$colors['--theme-form-text-focus-color'] = "var(--wp--preset--color--$var)";
-}
-
-if ( isset( $atts['inputBorderColor'] ) ) {
-	$var = $atts['inputBorderColor'];
-	$colors['--theme-form-field-border-initial-color'] = "var(--wp--preset--color--$var)";
-}
-
-if ( isset( $atts['inputBorderColorFocus'] ) ) {
-	$var = $atts['inputBorderColorFocus'];
-	$colors['--theme-form-field-border-focus-color'] = "var(--wp--preset--color--$var)";
-}
-
-if ( isset( $atts['inputBackgroundColor'] ) ) {
-	$var = $atts['inputBackgroundColor'];
-	$colors['--theme-form-field-background-initial-color'] = "var(--wp--preset--color--$var)";
-}
-
-if ( isset( $atts['inputBackgroundColorFocus'] ) ) {
-	$var = $atts['inputBackgroundColorFocus'];
-	$colors['--theme-form-field-background-focus-color'] = "var(--wp--preset--color--$var)";
-}
-
-$colors_css = blocksy_companion_colors_to_css( $colors );
+$button_text = blocksy_default_akg( 'newsletter_subscribe_button_text', $atts, __( 'Subscribe', 'blc' ) );
 
 // Form name
-$has_name =
-	blocksy_companion_akg( 'has_newsletter_subscribe_name', $atts, 'no' ) === 'yes';
+$has_name = blocksy_default_akg( 'has_newsletter_subscribe_name', $atts, 'no' ) === 'yes';
 
 $list_id = null;
 
-if (
-	blocksy_companion_akg(
-		'newsletter_subscribe_list_id_source',
-		$atts,
-		'default'
-	) === 'custom'
-) {
-	$list_id = blocksy_companion_akg( 'newsletter_subscribe_list_id', $atts, '' );
-}
-
-$manager = \Blocksy\Extensions\NewsletterSubscribe\Provider::get_for_settings();
-
-$settings = $manager->get_settings();
-
-if ( ! $list_id ) {
-	$list_id = $settings['list_id'];
-}
-
-$provider = $settings['provider'] . ':' . $list_id;
-
-$name_label  = blocksy_companion_akg(
-	'newsletter_subscribe_name_label',
-	$atts,
-	__( 'Your name', 'blocksy-companion' )
-);
-$email_label = blocksy_companion_akg(
-	'newsletter_subscribe_mail_label',
-	$atts,
-	__( 'Your email *', 'blocksy-companion' )
-);
-
-$view_type = blocksy_companion_akg(
-	'newsletter_subscribe_view_type',
-	$atts,
-	'inline'
-);
-
-$fields_number           = '2';
-$gdpr_checkbox_id_suffix = substr( blocksy_rand_md5(), 0, 3 );
-
-if ( $has_name ) {
-	$fields_number = '3';
-}
-
-echo '<div class="ct-newsletter-subscribe-block">';
-
-$form_attrs = array(
-	'action'        => '#',
-	'method'        => 'post',
-	'class'         => 'ct-newsletter-subscribe-form',
-	'data-provider' => $provider,
-);
-
-$container_type = blocksy_companion_akg(
-	'newsletter_subscribe_container_type',
+if (blocksy_default_akg(
+	'newsletter_subscribe_list_id_source',
 	$atts,
 	'default'
-);
-
-$container_atts = array(
-	'class'          => trim(
-		'ct-newsletter-subscribe-form-elements' . (
-			'boxed' === $container_type ? ' ct-pseudo-input' : ''
-		)
-	),
-	'data-container' => $container_type,
-);
-
-if ( 'inline' === $view_type ) {
-	$container_atts['data-columns'] = $fields_number;
+) === 'custom') {
+	$list_id = blocksy_default_akg('newsletter_subscribe_list_id', $atts, '');
 }
 
-if ( ! empty( $style ) || ! empty( $colors_css ) ) {
-	$form_attrs['style'] = $style . $colors_css;
+$manager = BlocksyNewsletterManager::get_for_settings();
+
+// Button value
+$provider_data = $manager->get_form_url_and_gdpr_for($list_id);
+
+if (! $provider_data) {
+	return;
 }
 
-$button_colors = array();
-
-$button_colors = array_merge(
-	$button_colors,
-	array(
-		'--theme-button-text-initial-color'       => blocksy_companion_akg( 'customInputIconColor', $atts, '' ),
-		'--theme-button-text-hover-color'         => blocksy_companion_akg( 'customInputIconColorFocus', $atts, '' ),
-		'--theme-button-background-initial-color' => blocksy_companion_akg( 'customButtonBackgroundColor', $atts, '' ),
-		'--theme-button-background-hover-color'   => blocksy_companion_akg( 'customButtonBackgroundColorHover', $atts, '' ),
-	)
-);
-
-if ( isset( $atts['inputIconColor'] ) ) {
-	$var = $atts['inputIconColor'];
-	$button_colors['--theme-button-text-initial-color'] = "var(--wp--preset--color--$var)";
+if ($provider_data['provider'] === 'mailerlite') {
+	$settings = $manager->get_settings();
+	$provider_data['provider'] .= ':' . $settings['list_id'];
 }
 
-if ( isset( $atts['inputIconColorFocus'] ) ) {
-	$var = $atts['inputIconColorFocus'];
-	$button_colors['--theme-button-text-hover-color'] = "var(--wp--preset--color--$var)";
+$form_url = $provider_data['form_url'];
+$has_gdpr_fields = $provider_data['has_gdpr_fields'];
+
+$skip_submit_output = '';
+
+if ($has_gdpr_fields) {
+	$skip_submit_output = 'data-skip-submit';
 }
 
-if ( isset( $atts['buttonBackgroundColor'] ) ) {
-	$var = $atts['buttonBackgroundColor'];
-	$button_colors['--theme-button-background-initial-color'] = "var(--wp--preset--color--$var)";
+// container type
+$container = blocksy_default_akg('newsletter_subscribe_container', $atts, 'default');
+
+$data_container = '';
+
+if ( $container !== 'default' ) {
+	$data_container = ' data-container=' . $container;
 }
 
-if ( isset( $atts['buttonBackgroundColorHover'] ) ) {
-	$var = $atts['buttonBackgroundColorHover'];
-	$button_colors['--theme-button-background-hover-color'] = "var(--wp--preset--color--$var)";
+// Content alignment
+$alignment = blocksy_default_akg('newsletter_subscribe_alignment', $atts, 'left');
+
+$name_label = blocksy_default_akg('newsletter_subscribe_name_label', $atts, __('Your name', 'blc'));
+$email_label = blocksy_default_akg('newsletter_subscribe_mail_label', $atts, __('Your email', 'blc'));
+
+$data_alignment = '';
+
+if ($alignment !== 'left') {
+	$data_alignment = ' data-alignment=' . $alignment;
 }
 
-$button_colors_css = blocksy_companion_colors_to_css( $button_colors );
+// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo $before_widget;
+
+echo '<div class="ct-widget-inner"' . $data_alignment . '' . $data_container . '>';
+
+// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo $before_title . wp_kses_post($title) . $after_title;
+
 
 ?>
-	<form <?php blocksy_companion_attr_to_html_e( $form_attrs ); ?>>
-		<div <?php blocksy_companion_attr_to_html_e( $container_atts ); ?>>
-			<?php if ( $has_name ) { ?>
-				<input
-					type="text"
-					name="FNAME"
-					placeholder="<?php echo esc_attr( $name_label, 'blocksy-companion' ) . ( $newsletter_subscribe_name_required ? ' *' : '' ); ?>"
-					title="<?php echo esc_attr__( 'Name', 'blocksy-companion' ); ?>"
-					aria-label="<?php echo esc_attr__( 'Name', 'blocksy-companion' ); ?>"
-					<?php echo ( $newsletter_subscribe_name_required ? 'required' : '' ); ?>
-				>
-			<?php } ?>
 
-			<input
-				type="email"
-				name="EMAIL"
-				placeholder="<?php echo esc_attr( $email_label ); ?>"
-				title="<?php echo esc_attr__( 'Email address', 'blocksy-companion' ); ?>"
-				aria-label="<?php echo esc_attr__( 'Email address', 'blocksy-companion' ); ?>"
-				required>
+	<form
+		action="<?php echo esc_attr($form_url) ?>"
+		method="post"
+		class="ct-newsletter-subscribe-widget-form"
+		target="_blank"
+		data-provider="<?php echo $provider_data['provider'] ?>"
+		<?php echo $skip_submit_output ?>>
 
-			<button class="wp-element-button" <?php echo ! empty( $button_colors_css ) ? 'style="' . esc_attr( $button_colors_css ) . '"' : ''; ?>>
-				<?php echo esc_html( $button_text ); ?>
-			</button>
+	<?php if (! empty($message)) { ?>
+		<div class="ct-newsletter-subscribe-description">
+			<?php echo wp_kses_post($message) ?>
 		</div>
+	<?php } ?>
 
-		<?php
-		if ( function_exists( 'blocksy_companion_ext_cookies_checkbox' ) ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo blocksy_companion_ext_cookies_checkbox(
-				'newsletter-subscribe',
-				$gdpr_checkbox_id_suffix
-			);
+	<?php if ($has_name) { ?>
+		<input type="text" name="FNAME" placeholder="<?php esc_attr_e($name_label, 'blc'); ?>" title="<?php echo __('Name', 'blocksy') ?>" />
+	<?php } ?>
+
+	<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($email_label, 'blc'); ?> *" title="<?php echo __('Email', 'blocksy') ?>" required />
+
+	<button class="button">
+		<?php echo esc_html($button_text) ?>
+	</button>
+
+	<div class="ct-newsletter-subscribe-message"></div>
+
+	<?php
+		if (function_exists('blocksy_ext_cookies_checkbox')) {
+			echo blocksy_ext_cookies_checkbox('newsletter-subscribe');
 		}
-		?>
-
-		<div class="ct-newsletter-subscribe-message"></div>
-	</form>
+	?>
+</form>
 
 </div>
+
+<?php echo wp_kses_post($after_widget); ?>

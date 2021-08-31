@@ -3,75 +3,43 @@
 namespace Blocksy;
 
 class DemoInstallContentEraser {
-	protected $is_ajax_request = true;
-	protected $to_erase = 'all';
+	public function import() {
+		Plugin::instance()->demo->start_streaming();
 
-	public function __construct($args = []) {
-		$args = wp_parse_args($args, [
-			'is_ajax_request' => true,
-			'to_erase' => 'all', // Possible values: 'all', 'content', 'widgets'
+		if (! current_user_can('edit_theme_options')) {
+			/*
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'complete',
+				'error' => 'No permission.',
+			]);
+
+			exit;
+			 */
+		}
+
+		$this->reset_widgets_data();
+		$this->reset_customizer();
+		$this->erase_default_pages();
+		$this->reset_previous_posts();
+		$this->reset_previous_terms();
+		$this->reset_menus();
+
+		Plugin::instance()->demo->emit_sse_message([
+			'action' => 'complete',
+			'error' => false,
 		]);
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if (isset($_REQUEST['to_erase'])) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$args['to_erase'] = sanitize_text_field(wp_unslash($_REQUEST['to_erase']));
-		}
-
-		// Validate to_erase value
-		if (!in_array($args['to_erase'], ['all', 'content', 'widgets'])) {
-			$args['to_erase'] = 'all';
-		}
-
-		$this->is_ajax_request = $args['is_ajax_request'];
-		$this->to_erase = $args['to_erase'];
-	}
-
-	public function import() {
-		if (
-			! current_user_can('edit_theme_options')
-			&&
-			$this->is_ajax_request
-		) {
-			wp_send_json_error([
-				'message' => __("Sorry, you don't have permission to erase content.", 'blocksy-companion')
-			]);
-		}
-
-		// Erase based on to_erase value
-		if ($this->to_erase === 'content') {
-			// Only erase content (posts, pages, terms, menus)
-			$this->erase_default_pages();
-			$this->reset_previous_posts();
-			$this->reset_previous_terms();
-			$this->reset_menus();
-		}
-
-		if ($this->to_erase === 'widgets') {
-			// Only erase widgets
-			$this->reset_widgets_data();
-		}
-
-		if ($this->to_erase === 'all') {
-			// Erase everything (original behavior)
-			$this->reset_widgets_data();
-			$this->reset_customizer();
-			$this->erase_default_pages();
-			$this->reset_previous_posts();
-			$this->reset_previous_terms();
-			// $this->reset_menus();
-			$this->erase_fluent_booking_data();
-		}
-
-		if ($this->is_ajax_request) {
-			wp_send_json_success();
-		}
+		exit;
 	}
 
 	private function reset_previous_posts() {
+		Plugin::instance()->demo->emit_sse_message([
+			'action' => 'erase_previous_posts',
+			'error' => false,
+		]);
+
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$post_ids = $wpdb->get_col(
 			"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='blocksy_demos_imported_post'"
 		);
@@ -86,9 +54,13 @@ class DemoInstallContentEraser {
 	}
 
 	private function reset_previous_terms() {
+		Plugin::instance()->demo->emit_sse_message([
+			'action' => 'erase_previous_terms',
+			'error' => false,
+		]);
+
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$term_ids = $wpdb->get_col(
 			"SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='blocksy_demos_imported_term'"
 		);
@@ -101,13 +73,17 @@ class DemoInstallContentEraser {
 			$term = get_term($term_id);
 
 			if (! $term) continue;
-			if (is_wp_error($term)) continue;
 
 			wp_delete_term($term_id, $term->taxonomy);
 		}
 	}
 
 	private function erase_default_pages() {
+		Plugin::instance()->demo->emit_sse_message([
+			'action' => 'erase_default_pages',
+			'error' => false,
+		]);
+
 		$sample_page = get_page_by_path('sample-page', OBJECT, 'page');
 		$hello_world_post = get_page_by_path('hello-world', OBJECT, 'post');
 
@@ -123,6 +99,11 @@ class DemoInstallContentEraser {
 	private function reset_customizer() {
 		global $wp_customize;
 
+		Plugin::instance()->demo->emit_sse_message([
+			'action' => 'erase_customizer_settings',
+			'error' => false,
+		]);
+
 		if (! $wp_customize) {
 			return;
 		}
@@ -134,11 +115,16 @@ class DemoInstallContentEraser {
 				continue;
 			}
 
-			remove_theme_mod($single_setting->id);
+			remove_theme_mod( $single_setting->id );
 		}
 	}
 
 	private function reset_widgets_data() {
+		Plugin::instance()->demo->emit_sse_message([
+			'action' => 'erase_widgets_data',
+			'error' => false,
+		]);
+
 		$sidebars_widgets = get_option('sidebars_widgets', array());
 
 		if (! isset($sidebars_widgets['wp_inactive_widgets'])) {
@@ -171,7 +157,14 @@ class DemoInstallContentEraser {
 	}
 
 	private function reset_menus() {
-		$menus = get_terms(['taxonomy' => 'nav_menu', 'hide_empty' => false]);
+		return;
+
+		Plugin::instance()->demo->emit_sse_message([
+			'action' => 'erase_menus_data',
+			'error' => false,
+		]);
+
+		$menus = get_terms('nav_menu', ['hide_empty' => false]);
 
 		foreach ($menus as $single_menu) {
 			if (! isset($single_menu->term_id)) {
@@ -181,27 +174,6 @@ class DemoInstallContentEraser {
 			wp_delete_nav_menu($single_menu->term_id);
 		}
 	}
-
-	private function erase_fluent_booking_data() {
-		if (! class_exists('\FluentBooking\App\Models\Calendar')) {
-			return;
-		}
-
-		$current_demo = get_option('blocksy_ext_demos_current_demo', []);
-
-		if (! isset($current_demo['fluent_booking_calendar'])) {
-			return;
-		}
-
-		$calendar = \FluentBooking\App\Models\Calendar::find(
-			$current_demo['fluent_booking_calendar']
-		);
-
-		if (! $calendar) {
-			return;
-		}
-
-		$calendar->delete();
-	}
 }
+
 
