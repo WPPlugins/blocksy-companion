@@ -222,9 +222,9 @@ class ConditionsManager {
 			&&
 			function_exists('blocksy_get_current_language')
 			&&
-			! empty($payload['language'])
+			! empty($rule['payload']['language'])
 		) {
-			return $payload['language'] === blocksy_get_current_language();
+			return $rule['payload']['language'] === blocksy_get_current_language();
 		}
 
 		if (
