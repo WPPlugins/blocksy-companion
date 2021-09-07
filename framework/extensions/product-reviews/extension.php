@@ -4,6 +4,44 @@ require_once dirname(__FILE__) . '/helpers.php';
 
 class BlocksyExtensionProductReviews {
 	public function __construct() {
+		add_action(
+			'blocksy:hero:title:before',
+			function () {
+				if (! is_singular('blc-product-review')) {
+					return;
+				}
+
+				$maybe_schema = blocksy_schema_org_definitions('itemReviewed');
+
+				if (! $maybe_schema) {
+					return;
+				}
+
+				echo '<div ' . $maybe_schema . '>';
+				echo '<meta itemprop="name" content="' . get_the_title() . '">';
+				if (get_the_post_thumbnail_url()) {
+					echo '<meta itemprop="image" content="' . get_the_post_thumbnail_url() . '">';
+				}
+			}
+		);
+
+		add_action(
+			'blocksy:hero:title:after',
+			function () {
+				if (! is_singular('blc-product-review')) {
+					return;
+				}
+
+				$maybe_schema = blocksy_schema_org_definitions('itemReviewed');
+
+				if (! $maybe_schema) {
+					return;
+				}
+
+				echo '</div>';
+			}
+		);
+
 		add_filter(
 			'blocksy:options:cpt:page-title-args',
 			function ($args, $cpt) {
@@ -15,6 +53,32 @@ class BlocksyExtensionProductReviews {
 			},
 			10, 2
 		);
+
+		add_action(
+			'customize_preview_init',
+			function () {
+				if (! function_exists('get_plugin_data')){
+					require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				}
+
+				$data = get_plugin_data(BLOCKSY__FILE__);
+
+				wp_enqueue_script(
+					'blocksy-product-reviews-customizer-sync',
+					BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/sync.js',
+					[ 'ct-scripts', 'customize-preview' ],
+					$data['Version'],
+					true
+				);
+			}
+		);
+
+		add_action('blocksy:global-dynamic-css:enqueue', function ($args) {
+			blocksy_theme_get_dynamic_styles(array_merge([
+				'path' => dirname( __FILE__ ) . '/global.php',
+				'chunk' => 'global'
+			], $args));
+		}, 10, 3);
 
 		add_action('init', [$this, 'declare_cpt']);
 
@@ -75,11 +139,11 @@ class BlocksyExtensionProductReviews {
 			];
 
 			$option['settings']['overall_score'] = [
-				'label' => __('Overall Score', 'blocksy'),
+				'label' => __('Overall Score', 'blc'),
 					/*
 				'options' => [
 					'excerpt_length' => [
-						'label' => __('Length', 'blocksy'),
+						'label' => __('Length', 'blc'),
 						'type' => 'ct-number',
 						'design' => 'inline',
 						'value' => 40,
@@ -127,19 +191,142 @@ class BlocksyExtensionProductReviews {
 			);
 		});
 
-		add_filter('blocksy_single_posts_post_elements_end', function ($options, $prefix) {
+		add_filter('blocksy_single_posts_post_elements_start', function ($options, $prefix) {
 			if ($prefix !== 'blc-product-review_single') {
 				return $options;
 			}
 
-			$options[$prefix . '_has_read_more'] = [
-				'label' => __('Read More Button', 'blc'),
-				'type' => 'ct-switch',
-				'value' => 'yes',
-				'sync' => blocksy_sync_single_post_container([
-					'prefix' => $prefix
-				])
+			$options[$prefix . '_reviews_summary'] = [
+				'label' => __( 'Review Summary', 'blc' ),
+				'type' => 'ct-panel',
+				'setting' => [ 'transport' => 'postMessage' ],
+				'inner-options' => [
+
+					blocksy_rand_md5() => [
+						'title' => __( 'General', 'blc' ),
+						'type' => 'tab',
+						'options' => [
+
+							$prefix . '_product_scores_width' => [
+								'label' => __( 'Scores Box Width', 'blc' ),
+								'type' => 'ct-slider',
+								'min' => 0,
+								'max' => 1200,
+								'value' => 800,
+								// 'responsive' => true,
+								'setting' => [ 'transport' => 'postMessage' ],
+							],
+
+							$prefix . '_has_read_more' => [
+								'label' => __('Read More Button', 'blc'),
+								'type' => 'ct-switch',
+								'value' => 'yes',
+								'divider' => 'top',
+								'sync' => blocksy_sync_single_post_container([
+									'prefix' => $prefix,
+									'loader_selector' => '.ct-product-actions-group'
+								])
+							],
+
+							$prefix . '_has_buy_now' => [
+								'label' => __('Buy Now Button', 'blc'),
+								'type' => 'ct-switch',
+								'value' => 'yes',
+								'divider' => 'top',
+								'sync' => blocksy_sync_single_post_container([
+									'prefix' => $prefix,
+									'loader_selector' => '.ct-product-actions-group'
+								])
+							],
+
+						],
+					],
+
+					blocksy_rand_md5() => [
+						'title' => __( 'Design', 'blc' ),
+						'type' => 'tab',
+						'options' => [
+
+							$prefix . '_star_rating_color' => [
+								'label' => __( 'Star Rating Color', 'blc' ),
+								'type'  => 'ct-color-picker',
+								'design' => 'inline',
+								'setting' => [ 'transport' => 'postMessage' ],
+
+								'value' => [
+									'default' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+
+									'inactive' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+								],
+
+								'pickers' => [
+									[
+										'title' => __( 'Active', 'blc' ),
+										'id' => 'default',
+										'inherit' => '#FDA256'
+									],
+
+									[
+										'title' => __( 'Inactive', 'blc' ),
+										'id' => 'inactive',
+										'inherit' => '#F9DFCC'
+									],
+								],
+							],
+
+							$prefix . '_overall_score_text' => [
+								'label' => __( 'Overll Score Text', 'blc' ),
+								'type'  => 'ct-color-picker',
+								'design' => 'inline',
+								'divider' => 'top',
+								'setting' => [ 'transport' => 'postMessage' ],
+
+								'value' => [
+									'default' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+								],
+
+								'pickers' => [
+									[
+										'title' => __( 'Active', 'blc' ),
+										'id' => 'default',
+										'inherit' => '#ffffff'
+									],
+								],
+							],
+
+							$prefix . '_overall_score_backgroud' => [
+								'label' => __( 'Overll Score Background', 'blc' ),
+								'type'  => 'ct-color-picker',
+								'design' => 'inline',
+								'setting' => [ 'transport' => 'postMessage' ],
+
+								'value' => [
+									'default' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+								],
+
+								'pickers' => [
+									[
+										'title' => __( 'Active', 'blc' ),
+										'id' => 'default',
+										'inherit' => '#1A202C'
+									],
+								],
+							],
+
+						],
+					],
+
+				]
 			];
+
 			return $options;
 		}, 10, 2);
 	}
@@ -231,8 +418,8 @@ class BlocksyExtensionProductReviews {
 			'blocksy_settings_meta_box',
 			sprintf(
 				// Translators: %s is the theme name.
-				__( '%s Settings', 'blocksy' ),
-				__( 'Blocksy', 'blocksy' )
+				__( '%s Settings', 'blc' ),
+				__( 'blc', 'blc' )
 			),
 			function ($post) {
 				$values = get_post_meta($post->ID, 'blocksy_product_review_options');

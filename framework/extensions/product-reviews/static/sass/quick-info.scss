@@ -17,14 +17,15 @@
 
 	li {
 		position: relative;
-		padding-inline-start: 23px;
+		padding-inline-start: 22px;
 	}
 
 	.ct-icon-container {
 		position: absolute;
 		left: 0;
-		top: 0.35em;
-		opacity: 0.9;
+		top: 0.4em;
+		opacity: 0.8;
+		--icon-size: 13px;
 	}
 }
 

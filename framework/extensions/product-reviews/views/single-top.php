@@ -132,28 +132,32 @@ if (! empty($scores)) {
 	echo '</div>';
 }
 
-echo '<div class="ct-product-actions-group">';
+$has_read_more = get_theme_mod($prefix . '_has_read_more', 'yes') === 'yes';
+$has_buy_now = get_theme_mod($prefix . '_has_buy_now', 'yes') === 'yes';
 
-$product_link = blocksy_akg('product_link', $atts, '#');
-$product_button_label = blocksy_akg(
-	'product_button_label',
-	$atts,
-	__('Buy Now', 'blc')
-);
+if ($has_read_more || $has_buy_now) {
+	echo '<div class="ct-product-actions-group">';
 
-$product_read_content_button_label = blocksy_akg(
-	'product_read_content_button_label',
-	$atts,
-	__('Read More', 'blc')
-);
+	$product_link = blocksy_akg('product_link', $atts, '#');
+	$product_button_label = blocksy_akg(
+		'product_button_label',
+		$atts,
+		__('Buy Now', 'blc')
+	);
 
-if (
-	! empty($product_button_label)
-	&&
-	get_theme_mod($prefix . '_has_read_more', 'yes') === 'yes'
-) {
-	echo '<a href="#post-' . get_the_ID() . '" class="ct-button">';
-	echo $product_read_content_button_label;
+	$product_read_content_button_label = blocksy_akg(
+		'product_read_content_button_label',
+		$atts,
+		__('Read More', 'blc')
+	);
+
+	if (
+		! empty($product_button_label)
+		&&
+		$has_read_more
+	) {
+		echo '<a href="#post-' . get_the_ID() . '" class="ct-button">';
+		echo $product_read_content_button_label;
 
 	/*
 	echo blc_get_icon([
@@ -163,12 +167,18 @@ if (
 	]);
 	 */
 
-	echo '</a>';
-}
+		echo '</a>';
+	}
 
-if (! empty($product_button_label) && ! empty($product_link)) {
-	echo '<a href="' . esc_url($product_link) . '" class="ct-button" ' . wp_kses_post($target_output) . '>';
-	echo $product_button_label;
+	if (
+		! empty($product_button_label)
+		&&
+		! empty($product_link)
+		&&
+		$has_buy_now
+	) {
+		echo '<a href="' . esc_url($product_link) . '" class="ct-button" ' . wp_kses_post($target_output) . '>';
+		echo $product_button_label;
 
 	/*
 	echo blc_get_icon([
@@ -178,10 +188,11 @@ if (! empty($product_button_label) && ! empty($product_link)) {
 	]);
 	 */
 
-	echo '</a>';
-}
+		echo '</a>';
+	}
 
-echo '</div>';
+	echo '</div>';
+}
 
 $product_specs = blocksy_akg('product_specs', $atts, []);
 $product_pros = blocksy_akg('product_pros', $atts, []);
