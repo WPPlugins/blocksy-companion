@@ -11,7 +11,23 @@ class BlocksyExtensionProductReviews {
 					return;
 				}
 
-				$maybe_schema = blocksy_schema_org_definitions('itemReviewed');
+				$atts = apply_filters(
+					'blocksy:ext:product-reviews:frontend:atts',
+					blocksy_get_post_options(null, [
+						'meta_id' => 'blocksy_product_review_options'
+					]),
+					get_the_ID()
+				);
+
+				$maybe_schema = blocksy_schema_org_definitions('itemReviewed', [
+					'to_merge' => [
+						'itemtype' => "https://schema.org/" . blocksy_akg(
+							'product_review_entity',
+							$atts,
+							'Thing'
+						)
+					]
+				]);
 
 				if (! $maybe_schema) {
 					return;
@@ -419,7 +435,7 @@ class BlocksyExtensionProductReviews {
 			sprintf(
 				// Translators: %s is the theme name.
 				__( '%s Settings', 'blc' ),
-				__( 'blc', 'blc' )
+				__( 'Blocksy', 'blc' )
 			),
 			function ($post) {
 				$values = get_post_meta($post->ID, 'blocksy_product_review_options');

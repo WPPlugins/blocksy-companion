@@ -6,6 +6,47 @@ $options = [
 		'title' => __( 'General', 'blc' ),
 		'type' => 'tab',
 		'options' => [
+			'product_review_entity' => [
+				'label' => __( 'Review Entity', 'blc' ),
+				'type' => 'ct-select',
+				'value' => 'Thing',
+				'view' => 'text',
+				'design' => 'inline',
+				'choices' => blocksy_ordered_keys(
+					[
+						'Thing' => __( 'Default', 'blc' ),
+						'Book' => __( 'Book', 'blc' ),
+						// 'Course' => __( 'Course', 'blc' ),
+						'CreativeWorkSeason' => __( 'Creative Work Season', 'blc' ),
+						'CreativeWorkSeries' => __( 'Creative Work Series', 'blc' ),
+						'Episode' => __( 'Episode', 'blc' ),
+						// 'Event' => __( 'Event', 'blc' ),
+						'Game' => __( 'Game', 'blc' ),
+						// 'HowTo' => __( 'How To', 'blc' ),
+						'LocalBusiness' => __( 'Local Business', 'blc' ),
+						'MediaObject' => __( 'Media Object', 'blc' ),
+						'Movie' => __( 'Movie', 'blc' ),
+						'MusicPlaylist' => __( 'Music Playlist', 'blc' ),
+						'MusicRecording' => __( 'Music Recording', 'blc' ),
+						'Organization' => __( 'Organization', 'blc' ),
+						// 'Product' => __( 'Product', 'blc' ),
+						// 'Recipe' => __( 'Recipe', 'blc' ),
+						// 'SoftwareApplication' => __( 'Software Application', 'blc' ),
+					]
+				),
+				'desc' => sprintf(
+					__(
+						'More info about review entity and how to choose the right one can be found %shere%s.',
+						'blc'
+					),
+					'<a href="https://developers.google.com/search/blog/2019/09/making-review-rich-results-more-helpful" target="_blank">',
+					'</a>'
+				),
+			],
+
+			blocksy_rand_md5() => [
+				'type' => 'ct-divider',
+			],
 
 			'gallery' => [
 				'type' => 'ct-multi-image-uploader',
@@ -77,10 +118,10 @@ $options = [
 
 			'product_description' => [
 				'type' => 'wp-editor',
-				'label' => __('Small Description', 'blc'),
+				'label' => __('Short Description', 'blc'),
 				'value' => '',
 				'design' => 'inline',
-			]
+			],
 
 		],
 	],

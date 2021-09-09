@@ -30,7 +30,7 @@ $link_rel = blocksy_default_akg('link_nofollow', $atts, 'no');
 if ($link_rel === 'yes') {
 	$link_rel = 'noopener noreferrer nofollow';
 } else {
-	$link_rel = false;
+	$link_rel = 'noopener';
 }
 
 /**

@@ -21,10 +21,8 @@ const getStartPositionFor = (stickyContainer) => {
 		return stickyContainer.parentNode.getBoundingClientRect().height + 200
 	}
 
-	// stickyContainer.closest('header').getBoundingClientRect().top +
-	// TODO: compute items that are before the header & are not fixed
-	// scrollY
-	const stickyOffset = 0
+	const stickyOffset =
+		stickyContainer.closest('header').getBoundingClientRect().top + scrollY
 
 	const row = stickyContainer.parentNode
 
