@@ -97,13 +97,6 @@ const useActivationAction = (extension, cb = () => {}) => {
 							)}
 						</p>
 
-						<p>
-							{__(
-								'Hurry up, we have a 10% off discount now 🤩',
-								'blc'
-							)}
-						</p>
-
 						<div
 							className="ct-modal-actions has-divider"
 							data-buttons="2">
@@ -121,7 +114,7 @@ const useActivationAction = (extension, cb = () => {}) => {
 							</a>
 
 							<a
-								href="https://creativethemes.com/blocksy/pricing/?coupon=BlocksyLimited10&utm_source=getpro&utm_medium=dashboard&utm_campaign=BlocksyLimited10"
+								href="https://creativethemes.com/blocksy/pricing/"
 								target="_blank"
 								className="button button-primary">
 								{__('Upgrade Now', 'blc')}
