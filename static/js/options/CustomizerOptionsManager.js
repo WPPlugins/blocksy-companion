@@ -82,10 +82,7 @@ const CustomizerOptionsManager = () => {
 				<h3>{__('Export Options', 'blc')}</h3>
 
 				<div className="ct-option-description">
-					{__(
-						'Easily export the theme customizer settings.',
-						'blc'
-					)}
+					{__('Easily export the theme customizer settings.', 'blc')}
 				</div>
 			</div>
 
@@ -108,10 +105,7 @@ const CustomizerOptionsManager = () => {
 				<h3>{__('Import Options', 'blc')}</h3>
 
 				<div className="ct-option-description">
-					{__(
-						'Easily import the theme customizer settings.',
-						'blc'
-					)}
+					{__('Easily import the theme customizer settings.', 'blc')}
 				</div>
 			</div>
 
@@ -160,6 +154,7 @@ const CustomizerOptionsManager = () => {
 
 								var reader = new FileReader()
 								reader.readAsText(futureConfig, 'UTF-8')
+
 								reader.onload = function (evt) {
 									const body = new FormData()
 

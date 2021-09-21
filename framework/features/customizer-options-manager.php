@@ -47,9 +47,12 @@ class CustomizerOptionsManager {
 			// Ensure only stdClass is allowed
 			// We need it for properly decoding widget data. Custom classes
 			// besides stdClass are not allowed.
-			$data = @unserialize(wp_unslash($_POST['data']), [
-				'allowed_classes' => ['stdClass']
-			]);
+			$data = @unserialize(
+				str_replace("\r\n", "\n", wp_unslash($_POST['data'])),
+				[
+					'allowed_classes' => ['stdClass']
+				]
+			);
 
 			// The above code will only import stuff from $data['mods']
 			// that is actually a customizer control. Everything else will be ignored
