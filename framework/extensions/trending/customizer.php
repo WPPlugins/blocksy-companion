@@ -116,7 +116,31 @@ $options = [
 								'design' => 'inline',
 								'value' => __( 'Trending now', 'blc' ),
 								'sync' => 'live',
-								'divider' => 'bottom'
+							],
+
+							'trending_block_label_tag' => [
+								'label' => __( 'Module Title Tag', 'blc' ),
+								'type' => 'ct-select',
+								'value' => 'h3',
+								'view' => 'text',
+								'design' => 'inline',
+								'divider' => 'bottom:full',
+								'choices' => blocksy_ordered_keys(
+									[
+										'h1' => 'H1',
+										'h2' => 'H2',
+										'h3' => 'H3',
+										'h4' => 'H4',
+										'h5' => 'H5',
+										'h6' => 'H6',
+									]
+								),
+								'sync' => [
+									'selector' => '.ct-trending-block',
+									'render' => function () {
+										echo blc_get_trending_block();
+									}
+								]
 							],
 
 							'trending_block_post_type' => count($all_post_types) > 1 ? [

@@ -211,6 +211,8 @@ function blc_get_trending_block($forced = false) {
 		$attr['data-location'] = 'trending_posts_ext';
 	}
 
+	$label_tag = get_theme_mod('trending_block_label_tag', 'h3');
+
 	$trending_label = get_theme_mod(
 		'trending_block_label',
 		__('Trending now', 'blc')
@@ -220,7 +222,7 @@ function blc_get_trending_block($forced = false) {
 
 	<section <?php echo blocksy_attr_to_html($attr) ?>>
 		<div class="ct-container" <?php echo $data_page ?>>
-			<h5 class="ct-block-title">
+			<<?php echo $label_tag ?> class="ct-block-title">
 				<?php echo $trending_label ?>
 
 				<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
@@ -232,7 +234,7 @@ function blc_get_trending_block($forced = false) {
 					<span class="ct-arrow-right">
 					</span>
 				<?php } ?>
-			</h5>
+			</<?php echo $label_tag ?>>
 
 			<?php
 				foreach ($result['posts'] as $post) {
