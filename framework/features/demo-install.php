@@ -159,7 +159,9 @@ class DemoInstall {
 			'route' => 'get_single',
 			'demo' => $args['demo'] . ':' . $args['builder'],
 			'field' => $args['field']
-		]));
+		]), [
+			'sslverify' => false
+		]);
 
 		if (is_wp_error($request)) {
 			return false;
@@ -177,7 +179,9 @@ class DemoInstall {
 	}
 
 	public function fetch_all_demos() {
-		$request = wp_remote_get('https://demo.creativethemes.com/?route=get_all');
+		$request = wp_remote_get('https://demo.creativethemes.com/?route=get_all', [
+			'sslverify' => false
+		]);
 
 		// $request = wp_remote_get('https://demo.creativethemes.BROKEN/?route=get_all');
 

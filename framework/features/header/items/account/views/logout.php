@@ -1,5 +1,7 @@
 <?php
 
+$login_label = blocksy_akg('login_label', $atts, __('Login', 'blc'));
+
 $loggedout_account_label_visibility = blocksy_akg(
 	'loggedout_account_label_visibility',
 	$atts,
@@ -33,6 +35,7 @@ if (blocksy_akg('logged_out_style', $atts, 'icon') !== 'none') {
 }
 
 $attr['href'] = $link;
+$attr['aria-label'] = $login_label;
 
 echo '<a ' . blocksy_attr_to_html($attr) . '>';
 
@@ -45,7 +48,7 @@ if (
 		$loggedout_account_label_visibility
 	)) . '">';
 
-	echo blocksy_akg('login_label', $atts, __('Login', 'blc'));
+	echo $login_label;
 
 	echo '</span>';
 }

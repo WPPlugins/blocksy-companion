@@ -13,6 +13,16 @@ export const setTransparencyFor = (deviceContainer, value = 'yes') => {
 	})
 }
 
+var getParents = function (elem) {
+	var parents = []
+
+	for (; elem && elem !== document; elem = elem.parentNode) {
+		parents.push(elem)
+	}
+
+	return parents
+}
+
 const getStartPositionFor = (stickyContainer) => {
 	if (
 		stickyContainer.dataset.sticky.indexOf('shrink') === -1 &&
@@ -21,8 +31,29 @@ const getStartPositionFor = (stickyContainer) => {
 		return stickyContainer.parentNode.getBoundingClientRect().height + 200
 	}
 
-	const stickyOffset =
-		stickyContainer.closest('header').getBoundingClientRect().top + scrollY
+	const headerRect = stickyContainer.closest('header').getBoundingClientRect()
+
+	let stickyOffset = headerRect.top + scrollY
+
+	if (stickyOffset > 0) {
+		let element = document.elementFromPoint(
+			0,
+			stickyContainer.getBoundingClientRect().top - 3
+		)
+
+		if (element) {
+			if (
+				getParents(element)
+					.map((el) => {
+						let style = getComputedStyle(el)
+						return style.position
+					})
+					.indexOf('fixed') > -1
+			) {
+				stickyOffset = 0
+			}
+		}
+	}
 
 	const row = stickyContainer.parentNode
 
