@@ -38,7 +38,7 @@ $image_output = blc_call_fn(['fn' => 'blocksy_image'], [
 ]);
 
 $about_name = blocksy_default_akg('about_name', $atts, __('John Doe', 'blc'));
-$about_text = blocksy_default_akg('about_text', $atts, '');
+$about_text = do_shortcode(blocksy_default_akg('about_text', $atts, ''));
 
 if ($about_source === 'from_wp') {
 	if (! $user_id) {

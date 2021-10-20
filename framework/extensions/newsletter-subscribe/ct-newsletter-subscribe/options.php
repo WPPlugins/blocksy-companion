@@ -18,12 +18,27 @@ $options = [
 		'disableRevertButton' => true,
 	],
 
+	// 'newsletter_subscribe_text' => [
+	// 	'label' => __( 'Message', 'blc' ),
+	// 	'type' => 'textarea',
+	// 	'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blc' ),
+	// 	'design' => 'inline',
+	// 	'disableRevertButton' => true,
+	// ],
+
 	'newsletter_subscribe_text' => [
-		'label' => __( 'Message', 'blc' ),
-		'type' => 'textarea',
-		'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blc' ),
+		'label' => __( 'Text', 'blc' ),
+		'type' => 'wp-editor',
 		'design' => 'inline',
+		'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blc' ),
+		'desc' => __( 'You can add here some arbitrary HTML code.', 'blc' ),
 		'disableRevertButton' => true,
+		'setting' => [ 'transport' => 'postMessage' ],
+
+		'mediaButtons' => false,
+		'tinymce' => [
+			'toolbar1' => 'bold,italic,link,undo,redo',
+		],
 	],
 
 	'newsletter_subscribe_list_id_source' => [

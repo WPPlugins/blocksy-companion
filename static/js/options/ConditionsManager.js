@@ -8,6 +8,7 @@ import PostIdPicker from './ConditionsManager/PostIdPicker'
 let allPostsCache = []
 let allTaxonomiesCache = []
 let allLanguagesCache = []
+let allUsersCache = []
 
 const ConditionsManager = ({ value, onChange }) => {
 	const allRules = blocksy_admin.all_condition_rules
@@ -36,6 +37,7 @@ const ConditionsManager = ({ value, onChange }) => {
 	const [allPosts, setAllPosts] = useState(allPostsCache)
 	const [allTaxonomies, setAllTaxonomies] = useState(allTaxonomiesCache)
 	const [allLanguages, setAllLanguages] = useState(allLanguagesCache)
+	const [allUsers, setAllUsers] = useState(allUsersCache)
 
 	const hasAdditions = (condition) =>
 		condition.rule === 'post_ids' ||
@@ -43,7 +45,8 @@ const ConditionsManager = ({ value, onChange }) => {
 		condition.rule === 'custom_post_type_ids' ||
 		condition.rule === 'taxonomy_ids' ||
 		condition.rule === 'post_with_taxonomy_ids' ||
-		condition.rule === 'current_language'
+		condition.rule === 'current_language' ||
+		condition.rule === 'user_post_author_id'
 
 	useEffect(() => {
 		fetch(
@@ -57,12 +60,15 @@ const ConditionsManager = ({ value, onChange }) => {
 			}
 		)
 			.then((r) => r.json())
-			.then(({ data: { taxonomies, languages } }) => {
+			.then(({ data: { taxonomies, languages, users } }) => {
 				setAllTaxonomies(taxonomies)
 				allTaxonomiesCache = taxonomies
 
 				setAllLanguages(languages)
 				allLanguagesCache = languages
+
+				setAllUsers(users)
+				allUsersCache = users
 			})
 	}, [])
 
@@ -215,6 +221,44 @@ const ConditionsManager = ({ value, onChange }) => {
 													payload: {
 														...condition.payload,
 														language,
+													},
+											  }
+											: r),
+									}))
+								)
+							}}
+						/>
+					)}
+
+					{condition.rule === 'user_post_author_id' && (
+						<Select
+							option={{
+								appendToBody: true,
+								defaultToFirstItem: false,
+								placeholder: __('Select user', 'blc'),
+								choices: [
+									{
+										key: 'current_user',
+										value: __('Current user', 'blc'),
+									},
+
+									...allUsers.map((user) => ({
+										key: user.id,
+										value: user.name,
+									})),
+								],
+								search: true,
+							}}
+							value={(condition.payload || {}).user_id || ''}
+							onChange={(user_id) => {
+								onChange(
+									value.map((r, i) => ({
+										...(i === index
+											? {
+													...condition,
+													payload: {
+														...condition.payload,
+														user_id,
 													},
 											  }
 											: r),

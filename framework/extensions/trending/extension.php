@@ -19,7 +19,7 @@ class BlocksyExtensionTrending
                 [ 'ct-main-styles' ],
                 $data['Version']
             );
-        } );
+        }, 50 );
         add_filter( 'blocksy:frontend:dynamic-js-chunks', function ( $chunks ) {
             $chunks[] = [
                 'id'       => 'blocksy_ext_trending',

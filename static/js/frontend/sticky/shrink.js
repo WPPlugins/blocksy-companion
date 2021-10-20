@@ -6,23 +6,16 @@ import { shrinkHandleMiddleRow } from './shrink-handle-middle-row'
 import { getRowInitialHeight } from './shrink-utils'
 
 export const computeShrink = ({
+	containerInitialHeight,
 	stickyContainer,
+	stickyContainerHeight,
 	isSticky,
 	startPosition,
 	stickyComponents,
 }) => {
-	let containerInitialHeight = Array.from(
-		stickyContainer.querySelectorAll('[data-row]')
-	).reduce((sum, el) => sum + el.getBoundingClientRect().height, 0)
-
 	if (startPosition === 0 && window.scrollY === 0) {
 		stickyContainer.dataset.sticky = ['fixed', ...stickyComponents].join(
 			':'
-		)
-
-		stickyContainer.parentNode.style.setProperty(
-			'--minHeight',
-			`${containerInitialHeight}px`
 		)
 	}
 
@@ -31,14 +24,13 @@ export const computeShrink = ({
 			return
 		}
 
-		setTransparencyFor(stickyContainer, 'no')
+		if (stickyContainer.dataset.sticky.indexOf('yes') === -1) {
+			setTransparencyFor(stickyContainer, 'no')
 
-		stickyContainer.parentNode.style.setProperty(
-			'--minHeight',
-			`${containerInitialHeight}px`
-		)
-
-		stickyContainer.dataset.sticky = ['yes', ...stickyComponents].join(':')
+			stickyContainer.dataset.sticky = ['yes', ...stickyComponents].join(
+				':'
+			)
+		}
 
 		shrinkHandleLogo({ stickyContainer, startPosition })
 		shrinkHandleMiddleRow({
@@ -46,20 +38,7 @@ export const computeShrink = ({
 			containerInitialHeight,
 			startPosition,
 		})
-
-		document.body.style.setProperty(
-			'--headerStickyHeightAnimated',
-			`${parseInt(stickyContainer.getBoundingClientRect().height)}px`
-		)
 	} else {
-		let containerInitialHeight = Array.from(
-			stickyContainer.querySelectorAll('[data-row]')
-		).reduce((sum, el) => {
-			return sum + getRowInitialHeight(el)
-		}, 0)
-
-		document.body.removeAttribute('style')
-
 		Array.from(stickyContainer.querySelectorAll('[data-row]')).map((row) =>
 			row.removeAttribute('style')
 		)
@@ -72,18 +51,12 @@ export const computeShrink = ({
 
 		setTransparencyFor(stickyContainer, 'yes')
 
-		stickyContainer.parentNode.style.setProperty(
-			'--minHeight',
-			`${containerInitialHeight}px`
-		)
-
 		if (startPosition === 0 && window.scrollY === 0) {
 			stickyContainer.dataset.sticky = [
 				'fixed',
 				...stickyComponents,
 			].join(':')
 		} else {
-			stickyContainer.parentNode.removeAttribute('style')
 			stickyContainer.dataset.sticky = stickyComponents.join(':')
 		}
 	}

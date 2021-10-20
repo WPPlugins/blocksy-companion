@@ -1,6 +1,16 @@
 import { handleVariablesFor } from 'customizer-sync-helpers'
+import {
+	handleBackgroundOptionFor,
+} from 'blocksy-customizer-sync'
 
 handleVariablesFor({
+	newsletter_subscribe_title_color: {
+		selector: '.ct-newsletter-subscribe-block',
+		variable: 'heading-color',
+		type: 'color:default',
+		responsive: true,
+	},
+
 	newsletter_subscribe_content: [
 		{
 			selector: '.ct-newsletter-subscribe-block',
@@ -29,10 +39,60 @@ handleVariablesFor({
 		},
 	],
 
-	newsletter_subscribe_background: {
+	newsletter_subscribe_input_font_color: [
+		{
+			selector: '.ct-newsletter-subscribe-block',
+			variable: 'form-text-initial-color',
+			type: 'color:default',
+		},
+
+		{
+			selector: '.ct-newsletter-subscribe-block',
+			variable: 'form-text-focus-color',
+			type: 'color:focus',
+		},
+	],
+
+	newsletter_subscribe_border_color: [
+		{
+			selector: '.ct-newsletter-subscribe-block',
+			variable: 'form-field-border-initial-color',
+			type: 'color:default',
+		},
+
+		{
+			selector: '.ct-newsletter-subscribe-block',
+			variable: 'form-field-border-focus-color',
+			type: 'color:focus',
+		},
+	],
+
+	newsletter_subscribe_input_background: [
+		{
+			selector: '.ct-newsletter-subscribe-block',
+			variable: 'form-field-initial-background',
+			type: 'color:default',
+		},
+
+		{
+			selector: '.ct-newsletter-subscribe-block',
+			variable: 'form-field-focus-background',
+			type: 'color:focus',
+		},
+	],
+
+	...handleBackgroundOptionFor({
+		id: 'newsletter_subscribe_container_background',
 		selector: '.ct-newsletter-subscribe-block',
-		variable: 'mailchimpBackground',
-		type: 'color',
+		responsive: true,
+	}),
+
+	newsletter_subscribe_container_border: {
+		selector: '.ct-newsletter-subscribe-block',
+		variable: 'newsletter-container-border',
+		type: 'border',
+		responsive: true,
+		skip_none: true,
 	},
 
 	newsletter_subscribe_shadow: {
@@ -42,10 +102,17 @@ handleVariablesFor({
 		responsive: true,
 	},
 
-	newsletter_subscribe_spacing: {
+	newsletter_subscribe_container_spacing: {
 		selector: '.ct-newsletter-subscribe-block',
+		type: 'spacing',
 		variable: 'padding',
-		responsive: true,
-		unit: 'px',
+		responsive: true
+	},
+
+	newsletter_subscribe_container_border_radius: {
+		selector: '.ct-newsletter-subscribe-block',
+		type: 'spacing',
+		variable: 'border-radius',
+		responsive: true
 	},
 })

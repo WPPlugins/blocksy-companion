@@ -39,7 +39,6 @@
 .ct-newsletter-subscribe-block,
 .ct-newsletter-subscribe-widget [data-container='boxed'] {
 	padding: var(--padding, 30px);
-	background: var(--backgroundColor, #fff);
 	box-shadow: var(--box-shadow, 0px 12px 18px -6px rgba(34, 56, 101, 0.04));
 }
 
@@ -49,6 +48,8 @@
 	margin-top: 60px;
 	text-align: center;
 	color: var(--color);
+	border: var(--newsletter-container-border, none);
+	border-radius: var(--border-radius, 0px);
 	--linkInitialColor: var(--color);
 
 	> * {

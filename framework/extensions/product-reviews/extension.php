@@ -19,13 +19,15 @@ class BlocksyExtensionProductReviews {
 					get_the_ID()
 				);
 
+				$product_review_entity = blocksy_akg(
+					'product_review_entity',
+					$atts,
+					'Thing'
+				);
+
 				$maybe_schema = blocksy_schema_org_definitions('itemReviewed', [
 					'to_merge' => [
-						'itemtype' => "https://schema.org/" . blocksy_akg(
-							'product_review_entity',
-							$atts,
-							'Thing'
-						)
+						'itemtype' => "https://schema.org/" . $product_review_entity
 					]
 				]);
 
@@ -33,10 +35,83 @@ class BlocksyExtensionProductReviews {
 					return;
 				}
 
-				echo '<div ' . $maybe_schema . '>';
+				echo '<div class="ct-item-review-meta" ' . $maybe_schema . '>';
 				echo '<meta itemprop="name" content="' . get_the_title() . '">';
 				if (get_the_post_thumbnail_url()) {
 					echo '<meta itemprop="image" content="' . get_the_post_thumbnail_url() . '">';
+				}
+
+				$product_description = blocksy_akg('product_description', $atts, '');
+
+				if (! empty($product_description)) {
+					echo blocksy_html_tag('meta', [
+						'itemprop' => 'description',
+						'content' => strip_tags($product_description)
+					]);
+				}
+
+				if ($product_review_entity === 'Product') {
+					$product_entity_sku = blocksy_akg('product_entity_sku', $atts, '');
+					$product_entity_brand = blocksy_akg('product_entity_brand', $atts, '');
+					$product_entity_price = blocksy_akg('product_entity_price', $atts, '');
+
+					if (! empty($product_entity_sku)) {
+						echo blocksy_html_tag('meta', [
+							'itemprop' => 'sku',
+							'content' => $product_entity_sku
+						]);
+					}
+
+					if (! empty($product_entity_brand)) {
+						echo blocksy_html_tag(
+							'div',
+							[
+								'itemprop' => 'brand',
+								'itemscope' => '',
+								'itemtype' => 'https://schema.org/Brand'
+							],
+							blocksy_html_tag(
+								'meta',
+								[
+									'itemprop' => 'name',
+									'content' => $product_entity_brand
+								]
+							)
+						);
+					}
+
+					$product_link = blocksy_akg('product_link', $atts, '#');
+
+					$offers_contents = '';
+
+					if (! empty($product_link)) {
+						$offers_contents .= blocksy_html_tag('link', [
+							'itemprop' => 'url',
+							'href' => $product_link
+						]);
+					}
+
+					$offers_contents .= blocksy_html_tag('meta', [
+						'itemprop' => 'availability',
+						'content' => 'https://schema.org/InStock'
+					]);
+
+					if (! empty($product_entity_price)) {
+						$offers_contents .= blocksy_html_tag('meta', [
+							'itemprop' => 'price',
+							'content' => $product_entity_price
+						]);
+					}
+
+					echo blocksy_html_tag(
+						'div',
+						[
+							'itemprop' => 'offers',
+							'itemscope' => '',
+							'itemtype' => 'https://schema.org/Offer'
+						],
+						$offers_contents
+					);
 				}
 			}
 		);
@@ -205,7 +280,7 @@ class BlocksyExtensionProductReviews {
 				['ct-main-styles'],
 				$data['Version']
 			);
-		});
+		}, 50);
 
 		add_filter('blocksy_single_posts_post_elements_start', function ($options, $prefix) {
 			if ($prefix !== 'blc-product-review_single') {

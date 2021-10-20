@@ -67,7 +67,7 @@ class BlocksyExtensionCookiesConsent {
 				$data['Version'],
 				true
 			);
-		});
+		}, 50);
 
 		add_action('blocksy:global-dynamic-css:enqueue', function ($args) {
 			blocksy_theme_get_dynamic_styles(array_merge([

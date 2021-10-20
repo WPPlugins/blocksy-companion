@@ -12,7 +12,7 @@
 $title = blocksy_default_akg( 'title', $atts, __( 'Quote', 'blc' ) );
 
 // Quote text
-$quote_text = blocksy_default_akg( 'quote_text', $atts, '' );
+$quote_text = do_shortcode(blocksy_default_akg( 'quote_text', $atts, '' ));
 
 // Quote author
 $quote_author = blocksy_default_akg( 'quote_author', $atts, __( 'John Doe', 'blc' ) );

@@ -150,6 +150,29 @@ class ConditionsManager {
 			return !is_user_logged_in();
 		}
 
+		if ($rule['rule'] === 'user_post_author_id') {
+			global $post;
+
+			if (
+				$post
+				&&
+				$post->post_author
+				&&
+				isset($rule['payload'])
+				&&
+				isset($rule['payload']['user_id'])
+			) {
+				$user_id = $rule['payload']['user_id'];
+				$post_author = intval($post->post_author);
+
+				if ($user_id === 'current_user') {
+					return $post_author === intval(get_current_user_id());
+				}
+
+				return intval($user_id) === $post_author;
+			}
+		}
+
 		if (strpos($rule['rule'], 'user_role_') !== false) {
 			if (! is_user_logged_in()) {
 				return false;
@@ -172,6 +195,14 @@ class ConditionsManager {
 		if (strpos($rule['rule'], 'post_type_archive_') !== false) {
 			return is_post_type_archive(str_replace(
 				'post_type_archive_',
+				'',
+				$rule['rule']
+			));
+		}
+
+		if (strpos($rule['rule'], 'post_type_taxonomy_') !== false) {
+			return is_tax(str_replace(
+				'post_type_taxonomy_',
 				'',
 				$rule['rule']
 			));
@@ -322,6 +353,19 @@ class ConditionsManager {
 					$post_type_object->labels->singular_name
 				)
 			];
+
+			$taxonomies = get_object_taxonomies($custom_post_type);
+
+			foreach ($taxonomies as $single_taxonomy) {
+				$cpts[] = [
+					'id' => 'post_type_taxonomy_' . $single_taxonomy,
+					'title' => sprintf(
+						__('%s %s Taxonomy', 'blc'),
+						$post_type_object->labels->singular_name,
+						get_taxonomy($single_taxonomy)->label
+					)
+				];
+			}
 		}
 
 		return array_merge([
@@ -511,6 +555,16 @@ class ConditionsManager {
 			[
 				'title' => __('User Roles', 'blc'),
 				'rules' => $this->get_user_roles_rules()
+            ],
+
+			[
+				'title' => __('Other', 'blc'),
+				'rules' => [
+					[
+						'id' => 'user_post_author_id',
+						'title' => __('Post Author', 'blc')
+					]
+				]
             ],
 		],
 

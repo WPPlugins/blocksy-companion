@@ -8,16 +8,15 @@ export const computeAutoHide = ({
 	isSticky,
 	stickyComponents,
 }) => {
-	let containerInitialHeight = Array.from(
-		stickyContainer.querySelectorAll('[data-row]')
-	).reduce((sum, el) => sum + el.getBoundingClientRect().height, 0)
-
 	if (window.scrollY < startPosition) {
 		prevScrollY = window.scrollY
 	}
 
 	if (isSticky && window.scrollY - prevScrollY === 0) {
-		document.body.style.setProperty('--headerStickyHeightAnimated', `0px`)
+		document.body.style.setProperty(
+			'--header-sticky-height-animated',
+			`0px`
+		)
 	}
 
 	if (isSticky && window.scrollY - prevScrollY < -5) {
@@ -44,18 +43,11 @@ export const computeAutoHide = ({
 
 		setTransparencyFor(stickyContainer, 'no')
 		document.body.removeAttribute('style')
-
-		stickyContainer.parentNode.style.setProperty(
-			'--minHeight',
-			`${containerInitialHeight}px`
-		)
 	} else {
 		if (!isSticky) {
 			stickyContainer.dataset.sticky = stickyComponents
 				.filter((c) => c !== 'yes-end')
 				.join(':')
-
-			stickyContainer.parentNode.removeAttribute('style')
 
 			Array.from(
 				stickyContainer.querySelectorAll('[data-row]')
@@ -63,7 +55,7 @@ export const computeAutoHide = ({
 			setTransparencyFor(stickyContainer, 'yes')
 
 			document.body.style.setProperty(
-				'--headerStickyHeightAnimated',
+				'--header-sticky-height-animated',
 				`0px`
 			)
 
@@ -82,7 +74,7 @@ export const computeAutoHide = ({
 			].join(':')
 
 			document.body.style.setProperty(
-				'--headerStickyHeightAnimated',
+				'--header-sticky-height-animated',
 				`0px`
 			)
 
@@ -94,8 +86,6 @@ export const computeAutoHide = ({
 
 				setTimeout(() => {
 					stickyContainer.dataset.sticky = stickyComponents.join(':')
-
-					stickyContainer.parentNode.removeAttribute('style')
 
 					Array.from(
 						stickyContainer.querySelectorAll('[data-row]')

@@ -122,7 +122,7 @@ function blc_get_contacts_output($args = []) {
 				<div class="contact-info">
 					<?php if (! empty(blocksy_akg('title', $single_layer, ''))) { ?>
 						<span class="contact-title">
-							<?php echo esc_html(blocksy_akg('title', $single_layer, '')) ?>
+							<?php echo do_shortcode(blocksy_akg('title', $single_layer, '')) ?>
 						</span>
 					<?php } ?>
 
@@ -132,7 +132,7 @@ function blc_get_contacts_output($args = []) {
 								<a href="<?php echo blocksy_akg('link', $single_layer, '') ?>" <?php echo $data_target ?>>
 							<?php } ?>
 
-							<?php echo blocksy_akg('content', $single_layer, '') ?>
+							<?php echo do_shortcode(blocksy_akg('content', $single_layer, '')) ?>
 
 							<?php if (! empty(blocksy_akg('link', $single_layer, ''))) { ?>
 								</a>

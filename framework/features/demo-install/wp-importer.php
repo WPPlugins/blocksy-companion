@@ -1088,6 +1088,8 @@ class Blocksy_WP_Import extends WP_Importer {
 		// extract the file name and extension from the url
 		$file_name = basename( $url );
 
+		add_filter('https_ssl_verify', '__return_false');
+
 		// get placeholder file in the upload dir with a unique, sanitized filename
 		$upload = wp_upload_bits( $file_name, 0, '', $post['upload_date'] );
 		if ( $upload['error'] )

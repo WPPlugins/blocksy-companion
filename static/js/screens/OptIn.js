@@ -3,7 +3,7 @@ import {
 	Component,
 	useEffect,
 	useState,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'
@@ -16,7 +16,7 @@ const OptIn = () => {
 		try {
 			const response = await fetch(ctDashboardLocalizations.ajax_url, {
 				method: 'POST',
-				body
+				body,
 			})
 
 			if (response.status === 200) {
@@ -62,7 +62,7 @@ const OptIn = () => {
 			</p>
 			<button
 				className="ct-button-primary"
-				onClick={e => {
+				onClick={(e) => {
 					e.preventDefault()
 					optinAgain()
 				}}>

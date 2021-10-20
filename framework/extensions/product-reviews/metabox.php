@@ -15,6 +15,7 @@ $options = [
 				'choices' => blocksy_ordered_keys(
 					[
 						'Thing' => __( 'Default', 'blc' ),
+						'Product' => __( 'Product', 'blc' ),
 						'Book' => __( 'Book', 'blc' ),
 						// 'Course' => __( 'Course', 'blc' ),
 						'CreativeWorkSeason' => __( 'Creative Work Season', 'blc' ),
@@ -29,7 +30,6 @@ $options = [
 						'MusicPlaylist' => __( 'Music Playlist', 'blc' ),
 						'MusicRecording' => __( 'Music Recording', 'blc' ),
 						'Organization' => __( 'Organization', 'blc' ),
-						// 'Product' => __( 'Product', 'blc' ),
 						// 'Recipe' => __( 'Recipe', 'blc' ),
 						// 'SoftwareApplication' => __( 'Software Application', 'blc' ),
 					]
@@ -42,6 +42,33 @@ $options = [
 					'<a href="https://developers.google.com/search/blog/2019/09/making-review-rich-results-more-helpful" target="_blank">',
 					'</a>'
 				),
+			],
+
+			blocksy_rand_md5() => [
+				'type' => 'ct-condition',
+				'condition' => ['product_review_entity' => 'Product'],
+				'options' => [
+					'product_entity_price' => [
+						'type' => 'text',
+						'label' => __('Product Price', 'blc'),
+						'design' => 'inline',
+						'value' => '',
+					],
+
+					'product_entity_sku' => [
+						'type' => 'text',
+						'label' => __('Product SKU', 'blc'),
+						'design' => 'inline',
+						'value' => ''
+					],
+
+					'product_entity_brand' => [
+						'type' => 'text',
+						'label' => __('Product Brand', 'blc'),
+						'design' => 'inline',
+						'value' => ''
+					],
+				]
 			],
 
 			blocksy_rand_md5() => [

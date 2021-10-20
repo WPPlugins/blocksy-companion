@@ -31,6 +31,6 @@ class BlocksyExtensionWidgets {
 				],
 				$data['Version']
 			);
-		});
+		}, 50);
 	}
 }

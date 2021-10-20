@@ -19,12 +19,26 @@ $options = [
 		'disableRevertButton' => true,
 	],
 
+	// 'quote_text' => [
+	// 	'label' => __( 'Quote text', 'blc' ),
+	// 	'type' => 'textarea',
+	// 	'value' => '',
+	// 	'design' => 'inline',
+	// 	'disableRevertButton' => true,
+	// ],
+
 	'quote_text' => [
-		'label' => __( 'Quote text', 'blc' ),
-		'type' => 'textarea',
-		'value' => '',
+		'label' => __( 'Text', 'blc' ),
+		'type' => 'wp-editor',
 		'design' => 'inline',
+		'desc' => __( 'You can add here some arbitrary HTML code.', 'blc' ),
 		'disableRevertButton' => true,
+		'setting' => [ 'transport' => 'postMessage' ],
+
+		'mediaButtons' => false,
+		'tinymce' => [
+			'toolbar1' => 'bold,italic,link,undo,redo',
+		],
 	],
 
 	'quote_author' => [

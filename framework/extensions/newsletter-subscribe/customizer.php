@@ -24,7 +24,7 @@ $options = [
 				],
 
 				'newsletter_subscribe_text' => [
-					'label' => __( 'Message', 'blc' ),
+					'label' => __( 'Description', 'blc' ),
 					'type' => 'textarea',
 					'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blc' ),
 					'design' => 'block',
@@ -148,8 +148,29 @@ $options = [
 			'type' => 'tab',
 			'options' => [
 
+				'newsletter_subscribe_title_color' => [
+					'label' => __( 'Title Color', 'blc' ),
+					'type'  => 'ct-color-picker',
+					'design' => 'inline',
+					'setting' => [ 'transport' => 'postMessage' ],
+
+					'value' => [
+						'default' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+					],
+
+					'pickers' => [
+						[
+							'title' => __( 'Initial', 'blc' ),
+							'id' => 'default',
+							'inherit' => 'var(--heading-color, var(--heading-3-color, var(--headings-color)))'
+						],
+					],
+				],
+
 				'newsletter_subscribe_content' => [
-					'label' => __( 'Content Color', 'blc' ),
+					'label' => __( 'Description Color', 'blc' ),
 					'type'  => 'ct-color-picker',
 					'design' => 'inline',
 					'setting' => [ 'transport' => 'postMessage' ],
@@ -176,6 +197,107 @@ $options = [
 							'id' => 'hover',
 							'inherit' => 'var(--linkHoverColor)'
 						],
+					],
+				],
+
+				'newsletter_subscribe_input_font_color' => [
+					'label' => __( 'Input Font Color', 'blc' ),
+					'type'  => 'ct-color-picker',
+					'design' => 'inline',
+					'divider' => 'top',
+					'setting' => [ 'transport' => 'postMessage' ],
+
+					'value' => [
+						'default' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+
+						'focus' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+					],
+
+					'pickers' => [
+						[
+							'title' => __( 'Initial', 'blc' ),
+							'id' => 'default',
+							'inherit' => 'var(--form-text-initial-color, var(--color))'
+						],
+
+						[
+							'title' => __( 'Focus', 'blc' ),
+							'id' => 'focus',
+							'inherit' => 'var(--form-text-focus-color, var(--color))'
+						],
+					],
+				],
+
+				'newsletter_subscribe_border_color' => [
+					'label' => __( 'Input Border Color', 'blc' ),
+					'type'  => 'ct-color-picker',
+					'design' => 'inline',
+					'setting' => [ 'transport' => 'postMessage' ],
+
+					'value' => [
+						'default' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+
+						'focus' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+					],
+
+					'pickers' => [
+						[
+							'title' => __( 'Initial', 'blc' ),
+							'id' => 'default',
+							'inherit' => 'var(--form-field-border-initial-color)'
+						],
+
+						[
+							'title' => __( 'Focus', 'blc' ),
+							'id' => 'focus',
+							'inherit' => 'var(--form-field-border-focus-color)'
+						],
+					],
+				],
+
+				blocksy_rand_md5() => [
+					'type' => 'ct-condition',
+					'condition' => ['forms_type' => 'classic-forms'],
+					'values_source' => 'global',
+					'options' => [
+
+						'newsletter_subscribe_input_background' => [
+							'label' => __( 'Input Background Color', 'blc' ),
+							'type'  => 'ct-color-picker',
+							'design' => 'inline',
+							'setting' => [ 'transport' => 'postMessage' ],
+
+							'value' => [
+								'default' => [
+									'color' => Blocksy_Css_Injector::get_skip_rule_keyword(),
+								],
+
+								'focus' => [
+									'color' => Blocksy_Css_Injector::get_skip_rule_keyword(),
+								],
+							],
+
+							'pickers' => [
+								[
+									'title' => __( 'Initial', 'blc' ),
+									'id' => 'default',
+								],
+
+								[
+									'title' => __( 'Focus', 'blc' ),
+									'id' => 'focus',
+								],
+							],
+						],
+
 					],
 				],
 
@@ -208,40 +330,40 @@ $options = [
 					],
 				],
 
-				'newsletter_subscribe_background' => [
-					'label' => __( 'Background Color', 'blc' ),
-					'type'  => 'ct-color-picker',
-					'design' => 'inline',
-					'setting' => [ 'transport' => 'postMessage' ],
-
-					'value' => [
-						'default' => [
-							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+				'newsletter_subscribe_container_background' => [
+					'label' => __( 'Container Background', 'blc' ),
+					'type' => 'ct-background',
+					'design' => 'block:right',
+					'responsive' => true,
+					'divider' => 'top:full',
+					'sync' => 'live',
+					'value' => blocksy_background_default_value([
+						'backgroundColor' => [
+							'default' => [
+								'color' => '#ffffff',
+							],
 						],
-					],
-
-					'pickers' => [
-						[
-							'title' => __( 'Initial', 'blc' ),
-							'id' => 'default',
-							'inherit' => '#ffffff'
-						],
-					],
+					])
 				],
 
-				'newsletter_subscribe_spacing' => [
-					'label' => __( 'Container Inner Spacing', 'blc' ),
-					'type' => 'ct-slider',
-					'value' => 30,
-					'min' => 0,
-					'max' => 300,
-					'responsive' => true,
+				'newsletter_subscribe_container_border' => [
+					'label' => __( 'Container Border', 'blc' ),
+					'type' => 'ct-border',
+					'sync' => 'live',
+					'design' => 'block',
 					'divider' => 'top',
-					'setting' => [ 'transport' => 'postMessage' ],
+					'value' => [
+						'width' => 1,
+						'style' => 'none',
+						'color' => [
+							'color' => 'var(--paletteColor5)',
+						],
+					],
+					'responsive' => true,
 				],
 
 				'newsletter_subscribe_shadow' => [
-					'label' => __( 'Shadow', 'blocksy' ),
+					'label' => __( 'Container Shadow', 'blocksy' ),
 					'type' => 'ct-box-shadow',
 					'responsive' => true,
 					'divider' => 'top',
@@ -258,6 +380,33 @@ $options = [
 						],
 					])
 				],
+
+				'newsletter_subscribe_container_spacing' => [
+					'label' => __( 'Container Inner Spacing', 'blc' ),
+					'type' => 'ct-spacing',
+					'divider' => 'top',
+					'setting' => [ 'transport' => 'postMessage' ],
+					'value' => blocksy_spacing_value([
+						'linked' => true,
+						'top' => '30px',
+						'left' => '30px',
+						'right' => '30px',
+						'bottom' => '30px',
+					]),
+					'responsive' => true
+				],
+
+				'newsletter_subscribe_container_border_radius' => [
+					'label' => __( 'Container Border Radius', 'blc' ),
+					'type' => 'ct-spacing',
+					'divider' => 'top',
+					'setting' => [ 'transport' => 'postMessage' ],
+					'value' => blocksy_spacing_value([
+						'linked' => true,
+					]),
+					'responsive' => true
+				],
+
 			],
 		],
 	],

@@ -19,11 +19,25 @@ $options = [
 		'disableRevertButton' => true,
 	],
 
+	// 'contact_text' => [
+	// 	'label' => __( 'Text', 'blc' ),
+	// 	'type' => 'textarea',
+	// 	'design' => 'inline',
+	// 	'disableRevertButton' => true,
+	// ],
+
 	'contact_text' => [
 		'label' => __( 'Text', 'blc' ),
-		'type' => 'textarea',
+		'type' => 'wp-editor',
 		'design' => 'inline',
+		'desc' => __( 'You can add here some arbitrary HTML code.', 'blc' ),
 		'disableRevertButton' => true,
+		'setting' => [ 'transport' => 'postMessage' ],
+
+		'mediaButtons' => false,
+		'tinymce' => [
+			'toolbar1' => 'bold,italic,link,undo,redo',
+		],
 	],
 
 	'contact_information' => [

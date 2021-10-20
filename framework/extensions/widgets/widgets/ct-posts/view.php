@@ -217,7 +217,7 @@ echo $before_title . wp_kses_post( $title ) . $after_title;
 
 								<?php if ( $has_comments && get_comments_number() > 0 ) { ?>
 									<span>
-										<?php echo wp_kses_post( get_comments_number_text( '', '1 Comment', '% Comments' ) ); ?>
+										<?php echo wp_kses_post( get_comments_number_text( '', __( '1 Comment', 'blc' ), __( '% Comments', 'blc' ) ) ); ?>
 									</span>
 								<?php } ?>
 							</div>

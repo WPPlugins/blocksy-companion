@@ -13,7 +13,7 @@ $title = blocksy_default_akg( 'title', $atts, __( 'Newsletter', 'blc' ) );
 
 
 // Message
-$message = blocksy_default_akg( 'newsletter_subscribe_text', $atts, __( 'Enter your email address below to subscribe to our newsletter', 'blc' ) );
+$message = do_shortcode(blocksy_default_akg( 'newsletter_subscribe_text', $atts, __( 'Enter your email address below to subscribe to our newsletter', 'blc' )));
 
 // Button text
 $button_text = blocksy_default_akg( 'newsletter_subscribe_button_text', $atts, __( 'Subscribe', 'blc' ) );

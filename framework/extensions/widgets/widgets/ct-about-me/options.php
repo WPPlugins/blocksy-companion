@@ -85,12 +85,27 @@ $options = [
 				'disableRevertButton' => true,
 			],
 
+			// 'about_text' => [
+			// 	'label' => __( 'Description', 'blc' ),
+			// 	'type' => 'textarea',
+			// 	'value' => '',
+			// 	'design' => 'inline',
+			// 	'disableRevertButton' => true,
+			// ],
+
 			'about_text' => [
 				'label' => __( 'Description', 'blc' ),
-				'type' => 'textarea',
-				'value' => '',
+				'type' => 'wp-editor',
 				'design' => 'inline',
+				'value' => __( 'Sample text', 'blc' ),
+				'desc' => __( 'You can add here some arbitrary HTML code.', 'blc' ),
 				'disableRevertButton' => true,
+				'setting' => [ 'transport' => 'postMessage' ],
+
+				'mediaButtons' => false,
+				'tinymce' => [
+					'toolbar1' => 'bold,italic,link,undo,redo',
+				],
 			],
 		],
 	],

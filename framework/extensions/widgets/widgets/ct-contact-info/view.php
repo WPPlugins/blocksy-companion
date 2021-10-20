@@ -12,7 +12,7 @@
 $title = blocksy_default_akg( 'title', $atts, __( 'Contact Info', 'blc' ) );
 
 // Text
-$text = blocksy_default_akg( 'contact_text', $atts, '' );
+$text = do_shortcode(blocksy_default_akg( 'contact_text', $atts, '' ));
 
 $contact_information = blocksy_default_akg(
 	'contact_information',

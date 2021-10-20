@@ -31,7 +31,7 @@ export const getRowInitialHeight = (el) => {
 export const getRowStickyHeight = (el) => {
 	let styles = getComputedStyle(el)
 
-	let maybeShrink = styles.getPropertyValue('--stickyShrink')
+	let maybeShrink = styles.getPropertyValue('--sticky-shrink')
 
 	if (!maybeShrink) {
 		return getRowInitialHeight(el)

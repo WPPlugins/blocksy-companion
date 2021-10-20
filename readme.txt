@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.9.2
+Stable tag: 1.8.9.3
 
 == Description ==
 
@@ -23,6 +23,23 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.9.3: 2021-10-20
+- New: User condition for post author
+- Improvement: Custom post types taxonomy condition per taxonomy
+- Improvement: Allow shortcode in widgets (About Me, Quote, Contact Info)
+- Improvement: Allow shortcode in contacts header element
+- Improvement: Newsletter subscribe extension design options
+- Improvement: Product reviews extensions entity option
+- Improvement: Demo importer better detect plugin dependencies
+- Improvement: Posts widget update comments translation strings
+
+1.8.9.3-beta14: 2021-10-19
+- Improvement: Allow shortcode in widgets (About Me, Quote, Contact Info)
+- Improvement: Allow shortcode in contacts header element
+- Improvement: Newsletter subscribe extension design options
+- Improvement: Demo importer better detect plugin dependencies
+- Improvement: Posts widget update comments translation strings
+
 1.8.9.2: 2021-10-01
 - Improvement: Account header element aria-label attribute
 

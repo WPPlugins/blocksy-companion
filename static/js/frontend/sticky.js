@@ -23,6 +23,11 @@ var getParents = function (elem) {
 	return parents
 }
 
+let cachedStartPosition = null
+let cachedContainerInitialHeight = null
+
+let cachedStickyContainerHeight = null
+
 const getStartPositionFor = (stickyContainer) => {
 	if (
 		stickyContainer.dataset.sticky.indexOf('shrink') === -1 &&
@@ -85,9 +90,11 @@ let prevScrollY = null
 
 const compute = () => {
 	if (prevScrollY === scrollY) {
+		/*
 		requestAnimationFrame(() => {
 			compute()
 		})
+    */
 
 		return
 	}
@@ -102,30 +109,67 @@ const compute = () => {
 		return
 	}
 
-	const startPosition = getStartPositionFor(stickyContainer)
+	let startPosition = cachedStartPosition
 
-	const isSticky =
-		(startPosition > 0 && Math.abs(window.scrollY - startPosition) < 5) ||
-		window.scrollY > startPosition
-
-	if (isSticky && document.body.dataset.header.indexOf('shrink') === -1) {
-		document.body.dataset.header = `${document.body.dataset.header}:shrink`
+	if (!startPosition) {
+		startPosition = getStartPositionFor(stickyContainer)
 	}
 
-	if (!isSticky && document.body.dataset.header.indexOf('shrink') > -1) {
-		document.body.dataset.header = document.body.dataset.header.replace(
-			':shrink',
-			''
+	let stickyContainerHeight = cachedStickyContainerHeight
+
+	if (!stickyContainerHeight) {
+		stickyContainerHeight = parseInt(
+			stickyContainer.getBoundingClientRect().height
 		)
+		cachedStickyContainerHeight = parseInt(stickyContainerHeight)
 	}
 
 	const stickyComponents = stickyContainer.dataset.sticky
 		.split(':')
 		.filter((c) => c !== 'yes' && c !== 'no' && c !== 'fixed')
 
+	let isSticky =
+		(startPosition > 0 && Math.abs(window.scrollY - startPosition) < 5) ||
+		window.scrollY > startPosition
+
+	if (stickyComponents.indexOf('shrink') > -1) {
+		isSticky =
+			startPosition > 0
+				? window.scrollY >= startPosition
+				: window.scrollY > 0
+	}
+
+	setTimeout(() => {
+		if (isSticky && document.body.dataset.header.indexOf('shrink') === -1) {
+			document.body.dataset.header = `${document.body.dataset.header}:shrink`
+		}
+
+		if (!isSticky && document.body.dataset.header.indexOf('shrink') > -1) {
+			document.body.dataset.header = document.body.dataset.header.replace(
+				':shrink',
+				''
+			)
+		}
+	}, 300)
+
+	let containerInitialHeight = cachedContainerInitialHeight
+
+	if (!containerInitialHeight) {
+		cachedContainerInitialHeight = Array.from(
+			stickyContainer.querySelectorAll('[data-row]')
+		).reduce((sum, el) => sum + el.getBoundingClientRect().height, 0)
+
+		containerInitialHeight = cachedContainerInitialHeight
+
+		stickyContainer.parentNode.style.height = `${containerInitialHeight}px`
+	}
+
 	if (stickyComponents.indexOf('shrink') > -1) {
 		computeShrink({
 			stickyContainer,
+			stickyContainerHeight,
+
+			containerInitialHeight,
 			isSticky,
 			startPosition,
 			stickyComponents,
@@ -152,16 +196,17 @@ const compute = () => {
 			stickyComponents,
 		})
 	}
-
-	requestAnimationFrame(() => {
-		compute()
-	})
 }
 
 export const mountStickyHeader = () => {
 	if (!document.querySelector('header [data-sticky]')) {
 		return
 	}
+
+	window.addEventListener('resize', compute, false)
+	window.addEventListener('scroll', compute, false)
+	window.addEventListener('load', compute, false)
+	window.addEventListener('orientationchange', compute)
 
 	compute()
 }

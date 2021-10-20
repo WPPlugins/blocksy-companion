@@ -166,9 +166,19 @@ class ThemeIntegration {
 				$languages = blocksy_get_all_i18n_languages();
 			}
 
+			$users = [];
+
+			foreach (get_users() as $user) {
+				$users[] = [
+					'id' => $user->ID,
+					'name' => $user->user_nicename
+				];
+			}
+
 			wp_send_json_success([
 				'taxonomies' => $terms,
-				'languages' => $languages
+				'languages' => $languages,
+				'users' => $users
 			]);
 		});
 
@@ -391,7 +401,7 @@ class ThemeIntegration {
 				$data['Version']
 			);
 			 */
-		});
+		}, 50);
 
 		add_action(
 			'customize_preview_init',

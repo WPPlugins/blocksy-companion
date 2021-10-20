@@ -184,8 +184,14 @@ class HeaderAdditions {
 		);
 
 		add_filter('blocksy:general:body-header-attr', function ($attr) {
-			if ($this->current_screen_has_sticky()) {
-				return $attr .= ':sticky';
+			$sticky_result = $this->current_screen_has_sticky();
+
+			if ($sticky_result) {
+				$attr .= ':sticky';
+
+				if ($sticky_result['effect'] === 'auto-hide') {
+					$attr .= ':auto';
+				}
 			}
 
 			return $attr;

@@ -52,6 +52,16 @@ class DemoInstallPluginsInstaller {
 		$plugins_manager = Plugin::instance()->demo->get_plugins_manager();
 
 		foreach ($plugins as $single_plugin) {
+			if ($single_plugin === 'stackable-ultimate-gutenberg-blocks') {
+				$stackable_pro_status = $plugins_manager->get_plugin_status(
+					'stackable-ultimate-gutenberg-blocks-premium'
+				);
+
+				if ($stackable_pro_status === 'active') {
+					continue;
+				}
+			}
+
 			if ($this->has_streaming) {
 				Plugin::instance()->demo->emit_sse_message([
 					'action' => 'install_plugin',
