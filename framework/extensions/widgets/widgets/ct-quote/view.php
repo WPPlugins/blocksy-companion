@@ -9,13 +9,13 @@
 
 
 // Widget title
-$title = blocksy_default_akg( 'title', $atts, __( 'Quote', 'blc' ) );
+$title = blocksy_default_akg( 'title', $atts, __( 'Quote', 'blocksy-companion' ) );
 
 // Quote text
 $quote_text = do_shortcode(blocksy_default_akg( 'quote_text', $atts, '' ));
 
 // Quote author
-$quote_author = blocksy_default_akg( 'quote_author', $atts, __( 'John Doe', 'blc' ) );
+$quote_author = blocksy_default_akg( 'quote_author', $atts, __( 'John Doe', 'blocksy-companion' ) );
 
 // Quote avatar
 $image_output = blc_call_fn(['fn' => 'blocksy_image'], [
@@ -46,7 +46,7 @@ if (! empty(trim($title))) {
 	<?php if (blocksy_default_akg('quote_has_by_label', $atts, 'yes') === 'yes') { ?>
 		<?php echo sprintf(
 			// translators: %s here is the author name
-			__('By %s', 'blc'),
+			__('By %s', 'blocksy-companion'),
 			$quote_author
 		) ?>
 	<?php } else { ?>

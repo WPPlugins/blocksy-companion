@@ -34,19 +34,19 @@ const ModifyDemo = ({ style, nextStep }) => {
 
 	const stepsDescriptors = {
 		erase_content: {
-			title: __('Erase content', 'blc'),
+			title: __('Erase content', 'blocksy-companion'),
 			query_string: `action=blocksy_demo_erase_content&wp_customize=on`,
 		},
 
 		deactivate_demo_plugins: {
-			title: __('Deactivate demo plugins', 'blc'),
+			title: __('Deactivate demo plugins', 'blocksy-companion'),
 			query_string: `action=blocksy_demo_deactivate_plugins&plugins=${demoVariations[0].plugins.join(
 				':'
 			)}`,
 		},
 
 		deregister_current_demo: {
-			title: __('Erase content', 'blc'),
+			title: __('Erase content', 'blocksy-companion'),
 			query_string: `action=blocksy_demo_deregister_current_demo`,
 		},
 	}
@@ -112,12 +112,12 @@ const ModifyDemo = ({ style, nextStep }) => {
 			</i>
 
 			{runningState === 'idle' && (
-				<h2>{__('This starter site is already installed', 'blc')}</h2>
+				<h2>{__('This starter site is already installed', 'blocksy-companion')}</h2>
 			)}
 			{runningState === 'loading' && <h2>Removing starter site...</h2>}
 			{runningState === 'done' && (
 				<Fragment>
-					<h2>{__('Starter Site Removed', 'blc')}</h2>
+					<h2>{__('Starter Site Removed', 'blocksy-companion')}</h2>
 
 					<div className="ct-modify-actions">
 						<button
@@ -126,7 +126,7 @@ const ModifyDemo = ({ style, nextStep }) => {
 								e.preventDefault()
 								setCurrentDemo(`${properDemoName}:hide`)
 							}}>
-							{__('Dismiss', 'blc')}
+							{__('Dismiss', 'blocksy-companion')}
 						</button>
 					</div>
 				</Fragment>
@@ -135,7 +135,7 @@ const ModifyDemo = ({ style, nextStep }) => {
 			{runningState === 'idle' && (
 				<Fragment>
 					<p>
-						{__('What steps do you want to perform next?', 'blc')}
+						{__('What steps do you want to perform next?', 'blocksy-companion')}
 					</p>
 
 					<div className="ct-modify-actions">
@@ -147,7 +147,7 @@ const ModifyDemo = ({ style, nextStep }) => {
 								fireOffNextStep()
 								setCurrentlyInstalledDemo()
 							}}>
-							{__('Remove', 'blc')}
+							{__('Remove', 'blocksy-companion')}
 						</button>
 
 						<button
@@ -156,7 +156,7 @@ const ModifyDemo = ({ style, nextStep }) => {
 								e.preventDefault()
 								nextStep()
 							}}>
-							{__('Reinstall', 'blc')}
+							{__('Reinstall', 'blocksy-companion')}
 						</button>
 					</div>
 				</Fragment>

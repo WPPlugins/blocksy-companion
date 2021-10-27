@@ -273,20 +273,20 @@ class ThemeIntegration {
 		add_filter(
 			'user_contactmethods',
 			function ( $field ) {
-				$fields['facebook'] = __( 'Facebook', 'blc' );
-				$fields['twitter'] = __( 'Twitter', 'blc' );
-				$fields['linkedin'] = __( 'LinkedIn', 'blc' );
-				$fields['dribbble'] = __( 'Dribbble', 'blc' );
-				$fields['instagram'] = __( 'Instagram', 'blc' );
-				$fields['pinterest'] = __( 'Pinterest', 'blc' );
-				$fields['wordpress'] = __( 'WordPress', 'blc' );
-				$fields['github'] = __( 'GitHub', 'blc' );
-				$fields['medium'] = __( 'Medium', 'blc' );
-				$fields['youtube'] = __( 'YouTube', 'blc' );
-				$fields['vimeo'] = __( 'Vimeo', 'blc' );
-				$fields['vkontakte'] = __( 'VKontakte', 'blc' );
-				$fields['odnoklassniki'] = __( 'Odnoklassniki', 'blc' );
-				$fields['tiktok'] = __( 'TikTok', 'blc' );
+				$fields['facebook'] = __( 'Facebook', 'blocksy-companion' );
+				$fields['twitter'] = __( 'Twitter', 'blocksy-companion' );
+				$fields['linkedin'] = __( 'LinkedIn', 'blocksy-companion' );
+				$fields['dribbble'] = __( 'Dribbble', 'blocksy-companion' );
+				$fields['instagram'] = __( 'Instagram', 'blocksy-companion' );
+				$fields['pinterest'] = __( 'Pinterest', 'blocksy-companion' );
+				$fields['wordpress'] = __( 'WordPress', 'blocksy-companion' );
+				$fields['github'] = __( 'GitHub', 'blocksy-companion' );
+				$fields['medium'] = __( 'Medium', 'blocksy-companion' );
+				$fields['youtube'] = __( 'YouTube', 'blocksy-companion' );
+				$fields['vimeo'] = __( 'Vimeo', 'blocksy-companion' );
+				$fields['vkontakte'] = __( 'VKontakte', 'blocksy-companion' );
+				$fields['odnoklassniki'] = __( 'Odnoklassniki', 'blocksy-companion' );
+				$fields['tiktok'] = __( 'TikTok', 'blocksy-companion' );
 
 				return $fields;
 			}
@@ -358,7 +358,7 @@ class ThemeIntegration {
 
 						if (isset($readme[1])) {
 							$changelogs[] = [
-								'title' => __('Companion', 'blc'),
+								'title' => __('Companion', 'blocksy-companion'),
 								'changelog' => trim($readme[1])
 							];
 						}
@@ -374,7 +374,7 @@ class ThemeIntegration {
 						);
 
 						$changelogs[] = [
-							'title' => __('PRO', 'blc'),
+							'title' => __('PRO', 'blocksy-companion'),
 							'changelog' => trim($pro_changelog)
 						];
 					}
@@ -503,14 +503,14 @@ class ThemeIntegration {
 			$redirect_to = admin_url();
 			$errors = apply_filters('wp_login_errors', $errors, $redirect_to);
 
-			login_header(__('Check your email', 'blc'), '', $errors);
+			login_header(__('Check your email', 'blocksy-companion'), '', $errors);
 
 			wp_die();
 		}
 
 		login_header(
-			__('Registration Form', 'blc'),
-			'<p class="message register">' . __('Register For This Site', 'blc') . '</p>',
+			__('Registration Form', 'blocksy-companion'),
+			'<p class="message register">' . __('Register For This Site', 'blocksy-companion') . '</p>',
 			$errors
 		);
 

@@ -27,7 +27,7 @@ const EditSettings = ({ extsSyncLoading, extensionData, onExtsSync }) => {
 					setIsEditing(true)
 					setSettings(extensionData.settings)
 				}}>
-				{__('Configure', 'blc')}
+				{__('Configure', 'blocksy-companion')}
 			</button>
 
 			<Overlay
@@ -36,12 +36,12 @@ const EditSettings = ({ extsSyncLoading, extensionData, onExtsSync }) => {
 				className={'ct-product-reviews-settings-modal'}
 				render={() => (
 					<div className={classnames('ct-modal-content')}>
-						<h2>{__('Product Reviews Settings', 'blc')}</h2>
+						<h2>{__('Product Reviews Settings', 'blocksy-companion')}</h2>
 
 						<p className="ct-modal-description">
 							{__(
 								'Configure the slugs for single and category pages of the product review custom post type.',
-								'blc'
+								'blocksy-companion'
 							)}
 						</p>
 
@@ -58,13 +58,13 @@ const EditSettings = ({ extsSyncLoading, extensionData, onExtsSync }) => {
 										single_slug: {
 											type: 'text',
 											value: '',
-											label: __('Single Slug', 'blc'),
+											label: __('Single Slug', 'blocksy-companion'),
 										},
 
 										category_slug: {
 											type: 'text',
 											value: '',
-											label: __('Category Slug', 'blc'),
+											label: __('Category Slug', 'blocksy-companion'),
 										},
 									}}
 									value={settings || {}}
@@ -127,7 +127,7 @@ const EditSettings = ({ extsSyncLoading, extensionData, onExtsSync }) => {
 										</g>
 									</svg>
 								) : (
-									__('Save', 'blc')
+									__('Save', 'blocksy-companion')
 								)}
 							</button>
 						</div>

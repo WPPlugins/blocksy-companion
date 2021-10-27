@@ -25,12 +25,12 @@ const Content = ({
 				</svg>
 			</i>
 
-			<h2>{__('Import Content', 'blc')}</h2>
+			<h2>{__('Import Content', 'blocksy-companion')}</h2>
 
 			<p>
 				{__(
 					'This will import posts, pages, comments, navigation menus, custom fields, terms and custom posts',
-					'blc'
+					'blocksy-companion'
 				)}
 			</p>
 
@@ -68,11 +68,11 @@ const Content = ({
 						})
 					}>
 					<div>
-						{__('Clean Install', 'blc')}
+						{__('Clean Install', 'blocksy-companion')}
 						<i>
 							{__(
 								'This option will remove the previous imported content and will perform a fresh and clean install.',
-								'blc'
+								'blocksy-companion'
 							)}
 						</i>
 					</div>

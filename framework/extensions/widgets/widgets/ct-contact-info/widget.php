@@ -10,8 +10,8 @@
 class Blocksy_Widget_Ct_Contact_Info extends BlocksyWidgetFactory {
 	protected function get_config() {
 		return [
-			'name' => __('Contact Info', 'blc'),
-			'description' => __('Contact info', 'blc'),
+			'name' => __('Contact Info', 'blocksy-companion'),
+			'description' => __('Contact info', 'blocksy-companion'),
 			'customize_selective_refresh' => true
 		];
 	}

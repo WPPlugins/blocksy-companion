@@ -66,18 +66,18 @@ class GoogleAnalytics {
 	public function generate_google_analytics_opts($options) {
 		$options[] = [
 			'analytics_id' => [
-				'label' => __( 'Google Analytics v3', 'blc' ),
+				'label' => __( 'Google Analytics v3', 'blocksy-companion' ),
 				'type' => 'text',
 				'design' => 'block',
 				'divider' => 'bottom',
 				'value' => '',
-				'desc' => __( 'Link your Google Analytics 3 tracking ID.', 'blc' ),
+				'desc' => __( 'Link your Google Analytics 3 tracking ID.', 'blocksy-companion' ),
 				'disableRevertButton' => true,
 				'setting' => [ 'transport' => 'postMessage' ],
 			],
 
 			'analytics_v4_id' => [
-				'label' => __( 'Google Analytics v4', 'blc' ),
+				'label' => __( 'Google Analytics v4', 'blocksy-companion' ),
 				'type' => 'text',
 				'design' => 'block',
 				'divider' => 'bottom',
@@ -85,7 +85,7 @@ class GoogleAnalytics {
 				'desc' => sprintf(
 					__(
 						'Link your Google Analytics 4 tracking ID. More info and instructions can be found %shere%s.',
-						'blc'
+						'blocksy-companion'
 					),
 					'<a href="https://support.google.com/analytics/answer/9744165?hl=en">',
 					'</a>'
@@ -95,13 +95,13 @@ class GoogleAnalytics {
 			],
 
 			'ip_anonymization' => [
-				'label' => __( 'IP Anonymization', 'blc' ),
+				'label' => __( 'IP Anonymization', 'blocksy-companion' ),
 				'type' => 'ct-switch',
 				'value' => 'no',
 				'desc' => sprintf(
 					__(
 						'Enable Google Analytics IP Anonymization for enhanced privacy. More info and instructions can be found %shere%s.',
-						'blc'
+						'blocksy-companion'
 					),
 					'<a href="https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization">',
 					'</a>'

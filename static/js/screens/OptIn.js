@@ -52,12 +52,12 @@ const OptIn = () => {
 				</svg>
 			</i>
 
-			<h2>{__('Stay Updated', 'blc')}</h2>
+			<h2>{__('Stay Updated', 'blocksy-companion')}</h2>
 
 			<p>
 				{__(
 					'Never miss an important update - opt in to our security & feature updates notifications, and non-sensitive diagnostic tracking.',
-					'blc'
+					'blocksy-companion'
 				)}
 			</p>
 			<button
@@ -66,7 +66,7 @@ const OptIn = () => {
 					e.preventDefault()
 					optinAgain()
 				}}>
-				{__('Allow & Continue', 'blc')}
+				{__('Allow & Continue', 'blocksy-companion')}
 			</button>
 		</div>
 	)

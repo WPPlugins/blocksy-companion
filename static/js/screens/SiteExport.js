@@ -78,11 +78,11 @@ const SiteExport = () => {
 				render={() => (
 					<div className="ct-site-export">
 						<label>
-							{__('Name', 'blc')}
+							{__('Name', 'blocksy-companion')}
 
 							<input
 								type="text"
-								placeholder={__('Name', 'blc')}
+								placeholder={__('Name', 'blocksy-companion')}
 								value={name}
 								onChange={({ target: { value } }) =>
 									setName(value)
@@ -91,10 +91,10 @@ const SiteExport = () => {
 						</label>
 
 						<label>
-							{__('Preview URL', 'blc')}
+							{__('Preview URL', 'blocksy-companion')}
 							<input
 								type="text"
-								placeholder={__('Preview URL', 'blc')}
+								placeholder={__('Preview URL', 'blocksy-companion')}
 								value={url}
 								onChange={({ target: { value } }) =>
 									setUrl(value)
@@ -103,7 +103,7 @@ const SiteExport = () => {
 						</label>
 
 						<label>
-							{__('PRO', 'blc')}
+							{__('PRO', 'blocksy-companion')}
 							<input
 								type="checkbox"
 								value={isPro}
@@ -114,10 +114,10 @@ const SiteExport = () => {
 						</label>
 
 						<label>
-							{__('Builder', 'blc')}
+							{__('Builder', 'blocksy-companion')}
 							<input
 								type="text"
-								placeholder={__('Builder', 'blc')}
+								placeholder={__('Builder', 'blocksy-companion')}
 								value={builder}
 								onChange={({ target: { value } }) =>
 									setBuilder(value)
@@ -126,9 +126,9 @@ const SiteExport = () => {
 						</label>
 
 						<label>
-							{__('Plugins', 'blc')}
+							{__('Plugins', 'blocksy-companion')}
 							<textarea
-								placeholder={__('Plugins', 'blc')}
+								placeholder={__('Plugins', 'blocksy-companion')}
 								value={plugins}
 								onChange={({ target: { value } }) =>
 									setPlugins(value)
@@ -140,8 +140,8 @@ const SiteExport = () => {
 							disabled={isLoading}
 							onClick={() => downloadExport()}>
 							{isLoading
-								? __('Loading...', 'blc')
-								: __('Export site', 'blc')}
+								? __('Loading...', 'blocksy-companion')
+								: __('Export site', 'blocksy-companion')}
 						</button>
 					</div>
 				)}

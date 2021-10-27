@@ -9,69 +9,69 @@ export const getMessageForAction = (message, stepsDescriptors) => {
 	}
 
 	if (action === 'import_install_child') {
-		return __('copying child theme sources', 'blc')
+		return __('copying child theme sources', 'blocksy-companion')
 	}
 
 	if (action === 'import_activate_child') {
-		return __('activating child theme', 'blc')
+		return __('activating child theme', 'blocksy-companion')
 	}
 
 	if (action === 'install_plugin') {
 		return sprintf(
-			__('installing plugin %s', 'blc'),
+			__('installing plugin %s', 'blocksy-companion'),
 			getNameForPlugin(message.name) || message.name
 		)
 	}
 
 	if (action === 'activate_plugin') {
 		return sprintf(
-			__('activating plugin %s', 'blc'),
+			__('activating plugin %s', 'blocksy-companion'),
 			getNameForPlugin(message.name) || message.name
 		)
 	}
 
 	if (action === 'download_demo_widgets') {
-		return __('downloading demo widgets', 'blc')
+		return __('downloading demo widgets', 'blocksy-companion')
 	}
 
 	if (action === 'apply_demo_widgets') {
-		return __('installing demo widgets', 'blc')
+		return __('installing demo widgets', 'blocksy-companion')
 	}
 
 	if (action === 'download_demo_options') {
-		return __('downloading demo options', 'blc')
+		return __('downloading demo options', 'blocksy-companion')
 	}
 
 	if (action === 'import_mods_images') {
-		return __('importing images from customizer', 'blc')
+		return __('importing images from customizer', 'blocksy-companion')
 	}
 
 	if (action === 'import_customizer_options') {
-		return __('import customizer options', 'blc')
+		return __('import customizer options', 'blocksy-companion')
 	}
 
 	if (action === 'activate_required_extensions') {
-		return __('activating required extensions', 'blc')
+		return __('activating required extensions', 'blocksy-companion')
 	}
 
 	if (action === 'erase_previous_posts') {
-		return __('removing previously installed posts', 'blc')
+		return __('removing previously installed posts', 'blocksy-companion')
 	}
 
 	if (action === 'erase_previous_terms') {
-		return __('removing previously installed taxonomies', 'blc')
+		return __('removing previously installed taxonomies', 'blocksy-companion')
 	}
 
 	if (action === 'erase_default_pages') {
-		return __('removing default WordPress pages', 'blc')
+		return __('removing default WordPress pages', 'blocksy-companion')
 	}
 
 	if (action === 'erase_customizer_settings') {
-		return __('resetting customizer options', 'blc')
+		return __('resetting customizer options', 'blocksy-companion')
 	}
 
 	if (action === 'erase_widgets_data') {
-		return __('resetting widgets', 'blc')
+		return __('resetting widgets', 'blocksy-companion')
 	}
 
 	if (action === 'content_installer_progress') {
@@ -86,11 +86,11 @@ export const getMessageForAction = (message, stepsDescriptors) => {
 
 		return `${Math.min(processed, total)} of ${total} ${
 			{
-				users: __('users', 'blc'),
-				term: __('terms', 'blc'),
-				media: __('images', 'blc'),
-				post: __('posts', 'blc'),
-				comment: __('comments', 'blc')
+				users: __('users', 'blocksy-companion'),
+				term: __('terms', 'blocksy-companion'),
+				media: __('images', 'blocksy-companion'),
+				post: __('posts', 'blocksy-companion'),
+				comment: __('comments', 'blocksy-companion')
 			}[message.kind]
 		}`
 	}

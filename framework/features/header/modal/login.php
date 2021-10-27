@@ -14,23 +14,23 @@ $redirect_to_url = apply_filters(
 	<?php do_action('blocksy:account:modal:login:start'); ?>
 
 	<p class="login-username">
-		<label for="user_login"><?php echo __('Email Address', 'blc') ?></label>
+		<label for="user_login"><?php echo __('Email Address', 'blocksy-companion') ?></label>
 		<input type="text" name="log" id="user_login" class="input" value="" size="20">
 	</p>
 
 	<p class="login-password">
-		<label for="user_pass"><?php echo __('Password', 'blc') ?></label>
+		<label for="user_pass"><?php echo __('Password', 'blocksy-companion') ?></label>
 		<input type="password" name="pwd" id="user_pass" class="input" value="" size="20">
 	</p>
 
 	<p class="login-remember col-2">
 		<label>
 			<input name="rememberme" type="checkbox" id="rememberme" class="ct-checkbox" value="forever">
-			<?php echo __('Remember Me', 'blc') ?>
+			<?php echo __('Remember Me', 'blocksy-companion') ?>
 		</label>
 
 		<a href="<?php echo wp_lostpassword_url() ?>" class="ct-forgot-password">
-			<?php echo __('Forgot Password?', 'blc') ?>
+			<?php echo __('Forgot Password?', 'blocksy-companion') ?>
 		</a>
 	</p>
 
@@ -38,7 +38,7 @@ $redirect_to_url = apply_filters(
 
 	<p class="login-submit">
 		<button name="wp-submit" class="ct-button">
-			<?php echo __('Log In', 'blc') ?>
+			<?php echo __('Log In', 'blocksy-companion') ?>
 		</button>
 
 		<input type="hidden" name="redirect_to" value="<?php echo $redirect_to_url ?>">

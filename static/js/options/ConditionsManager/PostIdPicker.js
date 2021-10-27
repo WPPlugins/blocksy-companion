@@ -66,14 +66,14 @@ const PostIdPicker = ({ condition, onChange }) => {
 				defaultToFirstItem: false,
 				searchPlaceholder: __(
 					'Type to search by ID or title...',
-					'blc'
+					'blocksy-companion'
 				),
 				placeholder:
 					condition.rule === 'post_ids'
-						? __('Select post', 'blc')
+						? __('Select post', 'blocksy-companion')
 						: condition.rule === 'page_ids'
-						? __('Select page', 'blc')
-						: __('Custom Post Type ID', 'blc'),
+						? __('Select page', 'blocksy-companion')
+						: __('Custom Post Type ID', 'blocksy-companion'),
 				choices: allPosts
 					.filter(({ post_type }) =>
 						postTypeToDisplay === 'ct_cpt'

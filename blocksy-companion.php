@@ -3,10 +3,10 @@
 /*
 Plugin Name: Blocksy Companion
 Description: This plugin is the companion for the Blocksy theme, it runs and adds its enhacements only if the Blocksy theme is installed and active.
-Version: 1.8.9.4
+Version: 1.8.9.5
 Author: CreativeThemes
 Author URI: https://creativethemes.com
-Text Domain: blc
+Text Domain: blocksy-companion
 Domain Path: /languages/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -91,7 +91,7 @@ if ( function_exists( 'blc_fs' ) ) {
          *
          * Load gettext translate for Blocksy text domain.
          */
-        load_plugin_textdomain( 'blc', false, dirname( BLOCKSY_PLUGIN_BASE ) . '/languages' );
+        load_plugin_textdomain( 'blocksy-companion', false, dirname( BLOCKSY_PLUGIN_BASE ) . '/languages' );
     } );
     
     if ( !version_compare( PHP_VERSION, '7.0', '>=' ) ) {
@@ -110,7 +110,7 @@ if ( function_exists( 'blc_fs' ) ) {
     function blc_fail_php_version()
     {
         /* translators: %s: PHP version */
-        $message = sprintf( esc_html__( 'Blocksy requires PHP version %s+, plugin is currently NOT RUNNING.', 'blc' ), '7.0' );
+        $message = sprintf( esc_html__( 'Blocksy requires PHP version %s+, plugin is currently NOT RUNNING.', 'blocksy-companion' ), '7.0' );
         $html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
         echo  wp_kses_post( $html_message ) ;
     }
@@ -123,7 +123,7 @@ if ( function_exists( 'blc_fs' ) ) {
     function blc_fail_wp_version()
     {
         /* translators: %s: WordPress version */
-        $message = sprintf( esc_html__( 'Blocksy requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING.', 'blc' ), '5.0' );
+        $message = sprintf( esc_html__( 'Blocksy requires WordPress version %s+. Because you are using an earlier version, the plugin is currently NOT RUNNING.', 'blocksy-companion' ), '5.0' );
         $html_message = sprintf( '<div class="error">%s</div>', wpautop( $message ) );
         echo  wp_kses_post( $html_message ) ;
     }

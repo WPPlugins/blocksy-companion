@@ -19,25 +19,25 @@ const InstallCompleted = () => {
 
 	return (
 		<div className="ct-install-success">
-			<h2>{__('Starter Site Imported Successfully', 'blc')}</h2>
+			<h2>{__('Starter Site Imported Successfully', 'blocksy-companion')}</h2>
 
 			<p>
 				{__(
 					'Now you can view your website or start customizing it',
-					'blc'
+					'blocksy-companion'
 				)}
 			</p>
 
 			<div>
 				<a href={customizer_url} className="ct-button">
-					{__('Customize', 'blc')}
+					{__('Customize', 'blocksy-companion')}
 				</a>
 
 				<a
 					href={home_url}
 					target="_blank"
 					className="ct-button-primary">
-					{__('View site', 'blc')}
+					{__('View site', 'blocksy-companion')}
 				</a>
 			</div>
 		</div>

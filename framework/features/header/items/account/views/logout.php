@@ -1,6 +1,6 @@
 <?php
 
-$login_label = blocksy_akg('login_label', $atts, __('Login', 'blc'));
+$login_label = blocksy_akg('login_label', $atts, __('Login', 'blocksy-companion'));
 
 $loggedout_account_label_visibility = blocksy_akg(
 	'loggedout_account_label_visibility',

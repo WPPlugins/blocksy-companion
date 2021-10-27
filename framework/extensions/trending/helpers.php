@@ -215,7 +215,7 @@ function blc_get_trending_block($forced = false) {
 
 	$trending_label = get_theme_mod(
 		'trending_block_label',
-		__('Trending now', 'blc')
+		__('Trending now', 'blocksy-companion')
 	);
 
 	?>

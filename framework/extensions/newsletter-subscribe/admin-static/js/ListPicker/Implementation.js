@@ -60,8 +60,8 @@ const ListPickerImplementation = ({ value, onChange }) => {
 				disabled
 				placeholder={
 					isLoadingLists
-						? __('Loading...', 'blc')
-						: __('Invalid API Key...', 'blc')
+						? __('Loading...', 'blocksy-companion')
+						: __('Invalid API Key...', 'blocksy-companion')
 				}
 			/>
 		</div>
@@ -89,7 +89,7 @@ const ListPickerImplementation = ({ value, onChange }) => {
 							onFocus: () => openMenu(),
 							onClick: () => openMenu(),
 						})}
-						placeholder={__('Select list...', 'blc')}
+						placeholder={__('Select list...', 'blocksy-companion')}
 						readOnly
 					/>
 

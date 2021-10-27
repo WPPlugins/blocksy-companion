@@ -116,7 +116,10 @@ const DemoInstall = ({ children, path, location }) => {
 								className="ct-loading-text">
 								<span />
 
-								{__('Loading Starter Sites...', 'blc')}
+								{__(
+									'Loading Starter Sites...',
+									'blocksy-companion'
+								)}
 							</animated.p>
 						)
 					}
@@ -128,7 +131,8 @@ const DemoInstall = ({ children, path, location }) => {
 									className="ct-demo-notification"
 									dangerouslySetInnerHTML={{
 										__html: __(
-											"The connection to our <b>demo.creativethemes.com</b> server didn't worked. This connection is required for importing the starter sites from our demo content server. All you have to do is to contact your hosting provider and ask them to white list our demo server address."
+											"The connection to our <b>demo.creativethemes.com</b> server didn't worked. This connection is required for importing the starter sites from our demo content server. All you have to do is to contact your hosting provider and ask them to white list our demo server address.",
+											'blocksy-companion'
 										),
 									}}
 								/>

@@ -9,7 +9,7 @@
 
 
 // Widget title
-$title = blocksy_default_akg( 'title', $atts, __( 'Advertisement', 'blc' ) );
+$title = blocksy_default_akg( 'title', $atts, __( 'Advertisement', 'blocksy-companion' ) );
 
 // Ad source
 $source = blocksy_default_akg( 'ad_source', $atts, 'code' );

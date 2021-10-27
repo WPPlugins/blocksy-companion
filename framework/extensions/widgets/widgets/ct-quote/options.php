@@ -12,15 +12,15 @@ $options = [
 
 	'title' => [
 		'type' => 'text',
-		'label' => __( 'Title', 'blc' ),
+		'label' => __( 'Title', 'blocksy-companion' ),
 		'field_attr' => [ 'id' => 'widget-title' ],
 		'design' => 'inline',
-		'value' => __( 'Quote', 'blc' ),
+		'value' => __( 'Quote', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 	],
 
 	// 'quote_text' => [
-	// 	'label' => __( 'Quote text', 'blc' ),
+	// 	'label' => __( 'Quote text', 'blocksy-companion' ),
 	// 	'type' => 'textarea',
 	// 	'value' => '',
 	// 	'design' => 'inline',
@@ -28,10 +28,10 @@ $options = [
 	// ],
 
 	'quote_text' => [
-		'label' => __( 'Text', 'blc' ),
+		'label' => __( 'Text', 'blocksy-companion' ),
 		'type' => 'wp-editor',
 		'design' => 'inline',
-		'desc' => __( 'You can add here some arbitrary HTML code.', 'blc' ),
+		'desc' => __( 'You can add here some arbitrary HTML code.', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 		'setting' => [ 'transport' => 'postMessage' ],
 
@@ -43,28 +43,28 @@ $options = [
 
 	'quote_author' => [
 		'type' => 'text',
-		'label' => __( 'Author Name', 'blc' ),
+		'label' => __( 'Author Name', 'blocksy-companion' ),
 		'field_attr' => [ 'id' => 'widget-title' ],
 		'design' => 'inline',
-		'value' => __( 'John Doe', 'blc' ),
+		'value' => __( 'John Doe', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 	],
 
 	'quote_has_by_label' => [
 		'type'  => 'ct-switch',
-		'label' => __( 'Author Label', 'blc' ),
+		'label' => __( 'Author Label', 'blocksy-companion' ),
 		'value' => 'yes',
 		'design' => 'inline-full',
 		'disableRevertButton' => true,
 	],
 
 	'quote_avatar' => [
-		'label' => __('Author Avatar', 'blc'),
+		'label' => __('Author Avatar', 'blocksy-companion'),
 		'type' => 'ct-image-uploader',
 		'design' => 'inline',
 		'value' => [ 'attachment_id' => null ],
-		'emptyLabel' => __('Select Image', 'blc'),
-		'filledLabel' => __('Change Image', 'blc'),
+		'emptyLabel' => __('Select Image', 'blocksy-companion'),
+		'filledLabel' => __('Change Image', 'blocksy-companion'),
 	],
 
 ];

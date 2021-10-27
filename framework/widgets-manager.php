@@ -72,13 +72,13 @@ class BlocksyWidgetFactory extends WP_Widget {
 		$name = blocksy_akg(
 			'name',
 			$config,
-			__('Default widget name', 'blc')
+			__('Default widget name', 'blocksy-companion')
 		);
 
 		$description = blocksy_akg(
 			'description',
 			$config,
-			__('Display online support infomation', 'blc')
+			__('Display online support infomation', 'blocksy-companion')
 		);
 
 		unset($config['name']);
@@ -141,7 +141,7 @@ class BlocksyWidgetFactory extends WP_Widget {
 			$this->options = [
 				'title' => [
 					'type' => 'text',
-					'label' => __( 'Widget Title', 'blc' ),
+					'label' => __( 'Widget Title', 'blocksy-companion' ),
 					'field_attr' => [ 'id' => 'widget-title' ],
 				],
 			];

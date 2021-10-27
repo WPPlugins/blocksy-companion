@@ -9,7 +9,7 @@
 
 
 // Widget title
-$title = blocksy_default_akg( 'title', $atts, __( 'Facebook', 'blc' ) );
+$title = blocksy_default_akg( 'title', $atts, __( 'Facebook', 'blocksy-companion' ) );
 
 $url = blocksy_default_akg('facebook_page_url', $atts, '');
 

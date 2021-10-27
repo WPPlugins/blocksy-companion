@@ -76,8 +76,8 @@ const Extension = ({ extension, onExtsSync }) => {
 						activationAction()
 					}}>
 					{extension.__object
-						? __('Deactivate', 'blc')
-						: __('Activate', 'blc')}
+						? __('Deactivate', 'blocksy-companion')
+						: __('Activate', 'blocksy-companion')}
 				</button>
 
 				{extension.readme && (
@@ -227,7 +227,7 @@ const Extensions = () => {
 									className="ct-loading-text">
 									<span />
 
-									{__('Loading Extensions Status...', 'blc')}
+									{__('Loading Extensions Status...', 'blocksy-companion')}
 								</animated.p>
 							)
 						}
@@ -251,11 +251,11 @@ const Extensions = () => {
 														{
 															free: __(
 																'Free Extensions',
-																'blc'
+																'blocksy-companion'
 															),
 															pro: __(
 																'Pro Extensions',
-																'blc'
+																'blocksy-companion'
 															),
 														}[plan]
 													}

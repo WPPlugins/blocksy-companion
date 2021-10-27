@@ -58,9 +58,9 @@ const ChildTheme = ({ demoConfiguration, setDemoConfiguration, style }) => {
 			</i>
 
 			{!child_theme_exists ? (
-				<h2>{__('Install Child Theme', 'blc')}</h2>
+				<h2>{__('Install Child Theme', 'blocksy-companion')}</h2>
 			) : (
-				<h2>{__('Activate Child Theme', 'blc')}</h2>
+				<h2>{__('Activate Child Theme', 'blocksy-companion')}</h2>
 			)}
 
 			{!is_child_theme && (
@@ -69,14 +69,14 @@ const ChildTheme = ({ demoConfiguration, setDemoConfiguration, style }) => {
 						<p>
 							{__(
 								'We strongly recommend to install the child theme, this way you will have freedom to make changes without breaking the parent theme.',
-								'blc'
+								'blocksy-companion'
 							)}
 						</p>
 					) : (
 						<p>
 							{__(
 								'We strongly recommend to activate the child theme, this way you will have freedom to make changes without breaking the parent theme.',
-								'blc'
+								'blocksy-companion'
 							)}
 						</p>
 					)}
@@ -90,8 +90,8 @@ const ChildTheme = ({ demoConfiguration, setDemoConfiguration, style }) => {
 							})
 						}>
 						{!child_theme_exists
-							? __('Install Child Theme', 'blc')
-							: __('Activate Child Theme', 'blc')}
+							? __('Install Child Theme', 'blocksy-companion')
+							: __('Activate Child Theme', 'blocksy-companion')}
 					</Checkbox>
 				</Fragment>
 			)}
@@ -99,11 +99,11 @@ const ChildTheme = ({ demoConfiguration, setDemoConfiguration, style }) => {
 			{is_child_theme &&
 				__(
 					'You already have a child theme properly installed and activated. Move on.',
-					'blc'
+					'blocksy-companion'
 				)}
 
 			<a href="https://developer.wordpress.org/themes/advanced-topics/child-themes/" target="_blank">
-				{__('Learn more about child themes', 'blc')}
+				{__('Learn more about child themes', 'blocksy-companion')}
 			</a>
 		</div>
 	)

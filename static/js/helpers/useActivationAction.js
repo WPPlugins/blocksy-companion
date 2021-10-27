@@ -93,7 +93,7 @@ const useActivationAction = (extension, cb = () => {}) => {
 						<p>
 							{__(
 								'Upgrade to the Pro version and get instant access to all premium extensions, features and future updates.',
-								'blc'
+								'blocksy-companion'
 							)}
 						</p>
 
@@ -117,7 +117,7 @@ const useActivationAction = (extension, cb = () => {}) => {
 								href="https://creativethemes.com/blocksy/pricing/"
 								target="_blank"
 								className="button button-primary">
-								{__('Upgrade Now', 'blc')}
+								{__('Upgrade Now', 'blocksy-companion')}
 							</a>
 						</div>
 					</div>

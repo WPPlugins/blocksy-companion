@@ -44,11 +44,11 @@ foreach ($form_views as $form_key => $value) {
 			<?php if ($users_can_register) { ?>
 				<ul>
 					<li class="active ct-login">
-						<?php echo __('Login', 'blc') ?>
+						<?php echo __('Login', 'blocksy-companion') ?>
 					</li>
 
 					<li class="ct-register">
-						<?php echo __('Sign Up', 'blc') ?>
+						<?php echo __('Sign Up', 'blocksy-companion') ?>
 					</li>
 				</ul>
 			<?php } ?>
@@ -67,7 +67,7 @@ foreach ($form_views as $form_key => $value) {
 				<?php echo $form_views['lostpassword'] ?>
 
 				<a href="<?php echo wp_login_url() ?>" class="ct-back-to-login ct-login">
-					← <?php echo __('Back to login', 'blc') ?>
+					← <?php echo __('Back to login', 'blocksy-companion') ?>
 				</a>
 			</section>
 		</div>

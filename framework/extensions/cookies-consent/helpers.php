@@ -27,10 +27,10 @@ function blocksy_ext_cookies_consent_output($forced = false) {
 
 	$content = get_theme_mod(
 		'cookie_consent_content',
-		__('We use cookies to ensure that we give you the best experience on our website.', 'blc')
+		__('We use cookies to ensure that we give you the best experience on our website.', 'blocksy-companion')
 	);
 
-	$button_text = get_theme_mod('cookie_consent_button_text', __('Accept', 'blc'));
+	$button_text = get_theme_mod('cookie_consent_button_text', __('Accept', 'blocksy-companion'));
 	$period = get_theme_mod('cookie_consent_period', 'forever');
 	$type = get_theme_mod('cookie_consent_type', 'type-1');
 
@@ -75,7 +75,7 @@ function blocksy_ext_cookies_checkbox($prefix = '') {
 	$message = get_theme_mod(
 		'forms_cookie_consent_content',
 		sprintf(
-			__('I accept the %sPrivacy Policy%s', 'blc'),
+			__('I accept the %sPrivacy Policy%s', 'blocksy-companion'),
 			'<a href="/privacy-policy">',
 			'</a>'
 		)

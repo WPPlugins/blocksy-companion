@@ -27,6 +27,8 @@ export const getNameForPlugin = (plugin) =>
 			'stackable-ultimate-gutenberg-blocks':
 				'Stackable – Gutenberg Blocks',
 
+			'map-block-gutenberg': 'Map Block for Google Maps',
+
 			'mb-custom-post-type': 'MB Custom Post Types & Custom Taxonomies',
 		}[plugin] || plugin
 	).replace(/\b\w/, (v) => v.toUpperCase()))
@@ -61,11 +63,11 @@ const Plugins = ({ demoConfiguration, setDemoConfiguration, style }) => {
 					</svg>
 				</i>
 
-				<h2>{__('Install & Activate Plugins', 'blc')}</h2>
+				<h2>{__('Install & Activate Plugins', 'blocksy-companion')}</h2>
 				<p>
 					{__(
 						'The following plugins are required for this starter site in order to work properly.',
-						'blc'
+						'blocksy-companion'
 					)}
 				</p>
 

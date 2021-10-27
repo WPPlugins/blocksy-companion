@@ -39,26 +39,26 @@ function blc_ext_newsletter_subscribe_form($forced = false) {
 	$args = [
 		'title' => get_theme_mod(
 			'newsletter_subscribe_title',
-			__('Newsletter Updates', 'blc')
+			__('Newsletter Updates', 'blocksy-companion')
 		),
 
 		'description' => get_theme_mod('newsletter_subscribe_text', __(
 			'Enter your email address below to subscribe to our newsletter',
-			'blc'
+			'blocksy-companion'
 		)),
 
 		'button_text' => get_theme_mod(
 			'newsletter_subscribe_button_text',
-			__('Subscribe', 'blc')
+			__('Subscribe', 'blocksy-companion')
 		),
 		'has_name' => get_theme_mod('has_newsletter_subscribe_name', 'no'),
 		'name_label' => get_theme_mod(
 			'newsletter_subscribe_name_label',
-			__('Your name', 'blc')
+			__('Your name', 'blocksy-companion')
 		),
 		'email_label' => get_theme_mod(
 			'newsletter_subscribe_mail_label',
-			__('Your email', 'blc')
+			__('Your email', 'blocksy-companion')
 		)
 	];
 
@@ -93,20 +93,20 @@ function blc_ext_newsletter_subscribe_output_form($args = []) {
 		'has_title' => true,
 		'has_description' => true,
 
-		'title' => __('Newsletter Updates', 'blc'),
+		'title' => __('Newsletter Updates', 'blocksy-companion'),
 		'description' => __(
 			'Enter your email address below to subscribe to our newsletter',
-			'blc'
+			'blocksy-companion'
 		),
 		'button_text' => __(
-			'Subscribe', 'blc'
+			'Subscribe', 'blocksy-companion'
 		),
 
 		// no | yes
 		'has_name' => 'no',
 
-		'name_label' => __('Your name', 'blc'),
-		'email_label' => __('Your email', 'blc'),
+		'name_label' => __('Your name', 'blocksy-companion'),
+		'email_label' => __('Your email', 'blocksy-companion'),
 		'list_id' => '',
 		'class' => ''
 	]);
@@ -160,10 +160,10 @@ function blc_ext_newsletter_subscribe_output_form($args = []) {
 			class="ct-newsletter-subscribe-block-form" <?php echo $skip_submit_output ?>>
 			<section data-fields="<?php echo $fields_number ?>">
 				<?php if ($has_name) { ?>
-					<input type="text" name="FNAME" placeholder="<?php esc_attr_e($args['name_label'], 'blc'); ?>" title="<?php echo __('Name', 'blc') ?>" />
+					<input type="text" name="FNAME" placeholder="<?php esc_attr_e($args['name_label'], 'blocksy-companion'); ?>" title="<?php echo __('Name', 'blocksy-companion') ?>" />
 				<?php } ?>
 
-				<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($args['email_label'], 'blc'); ?> *" title="<?php echo __('Email', 'blc') ?>" required />
+				<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($args['email_label'], 'blocksy-companion'); ?> *" title="<?php echo __('Email', 'blocksy-companion') ?>" required />
 
 				<button class="button">
 					<?php echo esc_html($args['button_text']) ?>

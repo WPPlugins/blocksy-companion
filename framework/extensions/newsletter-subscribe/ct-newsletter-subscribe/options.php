@@ -11,27 +11,27 @@
 $options = [
 	'title' => [
 		'type' => 'text',
-		'label' => __( 'Title', 'blc' ),
+		'label' => __( 'Title', 'blocksy-companion' ),
 		'field_attr' => [ 'id' => 'widget-title' ],
 		'design' => 'inline',
-		'value' => __( 'Newsletter', 'blc' ),
+		'value' => __( 'Newsletter', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 	],
 
 	// 'newsletter_subscribe_text' => [
-	// 	'label' => __( 'Message', 'blc' ),
+	// 	'label' => __( 'Message', 'blocksy-companion' ),
 	// 	'type' => 'textarea',
-	// 	'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blc' ),
+	// 	'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blocksy-companion' ),
 	// 	'design' => 'inline',
 	// 	'disableRevertButton' => true,
 	// ],
 
 	'newsletter_subscribe_text' => [
-		'label' => __( 'Text', 'blc' ),
+		'label' => __( 'Text', 'blocksy-companion' ),
 		'type' => 'wp-editor',
 		'design' => 'inline',
-		'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blc' ),
-		'desc' => __( 'You can add here some arbitrary HTML code.', 'blc' ),
+		'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blocksy-companion' ),
+		'desc' => __( 'You can add here some arbitrary HTML code.', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 		'setting' => [ 'transport' => 'postMessage' ],
 
@@ -43,15 +43,15 @@ $options = [
 
 	'newsletter_subscribe_list_id_source' => [
 		'type' => 'ct-radio',
-		'label' => __( 'List Source', 'blc' ),
+		'label' => __( 'List Source', 'blocksy-companion' ),
 		'value' => 'default',
 		'view' => 'radio',
 		'inline' => true,
 		'design' => 'inline',
 		'disableRevertButton' => true,
 		'choices' => [
-			'default' => __('Default', 'blc'),
-			'custom' => __('Custom', 'blc'),
+			'default' => __('Default', 'blocksy-companion'),
+			'custom' => __('Custom', 'blocksy-companion'),
 		],
 	],
 
@@ -61,7 +61,7 @@ $options = [
 		'options' => [
 
 			'newsletter_subscribe_list_id' => [
-				'label' => __( 'List ID', 'blc' ),
+				'label' => __( 'List ID', 'blocksy-companion' ),
 				'type' => 'blocksy-newsletter-subscribe',
 				'value' => '',
 				'design' => 'inline',
@@ -73,7 +73,7 @@ $options = [
 
 	'has_newsletter_subscribe_name' => [
 		'type'  => 'ct-switch',
-		'label' => __( 'Name Field', 'blc' ),
+		'label' => __( 'Name Field', 'blocksy-companion' ),
 		'value' => 'no',
 		'disableRevertButton' => true,
 	],
@@ -85,9 +85,9 @@ $options = [
 
 			'newsletter_subscribe_name_label' => [
 				'type' => 'text',
-				'label' => __( 'Name Label', 'blc' ),
+				'label' => __( 'Name Label', 'blocksy-companion' ),
 				'design' => 'inline',
-				'value' => __( 'Your name', 'blc' ),
+				'value' => __( 'Your name', 'blocksy-companion' ),
 				'disableRevertButton' => true,
 			],
 
@@ -96,35 +96,35 @@ $options = [
 
 	'newsletter_subscribe_mail_label' => [
 		'type' => 'text',
-		'label' => __( 'Mail Label', 'blc' ),
+		'label' => __( 'Mail Label', 'blocksy-companion' ),
 		'design' => 'inline',
-		'value' => __( 'Your email', 'blc' ),
+		'value' => __( 'Your email', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 	],
 
 	'newsletter_subscribe_button_text' => [
 		'type' => 'text',
-		'label' => __( 'Button Label', 'blc' ),
+		'label' => __( 'Button Label', 'blocksy-companion' ),
 		'design' => 'inline',
-		'value' => __( 'Subscribe', 'blc' ),
+		'value' => __( 'Subscribe', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 	],
 
 	'newsletter_subscribe_container' => [
-		'label' => __( 'Container Type', 'blc' ),
+		'label' => __( 'Container Type', 'blocksy-companion' ),
 		'type' => 'ct-select',
 		'value' => 'default',
 		'design' => 'inline',
 		'disableRevertButton' => true,
 		'choices' => [
-			'default' => __( 'Default', 'blc' ),
-			'boxed' => __( 'Boxed', 'blc' ),
+			'default' => __( 'Default', 'blocksy-companion' ),
+			'boxed' => __( 'Boxed', 'blocksy-companion' ),
 		],
 	],
 
 	'newsletter_subscribe_alignment' => [
 		'type' => 'ct-radio',
-		'label' => __( 'Content Alignment', 'blc' ),
+		'label' => __( 'Content Alignment', 'blocksy-companion' ),
 		'value' => 'left',
 		'view' => 'text',
 		'design' => 'inline',

@@ -57,7 +57,7 @@ const useActivationWithRequirements = (extension, cb = () => {}) => {
 					data-button="white"
 					title="Edit Credentials"
 					onClick={() => setIsEditingCredentials(true)}>
-					{__('Configure', 'blc')}
+					{__('Configure', 'blocksy-companion')}
 				</button>
 			)}
 

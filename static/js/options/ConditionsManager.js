@@ -88,10 +88,10 @@ const ConditionsManager = ({ value, onChange }) => {
 							selectInputStart: () => (
 								<span className={`ct-${condition.type}`} />
 							),
-							placeholder: __('Select variation', 'blc'),
+							placeholder: __('Select variation', 'blocksy-companion'),
 							choices: {
-								include: __('Include', 'blc'),
-								exclude: __('Exclude', 'blc'),
+								include: __('Include', 'blocksy-companion'),
+								exclude: __('Exclude', 'blocksy-companion'),
 							},
 						}}
 						value={condition.type}
@@ -113,7 +113,7 @@ const ConditionsManager = ({ value, onChange }) => {
 						key="second"
 						option={{
 							appendToBody: true,
-							placeholder: __('Select rule', 'blc'),
+							placeholder: __('Select rule', 'blocksy-companion'),
 							choices:
 								condition.category === 'user'
 									? allRules.filter(
@@ -170,7 +170,7 @@ const ConditionsManager = ({ value, onChange }) => {
 							option={{
 								appendToBody: true,
 								defaultToFirstItem: false,
-								placeholder: __('Select taxonomy', 'blc'),
+								placeholder: __('Select taxonomy', 'blocksy-companion'),
 								choices: allTaxonomies.map((taxonomy) => ({
 									key: taxonomy.id,
 									value: taxonomy.name,
@@ -204,7 +204,7 @@ const ConditionsManager = ({ value, onChange }) => {
 							option={{
 								appendToBody: true,
 								defaultToFirstItem: false,
-								placeholder: __('Select language', 'blc'),
+								placeholder: __('Select language', 'blocksy-companion'),
 								choices: allLanguages.map((language) => ({
 									key: language.id,
 									value: language.name,
@@ -235,11 +235,11 @@ const ConditionsManager = ({ value, onChange }) => {
 							option={{
 								appendToBody: true,
 								defaultToFirstItem: false,
-								placeholder: __('Select user', 'blc'),
+								placeholder: __('Select user', 'blocksy-companion'),
 								choices: [
 									{
 										key: 'current_user',
-										value: __('Current user', 'blc'),
+										value: __('Current user', 'blocksy-companion'),
 									},
 
 									...allUsers.map((user) => ({
@@ -299,7 +299,7 @@ const ConditionsManager = ({ value, onChange }) => {
 							},
 						])
 					}}>
-					{__('Add Display Condition', 'blc')}
+					{__('Add Display Condition', 'blocksy-companion')}
 				</button>
 
 				<button
@@ -318,7 +318,7 @@ const ConditionsManager = ({ value, onChange }) => {
 							},
 						])
 					}}>
-					{__('Add User Condition', 'blc')}
+					{__('Add User Condition', 'blocksy-companion')}
 				</button>
 			</div>
 		</div>

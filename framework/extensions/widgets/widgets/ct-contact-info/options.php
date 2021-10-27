@@ -12,25 +12,25 @@ $options = [
 
 	'title' => [
 		'type' => 'text',
-		'label' => __( 'Title', 'blc' ),
+		'label' => __( 'Title', 'blocksy-companion' ),
 		'field_attr' => [ 'id' => 'widget-title' ],
 		'design' => 'inline',
-		'value' => __( 'Contact Info', 'blc' ),
+		'value' => __( 'Contact Info', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 	],
 
 	// 'contact_text' => [
-	// 	'label' => __( 'Text', 'blc' ),
+	// 	'label' => __( 'Text', 'blocksy-companion' ),
 	// 	'type' => 'textarea',
 	// 	'design' => 'inline',
 	// 	'disableRevertButton' => true,
 	// ],
 
 	'contact_text' => [
-		'label' => __( 'Text', 'blc' ),
+		'label' => __( 'Text', 'blocksy-companion' ),
 		'type' => 'wp-editor',
 		'design' => 'inline',
-		'desc' => __( 'You can add here some arbitrary HTML code.', 'blc' ),
+		'desc' => __( 'You can add here some arbitrary HTML code.', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 		'setting' => [ 'transport' => 'postMessage' ],
 
@@ -48,14 +48,14 @@ $options = [
 			[
 				'id' => 'address',
 				'enabled' => true,
-				'title' => __('Address:', 'blc'),
+				'title' => __('Address:', 'blocksy-companion'),
 				'content' => 'Street Name, NY 38954',
 			],
 
 			[
 				'id' => 'phone',
 				'enabled' => true,
-				'title' => __('Phone:', 'blc'),
+				'title' => __('Phone:', 'blocksy-companion'),
 				'content' => '578-393-4937',
 				'link' => 'tel:578-393-4937',
 			],
@@ -63,7 +63,7 @@ $options = [
 			[
 				'id' => 'mobile',
 				'enabled' => true,
-				'title' => __('Mobile:', 'blc'),
+				'title' => __('Mobile:', 'blocksy-companion'),
 				'content' => '578-393-4937',
 				'link' => 'tel:578-393-4937',
 			],
@@ -72,25 +72,25 @@ $options = [
 
 		'settings' => [
 			'address' => [
-				'label' => __( 'Address', 'blc' ),
+				'label' => __( 'Address', 'blocksy-companion' ),
 				'options' => [
 					'title' => [
 						'type' => 'text',
-						'label' => __('Title', 'blc'),
-						'value' => __('Address:', 'blc'),
+						'label' => __('Title', 'blocksy-companion'),
+						'value' => __('Address:', 'blocksy-companion'),
 						'design' => 'inline',
 					],
 
 					'content' => [
 						'type' => 'text',
-						'label' => __('Content', 'blc'),
+						'label' => __('Content', 'blocksy-companion'),
 						'value' => 'Street Name, NY 38954',
 						'design' => 'inline',
 					],
 
 					'link' => [
 						'type' => 'text',
-						'label' => __('Link (optional)', 'blc'),
+						'label' => __('Link (optional)', 'blocksy-companion'),
 						'design' => 'inline',
 					]
 				],
@@ -99,27 +99,27 @@ $options = [
 			],
 
 			'phone' => [
-				'label' => __( 'Phone', 'blc' ),
+				'label' => __( 'Phone', 'blocksy-companion' ),
 				'clone' => true,
 				'options' => [
 
 					'title' => [
 						'type' => 'text',
-						'label' => __('Title', 'blc'),
-						'value' => __('Phone:', 'blc'),
+						'label' => __('Title', 'blocksy-companion'),
+						'value' => __('Phone:', 'blocksy-companion'),
 						'design' => 'inline',
 					],
 
 					'content' => [
 						'type' => 'text',
-						'label' => __('Content', 'blc'),
+						'label' => __('Content', 'blocksy-companion'),
 						'value' => '578-393-4937',
 						'design' => 'inline',
 					],
 
 					'link' => [
 						'type' => 'text',
-						'label' => __('Link (optional)', 'blc'),
+						'label' => __('Link (optional)', 'blocksy-companion'),
 						'value' => 'tel:578-393-4937',
 						'design' => 'inline',
 					]
@@ -128,26 +128,26 @@ $options = [
 			],
 
 			'mobile' => [
-				'label' => __( 'Mobile', 'blc' ),
+				'label' => __( 'Mobile', 'blocksy-companion' ),
 				'clone' => true,
 				'options' => [
 					'title' => [
 						'type' => 'text',
-						'label' => __('Title', 'blc'),
-						'value' => __('Mobile:', 'blc'),
+						'label' => __('Title', 'blocksy-companion'),
+						'value' => __('Mobile:', 'blocksy-companion'),
 						'design' => 'inline',
 					],
 
 					'content' => [
 						'type' => 'text',
-						'label' => __('Content', 'blc'),
+						'label' => __('Content', 'blocksy-companion'),
 						'value' => '578-393-4937',
 						'design' => 'inline',
 					],
 
 					'link' => [
 						'type' => 'text',
-						'label' => __('Link (optional)', 'blc'),
+						'label' => __('Link (optional)', 'blocksy-companion'),
 						'value' => 'tel:578-393-4937',
 						'design' => 'inline',
 					],
@@ -156,26 +156,26 @@ $options = [
 			],
 
 			'hours' => [
-				'label' => __( 'Work Hours', 'blc' ),
+				'label' => __( 'Work Hours', 'blocksy-companion' ),
 				'clone' => true,
 				'options' => [
 					'title' => [
 						'type' => 'text',
-						'label' => __('Title', 'blc'),
-						'value' => __('Opening hours', 'blc'),
+						'label' => __('Title', 'blocksy-companion'),
+						'value' => __('Opening hours', 'blocksy-companion'),
 						'design' => 'inline',
 					],
 
 					'content' => [
 						'type' => 'text',
-						'label' => __('Content', 'blc'),
+						'label' => __('Content', 'blocksy-companion'),
 						'value' => '9AM - 5PM',
 						'design' => 'inline',
 					],
 
 					'link' => [
 						'type' => 'text',
-						'label' => __('Link (optional)', 'blc'),
+						'label' => __('Link (optional)', 'blocksy-companion'),
 						'value' => '',
 						'design' => 'inline',
 					],
@@ -184,26 +184,26 @@ $options = [
 			],
 
 			'fax' => [
-				'label' => __( 'Fax', 'blc' ),
+				'label' => __( 'Fax', 'blocksy-companion' ),
 				'clone' => true,
 				'options' => [
 					'title' => [
 						'type' => 'text',
-						'label' => __('Title', 'blc'),
-						'value' => __('Fax:', 'blc'),
+						'label' => __('Title', 'blocksy-companion'),
+						'value' => __('Fax:', 'blocksy-companion'),
 						'design' => 'inline',
 					],
 
 					'content' => [
 						'type' => 'text',
-						'label' => __('Content', 'blc'),
+						'label' => __('Content', 'blocksy-companion'),
 						'value' => '578-393-4937',
 						'design' => 'inline',
 					],
 
 					'link' => [
 						'type' => 'text',
-						'label' => __('Link (optional)', 'blc'),
+						'label' => __('Link (optional)', 'blocksy-companion'),
 						'value' => 'tel:578-393-4937',
 						'design' => 'inline',
 					],
@@ -212,26 +212,26 @@ $options = [
 			],
 
 			'email' => [
-				'label' => __( 'Email', 'blc' ),
+				'label' => __( 'Email', 'blocksy-companion' ),
 				'clone' => true,
 				'options' => [
 					'title' => [
 						'type' => 'text',
-						'label' => __('Title', 'blc'),
-						'value' => __('Email:', 'blc'),
+						'label' => __('Title', 'blocksy-companion'),
+						'value' => __('Email:', 'blocksy-companion'),
 						'design' => 'inline',
 					],
 
 					'content' => [
 						'type' => 'text',
-						'label' => __('Content', 'blc'),
+						'label' => __('Content', 'blocksy-companion'),
 						'value' => 'contact@yourwebsite.com',
 						'design' => 'inline',
 					],
 
 					'link' => [
 						'type' => 'text',
-						'label' => __('Link (optional)', 'blc'),
+						'label' => __('Link (optional)', 'blocksy-companion'),
 						'value' => 'mailto:contact@yourwebsite.com',
 						'design' => 'inline',
 					],
@@ -240,26 +240,26 @@ $options = [
 			],
 
 			'website' => [
-				'label' => __( 'Website', 'blc' ),
+				'label' => __( 'Website', 'blocksy-companion' ),
 				'clone' => true,
 				'options' => [
 					'title' => [
 						'type' => 'text',
-						'label' => __('Title', 'blc'),
-						'value' => __('Website:', 'blc'),
+						'label' => __('Title', 'blocksy-companion'),
+						'value' => __('Website:', 'blocksy-companion'),
 						'design' => 'inline',
 					],
 
 					'content' => [
 						'type' => 'text',
-						'label' => __('Content', 'blc'),
+						'label' => __('Content', 'blocksy-companion'),
 						'value' => 'creativethemes.com',
 						'design' => 'inline',
 					],
 
 					'link' => [
 						'type' => 'text',
-						'label' => __('Link (optional)', 'blc'),
+						'label' => __('Link (optional)', 'blocksy-companion'),
 						'value' => 'https://creativethemes.com',
 						'design' => 'inline',
 					],
@@ -269,30 +269,30 @@ $options = [
 	],
 
 	'contacts_icons_size' => [
-		'label' => __( 'Icons Size', 'blc' ),
+		'label' => __( 'Icons Size', 'blocksy-companion' ),
 		'type' => 'ct-radio',
 		'value' => 'medium',
 		'view' => 'text',
 		'design' => 'block',
 		'setting' => [ 'transport' => 'postMessage' ],
 		'choices' => [
-			'small' => __( 'Small', 'blc' ),
-			'medium' => __( 'Medium', 'blc' ),
-			'large' => __( 'Large', 'blc' ),
+			'small' => __( 'Small', 'blocksy-companion' ),
+			'medium' => __( 'Medium', 'blocksy-companion' ),
+			'large' => __( 'Large', 'blocksy-companion' ),
 		],
 	],
 
 	'contacts_icon_shape' => [
-		'label' => __( 'Icons Shape Type', 'blc' ),
+		'label' => __( 'Icons Shape Type', 'blocksy-companion' ),
 		'type' => 'ct-radio',
 		'value' => 'rounded',
 		'view' => 'text',
 		'design' => 'block',
 		'setting' => [ 'transport' => 'postMessage' ],
 		'choices' => [
-			'simple' => __( 'None', 'blc' ),
-			'rounded' => __( 'Rounded', 'blc' ),
-			'square' => __( 'Square', 'blc' ),
+			'simple' => __( 'None', 'blocksy-companion' ),
+			'rounded' => __( 'Rounded', 'blocksy-companion' ),
+			'square' => __( 'Square', 'blocksy-companion' ),
 		],
 	],
 
@@ -302,15 +302,15 @@ $options = [
 		'options' => [
 
 			'contacts_icon_fill_type' => [
-				'label' => __( 'Shape Fill Type', 'blc' ),
+				'label' => __( 'Shape Fill Type', 'blocksy-companion' ),
 				'type' => 'ct-radio',
 				'value' => 'outline',
 				'view' => 'text',
 				'design' => 'block',
 				'setting' => [ 'transport' => 'postMessage' ],
 				'choices' => [
-					'solid' => __( 'Solid', 'blc' ),
-					'outline' => __( 'Outline', 'blc' ),
+					'solid' => __( 'Solid', 'blocksy-companion' ),
+					'outline' => __( 'Outline', 'blocksy-companion' ),
 				],
 			],
 
@@ -319,7 +319,7 @@ $options = [
 
 	'contact_link_target' => [
 		'type'  => 'ct-switch',
-		'label' => __( 'Open link in new tab', 'blc' ),
+		'label' => __( 'Open link in new tab', 'blocksy-companion' ),
 		'value' => 'no',
 		'design' => 'inline-full',
 		'disableRevertButton' => true,

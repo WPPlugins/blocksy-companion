@@ -1,7 +1,7 @@
 <?php
 
 $options = [
-	'title' => __('Cookie Consent', 'blc'),
+	'title' => __('Cookie Consent', 'blocksy-companion'),
 	'container' => [ 'priority' => 8 ],
 	'options' => [
 
@@ -15,7 +15,7 @@ $options = [
 				],
 
 				blocksy_rand_md5() => [
-					'title' => __( 'General', 'blc' ),
+					'title' => __( 'General', 'blocksy-companion' ),
 					'type' => 'tab',
 					'options' => [
 
@@ -28,19 +28,19 @@ $options = [
 
 								'type-1' => [
 									'src'   => BLOCKSY_URL . 'framework/extensions/cookies-consent/static/images/type-1.svg',
-									'title' => __( 'Type 1', 'blc' ),
+									'title' => __( 'Type 1', 'blocksy-companion' ),
 								],
 
 								'type-2' => [
 									'src'   => BLOCKSY_URL . 'framework/extensions/cookies-consent/static/images/type-2.svg',
-									'title' => __( 'Type 2', 'blc' ),
+									'title' => __( 'Type 2', 'blocksy-companion' ),
 								],
 
 							],
 						],
 
 						'cookie_consent_period' => [
-							'label' => __('Cookie period', 'blc'),
+							'label' => __('Cookie period', 'blocksy-companion'),
 							'type' => 'ct-select',
 							'value' => 'forever',
 							'design' => 'inline',
@@ -48,23 +48,23 @@ $options = [
 							'choices' => blocksy_ordered_keys(
 
 								[
-									'onehour' => __( 'One hour', 'blc' ),
-									'oneday' => __( 'One day', 'blc' ),
-									'oneweek' => __( 'One week', 'blc' ),
-									'onemonth' => __( 'One month', 'blc' ),
-									'threemonths' => __( 'Three months', 'blc' ),
-									'sixmonths' => __( 'Six months', 'blc' ),
-									'oneyear' => __( 'One year', 'blc' ),
-									'forever' => __('Forever', 'blc')
+									'onehour' => __( 'One hour', 'blocksy-companion' ),
+									'oneday' => __( 'One day', 'blocksy-companion' ),
+									'oneweek' => __( 'One week', 'blocksy-companion' ),
+									'onemonth' => __( 'One month', 'blocksy-companion' ),
+									'threemonths' => __( 'Three months', 'blocksy-companion' ),
+									'sixmonths' => __( 'Six months', 'blocksy-companion' ),
+									'oneyear' => __( 'One year', 'blocksy-companion' ),
+									'forever' => __('Forever', 'blocksy-companion')
 								]
 
 							),
 						],
 
 						'cookie_consent_content' => [
-							'label' => __( 'Content', 'blc' ),
+							'label' => __( 'Content', 'blocksy-companion' ),
 							'type' => 'wp-editor',
-							'value' => __('We use cookies to ensure that we give you the best experience on our website.', 'blc'),
+							'value' => __('We use cookies to ensure that we give you the best experience on our website.', 'blocksy-companion'),
 							'disableRevertButton' => true,
 							'setting' => [ 'transport' => 'postMessage' ],
 
@@ -76,10 +76,10 @@ $options = [
 						],
 
 						'cookie_consent_button_text' => [
-							'label' => __( 'Button text', 'blc' ),
+							'label' => __( 'Button text', 'blocksy-companion' ),
 							'type' => 'text',
 							'design' => 'block',
-							'value' => __('Accept', 'blc'),
+							'value' => __('Accept', 'blocksy-companion'),
 							'setting' => [ 'transport' => 'postMessage' ],
 						],
 
@@ -87,12 +87,12 @@ $options = [
 				],
 
 				blocksy_rand_md5() => [
-					'title' => __( 'Design', 'blc' ),
+					'title' => __( 'Design', 'blocksy-companion' ),
 					'type' => 'tab',
 					'options' => [
 
 						'cookieContentColor' => [
-							'label' => __( 'Font Color', 'blc' ),
+							'label' => __( 'Font Color', 'blocksy-companion' ),
 							'type'  => 'ct-color-picker',
 							'design' => 'inline',
 							'setting' => [ 'transport' => 'postMessage' ],
@@ -109,13 +109,13 @@ $options = [
 
 							'pickers' => [
 								[
-									'title' => __( 'Initial', 'blc' ),
+									'title' => __( 'Initial', 'blocksy-companion' ),
 									'id' => 'default',
 									'inherit' => 'var(--color)'
 								],
 
 								[
-									'title' => __( 'Hover', 'blc' ),
+									'title' => __( 'Hover', 'blocksy-companion' ),
 									'id' => 'hover',
 									'inherit' => 'var(--colorHover)'
 								],
@@ -123,7 +123,7 @@ $options = [
 						],
 
 						'cookieButtonBackground' => [
-							'label' => __( 'Button Color', 'blc' ),
+							'label' => __( 'Button Color', 'blocksy-companion' ),
 							'type'  => 'ct-color-picker',
 							'design' => 'inline',
 							'setting' => [ 'transport' => 'postMessage' ],
@@ -139,19 +139,19 @@ $options = [
 
 							'pickers' => [
 								[
-									'title' => __( 'Initial', 'blc' ),
+									'title' => __( 'Initial', 'blocksy-companion' ),
 									'id' => 'default',
 								],
 
 								[
-									'title' => __( 'Hover', 'blc' ),
+									'title' => __( 'Hover', 'blocksy-companion' ),
 									'id' => 'hover',
 								],
 							],
 						],
 
 						'cookieBackground' => [
-							'label' => __( 'Background Color', 'blc' ),
+							'label' => __( 'Background Color', 'blocksy-companion' ),
 							'type'  => 'ct-color-picker',
 							'design' => 'inline',
 							'setting' => [ 'transport' => 'postMessage' ],
@@ -164,7 +164,7 @@ $options = [
 
 							'pickers' => [
 								[
-									'title' => __( 'Initial', 'blc' ),
+									'title' => __( 'Initial', 'blocksy-companion' ),
 									'id' => 'default',
 								],
 							],
@@ -176,7 +176,7 @@ $options = [
 							'options' => [
 
 								'cookieMaxWidth' => [
-									'label' => __( 'Maximum Width', 'blc' ),
+									'label' => __( 'Maximum Width', 'blocksy-companion' ),
 									'type' => 'ct-slider',
 									'value' => 400,
 									'min' => 200,
@@ -199,11 +199,11 @@ $options = [
 					'label' => false,
 					'type' => 'wp-editor',
 					'value' => sprintf(
-						__('I accept the %sPrivacy Policy%s*', 'blc'),
+						__('I accept the %sPrivacy Policy%s*', 'blocksy-companion'),
 						'<a href="/privacy-policy">',
 						'</a>'
 					),
-					'desc' => __( 'This text will appear under each comment form and subscribe form.', 'blc' ),
+					'desc' => __( 'This text will appear under each comment form and subscribe form.', 'blocksy-companion' ),
 					// 'attr' => [ 'data-height' => 'heading-label' ],
 					'disableRevertButton' => true,
 					'setting' => [ 'transport' => 'postMessage' ],

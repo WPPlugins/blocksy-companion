@@ -80,7 +80,7 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 
 					setIsEditing(true)
 				}}>
-				{__('Add/Edit Conditions', 'blc')}
+				{__('Add/Edit Conditions', 'blocksy-companion')}
 			</button>
 
 			<Overlay
@@ -93,11 +93,11 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 				}}
 				render={() => (
 					<div className="ct-modal-content" ref={containerRef}>
-						<h2>{sprintf(__('Display Conditions', 'blc'))}</h2>
+						<h2>{sprintf(__('Display Conditions', 'blocksy-companion'))}</h2>
 						<p>
 							{__(
 								'Add one or more conditions in order to display your header.',
-								'blc'
+								'blocksy-companion'
 							)}
 						</p>
 
@@ -139,7 +139,7 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 								className="button-primary"
 								disabled={!localConditions}
 								onClick={() => saveSettings()}>
-								{__('Save Conditions', 'blc')}
+								{__('Save Conditions', 'blocksy-companion')}
 							</button>
 						</div>
 					</div>

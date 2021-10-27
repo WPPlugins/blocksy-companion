@@ -40,7 +40,7 @@ const DemosList = () => {
 							<img src={demo.screenshot} />
 
 							<section>
-								<h3>{__('Available for', 'blc')}</h3>
+								<h3>{__('Available for', 'blocksy-companion')}</h3>
 								<div>
 									{demos_list
 										.filter(
@@ -83,7 +83,7 @@ const DemosList = () => {
 									className="ct-button"
 									target="_blank"
 									href={demo.url}>
-									{__('Preview', 'blc')}
+									{__('Preview', 'blocksy-companion')}
 								</a>
 								<button
 									className="ct-button-primary"
@@ -96,8 +96,8 @@ const DemosList = () => {
 									currentlyInstalledDemo.demo.indexOf(
 										demo.name
 									) > -1
-										? __('Modify', 'blc')
-										: __('Import', 'blc')}
+										? __('Modify', 'blocksy-companion')
+										: __('Import', 'blocksy-companion')}
 								</button>
 							</div>
 						</div>

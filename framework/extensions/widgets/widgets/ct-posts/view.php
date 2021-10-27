@@ -136,7 +136,7 @@ $has_meta = blocksy_default_akg( 'display_date', $atts, 'no' ) === 'yes';
 $has_comments = blocksy_default_akg( 'display_comments', $atts, 'no' ) === 'yes';
 
 // Widget title
-$title = blocksy_default_akg( 'title', $atts, __( 'Posts', 'blc' ) );
+$title = blocksy_default_akg( 'title', $atts, __( 'Posts', 'blocksy-companion' ) );
 
 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 echo $before_widget;
@@ -217,7 +217,7 @@ echo $before_title . wp_kses_post( $title ) . $after_title;
 
 								<?php if ( $has_comments && get_comments_number() > 0 ) { ?>
 									<span>
-										<?php echo wp_kses_post( get_comments_number_text( '', __( '1 Comment', 'blc' ), __( '% Comments', 'blc' ) ) ); ?>
+										<?php echo wp_kses_post( get_comments_number_text( '', __( '1 Comment', 'blocksy-companion' ), __( '% Comments', 'blocksy-companion' ) ) ); ?>
 									</span>
 								<?php } ?>
 							</div>

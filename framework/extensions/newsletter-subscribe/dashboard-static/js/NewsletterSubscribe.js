@@ -70,8 +70,8 @@ const NewsletterSubscribe = ({ extension, onExtsSync }) => {
 					disabled={isLoading}
 					onClick={() => activationAction()}>
 					{extension.__object
-						? __('Deactivate', 'blc')
-						: __('Activate', 'blc')}
+						? __('Deactivate', 'blocksy-companion')
+						: __('Activate', 'blocksy-companion')}
 				</button>
 
 				{ui}

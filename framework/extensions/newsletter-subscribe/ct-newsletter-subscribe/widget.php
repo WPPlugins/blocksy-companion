@@ -10,8 +10,8 @@
 class Blocksy_Widget_Ct_Newsletter_Subscribe extends BlocksyWidgetFactory {
 	protected function get_config() {
 		return [
-			'name' => __('Newsletter Subscribe', 'blc'),
-			'description' => __('Newsletter subscribe form', 'blc'),
+			'name' => __('Newsletter Subscribe', 'blocksy-companion'),
+			'description' => __('Newsletter subscribe form', 'blocksy-companion'),
 		];
 	}
 

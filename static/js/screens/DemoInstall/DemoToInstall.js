@@ -302,7 +302,7 @@ const DemoToInstall = ({ location, navigate }) => {
 											)
 										)
 									}}>
-									{__('Back', 'blc')}
+									{__('Back', 'blocksy-companion')}
 								</button>
 							)}
 
@@ -342,8 +342,8 @@ const DemoToInstall = ({ location, navigate }) => {
 									)
 								}}>
 								{stepName === 'content'
-									? __('Install', 'blc')
-									: __('Next', 'blc')}
+									? __('Install', 'blocksy-companion')
+									: __('Next', 'blocksy-companion')}
 							</button>
 						</div>
 					)}

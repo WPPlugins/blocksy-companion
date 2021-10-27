@@ -15,10 +15,10 @@ const DisplayCondition = ({
 		// inline | modal
 		display = 'inline',
 
-		modalTitle = __('Transparent Header Display Conditions', 'blc'),
+		modalTitle = __('Transparent Header Display Conditions', 'blocksy-companion'),
 		modalDescription = __(
 			'Add one or more conditions to display the transparent header.',
-			'blc'
+			'blocksy-companion'
 		),
 	},
 	value,
@@ -41,7 +41,7 @@ const DisplayCondition = ({
 					setIsEditing(true)
 					setLocalValue(null)
 				}}>
-				{__('Add/Edit Conditions', 'blc')}
+				{__('Add/Edit Conditions', 'blocksy-companion')}
 			</button>
 
 			<Overlay
@@ -73,7 +73,7 @@ const DisplayCondition = ({
 									onChange(localValue)
 									setIsEditing(false)
 								}}>
-								{__('Save Conditions', 'blc')}
+								{__('Save Conditions', 'blocksy-companion')}
 							</button>
 						</div>
 					</div>

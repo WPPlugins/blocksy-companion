@@ -9,7 +9,7 @@
 
 
 // Widget title
-$title = blocksy_default_akg( 'title', $atts, __( 'Contact Info', 'blc' ) );
+$title = blocksy_default_akg( 'title', $atts, __( 'Contact Info', 'blocksy-companion' ) );
 
 // Text
 $text = do_shortcode(blocksy_default_akg( 'contact_text', $atts, '' ));
@@ -21,14 +21,14 @@ $contact_information = blocksy_default_akg(
 		[
 			'id' => 'address',
 			'enabled' => true,
-			'title' => __('Address:', 'blc'),
+			'title' => __('Address:', 'blocksy-companion'),
 			'content' => 'Street Name, NY 38954',
 		],
 
 		[
 			'id' => 'phone',
 			'enabled' => true,
-			'title' => __('Phone:', 'blc'),
+			'title' => __('Phone:', 'blocksy-companion'),
 			'content' => '578-393-4937',
 			'link' => 'tel:578-393-4937',
 		],
@@ -36,7 +36,7 @@ $contact_information = blocksy_default_akg(
 		[
 			'id' => 'mobile',
 			'enabled' => true,
-			'title' => __('Mobile:', 'blc'),
+			'title' => __('Mobile:', 'blocksy-companion'),
 			'content' => '578-393-4937',
 			'link' => 'tel:578-393-4937',
 		],

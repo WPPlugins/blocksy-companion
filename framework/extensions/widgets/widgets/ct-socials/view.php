@@ -8,7 +8,7 @@
  */
 
 // Widget title.
-$title = blocksy_default_akg( 'title', $atts, __('Social Icons', 'blc') );
+$title = blocksy_default_akg( 'title', $atts, __('Social Icons', 'blocksy-companion') );
 
 echo wp_kses_post($before_widget . $before_title . $title . $after_title);
 

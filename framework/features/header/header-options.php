@@ -3,7 +3,7 @@
 $options = [
 
 	'has_sticky_header' => [
-		'label' => __( 'Sticky Functionality', 'blc' ),
+		'label' => __( 'Sticky Functionality', 'blocksy-companion' ),
 		'type' => 'ct-switch',
 		'value' => 'no',
 
@@ -29,38 +29,38 @@ $options = [
 				'choices' => [
 					'middle' => [
 						'src' => blocksy_image_picker_url('sticky-main.svg'),
-						'title' => __('Only Main Row', 'blc'),
+						'title' => __('Only Main Row', 'blocksy-companion'),
 					],
 
 					'top_middle' => [
 						'src' => blocksy_image_picker_url('sticky-top-main.svg'),
-						'title' => __('Top & Main Row', 'blc'),
+						'title' => __('Top & Main Row', 'blocksy-companion'),
 					],
 
 					'entire_header' => [
 						'src' => blocksy_image_picker_url('sticky-all.svg'),
-						'title' => __('All Rows', 'blc'),
+						'title' => __('All Rows', 'blocksy-companion'),
 					],
 
 					'middle_bottom' => [
 						'src' => blocksy_image_picker_url('sticky-main-bottom.svg'),
-						'title' => __('Main & Bottom Row', 'blc'),
+						'title' => __('Main & Bottom Row', 'blocksy-companion'),
 					],
 
 					'top' => [
 						'src' => blocksy_image_picker_url('sticky-top.svg'),
-						'title' => __('Only Top Row', 'blc'),
+						'title' => __('Only Top Row', 'blocksy-companion'),
 					],
 
 					'bottom' => [
 						'src' => blocksy_image_picker_url('sticky-bottom.svg'),
-						'title' => __('Only Bottom Row', 'blc'),
+						'title' => __('Only Bottom Row', 'blocksy-companion'),
 					],
 				],
 			],
 
 			'sticky_effect' => [
-				'label' => __('Sticky Effect', 'blc' ),
+				'label' => __('Sticky Effect', 'blocksy-companion' ),
 				'type' => 'ct-select',
 				'value' => 'shrink',
 				'design' => 'block',
@@ -68,15 +68,15 @@ $options = [
 					'id' => 'header_placements_1'
 				],
 				'choices' => blocksy_ordered_keys([
-					'shrink' => __('Default', 'blc'),
-					'slide' => __('Slide Down', 'blc'),
-					'fade' => __('Fade', 'blc'),
-					'auto-hide' => __('Auto Hide/Show', 'blc'),
+					'shrink' => __('Default', 'blocksy-companion'),
+					'slide' => __('Slide Down', 'blocksy-companion'),
+					'fade' => __('Fade', 'blocksy-companion'),
+					'auto-hide' => __('Auto Hide/Show', 'blocksy-companion'),
 				]),
 			],
 
 			'sticky_behaviour' => [
-				'label' => __( 'Enable on', 'blc' ),
+				'label' => __( 'Enable on', 'blocksy-companion' ),
 				'type' => 'ct-visibility',
 				'design' => 'block',
 				'value' => [
@@ -86,9 +86,9 @@ $options = [
 				],
 
 				'choices' => blocksy_ordered_keys([
-					'desktop' => __('Desktop', 'blc'),
-					// 'tablet' => __('Tablet', 'blc'),
-					'mobile' => __('Mobile', 'blc'),
+					'desktop' => __('Desktop', 'blocksy-companion'),
+					// 'tablet' => __('Tablet', 'blocksy-companion'),
+					'mobile' => __('Mobile', 'blocksy-companion'),
 				]),
 
 				'sync' => [
@@ -103,7 +103,7 @@ $options = [
 	],
 
 	'has_transparent_header' => [
-		'label' => __( 'Transparent Functionality', 'blc' ),
+		'label' => __( 'Transparent Functionality', 'blocksy-companion' ),
 		'type' => 'ct-switch',
 		'value' => 'no',
 		'sync' => [
@@ -141,7 +141,7 @@ $options = [
 						'rule' => 'archives'
 					]
 				],
-				'label' => __( 'Display Conditions', 'blc' ),
+				'label' => __( 'Display Conditions', 'blocksy-companion' ),
 				'display' => 'modal',
 				'design' => 'block',
 				// 'divider' => 'top',
@@ -157,7 +157,7 @@ $options = [
 		'condition' => [ 'has_transparent_header' => 'yes' ],
 		'options' => [
 			'transparent_behaviour' => [
-				'label' => __( 'Enable on', 'blc' ),
+				'label' => __( 'Enable on', 'blocksy-companion' ),
 				'type' => 'ct-visibility',
 				'design' => 'block',
 				'sync' => 'live',
@@ -168,9 +168,9 @@ $options = [
 				],
 
 				'choices' => blocksy_ordered_keys([
-					'desktop' => __('Desktop', 'blc'),
-					// 'tablet' => __('Tablet', 'blc'),
-					'mobile' => __('Mobile', 'blc'),
+					'desktop' => __('Desktop', 'blocksy-companion'),
+					// 'tablet' => __('Tablet', 'blocksy-companion'),
+					'mobile' => __('Mobile', 'blocksy-companion'),
 				]),
 			],
 

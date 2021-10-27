@@ -3,9 +3,4 @@
 	.hero-section:not(:first-child) {
 		margin-top: var(--margin-bottom, 40px);	
 	}
-
-	.ct-item-review-meta {
-		display: none;
-		visibility: hidden;
-	}
 }

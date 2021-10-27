@@ -1,11 +1,11 @@
 <?php
 
 $all_post_types = [
-	'post' => __('Posts', 'blc')
+	'post' => __('Posts', 'blocksy-companion')
 ];
 
 if (class_exists('WooCommerce')) {
-	$all_post_types['product'] = __('Products', 'blc');
+	$all_post_types['product'] = __('Products', 'blocksy-companion');
 }
 
 if (function_exists('blocksy_manager')) {
@@ -32,14 +32,14 @@ foreach ($all_post_types as $custom_post_type => $label) {
 	}
 
 	$opt_id = 'trending_block_category';
-	$label = __('Category', 'blc');
-	$label_multiple = __('All categories', 'blc');
+	$label = __('Category', 'blocksy-companion');
+	$label_multiple = __('All categories', 'blocksy-companion');
 	$taxonomy = 'category';
 
 	if ($custom_post_type !== 'post') {
 		$opt_id = 'trending_block_' . $custom_post_type . '_taxonomy';
-		$label = __('Taxonomy', 'blc');
-		$label_multiple = __('All taxonomies', 'blc');
+		$label = __('Taxonomy', 'blocksy-companion');
+		$label_multiple = __('All taxonomies', 'blocksy-companion');
 
 		$taxonomies = get_object_taxonomies($custom_post_type);
 
@@ -93,7 +93,7 @@ foreach ($all_post_types as $custom_post_type => $label) {
 }
 
 $options = [
-	'title' => __('Trending Posts', 'blc'),
+	'title' => __('Trending Posts', 'blocksy-companion'),
 	'container' => [ 'priority' => 8 ],
 	'options' => [
 		'trending_posts_section_options' => [
@@ -102,24 +102,24 @@ $options = [
 			'inner-options' => [
 				blocksy_rand_md5() => [
 					'type' => 'ct-title',
-					'label' => __( 'Trending Posts', 'blc' ),
+					'label' => __( 'Trending Posts', 'blocksy-companion' ),
 				],
 
 				blocksy_rand_md5() => [
-					'title' => __( 'General', 'blc' ),
+					'title' => __( 'General', 'blocksy-companion' ),
 					'type' => 'tab',
 					'options' => [
 						[
 							'trending_block_label' => [
-								'label' => __( 'Module Title', 'blc' ),
+								'label' => __( 'Module Title', 'blocksy-companion' ),
 								'type' => 'text',
 								'design' => 'inline',
-								'value' => __( 'Trending now', 'blc' ),
+								'value' => __( 'Trending now', 'blocksy-companion' ),
 								'sync' => 'live',
 							],
 
 							'trending_block_label_tag' => [
-								'label' => __( 'Module Title Tag', 'blc' ),
+								'label' => __( 'Module Title Tag', 'blocksy-companion' ),
 								'type' => 'ct-select',
 								'value' => 'h3',
 								'view' => 'text',
@@ -144,7 +144,7 @@ $options = [
 							],
 
 							'trending_block_post_type' => count($all_post_types) > 1 ? [
-								'label' => __( 'Post Type', 'blc' ),
+								'label' => __( 'Post Type', 'blocksy-companion' ),
 								'type' => 'ct-select',
 								'value' => 'post',
 								'design' => 'inline',
@@ -157,7 +157,7 @@ $options = [
 									}
 								],
 							] : [
-								'label' => __('Post Type', 'blc'),
+								'label' => __('Post Type', 'blocksy-companion'),
 								'type' => 'hidden',
 								'value' => 'post',
 								'design' => 'none',
@@ -166,13 +166,13 @@ $options = [
 
 							'trending_block_post_source' => [
 								'type' => 'ct-select',
-								'label' => __( 'Source', 'blc' ),
+								'label' => __( 'Source', 'blocksy-companion' ),
 								'value' => 'categories',
 								'design' => 'inline',
 								'choices' => blocksy_ordered_keys(
 									[
-										'categories' => __('Taxonomies', 'blc'),
-										'custom' => __( 'Custom Query', 'blc' ),
+										'categories' => __('Taxonomies', 'blocksy-companion'),
+										'custom' => __( 'Custom Query', 'blocksy-companion' ),
 									]
 								),
 								'sync' => [
@@ -195,11 +195,11 @@ $options = [
 								'options' => [
 
 									'trending_block_post_id' => [
-										'label' => __( 'Posts ID', 'blc' ),
+										'label' => __( 'Posts ID', 'blocksy-companion' ),
 										'type' => 'text',
 										'design' => 'inline',
 										'desc' => sprintf(
-											__('Separate posts ID by comma. How to find the %spost ID%s.', 'blc'),
+											__('Separate posts ID by comma. How to find the %spost ID%s.', 'blocksy-companion'),
 											'<a href="https://www.wpbeginner.com/beginners-guide/how-to-find-post-category-tag-comments-or-user-id-in-wordpress/" target="_blank">',
 											'</a>'
 										),
@@ -215,7 +215,7 @@ $options = [
 							],
 
 							'trending_block_filter' => [
-								'label' => __( 'Trending From', 'blc' ),
+								'label' => __( 'Trending From', 'blocksy-companion' ),
 								'type' => 'ct-select',
 								'divider' => 'top',
 								'value' => 'all_time',
@@ -224,10 +224,10 @@ $options = [
 								'setting' => [ 'transport' => 'postMessage' ],
 								'choices' => blocksy_ordered_keys(
 									[
-										'all_time' => __( 'All Time', 'blc' ),
-										'last_24_hours' => __( 'Last 24 Hours', 'blc' ),
-										'last_7_days' => __( 'Last 7 Days', 'blc' ),
-										'last_month' => __( 'Last Month', 'blc' ),
+										'all_time' => __( 'All Time', 'blocksy-companion' ),
+										'last_24_hours' => __( 'Last 24 Hours', 'blocksy-companion' ),
+										'last_7_days' => __( 'Last 7 Days', 'blocksy-companion' ),
+										'last_month' => __( 'Last Month', 'blocksy-companion' ),
 									]
 								),
 
@@ -244,7 +244,7 @@ $options = [
 							],
 
 							'trending_block_visibility' => [
-								'label' => __( 'Container Visibility', 'blc' ),
+								'label' => __( 'Container Visibility', 'blocksy-companion' ),
 								'type' => 'ct-visibility',
 								'design' => 'block',
 								'sync' => 'live',
@@ -256,9 +256,9 @@ $options = [
 								],
 
 								'choices' => blocksy_ordered_keys([
-									'desktop' => __( 'Desktop', 'blc' ),
-									'tablet' => __( 'Tablet', 'blc' ),
-									'mobile' => __( 'Mobile', 'blc' ),
+									'desktop' => __( 'Desktop', 'blocksy-companion' ),
+									'tablet' => __( 'Tablet', 'blocksy-companion' ),
+									'mobile' => __( 'Mobile', 'blocksy-companion' ),
 								]),
 							],
 						],
@@ -266,7 +266,7 @@ $options = [
 						blc_fs()->is__premium_only() ? [
 
 							'trending_block_location' => [
-								'label' => __('Display Location', 'blc'),
+								'label' => __('Display Location', 'blocksy-companion'),
 								'type' => 'ct-select',
 								'design' => 'inline',
 								'divider' => 'top',
@@ -274,23 +274,23 @@ $options = [
 								'choices' => [
 									[
 										'key' => 'blocksy:content:bottom',
-										'value' => __('Before Footer', 'blc')
+										'value' => __('Before Footer', 'blocksy-companion')
 									],
 
 									[
 										'key' => 'blocksy:footer:after',
-										'value' => __('After Footer', 'blc')
+										'value' => __('After Footer', 'blocksy-companion')
 									],
 
 									[
 										'key' => 'blocksy:header:after',
-										'value' => __('After Header', 'blc')
+										'value' => __('After Header', 'blocksy-companion')
 									]
 								]
 							],
 
 							'trending_block_conditions' => [
-								'label' => __('Display Conditions', 'blc'),
+								'label' => __('Display Conditions', 'blocksy-companion'),
 								'type' => 'blocksy-display-condition',
 								'divider' => 'top',
 								'value' => [
@@ -301,8 +301,8 @@ $options = [
 								],
 								'display' => 'modal',
 
-								'modalTitle' => __('Trending Block Display Conditions', 'blc'),
-								'modalDescription' => __('Add one or more conditions to display the trending block.', 'blc'),
+								'modalTitle' => __('Trending Block Display Conditions', 'blocksy-companion'),
+								'modalDescription' => __('Add one or more conditions to display the trending block.', 'blocksy-companion'),
 								'design' => 'block',
 								'sync' => 'live'
 							],
@@ -311,13 +311,13 @@ $options = [
 				],
 
 				blocksy_rand_md5() => [
-					'title' => __( 'Design', 'blc' ),
+					'title' => __( 'Design', 'blocksy-companion' ),
 					'type' => 'tab',
 					'options' => [
 
 						'trendingBlockPostsFont' => [
 							'type' => 'ct-typography',
-							'label' => __( 'Posts Font', 'blc' ),
+							'label' => __( 'Posts Font', 'blocksy-companion' ),
 							'value' => blocksy_typography_default_values([
 								'size' => '15px',
 								'variation' => 'n5',
@@ -326,7 +326,7 @@ $options = [
 						],
 
 						'trendingBlockFontColor' => [
-							'label' => __( 'Font Color', 'blc' ),
+							'label' => __( 'Font Color', 'blocksy-companion' ),
 							'type'  => 'ct-color-picker',
 							'design' => 'block:right',
 							'divider' => 'top',
@@ -344,13 +344,13 @@ $options = [
 
 							'pickers' => [
 								[
-									'title' => __( 'Initial', 'blc' ),
+									'title' => __( 'Initial', 'blocksy-companion' ),
 									'id' => 'default',
 									'inherit' => 'var(--color)'
 								],
 
 								[
-									'title' => __( 'Hover', 'blc' ),
+									'title' => __( 'Hover', 'blocksy-companion' ),
 									'id' => 'hover',
 									'inherit' => 'var(--linkHoverColor)'
 								],
@@ -358,7 +358,7 @@ $options = [
 						],
 
 						'trending_block_background' => [
-							'label' => __( 'Container Background', 'blc' ),
+							'label' => __( 'Container Background', 'blocksy-companion' ),
 							'type' => 'ct-background',
 							'design' => 'block:right',
 							'responsive' => true,
@@ -374,7 +374,7 @@ $options = [
 						],
 
 						'trendingBlockContainerSpacing' => [
-							'label' => __( 'Container Inner Spacing', 'blc' ),
+							'label' => __( 'Container Inner Spacing', 'blocksy-companion' ),
 							'type' => 'ct-slider',
 							'divider' => 'top',
 							'value' => '30px',

@@ -79,10 +79,10 @@ const CustomizerOptionsManager = () => {
 	return (
 		<div className="ct-import-export">
 			<div className="ct-title" data-type="simple">
-				<h3>{__('Export Options', 'blc')}</h3>
+				<h3>{__('Export Options', 'blocksy-companion')}</h3>
 
 				<div className="ct-option-description">
-					{__('Easily export the theme customizer settings.', 'blc')}
+					{__('Easily export the theme customizer settings.', 'blocksy-companion')}
 				</div>
 			</div>
 
@@ -96,16 +96,16 @@ const CustomizerOptionsManager = () => {
 							e.preventDefault()
 							setIsExporting(true)
 						}}>
-						{__('Export Customizations', 'blc')}
+						{__('Export Customizations', 'blocksy-companion')}
 					</button>
 				</section>
 			</div>
 
 			<div className="ct-title" data-type="simple">
-				<h3>{__('Import Options', 'blc')}</h3>
+				<h3>{__('Import Options', 'blocksy-companion')}</h3>
 
 				<div className="ct-option-description">
-					{__('Easily import the theme customizer settings.', 'blc')}
+					{__('Easily import the theme customizer settings.', 'blocksy-companion')}
 				</div>
 			</div>
 
@@ -127,7 +127,7 @@ const CustomizerOptionsManager = () => {
 								? futureConfig.name
 								: __(
 										'Click or drop to upload a file...',
-										'blc'
+										'blocksy-companion'
 								  )}
 						</button>
 
@@ -189,7 +189,7 @@ const CustomizerOptionsManager = () => {
 									} catch (e) {}
 								}
 							}}>
-							{__('Import Customizations', 'blc')}
+							{__('Import Customizations', 'blocksy-companion')}
 						</button>
 					</div>
 				</section>
@@ -198,12 +198,12 @@ const CustomizerOptionsManager = () => {
 			{ct_customizer_localizations.has_child_theme && (
 				<Fragment>
 					<div className="ct-title" data-type="simple">
-						<h3>{__('Copy Options', 'blc')}</h3>
+						<h3>{__('Copy Options', 'blocksy-companion')}</h3>
 
 						<div className="ct-option-description">
 							{__(
 								'Copy and import your customizations from parent or child theme.',
-								'blc'
+								'blocksy-companion'
 							)}
 						</div>
 					</div>
@@ -218,7 +218,7 @@ const CustomizerOptionsManager = () => {
 										e.preventDefault()
 										setIsCopyingOptions('child')
 									}}>
-									{__('Copy From Child Theme', 'blc')}
+									{__('Copy From Child Theme', 'blocksy-companion')}
 								</button>
 							</section>
 						</div>
@@ -235,7 +235,7 @@ const CustomizerOptionsManager = () => {
 										e.preventDefault()
 										setIsCopyingOptions('parent')
 									}}>
-									{__('Copy From Parent Theme', 'blc')}
+									{__('Copy From Parent Theme', 'blocksy-companion')}
 								</button>
 							</section>
 						</div>
@@ -255,22 +255,22 @@ const CustomizerOptionsManager = () => {
 
 						<h2 className="ct-modal-title">
 							{!ct_customizer_localizations.is_parent_theme &&
-								__('Copy From Parent Theme', 'blc')}
+								__('Copy From Parent Theme', 'blocksy-companion')}
 
 							{ct_customizer_localizations.is_parent_theme &&
-								__('Copy From Child Theme', 'blc')}
+								__('Copy From Child Theme', 'blocksy-companion')}
 						</h2>
 						<p>
 							{!ct_customizer_localizations.is_parent_theme &&
 								__(
 									'You are about to copy all the settings from your parent theme into the child theme. Are you sure you want to continue?',
-									'blc'
+									'blocksy-companion'
 								)}
 
 							{ct_customizer_localizations.is_parent_theme &&
 								__(
 									'You are about to copy all the settings from your child theme into the parent theme. Are you sure you want to continue?',
-									'blc'
+									'blocksy-companion'
 								)}
 						</p>
 
@@ -284,7 +284,7 @@ const CustomizerOptionsManager = () => {
 									setIsCopyingOptions(false)
 								}}
 								className="button">
-								{__('Cancel', 'blc')}
+								{__('Cancel', 'blocksy-companion')}
 							</button>
 
 							<button
@@ -317,7 +317,7 @@ const CustomizerOptionsManager = () => {
 										})
 									} catch (e) {}
 								}}>
-								{__('Yes, I am sure', 'blc')}
+								{__('Yes, I am sure', 'blocksy-companion')}
 							</button>
 						</div>
 					</div>
@@ -331,13 +331,13 @@ const CustomizerOptionsManager = () => {
 				render={() => (
 					<div className="ct-modal-content">
 						<h2 className="ct-modal-title">
-							{__('Export Settings', 'blc')}
+							{__('Export Settings', 'blocksy-companion')}
 						</h2>
 
 						<p>
 							{__(
 								'Choose what set of settings you want to export.',
-								'blc'
+								'blocksy-companion'
 							)}
 						</p>
 
@@ -365,11 +365,11 @@ const CustomizerOptionsManager = () => {
 										{
 											options: __(
 												'Customizer settings',
-												'blc'
+												'blocksy-companion'
 											),
 											widgets: __(
 												'Widgets settings',
-												'blc'
+												'blocksy-companion'
 											),
 										}[component]
 									}
@@ -402,7 +402,7 @@ const CustomizerOptionsManager = () => {
 									setIsExporting(false)
 								}}
 								className="button">
-								{__('Cancel', 'blc')}
+								{__('Cancel', 'blocksy-companion')}
 							</button>
 
 							<button
@@ -458,7 +458,7 @@ const CustomizerOptionsManager = () => {
 										})
 									} catch (e) {}
 								}}>
-								{__('Export', 'blc')}
+								{__('Export', 'blocksy-companion')}
 							</button>
 						</div>
 					</div>

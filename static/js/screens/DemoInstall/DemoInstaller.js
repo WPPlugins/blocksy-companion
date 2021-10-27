@@ -63,12 +63,12 @@ const DemoInstaller = ({ demoConfiguration, style }) => {
 									</svg>
 								</i>
 
-								<h2>{__('Installing', 'blc')}...</h2>
+								<h2>{__('Installing', 'blocksy-companion')}...</h2>
 
 								<p>
 									{__(
 										"Please be patient and don't refresh this page, the import process may take a while, this also depends on your server.",
-										'blc'
+										'blocksy-companion'
 									)}
 								</p>
 

@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.9.4
+Stable tag: 1.8.9.5
 
 == Description ==
 
@@ -23,6 +23,11 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.9.5: 2021-10-27
+- Improvement: Update plugin text domain from blc to blocksy-companion
+- Improvement: Product reviews extension add `rel="sponsored"` attribute option
+- Fix: Product Reviews title does not show up
+
 1.8.9.4: 2021-10-21
 - Improvement: General fixes and improvements
 

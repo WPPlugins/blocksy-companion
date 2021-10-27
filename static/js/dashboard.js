@@ -27,7 +27,7 @@ ctEvents.on('ct:dashboard:routes', (r) => {
 ctEvents.on('ct:dashboard:navigation-links', (r) => {
 	if (ctDashboardLocalizations.plugin_data.has_demo_install === 'yes') {
 		r.push({
-			text: __('Starter Sites', 'blc'),
+			text: __('Starter Sites', 'blocksy-companion'),
 			path: 'demos',
 			getProps: ({ isPartiallyCurrent, isCurrent }) =>
 				isPartiallyCurrent
@@ -39,7 +39,7 @@ ctEvents.on('ct:dashboard:navigation-links', (r) => {
 	}
 
 	r.push({
-		text: __('Extensions', 'blc'),
+		text: __('Extensions', 'blocksy-companion'),
 		path: '/extensions',
 	})
 })

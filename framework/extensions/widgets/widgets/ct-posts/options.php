@@ -8,8 +8,8 @@
  */
 
 $all_post_types = [
-	'post' => __('Posts', 'blc'),
-	'page' => __('Pages', 'blc'),
+	'post' => __('Posts', 'blocksy-companion'),
+	'page' => __('Pages', 'blocksy-companion'),
 ];
 
 if (function_exists('blocksy_manager')) {
@@ -34,14 +34,14 @@ foreach ($all_post_types as $custom_post_type => $label) {
 	}
 
 	$opt_id = 'category';
-	$label = __('Category', 'blc');
-	$label_multiple = __('All categories', 'blc');
+	$label = __('Category', 'blocksy-companion');
+	$label_multiple = __('All categories', 'blocksy-companion');
 	$taxonomy = 'category';
 
 	if ($custom_post_type !== 'post') {
 		$opt_id = $custom_post_type . '_taxonomy';
-		$label = __('Taxonomy', 'blc');
-		$label_multiple = __('All taxonomies', 'blc');
+		$label = __('Taxonomy', 'blocksy-companion');
+		$label_multiple = __('All taxonomies', 'blocksy-companion');
 
 		$taxonomies = get_object_taxonomies($custom_post_type);
 
@@ -92,25 +92,25 @@ $options = [
 	[
 		'title' => [
 			'type' => 'text',
-			'label' => __('Title', 'blc'),
+			'label' => __('Title', 'blocksy-companion'),
 			'field_attr' => ['id' => 'widget-title'],
 			'design' => 'inline',
-			'value' => __('Posts', 'blc'),
+			'value' => __('Posts', 'blocksy-companion'),
 		],
 
 		'posts_type' => [
 			'type' => 'ct-select',
-			'label' => __('Widget Design', 'blc'),
+			'label' => __('Widget Design', 'blocksy-companion'),
 			'value' => 'small-thumbs',
 			'design' => 'inline',
 			'choices' => blocksy_ordered_keys(
 				[
-					'no-thumbs' => __( 'Without Thumbnails', 'blc' ),
-					'small-thumbs' => __( 'Small Thumbnails', 'blc' ),
-					'large-thumbs' => __( 'Large Thumbnails', 'blc' ),
-					'large-small' => __( 'First Thumbnail Large', 'blc' ),
-					'rounded' => __( 'Rounded Thumbnails', 'blc' ),
-					'numbered' => __( 'Numbered', 'blc' ),
+					'no-thumbs' => __( 'Without Thumbnails', 'blocksy-companion' ),
+					'small-thumbs' => __( 'Small Thumbnails', 'blocksy-companion' ),
+					'large-thumbs' => __( 'Large Thumbnails', 'blocksy-companion' ),
+					'large-small' => __( 'First Thumbnail Large', 'blocksy-companion' ),
+					'rounded' => __( 'Rounded Thumbnails', 'blocksy-companion' ),
+					'numbered' => __( 'Numbered', 'blocksy-companion' ),
 				]
 			),
 		],
@@ -123,7 +123,7 @@ $options = [
 			'options' => [
 
 				'post_widget_image_ratio' => [
-					'label' => __( 'Image Ratio', 'blc' ),
+					'label' => __( 'Image Ratio', 'blocksy-companion' ),
 					'type' => 'ct-ratio',
 					'value' => 'original',
 					'design' => 'inline',
@@ -134,7 +134,7 @@ $options = [
 
 		'post_type_source' => [
 			'type' => 'ct-select',
-			'label' => __( 'Post Type', 'blc' ),
+			'label' => __( 'Post Type', 'blocksy-companion' ),
 			'value' => 'post',
 			'design' => 'inline',
 			'choices' => blocksy_ordered_keys($all_post_types)
@@ -146,13 +146,13 @@ $options = [
 			'options' => [
 				'post_source' => [
 					'type' => 'ct-select',
-					'label' => __( 'Source', 'blc' ),
+					'label' => __( 'Source', 'blocksy-companion' ),
 					'value' => 'categories',
 					'design' => 'inline',
 					'choices' => blocksy_ordered_keys(
 						[
-							'categories' => __('Taxonomies', 'blc'),
-							'custom' => __( 'Custom Query', 'blc' ),
+							'categories' => __('Taxonomies', 'blocksy-companion'),
+							'custom' => __( 'Custom Query', 'blocksy-companion' ),
 						]
 					),
 				],
@@ -165,13 +165,13 @@ $options = [
 			'options' => [
 				'page_source' => [
 					'type' => 'ct-select',
-					'label' => __('Source', 'blc'),
+					'label' => __('Source', 'blocksy-companion'),
 					'value' => 'default',
 					'design' => 'inline',
 					'choices' => blocksy_ordered_keys(
 						[
-							'default' => __('Default', 'blc'),
-							'custom' => __('Custom Query', 'blc'),
+							'default' => __('Default', 'blocksy-companion'),
+							'custom' => __('Custom Query', 'blocksy-companion'),
 						]
 					),
 				],
@@ -190,39 +190,39 @@ $options = [
 		'options' => [
 			'type' => [
 				'type' => 'ct-select',
-				'label' => __('Sort by', 'blc'),
+				'label' => __('Sort by', 'blocksy-companion'),
 				'value' => 'recent',
 				'design' => 'inline',
 				'choices' => blocksy_ordered_keys(
 					[
-						'default' => __('Default', 'blc'),
-						'recent' => __('Recent', 'blc'),
-						'commented' => __('Most Commented', 'blc'),
-						'random' => __('Random', 'blc'),
+						'default' => __('Default', 'blocksy-companion'),
+						'recent' => __('Recent', 'blocksy-companion'),
+						'commented' => __('Most Commented', 'blocksy-companion'),
+						'random' => __('Random', 'blocksy-companion'),
 					]
 				),
 			],
 
 			'days' => [
 				'type' => 'ct-select',
-				'label' => __( 'Order by', 'blc' ),
+				'label' => __( 'Order by', 'blocksy-companion' ),
 				'value' => 'all_time',
 				'design' => 'inline',
 				'choices' => blocksy_ordered_keys(
 					[
-						'all_time' => __( 'All Time', 'blc' ),
-						'7' => __( '1 Week', 'blc' ),
-						'30' => __( '1 Month', 'blc' ),
-						'90' => __( '3 Months', 'blc' ),
-						'180' => __( '6 Months', 'blc' ),
-						'360' => __( '1 Year', 'blc' ),
+						'all_time' => __( 'All Time', 'blocksy-companion' ),
+						'7' => __( '1 Week', 'blocksy-companion' ),
+						'30' => __( '1 Month', 'blocksy-companion' ),
+						'90' => __( '3 Months', 'blocksy-companion' ),
+						'180' => __( '6 Months', 'blocksy-companion' ),
+						'360' => __( '1 Year', 'blocksy-companion' ),
 					]
 				),
 			],
 
 			'posts_number' => [
 				'type' => 'ct-number',
-				'label' => __( 'Posts Count', 'blc' ),
+				'label' => __( 'Posts Count', 'blocksy-companion' ),
 				'min' => 1,
 				'max' => 30,
 				'value' => 5,
@@ -240,11 +240,11 @@ $options = [
 		'options' => [
 
 			'post_id' => [
-				'label' => __( 'Posts ID', 'blc' ),
+				'label' => __( 'Posts ID', 'blocksy-companion' ),
 				'type' => 'text',
 				'design' => 'inline',
 				'desc' => sprintf(
-					__('Separate posts ID by comma. How to find the %spost ID%s.', 'blc'),
+					__('Separate posts ID by comma. How to find the %spost ID%s.', 'blocksy-companion'),
 					'<a href="https://www.wpbeginner.com/beginners-guide/how-to-find-post-category-tag-comments-or-user-id-in-wordpress/" target="_blank">',
 					'</a>'
 				),
@@ -262,11 +262,11 @@ $options = [
 		'options' => [
 
 			'page_id' => [
-				'label' => __( 'Pages ID', 'blc' ),
+				'label' => __( 'Pages ID', 'blocksy-companion' ),
 				'type' => 'text',
 				'design' => 'inline',
 				'desc' => sprintf(
-					__('Separate pages ID by comma. More info %shere%s.', 'blc'),
+					__('Separate pages ID by comma. More info %shere%s.', 'blocksy-companion'),
 					'<a href="https://www.wpbeginner.com/beginners-guide/how-to-find-post-category-tag-comments-or-user-id-in-wordpress/" target="_blank">',
 					'</a>'
 				),
@@ -284,7 +284,7 @@ $options = [
 		'options' => [
 			'page_number' => [
 				'type' => 'ct-number',
-				'label' => __( 'Pages Count', 'blc' ),
+				'label' => __( 'Pages Count', 'blocksy-companion' ),
 				'min' => 1,
 				'max' => 30,
 				'value' => 5,
@@ -295,21 +295,21 @@ $options = [
 
 	'display_date' => [
 		'type'  => 'ct-switch',
-		'label' => __( 'Show Date', 'blc' ),
+		'label' => __( 'Show Date', 'blocksy-companion' ),
 		'value' => 'no',
 		'design' => 'inline-full',
 	],
 
 	'display_comments' => [
 		'type'  => 'ct-switch',
-		'label' => __( 'Show Comments', 'blc' ),
+		'label' => __( 'Show Comments', 'blocksy-companion' ),
 		'value' => 'no',
 		'design' => 'inline-full',
 	],
 
 	'display_excerpt' => [
 		'type'  => 'ct-switch',
-		'label' => __( 'Show Excerpt', 'blc' ),
+		'label' => __( 'Show Excerpt', 'blocksy-companion' ),
 		'value' => 'no',
 		'design' => 'inline-full',
 	],
@@ -321,7 +321,7 @@ $options = [
 
 			'excerpt_lenght' => [
 				'type' => 'ct-number',
-				'label' => __( 'Excerpt Lenght', 'blc' ),
+				'label' => __( 'Excerpt Lenght', 'blocksy-companion' ),
 				'min' => 5,
 				'max' => 30,
 				'value' => 10,

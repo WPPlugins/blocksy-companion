@@ -69,8 +69,8 @@ const ProductReviews = ({ extsSyncLoading, extension, onExtsSync }) => {
 						activationAction()
 					}}>
 					{extension.__object
-						? __('Deactivate', 'blc')
-						: __('Activate', 'blc')}
+						? __('Deactivate', 'blocksy-companion')
+						: __('Activate', 'blocksy-companion')}
 				</button>
 
 				{extension.__object && (

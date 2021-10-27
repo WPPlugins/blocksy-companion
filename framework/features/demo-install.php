@@ -230,7 +230,7 @@ class DemoInstall {
 		$has_demo_error = false;
 
 		if (! extension_loaded('xml') && ! extension_loaded('simplexml')) {
-			$has_demo_error = __("Your PHP installation doesn't have support for XML. Please install the <i>xml</i> or <i>simplexml</i> PHP extension in order to be able to install starter sites. You might need to contact your hosting provider to assist you in doing so.", 'blc');
+			$has_demo_error = __("Your PHP installation doesn't have support for XML. Please install the <i>xml</i> or <i>simplexml</i> PHP extension in order to be able to install starter sites. You might need to contact your hosting provider to assist you in doing so.", 'blocksy-companion');
 		}
 
 		wp_send_json_success([

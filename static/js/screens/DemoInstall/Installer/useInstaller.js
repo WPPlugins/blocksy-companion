@@ -105,7 +105,7 @@ export const useInstaller = demoConfiguration => {
 
 	const [stepsDescriptors, setStepsDescriptors] = useState({
 		register_current_demo: {
-			title: __('Register demo', 'blc'),
+			title: __('Register demo', 'blocksy-companion'),
 
 			query_string: `action=blocksy_demo_register_current_demo&wp_customize=on&demo_name=${currentDemo}:${
 				demoConfiguration.builder === null
@@ -116,13 +116,13 @@ export const useInstaller = demoConfiguration => {
 		},
 
 		child_theme: {
-			title: __('Child theme', 'blc'),
+			title: __('Child theme', 'blocksy-companion'),
 			query_string: `action=blocksy_demo_install_child_theme`,
 			expected_signals: 3
 		},
 
 		plugins: {
-			title: __('Required plugins', 'blc'),
+			title: __('Required plugins', 'blocksy-companion'),
 			query_string: `action=blocksy_demo_activate_plugins&plugins=${pluginsToActivate.join(
 				':'
 			)}`,
@@ -130,25 +130,25 @@ export const useInstaller = demoConfiguration => {
 		},
 
 		fake_step: {
-			title: __('Fake Required plugins', 'blc'),
+			title: __('Fake Required plugins', 'blocksy-companion'),
 			query_string: `action=blocksy_demo_fake_step`,
 			expected_signals: 6
 		},
 
 		erase_content: {
-			title: __('Erase content', 'blc'),
+			title: __('Erase content', 'blocksy-companion'),
 			query_string: `action=blocksy_demo_erase_content&wp_customize=on`,
 			expected_signals: 6
 		},
 
 		install_finish: {
-			title: __('Final touches', 'blc'),
+			title: __('Final touches', 'blocksy-companion'),
 			query_string: 'action=blocksy_demo_install_finish&wp_customize=on',
 			expected_signals: 1
 		},
 
 		options: {
-			title: __('Import options', 'blc'),
+			title: __('Import options', 'blocksy-companion'),
 
 			query_string: `action=blocksy_demo_install_options&wp_customize=on&demo_name=${currentDemo}:${
 				demoConfiguration.builder === null
@@ -158,7 +158,7 @@ export const useInstaller = demoConfiguration => {
 			expected_signals: 5
 		},
 		widgets: {
-			title: __('Import widgets', 'blc'),
+			title: __('Import widgets', 'blocksy-companion'),
 			query_string: `action=blocksy_demo_install_widgets&wp_customize=on&demo_name=${currentDemo}:${
 				demoConfiguration.builder === null
 					? demoVariations[0].builder
@@ -168,7 +168,7 @@ export const useInstaller = demoConfiguration => {
 		},
 
 		content: {
-			title: __('Import content', 'blc'),
+			title: __('Import content', 'blocksy-companion'),
 			query_string: `action=blocksy_demo_install_content&wp_customize=on&demo_name=${currentDemo}:${
 				demoConfiguration.builder === null
 					? demoVariations[0].builder

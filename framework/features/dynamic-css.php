@@ -43,14 +43,14 @@ class DynamicCss {
 			'blocksy_performance_end_customizer_options',
 			function ($opts) {
 				$opts['dynamic_css_file'] = [
-					'label' => __( 'Dynamic CSS Output', 'blc' ),
+					'label' => __( 'Dynamic CSS Output', 'blocksy-companion' ),
 					'type' => 'ct-radio',
 					'value' => 'file',
 					'view' => 'text',
-					'desc' => __( 'The strategy of outputting the dynamic CSS. File - all the CSS code will be placed in a static file, otherwise it will be placed inline in head.', 'blc' ),
+					'desc' => __( 'The strategy of outputting the dynamic CSS. File - all the CSS code will be placed in a static file, otherwise it will be placed inline in head.', 'blocksy-companion' ),
 					'choices' => [
-						'file' => __( 'File', 'blc' ),
-						'inline' => __( 'Inline', 'blc' ),
+						'file' => __( 'File', 'blocksy-companion' ),
+						'inline' => __( 'Inline', 'blocksy-companion' ),
 					],
 				];
 

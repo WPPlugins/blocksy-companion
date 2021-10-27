@@ -14,10 +14,10 @@ class OpenGraphMetaData {
 					],
 
 					'enable_opengraph' => [
-						'label' => __( 'OpenGraph Meta Data', 'blc' ),
+						'label' => __( 'OpenGraph Meta Data', 'blocksy-companion' ),
 						'type' => 'ct-switch',
 						'value' => 'no',
-						'desc' => __( 'Enable the OpenGraph rich meta data features for your website.', 'blc' ),
+						'desc' => __( 'Enable the OpenGraph rich meta data features for your website.', 'blocksy-companion' ),
 					],
 
 					blocksy_rand_md5() => [
@@ -26,21 +26,21 @@ class OpenGraphMetaData {
 						'options' => [
 
 							'opengraph_facebook_page_url' => [
-								'label' => __( 'Facebook Page URL', 'blc' ),
+								'label' => __( 'Facebook Page URL', 'blocksy-companion' ),
 								'type' => 'text',
 								'design' => 'inline',
 								'value' => ''
 							],
 
 							'opengraph_facebook_app_id' => [
-								'label' => __( 'Facebook App ID', 'blc' ),
+								'label' => __( 'Facebook App ID', 'blocksy-companion' ),
 								'type' => 'text',
 								'design' => 'inline',
 								'value' => ''
 							],
 
 							'opengraph_twitter_username' => [
-								'label' => __( 'Twitter Username', 'blc' ),
+								'label' => __( 'Twitter Username', 'blocksy-companion' ),
 								'type' => 'text',
 								'design' => 'inline',
 								'value' => ''

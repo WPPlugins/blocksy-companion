@@ -12,10 +12,10 @@ $options = [
 
 	'title' => [
 		'type' => 'text',
-		'label' => __( 'Title', 'blc' ),
+		'label' => __( 'Title', 'blocksy-companion' ),
 		'field_attr' => [ 'id' => 'widget-title' ],
 		'design' => 'inline',
-		'value' => __( 'Social Icons', 'blc' ),
+		'value' => __( 'Social Icons', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 	],
 
@@ -24,11 +24,11 @@ $options = [
 		'label' => false,
 		'manageable' => true,
 		'desc' => sprintf(
-			__( 'You can configure social URLs in %s.', 'blc' ),
+			__( 'You can configure social URLs in %s.', 'blocksy-companion' ),
 			sprintf(
 				'<a href="%s" target="_blank">%s</a>',
 				admin_url('/customize.php?autofocus[section]=social_accounts'),
-				__('Customizer', 'blc')
+				__('Customizer', 'blocksy-companion')
 			)
 		),
 		'value' => [
@@ -56,7 +56,7 @@ $options = [
 
 	'link_target' => [
 		'type'  => 'ct-switch',
-		'label' => __( 'Open links in new tab', 'blc' ),
+		'label' => __( 'Open links in new tab', 'blocksy-companion' ),
 		'value' => 'no',
 		'design' => 'inline-full',
 		'disableRevertButton' => true,
@@ -64,36 +64,36 @@ $options = [
 
 	'link_nofollow' => [
 		'type'  => 'ct-switch',
-		'label' => __( 'Set links to nofollow', 'blc' ),
+		'label' => __( 'Set links to nofollow', 'blocksy-companion' ),
 		'value' => 'no',
 		'design' => 'inline-full',
 	],
 
 	'social_icons_size' => [
-		'label' => __( 'Icons Size', 'blc' ),
+		'label' => __( 'Icons Size', 'blocksy-companion' ),
 		'type' => 'ct-radio',
 		'value' => 'medium',
 		'view' => 'text',
 		'design' => 'block',
 		'setting' => [ 'transport' => 'postMessage' ],
 		'choices' => [
-			'small' => __( 'Small', 'blc' ),
-			'medium' => __( 'Medium', 'blc' ),
-			'large' => __( 'Large', 'blc' ),
+			'small' => __( 'Small', 'blocksy-companion' ),
+			'medium' => __( 'Medium', 'blocksy-companion' ),
+			'large' => __( 'Large', 'blocksy-companion' ),
 		],
 	],
 
 	'social_type' => [
-		'label' => __( 'Icons Shape Type', 'blc' ),
+		'label' => __( 'Icons Shape Type', 'blocksy-companion' ),
 		'type' => 'ct-radio',
 		'value' => 'simple',
 		'view' => 'text',
 		'design' => 'block',
 		'setting' => [ 'transport' => 'postMessage' ],
 		'choices' => [
-			'simple' => __( 'None', 'blc' ),
-			'rounded' => __( 'Rounded', 'blc' ),
-			'square' => __( 'Square', 'blc' ),
+			'simple' => __( 'None', 'blocksy-companion' ),
+			'rounded' => __( 'Rounded', 'blocksy-companion' ),
+			'square' => __( 'Square', 'blocksy-companion' ),
 		],
 	],
 
@@ -103,15 +103,15 @@ $options = [
 		'options' => [
 
 			'social_icons_fill' => [
-				'label' => __( 'Shape Fill Type', 'blc' ),
+				'label' => __( 'Shape Fill Type', 'blocksy-companion' ),
 				'type' => 'ct-radio',
 				'value' => 'outline',
 				'view' => 'text',
 				'design' => 'block',
 				'setting' => [ 'transport' => 'postMessage' ],
 				'choices' => [
-					'solid' => __( 'Solid', 'blc' ),
-					'outline' => __( 'Outline', 'blc' ),
+					'solid' => __( 'Solid', 'blocksy-companion' ),
+					'outline' => __( 'Outline', 'blocksy-companion' ),
 				],
 			],
 

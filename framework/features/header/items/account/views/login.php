@@ -64,7 +64,7 @@ if ($loggedin_media === 'icon') {
 }
 
 // Label
-$loggedin_label = blocksy_akg('loggedin_label', $atts, __('My Account', 'blc'));
+$loggedin_label = blocksy_akg('loggedin_label', $atts, __('My Account', 'blocksy-companion'));
 
 if (blocksy_akg('loggedin_text', $atts, 'label') === 'username') {
 	$user = wp_get_current_user();

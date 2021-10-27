@@ -75,20 +75,20 @@ const EditCredentials = ({
 					className={classnames('ct-modal-content', {
 						'ct-key-invalid': isApiKeyInvalid,
 					})}>
-					<h2>{__('API Credentials', 'blc')}</h2>
+					<h2>{__('API Credentials', 'blocksy-companion')}</h2>
 
 					<p
 						dangerouslySetInnerHTML={{
 							__html: __(
 								'Enter your Newsletter provider API credentials in the form below.',
-								'blc'
+								'blocksy-companion'
 							),
 						}}
 					/>
 
 					<div className="ct-newsletter-select-provider">
 						<Fragment>
-							<h4>{__('Select Provider', 'blc')}</h4>
+							<h4>{__('Select Provider', 'blocksy-companion')}</h4>
 
 							<Select
 								onChange={(copy) => {
@@ -97,7 +97,7 @@ const EditCredentials = ({
 								option={{
 									placeholder: __(
 										'Pick Mailing Service',
-										'blc'
+										'blocksy-companion'
 									),
 									choices: [
 										{
@@ -122,7 +122,7 @@ const EditCredentials = ({
 										__html: sprintf(
 											__(
 												'This option is available only in Blocksy premium %sversion%s.',
-												'blc'
+												'blocksy-companion'
 											),
 
 											'<a target="_blank" href="https://creativethemes.com/blocksy/pricing/">',
@@ -138,7 +138,7 @@ const EditCredentials = ({
 									__html: sprintf(
 										__(
 											'More info on how to generate an API key for Mailchimp can be found %shere%s.',
-											'blc'
+											'blocksy-companion'
 										),
 
 										'<a target="_blank" href="https://mailchimp.com/help/about-api-keys/">',
@@ -155,7 +155,7 @@ const EditCredentials = ({
 										__html: sprintf(
 											__(
 												'More info on how to generate an API key for Mailerlite can be found %shere%s.',
-												'blc'
+												'blocksy-companion'
 											),
 
 											'<a target="_blank" href="https://help.mailerlite.com/article/show/35040-where-to-find-the-mailerlite-api-key-and-api-documentation">',
@@ -170,7 +170,7 @@ const EditCredentials = ({
 						ctDashboardLocalizations.plugin_data.is_pro) && (
 						<div className="mailchimp-credentials">
 							<section>
-								<label>{__('API Key', 'blc')}</label>
+								<label>{__('API Key', 'blocksy-companion')}</label>
 
 								<div className="ct-option-input">
 									<input
@@ -184,7 +184,7 @@ const EditCredentials = ({
 							</section>
 
 							<section>
-								<label>{__('List ID', 'blc')}</label>
+								<label>{__('List ID', 'blocksy-companion')}</label>
 
 								<ListPicker
 									listId={listId}
@@ -202,10 +202,10 @@ const EditCredentials = ({
 									disabled={!apiKey || !listId || isLoading}
 									onClick={() => attemptToSaveCredentials()}>
 									{isLoading
-										? __('Loading...', 'blc')
+										? __('Loading...', 'blocksy-companion')
 										: !extension.__object
-										? __('Activate', 'blc')
-										: __('Save Settings', 'blc')}
+										? __('Activate', 'blocksy-companion')
+										: __('Save Settings', 'blocksy-companion')}
 								</button>
 							</section>
 						</div>

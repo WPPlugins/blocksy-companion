@@ -1,27 +1,27 @@
 <?php
 
 $link_options = [
-	'profile' => __( 'Profile Page', 'blc' ),
-	'dashboard' => __( 'Dashboard Page', 'blc' ),
-	// 'menu' => __( 'Menu', 'blc' ),
-	'custom' => __( 'Custom Link', 'blc' ),
-	'logout' => __( 'Logout', 'blc' ),
+	'profile' => __( 'Profile Page', 'blocksy-companion' ),
+	'dashboard' => __( 'Dashboard Page', 'blocksy-companion' ),
+	// 'menu' => __( 'Menu', 'blocksy-companion' ),
+	'custom' => __( 'Custom Link', 'blocksy-companion' ),
+	'logout' => __( 'Logout', 'blocksy-companion' ),
 ];
 
 $logout_link_options = [
-	'modal' => __( 'Modal', 'blc' ),
-	'custom' => __( 'Custom Link', 'blc' ),
+	'modal' => __( 'Modal', 'blocksy-companion' ),
+	'custom' => __( 'Custom Link', 'blocksy-companion' ),
 ];
 
 if (class_exists('WooCommerce')) {
-	$link_options['woocommerce_account'] = __('WooCommerce Account', 'blc');
-	$logout_link_options['woocommerce_account'] = __('WooCommerce Account', 'blc');
+	$link_options['woocommerce_account'] = __('WooCommerce Account', 'blocksy-companion');
+	$logout_link_options['woocommerce_account'] = __('WooCommerce Account', 'blocksy-companion');
 }
 
 $options = [
 	blocksy_rand_md5() => [
 		'type' => 'ct-title',
-		'label' => __( 'Customizing: Logged in State', 'blc' ),
+		'label' => __( 'Customizing: Logged in State', 'blocksy-companion' ),
 	],
 
 	'account_state' => [
@@ -33,12 +33,12 @@ $options = [
 		'choices' => [
 			'in' => [
 				'src'   => blocksy_image_picker_url( 'log-in-state.svg' ),
-				'title' => __( 'Logged In Options', 'blc' ),
+				'title' => __( 'Logged In Options', 'blocksy-companion' ),
 			],
 
 			'out' => [
 				'src' => blocksy_image_picker_url('log-out-state.svg'),
-				'title' => __('Logged Out Options', 'blc'),
+				'title' => __('Logged Out Options', 'blocksy-companion'),
 			],
 		],
 	],
@@ -48,7 +48,7 @@ $options = [
 	],
 
 	blocksy_rand_md5() => [
-		'title' => __( 'General', 'blc' ),
+		'title' => __( 'General', 'blocksy-companion' ),
 		'type' => 'tab',
 		'options' => [
 
@@ -58,7 +58,7 @@ $options = [
 				'options' => [
 
 					'account_link' => [
-						'label' => __( 'Account Action', 'blc' ),
+						'label' => __( 'Account Action', 'blocksy-companion' ),
 						'type' => 'ct-select',
 						'value' => 'profile',
 						'view' => 'text',
@@ -71,17 +71,17 @@ $options = [
 						'condition' => [ 'account_link' => 'menu' ],
 						'options' => [
 							'loggedin_account_menu' => [
-								'label' => __('Select Menu', 'blc'),
+								'label' => __('Select Menu', 'blocksy-companion'),
 								'type' => 'ct-select',
 								'value' => 'blocksy_location',
 								'view' => 'text',
 								'design' => 'inline',
 								'setting' => ['transport' => 'postMessage'],
-								'placeholder' => __('Select menu...', 'blc'),
+								'placeholder' => __('Select menu...', 'blocksy-companion'),
 								'choices' => blocksy_ordered_keys(blocksy_get_menus_items()),
 								'desc' => sprintf(
 									// translators: placeholder here means the actual URL.
-									__( 'Manage your menu items in the %sMenus screen%s.', 'blc' ),
+									__( 'Manage your menu items in the %sMenus screen%s.', 'blocksy-companion' ),
 									sprintf(
 										'<a href="%s" target="_blank">',
 										admin_url('/nav-menus.php')
@@ -98,7 +98,7 @@ $options = [
 						'options' => [
 
 							'account_custom_page' => [
-								'label' => __( 'Custom Page Link', 'blc' ),
+								'label' => __( 'Custom Page Link', 'blocksy-companion' ),
 								'type' => 'text',
 								'design' => 'inline',
 								'disableRevertButton' => true,
@@ -113,15 +113,15 @@ $options = [
 					],
 
 					'loggedin_media' => [
-						'label' => __( 'Account Image', 'blc' ),
+						'label' => __( 'Account Image', 'blocksy-companion' ),
 						'type' => 'ct-radio',
 						'design' => 'block',
 						'view' => 'text',
 						'value' => 'avatar',
 						'choices' => [
-							'avatar' => __( 'Avatar', 'blc' ),
-							'icon' => __( 'Icon', 'blc' ),
-							'none' => __( 'None', 'blc' ),
+							'avatar' => __( 'Avatar', 'blocksy-companion' ),
+							'icon' => __( 'Icon', 'blocksy-companion' ),
+							'none' => __( 'None', 'blocksy-companion' ),
 						],
 						'setting' => [ 'transport' => 'postMessage' ],
 					],
@@ -132,7 +132,7 @@ $options = [
 						'options' => [
 
 							'accountHeaderAvatarSize' => [
-								'label' => __( 'Avatar Size', 'blc' ),
+								'label' => __( 'Avatar Size', 'blocksy-companion' ),
 								'type' => 'ct-slider',
 								'min' => 10,
 								'max' => 40,
@@ -164,38 +164,38 @@ $options = [
 
 									'type-1' => [
 										'src'   => blocksy_image_picker_file( 'account-1' ),
-										'title' => __( 'Type 1', 'blc' ),
+										'title' => __( 'Type 1', 'blocksy-companion' ),
 									],
 
 									'type-2' => [
 										'src'   => blocksy_image_picker_file( 'account-2' ),
-										'title' => __( 'Type 2', 'blc' ),
+										'title' => __( 'Type 2', 'blocksy-companion' ),
 									],
 
 									'type-3' => [
 										'src'   => blocksy_image_picker_file( 'account-3' ),
-										'title' => __( 'Type 3', 'blc' ),
+										'title' => __( 'Type 3', 'blocksy-companion' ),
 									],
 
 									'type-4' => [
 										'src'   => blocksy_image_picker_file( 'account-4' ),
-										'title' => __( 'Type 4', 'blc' ),
+										'title' => __( 'Type 4', 'blocksy-companion' ),
 									],
 
 									'type-5' => [
 										'src'   => blocksy_image_picker_file( 'account-5' ),
-										'title' => __( 'Type 5', 'blc' ),
+										'title' => __( 'Type 5', 'blocksy-companion' ),
 									],
 
 									'type-6' => [
 										'src'   => blocksy_image_picker_file( 'account-6' ),
-										'title' => __( 'Type 6', 'blc' ),
+										'title' => __( 'Type 6', 'blocksy-companion' ),
 									],
 								],
 							],
 
 							'account_loggedin_icon_size' => [
-								'label' => __( 'Icon Size', 'blc' ),
+								'label' => __( 'Icon Size', 'blocksy-companion' ),
 								'type' => 'ct-slider',
 								'min' => 5,
 								'max' => 50,
@@ -213,7 +213,7 @@ $options = [
 					],
 
 					'loggedin_account_label_visibility' => [
-						'label' => __( 'Label Visibility', 'blc' ),
+						'label' => __( 'Label Visibility', 'blocksy-companion' ),
 						'type' => 'ct-visibility',
 						'design' => 'block',
 						'allow_empty' => true,
@@ -225,9 +225,9 @@ $options = [
 						],
 
 						'choices' => blocksy_ordered_keys([
-							'desktop' => __( 'Desktop', 'blc' ),
-							'tablet' => __( 'Tablet', 'blc' ),
-							'mobile' => __( 'Mobile', 'blc' ),
+							'desktop' => __( 'Desktop', 'blocksy-companion' ),
+							'tablet' => __( 'Tablet', 'blocksy-companion' ),
+							'mobile' => __( 'Mobile', 'blocksy-companion' ),
 						]),
 					],
 
@@ -249,16 +249,16 @@ $options = [
 
 									'loggedin_label_position' => [
 										'type' => 'ct-radio',
-										'label' => __( 'Label Position', 'blc' ),
+										'label' => __( 'Label Position', 'blocksy-companion' ),
 										'value' => 'left',
 										'view' => 'text',
 										'design' => 'block',
 										'divider' => 'top',
 										'responsive' => [ 'tablet' => 'skip' ],
 										'choices' => [
-											'left' => __( 'Left', 'blc' ),
-											'right' => __( 'Right', 'blc' ),
-											'bottom' => __( 'Bottom', 'blc' ),
+											'left' => __( 'Left', 'blocksy-companion' ),
+											'right' => __( 'Right', 'blocksy-companion' ),
+											'bottom' => __( 'Bottom', 'blocksy-companion' ),
 										],
 									],
 
@@ -266,7 +266,7 @@ $options = [
 							],
 
 							'loggedin_text' => [
-								'label' => __('Label Type', 'blc'),
+								'label' => __('Label Type', 'blocksy-companion'),
 								'type' => 'ct-radio',
 								'view' => 'text',
 								'design' => 'block',
@@ -274,8 +274,8 @@ $options = [
 								'setting' => ['transport' => 'postMessage'],
 								'value' => 'label',
 								'choices' => [
-									'label' => __('Text', 'blc'),
-									'username' => __('Name', 'blc'),
+									'label' => __('Text', 'blocksy-companion'),
+									'username' => __('Name', 'blocksy-companion'),
 								],
 							],
 
@@ -285,12 +285,12 @@ $options = [
 								'options' => [
 
 									'loggedin_label' => [
-										'label' => __('Label Text', 'blc'),
+										'label' => __('Label Text', 'blocksy-companion'),
 										'type' => 'text',
 										'design' => 'block',
 										'divider' => 'top',
 										'setting' => ['transport' => 'postMessage'],
-										'value' => __('My Account', 'blc')
+										'value' => __('My Account', 'blocksy-companion')
 									],
 
 								],
@@ -308,7 +308,7 @@ $options = [
 				'options' => [
 
 					'login_account_action' => [
-						'label' => __( 'Account Action', 'blc' ),
+						'label' => __( 'Account Action', 'blocksy-companion' ),
 						'type' => 'ct-select',
 						'value' => 'modal',
 						'view' => 'text',
@@ -323,7 +323,7 @@ $options = [
 						'options' => [
 
 							'loggedout_account_custom_page' => [
-								'label' => __( 'Custom Page Link', 'blc' ),
+								'label' => __( 'Custom Page Link', 'blocksy-companion' ),
 								'type' => 'text',
 								'design' => 'inline',
 								'disableRevertButton' => true,
@@ -339,14 +339,14 @@ $options = [
 					],
 
 					'logged_out_style' => [
-						'label' => __( 'Account Image', 'blc' ),
+						'label' => __( 'Account Image', 'blocksy-companion' ),
 						'type' => 'ct-radio',
 						'design' => 'block',
 						'view' => 'text',
 						'value' => 'icon',
 						'choices' => [
-							'icon' => __( 'Icon', 'blc' ),
-							'none' => __( 'None', 'blc' ),
+							'icon' => __( 'Icon', 'blocksy-companion' ),
+							'none' => __( 'None', 'blocksy-companion' ),
 						],
 						'setting' => [ 'transport' => 'postMessage' ],
 					],
@@ -370,38 +370,38 @@ $options = [
 
 									'type-1' => [
 										'src'   => blocksy_image_picker_file( 'account-1' ),
-										'title' => __( 'Type 1', 'blc' ),
+										'title' => __( 'Type 1', 'blocksy-companion' ),
 									],
 
 									'type-2' => [
 										'src'   => blocksy_image_picker_file( 'account-2' ),
-										'title' => __( 'Type 2', 'blc' ),
+										'title' => __( 'Type 2', 'blocksy-companion' ),
 									],
 
 									'type-3' => [
 										'src'   => blocksy_image_picker_file( 'account-3' ),
-										'title' => __( 'Type 3', 'blc' ),
+										'title' => __( 'Type 3', 'blocksy-companion' ),
 									],
 
 									'type-4' => [
 										'src'   => blocksy_image_picker_file( 'account-4' ),
-										'title' => __( 'Type 4', 'blc' ),
+										'title' => __( 'Type 4', 'blocksy-companion' ),
 									],
 
 									'type-5' => [
 										'src'   => blocksy_image_picker_file( 'account-5' ),
-										'title' => __( 'Type 5', 'blc' ),
+										'title' => __( 'Type 5', 'blocksy-companion' ),
 									],
 
 									'type-6' => [
 										'src'   => blocksy_image_picker_file( 'account-6' ),
-										'title' => __( 'Type 6', 'blc' ),
+										'title' => __( 'Type 6', 'blocksy-companion' ),
 									],
 								],
 							],
 
 							'accountHeaderIconSize' => [
-								'label' => __( 'Icon Size', 'blc' ),
+								'label' => __( 'Icon Size', 'blocksy-companion' ),
 								'type' => 'ct-slider',
 								'min' => 5,
 								'max' => 50,
@@ -419,7 +419,7 @@ $options = [
 					],
 
 					'loggedout_account_label_visibility' => [
-						'label' => __( 'Label Visibility', 'blc' ),
+						'label' => __( 'Label Visibility', 'blocksy-companion' ),
 						'type' => 'ct-visibility',
 						'design' => 'block',
 						'allow_empty' => true,
@@ -431,9 +431,9 @@ $options = [
 						],
 
 						'choices' => blocksy_ordered_keys([
-							'desktop' => __( 'Desktop', 'blc' ),
-							'tablet' => __( 'Tablet', 'blc' ),
-							'mobile' => __( 'Mobile', 'blc' ),
+							'desktop' => __( 'Desktop', 'blocksy-companion' ),
+							'tablet' => __( 'Tablet', 'blocksy-companion' ),
+							'mobile' => __( 'Mobile', 'blocksy-companion' ),
 						]),
 					],
 
@@ -455,16 +455,16 @@ $options = [
 
 									'loggedout_label_position' => [
 										'type' => 'ct-radio',
-										'label' => __( 'Label Position', 'blc' ),
+										'label' => __( 'Label Position', 'blocksy-companion' ),
 										'value' => 'left',
 										'view' => 'text',
 										'design' => 'block',
 										'divider' => 'top',
 										'responsive' => [ 'tablet' => 'skip' ],
 										'choices' => [
-											'left' => __( 'Left', 'blc' ),
-											'right' => __( 'Right', 'blc' ),
-											'bottom' => __( 'Bottom', 'blc' ),
+											'left' => __( 'Left', 'blocksy-companion' ),
+											'right' => __( 'Right', 'blocksy-companion' ),
+											'bottom' => __( 'Bottom', 'blocksy-companion' ),
 										],
 									],
 
@@ -472,13 +472,13 @@ $options = [
 							],
 
 							'login_label' => [
-								'label' => __('Label Text', 'blc'),
+								'label' => __('Label Text', 'blocksy-companion'),
 								'type' => 'text',
 								'design' => 'block',
 								'divider' => 'top',
 								'disableRevertButton' => true,
 								'setting' => [ 'transport' => 'postMessage' ],
-								'value' => __('Login', 'blc')
+								'value' => __('Login', 'blocksy-companion')
 							],
 
 						],
@@ -494,13 +494,13 @@ $options = [
 
 
 	blocksy_rand_md5() => [
-		'title' => __( 'Design', 'blc' ),
+		'title' => __( 'Design', 'blocksy-companion' ),
 		'type' => 'tab',
 		'options' => [
 
 			'account_label_font' => [
 				'type' => 'ct-typography',
-				'label' => __( 'Label Font', 'blc' ),
+				'label' => __( 'Label Font', 'blocksy-companion' ),
 				'value' => blocksy_typography_default_values([
 					'size' => '12px',
 					'variation' => 'n6',
@@ -511,17 +511,17 @@ $options = [
 
 			blocksy_rand_md5() => [
 				'type' => 'ct-labeled-group',
-				'label' => __( 'Label Color', 'blc' ),
+				'label' => __( 'Label Color', 'blocksy-companion' ),
 				'responsive' => true,
 				'choices' => [
 					[
 						'id' => 'accountHeaderColor',
-						'label' => __('Default State', 'blc')
+						'label' => __('Default State', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'transparentAccountHeaderColor',
-						'label' => __('Transparent State', 'blc'),
+						'label' => __('Transparent State', 'blocksy-companion'),
 						'condition' => [
 							'row' => '!offcanvas',
 							'builderSettings/has_transparent_header' => 'yes',
@@ -530,7 +530,7 @@ $options = [
 
 					[
 						'id' => 'stickyAccountHeaderColor',
-						'label' => __('Sticky State', 'blc'),
+						'label' => __('Sticky State', 'blocksy-companion'),
 						'condition' => [
 							'row' => '!offcanvas',
 							'builderSettings/has_sticky_header' => 'yes',
@@ -540,7 +540,7 @@ $options = [
 				'options' => [
 
 					'accountHeaderColor' => [
-						'label' => __( 'Label Color', 'blc' ),
+						'label' => __( 'Label Color', 'blocksy-companion' ),
 						'type'  => 'ct-color-picker',
 						'design' => 'block:right',
 						'responsive' => true,
@@ -558,13 +558,13 @@ $options = [
 
 						'pickers' => [
 							[
-								'title' => __( 'Initial', 'blc' ),
+								'title' => __( 'Initial', 'blocksy-companion' ),
 								'id' => 'default',
 								'inherit' => 'var(--color)'
 							],
 
 							[
-								'title' => __( 'Hover', 'blc' ),
+								'title' => __( 'Hover', 'blocksy-companion' ),
 								'id' => 'hover',
 								'inherit' => 'var(--linkHoverColor)'
 							],
@@ -572,7 +572,7 @@ $options = [
 					],
 
 					'transparentAccountHeaderColor' => [
-						'label' => __( 'Label Color', 'blc' ),
+						'label' => __( 'Label Color', 'blocksy-companion' ),
 						'type'  => 'ct-color-picker',
 						'design' => 'block:right',
 						'responsive' => true,
@@ -590,19 +590,19 @@ $options = [
 
 						'pickers' => [
 							[
-								'title' => __( 'Initial', 'blc' ),
+								'title' => __( 'Initial', 'blocksy-companion' ),
 								'id' => 'default',
 							],
 
 							[
-								'title' => __( 'Hover', 'blc' ),
+								'title' => __( 'Hover', 'blocksy-companion' ),
 								'id' => 'hover',
 							],
 						],
 					],
 
 					'stickyAccountHeaderColor' => [
-						'label' => __( 'Label Color', 'blc' ),
+						'label' => __( 'Label Color', 'blocksy-companion' ),
 						'type'  => 'ct-color-picker',
 						'design' => 'block:right',
 						'responsive' => true,
@@ -620,12 +620,12 @@ $options = [
 
 						'pickers' => [
 							[
-								'title' => __( 'Initial', 'blc' ),
+								'title' => __( 'Initial', 'blocksy-companion' ),
 								'id' => 'default',
 							],
 
 							[
-								'title' => __( 'Hover', 'blc' ),
+								'title' => __( 'Hover', 'blocksy-companion' ),
 								'id' => 'hover',
 							],
 						],
@@ -657,17 +657,17 @@ $options = [
 				'options' => [
 					blocksy_rand_md5() => [
 						'type' => 'ct-labeled-group',
-						'label' => __( 'Icon Color', 'blc' ),
+						'label' => __( 'Icon Color', 'blocksy-companion' ),
 						'responsive' => true,
 						'choices' => [
 							[
 								'id' => 'header_account_icon_color',
-								'label' => __('Default State', 'blc'),
+								'label' => __('Default State', 'blocksy-companion'),
 							],
 
 							[
 								'id' => 'transparent_header_account_icon_color',
-								'label' => __('Transparent State', 'blc'),
+								'label' => __('Transparent State', 'blocksy-companion'),
 								'condition' => [
 									'row' => '!offcanvas',
 									'builderSettings/has_transparent_header' => 'yes',
@@ -676,7 +676,7 @@ $options = [
 
 							[
 								'id' => 'sticky_header_account_icon_color',
-								'label' => __('Sticky State', 'blc'),
+								'label' => __('Sticky State', 'blocksy-companion'),
 								'condition' => [
 									'row' => '!offcanvas',
 									'builderSettings/has_sticky_header' => 'yes',
@@ -685,7 +685,7 @@ $options = [
 						],
 						'options' => [
 							'header_account_icon_color' => [
-								'label' => __( 'Icon Color', 'blc' ),
+								'label' => __( 'Icon Color', 'blocksy-companion' ),
 								'type'  => 'ct-color-picker',
 								'design' => 'block:right',
 								'responsive' => true,
@@ -702,13 +702,13 @@ $options = [
 
 								'pickers' => [
 									[
-										'title' => __( 'Initial', 'blc' ),
+										'title' => __( 'Initial', 'blocksy-companion' ),
 										'id' => 'default',
 										'inherit' => 'var(--color)',
 									],
 
 									[
-										'title' => __( 'Hover', 'blc' ),
+										'title' => __( 'Hover', 'blocksy-companion' ),
 										'id' => 'hover',
 										'inherit' => 'var(--paletteColor2)',
 									],
@@ -716,7 +716,7 @@ $options = [
 							],
 
 							'transparent_header_account_icon_color' => [
-								'label' => __( 'Icon Color', 'blc' ),
+								'label' => __( 'Icon Color', 'blocksy-companion' ),
 								'type'  => 'ct-color-picker',
 								'design' => 'block:right',
 								'responsive' => true,
@@ -733,19 +733,19 @@ $options = [
 
 								'pickers' => [
 									[
-										'title' => __( 'Initial', 'blc' ),
+										'title' => __( 'Initial', 'blocksy-companion' ),
 										'id' => 'default',
 									],
 
 									[
-										'title' => __( 'Hover', 'blc' ),
+										'title' => __( 'Hover', 'blocksy-companion' ),
 										'id' => 'hover',
 									],
 								],
 							],
 
 							'sticky_header_account_icon_color' => [
-								'label' => __( 'Icon Color', 'blc' ),
+								'label' => __( 'Icon Color', 'blocksy-companion' ),
 								'type'  => 'ct-color-picker',
 								'design' => 'block:right',
 								'responsive' => true,
@@ -762,12 +762,12 @@ $options = [
 
 								'pickers' => [
 									[
-										'title' => __( 'Initial', 'blc' ),
+										'title' => __( 'Initial', 'blocksy-companion' ),
 										'id' => 'default',
 									],
 
 									[
-										'title' => __( 'Hover', 'blc' ),
+										'title' => __( 'Hover', 'blocksy-companion' ),
 										'id' => 'hover',
 									],
 								],
@@ -782,7 +782,7 @@ $options = [
 			],
 
 			'accountHeaderMargin' => [
-				'label' => __( 'Item Margin', 'blc' ),
+				'label' => __( 'Item Margin', 'blocksy-companion' ),
 				'type' => 'ct-spacing',
 				'setting' => [ 'transport' => 'postMessage' ],
 				'value' => blocksy_spacing_value([
@@ -801,11 +801,11 @@ $options = [
 
 					blocksy_rand_md5() => [
 						'type' => 'ct-title',
-						'label' => __( 'Modal Options', 'blc' ),
+						'label' => __( 'Modal Options', 'blocksy-companion' ),
 					],
 
 					'account_modal_font_color' => [
-						'label' => __( 'Font Color', 'blc' ),
+						'label' => __( 'Font Color', 'blocksy-companion' ),
 						'type'  => 'ct-color-picker',
 						'design' => 'inline',
 						'divider' => 'bottom',
@@ -823,13 +823,13 @@ $options = [
 
 						'pickers' => [
 							[
-								'title' => __( 'Initial', 'blc' ),
+								'title' => __( 'Initial', 'blocksy-companion' ),
 								'id' => 'default',
 								'inherit' => 'var(--color)'
 							],
 
 							[
-								'title' => __( 'Hover', 'blc' ),
+								'title' => __( 'Hover', 'blocksy-companion' ),
 								'id' => 'hover',
 								'inherit' => 'var(--linkHoverColor)'
 							],
@@ -837,7 +837,7 @@ $options = [
 					],
 
 					'account_modal_form_text_color' => [
-						'label' => __( 'Input Font Color', 'blc' ),
+						'label' => __( 'Input Font Color', 'blocksy-companion' ),
 						'type'  => 'ct-color-picker',
 						'design' => 'inline',
 						'setting' => [ 'transport' => 'postMessage' ],
@@ -853,13 +853,13 @@ $options = [
 
 						'pickers' => [
 							[
-								'title' => __( 'Initial', 'blc' ),
+								'title' => __( 'Initial', 'blocksy-companion' ),
 								'id' => 'default',
 								'inherit' => 'var(--form-text-initial-color, var(--color))'
 							],
 
 							[
-								'title' => __( 'Focus', 'blc' ),
+								'title' => __( 'Focus', 'blocksy-companion' ),
 								'id' => 'focus',
 								'inherit' => 'var(--form-text-focus-color, var(--color))'
 							],
@@ -867,7 +867,7 @@ $options = [
 					],
 
 					'account_modal_form_border_color' => [
-						'label' => __( 'Input Border Color', 'blc' ),
+						'label' => __( 'Input Border Color', 'blocksy-companion' ),
 						'type'  => 'ct-color-picker',
 						'design' => 'inline',
 						'setting' => [ 'transport' => 'postMessage' ],
@@ -883,13 +883,13 @@ $options = [
 
 						'pickers' => [
 							[
-								'title' => __( 'Initial', 'blc' ),
+								'title' => __( 'Initial', 'blocksy-companion' ),
 								'id' => 'default',
 								'inherit' => 'var(--form-field-border-initial-color)'
 							],
 
 							[
-								'title' => __( 'Focus', 'blc' ),
+								'title' => __( 'Focus', 'blocksy-companion' ),
 								'id' => 'focus',
 								'inherit' => 'var(--form-field-border-focus-color)'
 							],
@@ -903,7 +903,7 @@ $options = [
 						'options' => [
 
 							'account_modal_form_background_color' => [
-								'label' => __( 'Input Background Color', 'blc' ),
+								'label' => __( 'Input Background Color', 'blocksy-companion' ),
 								'type'  => 'ct-color-picker',
 								'design' => 'inline',
 								'setting' => [ 'transport' => 'postMessage' ],
@@ -919,13 +919,13 @@ $options = [
 
 								'pickers' => [
 									[
-										'title' => __( 'Initial', 'blc' ),
+										'title' => __( 'Initial', 'blocksy-companion' ),
 										'id' => 'default',
 										'inherit' => 'var(--form-field-initial-background)'
 									],
 
 									[
-										'title' => __( 'Focus', 'blc' ),
+										'title' => __( 'Focus', 'blocksy-companion' ),
 										'id' => 'focus',
 										'inherit' => 'var(--form-field-focus-background)'
 									],
@@ -936,7 +936,7 @@ $options = [
 					],
 
 					'account_form_shadow' => [
-						'label' => __( 'Modal Shadow', 'blc' ),
+						'label' => __( 'Modal Shadow', 'blocksy-companion' ),
 						'type' => 'ct-box-shadow',
 						'design' => 'inline',
 						// 'responsive' => true,
@@ -955,7 +955,7 @@ $options = [
 					],
 
 					'account_close_button_color' => [
-						'label' => __( 'Close Icon Color', 'blc' ),
+						'label' => __( 'Close Icon Color', 'blocksy-companion' ),
 						'type'  => 'ct-color-picker',
 						'design' => 'inline',
 						'divider' => 'top',
@@ -973,13 +973,13 @@ $options = [
 
 						'pickers' => [
 							[
-								'title' => __( 'Initial', 'blc' ),
+								'title' => __( 'Initial', 'blocksy-companion' ),
 								'id' => 'default',
 								'inherit' => 'rgba(255, 255, 255, 0.7)'
 							],
 
 							[
-								'title' => __( 'Hover', 'blc' ),
+								'title' => __( 'Hover', 'blocksy-companion' ),
 								'id' => 'hover',
 								'inherit' => '#ffffff'
 							],
@@ -987,7 +987,7 @@ $options = [
 					],
 
 					'account_close_button_shape_color' => [
-						'label' => __( 'Close Icon Background', 'blc' ),
+						'label' => __( 'Close Icon Background', 'blocksy-companion' ),
 						'type'  => 'ct-color-picker',
 						'design' => 'inline',
 						'setting' => [ 'transport' => 'postMessage' ],
@@ -1004,13 +1004,13 @@ $options = [
 
 						'pickers' => [
 							[
-								'title' => __( 'Initial', 'blc' ),
+								'title' => __( 'Initial', 'blocksy-companion' ),
 								'id' => 'default',
 								'inherit' => 'rgba(0, 0, 0, 0.5)'
 							],
 
 							[
-								'title' => __( 'Hover', 'blc' ),
+								'title' => __( 'Hover', 'blocksy-companion' ),
 								'id' => 'hover',
 								'inherit' => 'rgba(0, 0, 0, 0.5)'
 							],
@@ -1018,7 +1018,7 @@ $options = [
 					],
 
 					'accountHeaderFormBackground' => [
-						'label' => __( 'Modal Background', 'blc' ),
+						'label' => __( 'Modal Background', 'blocksy-companion' ),
 						'type'  => 'ct-background',
 						'design' => 'inline',
 						'divider' => 'top',
@@ -1033,7 +1033,7 @@ $options = [
 					],
 
 					'accountHeaderBackground' => [
-						'label' => __( 'Modal Backdrop', 'blc' ),
+						'label' => __( 'Modal Backdrop', 'blocksy-companion' ),
 						'type'  => 'ct-background',
 						'design' => 'inline',
 						'divider' => 'top',
@@ -1063,7 +1063,7 @@ $options = [
 			],
 
 			'header_account_visibility' => [
-				'label' => __( 'Element Visibility', 'blc' ),
+				'label' => __( 'Element Visibility', 'blocksy-companion' ),
 				'type' => 'ct-visibility',
 				'design' => 'block',
 				'setting' => [ 'transport' => 'postMessage' ],
@@ -1074,8 +1074,8 @@ $options = [
 				],
 
 				'choices' => blocksy_ordered_keys([
-					'tablet' => __( 'Tablet', 'blc' ),
-					'mobile' => __( 'Mobile', 'blc' ),
+					'tablet' => __( 'Tablet', 'blocksy-companion' ),
+					'mobile' => __( 'Mobile', 'blocksy-companion' ),
 				]),
 			],
 

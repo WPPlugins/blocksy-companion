@@ -10,8 +10,8 @@
 class Blocksy_Widget_Ct_Advertisement extends BlocksyWidgetFactory {
 	protected function get_config() {
 		return [
-			'name' => __('Advertisement', 'blc'),
-			'description' => __('Advertisement', 'blc'),
+			'name' => __('Advertisement', 'blocksy-companion'),
+			'description' => __('Advertisement', 'blocksy-companion'),
 			'customize_selective_refresh' => true
 		];
 	}

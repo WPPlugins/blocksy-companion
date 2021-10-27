@@ -22,10 +22,21 @@ if ($thumb_id) {
 	$gallery_images = [];
 }
 
-$target_output = '';
+$link_atts = [];
+
+if (blocksy_akg('product_link_sponsored', $atts, 'no') === 'yes') {
+	$link_atts['rel'] = 'sponsored';
+}
 
 if (blocksy_akg('product_link_target', $atts, 'no') === 'yes') {
-	$target_output = 'target="_blank" rel="noopener noreferrer"';
+	$link_atts['target'] = '_blank';
+
+	if (! isset($link_atts['rel'])) {
+		$link_atts['rel'] = '';
+	}
+
+	$link_atts['rel'] .= ' noopener noreferrer';
+	$link_atts['rel'] = trim($link_atts['rel']);
 }
 
 echo '<section class="ct-product-hero">';
@@ -125,7 +136,7 @@ if (! empty($scores)) {
 	echo '</div>';
 
 	echo '<span class="ct-score-label">';
-	echo __('Overall Score', 'blc');
+	echo __('Overall Score', 'blocksy-companion');
 	echo '</span>';
 	echo '</div>';
 
@@ -142,13 +153,13 @@ if ($has_read_more || $has_buy_now) {
 	$product_button_label = blocksy_akg(
 		'product_button_label',
 		$atts,
-		__('Buy Now', 'blc')
+		__('Buy Now', 'blocksy-companion')
 	);
 
 	$product_read_content_button_label = blocksy_akg(
 		'product_read_content_button_label',
 		$atts,
-		__('Read More', 'blc')
+		__('Read More', 'blocksy-companion')
 	);
 
 	if (
@@ -177,8 +188,14 @@ if ($has_read_more || $has_buy_now) {
 		&&
 		$has_buy_now
 	) {
-		echo '<a href="' . esc_url($product_link) . '" class="ct-button" ' . wp_kses_post($target_output) . '>';
-		echo $product_button_label;
+		echo blocksy_html_tag(
+			'a',
+			array_merge([
+				'href' => esc_url($product_link),
+				'class' => 'ct-button'
+			], $link_atts),
+			$product_button_label
+		);
 
 	/*
 	echo blc_get_icon([
@@ -187,8 +204,6 @@ if ($has_read_more || $has_buy_now) {
 		]),
 	]);
 	 */
-
-		echo '</a>';
 	}
 
 	echo '</div>';
@@ -220,7 +235,7 @@ if (
 
 	if (! empty($product_specs)) {
 		echo '<div class="ct-specs">';
-		echo '<h5>' . __('Specs', 'blc') . '</h5>';
+		echo '<h5>' . __('Specs', 'blocksy-companion') . '</h5>';
 
 		echo '<ul>';
 
@@ -244,7 +259,7 @@ if (
 
 	if (! empty($product_pros)) {
 		echo '<div class="ct-product-review-pros" ' . blocksy_schema_org_definitions('positiveNotes') . '>';
-		echo '<h5>' . __('Pros', 'blc') . '</h5>';
+		echo '<h5>' . __('Pros', 'blocksy-companion') . '</h5>';
 
 		echo '<ul>';
 
@@ -267,7 +282,7 @@ if (
 
 	if (! empty($product_cons)) {
 		echo '<div class="ct-product-review-cons" ' . blocksy_schema_org_definitions('negativeNotes') . '>';
-		echo '<h5>' . __('Cons', 'blc') . '</h5>';
+		echo '<h5>' . __('Cons', 'blocksy-companion') . '</h5>';
 
 		echo '<ul>';
 

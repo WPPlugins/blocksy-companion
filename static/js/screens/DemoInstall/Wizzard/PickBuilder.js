@@ -63,12 +63,12 @@ const PickBuilder = ({ demoConfiguration, setDemoConfiguration, style }) => {
 						</svg>
 					</i>
 
-					<h2>{__('Choose Page Builder', 'blc')}</h2>
+					<h2>{__('Choose Page Builder', 'blocksy-companion')}</h2>
 
 					<p>
 						{__(
 							'This starter site can be imported and used with one of these page builders. Please select your prefered one in order to continue.',
-							'blc'
+							'blocksy-companion'
 						)}
 					</p>
 

@@ -131,7 +131,7 @@ class BlocksyExtensionNewsletterSubscribe {
 
 		add_filter('blocksy_extensions_metabox_post:elements:before', function ($opts) {
 			$opts['disable_subscribe_form'] = [
-					'label' => __( 'Disable Subscribe Form', 'blc' ),
+					'label' => __( 'Disable Subscribe Form', 'blocksy-companion' ),
 					'type' => 'ct-switch',
 					'value' => 'no',
 			];
@@ -178,13 +178,13 @@ class BlocksyExtensionNewsletterSubscribe {
 					'has_title' => false,
 					'has_description' => false,
 
-					'button_text' => __('Subscribe', 'blc'),
+					'button_text' => __('Subscribe', 'blocksy-companion'),
 
 					// no | yes
 					'has_name' => 'no',
 
-					'name_label' => __('Your name', 'blc'),
-					'email_label' => __('Your email', 'blc'),
+					'name_label' => __('Your name', 'blocksy-companion'),
+					'email_label' => __('Your email', 'blocksy-companion'),
 					'list_id' => '',
 					'class' => ''
 				]

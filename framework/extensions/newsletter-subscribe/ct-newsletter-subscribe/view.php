@@ -9,14 +9,14 @@
 
 
 // Widget title
-$title = blocksy_default_akg( 'title', $atts, __( 'Newsletter', 'blc' ) );
+$title = blocksy_default_akg( 'title', $atts, __( 'Newsletter', 'blocksy-companion' ) );
 
 
 // Message
-$message = do_shortcode(blocksy_default_akg( 'newsletter_subscribe_text', $atts, __( 'Enter your email address below to subscribe to our newsletter', 'blc' )));
+$message = do_shortcode(blocksy_default_akg( 'newsletter_subscribe_text', $atts, __( 'Enter your email address below to subscribe to our newsletter', 'blocksy-companion' )));
 
 // Button text
-$button_text = blocksy_default_akg( 'newsletter_subscribe_button_text', $atts, __( 'Subscribe', 'blc' ) );
+$button_text = blocksy_default_akg( 'newsletter_subscribe_button_text', $atts, __( 'Subscribe', 'blocksy-companion' ) );
 
 // Form name
 $has_name = blocksy_default_akg( 'has_newsletter_subscribe_name', $atts, 'no' ) === 'yes';
@@ -66,8 +66,8 @@ if ( $container !== 'default' ) {
 // Content alignment
 $alignment = blocksy_default_akg('newsletter_subscribe_alignment', $atts, 'left');
 
-$name_label = blocksy_default_akg('newsletter_subscribe_name_label', $atts, __('Your name', 'blc'));
-$email_label = blocksy_default_akg('newsletter_subscribe_mail_label', $atts, __('Your email', 'blc'));
+$name_label = blocksy_default_akg('newsletter_subscribe_name_label', $atts, __('Your name', 'blocksy-companion'));
+$email_label = blocksy_default_akg('newsletter_subscribe_mail_label', $atts, __('Your email', 'blocksy-companion'));
 
 $data_alignment = '';
 
@@ -101,10 +101,10 @@ echo $before_title . wp_kses_post($title) . $after_title;
 	<?php } ?>
 
 	<?php if ($has_name) { ?>
-		<input type="text" name="FNAME" placeholder="<?php esc_attr_e($name_label, 'blc'); ?>" title="<?php echo __('Name', 'blocksy') ?>" />
+		<input type="text" name="FNAME" placeholder="<?php esc_attr_e($name_label, 'blocksy-companion'); ?>" title="<?php echo __('Name', 'blocksy') ?>" />
 	<?php } ?>
 
-	<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($email_label, 'blc'); ?> *" title="<?php echo __('Email', 'blocksy') ?>" required />
+	<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($email_label, 'blocksy-companion'); ?> *" title="<?php echo __('Email', 'blocksy') ?>" required />
 
 	<button class="button">
 		<?php echo esc_html($button_text) ?>

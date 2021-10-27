@@ -41,10 +41,7 @@ const getStartPositionFor = (stickyContainer) => {
 	let stickyOffset = headerRect.top + scrollY
 
 	if (stickyOffset > 0) {
-		let element = document.elementFromPoint(
-			0,
-			stickyContainer.getBoundingClientRect().top - 3
-		)
+		let element = document.elementFromPoint(0, 3)
 
 		if (element) {
 			if (
@@ -55,7 +52,7 @@ const getStartPositionFor = (stickyContainer) => {
 					})
 					.indexOf('fixed') > -1
 			) {
-				stickyOffset = 0
+				stickyOffset -= element.getBoundingClientRect().height
 			}
 		}
 	}
@@ -111,8 +108,9 @@ const compute = () => {
 
 	let startPosition = cachedStartPosition
 
-	if (!startPosition) {
+	if (startPosition === null) {
 		startPosition = getStartPositionFor(stickyContainer)
+		cachedStartPosition = startPosition
 	}
 
 	let stickyContainerHeight = cachedStickyContainerHeight

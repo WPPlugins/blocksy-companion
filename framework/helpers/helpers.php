@@ -1,5 +1,21 @@
 <?php
 
+function blc_empty_site_host_and_domain_for($url) {
+	$parsed_url = parse_url(get_site_url());
+
+	$to_replace = $parsed_url['scheme'] . '://' . $parsed_url['host'];
+
+	if (isset($parsed_url['port'])) {
+		$to_replace .= ':' . $parsed_url['port'];
+	}
+
+	return str_replace(
+		$to_replace,
+		'',
+		$url
+	);
+}
+
 function blc_get_ext($id) {
 	return \Blocksy\Plugin::instance()->extensions->get($id);
 }

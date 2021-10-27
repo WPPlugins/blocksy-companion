@@ -35,7 +35,7 @@ class BlocksyExtensionProductReviews {
 					return;
 				}
 
-				echo '<div class="ct-item-review-meta" ' . $maybe_schema . '>';
+				echo '<div ' . $maybe_schema . '>';
 				echo '<meta itemprop="name" content="' . get_the_title() . '">';
 				if (get_the_post_thumbnail_url()) {
 					echo '<meta itemprop="image" content="' . get_the_post_thumbnail_url() . '">';
@@ -230,11 +230,11 @@ class BlocksyExtensionProductReviews {
 			];
 
 			$option['settings']['overall_score'] = [
-				'label' => __('Overall Score', 'blc'),
+				'label' => __('Overall Score', 'blocksy-companion'),
 					/*
 				'options' => [
 					'excerpt_length' => [
-						'label' => __('Length', 'blc'),
+						'label' => __('Length', 'blocksy-companion'),
 						'type' => 'ct-number',
 						'design' => 'inline',
 						'value' => 40,
@@ -288,18 +288,18 @@ class BlocksyExtensionProductReviews {
 			}
 
 			$options[$prefix . '_reviews_summary'] = [
-				'label' => __( 'Review Summary', 'blc' ),
+				'label' => __( 'Review Summary', 'blocksy-companion' ),
 				'type' => 'ct-panel',
 				'setting' => [ 'transport' => 'postMessage' ],
 				'inner-options' => [
 
 					blocksy_rand_md5() => [
-						'title' => __( 'General', 'blc' ),
+						'title' => __( 'General', 'blocksy-companion' ),
 						'type' => 'tab',
 						'options' => [
 
 							$prefix . '_product_scores_width' => [
-								'label' => __( 'Scores Box Width', 'blc' ),
+								'label' => __( 'Scores Box Width', 'blocksy-companion' ),
 								'type' => 'ct-slider',
 								'min' => 0,
 								'max' => 1200,
@@ -309,7 +309,7 @@ class BlocksyExtensionProductReviews {
 							],
 
 							$prefix . '_has_read_more' => [
-								'label' => __('Read More Button', 'blc'),
+								'label' => __('Read More Button', 'blocksy-companion'),
 								'type' => 'ct-switch',
 								'value' => 'yes',
 								'divider' => 'top',
@@ -320,7 +320,7 @@ class BlocksyExtensionProductReviews {
 							],
 
 							$prefix . '_has_buy_now' => [
-								'label' => __('Buy Now Button', 'blc'),
+								'label' => __('Buy Now Button', 'blocksy-companion'),
 								'type' => 'ct-switch',
 								'value' => 'yes',
 								'divider' => 'top',
@@ -334,12 +334,12 @@ class BlocksyExtensionProductReviews {
 					],
 
 					blocksy_rand_md5() => [
-						'title' => __( 'Design', 'blc' ),
+						'title' => __( 'Design', 'blocksy-companion' ),
 						'type' => 'tab',
 						'options' => [
 
 							$prefix . '_star_rating_color' => [
-								'label' => __( 'Star Rating Color', 'blc' ),
+								'label' => __( 'Star Rating Color', 'blocksy-companion' ),
 								'type'  => 'ct-color-picker',
 								'design' => 'inline',
 								'setting' => [ 'transport' => 'postMessage' ],
@@ -356,13 +356,13 @@ class BlocksyExtensionProductReviews {
 
 								'pickers' => [
 									[
-										'title' => __( 'Active', 'blc' ),
+										'title' => __( 'Active', 'blocksy-companion' ),
 										'id' => 'default',
 										'inherit' => '#FDA256'
 									],
 
 									[
-										'title' => __( 'Inactive', 'blc' ),
+										'title' => __( 'Inactive', 'blocksy-companion' ),
 										'id' => 'inactive',
 										'inherit' => '#F9DFCC'
 									],
@@ -370,7 +370,7 @@ class BlocksyExtensionProductReviews {
 							],
 
 							$prefix . '_overall_score_text' => [
-								'label' => __( 'Overll Score Text', 'blc' ),
+								'label' => __( 'Overll Score Text', 'blocksy-companion' ),
 								'type'  => 'ct-color-picker',
 								'design' => 'inline',
 								'divider' => 'top',
@@ -384,7 +384,7 @@ class BlocksyExtensionProductReviews {
 
 								'pickers' => [
 									[
-										'title' => __( 'Active', 'blc' ),
+										'title' => __( 'Active', 'blocksy-companion' ),
 										'id' => 'default',
 										'inherit' => '#ffffff'
 									],
@@ -392,7 +392,7 @@ class BlocksyExtensionProductReviews {
 							],
 
 							$prefix . '_overall_score_backgroud' => [
-								'label' => __( 'Overll Score Background', 'blc' ),
+								'label' => __( 'Overll Score Background', 'blocksy-companion' ),
 								'type'  => 'ct-color-picker',
 								'design' => 'inline',
 								'setting' => [ 'transport' => 'postMessage' ],
@@ -405,7 +405,7 @@ class BlocksyExtensionProductReviews {
 
 								'pickers' => [
 									[
-										'title' => __( 'Active', 'blc' ),
+										'title' => __( 'Active', 'blocksy-companion' ),
 										'id' => 'default',
 										'inherit' => '#1A202C'
 									],
@@ -431,23 +431,23 @@ class BlocksyExtensionProductReviews {
 		$settings = $this->get_settings();
 
 		register_post_type('blc-product-review', [
-			'label' => __('Product Reviews', 'blc'),
-			'description' => __( 'Product Reviews', 'blc'),
+			'label' => __('Product Reviews', 'blocksy-companion'),
+			'description' => __( 'Product Reviews', 'blocksy-companion'),
 			'menu_icon' => 'dashicons-star-filled',
 			'labels' => [
-				'name' => __('Product Reviews', 'blc'),
-				'singular_name' => __('Product Review', 'blc'),
-				'menu_name' => __('Product Reviews', 'blc'),
-				'parent_item_colon' => __('Parent Product Review', 'blc'),
-				'all_items' => __('All Reviews', 'blc'),
-				'view_item' => __('View Product Review', 'blc'),
-				'add_new_item' => __('Add New Product Review', 'blc'),
-				'add_new' => __('Add New Review', 'blc'),
-				'edit_item' => __('Edit Product Review', 'blc'),
-				'update_item' => __('Update Product Review', 'blc'),
-				'search_items' => __('Search Product Review', 'blc'),
-				'not_found' => __('Not Found', 'blc'),
-				'not_found_in_trash' => __('Not found in Trash', 'blc')
+				'name' => __('Product Reviews', 'blocksy-companion'),
+				'singular_name' => __('Product Review', 'blocksy-companion'),
+				'menu_name' => __('Product Reviews', 'blocksy-companion'),
+				'parent_item_colon' => __('Parent Product Review', 'blocksy-companion'),
+				'all_items' => __('All Reviews', 'blocksy-companion'),
+				'view_item' => __('View Product Review', 'blocksy-companion'),
+				'add_new_item' => __('Add New Product Review', 'blocksy-companion'),
+				'add_new' => __('Add New Review', 'blocksy-companion'),
+				'edit_item' => __('Edit Product Review', 'blocksy-companion'),
+				'update_item' => __('Update Product Review', 'blocksy-companion'),
+				'search_items' => __('Search Product Review', 'blocksy-companion'),
+				'not_found' => __('Not Found', 'blocksy-companion'),
+				'not_found_in_trash' => __('Not found in Trash', 'blocksy-companion')
 			],
 			'supports' => [
 				'comments',
@@ -481,17 +481,17 @@ class BlocksyExtensionProductReviews {
 			[
 				'hierarchical' => true,
 				'labels' => [
-					'name' => __('Categories', 'blc'),
-					'singular_name' => __('Category', 'blc'),
-					'search_items' =>  __('Search Category', 'blc'),
-					'all_items' => __('All Categories', 'blc'),
-					'parent_item' => __('Parent Category', 'blc'),
-					'parent_item_colon' => __('Parent Category:', 'blc'),
-					'edit_item' => __('Edit Category', 'blc'),
-					'update_item' => __('Update Category', 'blc'),
-					'add_new_item' => __('Add New Category', 'blc'),
-					'new_item_name' => __('New Category Name', 'blc'),
-					'menu_name' => __('Categories', 'blc'),
+					'name' => __('Categories', 'blocksy-companion'),
+					'singular_name' => __('Category', 'blocksy-companion'),
+					'search_items' =>  __('Search Category', 'blocksy-companion'),
+					'all_items' => __('All Categories', 'blocksy-companion'),
+					'parent_item' => __('Parent Category', 'blocksy-companion'),
+					'parent_item_colon' => __('Parent Category:', 'blocksy-companion'),
+					'edit_item' => __('Edit Category', 'blocksy-companion'),
+					'update_item' => __('Update Category', 'blocksy-companion'),
+					'add_new_item' => __('Add New Category', 'blocksy-companion'),
+					'new_item_name' => __('New Category Name', 'blocksy-companion'),
+					'menu_name' => __('Categories', 'blocksy-companion'),
 				],
 				'show_ui' => true,
 				'show_admin_column' => true,
@@ -509,8 +509,8 @@ class BlocksyExtensionProductReviews {
 			'blocksy_settings_meta_box',
 			sprintf(
 				// Translators: %s is the theme name.
-				__( '%s Settings', 'blc' ),
-				__( 'Blocksy', 'blc' )
+				__( '%s Settings', 'blocksy-companion' ),
+				__( 'Blocksy', 'blocksy-companion' )
 			),
 			function ($post) {
 				$values = get_post_meta($post->ID, 'blocksy_product_review_options');

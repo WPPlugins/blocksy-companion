@@ -15,11 +15,11 @@ const SubmitSupport = () => {
 
 	return (
 		<div className="ct-support-container">
-			<h2>{__('Need help or advice?', 'blc')}</h2>
+			<h2>{__('Need help or advice?', 'blocksy-companion')}</h2>
 			<p>
 				{__(
 					'Got a question or need help with the theme? You can always submit a support ticket or ask for help in our friendly Facebook community.',
-					'blc'
+					'blocksy-companion'
 				)}
 			</p>
 			<a
@@ -27,7 +27,7 @@ const SubmitSupport = () => {
 				className="ct-button"
 				data-hover="blue"
 				target="_blank">
-				{__('Submit a Support Ticket', 'blc')}
+				{__('Submit a Support Ticket', 'blocksy-companion')}
 			</a>
 
 			<a
@@ -35,7 +35,7 @@ const SubmitSupport = () => {
 				className="ct-button"
 				data-hover="blue"
 				target="_blank">
-				{__('Join Facebook Community', 'blc')}
+				{__('Join Facebook Community', 'blocksy-companion')}
 			</a>
 		</div>
 	)

@@ -71,7 +71,7 @@ const PanelsManager = () => {
 							...(id.indexOf('ct-custom') > -1
 								? {
 										conditions_button: {
-											label: __('Edit Conditions', 'blc'),
+											label: __('Edit Conditions', 'blocksy-companion'),
 											type: 'jsx',
 											design: 'block',
 											render: () => (
@@ -165,7 +165,7 @@ const PanelsManager = () => {
 													<i className="ct-tooltip-top">
 														{__(
 															'Remove header',
-															'blc'
+															'blocksy-companion'
 														)}
 													</i>
 													<svg
@@ -193,12 +193,12 @@ const PanelsManager = () => {
 				render={() => (
 					<div className="ct-modal-content">
 						<h2 className="ct-modal-title">
-							{__('Remove Header', 'blc')}
+							{__('Remove Header', 'blocksy-companion')}
 						</h2>
 						<p>
 							{__(
 								'You are about to remove a custom header, are you sure you want to continue?',
-								'blc'
+								'blocksy-companion'
 							)}
 						</p>
 
@@ -212,7 +212,7 @@ const PanelsManager = () => {
 									setIsRemovingSection(false)
 								}}
 								className="button">
-								{__('Cancel', 'blc')}
+								{__('Cancel', 'blocksy-companion')}
 							</button>
 
 							<button
@@ -228,7 +228,7 @@ const PanelsManager = () => {
 
 									setIsRemovingSection(false)
 								}}>
-								{__('Confirm', 'blc')}
+								{__('Confirm', 'blocksy-companion')}
 							</button>
 						</div>
 					</div>

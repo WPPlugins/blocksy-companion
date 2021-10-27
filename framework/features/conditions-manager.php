@@ -341,7 +341,7 @@ class ConditionsManager {
 			$cpts[] = [
 				'id' => 'post_type_single_' . $custom_post_type,
 				'title' => sprintf(
-					__('%s Single', 'blc'),
+					__('%s Single', 'blocksy-companion'),
 					$post_type_object->labels->singular_name
 				)
 			];
@@ -349,7 +349,7 @@ class ConditionsManager {
 			$cpts[] = [
 				'id' => 'post_type_archive_' . $custom_post_type,
 				'title' => sprintf(
-					__('%s Archive', 'blc'),
+					__('%s Archive', 'blocksy-companion'),
 					$post_type_object->labels->singular_name
 				)
 			];
@@ -360,7 +360,7 @@ class ConditionsManager {
 				$cpts[] = [
 					'id' => 'post_type_taxonomy_' . $single_taxonomy,
 					'title' => sprintf(
-						__('%s %s Taxonomy', 'blc'),
+						__('%s %s Taxonomy', 'blocksy-companion'),
 						$post_type_object->labels->singular_name,
 						get_taxonomy($single_taxonomy)->label
 					)
@@ -374,57 +374,57 @@ class ConditionsManager {
 				'rules' => [
 					[
 						'id' => 'everywhere',
-						'title' => __('Entire Website', 'blc')
+						'title' => __('Entire Website', 'blocksy-companion')
 					]
 				]
 			],
 
 			[
-				'title' => __('Basic', 'blc'),
+				'title' => __('Basic', 'blocksy-companion'),
 				'rules' => [
 					[
 						'id' => 'singulars',
-						'title' => __('Singulars', 'blc')
+						'title' => __('Singulars', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'archives',
-						'title' => __('Archives', 'blc')
+						'title' => __('Archives', 'blocksy-companion')
 					]
 				]
 			],
 
 			[
-				'title' => __('Posts', 'blc'),
+				'title' => __('Posts', 'blocksy-companion'),
 				'rules' => [
 					[
 						'id' => 'single_post',
-						'title' => __('Single Post', 'blc')
+						'title' => __('Single Post', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'all_post_archives',
-						'title' => __('All Post Archives', 'blc')
+						'title' => __('All Post Archives', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'post_categories',
-						'title' => __('Post Categories', 'blc')
+						'title' => __('Post Categories', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'post_tags',
-						'title' => __('Post Tags', 'blc')
+						'title' => __('Post Tags', 'blocksy-companion')
 					],
 				]
 			],
 
 			[
-				'title' => __('Pages', 'blc'),
+				'title' => __('Pages', 'blocksy-companion'),
 				'rules' => [
 					[
 						'id' => 'single_page',
-						'title' => __('Single Page', 'blc')
+						'title' => __('Single Page', 'blocksy-companion')
 					],
 				]
 			],
@@ -432,31 +432,31 @@ class ConditionsManager {
 
 		$has_woo ? [
 			[
-				'title' => __('WooCommerce', 'blc'),
+				'title' => __('WooCommerce', 'blocksy-companion'),
 				'rules' => [
 					[
 						'id' => 'woo_shop',
-						'title' => __('Shop Home', 'blc')
+						'title' => __('Shop Home', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'single_product',
-						'title' => __('Single Product', 'blc')
+						'title' => __('Single Product', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'all_product_archives',
-						'title' => __('Product Archives', 'blc')
+						'title' => __('Product Archives', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'all_product_categories',
-						'title' => __('Product Categories', 'blc')
+						'title' => __('Product Categories', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'all_product_tags',
-						'title' => __('Product Tags', 'blc')
+						'title' => __('Product Tags', 'blocksy-companion')
 					],
 				]
 			]
@@ -464,105 +464,105 @@ class ConditionsManager {
 
 		count($cpts) > 0 ? [
 			[
-				'title' => __('Custom Post Types', 'blc'),
+				'title' => __('Custom Post Types', 'blocksy-companion'),
 				'rules' => $cpts
 			]
 		] : [],
 
 		[
 			[
-				'title' => __('Specific', 'blc'),
+				'title' => __('Specific', 'blocksy-companion'),
 				'rules' => [
 					[
 						'id' => 'post_ids',
-						'title' => __('Post ID', 'blc')
+						'title' => __('Post ID', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'page_ids',
-						'title' => __('Page ID', 'blc')
+						'title' => __('Page ID', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'custom_post_type_ids',
-						'title' => __('Custom Post Type ID', 'blc')
+						'title' => __('Custom Post Type ID', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'taxonomy_ids',
-						'title' => __('Taxonomy ID', 'blc')
+						'title' => __('Taxonomy ID', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'post_with_taxonomy_ids',
-						'title' => __('Post with Taxonomy ID', 'blc')
+						'title' => __('Post with Taxonomy ID', 'blocksy-companion')
 					],
 				]
 			],
 
 			[
-				'title' => __('Other Pages', 'blc'),
+				'title' => __('Other Pages', 'blocksy-companion'),
 				'rules' => [
 					[
 						'id' => '404',
-						'title' => __('404', 'blc')
+						'title' => __('404', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'search',
-						'title' => __('Search', 'blc')
+						'title' => __('Search', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'blog',
-						'title' => __('Blog', 'blc')
+						'title' => __('Blog', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'front_page',
-						'title' => __('Front Page', 'blc')
+						'title' => __('Front Page', 'blocksy-companion')
 					],
 
 					/*
 					[
 						'id' => 'date',
-						'title' => __('Date', 'blc')
+						'title' => __('Date', 'blocksy-companion')
 					],
 					 */
 
 					[
 						'id' => 'author',
-						'title' => __('Author', 'blc')
+						'title' => __('Author', 'blocksy-companion')
 					],
 				],
 			],
 
 			[
-				'title' => __('User Auth', 'blc'),
+				'title' => __('User Auth', 'blocksy-companion'),
 				'rules' => [
 					[
 						'id' => 'user_logged_in',
-						'title' => __('User Logged In', 'blc')
+						'title' => __('User Logged In', 'blocksy-companion')
 					],
 
 					[
 						'id' => 'user_logged_out',
-						'title' => __('User Logged Out', 'blc')
+						'title' => __('User Logged Out', 'blocksy-companion')
 					],
 				]
 			],
 
 			[
-				'title' => __('User Roles', 'blc'),
+				'title' => __('User Roles', 'blocksy-companion'),
 				'rules' => $this->get_user_roles_rules()
             ],
 
 			[
-				'title' => __('Other', 'blc'),
+				'title' => __('Other', 'blocksy-companion'),
 				'rules' => [
 					[
 						'id' => 'user_post_author_id',
-						'title' => __('Post Author', 'blc')
+						'title' => __('Post Author', 'blocksy-companion')
 					]
 				]
             ],
@@ -574,11 +574,11 @@ class ConditionsManager {
 			blocksy_get_current_language() !== '__NOT_KNOWN__'
 		) ? [
 			[
-				'title' => __('Languages', 'blc'),
+				'title' => __('Languages', 'blocksy-companion'),
 				'rules' => [
 					[
 						'id' => 'current_language',
-						'title' => __('Current Language', 'blc')
+						'title' => __('Current Language', 'blocksy-companion')
 					]
 				]
 			]
@@ -586,11 +586,11 @@ class ConditionsManager {
 
 		function_exists('bbp_is_single_user_profile') ? [
 			[
-				'title' => __('bbPress', 'blc'),
+				'title' => __('bbPress', 'blocksy-companion'),
 				'rules' => [
 					[
 						'id' => 'bbpress_profile',
-						'title' => __('Profile', 'blc')
+						'title' => __('Profile', 'blocksy-companion')
 					]
 				]
 			]
@@ -601,8 +601,8 @@ class ConditionsManager {
 		$result = [];
 
 		foreach ($conditions as $condition) {
-			$type = $condition['type'] === 'include' ? __('Include', 'blc') : __(
-				'Exclude', 'blc'
+			$type = $condition['type'] === 'include' ? __('Include', 'blocksy-companion') : __(
+				'Exclude', 'blocksy-companion'
 			);
 
 			$maybe_descriptor = $this->find_rule_descriptor($condition['rule']);
@@ -655,7 +655,7 @@ class ConditionsManager {
 					foreach (blocksy_get_all_i18n_languages() as $lang) {
 						if ($lang['id'] === $condition['payload']['language']) {
 							$to_append = $type . ' ' . $lang['name'] . ' ' . __(
-								'Language', 'blc'
+								'Language', 'blocksy-companion'
 							);
 						}
 					}

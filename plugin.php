@@ -58,8 +58,8 @@ class Plugin
             $locale_data_ct = blc_call_fn( [
                 'fn'      => 'blocksy_get_jed_locale_data',
                 'default' => [],
-            ], 'blc' );
-            wp_add_inline_script( 'wp-i18n', 'wp.i18n.setLocaleData( ' . wp_json_encode( $locale_data_ct ) . ', "blc" );' );
+            ], 'blocksy-companion' );
+            wp_add_inline_script( 'wp-i18n', 'wp.i18n.setLocaleData( ' . wp_json_encode( $locale_data_ct ) . ', "blocksy-companion" );' );
         } );
         $this->cache_manager = new CacheResetManager();
         $this->extensions_api = new ExtensionsManagerApi();
