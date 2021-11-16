@@ -54,7 +54,7 @@ export const getRowStickyHeight = (el) => {
 				rowInitialMinHeight *= parseFloat(maybeShrink) / 100
 			}
 
-			let logoStickyHeight = logoInitialHeight * logoStickyHeight
+			let logoStickyHeight = logoInitialHeight * logoStickyShrink
 
 			let finalInitialHeight =
 				rowStickyHeight - logoInitialHeight + logoStickyHeight
