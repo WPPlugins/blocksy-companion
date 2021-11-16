@@ -169,7 +169,7 @@ if (! function_exists('blocksy_attr_to_html')) {
 				continue;
 			}
 
-			$html_attr .= $attr_name . '="' . htmlspecialchars($attr_val) . '" ';
+			$html_attr .= $attr_name . '="' . $attr_val . '" ';
 		}
 
 		return $html_attr;

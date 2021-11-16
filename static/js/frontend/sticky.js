@@ -5,6 +5,8 @@ import { computeShrink } from './sticky/shrink'
 import { computeAutoHide } from './sticky/auto-hide'
 import { computeFadeSlide } from './sticky/fade-slide'
 
+import { getRowStickyHeight } from './sticky/shrink-utils'
+
 export const setTransparencyFor = (deviceContainer, value = 'yes') => {
 	Array.from(
 		deviceContainer.querySelectorAll('[data-row][data-transparent-row]')
@@ -25,8 +27,15 @@ var getParents = function (elem) {
 
 let cachedStartPosition = null
 let cachedContainerInitialHeight = null
-
 let cachedStickyContainerHeight = null
+
+ctEvents.on('ct:header:update', () => {
+	cachedStartPosition = null
+	cachedContainerInitialHeight = null
+	cachedStickyContainerHeight = null
+
+	compute()
+})
 
 const getStartPositionFor = (stickyContainer) => {
 	if (
@@ -120,6 +129,14 @@ const compute = () => {
 			stickyContainer.getBoundingClientRect().height
 		)
 		cachedStickyContainerHeight = parseInt(stickyContainerHeight)
+
+		document.body.style.setProperty(
+			'--header-sticky-height-animated',
+			`${[...stickyContainer.querySelectorAll('[data-row]')].reduce(
+				(res, row) => res + getRowStickyHeight(row),
+				0
+			)}px`
+		)
 	}
 
 	const stickyComponents = stickyContainer.dataset.sticky

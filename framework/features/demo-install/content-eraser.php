@@ -3,8 +3,20 @@
 namespace Blocksy;
 
 class DemoInstallContentEraser {
+	protected $has_streaming = true;
+
+	public function __construct($args = []) {
+		$args = wp_parse_args($args, [
+			'has_streaming' => true
+		]);
+
+		$this->has_streaming = $args['has_streaming'];
+	}
+
 	public function import() {
-		Plugin::instance()->demo->start_streaming();
+		if ($this->has_streaming) {
+			Plugin::instance()->demo->start_streaming();
+		}
 
 		if (! current_user_can('edit_theme_options')) {
 			/*
@@ -24,19 +36,23 @@ class DemoInstallContentEraser {
 		$this->reset_previous_terms();
 		$this->reset_menus();
 
-		Plugin::instance()->demo->emit_sse_message([
-			'action' => 'complete',
-			'error' => false,
-		]);
+		if ($this->has_streaming) {
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'complete',
+				'error' => false,
+			]);
 
-		exit;
+			exit;
+		}
 	}
 
 	private function reset_previous_posts() {
-		Plugin::instance()->demo->emit_sse_message([
-			'action' => 'erase_previous_posts',
-			'error' => false,
-		]);
+		if ($this->has_streaming) {
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'erase_previous_posts',
+				'error' => false,
+			]);
+		}
 
 		global $wpdb;
 
@@ -54,10 +70,12 @@ class DemoInstallContentEraser {
 	}
 
 	private function reset_previous_terms() {
-		Plugin::instance()->demo->emit_sse_message([
-			'action' => 'erase_previous_terms',
-			'error' => false,
-		]);
+		if ($this->has_streaming) {
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'erase_previous_terms',
+				'error' => false,
+			]);
+		}
 
 		global $wpdb;
 
@@ -79,10 +97,12 @@ class DemoInstallContentEraser {
 	}
 
 	private function erase_default_pages() {
-		Plugin::instance()->demo->emit_sse_message([
-			'action' => 'erase_default_pages',
-			'error' => false,
-		]);
+		if ($this->has_streaming) {
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'erase_default_pages',
+				'error' => false,
+			]);
+		}
 
 		$sample_page = get_page_by_path('sample-page', OBJECT, 'page');
 		$hello_world_post = get_page_by_path('hello-world', OBJECT, 'post');
@@ -99,10 +119,12 @@ class DemoInstallContentEraser {
 	private function reset_customizer() {
 		global $wp_customize;
 
-		Plugin::instance()->demo->emit_sse_message([
-			'action' => 'erase_customizer_settings',
-			'error' => false,
-		]);
+		if ($this->has_streaming) {
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'erase_customizer_settings',
+				'error' => false,
+			]);
+		}
 
 		if (! $wp_customize) {
 			return;
@@ -115,15 +137,17 @@ class DemoInstallContentEraser {
 				continue;
 			}
 
-			remove_theme_mod( $single_setting->id );
+			remove_theme_mod($single_setting->id);
 		}
 	}
 
 	private function reset_widgets_data() {
-		Plugin::instance()->demo->emit_sse_message([
-			'action' => 'erase_widgets_data',
-			'error' => false,
-		]);
+		if ($this->has_streaming) {
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'erase_widgets_data',
+				'error' => false,
+			]);
+		}
 
 		$sidebars_widgets = get_option('sidebars_widgets', array());
 
@@ -175,5 +199,4 @@ class DemoInstallContentEraser {
 		}
 	}
 }
-
 

@@ -6,6 +6,8 @@
 		<input type="text" name="user_login" id="user_login_forgot" class="input" value="" size="20" autocapitalize="off" required>
 	</p>
 
+	<?php do_action('lostpassword_form'); ?>
+
 	<p>
 		<button name="wp-submit" class="ct-button">
 			<?php echo __('Get New Password', 'blocksy-companion') ?>

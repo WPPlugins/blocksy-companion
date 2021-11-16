@@ -16,7 +16,11 @@ const ensureAccountModalPresent = (cb) => {
 	}
 
 	fetch(
-		`${ct_localizations.ajax_url}?action=blc_retrieve_account_modal`,
+		`${
+			ct_localizations.ajax_url
+		}?action=blc_retrieve_account_modal&header_id=${
+			document.body.dataset.header.split(':')[0]
+		}`,
 
 		{
 			method: 'POST',
@@ -31,7 +35,34 @@ const ensureAccountModalPresent = (cb) => {
 			drawerCanvas.insertAdjacentHTML('beforeend', html)
 
 			setTimeout(() => {
-				cb(document.querySelector(selector))
+				let el = document.querySelector(selector)
+
+				if (window.nslReinit) {
+					window.nslReinit()
+				}
+
+				;[...el.querySelectorAll('script')].map((s) => {
+					var script = document.createElement('script')
+					script.textContent = s.textContent
+					document.body.appendChild(script)
+				})
+				;[...el.querySelectorAll('.g-recaptcha')].map((el) => {
+					if (window.grecaptcha && !el.gr_rendered) {
+						el.gr_rendered = true
+
+						el.id += Math.floor(Math.random() * 1000) + 1
+
+						el.gID = grecaptcha.render(el.id, {
+							sitekey: el.dataset.sitekey,
+						})
+					}
+				})
+
+				if (window.anr_onloadCallback) {
+					anr_onloadCallback()
+				}
+
+				cb(el)
 			})
 		})
 }

@@ -3,8 +3,6 @@ import { setTransparencyFor } from '../sticky'
 import { shrinkHandleLogo } from './shrink-handle-logo'
 import { shrinkHandleMiddleRow } from './shrink-handle-middle-row'
 
-import { getRowInitialHeight } from './shrink-utils'
-
 export const computeShrink = ({
 	containerInitialHeight,
 	stickyContainer,

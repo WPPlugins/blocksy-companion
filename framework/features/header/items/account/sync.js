@@ -153,16 +153,30 @@ ctEvents.on(
 					},
 				],
 
-				account_close_button_shape_color: [
+				account_close_button_border_color: [
 					{
 						selector: '#account-modal .ct-close-button',
-						variable: 'closeButtonBackground',
+						variable: 'close-button-border-color',
 						type: 'color:default',
 					},
 
 					{
 						selector: '#account-modal .ct-close-button',
-						variable: 'closeButtonHoverBackground',
+						variable: 'close-button-hover-border-color',
+						type: 'color:hover',
+					},
+				],
+
+				account_close_button_shape_color: [
+					{
+						selector: '#account-modal .ct-close-button',
+						variable: 'close-button-background',
+						type: 'color:default',
+					},
+
+					{
+						selector: '#account-modal .ct-close-button',
+						variable: 'close-button-hover-background',
 						type: 'color:hover',
 					},
 				],
@@ -416,5 +430,27 @@ ctEvents.on('ct:header:sync:item:account', ({ optionId, optionValue }) => {
 			},
 			{ onlyView: 'mobile' }
 		)
+	}
+
+	if (optionId === 'account_close_button_type') {
+		let offcanvasModalClose = document.querySelector(
+			'#account-modal .ct-close-button'
+		)
+
+		setTimeout(() => {
+			offcanvasModalClose.classList.add('ct-disable-transitions')
+
+			requestAnimationFrame(() => {
+				if (offcanvasModalClose) {
+					offcanvasModalClose.dataset.type = optionValue
+				}
+
+				setTimeout(() => {
+					offcanvasModalClose.classList.remove(
+						'ct-disable-transitions'
+					)
+				})
+			})
+		}, 300)
 	}
 })

@@ -541,6 +541,7 @@ if ($forms_type !== 'classic-forms' || is_customize_preview()) {
 	]);
 }
 
+$close_button_type = blocksy_akg('account_close_button_type', $atts, 'type-1');
 
 blocksy_output_colors([
 	'value' => blocksy_akg('account_close_button_color', $atts),
@@ -581,41 +582,87 @@ blocksy_output_colors([
 	],
 ]);
 
-blocksy_output_colors([
-	'value' => blocksy_akg('account_close_button_shape_color', $atts),
-	'default' => [
-		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
-		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
-	],
-	'css' => $css,
 
-	'variables' => [
+if (is_customize_preview() || $close_button_type === 'type-2') {
+	blocksy_output_colors([
+		'value' => blocksy_akg('account_close_button_border_color', $atts),
 		'default' => [
-			'selector' => blc_call_fn([
-				'fn' => 'blocksy_assemble_selector',
-				'default' => $root_selector
-			], blc_call_fn([
-				'fn' => 'blocksy_mutate_selector',
-			], [
-				'selector' => [$root_selector[0]],
-				'operation' => 'suffix',
-				'to_add' => '#account-modal .ct-close-button'
-			])),
-			'variable' => 'closeButtonBackground'
+			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+			'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		],
+		'css' => $css,
 
-		'hover' => [
-			'selector' => blc_call_fn([
-				'fn' => 'blocksy_assemble_selector',
-				'default' => $root_selector
-			], blc_call_fn([
-				'fn' => 'blocksy_mutate_selector',
-			], [
-				'selector' => [$root_selector[0]],
-				'operation' => 'suffix',
-				'to_add' => '#account-modal .ct-close-button'
-			])),
-			'variable' => 'closeButtonHoverBackground'
-		]
-	],
-]);
+		'variables' => [
+			'default' => [
+				'selector' => blc_call_fn([
+					'fn' => 'blocksy_assemble_selector',
+					'default' => $root_selector
+				], blc_call_fn([
+					'fn' => 'blocksy_mutate_selector',
+				], [
+					'selector' => [$root_selector[0]],
+					'operation' => 'suffix',
+					'to_add' => '#account-modal .ct-close-button'
+				])),
+				'variable' => 'close-button-border-color'
+			],
+
+			'hover' => [
+				'selector' => blc_call_fn([
+					'fn' => 'blocksy_assemble_selector',
+					'default' => $root_selector
+				], blc_call_fn([
+					'fn' => 'blocksy_mutate_selector',
+				], [
+					'selector' => [$root_selector[0]],
+					'operation' => 'suffix',
+					'to_add' => '#account-modal .ct-close-button'
+				])),
+				'variable' => 'close-button-hover-border-color'
+			]
+		],
+	]);
+}
+
+if (is_customize_preview() || $close_button_type === 'type-3') {
+
+	blocksy_output_colors([
+		'value' => blocksy_akg('account_close_button_shape_color', $atts),
+		'default' => [
+			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+			'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		],
+		'css' => $css,
+
+		'variables' => [
+			'default' => [
+				'selector' => blc_call_fn([
+					'fn' => 'blocksy_assemble_selector',
+					'default' => $root_selector
+				], blc_call_fn([
+					'fn' => 'blocksy_mutate_selector',
+				], [
+					'selector' => [$root_selector[0]],
+					'operation' => 'suffix',
+					'to_add' => '#account-modal .ct-close-button'
+				])),
+				'variable' => 'close-button-background'
+			],
+
+			'hover' => [
+				'selector' => blc_call_fn([
+					'fn' => 'blocksy_assemble_selector',
+					'default' => $root_selector
+				], blc_call_fn([
+					'fn' => 'blocksy_mutate_selector',
+				], [
+					'selector' => [$root_selector[0]],
+					'operation' => 'suffix',
+					'to_add' => '#account-modal .ct-close-button'
+				])),
+				'variable' => 'close-button-hover-background'
+			]
+		],
+	]);
+}
+

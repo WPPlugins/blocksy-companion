@@ -3,15 +3,27 @@
 namespace Blocksy;
 
 class DemoInstallFinalActions {
-	public function import() {
-		Plugin::instance()->demo->start_streaming();
+	protected $has_streaming = true;
 
-		if (! current_user_can('edit_theme_options')) {
-			Plugin::instance()->demo->emit_sse_message([
-				'action' => 'complete',
-				'error' => false,
-			]);
-			exit;
+	public function __construct($args = []) {
+		$args = wp_parse_args($args, [
+			'has_streaming' => true
+		]);
+
+		$this->has_streaming = $args['has_streaming'];
+	}
+
+	public function import() {
+		if ($this->has_streaming) {
+			Plugin::instance()->demo->start_streaming();
+
+			if (! current_user_can('edit_theme_options')) {
+				Plugin::instance()->demo->emit_sse_message([
+					'action' => 'complete',
+					'error' => false,
+				]);
+				exit;
+			}
 		}
 
 		$wpforms_settings = get_option('wpforms_settings', []);
@@ -20,11 +32,14 @@ class DemoInstallFinalActions {
 
 		$this->replace_urls();
 
+		do_action('customize_save_after');
 		do_action('blocksy:dynamic-css:refresh-caches');
 		Plugin::instance()->cache_manager->run_cache_purge();
 
 		if (class_exists('WC_REST_System_Status_Tools_V2_Controller')) {
-			define('WP_CLI', true);
+			if (! defined('WP_CLI')) {
+				define('WP_CLI', true);
+			}
 
 			$s = new \WC_REST_System_Status_Tools_V2_Controller();
 
@@ -62,11 +77,13 @@ class DemoInstallFinalActions {
 			}
 		}
 
-		Plugin::instance()->demo->emit_sse_message([
-			'action' => 'complete',
-			'error' => false,
-		]);
-		exit;
+		if ($this->has_streaming) {
+			Plugin::instance()->demo->emit_sse_message([
+				'action' => 'complete',
+				'error' => false,
+			]);
+			exit;
+		}
 	}
 
 	/**

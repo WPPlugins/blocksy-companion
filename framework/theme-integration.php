@@ -4,16 +4,6 @@ namespace Blocksy;
 
 class ThemeIntegration {
 	public function __construct() {
-		add_action(
-			'wp_ajax_blc_implement_user_registration',
-			[$this, 'blc_implement_user_registration']
-		);
-
-		add_action(
-			'wp_ajax_nopriv_blc_implement_user_registration',
-			[$this, 'blc_implement_user_registration']
-		);
-
 		add_filter('blocksy:frontend:dynamic-js-chunks', function ($chunks) {
 			$chunks[] = [
 				'id' => 'blocksy_account',
@@ -365,7 +355,7 @@ class ThemeIntegration {
 					}
 
 					if (
-						blc_fs()->is__premium_only()
+						blc_fs()->can_use_premium_code__premium_only()
 						&&
 						BLOCKSY_PATH . '/framework/premium/changelog.txt'
 					) {
@@ -454,66 +444,5 @@ class ThemeIntegration {
 			'orientation' => ($width > $height) ? 'landscape' : 'portrait'
 		);
 	}
-
-	public function blc_implement_user_registration() {
-		ob_start();
-		require_once ABSPATH . 'wp-login.php';
-		$res = ob_get_clean();
-
-		$users_can_register = get_option('users_can_register');
-
-		if (get_option('woocommerce_enable_myaccount_registration') === 'yes') {
-			$users_can_register = true;
-		}
-
-		if (! $users_can_register) {
-			exit;
-		}
-
-		$user_login = '';
-		$user_email = '';
-
-		if (
-			isset($_POST['user_login'])
-			&&
-			is_string($_POST['user_login'])
-		) {
-			$user_login = wp_unslash( $_POST['user_login'] );
-		}
-
-		if (isset($_POST['user_email']) && is_string($_POST['user_email'])) {
-			$user_email = wp_unslash( $_POST['user_email'] );
-		}
-
-		$errors = register_new_user($user_login, $user_email);
-
-		if (! is_wp_error($errors)) {
-			$errors = new \WP_Error();
-
-			$errors->add(
-				'registered',
-				sprintf(
-					/* translators: %s: Link to the login page. */
-					__( 'Registration complete. Please check your email, then visit the <a href="%s">login page</a>.' ),
-					wp_login_url()
-				),
-				'message'
-			);
-
-			$redirect_to = admin_url();
-			$errors = apply_filters('wp_login_errors', $errors, $redirect_to);
-
-			login_header(__('Check your email', 'blocksy-companion'), '', $errors);
-
-			wp_die();
-		}
-
-		login_header(
-			__('Registration Form', 'blocksy-companion'),
-			'<p class="message register">' . __('Register For This Site', 'blocksy-companion') . '</p>',
-			$errors
-		);
-
-		wp_die();
-	}
 }
+

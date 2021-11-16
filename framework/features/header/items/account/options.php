@@ -935,88 +935,6 @@ $options = [
 						],
 					],
 
-					'account_form_shadow' => [
-						'label' => __( 'Modal Shadow', 'blocksy-companion' ),
-						'type' => 'ct-box-shadow',
-						'design' => 'inline',
-						// 'responsive' => true,
-						'divider' => 'top',
-						'value' => blocksy_box_shadow_value([
-							'enable' => true,
-							'h_offset' => 0,
-							'v_offset' => 0,
-							'blur' => 70,
-							'spread' => 0,
-							'inset' => false,
-							'color' => [
-								'color' => 'rgba(0, 0, 0, 0.35)',
-							],
-						])
-					],
-
-					'account_close_button_color' => [
-						'label' => __( 'Close Icon Color', 'blocksy-companion' ),
-						'type'  => 'ct-color-picker',
-						'design' => 'inline',
-						'divider' => 'top',
-						'setting' => [ 'transport' => 'postMessage' ],
-
-						'value' => [
-							'default' => [
-								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
-							],
-
-							'hover' => [
-								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
-							],
-						],
-
-						'pickers' => [
-							[
-								'title' => __( 'Initial', 'blocksy-companion' ),
-								'id' => 'default',
-								'inherit' => 'rgba(255, 255, 255, 0.7)'
-							],
-
-							[
-								'title' => __( 'Hover', 'blocksy-companion' ),
-								'id' => 'hover',
-								'inherit' => '#ffffff'
-							],
-						],
-					],
-
-					'account_close_button_shape_color' => [
-						'label' => __( 'Close Icon Background', 'blocksy-companion' ),
-						'type'  => 'ct-color-picker',
-						'design' => 'inline',
-						'setting' => [ 'transport' => 'postMessage' ],
-
-						'value' => [
-							'default' => [
-								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
-							],
-
-							'hover' => [
-								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
-							],
-						],
-
-						'pickers' => [
-							[
-								'title' => __( 'Initial', 'blocksy-companion' ),
-								'id' => 'default',
-								'inherit' => 'rgba(0, 0, 0, 0.5)'
-							],
-
-							[
-								'title' => __( 'Hover', 'blocksy-companion' ),
-								'id' => 'hover',
-								'inherit' => 'rgba(0, 0, 0, 0.5)'
-							],
-						],
-					],
-
 					'accountHeaderFormBackground' => [
 						'label' => __( 'Modal Background', 'blocksy-companion' ),
 						'type'  => 'ct-background',
@@ -1045,6 +963,156 @@ $options = [
 								],
 							],
 						])
+					],
+
+					'account_form_shadow' => [
+						'label' => __( 'Modal Shadow', 'blocksy-companion' ),
+						'type' => 'ct-box-shadow',
+						'design' => 'inline',
+						// 'responsive' => true,
+						'divider' => 'top',
+						'value' => blocksy_box_shadow_value([
+							'enable' => true,
+							'h_offset' => 0,
+							'v_offset' => 0,
+							'blur' => 70,
+							'spread' => 0,
+							'inset' => false,
+							'color' => [
+								'color' => 'rgba(0, 0, 0, 0.35)',
+							],
+						])
+					],
+
+					'account_close_button_type' => [
+						'label' => __('Close Button Type', 'blocksy-companion'),
+						'type' => 'ct-select',
+						'value' => 'type-1',
+						'view' => 'text',
+						'design' => 'inline',
+						'divider' => 'top',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'choices' => blocksy_ordered_keys(
+							[
+								'type-1' => __( 'Simple', 'blocksy-companion' ),
+								'type-2' => __( 'Border', 'blocksy-companion' ),
+								'type-3' => __( 'Background', 'blocksy-companion' ),
+							]
+						),
+					],
+
+					'account_close_button_color' => [
+						'label' => __( 'Icon Color', 'blocksy-companion' ),
+						'type'  => 'ct-color-picker',
+						'design' => 'inline',
+						'setting' => [ 'transport' => 'postMessage' ],
+
+						'value' => [
+							'default' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+
+							'hover' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
+						],
+
+						'pickers' => [
+							[
+								'title' => __( 'Initial', 'blocksy-companion' ),
+								'id' => 'default',
+								'inherit' => 'rgba(255, 255, 255, 0.7)'
+							],
+
+							[
+								'title' => __( 'Hover', 'blocksy-companion' ),
+								'id' => 'hover',
+								'inherit' => '#ffffff'
+							],
+						],
+					],
+
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => [ 'account_close_button_type' => 'type-2' ],
+						'options' => [
+
+							'account_close_button_border_color' => [
+								'label' => __( 'Border Color', 'blocksy-companion' ),
+								'type'  => 'ct-color-picker',
+								'design' => 'inline',
+								'setting' => [ 'transport' => 'postMessage' ],
+
+								'value' => [
+									'default' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+
+									'hover' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+								],
+
+								'pickers' => [
+									[
+										'title' => __( 'Initial', 'blocksy-companion' ),
+										'id' => 'default',
+										'inherit' => 'rgba(0, 0, 0, 0.5)'
+									],
+
+									[
+										'title' => __( 'Hover', 'blocksy-companion' ),
+										'id' => 'hover',
+										'inherit' => 'rgba(0, 0, 0, 0.5)'
+									],
+								],
+							],
+
+						],
+					],
+
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => [ 'account_close_button_type' => 'type-3' ],
+						'options' => [
+
+							'account_close_button_shape_color' => [
+								'label' => __( 'Background Color', 'blocksy-companion' ),
+								'type'  => 'ct-color-picker',
+								'design' => 'inline',
+								'setting' => [ 'transport' => 'postMessage' ],
+
+								'value' => [
+									'default' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+
+									'hover' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+								],
+
+								'pickers' => [
+									[
+										'title' => __( 'Initial', 'blocksy-companion' ),
+										'id' => 'default',
+										'inherit' => 'rgba(0, 0, 0, 0.5)'
+									],
+
+									[
+										'title' => __( 'Hover', 'blocksy-companion' ),
+										'id' => 'hover',
+										'inherit' => 'rgba(0, 0, 0, 0.5)'
+									],
+								],
+							],
+
+						],
+					],
+
+					blocksy_rand_md5() => [
+						'type' => 'ct-spacer',
+						'height' => 50
 					],
 
 				],

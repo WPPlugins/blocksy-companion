@@ -70,6 +70,7 @@ class DemoInstallPluginsInstaller {
 			}
 
 			$plugins_manager->prepare_install($single_plugin);
+
 			echo $single_plugin;
 
 			if ($this->has_streaming) {

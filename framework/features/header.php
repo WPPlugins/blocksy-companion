@@ -551,15 +551,29 @@ class HeaderAdditions {
 
 		$body = json_decode(file_get_contents('php://input'), true);
 
+		$header_id = null;
+
+		if (isset($_REQUEST['header_id'])) {
+			$header_id = $_REQUEST['header_id'];
+		}
+
 		if ($body && isset($body['current_url'])) {
 			$url = $body['current_url'];
 		}
+
+		$render = new \Blocksy_Header_Builder_Render([
+			'current_section_id' => $header_id
+		]);
+
+		$atts = $render->get_item_data_for('account');
 
 		$html = blc_call_fn(
 			['fn' => 'blocksy_render_view'],
 			dirname(__FILE__) . '/header/account-modal.php',
 			[
-				'current_url' => $url
+				'current_url' => $url,
+				'header_id' => $header_id,
+				'atts' => $atts
 			]
 		);
 
