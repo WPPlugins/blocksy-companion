@@ -33,6 +33,21 @@ class AccountAuth {
 		$errors = [];
 		$success = false;
 
+		$nonce_value = '';
+
+		if (
+			isset($_POST['blocksy-lostpassword-nonce'])
+			&&
+			is_string($_POST['blocksy-lostpassword-nonce'])
+		) {
+			$nonce_value = wp_unslash($_POST['blocksy-lostpassword-nonce']);
+		}
+
+		if (! wp_verify_nonce($nonce_value, 'blocksy-lostpassword')) {
+			wp_send_json_error([]);
+			exit;
+		}
+
 		if (class_exists('WC_Shortcode_My_Account')) {
 			$success = \WC_Shortcode_My_Account::retrieve_password();
 
@@ -119,6 +134,7 @@ class AccountAuth {
 		$user_login = '';
 		$user_email = '';
 		$user_pass = '';
+		$nonce_value = '';
 
 		if (isset($_POST['user_login']) && is_string($_POST['user_login'])) {
 			$user_login = wp_unslash($_POST['user_login']);
@@ -130,6 +146,19 @@ class AccountAuth {
 
 		if (isset($_POST['user_pass']) && is_string($_POST['user_pass'])) {
 			$user_pass = wp_unslash($_POST['user_pass']);
+		}
+
+		if (
+			isset($_POST['blocksy-register-nonce'])
+			&&
+			is_string($_POST['blocksy-register-nonce'])
+		) {
+			$nonce_value = wp_unslash($_POST['blocksy-register-nonce']);
+		}
+
+		if (! wp_verify_nonce($nonce_value, 'blocksy-register')) {
+			wp_send_json_error([]);
+			exit;
 		}
 
 		if (function_exists('wc_create_new_customer')) {

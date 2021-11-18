@@ -15192,6 +15192,7 @@
                 'mature'   => 0,
                 'spam'     => 0,
                 'deleted'  => 0,
+				'number' => 100000
             );
 
             if ( function_exists( 'get_sites' ) ) {

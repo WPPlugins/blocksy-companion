@@ -85,5 +85,8 @@ do_action( 'blocksy:account:modal:register:end' );
 	<?php 
 do_action( 'woocommerce_register_form_end' );
 ?>
+	<?php 
+wp_nonce_field( 'blocksy-register', 'blocksy-register-nonce' );
+?>
 </form>
 
