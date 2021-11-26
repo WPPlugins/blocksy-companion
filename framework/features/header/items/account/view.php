@@ -33,6 +33,23 @@ if (! $current_user_id) {
 	$path = 'logout';
 }
 
+$account_user_visibility = blocksy_default_akg(
+	'account_user_visibility',
+	$atts,
+	[
+		'logged_in' => true,
+		'logged_out' => true,
+	]
+);
+
+if (
+	$path === 'login' && ! $account_user_visibility['logged_in']
+	||
+	$path === 'logout' && ! $account_user_visibility['logged_out']
+) {
+	return;
+}
+
 $attr['class'] = trim('ct-header-account ' . blocksy_visibility_classes(
 	blocksy_default_akg(
 		'header_account_visibility',

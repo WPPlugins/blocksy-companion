@@ -487,6 +487,22 @@ $options = [
 				],
 			],
 
+			'account_user_visibility' => [
+				'label' => __( 'User Visibility', 'blocksy-companion' ),
+				'type' => 'ct-checkboxes',
+				'design' => 'block',
+				'view' => 'text',
+				'divider' => 'top:full',
+				'value' => [
+					'logged_in' => true,
+					'logged_out' => true,
+				],
+				'choices' => blocksy_ordered_keys([
+					'logged_in' => __( 'Logged In', 'blocksy-companion' ),
+					'logged_out' => __( 'Logged Out', 'blocksy-companion' ),
+				]),
+			],
+
 		],
 	],
 

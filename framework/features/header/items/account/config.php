@@ -15,7 +15,8 @@ $config = [
 		'login_account_action',
 		'loggedout_account_custom_page',
 		'logged_out_style',
-		'accountHeaderIcon'
+		'accountHeaderIcon',
+		'account_user_visibility'
 	],
 
 	'translation_keys' => [

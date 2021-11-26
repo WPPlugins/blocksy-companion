@@ -218,10 +218,22 @@ export const mountStickyHeader = () => {
 		return
 	}
 
-	window.addEventListener('resize', compute, false)
+	window.addEventListener(
+		'resize',
+		(event) => {
+			compute(event)
+			ctEvents.trigger('ct:header:update')
+		},
+		false
+	)
+
+	window.addEventListener('orientationchange', (event) => {
+		compute(event)
+		ctEvents.trigger('ct:header:update')
+	})
+
 	window.addEventListener('scroll', compute, false)
 	window.addEventListener('load', compute, false)
-	window.addEventListener('orientationchange', compute)
 
 	compute()
 }

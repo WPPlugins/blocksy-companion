@@ -99,7 +99,7 @@ const actuallyInsertMessage = (container, html) => {
 	if (html) {
 		container.insertAdjacentHTML(
 			'afterbegin',
-			`<div class="ct-form-notification">${maybeMessage.innerHTML}</div>`
+			`<div class="ct-form-notification">${html}</div>`
 		)
 	}
 }
