@@ -4,22 +4,34 @@ namespace Blocksy;
 
 class ThemeIntegration {
 	public function __construct() {
+
 		add_filter('blocksy:frontend:dynamic-js-chunks', function ($chunks) {
-			$chunks[] = [
-				'id' => 'blocksy_account',
-				'selector' => implode(', ', [
-					'.ct-header-account[href*="account-modal"]',
-					'.must-log-in a'
-				]),
-				'url' => blc_call_fn(
-					[
-						'fn' => 'blocksy_cdn_url',
-						'default' => BLOCKSY_URL . 'static/bundle/account.js'
-					],
-					BLOCKSY_URL . 'static/bundle/account.js'
-				),
-				'trigger' => 'click'
-			];
+			$render = new \Blocksy_Header_Builder_Render();
+
+			if (
+				$render->contains_item('account')
+				||
+				is_customize_preview()
+			) {
+				$chunks[] = [
+					'id' => 'blocksy_account',
+					'selector' => implode(', ', [
+						'.ct-header-account[href*="account-modal"]',
+						'.must-log-in a'
+					]),
+					'url' => blc_call_fn(
+						[
+							'fn' => 'blocksy_cdn_url',
+							'default' => BLOCKSY_URL . 'static/bundle/account.js'
+						],
+						BLOCKSY_URL . 'static/bundle/account.js'
+					),
+					'trigger' => 'click',
+					'has_modal_loader' => [
+						'id' => 'account-modal'
+					]
+				];
+			}
 
 			$chunks[] = [
 				'id' => 'blocksy_dark_mode',
@@ -92,6 +104,17 @@ class ThemeIntegration {
 					'content' => $content
 				]
 			);
+		});
+
+		add_filter('blocksy:general:ct-scripts-localizations', function ($data) {
+			$data['dynamic_styles_selectors'][] = [
+				'selector' => '#account-modal',
+				'url' => blocksy_cdn_url(
+					BLOCKSY_URL . 'static/bundle/account-lazy.min.css'
+				)
+			];
+
+			return $data;
 		});
 
 		add_shortcode('blocksy_breadcrumbs', function ($args, $content) {

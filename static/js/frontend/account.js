@@ -421,6 +421,15 @@ export const handleAccountModal = (el) => {
 				e.preventDefault()
 				activateScreen(el, { screen })
 			})
+
+			itemEl.addEventListener('keyup', (e) => {
+				if (e.keyCode !== 13) {
+					return
+				}
+
+				e.preventDefault()
+				activateScreen(el, { screen })
+			})
 		})
 	})
 }

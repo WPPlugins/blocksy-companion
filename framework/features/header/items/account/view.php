@@ -68,7 +68,9 @@ echo blocksy_render_view(
 		'attr' => $attr,
 		'icon' => $icon,
 		'device' => $device,
-		'current_user_id' => $current_user_id
+		'current_user_id' => $current_user_id,
+		'section_id' => $section_id,
+		'item_id' => $item_id
 	]
 );
 

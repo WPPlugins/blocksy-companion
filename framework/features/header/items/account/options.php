@@ -20,8 +20,25 @@ if (class_exists('WooCommerce')) {
 
 $options = [
 	blocksy_rand_md5() => [
-		'type' => 'ct-title',
-		'label' => __( 'Customizing: Logged in State', 'blocksy-companion' ),
+		'type' => 'ct-condition',
+		'condition' => ['account_state' => 'in'],
+		'options' => [
+			blocksy_rand_md5() => [
+				'type' => 'ct-title',
+				'label' => __('Customizing: Logged in State', 'blocksy-companion'),
+			],
+		]
+	],
+
+	blocksy_rand_md5() => [
+		'type' => 'ct-condition',
+		'condition' => ['account_state' => 'out'],
+		'options' => [
+			blocksy_rand_md5() => [
+				'type' => 'ct-title',
+				'label' => __('Customizing: Logged out State', 'blocksy-companion'),
+			],
+		]
 	],
 
 	'account_state' => [
@@ -493,6 +510,7 @@ $options = [
 				'design' => 'block',
 				'view' => 'text',
 				'divider' => 'top:full',
+				'allow_empty' => true,
 				'value' => [
 					'logged_in' => true,
 					'logged_out' => true,

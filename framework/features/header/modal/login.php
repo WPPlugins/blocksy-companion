@@ -2,6 +2,11 @@
 
 // wp_login_form([]);
 $redirect_to_url = apply_filters( 'blocksy:account:modal:login:redirect_to', $current_url );
+$forgot_password_inline = apply_filters( 'blocksy:account:modal:login:forgot-password-inline', true );
+$forgot_pass_class = 'ct-forgot-password';
+if ( !$forgot_password_inline ) {
+    $forgot_pass_class .= '-static';
+}
 ?>
 
 <form name="loginform" id="loginform" action="<?php 
@@ -16,7 +21,7 @@ do_action( 'blocksy:account:modal:login:start' );
 
 	<p class="login-username">
 		<label for="user_login"><?php 
-echo  __( 'Email Address', 'blocksy-companion' ) ;
+echo  __( 'Username or Email Address', 'blocksy-companion' ) ;
 ?></label>
 		<input type="text" name="log" id="user_login" class="input" value="" size="20">
 	</p>
@@ -38,7 +43,9 @@ echo  __( 'Remember Me', 'blocksy-companion' ) ;
 
 		<a href="<?php 
 echo  wp_lostpassword_url() ;
-?>" class="ct-forgot-password">
+?>" class="<?php 
+echo  $forgot_pass_class ;
+?>">
 			<?php 
 echo  __( 'Forgot Password?', 'blocksy-companion' ) ;
 ?>

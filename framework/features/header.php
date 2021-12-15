@@ -234,15 +234,23 @@ class HeaderAdditions {
 			return $opt;
 		});
 
-		add_action(
-			'wp_ajax_blc_retrieve_account_modal',
-			[$this, 'blc_retrieve_account_modal']
-		);
+		add_filter('blocksy:footer:offcanvas-drawer', function ($els) {
+			if (get_current_user_id()) {
+				return $els;
+			}
 
-		add_action(
-			'wp_ajax_nopriv_blc_retrieve_account_modal',
-			[$this, 'blc_retrieve_account_modal']
-		);
+			$render = new \Blocksy_Header_Builder_Render();
+
+			if (! $render->contains_item('account')) {
+				if (! is_customize_preview()) {
+					return $els;
+				}
+			}
+
+			$els[] = $this->retrieve_account_modal();
+
+			return $els;
+		});
 	}
 
 	public function enqueue_static() {
@@ -544,7 +552,9 @@ class HeaderAdditions {
 		set_theme_mod('blocksy_premium_header_conditions', $conditions);
 	}
 
-	public function blc_retrieve_account_modal() {
+	public function retrieve_account_modal() {
+		do_action('blocksy:content-blocks:display-hooks');
+
 		remove_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
 
 		$url = home_url();
@@ -579,9 +589,7 @@ class HeaderAdditions {
 
 		add_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
 
-		wp_send_json_success([
-			'html' => $html
-		]);
+		return $html;
 	}
 }
 
