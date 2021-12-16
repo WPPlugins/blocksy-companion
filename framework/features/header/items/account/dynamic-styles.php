@@ -561,7 +561,7 @@ blocksy_output_colors([
 			], [
 				'selector' => [$root_selector[0]],
 				'operation' => 'suffix',
-				'to_add' => '#account-modal .ct-close-button'
+				'to_add' => '#account-modal .ct-toggle-close'
 			])),
 			'variable' => 'icon-color'
 		],
@@ -575,9 +575,9 @@ blocksy_output_colors([
 			], [
 				'selector' => [$root_selector[0]],
 				'operation' => 'suffix',
-				'to_add' => '#account-modal .ct-close-button'
+				'to_add' => '#account-modal .ct-toggle-close:hover'
 			])),
-			'variable' => 'icon-hover-color'
+			'variable' => 'icon-color'
 		]
 	],
 ]);
@@ -602,9 +602,9 @@ if (is_customize_preview() || $close_button_type === 'type-2') {
 				], [
 					'selector' => [$root_selector[0]],
 					'operation' => 'suffix',
-					'to_add' => '#account-modal .ct-close-button'
+					'to_add' => '#account-modal .ct-toggle-close[data-type="type-2"]'
 				])),
-				'variable' => 'close-button-border-color'
+				'variable' => 'toggle-button-border-color'
 			],
 
 			'hover' => [
@@ -616,9 +616,9 @@ if (is_customize_preview() || $close_button_type === 'type-2') {
 				], [
 					'selector' => [$root_selector[0]],
 					'operation' => 'suffix',
-					'to_add' => '#account-modal .ct-close-button'
+					'to_add' => '#account-modal .ct-toggle-close[data-type="type-2"]:hover'
 				])),
-				'variable' => 'close-button-hover-border-color'
+				'variable' => 'toggle-button-border-color'
 			]
 		],
 	]);
@@ -644,9 +644,9 @@ if (is_customize_preview() || $close_button_type === 'type-3') {
 				], [
 					'selector' => [$root_selector[0]],
 					'operation' => 'suffix',
-					'to_add' => '#account-modal .ct-close-button'
+					'to_add' => '#account-modal .ct-toggle-close[data-type="type-3"]'
 				])),
-				'variable' => 'close-button-background'
+				'variable' => 'toggle-button-background'
 			],
 
 			'hover' => [
@@ -658,9 +658,9 @@ if (is_customize_preview() || $close_button_type === 'type-3') {
 				], [
 					'selector' => [$root_selector[0]],
 					'operation' => 'suffix',
-					'to_add' => '#account-modal .ct-close-button'
+					'to_add' => '#account-modal .ct-toggle-close[data-type="type-3"]:hover'
 				])),
-				'variable' => 'close-button-hover-background'
+				'variable' => 'toggle-button-background'
 			]
 		],
 	]);

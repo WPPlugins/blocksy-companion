@@ -141,42 +141,42 @@ ctEvents.on(
 
 				account_close_button_color: [
 					{
-						selector: '#account-modal .ct-close-button',
+						selector: '#account-modal .ct-toggle-close',
 						variable: 'icon-color',
 						type: 'color:default',
 					},
 
 					{
-						selector: '#account-modal .ct-close-button',
-						variable: 'icon-hover-color',
+						selector: '#account-modal .ct-toggle-close:hover',
+						variable: 'icon-color',
 						type: 'color:hover',
 					},
 				],
 
 				account_close_button_border_color: [
 					{
-						selector: '#account-modal .ct-close-button',
-						variable: 'close-button-border-color',
+						selector: '#account-modal .ct-toggle-close[data-type="type-2"]',
+						variable: 'toggle-button-border-color',
 						type: 'color:default',
 					},
 
 					{
-						selector: '#account-modal .ct-close-button',
-						variable: 'close-button-hover-border-color',
+						selector: '#account-modal .ct-toggle-close[data-type="type-2"]:hover',
+						variable: 'toggle-button-border-color',
 						type: 'color:hover',
 					},
 				],
 
 				account_close_button_shape_color: [
 					{
-						selector: '#account-modal .ct-close-button',
-						variable: 'close-button-background',
+						selector: '#account-modal .ct-toggle-close[data-type="type-3"]',
+						variable: 'toggle-button-background',
 						type: 'color:default',
 					},
 
 					{
-						selector: '#account-modal .ct-close-button',
-						variable: 'close-button-hover-background',
+						selector: '#account-modal .ct-toggle-close[data-type="type-3"]:hover',
+						variable: 'toggle-button-background',
 						type: 'color:hover',
 					},
 				],
@@ -434,7 +434,7 @@ ctEvents.on('ct:header:sync:item:account', ({ optionId, optionValue }) => {
 
 	if (optionId === 'account_close_button_type') {
 		let offcanvasModalClose = document.querySelector(
-			'#account-modal .ct-close-button'
+			'#account-modal .ct-toggle-close'
 		)
 
 		setTimeout(() => {

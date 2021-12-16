@@ -109,7 +109,11 @@ class ThemeIntegration {
 		add_filter('blocksy:general:ct-scripts-localizations', function ($data) {
 			$data['dynamic_styles_selectors'][] = [
 				'selector' => '#account-modal',
-				'url' => blocksy_cdn_url(
+				'url' => blc_call_fn(
+					[
+						'fn' => 'blocksy_cdn_url',
+						'default' => BLOCKSY_URL . 'static/bundle/account-lazy.min.css'
+					],
 					BLOCKSY_URL . 'static/bundle/account-lazy.min.css'
 				)
 			];

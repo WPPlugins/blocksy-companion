@@ -1,6 +1,13 @@
 import ctEvents from 'ct-events'
 import cookie from 'js-cookie'
-import { onDocumentLoaded } from 'blocksy-frontend'
+
+export const onDocumentLoaded = (cb) => {
+	if (/comp|inter|loaded/.test(document.readyState)) {
+		cb()
+	} else {
+		document.addEventListener('DOMContentLoaded', cb, false)
+	}
+}
 
 const initCookies = () => {
 	const notification = document.querySelector('.cookie-notification')
@@ -62,9 +69,11 @@ const initCookies = () => {
 onDocumentLoaded(() => {
 	initCookies()
 
-	ctEvents.on('blocksy:cookies:init', () => {
-		initCookies()
-	})
+	if (ctEvents) {
+		ctEvents.on('blocksy:cookies:init', () => {
+			initCookies()
+		})
+	}
 })
 
 function whenTransitionEnds(el, cb) {

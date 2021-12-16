@@ -236,7 +236,9 @@ class HeaderAdditions {
 
 		add_filter('blocksy:footer:offcanvas-drawer', function ($els) {
 			if (get_current_user_id()) {
-				return $els;
+				if (! is_customize_preview()) {
+					return $els;
+				}
 			}
 
 			$render = new \Blocksy_Header_Builder_Render();
@@ -553,8 +555,6 @@ class HeaderAdditions {
 	}
 
 	public function retrieve_account_modal() {
-		do_action('blocksy:content-blocks:display-hooks');
-
 		remove_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
 
 		$url = home_url();
