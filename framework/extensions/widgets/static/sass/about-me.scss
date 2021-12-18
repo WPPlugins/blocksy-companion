@@ -23,6 +23,7 @@
 	.ct-about-me-name {
 		display: flex;
 		flex-direction: column;
+		font-weight: 700;
 
 		&:not(:last-child) {
 			margin-bottom: 15px;

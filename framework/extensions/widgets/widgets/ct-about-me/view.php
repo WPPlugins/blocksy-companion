@@ -91,7 +91,7 @@ echo $before_title . wp_kses_post( $title ) . $after_title;
 
 	<?php echo $image_output; ?>
 
-	<h6 class="ct-about-me-name">
+	<p class="ct-about-me-name">
 		<?php echo $about_name; ?>
 
 		<?php if ($about_source === 'from_wp') { ?>
@@ -99,7 +99,7 @@ echo $before_title . wp_kses_post( $title ) . $after_title;
 				<?php echo __('View Profile', 'blc') ?>
 			</a>
 		<?php } ?>
-	</h6>
+	</p>
 
 	<div class="ct-about-me-text"><?php echo $about_text; ?></div>
 

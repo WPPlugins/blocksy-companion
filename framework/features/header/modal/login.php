@@ -34,12 +34,12 @@ echo  __( 'Password', 'blocksy-companion' ) ;
 	</p>
 
 	<p class="login-remember col-2">
-		<label>
+		<span>
 			<input name="rememberme" type="checkbox" id="rememberme" class="ct-checkbox" value="forever">
-			<?php 
+			<label for="rememberme"><?php 
 echo  __( 'Remember Me', 'blocksy-companion' ) ;
-?>
-		</label>
+?></label>
+		</span>
 
 		<a href="<?php 
 echo  wp_lostpassword_url() ;
