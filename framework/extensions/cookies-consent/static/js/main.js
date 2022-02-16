@@ -1,5 +1,49 @@
 import ctEvents from 'ct-events'
 import cookie from 'js-cookie'
+import focusLock from 'dom-focus-lock'
+
+let focusLockToUse = focusLock
+
+if (window.ctFrontend && ctFrontend.focusLock) {
+	focusLockToUse = ctFrontend.focusLock
+} else {
+	window.ctFrontend = window.ctFrontend || {}
+	ctFrontend.focusLock = focusLockToUse
+}
+
+const onKeydown = (event) => {
+	if (event.keyCode !== 27) return
+	hideCookieConsent(document.querySelector('.cookie-notification'))
+}
+
+const showCookieConsent = (node) => {
+	focusLockToUse.on(node)
+	document.addEventListener('keyup', onKeydown)
+
+	requestAnimationFrame(() => {
+		node.classList.remove('ct-fade-in-start')
+		node.classList.add('ct-fade-in-end')
+
+		whenTransitionEnds(node, () => {
+			node.classList.remove('ct-fade-in-end')
+		})
+	})
+}
+const hideCookieConsent = (node) => {
+	focusLockToUse.off(node)
+	document.removeEventListener('keyup', onKeydown)
+
+	node.classList.add('ct-fade-start')
+
+	requestAnimationFrame(() => {
+		node.classList.remove('ct-fade-start')
+		node.classList.add('ct-fade-end')
+
+		whenTransitionEnds(node, () => {
+			node.parentNode.removeChild(node)
+		})
+	})
+}
 
 export const onDocumentLoaded = (cb) => {
 	if (/comp|inter|loaded/.test(document.readyState)) {
@@ -19,14 +63,7 @@ const initCookies = () => {
 		return
 	}
 
-	requestAnimationFrame(() => {
-		notification.classList.remove('ct-fade-in-start')
-		notification.classList.add('ct-fade-in-end')
-
-		whenTransitionEnds(notification, () => {
-			notification.classList.remove('ct-fade-in-end')
-		})
-	})
+	showCookieConsent(notification)
 	;[...notification.querySelectorAll('button')].map((el) => {
 		el.addEventListener('click', (e) => {
 			e.preventDefault()
@@ -52,16 +89,7 @@ const initCookies = () => {
 				})
 			}
 
-			notification.classList.add('ct-fade-start')
-
-			requestAnimationFrame(() => {
-				notification.classList.remove('ct-fade-start')
-				notification.classList.add('ct-fade-end')
-
-				whenTransitionEnds(notification, () => {
-					notification.parentNode.removeChild(notification)
-				})
-			})
+			hideCookieConsent(notification)
 		})
 	})
 }
