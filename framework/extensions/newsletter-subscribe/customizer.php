@@ -1,15 +1,11 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $options = [
 	'label' => __( 'Subscribe Form', 'blocksy-companion' ),
 	'type' => 'ct-panel',
 	'switch' => true,
 	'value' => 'yes',
-	'sync' => blocksy_sync_single_post_container(),
+	'setting' => [ 'transport' => 'postMessage' ],
 	'inner-options' => [
 
 		blocksy_rand_md5() => [
@@ -20,6 +16,7 @@ $options = [
 				'newsletter_subscribe_title' => [
 					'type' => 'text',
 					'label' => __( 'Title', 'blocksy-companion' ),
+					'field_attr' => [ 'id' => 'widget-title' ],
 					'design' => 'block',
 					'value' => __( 'Newsletter Updates', 'blocksy-companion' ),
 					'disableRevertButton' => true,
@@ -29,7 +26,7 @@ $options = [
 				'newsletter_subscribe_text' => [
 					'label' => __( 'Description', 'blocksy-companion' ),
 					'type' => 'textarea',
-					'value' => __( 'Enter your email address below and subscribe to our newsletter', 'blocksy-companion' ),
+					'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blocksy-companion' ),
 					'design' => 'block',
 					'disableRevertButton' => true,
 					'setting' => [ 'transport' => 'postMessage' ],
@@ -83,32 +80,7 @@ $options = [
 					'label' => __( 'Name Field', 'blocksy-companion' ),
 					'value' => 'no',
 					'disableRevertButton' => true,
-					'sync' => blocksy_sync_single_post_container([
-						'loader_selector' => '.ct-newsletter-subscribe-container'
-					]),
-				],
-
-				blocksy_rand_md5() => [
-					'type' => 'ct-condition',
-					'condition' => [ 'has_newsletter_subscribe_name' => 'yes' ],
-					'options' => [
-
-						'newsletter_subscribe_name_required' => [
-							'type' => 'ct-switch',
-							'label' => __('Make Name Field Required', 'blocksy-companion'),
-							'value' => 'no',
-							'disableRevertButton' => true,
-							'sync' => blocksy_sync_single_post_container([
-								'loader_selector' => '.ct-newsletter-subscribe-container'
-							]),
-						],
-
-					],
-				],
-
-				blocksy_rand_md5() => [
-					'type' => 'ct-divider',
-					'attr' => [ 'data-type' => 'small' ],
+					'setting' => [ 'transport' => 'postMessage' ],
 				],
 
 				blocksy_rand_md5() => [
@@ -124,6 +96,7 @@ $options = [
 							'disableRevertButton' => true,
 							'setting' => [ 'transport' => 'postMessage' ],
 						],
+
 					],
 				],
 
@@ -154,11 +127,11 @@ $options = [
 					'type' => 'ct-visibility',
 					'design' => 'block',
 					'setting' => [ 'transport' => 'postMessage' ],
-					'value' => blocksy_default_responsive_value([
+					'value' => [
 						'desktop' => true,
 						'tablet' => true,
 						'mobile' => false,
-					]),
+					],
 
 					'choices' => blocksy_ordered_keys([
 						'desktop' => __( 'Desktop', 'blocksy-companion' ),
@@ -191,13 +164,13 @@ $options = [
 						[
 							'title' => __( 'Initial', 'blocksy-companion' ),
 							'id' => 'default',
-							'inherit' => 'var(--theme-heading-color, var(--theme-heading-3-color, var(--theme-headings-color)))'
+							'inherit' => 'var(--heading-color, var(--heading-3-color, var(--headings-color)))'
 						],
 					],
 				],
 
 				'newsletter_subscribe_content' => [
-					'label' => __( 'Text Color', 'blocksy-companion' ),
+					'label' => __( 'Description Color', 'blocksy-companion' ),
 					'type'  => 'ct-color-picker',
 					'design' => 'inline',
 					'setting' => [ 'transport' => 'postMessage' ],
@@ -216,13 +189,13 @@ $options = [
 						[
 							'title' => __( 'Initial', 'blocksy-companion' ),
 							'id' => 'default',
-							'inherit' => 'var(--theme-text-color)'
+							'inherit' => 'var(--color)'
 						],
 
 						[
 							'title' => __( 'Hover', 'blocksy-companion' ),
 							'id' => 'hover',
-							'inherit' => 'var(--theme-link-hover-color)'
+							'inherit' => 'var(--linkHoverColor)'
 						],
 					],
 				],
@@ -248,13 +221,13 @@ $options = [
 						[
 							'title' => __( 'Initial', 'blocksy-companion' ),
 							'id' => 'default',
-							'inherit' => 'var(--theme-form-text-initial-color, var(--theme-text-color))'
+							'inherit' => 'var(--form-text-initial-color, var(--color))'
 						],
 
 						[
 							'title' => __( 'Focus', 'blocksy-companion' ),
 							'id' => 'focus',
-							'inherit' => 'var(--theme-form-text-focus-color, var(--theme-text-color))'
+							'inherit' => 'var(--form-text-focus-color, var(--color))'
 						],
 					],
 				],
@@ -279,13 +252,13 @@ $options = [
 						[
 							'title' => __( 'Initial', 'blocksy-companion' ),
 							'id' => 'default',
-							'inherit' => 'var(--theme-form-field-border-initial-color)'
+							'inherit' => 'var(--form-field-border-initial-color)'
 						],
 
 						[
 							'title' => __( 'Focus', 'blocksy-companion' ),
 							'id' => 'focus',
-							'inherit' => 'var(--theme-form-field-border-focus-color)'
+							'inherit' => 'var(--form-field-border-focus-color)'
 						],
 					],
 				],
@@ -336,11 +309,11 @@ $options = [
 
 					'value' => [
 						'default' => [
-							'color' => 'var(--theme-palette-color-1)',
+							'color' => 'var(--paletteColor1)',
 						],
 
 						'hover' => [
-							'color' => 'var(--theme-palette-color-2)',
+							'color' => 'var(--paletteColor2)',
 						],
 					],
 
@@ -367,7 +340,7 @@ $options = [
 					'value' => blocksy_background_default_value([
 						'backgroundColor' => [
 							'default' => [
-								'color' => 'var(--theme-palette-color-8)',
+								'color' => '#ffffff',
 							],
 						],
 					])
@@ -383,14 +356,14 @@ $options = [
 						'width' => 1,
 						'style' => 'none',
 						'color' => [
-							'color' => 'var(--theme-palette-color-5)',
+							'color' => 'var(--paletteColor5)',
 						],
 					],
 					'responsive' => true,
 				],
 
 				'newsletter_subscribe_shadow' => [
-					'label' => __( 'Container Shadow', 'blocksy-companion' ),
+					'label' => __( 'Container Shadow', 'blocksy' ),
 					'type' => 'ct-box-shadow',
 					'responsive' => true,
 					'divider' => 'top',
@@ -413,11 +386,13 @@ $options = [
 					'type' => 'ct-spacing',
 					'divider' => 'top',
 					'setting' => [ 'transport' => 'postMessage' ],
-					'value' => blocksy_spacing_value(),
-					'inputAttr' => [
-						'placeholder' => '30'
-					],
-					'min' => 0,
+					'value' => blocksy_spacing_value([
+						'linked' => true,
+						'top' => '30px',
+						'left' => '30px',
+						'right' => '30px',
+						'bottom' => '30px',
+					]),
 					'responsive' => true
 				],
 
@@ -426,8 +401,9 @@ $options = [
 					'type' => 'ct-spacing',
 					'divider' => 'top',
 					'setting' => [ 'transport' => 'postMessage' ],
-					'value' => blocksy_spacing_value(),
-					'min' => 0,
+					'value' => blocksy_spacing_value([
+						'linked' => true,
+					]),
 					'responsive' => true
 				],
 

@@ -7,10 +7,6 @@ import {
 
 let shrinkCache = null
 
-export const clearShrinkCache = () => {
-	shrinkCache = null
-}
-
 const getShrinkData = ({ row }) => {
 	if (shrinkCache) {
 		return shrinkCache
@@ -37,13 +33,9 @@ export const shrinkHandleMiddleRow = ({
 		let { rowInitialHeight, rowStickyHeight } = getShrinkData({ row })
 
 		if (rowInitialHeight !== rowStickyHeight) {
-			let shrinkHeight = rowStickyHeight
-
-			if (
-				true ||
-				stickyContainer.dataset.sticky.indexOf('auto-hide') === -1
-			) {
-				shrinkHeight = computeLinearScale(
+			row.style.setProperty(
+				'--shrink-height',
+				`${computeLinearScale(
 					[
 						startPosition,
 						startPosition +
@@ -58,12 +50,7 @@ export const shrinkHandleMiddleRow = ({
 
 						scrollY
 					)
-				)
-			}
-
-			row.style.setProperty(
-				'--shrink-height',
-				`${Math.round(shrinkHeight)}px`
+				)}px`
 			)
 		}
 	})

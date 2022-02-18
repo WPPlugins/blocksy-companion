@@ -9,25 +9,13 @@ import Downshift from 'downshift'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'
 
-const ListPicker = ({
-	listId,
-	provider,
-	apiKey,
-	apiUrl,
-	onChange,
-	onListsLoading,
-}) => {
+const ListPicker = ({ listId, provider, apiKey, onChange }) => {
 	const [lists, setLists] = useState([])
 	const [isLoadingLists, setListsLoading] = useState(false)
 
 	let [{ controller }, setAbortState] = useState({
 		controller: null,
 	})
-
-	const setListsWithPropagation = (lists) => {
-		setLists(lists)
-		onListsLoading(lists.length)
-	}
 
 	const maybeFetchLists = async () => {
 		if (controller) {
@@ -47,14 +35,11 @@ const ListPicker = ({
 		const body = new FormData()
 
 		body.append('api_key', apiKey)
-		body.append('api_url', apiUrl)
 		body.append('provider', provider)
 		body.append(
 			'action',
 			'blocksy_ext_newsletter_subscribe_maybe_get_lists'
 		)
-
-		body.append('nonce', ctDashboardLocalizations.dashboard_actions_nonce)
 
 		try {
 			const response = await fetch(ctDashboardLocalizations.ajax_url, {
@@ -69,12 +54,7 @@ const ListPicker = ({
 				if (body.success) {
 					if (body.data.result !== 'api_key_invalid') {
 						setListsLoading(false)
-						setListsWithPropagation(
-							body.data.result.map((list) => ({
-								...list,
-								id: list.id.toString(),
-							}))
-						)
+						setLists(body.data.result)
 
 						return
 					}
@@ -82,31 +62,33 @@ const ListPicker = ({
 			}
 		} catch (e) {}
 
-		setListsWithPropagation([])
+		setLists([])
 		setListsLoading(false)
 	}
 
 	useEffect(() => {
-		if (!apiKey && !['mailpoet', 'fluentcrm'].includes(provider)) {
-			setListsWithPropagation([])
+		if (!apiKey) {
+			setLists([])
 			return
 		}
 
 		maybeFetchLists()
-	}, [provider, apiKey, apiUrl])
+	}, [provider, apiKey])
 
 	return lists.length === 0 ? (
-		<div className={classnames('ct-select-input', 'ct-no-results')}>
+		<div className="ct-select-input">
 			<input
 				disabled
 				placeholder={
-					isLoadingLists ? __('Fetching...', 'blocksy-companion') : ''
+					isLoadingLists
+						? __('Loading', 'blocksy-companion')
+						: __('Invalid API Key...', 'blocksy-companion')
 				}
 			/>
 		</div>
 	) : (
 		<Downshift
-			selectedItem={lists.find(({ id }) => id === listId) ? listId : ''}
+			selectedItem={listId || ''}
 			onChange={(selection) => onChange(selection)}
 			itemToString={(item) =>
 				item ? (lists.find(({ id }) => id === item) || {}).name : ''

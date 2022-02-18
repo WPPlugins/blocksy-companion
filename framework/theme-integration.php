@@ -2,33 +2,8 @@
 
 namespace Blocksy;
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 class ThemeIntegration {
 	public function __construct() {
-		add_action(
-			'wp_enqueue_scripts',
-			function () {
-				if (! function_exists('get_plugin_data')){
-					require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-				}
-
-				$data = get_plugin_data(BLOCKSY__FILE__);
-
-				if (is_admin()) return;
-
-				wp_register_script(
-					'blocksy-zxcvbn',
-					includes_url('/js/zxcvbn.min.js'),
-					[],
-					$data['Version'],
-					false
-				);
-			},
-			5
-		);
 
 		add_filter('blocksy:frontend:dynamic-js-chunks', function ($chunks) {
 			$render = new \Blocksy_Header_Builder_Render();
@@ -38,109 +13,49 @@ class ThemeIntegration {
 				||
 				is_customize_preview()
 			) {
-				$deps = [];
-				$global_data = [];
-
-				if (class_exists('woocommerce')) {
-					$deps = [
-						'blocksy-zxcvbn',
-						'wp-hooks',
-						'wp-i18n',
-						'password-strength-meter',
-					];
-
-					$global_data = [
-						[
-							'var' => 'wc_password_strength_meter_params',
-							'data' => [
-								'min_password_strength' => apply_filters(
-									'woocommerce_min_password_strength',
-									3
-								),
-								'stop_checkout' => apply_filters(
-									'woocommerce_enforce_password_strength_meter_on_checkout',
-									false
-								),
-								'i18n_password_error'=> esc_attr__(
-									'Please enter a stronger password.',
-									'blocksy-companion'
-								),
-								'i18n_password_hint' => addslashes(wp_get_password_hint()),
-							]
-						],
-
-						[
-							'var' => 'pwsL10n',
-							'data' => [
-								'unknown'  => _x( 'Password strength unknown', 'password strength', 'blocksy-companion' ),
-								'short'    => _x( 'Very weak', 'password strength', 'blocksy-companion' ),
-								'bad'      => _x( 'Weak', 'password strength', 'blocksy-companion' ),
-								'good'     => _x( 'Medium', 'password strength', 'blocksy-companion' ),
-								'strong'   => _x( 'Strong', 'password strength', 'blocksy-companion' ),
-								'mismatch' => _x( 'Mismatch', 'password mismatch', 'blocksy-companion' ),
-							]
-						]
-					];
-				}
-
-				if (function_exists('dokan')) {
-					$deps[] = 'dokan-form-validate';
-					$deps[] = 'dokan-vendor-registration';
-
-					$global_data[] = [
-						'var' => 'DokanValidateMsg',
-						'data' => apply_filters('DokanValidateMsg_args', [
-							'required' => __( 'This field is required', 'blocksy-companion' ),
-							'remote' => __( 'Please fix this field.', 'blocksy-companion' ),
-							'email' => __( 'Please enter a valid email address.', 'blocksy-companion' ),
-							'url' => __( 'Please enter a valid URL.', 'blocksy-companion' ),
-							'date' => __( 'Please enter a valid date.', 'blocksy-companion' ),
-							'dateISO' => __( 'Please enter a valid date (ISO).', 'blocksy-companion' ),
-							'number' => __( 'Please enter a valid number.', 'blocksy-companion' ),
-							'digits' => __( 'Please enter only digits.', 'blocksy-companion' ),
-							'creditcard' => __( 'Please enter a valid credit card number.', 'blocksy-companion' ),
-							'equalTo' => __( 'Please enter the same value again.', 'blocksy-companion' ),
-							'maxlength_msg' => __( 'Please enter no more than {0} characters.', 'blocksy-companion' ),
-							'minlength_msg' => __( 'Please enter at least {0} characters.', 'blocksy-companion' ),
-							'rangelength_msg' => __( 'Please enter a value between {0} and {1} characters long.', 'blocksy-companion' ),
-							'range_msg' => __( 'Please enter a value between {0} and {1}.', 'blocksy-companion' ),
-							'max_msg' => __( 'Please enter a value less than or equal to {0}.', 'blocksy-companion' ),
-							'min_msg' => __( 'Please enter a value greater than or equal to {0}.', 'blocksy-companion' ),
-						])
-					];
-
-					$global_data[] = [
-						'var' => 'dokanRegistrationI18n',
-						'data' => [
-							'defaultRole' => dokan_get_seller_registration_default_role(),
-						]
-					];
-				}
-
 				$chunks[] = [
 					'id' => 'blocksy_account',
 					'selector' => implode(', ', [
-						'.ct-account-item[href*="account-modal"]',
+						'.ct-header-account[href*="account-modal"]',
 						'.must-log-in a'
 					]),
-					'url' => blocksy_cdn_url(
+					'url' => blc_call_fn(
+						[
+							'fn' => 'blocksy_cdn_url',
+							'default' => BLOCKSY_URL . 'static/bundle/account.js'
+						],
 						BLOCKSY_URL . 'static/bundle/account.js'
 					),
-					'deps' => $deps,
-					'global_data' => $global_data,
-
 					'trigger' => 'click',
-					'version' => blocksy_companion_get_version()
+					'has_modal_loader' => [
+						'id' => 'account-modal'
+					]
 				];
 			}
 
 			$chunks[] = [
+				'id' => 'blocksy_dark_mode',
+				'selector' => '[data-id="dark-mode-switcher"]',
+				'url' => blc_call_fn(
+					[
+						'fn' => 'blocksy_cdn_url',
+						'default' => BLOCKSY_URL . 'static/bundle/dark-mode.js'
+					],
+					BLOCKSY_URL . 'static/bundle/dark-mode.js'
+				),
+				'trigger' => 'click'
+			];
+
+			$chunks[] = [
 				'id' => 'blocksy_sticky_header',
 				'selector' => 'header [data-sticky]',
-				'url' => blocksy_cdn_url(
+				'url' => blc_call_fn(
+					[
+						'fn' => 'blocksy_cdn_url',
+						'default' => BLOCKSY_URL . 'static/bundle/sticky.js'
+					],
 					BLOCKSY_URL . 'static/bundle/sticky.js'
 				),
-				'version' => blocksy_companion_get_version()
 			];
 
 			return $chunks;
@@ -156,16 +71,6 @@ class ThemeIntegration {
 					// post_date | comment_count
 					'orderby' => 'post_date',
 					'order' => 'DESC',
-					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
-					'meta_value' => '',
-					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-					'meta_key' => '',
-
-					// yes | no
-					'has_slideshow' => 'no',
-					'has_slideshow_arrows' => 'yes',
-					'has_slideshow_autoplay' => 'no',
-					'has_slideshow_autoplay_speed' => 3,
 
 					// yes | no
 					'has_pagination' => 'yes',
@@ -183,18 +88,16 @@ class ThemeIntegration {
 					'slider_autoplay' => 'no',
 
 					'filtering' => false,
-					'filtering_use_children_tax_ids' => false,
 
 					// 404 | skip
-					'no_results' => '404',
-
-					'class' => ''
+					'no_results' => '404'
 				]
 			);
 
 			$file_path = dirname(__FILE__) . '/views/blocksy-posts.php';
 
-			return blocksy_companion_render_view(
+			return blc_call_fn(
+				['fn' => 'blocksy_render_view'],
 				$file_path,
 				[
 					'args' => $args,
@@ -204,42 +107,193 @@ class ThemeIntegration {
 		});
 
 		add_filter('blocksy:general:ct-scripts-localizations', function ($data) {
-			if (! function_exists('get_plugin_data')){
-				require_once(ABSPATH . 'wp-admin/includes/plugin.php');
-			}
-
-			$plugin_data = get_plugin_data(BLOCKSY__FILE__);
-
 			$data['dynamic_styles_selectors'][] = [
 				'selector' => '#account-modal',
-				'url' => add_query_arg(
-					'ver',
-					$plugin_data['Version'],
-					blocksy_cdn_url(
-						BLOCKSY_URL . 'static/bundle/header-account-modal-lazy.min.css'
-					)
-				)
-			];
-
-			$data['dynamic_styles_selectors'][] = [
-				'selector' => '.ct-header-account',
-				'url' => add_query_arg(
-					'ver',
-					$plugin_data['Version'],
-					blocksy_cdn_url(
-						BLOCKSY_URL . 'static/bundle/header-account-dropdown-lazy.min.css'
-					)
+				'url' => blc_call_fn(
+					[
+						'fn' => 'blocksy_cdn_url',
+						'default' => BLOCKSY_URL . 'static/bundle/account-lazy.min.css'
+					],
+					BLOCKSY_URL . 'static/bundle/account-lazy.min.css'
 				)
 			];
 
 			return $data;
 		});
 
+		add_shortcode('blocksy_breadcrumbs', function ($args, $content) {
+			$breadcrumbs_builder = new \Blocksy_Breadcrumbs_Builder();
+			return $breadcrumbs_builder->render([
+				'class' => 'ct-breadcrumbs-shortcode'
+			]);
+		});
+
+		add_action('wp_ajax_blocksy_conditions_get_all_taxonomies', function () {
+			if (! current_user_can('manage_options')) {
+				wp_send_json_error();
+			}
+
+			$cpts = blocksy_manager()->post_types->get_supported_post_types();
+
+			$cpts[] = 'post';
+			$cpts[] = 'page';
+			$cpts[] = 'product';
+
+			$taxonomies = [];
+
+			foreach ($cpts as $cpt) {
+				$taxonomies = array_merge($taxonomies, array_values(array_diff(
+					get_object_taxonomies($cpt),
+					['post_format']
+				)));
+			}
+
+			$terms = [];
+
+			foreach ($taxonomies as $taxonomy) {
+				$taxonomy_object = get_taxonomy($taxonomy);
+
+				if (! $taxonomy_object->public) {
+					continue;
+				}
+
+				$local_terms = array_map(function ($tax) {
+					return [
+						'id' => $tax->term_id,
+						'name' => $tax->name
+					];
+				}, get_terms(['taxonomy' => $taxonomy, 'lang' => '']));
+
+				if (empty($local_terms)) {
+					continue;
+				}
+
+				$terms[] = [
+					'id' => $taxonomy,
+					'name' => $taxonomy,
+					'group' => get_taxonomy($taxonomy)->label
+				];
+
+				$terms = array_merge($terms, $local_terms);
+			}
+
+			$languages = [];
+
+			if (function_exists('blocksy_get_current_language')) {
+				$languages = blocksy_get_all_i18n_languages();
+			}
+
+			$users = [];
+
+			foreach (get_users([
+				'number' => 500
+			]) as $user) {
+				$users[] = [
+					'id' => $user->ID,
+					'name' => $user->user_nicename
+				];
+			}
+
+			wp_send_json_success([
+				'taxonomies' => $terms,
+				'languages' => $languages,
+				'users' => $users
+			]);
+		});
+
+		add_action('wp_ajax_blocksy_conditions_get_all_posts', function () {
+			if (! current_user_can('manage_options')) {
+				wp_send_json_error();
+			}
+
+			$maybe_input = json_decode(file_get_contents('php://input'), true);
+
+			if (! $maybe_input) {
+				wp_send_json_error();
+			}
+
+			if (! isset($maybe_input['post_type'])) {
+				wp_send_json_error();
+			}
+
+			$query_args = [
+				'posts_per_page' => 10,
+				'post_type' => $maybe_input['post_type'],
+				'suppress_filters' => true,
+				'lang' => ''
+			];
+
+			if (
+				isset($maybe_input['search_query'])
+				&&
+				! empty($maybe_input['search_query'])
+			) {
+				if (intval($maybe_input['search_query'])) {
+					$query_args['p'] = intval($maybe_input['search_query']);
+				} else {
+					$query_args['s'] = $maybe_input['search_query'];
+				}
+			}
+
+			if (strpos($query_args['post_type'], 'ct_cpt') !== false) {
+				$query_args['post_type'] = array_diff(
+					get_post_types(['public' => true]),
+					['post', 'page', 'attachment', 'ct_content_block']
+				);
+			}
+
+			$query = new \WP_Query($query_args);
+
+			$posts_result = $query->posts;
+
+			if (isset($maybe_input['alsoInclude'])) {
+				$maybe_post = get_post($maybe_input['alsoInclude'], 'display');
+
+				if ($maybe_post) {
+					$posts_result[] = $maybe_post;
+				}
+			}
+
+			wp_send_json_success([
+				'posts' => $posts_result
+			]);
+		});
+
+		add_filter(
+			'blocksy_add_menu_page',
+			function ($res, $options) {
+				add_menu_page(
+					$options['title'],
+					$options['menu-title'],
+					$options['permision'],
+					$options['top-level-handle'],
+					$options['callback'],
+					$options['icon-url'],
+					2
+				);
+
+				return true;
+			},
+			10, 2
+		);
+
+		add_action('rest_api_init', function () {
+			return;
+
+			register_rest_field('post', 'images', [
+				'get_callback' => function () {
+					return wp_prepare_attachment_for_js($object->id);
+				},
+				'update_callback' => null,
+				'schema' => null,
+			]);
+		});
+
 		add_filter(
 			'user_contactmethods',
 			function ( $field ) {
 				$fields['facebook'] = __( 'Facebook', 'blocksy-companion' );
-				$fields['twitter'] = __( 'X (Twitter)', 'blocksy-companion' );
+				$fields['twitter'] = __( 'Twitter', 'blocksy-companion' );
 				$fields['linkedin'] = __( 'LinkedIn', 'blocksy-companion' );
 				$fields['dribbble'] = __( 'Dribbble', 'blocksy-companion' );
 				$fields['instagram'] = __( 'Instagram', 'blocksy-companion' );
@@ -252,40 +306,53 @@ class ThemeIntegration {
 				$fields['vkontakte'] = __( 'VKontakte', 'blocksy-companion' );
 				$fields['odnoklassniki'] = __( 'Odnoklassniki', 'blocksy-companion' );
 				$fields['tiktok'] = __( 'TikTok', 'blocksy-companion' );
-				$fields['mastodon'] = __( 'Mastodon', 'blocksy-companion' );
-
-				/**
-				 * Filters the additional social networks available on the user profile screen.
-				 *
-				 * @since 2.0.1
-				 *
-				 * @param array $additional_fields {
-				 *     Additional social network fields. Entries without an `id` and a `name` are skipped.
-				 *
-				 *     @type array $field {
-				 *         @type string $id   Key the field is stored under in the user meta.
-				 *         @type string $name Field label shown on the profile screen.
-				 *     }
-				 * }
-				 */
-				$additional_fields = apply_filters(
-					'blocksy:author-profile:custom-social-network',
-					[]
-				);
-
-				foreach ($additional_fields as $field) {
-					if (
-						isset($field['id'])
-						&&
-						isset($field['name'])
-					)  {
-						$fields[$field['id']] = $field['name'];
-					}
-				}
 
 				return $fields;
 			}
 		);
+
+		add_filter(
+			'wp_check_filetype_and_ext',
+			function ($data=null, $file=null, $filename=null, $mimes=null) {
+				if (strpos($filename, '.svg') !== false) {
+					$data['type'] = 'image/svg+xml';
+					$data['ext'] = 'svg';
+				}
+
+				return $data;
+			},
+			75, 4
+		);
+
+		add_filter('upload_mimes', function ($mimes) {
+			$mimes['svg'] = 'image/svg+xml';
+			return $mimes;
+		});
+
+		add_filter('wp_get_attachment_image_src', function ($image, $attachment_id, $size, $icon) {
+			if (! isset($attachment_id)) {
+				return $image;
+			}
+
+			$mime = get_post_mime_type($attachment_id);
+
+			if ('image/svg+xml' === $mime) {
+				$default_height = 100;
+				$default_width = 100;
+
+				$dimensions = $this->svg_dimensions(get_attached_file($attachment_id));
+
+				if ($dimensions) {
+					$default_height = $dimensions['height'];
+					$default_width = $dimensions['width'];
+				}
+
+				$image[2] = $default_height;
+				$image[1] = $default_width;
+			}
+
+			return $image;
+		}, 10, 4);
 
 		add_filter('blocksy_changelogs_list', function ($changelogs) {
 			$changelog = null;
@@ -298,7 +365,7 @@ class ThemeIntegration {
 					[]
 				);
 
-				if (WP_Filesystem($creds)) {
+				if ( WP_Filesystem($creds) ) {
 					global $wp_filesystem;
 
 					$readme = $wp_filesystem->get_contents(
@@ -317,11 +384,9 @@ class ThemeIntegration {
 					}
 
 					if (
-						blocksy_companion_can_use_premium_code()
+						blc_fs()->can_use_premium_code__premium_only()
 						&&
-						file_exists(
-							BLOCKSY_PATH . '/framework/premium/changelog.txt'
-						)
+						BLOCKSY_PATH . '/framework/premium/changelog.txt'
 					) {
 						$pro_changelog = $wp_filesystem->get_contents(
 							BLOCKSY_PATH . '/framework/premium/changelog.txt'
@@ -347,33 +412,19 @@ class ThemeIntegration {
 
 			if (is_admin()) return;
 
-			if (! class_exists('Blocksy_Header_Builder_Render')) {
-				return;
-			}
-
-			$render = new \Blocksy_Header_Builder_Render();
-
-			if (
-				$render->contains_item('account')
-				||
-				is_customize_preview()
-			) {
-				wp_enqueue_style(
-					'blocksy-companion-header-account-styles',
-					BLOCKSY_URL . 'static/bundle/header-account.min.css',
-					['ct-main-styles'],
-					$data['Version']
-				);
-			}
+			/*
+			wp_enqueue_style(
+				'blocksy-companion-styles',
+				BLOCKSY_URL . 'static/bundle/min.css',
+				['ct-main-styles'],
+				$data['Version']
+			);
+			 */
 		}, 50);
 
 		add_action(
 			'customize_preview_init',
 			function () {
-				if (! function_exists('get_plugin_data')){
-					require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-				}
-
 				$data = get_plugin_data(BLOCKSY__FILE__);
 
 				wp_enqueue_script(
@@ -384,6 +435,42 @@ class ThemeIntegration {
 					true
 				);
 			}
+		);
+	}
+
+	protected function svg_dimensions($svg) {
+		$svg = @simplexml_load_file($svg);
+		$width = 0;
+		$height = 0;
+
+		if ($svg) {
+			$attributes = $svg->attributes();
+
+			if (
+				isset($attributes->width, $attributes->height)
+				&&
+				is_numeric($attributes->width)
+				&&
+				is_numeric($attributes->height)
+			) {
+				$width = floatval($attributes->width);
+				$height = floatval($attributes->height);
+			} elseif (isset($attributes->viewBox)) {
+				$sizes = explode(' ', $attributes->viewBox);
+
+				if (isset($sizes[2], $sizes[3])) {
+					$width = floatval($sizes[2]);
+					$height = floatval($sizes[3]);
+				}
+			} else {
+				return false;
+			}
+		}
+
+		return array(
+			'width' => $width,
+			'height' => $height,
+			'orientation' => ($width > $height) ? 'landscape' : 'portrait'
 		);
 	}
 }

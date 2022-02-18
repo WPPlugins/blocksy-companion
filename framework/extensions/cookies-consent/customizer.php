@@ -1,12 +1,7 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $options = [
-	//  translators: This is a brand name. Preferably to not be translated
-	'title' => _x('Cookies Consent', 'Extension Brand Name', 'blocksy-companion'),
+	'title' => __('Cookie Consent', 'blocksy-companion'),
 	'container' => [ 'priority' => 8 ],
 	'options' => [
 
@@ -14,6 +9,10 @@ $options = [
 			'type' => 'ct-options',
 			'setting' => [ 'transport' => 'postMessage' ],
 			'inner-options' => [
+				blocksy_rand_md5() => [
+					'type' => 'ct-title',
+					'label' => __( 'Cookies Notification', 'blocksy' ),
+				],
 
 				blocksy_rand_md5() => [
 					'title' => __( 'General', 'blocksy-companion' ),
@@ -77,20 +76,98 @@ $options = [
 						],
 
 						'cookie_consent_button_text' => [
-							'label' => __( 'Accept Button text', 'blocksy-companion' ),
+							'label' => __( 'Button text', 'blocksy-companion' ),
 							'type' => 'text',
 							'design' => 'block',
-							'divider' => 'top',
 							'value' => __('Accept', 'blocksy-companion'),
 							'setting' => [ 'transport' => 'postMessage' ],
 						],
 
-						'cookie_consent_decline_button_text' => [
-							'label' => __( 'Decline Button text', 'blocksy-companion' ),
-							'type' => 'text',
-							'design' => 'block',
-							'value' => __('Decline', 'blocksy-companion'),
+					],
+				],
+
+				blocksy_rand_md5() => [
+					'title' => __( 'Design', 'blocksy-companion' ),
+					'type' => 'tab',
+					'options' => [
+
+						'cookieContentColor' => [
+							'label' => __( 'Font Color', 'blocksy-companion' ),
+							'type'  => 'ct-color-picker',
+							'design' => 'inline',
 							'setting' => [ 'transport' => 'postMessage' ],
+
+							'value' => [
+								'default' => [
+									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+								],
+
+								'hover' => [
+									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+								],
+							],
+
+							'pickers' => [
+								[
+									'title' => __( 'Initial', 'blocksy-companion' ),
+									'id' => 'default',
+									'inherit' => 'var(--color)'
+								],
+
+								[
+									'title' => __( 'Hover', 'blocksy-companion' ),
+									'id' => 'hover',
+									'inherit' => 'var(--colorHover)'
+								],
+							],
+						],
+
+						'cookieButtonBackground' => [
+							'label' => __( 'Button Color', 'blocksy-companion' ),
+							'type'  => 'ct-color-picker',
+							'design' => 'inline',
+							'setting' => [ 'transport' => 'postMessage' ],
+							'value' => [
+								'default' => [
+									'color' => 'var(--paletteColor1)',
+								],
+
+								'hover' => [
+									'color' => 'var(--paletteColor2)',
+								],
+							],
+
+							'pickers' => [
+								[
+									'title' => __( 'Initial', 'blocksy-companion' ),
+									'id' => 'default',
+								],
+
+								[
+									'title' => __( 'Hover', 'blocksy-companion' ),
+									'id' => 'hover',
+								],
+							],
+						],
+
+						'cookieBackground' => [
+							'label' => __( 'Background Color', 'blocksy-companion' ),
+							'type'  => 'ct-color-picker',
+							'design' => 'inline',
+							'setting' => [ 'transport' => 'postMessage' ],
+
+							'value' => [
+								'default' => [
+									'color' => '#ffffff',
+								],
+							],
+
+							'pickers' => [
+								[
+									'title' => __( 'Initial', 'blocksy-companion' ),
+									'id' => 'default',
+								],
+							],
 						],
 
 						blocksy_rand_md5() => [
@@ -104,39 +181,9 @@ $options = [
 									'value' => 400,
 									'min' => 200,
 									'max' => 500,
-									'divider' => 'top',
 									'setting' => [ 'transport' => 'postMessage' ],
 								],
 
-							],
-						],
-
-						blocksy_rand_md5() => [
-							'type' => 'ct-title',
-							'label' => __( 'Forms Cookies Content', 'blocksy-companion' ),
-						],
-
-						'forms_cookie_consent_content' => [
-							'label' => false,
-							'type' => 'wp-editor',
-							'value' => blocksy_companion_safe_sprintf(
-								// translators: %1$s and %2$s are HTML tags for a link.
-								__('I accept the %1$sPrivacy Policy%2$s*', 'blocksy-companion'),
-								'<a href="' . get_privacy_policy_url() . '">',
-								'</a>'
-							),
-							'desc' => __( 'This text will appear under each comment form and subscribe form.', 'blocksy-companion' ),
-							// 'attr' => [ 'data-height' => 'heading-label' ],
-							'disableRevertButton' => true,
-							'setting' => [ 'transport' => 'postMessage' ],
-
-							'quicktags' => false,
-							'mediaButtons' => false,
-							'tinymce' => [
-								'toolbar1' => 'bold,italic,link,alignleft,aligncenter,alignright,undo,redo',
-								'forced_root_block' => '',
-								'force_br_newlines' => true,
-								'force_p_newlines' => false
 							],
 						],
 
@@ -144,191 +191,30 @@ $options = [
 				],
 
 				blocksy_rand_md5() => [
-					'title' => __( 'Design', 'blocksy-companion' ),
-					'type' => 'tab',
-					'options' => [
+					'type' => 'ct-title',
+					'label' => __( 'Forms Cookies Content', 'blocksy' ),
+				],
 
-						'cookieContentColor' => [
-							'label' => __( 'Text Color', 'blocksy-companion' ),
-							'type'  => 'ct-color-picker',
-							'design' => 'inline',
-							'setting' => [ 'transport' => 'postMessage' ],
+				'forms_cookie_consent_content' => [
+					'label' => false,
+					'type' => 'wp-editor',
+					'value' => sprintf(
+						__('I accept the %sPrivacy Policy%s*', 'blocksy-companion'),
+						'<a href="/privacy-policy">',
+						'</a>'
+					),
+					'desc' => __( 'This text will appear under each comment form and subscribe form.', 'blocksy-companion' ),
+					// 'attr' => [ 'data-height' => 'heading-label' ],
+					'disableRevertButton' => true,
+					'setting' => [ 'transport' => 'postMessage' ],
 
-							'value' => [
-								'default' => [
-									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
-								],
-
-								'hover' => [
-									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
-								],
-							],
-
-							'pickers' => [
-								[
-									'title' => __( 'Initial', 'blocksy-companion' ),
-									'id' => 'default',
-									'inherit' => 'var(--theme-text-color)'
-								],
-
-								[
-									'title' => __( 'Hover', 'blocksy-companion' ),
-									'id' => 'hover',
-									'inherit' => 'var(--theme-link-hover-color)'
-								],
-							],
-						],
-
-						'cookieBackground' => [
-							'label' => __( 'Background Color', 'blocksy-companion' ),
-							'type'  => 'ct-color-picker',
-							'design' => 'inline',
-							'setting' => [ 'transport' => 'postMessage' ],
-
-							'value' => [
-								'default' => [
-									'color' => 'var(--theme-palette-color-8)',
-								],
-							],
-
-							'pickers' => [
-								[
-									'title' => __( 'Initial', 'blocksy-companion' ),
-									'id' => 'default',
-								],
-							],
-						],
-
-						blocksy_rand_md5() => [
-							'type' => 'ct-title',
-							'label' => __( 'Accept Button', 'blocksy-companion' ),
-						],
-
-						'cookieButtonText' => [
-							'label' => __( 'Font Color', 'blocksy-companion' ),
-							'type'  => 'ct-color-picker',
-							'design' => 'inline',
-							// 'divider' => 'top',
-							'setting' => [ 'transport' => 'postMessage' ],
-							'value' => [
-								'default' => [
-									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
-								],
-
-								'hover' => [
-									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
-								],
-							],
-
-							'pickers' => [
-								[
-									'title' => __( 'Initial', 'blocksy-companion' ),
-									'id' => 'default',
-									'inherit' => 'var(--theme-button-text-initial-color)',
-								],
-
-								[
-									'title' => __( 'Hover', 'blocksy-companion' ),
-									'id' => 'hover',
-									'inherit' => 'var(--theme-button-text-hover-color)',
-								],
-							],
-						],
-
-						'cookieButtonBackground' => [
-							'label' => __( 'Background Color', 'blocksy-companion' ),
-							'type'  => 'ct-color-picker',
-							'design' => 'inline',
-							// 'divider' => 'top',
-							'setting' => [ 'transport' => 'postMessage' ],
-							'value' => [
-								'default' => [
-									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
-								],
-
-								'hover' => [
-									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
-								],
-							],
-
-							'pickers' => [
-								[
-									'title' => __( 'Initial', 'blocksy-companion' ),
-									'id' => 'default',
-									'inherit' => 'var(--theme-button-background-initial-color)'
-								],
-
-								[
-									'title' => __( 'Hover', 'blocksy-companion' ),
-									'id' => 'hover',
-									'inherit' => 'var(--theme-button-background-hover-color)'
-								],
-							],
-						],
-
-						blocksy_rand_md5() => [
-							'type' => 'ct-title',
-							'label' => __( 'Decline Button', 'blocksy-companion' ),
-						],
-
-						'cookieDeclineButtonText' => [
-							'label' => __( 'Font Color', 'blocksy-companion' ),
-							'type'  => 'ct-color-picker',
-							'design' => 'inline',
-							// 'divider' => 'top',
-							'setting' => [ 'transport' => 'postMessage' ],
-							'value' => [
-								'default' => [
-									'color' => 'var(--theme-palette-color-3)',
-								],
-
-								'hover' => [
-									'color' => 'var(--theme-palette-color-3)',
-								],
-							],
-
-							'pickers' => [
-								[
-									'title' => __( 'Initial', 'blocksy-companion' ),
-									'id' => 'default',
-								],
-
-								[
-									'title' => __( 'Hover', 'blocksy-companion' ),
-									'id' => 'hover',
-								],
-							],
-						],
-
-						'cookieDeclineButtonBackground' => [
-							'label' => __( 'Background Color', 'blocksy-companion' ),
-							'type'  => 'ct-color-picker',
-							'design' => 'inline',
-							// 'divider' => 'top',
-							'setting' => [ 'transport' => 'postMessage' ],
-							'value' => [
-								'default' => [
-									'color' => 'rgba(224, 229, 235, 0.6)',
-								],
-
-								'hover' => [
-									'color' => 'rgba(224, 229, 235, 1)',
-								],
-							],
-
-							'pickers' => [
-								[
-									'title' => __( 'Initial', 'blocksy-companion' ),
-									'id' => 'default',
-								],
-
-								[
-									'title' => __( 'Hover', 'blocksy-companion' ),
-									'id' => 'hover',
-								],
-							],
-						],
-
+					'quicktags' => false,
+					'mediaButtons' => false,
+					'tinymce' => [
+						'toolbar1' => 'bold,italic,link,alignleft,aligncenter,alignright,undo,redo',
+						'forced_root_block' => '',
+						'force_br_newlines' => true,
+						'force_p_newlines' => false
 					],
 				],
 
