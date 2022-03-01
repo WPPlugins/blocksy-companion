@@ -2,10 +2,10 @@
 Tags: widget, widgets
 Requires at least: 5.2
 Requires PHP: 7.0
-Tested up to: 5.8
+Tested up to: 5.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.19
+Stable tag: 1.8.20
 
 == Description ==
 
@@ -23,6 +23,10 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.20: 2022-03-01
+- Fix: Header row shrink does not work when set to boxed layout
+- Fix: Cookies consent modal tabindex issue
+
 1.8.19: 2022-02-18
 - Improvement: Do not load all users in conditions to avoid memory limit hits
 - Improvement: Remove focus lock from cookies consent popup

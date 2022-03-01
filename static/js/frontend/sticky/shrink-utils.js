@@ -27,7 +27,7 @@ export const getRowStickyHeight = (el) => {
 
 	let maybeShrink = 100
 
-	if (el.dataset.row === 'middle') {
+	if (el.dataset.row.includes('middle')) {
 		maybeShrink = styles.getPropertyValue('--sticky-shrink')
 	}
 
