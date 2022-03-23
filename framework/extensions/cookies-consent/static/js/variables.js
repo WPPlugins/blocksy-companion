@@ -25,15 +25,57 @@ ctEvents.on(
 				type: 'color',
 			},
 
+			cookieButtonText: [
+				{
+					selector: '.cookie-notification .ct-cookies-accept-button',
+					variable: 'buttonTextInitialColor',
+					type: 'color:default',
+				},
+
+				{
+					selector: '.cookie-notification .ct-cookies-accept-button',
+					variable: 'buttonTextHoverColor',
+					type: 'color:hover',
+				},
+			],
+
 			cookieButtonBackground: [
 				{
-					selector: '.cookie-notification',
+					selector: '.cookie-notification .ct-cookies-accept-button',
 					variable: 'buttonInitialColor',
 					type: 'color:default',
 				},
 
 				{
-					selector: '.cookie-notification',
+					selector: '.cookie-notification .ct-cookies-accept-button',
+					variable: 'buttonHoverColor',
+					type: 'color:hover',
+				},
+			],
+
+			cookieDeclineButtonText: [
+				{
+					selector: '.cookie-notification .ct-cookies-decline-button',
+					variable: 'buttonTextInitialColor',
+					type: 'color:default',
+				},
+
+				{
+					selector: '.cookie-notification .ct-cookies-decline-button',
+					variable: 'buttonTextHoverColor',
+					type: 'color:hover',
+				},
+			],
+
+			cookieDeclineButtonBackground: [
+				{
+					selector: '.cookie-notification .ct-cookies-decline-button',
+					variable: 'buttonInitialColor',
+					type: 'color:default',
+				},
+
+				{
+					selector: '.cookie-notification .ct-cookies-decline-button',
 					variable: 'buttonHoverColor',
 					type: 'color:hover',
 				},

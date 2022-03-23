@@ -57,7 +57,7 @@ const initCookies = () => {
 		el.addEventListener('click', (e) => {
 			e.preventDefault()
 
-			if (el.classList.contains('ct-accept')) {
+			if (el.classList.contains('ct-cookies-accept-button')) {
 				const periods = {
 					onehour: 36e5,
 					oneday: 864e5,

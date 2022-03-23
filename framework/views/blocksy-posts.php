@@ -4,23 +4,24 @@ if (! function_exists('blocksy_render_archive_cards')) {
 	return;
 }
 
-if (get_query_var('paged')) {
-	$paged = get_query_var('paged');
-} elseif (get_query_var('page')) {
-	$paged = get_query_var('page');
-} else {
-	$paged = 1;
-}
-
 $query_args = [
 	'order' => $args['order'],
 	'ignore_sticky_posts' => true,
 	'post_type' => explode(',', $args['post_type']),
 	'orderby' => $args['orderby'],
 	'posts_per_page' => $args['limit'],
-	'paged' => $paged,
 	'ignore_sticky_posts' => $args['ignore_sticky_posts'] === 'yes'
 ];
+
+if ($args['has_pagination'] === 'yes') {
+	if (get_query_var('paged')) {
+		$args['paged'] = get_query_var('paged');
+	} elseif (get_query_var('page')) {
+		$args['paged'] = get_query_var('page');
+	} else {
+		$args['paged'] = 1;
+	}
+}
 
 if (isset($args['post_ids']) && $args['post_ids']) {
 	$query_args['post__in'] = explode(',', $args['post_ids']);
