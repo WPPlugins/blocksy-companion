@@ -1964,7 +1964,7 @@ msgid "Newsletter subscribe form"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/includes/BlocksyMailerliteManager.php:99
-msgid "Thank you for subscribing!"
+msgid "Thank you for subscribing to our newsletter!"
 msgstr ""
 
 #: framework/extensions/product-reviews/views/single-top.php:238

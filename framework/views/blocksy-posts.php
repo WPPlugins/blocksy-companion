@@ -15,11 +15,11 @@ $query_args = [
 
 if ($args['has_pagination'] === 'yes') {
 	if (get_query_var('paged')) {
-		$args['paged'] = get_query_var('paged');
+		$query_args['paged'] = get_query_var('paged');
 	} elseif (get_query_var('page')) {
-		$args['paged'] = get_query_var('page');
+		$query_args['paged'] = get_query_var('page');
 	} else {
-		$args['paged'] = 1;
+		$query_args['paged'] = 1;
 	}
 }
 
