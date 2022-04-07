@@ -2,6 +2,7 @@
 
 namespace Blocksy;
 
+/*
 add_action('blocksy:customizer:load:before', function () {
 	$_REQUEST['wp_customize'] = 'on';
 	_wp_customize_include();
@@ -10,6 +11,7 @@ add_action('blocksy:customizer:load:before', function () {
 
 	$wp_customize->wp_loaded();
 });
+ */
 
 class Cli {
 	public function __construct() {

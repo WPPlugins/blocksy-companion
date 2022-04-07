@@ -4,7 +4,15 @@ require_once dirname(__FILE__) . '/helpers.php';
 
 class BlocksyExtensionCookiesConsent {
 	public static function should_display_notification() {
-		return !isset($_COOKIE['blocksy_cookies_consent_accepted']);
+		return ! isset($_COOKIE['blocksy_cookies_consent_accepted']);
+	}
+
+	public static function has_consent() {
+		return (
+			isset($_COOKIE['blocksy_cookies_consent_accepted'])
+			&&
+			$_COOKIE['blocksy_cookies_consent_accepted'] === 'true'
+		);
 	}
 
 	public function __construct() {

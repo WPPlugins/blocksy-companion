@@ -1,4 +1,4 @@
-<form name="lostpasswordform" id="lostpasswordform" action="<?php echo wp_lostpassword_url() ?>" method="post">
+<form name="lostpasswordform" id="lostpasswordform" action="#" method="post">
 	<?php do_action('blocksy:account:modal:lostpassword:start'); ?>
 
 	<p>

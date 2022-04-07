@@ -10,9 +10,7 @@ if ( \Blocksy\Plugin::instance()->account_auth->has_woo_register_flow() && 'no' 
 }
 ?>
 
-<form name="registerform" id="registerform" action="<?php 
-echo  wp_registration_url() ;
-?>" method="post" novalidate="novalidate">
+<form name="registerform" id="registerform" action="#" method="post" novalidate="novalidate">
 	<?php 
 do_action( 'woocommerce_register_form_start' );
 ?>

@@ -41,17 +41,19 @@ export const renderWithStrategy = (args = {}) => {
 		// append | firstChild | maybeBefore:selector
 		strategy: 'append',
 		whenInserted: () => {},
-		beforeInsert: el => {},
+		beforeInsert: (el) => {},
 
 		should_insert: true,
 
-		...args
+		...args,
 	}
 
 	const parent = document.querySelector(args.parent_selector)
 	;[
-		...document.querySelectorAll(`${args.parent_selector} ${args.selector}`)
-	].map(el => el.parentNode.removeChild(el))
+		...document.querySelectorAll(
+			`${args.parent_selector} ${args.selector}`
+		),
+	].map((el) => el.parentNode.removeChild(el))
 
 	if (!args.should_insert) return
 
@@ -101,10 +103,10 @@ export const checkAndReplace = (args = {}) => {
 		// append | firstChild | maybeBefore:selector
 		strategy: 'append',
 		whenInserted: () => {},
-		beforeInsert: el => {},
+		beforeInsert: (el) => {},
 		watch: [],
 
-		...args
+		...args,
 	}
 
 	const render = () => {
@@ -112,12 +114,14 @@ export const checkAndReplace = (args = {}) => {
 
 		renderWithStrategy({
 			...args,
-			should_insert: to === 'yes'
+			should_insert: to === 'yes',
 		})
 	}
 
-	wp.customize(args.id, val => val.bind(to => render()))
-	args.watch.map(opt => wp.customize(opt, val => val.bind(() => render())))
+	wp.customize(args.id, (val) => val.bind((to) => render()))
+	args.watch.map((opt) =>
+		wp.customize(opt, (val) => val.bind(() => render()))
+	)
 }
 
 export const responsiveClassesFor = (id, el) => {
@@ -128,7 +132,7 @@ export const responsiveClassesFor = (id, el) => {
 	const data = wp.customize(id)() || {
 		mobile: false,
 		tablet: true,
-		desktop: true
+		desktop: true,
 	}
 
 	if (!data.mobile) {

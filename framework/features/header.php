@@ -5,6 +5,7 @@ namespace Blocksy;
 class HeaderAdditions {
 	private $has_transparent_header = '__DEFAULT__';
 	private $has_sticky_header = '__DEFAULT__';
+	private $has_account_modal = '__empty__';
 
 	public function __construct() {
 		add_action(
@@ -235,21 +236,9 @@ class HeaderAdditions {
 		});
 
 		add_filter('blocksy:footer:offcanvas-drawer', function ($els) {
-			if (get_current_user_id()) {
-				if (! is_customize_preview()) {
-					return $els;
-				}
+			if ($this->has_account_modal()) {
+				$els[] = $this->retrieve_account_modal();
 			}
-
-			$render = new \Blocksy_Header_Builder_Render();
-
-			if (! $render->contains_item('account')) {
-				if (! is_customize_preview()) {
-					return $els;
-				}
-			}
-
-			$els[] = $this->retrieve_account_modal();
 
 			return $els;
 		});
@@ -584,6 +573,38 @@ class HeaderAdditions {
 		add_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
 
 		return $html;
+	}
+
+	public function has_account_modal() {
+		if (is_customize_preview()) {
+			return true;
+		}
+
+		if ($this->has_account_modal !== '__empty__') {
+			return $this->has_account_modal;
+		}
+
+		if (get_current_user_id()) {
+			$this->has_account_modal = false;
+			return false;
+		}
+
+		$render = new \Blocksy_Header_Builder_Render();
+
+		if (! $render->contains_item('account')) {
+			$this->has_account_modal = false;
+			return false;
+		}
+
+		$atts = $render->get_item_data_for('account');
+
+		if (blocksy_akg('login_account_action', $atts, 'modal') !== 'modal') {
+			$this->has_account_modal = false;
+			return false;
+		}
+
+		$this->has_account_modal = true;
+		return true;
 	}
 }
 

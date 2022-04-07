@@ -9,9 +9,7 @@ if ( !$forgot_password_inline ) {
 }
 ?>
 
-<form name="loginform" id="loginform" action="<?php 
-echo  wp_login_url() ;
-?>" method="post">
+<form name="loginform" id="loginform" action="#" method="post">
 	<?php 
 do_action( 'woocommerce_login_form_start' );
 ?>

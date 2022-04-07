@@ -15,6 +15,16 @@ class AccountAuth {
 		);
 
 		add_action(
+			'wp_ajax_blc_implement_user_login',
+			[$this, 'blc_implement_user_login']
+		);
+
+		add_action(
+			'wp_ajax_nopriv_blc_implement_user_login',
+			[$this, 'blc_implement_user_login']
+		);
+
+		add_action(
 			'wp_ajax_blc_implement_user_lostpassword',
 			[$this, 'blc_implement_user_lostpassword']
 		);
@@ -229,6 +239,11 @@ class AccountAuth {
 			$errors
 		);
 
+		wp_die();
+	}
+
+	public function blc_implement_user_login() {
+		require_once ABSPATH . 'wp-login.php';
 		wp_die();
 	}
 

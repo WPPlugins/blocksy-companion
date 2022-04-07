@@ -172,7 +172,9 @@ export const handleAccountModal = (el) => {
 
 			let body = new FormData(maybeLogin)
 
-			let url = maybeLogin.action
+			// let url = maybeLogin.action
+
+			let url = `${ct_localizations.ajax_url}?action=blc_implement_user_login`
 
 			if (window.WFLSVars && !maybeLogin.loginProceed) {
 				body.append('action', 'wordfence_ls_authenticate')

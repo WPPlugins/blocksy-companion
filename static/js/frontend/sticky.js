@@ -29,13 +29,21 @@ let cachedStartPosition = null
 let cachedContainerInitialHeight = null
 let cachedStickyContainerHeight = null
 
-ctEvents.on('ct:header:update', () => {
-	cachedStartPosition = null
-	cachedContainerInitialHeight = null
-	cachedStickyContainerHeight = null
+if (window.wp && wp.customize) {
+	wp.customize.selectiveRefresh.bind(
+		'partial-content-rendered',
+		(placement) => {
+			setTimeout(() => {
+				cachedStartPosition = null
+				cachedContainerInitialHeight = null
+				cachedStickyContainerHeight = null
+				prevScrollY = null
 
-	compute()
-})
+				compute()
+			}, 500)
+		}
+	)
+}
 
 const getStartPositionFor = (stickyContainer) => {
 	if (
@@ -68,14 +76,21 @@ const getStartPositionFor = (stickyContainer) => {
 
 	const row = stickyContainer.parentNode
 
+	const bodyComp = getComputedStyle(document.body)
+	let maybeDynamicOffset = parseFloat(
+		bodyComp.getPropertyValue('--header-sticky-offset') || 0
+	)
+
 	if (
 		row.parentNode.children.length === 1 ||
 		row.parentNode.children[0].classList.contains('ct-sticky-container')
 	) {
-		return stickyOffset
+		return stickyOffset > 0
+			? stickyOffset - maybeDynamicOffset
+			: stickyOffset
 	}
 
-	return Array.from(row.parentNode.children)
+	let finalResult = Array.from(row.parentNode.children)
 		.reduce((result, el, index) => {
 			if (result.indexOf(0) > -1 || !el.dataset.row) {
 				return [...result, 0]
@@ -90,6 +105,8 @@ const getStartPositionFor = (stickyContainer) => {
 			}
 		}, [])
 		.reduce((sum, height) => sum + height, stickyOffset)
+
+	return finalResult > 0 ? finalResult - maybeDynamicOffset : finalResult
 }
 
 let prevScrollY = null

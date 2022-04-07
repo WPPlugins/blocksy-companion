@@ -15,7 +15,7 @@ class GoogleAnalytics {
 			if (is_admin()) return;
 
 			if (class_exists('BlocksyExtensionCookiesConsent')) {
-				if (\BlocksyExtensionCookiesConsent::should_display_notification()) {
+				if (! \BlocksyExtensionCookiesConsent::has_consent()) {
 					return;
 				}
 			}

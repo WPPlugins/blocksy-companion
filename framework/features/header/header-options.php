@@ -60,7 +60,7 @@ $options = [
 			],
 
 			'sticky_effect' => [
-				'label' => __('Sticky Effect', 'blocksy-companion' ),
+				'label' => __('Effect', 'blocksy-companion' ),
 				'type' => 'ct-select',
 				'value' => 'shrink',
 				'design' => 'block',
@@ -75,10 +75,24 @@ $options = [
 				]),
 			],
 
+			'sticky_offset' => [
+				'label' => __( 'Offset', 'blocksy-companion' ),
+				'type' => 'ct-slider',
+				'min' => 0,
+				'max' => 300,
+				'value' => 0,
+				'responsive' => true,
+				'divider' => 'top',
+				'sync' => [
+					'id' => 'header_placements_1'
+				],
+			],
+
 			'sticky_behaviour' => [
 				'label' => __( 'Enable on', 'blocksy-companion' ),
 				'type' => 'ct-visibility',
 				'design' => 'block',
+				'divider' => 'top',
 				'value' => [
 					'desktop' => true,
 					// 'tablet' => true,

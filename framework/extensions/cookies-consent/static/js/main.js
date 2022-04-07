@@ -78,6 +78,27 @@ const initCookies = () => {
 				})
 			}
 
+			if (el.classList.contains('ct-cookies-decline-button')) {
+				const periods = {
+					onehour: 36e5,
+					oneday: 864e5,
+					oneweek: 7 * 864e5,
+					onemonth: 31 * 864e5,
+					threemonths: 3 * 31 * 864e5,
+					sixmonths: 6 * 31 * 864e5,
+					oneyear: 365 * 864e5,
+					forever: 10000 * 864e5,
+				}
+
+				cookie.set('blocksy_cookies_consent_accepted', 'no', {
+					expires: new Date(
+						new Date() * 1 +
+							periods[el.closest('[data-period]').dataset.period]
+					),
+					sameSite: 'lax',
+				})
+			}
+
 			hideCookieConsent(notification)
 		})
 	})

@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.22
+Stable tag: 1.8.23
 
 == Description ==
 
@@ -23,6 +23,11 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.23: 2022-04-07
+- Improvement: Smarter loading of the account modal
+- Improvement: More robust data parsing in options import/export module
+- Improvement: Simpler customizer load in CLI commands
+
 1.8.22: 2022-03-25
 - Fix: Blocksy posts shortcode respect pagination
 

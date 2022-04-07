@@ -33,36 +33,18 @@ class CustomizerOptionsManager {
 				wp_send_json_error();
 			}
 
-			if (! isset($_POST['data'])) {
+			if (! isset($_REQUEST['nonce'])) {
 				wp_send_json_error();
 			}
 
-			if (! isset($_POST['nonce'])) {
+			if (! wp_verify_nonce($_REQUEST['nonce'], 'ct-customizer-reset')) {
 				wp_send_json_error();
 			}
 
-			if (! wp_verify_nonce($_POST['nonce'], 'ct-customizer-reset')) {
-				wp_send_json_error();
-			}
-
-			// Ensure only stdClass is allowed
-			// We need it for properly decoding widget data. Custom classes
-			// besides stdClass are not allowed.
-			$data = unserialize(
-				wp_unslash($_POST['data']),
-				[
-					'allowed_classes' => ['stdClass']
-				]
+			$data = json_decode(
+				file_get_contents('php://input'),
+				true
 			);
-
-			if (! $data) {
-				$data = unserialize(
-					str_replace("\r\n", "\n", wp_unslash($_POST['data'])),
-					[
-						'allowed_classes' => ['stdClass']
-					]
-				);
-			}
 
 			// The above code will only import stuff from $data['mods']
 			// that is actually a customizer control. Everything else will be ignored

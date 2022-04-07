@@ -467,11 +467,11 @@ class ThemeIntegration {
 			}
 		}
 
-		return array(
+		return [
 			'width' => $width,
 			'height' => $height,
 			'orientation' => ($width > $height) ? 'landscape' : 'portrait'
-		);
+		];
 	}
 }
 

@@ -11,6 +11,8 @@ import { Overlay } from 'blocksy-options'
 
 import classnames from 'classnames'
 
+import phpUnserialize from 'phpunserialize'
+
 const CustomizerOptionsManager = () => {
 	const [futureConfig, setFutureConfig] = useState(null)
 	const [isCopyingOptions, setIsCopyingOptions] = useState(null)
@@ -162,26 +164,23 @@ const CustomizerOptionsManager = () => {
 								reader.readAsText(futureConfig, 'UTF-8')
 
 								reader.onload = function (evt) {
-									const body = new FormData()
-
-									body.append(
-										'action',
-										'blocksy_customizer_import'
-									)
-
-									body.append(
-										'nonce',
-										ct_customizer_localizations.customizer_reset_none
-									)
-
-									body.append('wp_customize', 'on')
-									body.append('data', evt.target.result)
-
 									try {
-										fetch(window.ajaxurl, {
-											method: 'POST',
-											body,
-										}).then((response) => {
+										fetch(
+											`${window.ajaxurl}?action=blocksy_customizer_import&wp_customize=on&nonce=${ct_customizer_localizations.customizer_reset_none}`,
+											{
+												method: 'POST',
+												headers: {
+													Accept: 'application/json',
+													'Content-Type':
+														'application/json',
+												},
+												body: JSON.stringify(
+													phpUnserialize(
+														evt.target.result
+													)
+												),
+											}
+										).then((response) => {
 											if (response.status === 200) {
 												response
 													.json()
@@ -455,11 +454,6 @@ const CustomizerOptionsManager = () => {
 															if (!success) {
 																return
 															}
-
-															console.log(
-																'here',
-																data.site_url
-															)
 
 															var blob = new Blob(
 																[data.data],
