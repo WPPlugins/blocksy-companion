@@ -103,7 +103,11 @@ class DemoInstallWidgetsInstaller {
 	}
 
 	public function import_data($data) {
-		if (empty($data) || !is_object($data)) {
+		if (empty($data)) {
+			return false;
+		}
+
+		if (! is_object($data) && ! is_array($data)) {
 			return false;
 		}
 

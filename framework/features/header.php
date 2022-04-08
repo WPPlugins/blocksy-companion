@@ -580,6 +580,10 @@ class HeaderAdditions {
 			return true;
 		}
 
+		if (! class_exists('Blocksy_Header_Builder_Render')) {
+			return false;
+		}
+
 		if ($this->has_account_modal !== '__empty__') {
 			return $this->has_account_modal;
 		}
