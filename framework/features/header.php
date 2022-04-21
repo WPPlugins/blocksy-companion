@@ -274,6 +274,12 @@ class HeaderAdditions {
 		$localize = array_merge(
 			[
 				'all_condition_rules' => $conditions_manager->get_all_rules(),
+				'singular_condition_rules' => $conditions_manager->get_all_rules([
+					'filter' => 'singular'
+				]),
+				'archive_condition_rules' => $conditions_manager->get_all_rules([
+					'filter' => 'archive'
+				]),
 				'ajax_url' => admin_url('admin-ajax.php'),
 				'rest_url' => get_rest_url(),
 			]

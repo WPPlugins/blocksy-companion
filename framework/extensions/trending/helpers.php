@@ -154,7 +154,10 @@ if (! function_exists('blc_get_trending_posts_value')) {
 					['fn' => 'blocksy_image'],
 					[
 						'attachment_id' => get_post_thumbnail_id(),
-						'size' => 'thumbnail',
+						'size' => get_theme_mod(
+							'trending_block_thumbnails_size',
+							'thumbnail'
+						),
 						'ratio' => '1/1',
 						'tag_name' => 'div',
 					]

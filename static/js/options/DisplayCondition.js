@@ -15,7 +15,12 @@ const DisplayCondition = ({
 		// inline | modal
 		display = 'inline',
 
-		modalTitle = __('Transparent Header Display Conditions', 'blocksy-companion'),
+		filter = 'all',
+
+		modalTitle = __(
+			'Transparent Header Display Conditions',
+			'blocksy-companion'
+		),
 		modalDescription = __(
 			'Add one or more conditions to display the transparent header.',
 			'blocksy-companion'
@@ -28,7 +33,13 @@ const DisplayCondition = ({
 	const [localValue, setLocalValue] = useState(null)
 
 	if (display === 'inline') {
-		return <ConditionsManager value={value} onChange={onChange} />
+		return (
+			<ConditionsManager
+				filter={filter}
+				value={value}
+				onChange={onChange}
+			/>
+		)
 	}
 
 	return (
@@ -58,6 +69,7 @@ const DisplayCondition = ({
 
 						<div className="ct-modal-scroll">
 							<ConditionsManager
+								filter={filter}
 								value={localValue || value}
 								onChange={(value) => {
 									setLocalValue(value)

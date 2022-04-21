@@ -24,13 +24,11 @@ export const getNameForPlugin = (plugin) =>
 			'wpforms-lite': 'WPForms - Contact Form',
 			'simply-gallery-block': 'SimpLy Gallery Block & Lightbox',
 			'recipe-card-blocks-by-wpzoom': 'Recipe Card Blocks by WPZOOM',
-			'stackable-ultimate-gutenberg-blocks':
-				'Stackable – Gutenberg Blocks',
-
+			'stackable-ultimate-gutenberg-blocks': 'Stackable – Gutenberg Blocks',
 			'map-block-gutenberg': 'Map Block for Google Maps',
-
 			'mb-custom-post-type': 'MB Custom Post Types & Custom Taxonomies',
 			'leadin': 'HubSpot',
+			'block-slider': 'Block Slider',
 		}[plugin] || plugin
 	).replace(/\b\w/, (v) => v.toUpperCase()))
 

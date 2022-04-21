@@ -242,6 +242,13 @@ class ThemeIntegration {
 				);
 			}
 
+			if (strpos($query_args['post_type'], 'ct_all_posts') !== false) {
+				$query_args['post_type'] = array_diff(
+					get_post_types(['public' => true]),
+					['product', 'attachment', 'ct_content_block']
+				);
+			}
+
 			$query = new \WP_Query($query_args);
 
 			$posts_result = $query->posts;

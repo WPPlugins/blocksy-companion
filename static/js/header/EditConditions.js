@@ -93,7 +93,11 @@ const EditConditions = ({ forcedEdit = false, headerId }) => {
 				}}
 				render={() => (
 					<div className="ct-modal-content" ref={containerRef}>
-						<h2>{sprintf(__('Display Conditions', 'blocksy-companion'))}</h2>
+						<h2>
+							{sprintf(
+								__('Display Conditions', 'blocksy-companion')
+							)}
+						</h2>
 						<p>
 							{__(
 								'Add one or more conditions in order to display your header.',

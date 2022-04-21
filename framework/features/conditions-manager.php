@@ -8,7 +8,9 @@ class ConditionsManager {
 
 	public function condition_matches($rules = [], $args = []) {
 		$args = wp_parse_args($args, [
-			'relation' => 'OR'
+			'relation' => 'OR',
+			// prefix | current-screen
+			'strategy' => 'current-screen'
 		]);
 
 		if (empty($rules)) {
@@ -23,12 +25,26 @@ class ConditionsManager {
 			return $el['type'] === 'exclude';
 		});
 
-		$resolved_includes = array_filter($all_includes, function ($el) {
-			return $this->resolve_single_condition($el);
+		$resolved_includes = array_filter($all_includes, function ($el) use ($args) {
+			if ($args['strategy'] === 'current-screen') {
+				return $this->resolve_single_condition($el);
+			}
+
+			return $this->resolve_single_condition_with_prefix(
+				$el,
+				$args['strategy']
+			);
 		});
 
-		$resolved_excludes = array_filter($all_excludes, function ($el) {
-			return $this->resolve_single_condition($el);
+		$resolved_excludes = array_filter($all_excludes, function ($el) use ($args) {
+			if ($args['strategy'] === 'current-screen') {
+				return $this->resolve_single_condition($el);
+			}
+
+			return $this->resolve_single_condition_with_prefix(
+				$el,
+				$args['strategy']
+			);
 		});
 
 		// If at least one exclusion is true -- return false
@@ -81,7 +97,7 @@ class ConditionsManager {
 		}
 
 		if ($rule['rule'] === 'blog') {
-			return !is_front_page() && is_home();
+			return ! is_front_page() && is_home();
 		}
 
 		if ($rule['rule'] === 'front_page') {
@@ -147,7 +163,7 @@ class ConditionsManager {
 		}
 
 		if ($rule['rule'] === 'user_logged_out') {
-			return !is_user_logged_in();
+			return ! is_user_logged_in();
 		}
 
 		if ($rule['rule'] === 'user_post_author_id') {
@@ -318,58 +334,128 @@ class ConditionsManager {
 		return false;
 	}
 
-	public function get_all_rules() {
-		$has_woo = class_exists('WooCommerce');
-
-		$cpts = [];
-
-		$custom_post_types = array_diff(
-			get_post_types(['public' => true]),
-			[
-				'post',
-				'page',
-				'attachment',
-				'documentation',
-				'ct_content_block',
-				'product'
-			]
-		);
-
-		foreach ($custom_post_types as $custom_post_type) {
-			$post_type_object = get_post_type_object($custom_post_type);
-
-			$cpts[] = [
-				'id' => 'post_type_single_' . $custom_post_type,
-				'title' => sprintf(
-					__('%s Single', 'blocksy-companion'),
-					$post_type_object->labels->singular_name
-				)
-			];
-
-			$cpts[] = [
-				'id' => 'post_type_archive_' . $custom_post_type,
-				'title' => sprintf(
-					__('%s Archive', 'blocksy-companion'),
-					$post_type_object->labels->singular_name
-				)
-			];
-
-			$taxonomies = get_object_taxonomies($custom_post_type);
-
-			foreach ($taxonomies as $single_taxonomy) {
-				$cpts[] = [
-					'id' => 'post_type_taxonomy_' . $single_taxonomy,
-					'title' => sprintf(
-						__('%s %s Taxonomy', 'blocksy-companion'),
-						$post_type_object->labels->singular_name,
-						get_taxonomy($single_taxonomy)->label
-					)
-				];
-			}
+	public function resolve_single_condition_with_prefix($rule, $prefix) {
+		if ($rule['rule'] === 'everywhere') {
+			return true;
 		}
 
-		return array_merge([
-			[
+		if ($rule['rule'] === 'singulars') {
+			return (
+				$prefix === 'single_blog_post'
+				||
+				$prefix === 'single_page'
+				||
+				strpos($prefix, '_single') !== false
+			);
+		}
+
+		if ($rule['rule'] === 'archives') {
+			return is_archive();
+		}
+
+		if ($rule['rule'] === '404') {
+			return $prefix === '404';
+		}
+
+		if ($rule['rule'] === 'search') {
+			return $prefix === 'search';
+		}
+
+		if ($rule['rule'] === 'blog') {
+			return $prefix === 'blog';
+		}
+
+		if ($rule['rule'] === 'front_page') {
+			return $prefix === 'blog';
+		}
+
+		if ($rule['rule'] === 'date') {
+			return is_date();
+		}
+
+		if ($rule['rule'] === 'author') {
+			return is_author();
+		}
+
+		if ($rule['rule'] === 'woo_shop') {
+			return function_exists('is_shop') && is_shop();
+		}
+
+		if ($rule['rule'] === 'single_post') {
+			return $prefix === 'single_blog_post';
+		}
+
+		if ($rule['rule'] === 'all_post_archives') {
+			return is_post_type_archive('post');
+		}
+
+		if ($rule['rule'] === 'post_categories') {
+			return $prefix === 'categories';
+		}
+
+		if ($rule['rule'] === 'post_tags') {
+			return $prefix === 'categories';
+		}
+
+		if ($rule['rule'] === 'single_page') {
+			return $prefix === 'single_page';
+		}
+
+		if ($rule['rule'] === 'single_product') {
+			return $prefix === 'product';
+		}
+
+		if ($rule['rule'] === 'all_product_archives') {
+			return $prefix === 'woo_categories';
+		}
+
+		if ($rule['rule'] === 'all_product_categories') {
+			return $prefix === 'woo_categories';
+		}
+
+		if ($rule['rule'] === 'all_product_tags') {
+			return $prefix === 'woo_categories';
+		}
+
+		if (strpos($rule['rule'], 'post_type_single_') !== false) {
+			return $prefix === str_replace(
+				'post_type_single_',
+				'',
+				$rule['rule']
+			) . '_single';
+		}
+
+		if (strpos($rule['rule'], 'post_type_archive_') !== false) {
+			return $prefix === str_replace(
+				'post_type_archive_',
+				'',
+				$rule['rule']
+			) . '_archive';
+		}
+
+		if (strpos($rule['rule'], 'post_type_taxonomy_') !== false) {
+			return $prefix === str_replace(
+				'post_type_taxonomy_',
+				'',
+				$rule['rule']
+			) . '_archive';
+		}
+
+		return false;
+	}
+
+	public function get_all_rules($args = []) {
+		$args = wp_parse_args($args, [
+			// all | archive | singular
+			'filter' => 'all'
+		]);
+
+		$has_woo = class_exists('WooCommerce');
+
+		$common_rules = [];
+
+		if ($args['filter'] === 'all') {
+			$common_rules[] = [
 				'title' => '',
 				'rules' => [
 					[
@@ -377,9 +463,9 @@ class ConditionsManager {
 						'title' => __('Entire Website', 'blocksy-companion')
 					]
 				]
-			],
+			];
 
-			[
+			$common_rules[] = [
 				'title' => __('Basic', 'blocksy-companion'),
 				'rules' => [
 					[
@@ -392,9 +478,9 @@ class ConditionsManager {
 						'title' => __('Archives', 'blocksy-companion')
 					]
 				]
-			],
+			];
 
-			[
+			$common_rules[] = [
 				'title' => __('Posts', 'blocksy-companion'),
 				'rules' => [
 					[
@@ -417,9 +503,65 @@ class ConditionsManager {
 						'title' => __('Post Tags', 'blocksy-companion')
 					],
 				]
-			],
+			];
+		}
 
-			[
+		if ($args['filter'] === 'archive') {
+			$common_rules[] = [
+				'title' => __('Basic', 'blocksy-companion'),
+				'rules' => [
+					[
+						'id' => 'archives',
+						'title' => __('Archives', 'blocksy-companion')
+					]
+				]
+			];
+
+			$common_rules[] = [
+				'title' => __('Posts', 'blocksy-companion'),
+				'rules' => [
+					[
+						'id' => 'all_post_archives',
+						'title' => __('All Post Archives', 'blocksy-companion')
+					],
+
+					[
+						'id' => 'post_categories',
+						'title' => __('Post Categories', 'blocksy-companion')
+					],
+
+					[
+						'id' => 'post_tags',
+						'title' => __('Post Tags', 'blocksy-companion')
+					],
+				]
+			];
+		}
+
+		if ($args['filter'] === 'singular') {
+			$common_rules[] = [
+				'title' => __('Basic', 'blocksy-companion'),
+				'rules' => [
+					[
+						'id' => 'singulars',
+						'title' => __('Singulars', 'blocksy-companion')
+					]
+				]
+			];
+
+			$common_rules[] = [
+				'title' => __('Posts', 'blocksy-companion'),
+				'rules' => [
+					[
+						'id' => 'single_post',
+						'title' => __('Single Post', 'blocksy-companion')
+					]
+				]
+			];
+		}
+
+		if ($args['filter'] === 'all' || $args['filter'] === 'singular') {
+			$common_rules[] = [
 				'title' => __('Pages', 'blocksy-companion'),
 				'rules' => [
 					[
@@ -427,80 +569,102 @@ class ConditionsManager {
 						'title' => __('Single Page', 'blocksy-companion')
 					],
 				]
-			],
-		],
+			];
+		}
 
-		$has_woo ? [
+		$cpts = [];
+
+		$custom_post_types = array_diff(
+			get_post_types(['public' => true]),
 			[
-				'title' => __('WooCommerce', 'blocksy-companion'),
-				'rules' => [
-					[
-						'id' => 'woo_shop',
-						'title' => __('Shop Home', 'blocksy-companion')
-					],
-
-					[
-						'id' => 'single_product',
-						'title' => __('Single Product', 'blocksy-companion')
-					],
-
-					[
-						'id' => 'all_product_archives',
-						'title' => __('Product Archives', 'blocksy-companion')
-					],
-
-					[
-						'id' => 'all_product_categories',
-						'title' => __('Product Categories', 'blocksy-companion')
-					],
-
-					[
-						'id' => 'all_product_tags',
-						'title' => __('Product Tags', 'blocksy-companion')
-					],
-				]
+				'post',
+				'page',
+				'attachment',
+				'documentation',
+				'ct_content_block',
+				'product'
 			]
-		] : [],
+		);
 
-		count($cpts) > 0 ? [
-			[
-				'title' => __('Custom Post Types', 'blocksy-companion'),
-				'rules' => $cpts
-			]
-		] : [],
+		foreach ($custom_post_types as $custom_post_type) {
+			$post_type_object = get_post_type_object($custom_post_type);
 
-		[
-			[
-				'title' => __('Specific', 'blocksy-companion'),
-				'rules' => [
-					[
-						'id' => 'post_ids',
-						'title' => __('Post ID', 'blocksy-companion')
-					],
+			if ($args['filter'] === 'all' || $args['filter'] === 'singular') {
+				$cpts[] = [
+					'id' => 'post_type_single_' . $custom_post_type,
+					'title' => sprintf(
+						__('%s Single', 'blocksy-companion'),
+						$post_type_object->labels->singular_name
+					)
+				];
+			}
 
-					[
-						'id' => 'page_ids',
-						'title' => __('Page ID', 'blocksy-companion')
-					],
+			if ($args['filter'] === 'all' || $args['filter'] === 'archive') {
+				$cpts[] = [
+					'id' => 'post_type_archive_' . $custom_post_type,
+					'title' => sprintf(
+						__('%s Archive', 'blocksy-companion'),
+						$post_type_object->labels->singular_name
+					)
+				];
+			}
 
-					[
-						'id' => 'custom_post_type_ids',
-						'title' => __('Custom Post Type ID', 'blocksy-companion')
-					],
+			$taxonomies = get_object_taxonomies($custom_post_type);
 
-					[
-						'id' => 'taxonomy_ids',
-						'title' => __('Taxonomy ID', 'blocksy-companion')
-					],
+			if ($args['filter'] === 'all' || $args['filter'] === 'archive') {
+				foreach ($taxonomies as $single_taxonomy) {
+					$cpts[] = [
+						'id' => 'post_type_taxonomy_' . $single_taxonomy,
+						'title' => sprintf(
+							__('%s %s Taxonomy', 'blocksy-companion'),
+							$post_type_object->labels->singular_name,
+							get_taxonomy($single_taxonomy)->label
+						)
+					];
+				}
+			}
+		}
 
-					[
-						'id' => 'post_with_taxonomy_ids',
-						'title' => __('Post with Taxonomy ID', 'blocksy-companion')
-					],
-				]
-			],
+		$specific_conditions = [];
 
-			[
+		$specific_ids = [];
+
+		if ($args['filter'] === 'all' || $args['filter'] === 'singular') {
+			$specific_ids[] = [
+				'id' => 'post_ids',
+				'title' => __('Post ID', 'blocksy-companion')
+			];
+
+			$specific_ids[] = [
+				'id' => 'page_ids',
+				'title' => __('Page ID', 'blocksy-companion')
+			];
+
+			$specific_ids[] = [
+				'id' => 'custom_post_type_ids',
+				'title' => __('Custom Post Type ID', 'blocksy-companion')
+			];
+
+			$specific_ids[] = [
+				'id' => 'post_with_taxonomy_ids',
+				'title' => __('Post with Taxonomy ID', 'blocksy-companion')
+			];
+		}
+
+		if ($args['filter'] === 'all' || $args['filter'] === 'archive') {
+			$specific_ids[] = [
+				'id' => 'taxonomy_ids',
+				'title' => __('Taxonomy ID', 'blocksy-companion')
+			];
+		}
+
+		$specific_conditions[] = [
+			'title' => __('Specific', 'blocksy-companion'),
+			'rules' => $specific_ids
+		];
+
+		if ($args['filter'] === 'all' || $args['filter'] === 'archive') {
+			$specific_conditions[] = [
 				'title' => __('Other Pages', 'blocksy-companion'),
 				'rules' => [
 					[
@@ -535,66 +699,112 @@ class ConditionsManager {
 						'title' => __('Author', 'blocksy-companion')
 					],
 				],
+			];
+		}
+
+		return array_merge(
+			$common_rules,
+			$has_woo && $args['filter'] === 'all' ? [
+				[
+					'title' => __('WooCommerce', 'blocksy-companion'),
+					'rules' => [
+						[
+							'id' => 'woo_shop',
+							'title' => __('Shop Home', 'blocksy-companion')
+						],
+
+						[
+							'id' => 'single_product',
+							'title' => __('Single Product', 'blocksy-companion')
+						],
+
+						[
+							'id' => 'all_product_archives',
+							'title' => __('Product Archives', 'blocksy-companion')
+						],
+
+						[
+							'id' => 'all_product_categories',
+							'title' => __('Product Categories', 'blocksy-companion')
+						],
+
+						[
+							'id' => 'all_product_tags',
+							'title' => __('Product Tags', 'blocksy-companion')
+						],
+					]
+				]
+			] : [],
+
+			count($cpts) > 0 ? [
+				[
+					'title' => __('Custom Post Types', 'blocksy-companion'),
+					'rules' => $cpts
+				]
+			] : [],
+
+			$specific_conditions,
+
+			[
+				[
+					'title' => __('User Auth', 'blocksy-companion'),
+					'rules' => [
+						[
+							'id' => 'user_logged_in',
+							'title' => __('User Logged In', 'blocksy-companion')
+						],
+
+						[
+							'id' => 'user_logged_out',
+							'title' => __('User Logged Out', 'blocksy-companion')
+						],
+					]
+				],
+
+				[
+					'title' => __('User Roles', 'blocksy-companion'),
+					'rules' => $this->get_user_roles_rules()
+				],
+
+				[
+					'title' => __('Other', 'blocksy-companion'),
+					'rules' => [
+						[
+							'id' => 'user_post_author_id',
+							'title' => __('Post Author', 'blocksy-companion')
+						]
+					]
+				],
 			],
 
-			[
-				'title' => __('User Auth', 'blocksy-companion'),
-				'rules' => [
-					[
-						'id' => 'user_logged_in',
-						'title' => __('User Logged In', 'blocksy-companion')
-					],
-
-					[
-						'id' => 'user_logged_out',
-						'title' => __('User Logged Out', 'blocksy-companion')
-					],
-				]
-			],
-
-			[
-				'title' => __('User Roles', 'blocksy-companion'),
-				'rules' => $this->get_user_roles_rules()
-            ],
-
-			[
-				'title' => __('Other', 'blocksy-companion'),
-				'rules' => [
-					[
-						'id' => 'user_post_author_id',
-						'title' => __('Post Author', 'blocksy-companion')
+			(
+				function_exists('blocksy_get_current_language')
+				&&
+				blocksy_get_current_language() !== '__NOT_KNOWN__'
+			) ? [
+				[
+					'title' => __('Languages', 'blocksy-companion'),
+					'rules' => [
+						[
+							'id' => 'current_language',
+							'title' => __('Current Language', 'blocksy-companion')
+						]
 					]
 				]
-            ],
-		],
+			] : [],
 
-		(
-			function_exists('blocksy_get_current_language')
-			&&
-			blocksy_get_current_language() !== '__NOT_KNOWN__'
-		) ? [
-			[
-				'title' => __('Languages', 'blocksy-companion'),
-				'rules' => [
-					[
-						'id' => 'current_language',
-						'title' => __('Current Language', 'blocksy-companion')
+			function_exists('bbp_is_single_user_profile') && $args['filter'] === 'all' ? [
+				[
+					'title' => __('bbPress', 'blocksy-companion'),
+					'rules' => [
+						[
+							'id' => 'bbpress_profile',
+							'title' => __('Profile', 'blocksy-companion')
+						]
 					]
 				]
-			]
-		] : [],
-
-		function_exists('bbp_is_single_user_profile') ? [
-			[
-				'title' => __('bbPress', 'blocksy-companion'),
-				'rules' => [
-					[
-						'id' => 'bbpress_profile',
-						'title' => __('Profile', 'blocksy-companion')
-					]
-				]
-			]
-		] : []);
+			] : []
+		);
 	}
 
 	public function humanize_conditions($conditions) {

@@ -88,7 +88,9 @@ const EditCredentials = ({
 
 					<div className="ct-newsletter-select-provider">
 						<Fragment>
-							<h4>{__('Select Provider', 'blocksy-companion')}</h4>
+							<h4>
+								{__('Select Provider', 'blocksy-companion')}
+							</h4>
 
 							<Select
 								onChange={(copy) => {
@@ -154,11 +156,13 @@ const EditCredentials = ({
 									dangerouslySetInnerHTML={{
 										__html: sprintf(
 											__(
-												'More info on how to generate an API key for Mailerlite can be found %shere%s.',
+												'More info on how to generate an API key for Mailerlite can be found %shere%s. Please note that we require at least one group to be created in your account for the integration to work. More info on how to create a group %shere%s.',
 												'blocksy-companion'
 											),
 
-											'<a target="_blank" href="https://help.mailerlite.com/article/show/35040-where-to-find-the-mailerlite-api-key-and-api-documentation">',
+											'<a target="_blank" href="https://www.mailerlite.com/help/where-to-find-the-mailerlite-api-key-and-documentation">',
+											'</a>',
+											'<a target="_blank" href="https://www.mailerlite.com/help/how-to-create-and-use-groups">',
 											'</a>'
 										),
 									}}
@@ -170,7 +174,9 @@ const EditCredentials = ({
 						ctDashboardLocalizations.plugin_data.is_pro) && (
 						<div className="mailchimp-credentials">
 							<section>
-								<label>{__('API Key', 'blocksy-companion')}</label>
+								<label>
+									{__('API Key', 'blocksy-companion')}
+								</label>
 
 								<div className="ct-option-input">
 									<input
@@ -184,7 +190,9 @@ const EditCredentials = ({
 							</section>
 
 							<section>
-								<label>{__('List ID', 'blocksy-companion')}</label>
+								<label>
+									{__('List ID', 'blocksy-companion')}
+								</label>
 
 								<ListPicker
 									listId={listId}
@@ -205,7 +213,10 @@ const EditCredentials = ({
 										? __('Loading...', 'blocksy-companion')
 										: !extension.__object
 										? __('Activate', 'blocksy-companion')
-										: __('Save Settings', 'blocksy-companion')}
+										: __(
+												'Save Settings',
+												'blocksy-companion'
+										  )}
 								</button>
 							</section>
 						</div>

@@ -5,13 +5,22 @@ import { Select } from 'blocksy-options'
 
 import PostIdPicker from './ConditionsManager/PostIdPicker'
 
-let allPostsCache = []
 let allTaxonomiesCache = []
 let allLanguagesCache = []
 let allUsersCache = []
 
-const ConditionsManager = ({ value, onChange }) => {
-	const allRules = blocksy_admin.all_condition_rules
+const ConditionsManager = ({ value, onChange, filter = 'all' }) => {
+	let rulesToUse = blocksy_admin.all_condition_rules
+
+	if (filter === 'singular') {
+		rulesToUse = blocksy_admin.singular_condition_rules
+	}
+
+	if (filter === 'archive') {
+		rulesToUse = blocksy_admin.archive_condition_rules
+	}
+
+	const allRules = rulesToUse
 		.reduce(
 			(current, { rules, title }) => [
 				...current,
@@ -34,7 +43,6 @@ const ConditionsManager = ({ value, onChange }) => {
 			[]
 		)
 
-	const [allPosts, setAllPosts] = useState(allPostsCache)
 	const [allTaxonomies, setAllTaxonomies] = useState(allTaxonomiesCache)
 	const [allLanguages, setAllLanguages] = useState(allLanguagesCache)
 	const [allUsers, setAllUsers] = useState(allUsersCache)
@@ -88,7 +96,10 @@ const ConditionsManager = ({ value, onChange }) => {
 							selectInputStart: () => (
 								<span className={`ct-${condition.type}`} />
 							),
-							placeholder: __('Select variation', 'blocksy-companion'),
+							placeholder: __(
+								'Select variation',
+								'blocksy-companion'
+							),
 							choices: {
 								include: __('Include', 'blocksy-companion'),
 								exclude: __('Exclude', 'blocksy-companion'),
@@ -170,7 +181,10 @@ const ConditionsManager = ({ value, onChange }) => {
 							option={{
 								appendToBody: true,
 								defaultToFirstItem: false,
-								placeholder: __('Select taxonomy', 'blocksy-companion'),
+								placeholder: __(
+									'Select taxonomy',
+									'blocksy-companion'
+								),
 								choices: allTaxonomies.map((taxonomy) => ({
 									key: taxonomy.id,
 									value: taxonomy.name,
@@ -204,7 +218,10 @@ const ConditionsManager = ({ value, onChange }) => {
 							option={{
 								appendToBody: true,
 								defaultToFirstItem: false,
-								placeholder: __('Select language', 'blocksy-companion'),
+								placeholder: __(
+									'Select language',
+									'blocksy-companion'
+								),
 								choices: allLanguages.map((language) => ({
 									key: language.id,
 									value: language.name,
@@ -235,11 +252,17 @@ const ConditionsManager = ({ value, onChange }) => {
 							option={{
 								appendToBody: true,
 								defaultToFirstItem: false,
-								placeholder: __('Select user', 'blocksy-companion'),
+								placeholder: __(
+									'Select user',
+									'blocksy-companion'
+								),
 								choices: [
 									{
 										key: 'current_user',
-										value: __('Current user', 'blocksy-companion'),
+										value: __(
+											'Current user',
+											'blocksy-companion'
+										),
 									},
 
 									...allUsers.map((user) => ({
@@ -294,7 +317,7 @@ const ConditionsManager = ({ value, onChange }) => {
 							...value,
 							{
 								type: 'include',
-								rule: 'everywhere',
+								rule: rulesToUse[0].rules[0].id,
 								payload: {},
 							},
 						])

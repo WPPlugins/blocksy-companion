@@ -133,6 +133,7 @@ $options = [
 										'h4' => 'H4',
 										'h5' => 'H5',
 										'h6' => 'H6',
+										'span' => 'span',
 									]
 								),
 								'sync' => [
@@ -234,7 +235,25 @@ $options = [
 								'sync' => [
 									'selector' => '.ct-trending-block',
 									'render' => function () {
-										echo blocksy_get_trending_block();
+										echo blc_get_trending_block();
+									}
+								],
+							],
+
+							'trending_block_thumbnails_size' => [
+								'label' => __('Image Size', 'blocksy-companion'),
+								'type' => 'ct-select',
+								'value' => 'thumbnail',
+								'view' => 'text',
+								'design' => 'inline',
+								'divider' => 'top',
+								'choices' => blocksy_ordered_keys(
+									blocksy_get_all_image_sizes()
+								),
+								'sync' => [
+									'selector' => '.ct-trending-block',
+									'render' => function () {
+										echo blc_get_trending_block();
 									}
 								],
 							],
