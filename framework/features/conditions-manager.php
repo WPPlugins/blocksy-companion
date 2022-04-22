@@ -80,9 +80,11 @@ class ConditionsManager {
 			return true;
 		}
 
+
 		if ($rule['rule'] === 'singulars') {
 			return is_singular();
 		}
+
 
 		if ($rule['rule'] === 'archives') {
 			return is_archive();
@@ -452,10 +454,8 @@ class ConditionsManager {
 
 		$has_woo = class_exists('WooCommerce');
 
-		$common_rules = [];
-
-		if ($args['filter'] === 'all') {
-			$common_rules[] = [
+		$common_rules = [
+			[
 				'title' => '',
 				'rules' => [
 					[
@@ -463,8 +463,10 @@ class ConditionsManager {
 						'title' => __('Entire Website', 'blocksy-companion')
 					]
 				]
-			];
+			]
+		];
 
+		if ($args['filter'] === 'all') {
 			$common_rules[] = [
 				'title' => __('Basic', 'blocksy-companion'),
 				'rules' => [
@@ -629,34 +631,30 @@ class ConditionsManager {
 
 		$specific_ids = [];
 
-		if ($args['filter'] === 'all' || $args['filter'] === 'singular') {
-			$specific_ids[] = [
-				'id' => 'post_ids',
-				'title' => __('Post ID', 'blocksy-companion')
-			];
+		$specific_ids[] = [
+			'id' => 'post_ids',
+			'title' => __('Post ID', 'blocksy-companion')
+		];
 
-			$specific_ids[] = [
-				'id' => 'page_ids',
-				'title' => __('Page ID', 'blocksy-companion')
-			];
+		$specific_ids[] = [
+			'id' => 'page_ids',
+			'title' => __('Page ID', 'blocksy-companion')
+		];
 
-			$specific_ids[] = [
-				'id' => 'custom_post_type_ids',
-				'title' => __('Custom Post Type ID', 'blocksy-companion')
-			];
+		$specific_ids[] = [
+			'id' => 'custom_post_type_ids',
+			'title' => __('Custom Post Type ID', 'blocksy-companion')
+		];
 
-			$specific_ids[] = [
-				'id' => 'post_with_taxonomy_ids',
-				'title' => __('Post with Taxonomy ID', 'blocksy-companion')
-			];
-		}
+		$specific_ids[] = [
+			'id' => 'post_with_taxonomy_ids',
+			'title' => __('Post with Taxonomy ID', 'blocksy-companion')
+		];
 
-		if ($args['filter'] === 'all' || $args['filter'] === 'archive') {
-			$specific_ids[] = [
-				'id' => 'taxonomy_ids',
-				'title' => __('Taxonomy ID', 'blocksy-companion')
-			];
-		}
+		$specific_ids[] = [
+			'id' => 'taxonomy_ids',
+			'title' => __('Taxonomy ID', 'blocksy-companion')
+		];
 
 		$specific_conditions[] = [
 			'title' => __('Specific', 'blocksy-companion'),
