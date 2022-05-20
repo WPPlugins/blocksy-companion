@@ -7,6 +7,10 @@ import {
 
 let shrinkCache = null
 
+export const clearShrinkCache = () => {
+	shrinkCache = null
+}
+
 const getShrinkData = ({ row }) => {
 	if (shrinkCache) {
 		return shrinkCache

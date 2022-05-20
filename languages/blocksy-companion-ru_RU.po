@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-04-26 06:33:23+0000\n"
+"PO-Revision-Date: 2022-05-17 12:29:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,17 +14,17 @@ msgstr ""
 #: framework/premium/features/premium-header.php:43,
 #: build_tmp/build/framework/premium/features/premium-header.php:43
 msgid "Mobile Menu 1"
-msgstr ""
+msgstr "Мобильное меню 1"
 
 #: framework/premium/features/premium-header.php:44,
 #: build_tmp/build/framework/premium/features/premium-header.php:44
 msgid "Mobile Menu 2"
-msgstr ""
+msgstr "Мобильное меню 2"
 
 #: framework/extensions/newsletter-subscribe/includes/BlocksyMailerliteManager.php:99,
 #: build_tmp/build/framework/extensions/newsletter-subscribe/includes/BlocksyMailerliteManager.php:99
 msgid "Thank you for subscribing to our newsletter!"
-msgstr ""
+msgstr "Благодарим за подписку на нашу рассылку!"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -32,7 +32,7 @@ msgstr ""
 #: build_tmp/build/framework/premium/extensions/adobe-typekit/config.php:5
 msgctxt "Extension Brand Name"
 msgid "Adobe Fonts"
-msgstr ""
+msgstr "Шрифты Adobe"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -52,7 +52,7 @@ msgstr ""
 #: build_tmp/build/framework/premium/extensions/code-snippets/extension.php:102
 msgctxt "Extension Brand Name"
 msgid "Custom Code Snippets"
-msgstr ""
+msgstr "Произвольный код"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -60,7 +60,7 @@ msgstr ""
 #: build_tmp/build/framework/premium/extensions/custom-fonts/config.php:5
 msgctxt "Extension Brand Name"
 msgid "Custom Fonts"
-msgstr ""
+msgstr "Произвольные шрифты"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -68,7 +68,7 @@ msgstr ""
 #: build_tmp/build/framework/premium/extensions/local-google-fonts/config.php:5
 msgctxt "Extension Brand Name"
 msgid "Local Google Fonts"
-msgstr ""
+msgstr "Локальные шрифты Google"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -76,7 +76,7 @@ msgstr ""
 #: build_tmp/build/framework/premium/extensions/mega-menu/config.php:5
 msgctxt "Extension Brand Name"
 msgid "Advanced Menu"
-msgstr ""
+msgstr "Расширенное меню"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -84,7 +84,7 @@ msgstr ""
 #: build_tmp/build/framework/premium/extensions/post-types-extra/config.php:5
 msgctxt "Extension Brand Name"
 msgid "Post Types Extra"
-msgstr ""
+msgstr "Дополнительные типы записей"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -96,17 +96,17 @@ msgstr ""
 #: build_tmp/build/framework/premium/extensions/shortcuts/customizer.php:524
 msgctxt "Extension Brand Name"
 msgid "Shortcuts Bar"
-msgstr ""
+msgstr "Мобильная панель кнопок"
 
 #: framework/premium/extensions/shortcuts/customizer.php:300,
 #: build_tmp/build/framework/premium/extensions/shortcuts/customizer.php:300
 msgid "Set link to nofollow"
-msgstr ""
+msgstr "Установить ссылкам nofollow"
 
 #: framework/premium/extensions/shortcuts/customizer.php:306,
 #: build_tmp/build/framework/premium/extensions/shortcuts/customizer.php:306
 msgid "Custom class"
-msgstr ""
+msgstr "Произвольный класс"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -114,7 +114,7 @@ msgstr ""
 #: build_tmp/build/framework/premium/extensions/sidebars/config.php:5
 msgctxt "Extension Brand Name"
 msgid "Multiple Sidebars"
-msgstr ""
+msgstr "Несколько сайдбаров"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -122,7 +122,7 @@ msgstr ""
 #: build_tmp/build/framework/premium/extensions/white-label/config.php:5
 msgctxt "Extension Brand Name"
 msgid "White Label"
-msgstr ""
+msgstr "Белая этикетка"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -130,320 +130,320 @@ msgstr ""
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/config.php:5
 msgctxt "Extension Brand Name"
 msgid "WooCommerce Extra"
-msgstr ""
+msgstr "Экстра WooCommerce"
 
 #: framework/premium/extensions/woocommerce-extra/extension.php:154,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/extension.php:154
 msgid "Gallery Arrows Visibility"
-msgstr ""
+msgstr "Видимость стрелок галереи"
 
 #: framework/premium/extensions/woocommerce-extra/extension.php:175,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/extension.php:175
 msgid "Thumbnails Arrows Visibility"
-msgstr ""
+msgstr "Видимость стрелок миниатюр"
 
 #: framework/premium/extensions/woocommerce-extra/extension.php:384,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/extension.php:384
 msgid "Icons Spacing"
-msgstr ""
+msgstr "Отступ значков"
 
 #: framework/premium/extensions/woocommerce-extra/extension.php:428,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/extension.php:428
 msgid "WooCommerce Offcanvas Filters"
-msgstr ""
+msgstr "Плавающий блок фильтров товаров"
 
 #: framework/premium/extensions/woocommerce-extra/extension.php:430,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/extension.php:430
 msgid "Add widgets here."
-msgstr ""
+msgstr "Добавляйте виджеты сюда."
 
 #: framework/premium/extensions/woocommerce-extra/extension.php:702,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/extension.php:702
 msgid "Close filters modal"
-msgstr ""
+msgstr "Закрыть модальное окно фильтров"
 
 #: framework/premium/extensions/woocommerce-extra/helpers.php:75,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/helpers.php:75
 msgid "Close quick view"
-msgstr ""
+msgstr "Закрыть быстрый просмотр"
 
 #: framework/premium/extensions/woocommerce-extra/helpers.php:148,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/helpers.php:148
 msgid "Quick view toggle"
-msgstr ""
+msgstr "Тумблер быстрого просмотра"
 
 #: framework/premium/extensions/woocommerce-extra/helpers.php:148,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/helpers.php:148
 msgid "Quick view icon"
-msgstr ""
+msgstr "Значок быстрого просмотра"
 
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:335,
 #: framework/features/header/items/account/options.php:1022,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:335,
 #: build_tmp/build/framework/features/header/items/account/options.php:1022
 msgid "Close Button Type"
-msgstr ""
+msgstr "Тип кнопки закрытия"
 
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:344,
 #: framework/features/header/items/account/options.php:1031,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:344,
 #: build_tmp/build/framework/features/header/items/account/options.php:1031
 msgid "Simple"
-msgstr ""
+msgstr "Прост."
 
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:345,
 #: framework/features/header/items/account/options.php:1032,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:345,
 #: build_tmp/build/framework/features/header/items/account/options.php:1032
 msgid "Border"
-msgstr ""
+msgstr "Граница"
 
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:386,
 #: framework/features/header/items/account/options.php:1075,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:386,
 #: build_tmp/build/framework/features/header/items/account/options.php:1075
 msgid "Border Color"
-msgstr ""
+msgstr "Цвет границы"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:161,
 #: build_tmp/build/framework/premium/features/content-blocks/hooks-manager.php:161
 msgid "Before description"
-msgstr ""
+msgstr "До описания"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:169,
 #: build_tmp/build/framework/premium/features/content-blocks/hooks-manager.php:169
 msgid "Before breadcrumbs"
-msgstr ""
+msgstr "До цепочки навигации"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:193,
 #: build_tmp/build/framework/premium/features/content-blocks/hooks-manager.php:193
 msgid "After description"
-msgstr ""
+msgstr "После описания"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:201,
 #: build_tmp/build/framework/premium/features/content-blocks/hooks-manager.php:201
 msgid "After breadcrumbs"
-msgstr ""
+msgstr "После цепочки навигации"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:500,
 #: build_tmp/build/framework/premium/features/content-blocks/hooks-manager.php:500
 msgid "Before shop loop item actions"
-msgstr ""
+msgstr "До цикла действий с товарами"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:505,
 #: build_tmp/build/framework/premium/features/content-blocks/hooks-manager.php:505
 msgid "After shop loop item actions"
-msgstr ""
+msgstr "После цикла действий с товарами"
 
 #. translators: placeholder here means the actual URL.
 #. translators: placeholder here means the actual URL.
 #: framework/extensions/widgets/widgets/ct-socials/options.php:28,
 #: build_tmp/build/framework/extensions/widgets/widgets/ct-socials/options.php:28
 msgid "Configure the social links in Customizer ➝ General ➝ %sSocial Network Accounts%s."
-msgstr ""
+msgstr "Настройте ссылок соцсетей в Настройщик ➝ Общее ➝ %sПрофили в соцсетях%s."
 
 #: framework/features/header/items/account/options.php:39,
 #: build_tmp/build/framework/features/header/items/account/options.php:39
 msgid "Customizing: Logged out State"
-msgstr ""
+msgstr "Настройка: статус неавторизованности"
 
 #: framework/features/header/items/account/options.php:508,
 #: build_tmp/build/framework/features/header/items/account/options.php:508
 msgid "User Visibility"
-msgstr ""
+msgstr "Видимость пользователя"
 
 #: framework/features/header/items/account/options.php:519,
 #: build_tmp/build/framework/features/header/items/account/options.php:519
 msgid "Logged In"
-msgstr ""
+msgstr "Зарегистрированные"
 
 #: framework/features/header/items/account/options.php:520,
 #: build_tmp/build/framework/features/header/items/account/options.php:520
 msgid "Logged Out"
-msgstr ""
+msgstr "Гости"
 
 #: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:880,
 #: build_tmp/build/framework/premium/extensions/post-types-extra/includes/dynamic-data.php:880
 msgid "Custom Field"
-msgstr ""
+msgstr "Произвольные поля"
 
 #: framework/premium/extensions/post-types-extra/includes/estimated-read-time.php:107
 msgid "%s min"
 msgid_plural "%s mins"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%s минута"
+msgstr[1] "%s минуты"
+msgstr[2] "%s минут"
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-helpers.php:38,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/includes/wish-list-helpers.php:38
 msgid "Wishlist icon"
-msgstr ""
+msgstr "Значок списка желаний"
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-options.php:101,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/includes/wish-list-options.php:101
 msgid "Enable AJAX loading"
-msgstr ""
+msgstr "Ajax-загрузка"
 
 #: framework/premium/features/content-blocks/options/archive.php:56,
 #: build_tmp/build/framework/premium/features/content-blocks/options/archive.php:56
 msgid "Default Card Layout"
-msgstr ""
+msgstr "Стандартный макет карточки"
 
 #: framework/premium/features/content-blocks/options/archive.php:60,
 #: build_tmp/build/framework/premium/features/content-blocks/options/archive.php:60
 msgid "Inherit card wrapper settings from Customizer (background color, spacing, shadow)."
-msgstr ""
+msgstr "Наследование настроек оболочки карточки из настройщика (цвет фона, интервал, тень)."
 
 #: framework/premium/features/content-blocks/options/archive.php:68,
 #: framework/premium/features/content-blocks/options/single.php:56,
 #: build_tmp/build/framework/premium/features/content-blocks/options/archive.php:68,
 #: build_tmp/build/framework/premium/features/content-blocks/options/single.php:56
 msgid "Dynamic Content Preview"
-msgstr ""
+msgstr "Предпросмотр динамического содержимого"
 
 #: framework/premium/features/content-blocks/options/archive.php:74,
 #: build_tmp/build/framework/premium/features/content-blocks/options/archive.php:74
 msgid "Select a post/page to preview it's content inside the editor while building the archive."
-msgstr ""
+msgstr "Выберите запись/страницу для предпросмотра её содержимого в редакторе при создании архива."
 
 #: framework/premium/features/content-blocks/options/archive.php:78,
 #: build_tmp/build/framework/premium/features/content-blocks/options/archive.php:78
 msgid "Editor/Card Width"
-msgstr ""
+msgstr "Ширина редактора/карточки"
 
 #: framework/premium/features/content-blocks/options/archive.php:89,
 #: build_tmp/build/framework/premium/features/content-blocks/options/archive.php:89
 msgid "Set the editor width for better understanging the layout you are building (just for preview purpose, this option won't apply in frontend)."
-msgstr ""
+msgstr "Устака ширины редактора для лучшего понимания создаваемого макета (только для предпросмотра, параметр не приме��яется во внешнем интерфейсе)."
 
 #: framework/premium/features/content-blocks/options/popup.php:269,
 #: build_tmp/build/framework/premium/features/content-blocks/options/popup.php:269
 msgid "After X Pages"
-msgstr ""
+msgstr "После X страниц"
 
 #: framework/premium/features/content-blocks/options/popup.php:275,
 #: build_tmp/build/framework/premium/features/content-blocks/options/popup.php:275
 msgid "Set after how many visited pages the popup block will appear."
-msgstr ""
+msgstr "После скольких посещённых страниц появится модальное окно."
 
 #: framework/premium/features/content-blocks/options/single.php:62,
 #: build_tmp/build/framework/premium/features/content-blocks/options/single.php:62
 msgid "Select a post/page to preview it's content inside the editor while building the post/page."
-msgstr ""
+msgstr "Выберите запись/страницу для предпросмотра её содержимого в редакторе при настройки записи/страницы."
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:158
 msgid "More info on how to generate an API key for Mailerlite can be found %shere%s. Please note that we require at least one group to be created in your account for the integration to work. More info on how to create a group %shere%s."
-msgstr ""
+msgstr "Дополнительную информацию о генерации ключа API для Mailerlite, можно найти %sздесь%s. Для работы интеграции требуется, чтобы в вашем профиле была создана хотя бы одна группа. Подробнее о создании группы читайте %sздесь%s."
 
 #: framework/premium/static/js/hooks/CodeEditor.js:56
 msgid "Code Editor"
-msgstr ""
+msgstr "Редактор кода"
 
 #: framework/premium/static/js/hooks/CreateHook.js:101
 msgid "Template Type"
-msgstr ""
+msgstr "Тип шаблона"
 
 #: framework/premium/static/js/hooks/CreateHook.js:116
 msgid "Archive Template"
-msgstr ""
+msgstr "Шаблон архива"
 
 #: framework/premium/static/js/hooks/CreateHook.js:124
 msgid "Single Template"
-msgstr ""
+msgstr "Отдельный шаблон"
 
 #: framework/premium/static/js/hooks/CreateHook.js:162
 msgid "Hook Name"
-msgstr ""
+msgstr "Название зацепа"
 
 #: framework/premium/static/js/hooks/CreateHook.js:166
 msgid "Popup Name"
-msgstr ""
+msgstr "Название модального окна"
 
 #: framework/premium/static/js/hooks/CreateHook.js:170
 msgid "Template Name"
-msgstr ""
+msgstr "Название шаблона"
 
 #: framework/premium/static/js/hooks/CreateHook.js:77
 msgid "Popup"
-msgstr ""
+msgstr "Модальное окно"
 
 #: framework/premium/static/js/hooks/CreateHook.js:86
 msgid "Custom Template"
-msgstr ""
+msgstr "Произвольный шаблон"
 
 #: framework/premium/static/js/media-video-upload-button.js:27
 msgid "Select MP4"
-msgstr ""
+msgstr "Выберите MP4"
 
 #: framework/premium/static/js/media-video-upload-button.js:29
 msgid "Attach MP4"
-msgstr ""
+msgstr "Прикрепить MP4"
 
 #: framework/premium/static/js/options/IconPicker.js:20
 msgid "Theme Icons"
-msgstr ""
+msgstr "Значки темы"
 
 #: framework/premium/static/js/options/IconPicker.js:26
 msgid "FontAwesome Brands"
-msgstr ""
+msgstr "FontAwesome бренды"
 
 #: framework/premium/static/js/options/IconPicker.js:32
 msgid "FontAwesome Solid"
-msgstr ""
+msgstr "FontAwesome залитые"
 
 #: framework/premium/static/js/options/IconPicker.js:38
 msgid "FontAwesome Regular"
-msgstr ""
+msgstr "FontAwesome обычные"
 
 #: framework/premium/static/js/typography/providers/kadence.js:21
 #: framework/premium/static/js/typography/providers/plus-addons.js:23
 #: framework/premium/static/js/typography/providers/stackable.js:23
 msgid "%s Local Google Fonts"
-msgstr ""
+msgstr "Локальные Google-шрифты %s"
 
 #: framework/premium/static/js/typography/providers/kadence.js:25
 #: framework/premium/static/js/typography/providers/plus-addons.js:27
 #: framework/premium/static/js/typography/providers/stackable.js:27
 msgid "%s Typekit"
-msgstr ""
+msgstr "Typekit %s"
 
 #: framework/premium/static/js/typography/providers/kadence.js:30
 #: framework/premium/static/js/typography/providers/stackable.js:31
 msgid "%s Custom Fonts"
-msgstr ""
+msgstr "Custom Fonts %s"
 
 #: framework/premium/static/js/typography/providers/kadence.js:58
 msgid "Normal"
-msgstr ""
+msgstr "Обычный"
 
 #: framework/premium/static/js/typography/providers/kadence.js:82
 msgid "Inherit"
-msgstr ""
+msgstr "Наследовать"
 
 #: framework/premium/static/js/typography/providers/plus-addons.js:31
 msgid "%s Custom"
-msgstr ""
+msgstr "Кастом %s"
 
 #: framework/premium/static/js/typography/providers/plus-addons.js:35
 msgid "%s System"
-msgstr ""
+msgstr "Система %s"
 
 #. translators: %s: Link to the login page.
 #. translators: %s: Link to the login page.
 #: framework/features/account-auth.php:92,
 #: build_tmp/build/framework/features/account-auth.php:92
 msgid "Check your email for the confirmation link, then visit the <a href=\"%s\">login page</a>."
-msgstr ""
+msgstr "Проверьте свою электронную почту на наличие ссылки для подтверждения, а затем перейдите на <a href=\"%s\">страницу входа</a>."
 
 #: framework/features/account-auth.php:198,
 #: build_tmp/build/framework/features/account-auth.php:198
 msgid "Your account was created successfully. Your login details have been sent to your email address. Please visit the <a href=\"%s\">login page</a>."
-msgstr ""
+msgstr "Ваша учётная запись была успешно создана. Данные для входа отправлены на ваш адрес электронной почты. Пожалуйста, перейдите на <a href=\"%s\">страницу входа</a>."
 
 #: framework/features/account-auth.php:207,
 #: build_tmp/build/framework/features/account-auth.php:207
 msgid "Your account was created successfully and a password has been sent to your email address. Please visit the <a href=\"%s\">login page</a>."
-msgstr ""
+msgstr "Ваша учётная запись была успешно создана, и пароль был отправлен на ваш адрес электронной почты. Пожалуйста, перейдите на <a href=\"%s\">страницу входа</a>."
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -455,24 +455,24 @@ msgstr ""
 #: build_tmp/build/framework/extensions/cookies-consent/customizer.php:5
 msgctxt "Extension Brand Name"
 msgid "Cookies Consent"
-msgstr ""
+msgstr "Согласие на cookie"
 
 #: framework/extensions/cookies-consent/customizer.php:76,
 #: build_tmp/build/framework/extensions/cookies-consent/customizer.php:76
 msgid "Accept Button text"
-msgstr ""
+msgstr "Текст кнопки подтверждения"
 
 #: framework/extensions/cookies-consent/customizer.php:85,
 #: build_tmp/build/framework/extensions/cookies-consent/customizer.php:85
 msgid "Decline Button text"
-msgstr ""
+msgstr "Текст кнопки отказа"
 
 #: framework/extensions/cookies-consent/customizer.php:88,
 #: framework/extensions/cookies-consent/helpers.php:34,
 #: build_tmp/build/framework/extensions/cookies-consent/customizer.php:88,
 #: build_tmp/build/framework/extensions/cookies-consent/helpers.php:34
 msgid "Decline"
-msgstr ""
+msgstr "Отказ"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -480,7 +480,7 @@ msgstr ""
 #: build_tmp/build/framework/extensions/newsletter-subscribe/config.php:5
 msgctxt "Extension Brand Name"
 msgid "Newsletter Subscribe"
-msgstr ""
+msgstr "Подписка на рассылку"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -488,12 +488,12 @@ msgstr ""
 #: build_tmp/build/framework/extensions/product-reviews/config.php:5
 msgctxt "Extension Brand Name"
 msgid "Product Reviews"
-msgstr ""
+msgstr "Обзоры товаров"
 
 #: framework/extensions/product-reviews/metabox.php:60,
 #: build_tmp/build/framework/extensions/product-reviews/metabox.php:60
 msgid "Please note that some of this information (price, sku, brand) won't be displayed on the front-end. It is solely used for Google's Schema.org markup."
-msgstr ""
+msgstr "Часть этой информации (цена, артикул, бренд) не будет отображаться во внешнем интерфейсе. Он используется исключительно для разметки Google Schema.org."
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -505,12 +505,12 @@ msgstr ""
 #: build_tmp/build/framework/extensions/trending/customizer.php:97
 msgctxt "Extension Brand Name"
 msgid "Trending Posts"
-msgstr ""
+msgstr "Популярные записи"
 
 #: framework/extensions/trending/customizer.php:245,
 #: build_tmp/build/framework/extensions/trending/customizer.php:245
 msgid "Image Size"
-msgstr ""
+msgstr "Размер изображения"
 
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
@@ -518,66 +518,66 @@ msgstr ""
 #: build_tmp/build/framework/extensions/widgets/config.php:5
 msgctxt "Extension Brand Name"
 msgid "Widgets"
-msgstr ""
+msgstr "Виджеты"
 
 #: framework/features/header/account-modal.php:37,
 #: build_tmp/build/framework/features/header/account-modal.php:37
 msgid "Close account modal"
-msgstr ""
+msgstr "Закрыть модальное окно профиля"
 
 #: framework/features/header/header-options.php:63,
 #: build_tmp/build/framework/features/header/header-options.php:63
 msgid "Effect"
-msgstr ""
+msgstr "Эффект"
 
 #: framework/features/header/header-options.php:79,
 #: build_tmp/build/framework/features/header/header-options.php:79
 msgid "Offset"
-msgstr ""
+msgstr "Смещение"
 
 #: framework/premium/features/content-blocks.php:86,
 #: build_tmp/build/framework/premium/features/content-blocks.php:86
 msgid "All types"
-msgstr ""
+msgstr "Все типы"
 
 #: framework/premium/features/content-blocks.php:378,
 #: build_tmp/build/framework/premium/features/content-blocks.php:378,
 #: framework/premium/features/content-blocks/options/popup.php:168,
 #: build_tmp/build/framework/premium/features/content-blocks/options/popup.php:168
 msgid "After x pages"
-msgstr ""
+msgstr "После X страниц"
 
 #: framework/premium/features/content-blocks.php:1088,
 #: build_tmp/build/framework/premium/features/content-blocks.php:1088
 msgid "Close popup"
-msgstr ""
+msgstr "Закрыть модальное окно"
 
 #: framework/premium/features/media-meta-fields.php:29,
 #: build_tmp/build/framework/premium/features/media-meta-fields.php:29
 msgid "Attachment Video"
-msgstr ""
+msgstr "Видео вложения"
 
 #: framework/premium/features/media-meta-fields.php:33,
 #: build_tmp/build/framework/premium/features/media-meta-fields.php:33
 msgid "Video URL"
-msgstr ""
+msgstr "URL видео"
 
 #. translators: %s: Link to wordpress.org article
 #. translators: %s: Link to wordpress.org article
 #: framework/premium/features/media-meta-fields.php:39,
 #: build_tmp/build/framework/premium/features/media-meta-fields.php:39
 msgid "Enter a <a href=\"%s\" target=\"_blank\">valid media URL</a> or upload an MP4 file into the media library."
-msgstr ""
+msgstr "Введите <a href=\"%s\" target=\"_blank\">действительный URL медиафайла</a> или загрузите MP4-файл в медиатеку."
 
 #: framework/premium/features/media-meta-fields.php:42,
 #: build_tmp/build/framework/premium/features/media-meta-fields.php:42
 msgid "Upload"
-msgstr ""
+msgstr "Загрузить"
 
 #: framework/premium/features/media-meta-fields.php:44,
 #: build_tmp/build/framework/premium/features/media-meta-fields.php:44
 msgid "Upload Video (MP4 File)"
-msgstr ""
+msgstr "Загрузить видео (MP4-файл)"
 
 #: framework/premium/static/js/header/CreateHeader.js:117
 msgid "Picker header"
@@ -1090,7 +1090,7 @@ msgstr "Импорт содержимого"
 
 #: static/js/screens/DemoInstall/Wizzard/Content.js:31
 msgid "This will import posts, pages, comments, navigation menus, custom fields, terms and custom posts"
-msgstr "Будут импортированы записи, страницы, комментарии, меню навигации, про��звольные поля, термины и произвольные типы записей."
+msgstr "Будут импортированы записи, страницы, комментарии, меню навигации, произвольные поля, термины и произвольные типы записей."
 
 #: static/js/screens/DemoInstall/Wizzard/Content.js:71
 msgid "Clean Install"
@@ -1146,7 +1146,7 @@ msgstr "Следующие плагины необходимы для для п�
 
 #: static/js/screens/Extensions.js:239
 msgid "Loading Extensions Status..."
-msgstr "Загрузка статусов расширений..."
+msgstr "Загрузка статусов расширен��й..."
 
 #: static/js/screens/Extensions.js:264
 msgid "Free Extensions"
@@ -1281,7 +1281,7 @@ msgstr "Действие профиля"
 #: framework/features/header/items/account/options.php:91,
 #: build_tmp/build/framework/features/header/items/account/options.php:91
 msgid "Select Menu"
-msgstr "Выб��р меню"
+msgstr "Выбор меню"
 
 #: framework/features/header/items/account/options.php:97,
 #: build_tmp/build/framework/features/header/items/account/options.php:97
@@ -1482,7 +1482,7 @@ msgstr "Фон модального окна"
 #: framework/features/header/items/account/options.php:988,
 #: build_tmp/build/framework/features/header/items/account/options.php:988
 msgid "Modal Backdrop"
-msgstr "Задний фон мод��льного окна"
+msgstr "Задний фон модального окна"
 
 #: framework/features/header/items/account/options.php:1168,
 #: build_tmp/build/framework/features/header/items/account/options.php:1168
@@ -1673,7 +1673,7 @@ msgstr "Кнопка быстрого просмотра"
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:172,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:171
 msgid "You don't have any products in your wish list yet."
-msgstr "В вашем списке желаний ещё нет товаров."
+msgstr "В вашем списк�� желаний ещё нет товаров."
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:33,
 #: build_tmp/build/framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:33
@@ -2092,7 +2092,7 @@ msgstr "Автоскрытие"
 #: framework/premium/extensions/post-types-extra/includes/read-progress/customizer.php:38,
 #: build_tmp/build/framework/premium/extensions/post-types-extra/includes/read-progress/customizer.php:38
 msgid "Automatically hide the read progress bar once you arrive at the bottom of the article."
-msgstr "Автоматическое скрытие индикатора прогресса чтения, как только статья заканчив��ется."
+msgstr "Автоматическое скрытие индикатора прогресса чтения, как только статья заканчивается."
 
 #: framework/premium/extensions/post-types-extra/includes/read-progress/customizer.php:71,
 #: build_tmp/build/framework/premium/extensions/post-types-extra/includes/read-progress/customizer.php:71
@@ -2294,7 +2294,7 @@ msgstr "Выберите список..."
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:125
 msgid "This option is available only in Blocksy premium %sversion%s."
-msgstr "Эта опция доступна только в премиальной %sверсии%s Blocksy."
+msgstr "Эта опция доступна только в премиальной %sв��рсии%s Blocksy."
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:141
 msgid "More info on how to generate an API key for Mailchimp can be found %shere%s."
@@ -2477,7 +2477,7 @@ msgstr "Загружайте только файлы шрифтов в форм�
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:284
 msgid "Upload only the %s.woff2%s or %s.ttf%s font file formats. Please don't convert non-woff variable fonts by yourself. Instead, just ask the font provider to hand a correct file otherwise the %svariable%s font will loose its capabilities."
-msgstr "Загружайте только файлы шрифтов в формате %s.woff2%s или %s.ttf%s. Не конвертируйте вариативные шри��ты, отличные от woff, самостоятельно. Вместо этого просто попросите поставщика шрифтов передать правильный файл, иначе %sвариативный%s шрифт потеряет свои возможности."
+msgstr "Загружайте только файлы шрифтов в формате %s.woff2%s или %s.ttf%s. Не конвертируйте вариативные шрифты, отличные от woff, самостоятельно. Вместо этого просто попросите поставщика шрифтов передать правильный файл, иначе %sвариативный%s шрифт потеряет свои возможности."
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:310
 msgid "Font Name"
@@ -5426,7 +5426,7 @@ msgstr "Анонимизация IP"
 #: framework/features/google-analytics.php:102,
 #: build_tmp/build/framework/features/google-analytics.php:102
 msgid "Enable Google Analytics IP Anonymization for enhanced privacy. More info and instructions can be found %shere%s."
-msgstr "Анонимность IP-адресов для Google Analytics для повышения конфиденциальности. Подробная информация и инструкции %sздесь%s."
+msgstr "Анонимность IP-адресов для Google Analytics ��ля повышения конфиденциальности. Подробная информация и инструкции %sздесь%s."
 
 #: framework/features/opengraph-meta-data.php:17,
 #: build_tmp/build/framework/features/opengraph-meta-data.php:17

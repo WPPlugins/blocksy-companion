@@ -3,7 +3,7 @@
 /*
 Plugin Name: Blocksy Companion
 Description: This plugin is the companion for the Blocksy theme, it runs and adds its enhacements only if the Blocksy theme is installed and active.
-Version: 1.8.31
+Version: 1.8.32
 Author: CreativeThemes
 Author URI: https://creativethemes.com
 Text Domain: blocksy-companion
@@ -72,11 +72,6 @@ if ( function_exists( 'blc_fs' ) ) {
             
             blc_fs();
             do_action( 'blc_fs_loaded' );
-            blc_fs()->add_filter( 'freemius_pricing_js_path', function ( $d ) {
-                // return BLOCKSY_PATH . 'freemius-pricing/freemius-pricing.js';
-                // Only in DEV!!
-                return WP_CONTENT_DIR . '/plugins/blocksy-companion/freemius-pricing/freemius-pricing.js';
-            } );
         }
     
     }

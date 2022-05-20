@@ -122,6 +122,10 @@ class ThemeIntegration {
 		});
 
 		add_shortcode('blocksy_breadcrumbs', function ($args, $content) {
+			if (! class_exists('Blocksy_Breadcrumbs_Builder')) {
+				return '';
+			}
+
 			$breadcrumbs_builder = new \Blocksy_Breadcrumbs_Builder();
 			return $breadcrumbs_builder->render([
 				'class' => 'ct-breadcrumbs-shortcode'

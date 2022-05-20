@@ -19,12 +19,12 @@ msgstr ""
 "x-generator: babel-plugin-wp-i18n\n"
 
 #. translators: %s: PHP version
-#: blocksy-companion.php:136
+#: blocksy-companion.php:128
 msgid "Blocksy requires PHP version %s+, plugin is currently NOT RUNNING."
 msgstr ""
 
 #. translators: %s: WordPress version
-#: blocksy-companion.php:147
+#: blocksy-companion.php:139
 msgid ""
 "Blocksy requires WordPress version %s+. Because you are using an earlier "
 "version, the plugin is currently NOT RUNNING."
@@ -120,73 +120,73 @@ msgid ""
 "a wishlits page."
 msgstr ""
 
-#: framework/theme-integration.php:304,
+#: framework/theme-integration.php:308,
 #: framework/extensions/widgets/widgets/ct-facebook/options.php:16,
 #: framework/extensions/widgets/widgets/ct-facebook/view.php:12,
 #: framework/extensions/widgets/widgets/ct-facebook/widget.php:13
 msgid "Facebook"
 msgstr ""
 
-#: framework/theme-integration.php:305
+#: framework/theme-integration.php:309
 msgid "Twitter"
 msgstr ""
 
-#: framework/theme-integration.php:306
+#: framework/theme-integration.php:310
 msgid "LinkedIn"
 msgstr ""
 
-#: framework/theme-integration.php:307
+#: framework/theme-integration.php:311
 msgid "Dribbble"
 msgstr ""
 
-#: framework/theme-integration.php:308
+#: framework/theme-integration.php:312
 msgid "Instagram"
 msgstr ""
 
-#: framework/theme-integration.php:309
+#: framework/theme-integration.php:313
 msgid "Pinterest"
 msgstr ""
 
-#: framework/theme-integration.php:310
+#: framework/theme-integration.php:314
 msgid "WordPress"
 msgstr ""
 
-#: framework/theme-integration.php:311
+#: framework/theme-integration.php:315
 msgid "GitHub"
 msgstr ""
 
-#: framework/theme-integration.php:312,
+#: framework/theme-integration.php:316,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:280,
 #: framework/extensions/widgets/widgets/ct-socials/options.php:83,
 #: framework/premium/features/content-blocks/options/archive.php:47
 msgid "Medium"
 msgstr ""
 
-#: framework/theme-integration.php:313
+#: framework/theme-integration.php:317
 msgid "YouTube"
 msgstr ""
 
-#: framework/theme-integration.php:314
+#: framework/theme-integration.php:318
 msgid "Vimeo"
 msgstr ""
 
-#: framework/theme-integration.php:315
+#: framework/theme-integration.php:319
 msgid "VKontakte"
 msgstr ""
 
-#: framework/theme-integration.php:316
+#: framework/theme-integration.php:320
 msgid "Odnoklassniki"
 msgstr ""
 
-#: framework/theme-integration.php:317
+#: framework/theme-integration.php:321
 msgid "TikTok"
 msgstr ""
 
-#: framework/theme-integration.php:389
+#: framework/theme-integration.php:393
 msgid "Companion"
 msgstr ""
 
-#: framework/theme-integration.php:405 static/js/screens/SiteExport.js:106
+#: framework/theme-integration.php:409 static/js/screens/SiteExport.js:106
 msgid "PRO"
 msgstr ""
 
@@ -1738,136 +1738,54 @@ msgstr ""
 msgid "Display Conditions"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:114
-msgid "All types"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:211
+#: framework/premium/features/content-blocks.php:125
 msgid "Hooks Locations"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:376,
-#: framework/premium/extensions/shortcuts/customizer.php:538
-msgid "Type"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:377
-msgid "Location/Trigger"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:378
-msgid "Conditions"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:379
-msgid "Output"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:380
-msgid "Enable/Disable"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:400,
-#: framework/premium/extensions/shortcuts/customizer.php:726,
-#: framework/extensions/widgets/widgets/ct-contact-info/options.php:293,
-#: framework/extensions/widgets/widgets/ct-socials/options.php:96,
-#: framework/features/header/items/account/options.php:141,
-#: framework/features/header/items/account/options.php:366,
-#: framework/premium/features/content-blocks/options/hook.php:9,
-#: framework/premium/features/content-blocks/options/hook.php:158,
-#: framework/premium/features/content-blocks/options/popup.php:162,
-#: framework/premium/features/content-blocks/options/popup.php:437,
-#: framework/premium/features/premium-header/items/contacts/options.php:274
-msgid "None"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:401,
-#: framework/premium/features/content-blocks/options/popup.php:163
-msgid "On scroll"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:402,
-#: framework/premium/features/content-blocks/options/popup.php:164
-msgid "On scroll to element"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:403,
-#: framework/premium/features/content-blocks/options/popup.php:165
-msgid "On page load"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:404,
-#: framework/premium/features/content-blocks/options/popup.php:166
-msgid "After inactivity"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:405,
-#: framework/premium/features/content-blocks/options/popup.php:167
-msgid "After x time"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:406,
-#: framework/premium/features/content-blocks/options/popup.php:168
-msgid "After x pages"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:407,
-#: framework/premium/features/content-blocks/options/popup.php:169
-msgid "On page exit intent"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:411
-msgid "Down"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:412
-msgid "Up"
-msgstr ""
-
-#: framework/premium/features/content-blocks.php:871,
-#: framework/premium/features/content-blocks.php:877
+#: framework/premium/features/content-blocks.php:568,
+#: framework/premium/features/content-blocks.php:574
 msgid "Content Blocks"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:872,
+#: framework/premium/features/content-blocks.php:569,
 #: framework/premium/extensions/mega-menu/options.php:333
 msgid "Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:873
+#: framework/premium/features/content-blocks.php:570
 msgid "Add New"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:874
+#: framework/premium/features/content-blocks.php:571
 msgid "Add New Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:875
+#: framework/premium/features/content-blocks.php:572
 msgid "Edit Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:876
+#: framework/premium/features/content-blocks.php:573
 #: framework/premium/static/js/hooks/CreateHook.js:33
 msgid "New Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:878
+#: framework/premium/features/content-blocks.php:575
 msgid "View Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:879
+#: framework/premium/features/content-blocks.php:576
 msgid "Search Content Blocks"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:880
+#: framework/premium/features/content-blocks.php:577
 msgid "Nothing found"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:881
+#: framework/premium/features/content-blocks.php:578
 msgid "Nothing found in Trash"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:1169
+#: framework/premium/features/content-blocks.php:866
 msgid "Close popup"
 msgstr ""
 
@@ -2490,6 +2408,11 @@ msgstr ""
 msgid "Wishlist"
 msgstr ""
 
+#: framework/premium/extensions/shortcuts/customizer.php:538,
+#: framework/premium/features/content-blocks/admin-ui.php:196
+msgid "Type"
+msgstr ""
+
 #: framework/premium/extensions/shortcuts/customizer.php:557
 msgid "Shortcuts"
 msgstr ""
@@ -2535,6 +2458,20 @@ msgstr ""
 
 #: framework/premium/extensions/shortcuts/customizer.php:721
 msgid "Scroll Interaction"
+msgstr ""
+
+#: framework/premium/extensions/shortcuts/customizer.php:726,
+#: framework/premium/features/content-blocks/admin-ui.php:225,
+#: framework/extensions/widgets/widgets/ct-contact-info/options.php:293,
+#: framework/extensions/widgets/widgets/ct-socials/options.php:96,
+#: framework/features/header/items/account/options.php:141,
+#: framework/features/header/items/account/options.php:366,
+#: framework/premium/features/content-blocks/options/hook.php:9,
+#: framework/premium/features/content-blocks/options/hook.php:158,
+#: framework/premium/features/content-blocks/options/popup.php:162,
+#: framework/premium/features/content-blocks/options/popup.php:437,
+#: framework/premium/features/premium-header/items/contacts/options.php:274
+msgid "None"
 msgstr ""
 
 #: framework/premium/extensions/shortcuts/customizer.php:727
@@ -2923,6 +2860,89 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/readme.php:77
 msgid "Customizer ➝ WooCommerce ➝ General ➝ Products Wishlist"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:17
+msgid "Enable"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:18
+msgid "Disable"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:69
+msgid "Enabled %s content block."
+msgid_plural "Enabled %s content blocks."
+msgstr[0] ""
+msgstr[1] ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:94
+msgid "Disabled %s content block."
+msgid_plural "Disabled %s content blocks."
+msgstr[0] ""
+msgstr[1] ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:131
+msgid "All types"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:197
+msgid "Location/Trigger"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:198
+msgid "Conditions"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:199
+msgid "Output"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:200
+msgid "Enable/Disable"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:226,
+#: framework/premium/features/content-blocks/options/popup.php:163
+msgid "On scroll"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:227,
+#: framework/premium/features/content-blocks/options/popup.php:164
+msgid "On scroll to element"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:228,
+#: framework/premium/features/content-blocks/options/popup.php:165
+msgid "On page load"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:229,
+#: framework/premium/features/content-blocks/options/popup.php:166
+msgid "After inactivity"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:230,
+#: framework/premium/features/content-blocks/options/popup.php:167
+msgid "After x time"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:231,
+#: framework/premium/features/content-blocks/options/popup.php:168
+msgid "After x pages"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:232,
+#: framework/premium/features/content-blocks/options/popup.php:169
+msgid "On page exit intent"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:236
+msgid "Down"
+msgstr ""
+
+#: framework/premium/features/content-blocks/admin-ui.php:237
+msgid "Up"
 msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:11
@@ -4222,11 +4242,11 @@ msgstr[1] ""
 msgid "All"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/includes/taxonomies-options.php:129
+#: framework/premium/extensions/post-types-extra/includes/taxonomies-options.php:161
 msgid "Featured Image"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/includes/taxonomies-options.php:134
+#: framework/premium/extensions/post-types-extra/includes/taxonomies-options.php:166
 msgid "Accent Color"
 msgstr ""
 
@@ -4322,7 +4342,7 @@ msgstr ""
 msgid "Quick View Modal Button"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:172
+#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:190
 msgid "You don't have any products in your wish list yet."
 msgstr ""
 
@@ -4330,8 +4350,8 @@ msgstr ""
 msgid "Add to cart"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:108,
-#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:132
+#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:126,
+#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:150
 msgid "Remove Product"
 msgstr ""
 
@@ -5401,7 +5421,7 @@ msgid ""
 msgstr ""
 
 #: framework/premium/static/js/footer/PanelsManager.js:211
-#: framework/premium/static/js/hooks/CodeEditor.js:166
+#: framework/premium/static/js/hooks/CodeEditor.js:183
 #: static/js/header/PanelsManager.js:215
 #: static/js/options/CustomizerOptionsManager.js:422
 msgid "Cancel"
@@ -5444,33 +5464,33 @@ msgstr ""
 msgid "Header name"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:127
+#: framework/premium/static/js/hooks/CodeEditor.js:144
 msgid "Use code editor"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:130
+#: framework/premium/static/js/hooks/CodeEditor.js:147
 msgid "Exit code editor"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:142
+#: framework/premium/static/js/hooks/CodeEditor.js:159
 msgid "Heads up!"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:144
+#: framework/premium/static/js/hooks/CodeEditor.js:161
 msgid ""
 "Enabling & disabling the code editor will erase everything from your post "
 "editor and this action is irreversible."
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:151
+#: framework/premium/static/js/hooks/CodeEditor.js:168
 msgid "Are you sure you want to continue?"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:215
+#: framework/premium/static/js/hooks/CodeEditor.js:232
 msgid "Yes, continue"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:56
+#: framework/premium/static/js/hooks/CodeEditor.js:73
 msgid "Code Editor"
 msgstr ""
 

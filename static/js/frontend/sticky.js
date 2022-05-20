@@ -7,6 +7,8 @@ import { computeFadeSlide } from './sticky/fade-slide'
 
 import { getRowStickyHeight } from './sticky/shrink-utils'
 
+import { clearShrinkCache } from './sticky/shrink-handle-middle-row'
+
 export const setTransparencyFor = (deviceContainer, value = 'yes') => {
 	Array.from(
 		deviceContainer.querySelectorAll('[data-row][data-transparent-row]')
@@ -29,11 +31,13 @@ let cachedStartPosition = null
 let cachedContainerInitialHeight = null
 let cachedStickyContainerHeight = null
 
-if (window.wp && wp.customize) {
+if (window.wp && wp.customize && wp.customize.selectiveRefresh) {
 	wp.customize.selectiveRefresh.bind(
 		'partial-content-rendered',
 		(placement) => {
 			setTimeout(() => {
+				clearShrinkCache()
+
 				cachedStartPosition = null
 				cachedContainerInitialHeight = null
 				cachedStickyContainerHeight = null
