@@ -268,12 +268,12 @@ msgstr ""
 
 #: framework/features/conditions-manager.php:490,
 #: framework/features/conditions-manager.php:559,
-#: framework/premium/features/content-blocks/hooks-manager.php:399,
-#: framework/premium/features/content-blocks/hooks-manager.php:407,
-#: framework/premium/features/content-blocks/hooks-manager.php:415,
-#: framework/premium/features/content-blocks/hooks-manager.php:422,
-#: framework/premium/features/content-blocks/hooks-manager.php:429,
-#: framework/premium/features/content-blocks/hooks-manager.php:437
+#: framework/premium/features/content-blocks/hooks-manager.php:408,
+#: framework/premium/features/content-blocks/hooks-manager.php:416,
+#: framework/premium/features/content-blocks/hooks-manager.php:424,
+#: framework/premium/features/content-blocks/hooks-manager.php:431,
+#: framework/premium/features/content-blocks/hooks-manager.php:438,
+#: framework/premium/features/content-blocks/hooks-manager.php:446
 msgid "Single Post"
 msgstr ""
 
@@ -323,7 +323,7 @@ msgid "Page ID"
 msgstr ""
 
 #: framework/features/conditions-manager.php:646
-#: static/js/options/ConditionsManager/PostIdPicker.js:76
+#: static/js/options/ConditionsManager/PostIdPicker.js:77
 msgid "Custom Post Type ID"
 msgstr ""
 
@@ -568,10 +568,10 @@ msgid "Forever"
 msgstr ""
 
 #: framework/extensions/cookies-consent/customizer.php:62,
-#: framework/premium/features/content-blocks/hooks-manager.php:226,
-#: framework/premium/features/content-blocks/hooks-manager.php:234,
-#: framework/premium/features/content-blocks/hooks-manager.php:242,
-#: framework/premium/features/content-blocks/hooks-manager.php:250,
+#: framework/premium/features/content-blocks/hooks-manager.php:235,
+#: framework/premium/features/content-blocks/hooks-manager.php:243,
+#: framework/premium/features/content-blocks/hooks-manager.php:251,
+#: framework/premium/features/content-blocks/hooks-manager.php:259,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:86,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:115,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:143,
@@ -1396,7 +1396,7 @@ msgid "Review Entity"
 msgstr ""
 
 #: framework/extensions/product-reviews/metabox.php:18,
-#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:32
+#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:34
 msgid "Product"
 msgstr ""
 
@@ -2433,7 +2433,7 @@ msgstr ""
 
 #: framework/premium/extensions/shortcuts/customizer.php:661,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:25,
-#: framework/premium/features/content-blocks/hooks-manager.php:436,
+#: framework/premium/features/content-blocks/hooks-manager.php:445,
 #: framework/features/header/items/account/options.php:278,
 #: framework/features/header/items/account/options.php:484,
 #: framework/premium/features/content-blocks/options/hook.php:307,
@@ -2681,7 +2681,7 @@ msgid "Position"
 msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:24,
-#: framework/premium/features/content-blocks/hooks-manager.php:398,
+#: framework/premium/features/content-blocks/hooks-manager.php:407,
 #: framework/premium/features/content-blocks/options/hook.php:306
 msgid "Top"
 msgstr ""
@@ -2951,7 +2951,8 @@ msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:13,
 #: framework/premium/features/content-blocks/hooks-manager.php:22,
-#: framework/premium/features/content-blocks/hooks-manager.php:32
+#: framework/premium/features/content-blocks/hooks-manager.php:32,
+#: framework/premium/features/content-blocks/hooks-manager.php:41
 msgid "Head"
 msgstr ""
 
@@ -2964,659 +2965,663 @@ msgid "WP head end"
 msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:39
-msgid "Header before"
-msgstr ""
-
-#: framework/premium/features/content-blocks/hooks-manager.php:41,
-#: framework/premium/features/content-blocks/hooks-manager.php:50
-msgid "Header"
+msgid "WP body open"
 msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:48
-msgid "Header after"
+msgid "Header before"
+msgstr ""
+
+#: framework/premium/features/content-blocks/hooks-manager.php:50,
+#: framework/premium/features/content-blocks/hooks-manager.php:59
+msgid "Header"
 msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:57
-msgid "Desktop top"
-msgstr ""
-
-#: framework/premium/features/content-blocks/hooks-manager.php:59,
-#: framework/premium/features/content-blocks/hooks-manager.php:68,
-#: framework/premium/features/content-blocks/hooks-manager.php:77,
-#: framework/premium/features/content-blocks/hooks-manager.php:86
-msgid "Header offcanvas"
+msgid "Header after"
 msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:66
-msgid "Desktop bottom"
+msgid "Desktop top"
+msgstr ""
+
+#: framework/premium/features/content-blocks/hooks-manager.php:68,
+#: framework/premium/features/content-blocks/hooks-manager.php:77,
+#: framework/premium/features/content-blocks/hooks-manager.php:86,
+#: framework/premium/features/content-blocks/hooks-manager.php:95
+msgid "Header offcanvas"
 msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:75
-msgid "Mobile top"
+msgid "Desktop bottom"
 msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:84
-msgid "Mobile bottom"
+msgid "Mobile top"
 msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:93
+msgid "Mobile bottom"
+msgstr ""
+
+#: framework/premium/features/content-blocks/hooks-manager.php:102
 msgid "Sidebar before"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:94,
-#: framework/premium/features/content-blocks/hooks-manager.php:101,
-#: framework/premium/features/content-blocks/hooks-manager.php:108,
-#: framework/premium/features/content-blocks/hooks-manager.php:115
+#: framework/premium/features/content-blocks/hooks-manager.php:103,
+#: framework/premium/features/content-blocks/hooks-manager.php:110,
+#: framework/premium/features/content-blocks/hooks-manager.php:117,
+#: framework/premium/features/content-blocks/hooks-manager.php:124
 msgid "Left/Right sidebar"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:100
+#: framework/premium/features/content-blocks/hooks-manager.php:109
 msgid "Sidebar start"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:107
+#: framework/premium/features/content-blocks/hooks-manager.php:116
 msgid "Sidebar end"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:114
+#: framework/premium/features/content-blocks/hooks-manager.php:123
 msgid "Sidebar after"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:121
+#: framework/premium/features/content-blocks/hooks-manager.php:130
 msgid "Dynamic sidebar before"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:122,
-#: framework/premium/features/content-blocks/hooks-manager.php:129,
-#: framework/premium/features/content-blocks/hooks-manager.php:137
+#: framework/premium/features/content-blocks/hooks-manager.php:131,
+#: framework/premium/features/content-blocks/hooks-manager.php:138,
+#: framework/premium/features/content-blocks/hooks-manager.php:146
 msgid "All widget areas"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:128
+#: framework/premium/features/content-blocks/hooks-manager.php:137
 msgid "Dynamic sidebar"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:136
+#: framework/premium/features/content-blocks/hooks-manager.php:145
 msgid "Dynamic sidebar after"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:145
+#: framework/premium/features/content-blocks/hooks-manager.php:154
 msgid "Before section"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:146,
-#: framework/premium/features/content-blocks/hooks-manager.php:154,
-#: framework/premium/features/content-blocks/hooks-manager.php:162,
-#: framework/premium/features/content-blocks/hooks-manager.php:170,
-#: framework/premium/features/content-blocks/hooks-manager.php:178,
-#: framework/premium/features/content-blocks/hooks-manager.php:186,
-#: framework/premium/features/content-blocks/hooks-manager.php:194,
-#: framework/premium/features/content-blocks/hooks-manager.php:202,
-#: framework/premium/features/content-blocks/hooks-manager.php:210,
-#: framework/premium/features/content-blocks/hooks-manager.php:218
+#: framework/premium/features/content-blocks/hooks-manager.php:155,
+#: framework/premium/features/content-blocks/hooks-manager.php:163,
+#: framework/premium/features/content-blocks/hooks-manager.php:171,
+#: framework/premium/features/content-blocks/hooks-manager.php:179,
+#: framework/premium/features/content-blocks/hooks-manager.php:187,
+#: framework/premium/features/content-blocks/hooks-manager.php:195,
+#: framework/premium/features/content-blocks/hooks-manager.php:203,
+#: framework/premium/features/content-blocks/hooks-manager.php:211,
+#: framework/premium/features/content-blocks/hooks-manager.php:219,
+#: framework/premium/features/content-blocks/hooks-manager.php:227
 msgid "Page/post title"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:153,
-#: framework/premium/features/content-blocks/hooks-manager.php:271,
-#: framework/premium/features/content-blocks/hooks-manager.php:313
+#: framework/premium/features/content-blocks/hooks-manager.php:162,
+#: framework/premium/features/content-blocks/hooks-manager.php:280,
+#: framework/premium/features/content-blocks/hooks-manager.php:322
 msgid "Before title"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:161
+#: framework/premium/features/content-blocks/hooks-manager.php:170
 msgid "Before description"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:169
+#: framework/premium/features/content-blocks/hooks-manager.php:178
 msgid "Before breadcrumbs"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:177
+#: framework/premium/features/content-blocks/hooks-manager.php:186
 msgid "Before post meta"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:185,
-#: framework/premium/features/content-blocks/hooks-manager.php:278,
-#: framework/premium/features/content-blocks/hooks-manager.php:320
+#: framework/premium/features/content-blocks/hooks-manager.php:194,
+#: framework/premium/features/content-blocks/hooks-manager.php:287,
+#: framework/premium/features/content-blocks/hooks-manager.php:329
 msgid "After title"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:193
+#: framework/premium/features/content-blocks/hooks-manager.php:202
 msgid "After description"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:201
+#: framework/premium/features/content-blocks/hooks-manager.php:210
 msgid "After breadcrumbs"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:209
+#: framework/premium/features/content-blocks/hooks-manager.php:218
 msgid "After post meta"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:217
+#: framework/premium/features/content-blocks/hooks-manager.php:226
 msgid "After section"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:225
+#: framework/premium/features/content-blocks/hooks-manager.php:234
 msgid "Before content"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:233,
-#: framework/premium/features/content-blocks/hooks-manager.php:406
+#: framework/premium/features/content-blocks/hooks-manager.php:242,
+#: framework/premium/features/content-blocks/hooks-manager.php:415
 msgid "Top content"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:241,
-#: framework/premium/features/content-blocks/hooks-manager.php:428
+#: framework/premium/features/content-blocks/hooks-manager.php:250,
+#: framework/premium/features/content-blocks/hooks-manager.php:437
 msgid "Bottom content"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:249
+#: framework/premium/features/content-blocks/hooks-manager.php:258
 msgid "After content"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:257
+#: framework/premium/features/content-blocks/hooks-manager.php:266
 msgid "Before comments"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:258,
-#: framework/premium/features/content-blocks/hooks-manager.php:265,
-#: framework/premium/features/content-blocks/hooks-manager.php:272,
-#: framework/premium/features/content-blocks/hooks-manager.php:279,
-#: framework/premium/features/content-blocks/hooks-manager.php:286,
-#: framework/premium/features/content-blocks/hooks-manager.php:293
+#: framework/premium/features/content-blocks/hooks-manager.php:267,
+#: framework/premium/features/content-blocks/hooks-manager.php:274,
+#: framework/premium/features/content-blocks/hooks-manager.php:281,
+#: framework/premium/features/content-blocks/hooks-manager.php:288,
+#: framework/premium/features/content-blocks/hooks-manager.php:295,
+#: framework/premium/features/content-blocks/hooks-manager.php:302
 msgid "Comments"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:264
+#: framework/premium/features/content-blocks/hooks-manager.php:273
 msgid "Top comments"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:285
+#: framework/premium/features/content-blocks/hooks-manager.php:294
 msgid "Bottom comments"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:292
+#: framework/premium/features/content-blocks/hooks-manager.php:301
 msgid "After comments"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:299
+#: framework/premium/features/content-blocks/hooks-manager.php:308
 msgid "Before related posts"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:300,
-#: framework/premium/features/content-blocks/hooks-manager.php:307,
-#: framework/premium/features/content-blocks/hooks-manager.php:314,
-#: framework/premium/features/content-blocks/hooks-manager.php:321,
-#: framework/premium/features/content-blocks/hooks-manager.php:328,
-#: framework/premium/features/content-blocks/hooks-manager.php:335,
-#: framework/premium/features/content-blocks/hooks-manager.php:342,
-#: framework/premium/features/content-blocks/hooks-manager.php:349,
-#: framework/premium/features/content-blocks/hooks-manager.php:357,
-#: framework/premium/features/content-blocks/hooks-manager.php:364
+#: framework/premium/features/content-blocks/hooks-manager.php:309,
+#: framework/premium/features/content-blocks/hooks-manager.php:316,
+#: framework/premium/features/content-blocks/hooks-manager.php:323,
+#: framework/premium/features/content-blocks/hooks-manager.php:330,
+#: framework/premium/features/content-blocks/hooks-manager.php:337,
+#: framework/premium/features/content-blocks/hooks-manager.php:344,
+#: framework/premium/features/content-blocks/hooks-manager.php:351,
+#: framework/premium/features/content-blocks/hooks-manager.php:358,
+#: framework/premium/features/content-blocks/hooks-manager.php:366,
+#: framework/premium/features/content-blocks/hooks-manager.php:373
 msgid "Related posts"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:306
+#: framework/premium/features/content-blocks/hooks-manager.php:315
 msgid "Related posts top"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:327
+#: framework/premium/features/content-blocks/hooks-manager.php:336
 msgid "Card top"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:334
+#: framework/premium/features/content-blocks/hooks-manager.php:343
 msgid "Before featured image"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:341
+#: framework/premium/features/content-blocks/hooks-manager.php:350
 msgid "After featured image"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:348
+#: framework/premium/features/content-blocks/hooks-manager.php:357
 msgid "Card bottom"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:356
+#: framework/premium/features/content-blocks/hooks-manager.php:365
 msgid "Related posts bottom"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:363
+#: framework/premium/features/content-blocks/hooks-manager.php:372
 msgid "After related posts"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:370,
+#: framework/premium/features/content-blocks/hooks-manager.php:379,
 #: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:459
 msgid "Before"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:371,
-#: framework/premium/features/content-blocks/hooks-manager.php:378
+#: framework/premium/features/content-blocks/hooks-manager.php:380,
+#: framework/premium/features/content-blocks/hooks-manager.php:387
 msgid "Loop"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:377,
+#: framework/premium/features/content-blocks/hooks-manager.php:386,
 #: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:470
 msgid "After"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:384
+#: framework/premium/features/content-blocks/hooks-manager.php:393
 msgid "Start"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:385,
-#: framework/premium/features/content-blocks/hooks-manager.php:392
+#: framework/premium/features/content-blocks/hooks-manager.php:394,
+#: framework/premium/features/content-blocks/hooks-manager.php:401
 msgid "Loop card"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:391
+#: framework/premium/features/content-blocks/hooks-manager.php:400
 msgid "End"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:414
+#: framework/premium/features/content-blocks/hooks-manager.php:423
 msgid "After certain number of blocks"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:421
+#: framework/premium/features/content-blocks/hooks-manager.php:430
 msgid "Before certain number of headings"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:444
+#: framework/premium/features/content-blocks/hooks-manager.php:453
 msgid "Login form start"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:445,
-#: framework/premium/features/content-blocks/hooks-manager.php:452,
-#: framework/premium/features/content-blocks/hooks-manager.php:459,
-#: framework/premium/features/content-blocks/hooks-manager.php:466,
-#: framework/premium/features/content-blocks/hooks-manager.php:473,
-#: framework/premium/features/content-blocks/hooks-manager.php:480,
-#: framework/premium/features/content-blocks/hooks-manager.php:487,
-#: framework/premium/features/content-blocks/hooks-manager.php:494,
-#: framework/premium/features/content-blocks/hooks-manager.php:501,
-#: framework/premium/features/content-blocks/hooks-manager.php:508
+#: framework/premium/features/content-blocks/hooks-manager.php:454,
+#: framework/premium/features/content-blocks/hooks-manager.php:461,
+#: framework/premium/features/content-blocks/hooks-manager.php:468,
+#: framework/premium/features/content-blocks/hooks-manager.php:475,
+#: framework/premium/features/content-blocks/hooks-manager.php:482,
+#: framework/premium/features/content-blocks/hooks-manager.php:489,
+#: framework/premium/features/content-blocks/hooks-manager.php:496,
+#: framework/premium/features/content-blocks/hooks-manager.php:503,
+#: framework/premium/features/content-blocks/hooks-manager.php:510,
+#: framework/premium/features/content-blocks/hooks-manager.php:517
 msgid "Auth forms"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:451
+#: framework/premium/features/content-blocks/hooks-manager.php:460
 msgid "Login form end"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:458
+#: framework/premium/features/content-blocks/hooks-manager.php:467
 msgid "Login form modal start"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:465
+#: framework/premium/features/content-blocks/hooks-manager.php:474
 msgid "Login form modal end"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:472
+#: framework/premium/features/content-blocks/hooks-manager.php:481
 msgid "Register form start"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:479
+#: framework/premium/features/content-blocks/hooks-manager.php:488
 msgid "Register form end"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:486
+#: framework/premium/features/content-blocks/hooks-manager.php:495
 msgid "Register form modal start"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:493
+#: framework/premium/features/content-blocks/hooks-manager.php:502
 msgid "Register form modal end"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:500
+#: framework/premium/features/content-blocks/hooks-manager.php:509
 msgid "Lost password form modal start"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:507
+#: framework/premium/features/content-blocks/hooks-manager.php:516
 msgid "Lost password form modal end"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:515
+#: framework/premium/features/content-blocks/hooks-manager.php:524
 msgid "Before main content"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:521
+#: framework/premium/features/content-blocks/hooks-manager.php:530
 msgid "After main content"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:527
+#: framework/premium/features/content-blocks/hooks-manager.php:536
 msgid "Offcanvas Filters Top"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:533
+#: framework/premium/features/content-blocks/hooks-manager.php:542
 msgid "Offcanvas Filters Bottom"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:536
+#: framework/premium/features/content-blocks/hooks-manager.php:545
 msgid "WooCommerce Global"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:541
+#: framework/premium/features/content-blocks/hooks-manager.php:550
 msgid "Archive description"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:546
+#: framework/premium/features/content-blocks/hooks-manager.php:555
 msgid "Before shop loop"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:563
+#: framework/premium/features/content-blocks/hooks-manager.php:572
 msgid "Before shop loop item title"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:568
+#: framework/premium/features/content-blocks/hooks-manager.php:577
 msgid "After shop loop item title"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:573
+#: framework/premium/features/content-blocks/hooks-manager.php:582
 msgid "Before shop loop item price"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:578
+#: framework/premium/features/content-blocks/hooks-manager.php:587
 msgid "After shop loop item price"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:583
+#: framework/premium/features/content-blocks/hooks-manager.php:592
 msgid "Before shop loop item actions"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:588
+#: framework/premium/features/content-blocks/hooks-manager.php:597
 msgid "After shop loop item actions"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:593
+#: framework/premium/features/content-blocks/hooks-manager.php:602
 msgid "After shop loop"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:595
+#: framework/premium/features/content-blocks/hooks-manager.php:604
 msgid "WooCommerce Archive"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:600
+#: framework/premium/features/content-blocks/hooks-manager.php:609
 msgid "Before single product"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:618
+#: framework/premium/features/content-blocks/hooks-manager.php:627
 msgid "Product meta start"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:622
+#: framework/premium/features/content-blocks/hooks-manager.php:631
 msgid "Product meta end"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:626
+#: framework/premium/features/content-blocks/hooks-manager.php:635
 msgid "Share"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:630
+#: framework/premium/features/content-blocks/hooks-manager.php:639
 msgid "After single product"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:636
+#: framework/premium/features/content-blocks/hooks-manager.php:645
 msgid "Before single product excerpt"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:641
+#: framework/premium/features/content-blocks/hooks-manager.php:650
 msgid "After single product excerpt"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:646
+#: framework/premium/features/content-blocks/hooks-manager.php:655
 msgid "Before single product tabs"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:652
+#: framework/premium/features/content-blocks/hooks-manager.php:661
 msgid "After single product tabs"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:656
+#: framework/premium/features/content-blocks/hooks-manager.php:665
 msgid "WooCommerce Product"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:661
+#: framework/premium/features/content-blocks/hooks-manager.php:670
 msgid "Cart is empty"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:665
+#: framework/premium/features/content-blocks/hooks-manager.php:674
 msgid "Before cart"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:669
+#: framework/premium/features/content-blocks/hooks-manager.php:678
 msgid "Before cart table"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:673
+#: framework/premium/features/content-blocks/hooks-manager.php:682
 msgid "Before cart contents"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:677
+#: framework/premium/features/content-blocks/hooks-manager.php:686
 msgid "Cart contents"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:681
+#: framework/premium/features/content-blocks/hooks-manager.php:690
 msgid "After cart contents"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:685
+#: framework/premium/features/content-blocks/hooks-manager.php:694
 msgid "Cart coupon"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:689
+#: framework/premium/features/content-blocks/hooks-manager.php:698
 msgid "Cart actions"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:693
+#: framework/premium/features/content-blocks/hooks-manager.php:702
 msgid "After cart table"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:697
+#: framework/premium/features/content-blocks/hooks-manager.php:706
 msgid "Cart collaterals"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:701
+#: framework/premium/features/content-blocks/hooks-manager.php:710
 msgid "Before cart totals"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:705
+#: framework/premium/features/content-blocks/hooks-manager.php:714
 msgid "Cart totals before order total"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:709
+#: framework/premium/features/content-blocks/hooks-manager.php:718
 msgid "Cart totals after order total"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:713
+#: framework/premium/features/content-blocks/hooks-manager.php:722
 msgid "Proceed to checkout"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:717
+#: framework/premium/features/content-blocks/hooks-manager.php:726
 msgid "After cart totals"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:721
+#: framework/premium/features/content-blocks/hooks-manager.php:730
 msgid "After cart"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:726
+#: framework/premium/features/content-blocks/hooks-manager.php:735
 msgid "Before Mini Cart"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:731
+#: framework/premium/features/content-blocks/hooks-manager.php:740
 msgid "Before Mini Cart Contents"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:736
+#: framework/premium/features/content-blocks/hooks-manager.php:745
 msgid "Mini Cart Contents"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:741
+#: framework/premium/features/content-blocks/hooks-manager.php:750
 msgid "Widget Shopping Cart Before Buttons"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:746
+#: framework/premium/features/content-blocks/hooks-manager.php:755
 msgid "Widget Shopping Cart After Buttons"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:751
+#: framework/premium/features/content-blocks/hooks-manager.php:760
 msgid "After Mini Cart"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:753
+#: framework/premium/features/content-blocks/hooks-manager.php:762
 msgid "WooCommerce Cart"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:759
+#: framework/premium/features/content-blocks/hooks-manager.php:768
 msgid "Before checkout form"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:763
+#: framework/premium/features/content-blocks/hooks-manager.php:772
 msgid "Before customer details"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:767
+#: framework/premium/features/content-blocks/hooks-manager.php:776
 msgid "After customer details"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:771
+#: framework/premium/features/content-blocks/hooks-manager.php:780
 msgid "Checkout billing"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:775
+#: framework/premium/features/content-blocks/hooks-manager.php:784
 msgid "Before checkout billing form"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:779
+#: framework/premium/features/content-blocks/hooks-manager.php:788
 msgid "After checkout billing form"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:783
+#: framework/premium/features/content-blocks/hooks-manager.php:792
 msgid "Before order notes"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:787
+#: framework/premium/features/content-blocks/hooks-manager.php:796
 msgid "After order notes"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:791
+#: framework/premium/features/content-blocks/hooks-manager.php:800
 msgid "Checkout shipping"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:795
+#: framework/premium/features/content-blocks/hooks-manager.php:804
 msgid "Checkout before order review"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:799
+#: framework/premium/features/content-blocks/hooks-manager.php:808
 msgid "Checkout order review"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:803
+#: framework/premium/features/content-blocks/hooks-manager.php:812
 msgid "Review order before cart contents"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:807
+#: framework/premium/features/content-blocks/hooks-manager.php:816
 msgid "Review order after cart contents"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:811
+#: framework/premium/features/content-blocks/hooks-manager.php:820
 msgid "Review order before order total"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:815
+#: framework/premium/features/content-blocks/hooks-manager.php:824
 msgid "Review order after order total"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:819
+#: framework/premium/features/content-blocks/hooks-manager.php:828
 msgid "Review order before payment"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:823
+#: framework/premium/features/content-blocks/hooks-manager.php:832
 msgid "Review order before submit"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:827
+#: framework/premium/features/content-blocks/hooks-manager.php:836
 msgid "Review order after submit"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:831
+#: framework/premium/features/content-blocks/hooks-manager.php:840
 msgid "Review order after payment"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:835
+#: framework/premium/features/content-blocks/hooks-manager.php:844
 msgid "Checkout after order review"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:839
+#: framework/premium/features/content-blocks/hooks-manager.php:848
 msgid "After checkout form"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:842
+#: framework/premium/features/content-blocks/hooks-manager.php:851
 msgid "WooCommerce Checkout"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:848
+#: framework/premium/features/content-blocks/hooks-manager.php:857
 msgid "Before my account"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:852
+#: framework/premium/features/content-blocks/hooks-manager.php:861
 msgid "Before account navigation"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:856
+#: framework/premium/features/content-blocks/hooks-manager.php:865
 msgid "Account navigation"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:860
+#: framework/premium/features/content-blocks/hooks-manager.php:869
 msgid "After account navigation"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:864
+#: framework/premium/features/content-blocks/hooks-manager.php:873
 msgid "Account content"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:868
+#: framework/premium/features/content-blocks/hooks-manager.php:877
 msgid "Account dashboard"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:872
+#: framework/premium/features/content-blocks/hooks-manager.php:881
 msgid "After my account"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:874,
+#: framework/premium/features/content-blocks/hooks-manager.php:883,
 #: framework/features/header/items/account/options.php:17,
 #: framework/features/header/items/account/options.php:18
 msgid "WooCommerce Account"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:880
+#: framework/premium/features/content-blocks/hooks-manager.php:889
 msgid "WP footer"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:881,
-#: framework/premium/features/content-blocks/hooks-manager.php:889,
-#: framework/premium/features/content-blocks/hooks-manager.php:897
+#: framework/premium/features/content-blocks/hooks-manager.php:890,
+#: framework/premium/features/content-blocks/hooks-manager.php:898,
+#: framework/premium/features/content-blocks/hooks-manager.php:906
 msgid "Footer"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:888
+#: framework/premium/features/content-blocks/hooks-manager.php:897
 msgid "Footer before"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:896
+#: framework/premium/features/content-blocks/hooks-manager.php:905
 msgid "Footer after"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:911
+#: framework/premium/features/content-blocks/hooks-manager.php:920
 msgid "Custom Hook (%s)"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:917,
+#: framework/premium/features/content-blocks/hooks-manager.php:926,
 #: framework/premium/features/content-blocks/options/hook.php:197
 #: framework/premium/static/js/options/MultipleLocationsSelect.js:90
 msgid "After Block Number"
 msgstr ""
 
-#: framework/premium/features/content-blocks/hooks-manager.php:923,
+#: framework/premium/features/content-blocks/hooks-manager.php:932,
 #: framework/premium/features/content-blocks/options/hook.php:214
 #: framework/premium/static/js/options/MultipleLocationsSelect.js:112
 msgid "Before Heading Number"
@@ -4342,16 +4347,16 @@ msgstr ""
 msgid "Quick View Modal Button"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:190
+#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:192
 msgid "You don't have any products in your wish list yet."
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:33
+#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:35
 msgid "Add to cart"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:126,
-#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:150
+#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:128,
+#: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:152
 msgid "Remove Product"
 msgstr ""
 
@@ -5617,12 +5622,12 @@ msgid "Select location"
 msgstr ""
 
 #: framework/premium/static/js/options/PreviewedPostsSelect.js:107
-#: static/js/options/ConditionsManager/PostIdPicker.js:67
+#: static/js/options/ConditionsManager/PostIdPicker.js:68
 msgid "Type to search by ID or title..."
 msgstr ""
 
 #: framework/premium/static/js/options/PreviewedPostsSelect.js:111
-#: static/js/options/ConditionsManager/PostIdPicker.js:73
+#: static/js/options/ConditionsManager/PostIdPicker.js:74
 msgid "Select post"
 msgstr ""
 
@@ -5757,7 +5762,7 @@ msgstr ""
 msgid "Add User Condition"
 msgstr ""
 
-#: static/js/options/ConditionsManager/PostIdPicker.js:75
+#: static/js/options/ConditionsManager/PostIdPicker.js:76
 msgid "Select page"
 msgstr ""
 

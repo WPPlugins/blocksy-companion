@@ -204,59 +204,88 @@ export const handleAccountModal = (el) => {
 								actuallyInsertMessage(form, res.message)
 							}
 
-							if (res.login && res.jwt) {
-								if (!jQuery('#wfls-token').length) {
-									var overlay = jQuery(
-										'<div id="wfls-prompt-overlay-blocksy"></div>'
-									)
+							if (res.login) {
+								if (res.jwt) {
+									if (!jQuery('#wfls-token').length) {
+										var overlay = jQuery(
+											'<div id="wfls-prompt-overlay-blocksy"></div>'
+										)
 
-									var wrapper = jQuery(
-										'<div id="wfls-prompt-wrapper"></div>'
-									)
-									var label = jQuery(
-										'<label for="wfls-token">2FA Code <a href="javascript:void(0)" class="wfls-2fa-code-help wfls-tooltip-trigger" title="The 2FA Code can be found within the authenticator app you used when first activating two-factor authentication. You may also use one of your recovery codes."><i class="dashicons dashicons-editor-help"></i></a></label>'
-									)
-									var field = jQuery(
-										'<input type="text" name="wfls-token" id="wfls-token" aria-describedby="wfls-token-error" class="input" value="" size="6" autocomplete="off"/>'
-									)
-									var remember = jQuery(
-										'<label for="wfls-remember-device"><input name="wfls-remember-device" type="checkbox" id="wfls-remember-device" class="ct-checkbox" value="1" /> Remember for 30 days</label>'
-									)
+										var wrapper = jQuery(
+											'<div id="wfls-prompt-wrapper"></div>'
+										)
+										var label = jQuery(
+											'<label for="wfls-token">2FA Code <a href="javascript:void(0)" class="wfls-2fa-code-help wfls-tooltip-trigger" title="The 2FA Code can be found within the authenticator app you used when first activating two-factor authentication. You may also use one of your recovery codes."><i class="dashicons dashicons-editor-help"></i></a></label>'
+										)
+										var field = jQuery(
+											'<input type="text" name="wfls-token" id="wfls-token" aria-describedby="wfls-token-error" class="input" value="" size="6" autocomplete="off"/>'
+										)
+										var remember = jQuery(
+											'<label for="wfls-remember-device"><input name="wfls-remember-device" type="checkbox" id="wfls-remember-device" class="ct-checkbox" value="1" /> Remember for 30 days</label>'
+										)
 
-									wrapper.append(label)
-									wrapper.append(field)
+										wrapper.append(label)
+										wrapper.append(field)
 
-									if (parseInt(WFLSVars.allowremember)) {
-										wrapper.append(remember)
+										if (parseInt(WFLSVars.allowremember)) {
+											wrapper.append(remember)
+										}
+
+										overlay.append(wrapper)
+
+										jQuery(form).prepend(overlay)
+
+										new jQuery.Zebra_Tooltips(
+											jQuery('.wfls-tooltip-trigger')
+										)
 									}
 
-									overlay.append(wrapper)
+									var jwtField = jQuery('#wfls-token-jwt')
 
-									jQuery(form).prepend(overlay)
+									if (!jwtField.length) {
+										jwtField = jQuery(
+											'<input type="hidden" name="wfls-token-jwt" id="wfls-token-jwt" value=""/>'
+										)
 
-									new jQuery.Zebra_Tooltips(
-										jQuery('.wfls-tooltip-trigger')
+										jQuery(
+											'#wfls-prompt-overlay-blocksy'
+										).append(jwtField)
+									}
+
+									jQuery('#wfls-token-jwt').val(res.jwt)
+								} else {
+									fetch(
+										`${ct_localizations.ajax_url}?action=blc_implement_user_login`,
+										{
+											method: maybeLogin.method,
+											body: new FormData(maybeLogin),
+										}
 									)
+										.then((response) => response.text())
+										.then((html) => {
+											location = maybeLogin.querySelector(
+												'[name="redirect_to"]'
+											).value
+										})
 								}
-
-								var jwtField = jQuery('#wfls-token-jwt')
-
-								if (!jwtField.length) {
-									jwtField = jQuery(
-										'<input type="hidden" name="wfls-token-jwt" id="wfls-token-jwt" value=""/>'
-									)
-
-									jQuery(
-										'#wfls-prompt-overlay-blocksy'
-									).append(jwtField)
-								}
-
-								jQuery('#wfls-token-jwt').val(res.jwt)
 							}
 
 							if (res.combined) {
 								maybeLogin.loginProceed = true
-								form.submit()
+
+								fetch(
+									`${ct_localizations.ajax_url}?action=blc_implement_user_login`,
+									{
+										method: maybeLogin.method,
+										body: new FormData(maybeLogin),
+									}
+								)
+									.then((response) => response.text())
+									.then((html) => {
+										location = maybeLogin.querySelector(
+											'[name="redirect_to"]'
+										).value
+									})
 							}
 
 							if (
