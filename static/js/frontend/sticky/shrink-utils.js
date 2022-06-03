@@ -14,8 +14,13 @@ export const getRowInitialHeight = (el) => {
 		return el.blcInitialHeight
 	}
 
-	let initialHeight = el.firstElementChild.firstElementChild.getBoundingClientRect()
-		.height
+	let elToCheck = el.firstElementChild
+
+	if (el.firstElementChild.firstElementChild) {
+		elToCheck = el.firstElementChild.firstElementChild
+	}
+
+	let initialHeight = elToCheck.getBoundingClientRect().height
 
 	el.blcInitialHeight = initialHeight
 

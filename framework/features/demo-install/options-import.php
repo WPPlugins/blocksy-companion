@@ -346,7 +346,7 @@ class DemoInstallOptionsInstaller {
 		}
 
 		// Set variables for storage, fix file filename for query strings.
-		preg_match('/[^\?]+\.(jpe?g|jpe|gif|png|svg)\b/i', $file, $matches);
+		preg_match('/[^\?]+\.(jpe?g|jpe|gif|png|svg|webp)\b/i', $file, $matches);
 
 		$file_array = [];
 
@@ -389,7 +389,7 @@ class DemoInstallOptionsInstaller {
 
 	private function is_image_url($string = '') {
 		if (is_string($string)) {
-			if (preg_match('/\.(jpg|jpeg|png|gif|svg)/i', $string)) {
+			if (preg_match('/\.(jpg|jpeg|png|gif|svg|webp)/i', $string)) {
 				return true;
 			}
 		}

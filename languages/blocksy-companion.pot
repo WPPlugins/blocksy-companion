@@ -1742,50 +1742,50 @@ msgstr ""
 msgid "Hooks Locations"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:568,
-#: framework/premium/features/content-blocks.php:574
+#: framework/premium/features/content-blocks.php:564,
+#: framework/premium/features/content-blocks.php:570
 msgid "Content Blocks"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:569,
+#: framework/premium/features/content-blocks.php:565,
 #: framework/premium/extensions/mega-menu/options.php:333
 msgid "Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:570
+#: framework/premium/features/content-blocks.php:566
 msgid "Add New"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:571
+#: framework/premium/features/content-blocks.php:567
 msgid "Add New Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:572
+#: framework/premium/features/content-blocks.php:568
 msgid "Edit Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:573
+#: framework/premium/features/content-blocks.php:569
 #: framework/premium/static/js/hooks/CreateHook.js:33
 msgid "New Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:575
+#: framework/premium/features/content-blocks.php:571
 msgid "View Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:576
+#: framework/premium/features/content-blocks.php:572
 msgid "Search Content Blocks"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:577
+#: framework/premium/features/content-blocks.php:573
 msgid "Nothing found"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:578
+#: framework/premium/features/content-blocks.php:574
 msgid "Nothing found in Trash"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:866
+#: framework/premium/features/content-blocks.php:863
 msgid "Close popup"
 msgstr ""
 
@@ -6042,7 +6042,7 @@ msgid ""
 "You already have a child theme properly installed and activated. Move on."
 msgstr ""
 
-#: static/js/screens/DemoInstall/Wizzard/ChildTheme.js:106
+#: static/js/screens/DemoInstall/Wizzard/ChildTheme.js:108
 msgid "Learn more about child themes"
 msgstr ""
 

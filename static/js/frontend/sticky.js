@@ -8,6 +8,7 @@ import { computeFadeSlide } from './sticky/fade-slide'
 import { getRowStickyHeight } from './sticky/shrink-utils'
 
 import { clearShrinkCache } from './sticky/shrink-handle-middle-row'
+import { clearLogoShrinkCache } from './sticky/shrink-handle-logo'
 
 export const setTransparencyFor = (deviceContainer, value = 'yes') => {
 	Array.from(
@@ -37,6 +38,7 @@ if (window.wp && wp.customize && wp.customize.selectiveRefresh) {
 		(placement) => {
 			setTimeout(() => {
 				clearShrinkCache()
+				clearLogoShrinkCache()
 
 				cachedStartPosition = null
 				cachedContainerInitialHeight = null

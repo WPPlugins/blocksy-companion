@@ -2,6 +2,26 @@ import ctEvents from 'ct-events'
 import { formPreSubmitHook } from './account/hooks'
 import { resetCaptchaFor } from './account/captcha'
 
+const maybeAddLoadingState = (form) => {
+	const maybeButton = form.querySelector('[name*="submit"]')
+
+	if (!maybeButton) {
+		return
+	}
+
+	maybeButton.classList.add('ct-loading')
+}
+
+const maybeCleanupLoadingState = (form) => {
+	const maybeButton = form.querySelector('[name*="submit"]')
+
+	if (!maybeButton) {
+		return
+	}
+
+	maybeButton.classList.remove('ct-loading')
+}
+
 export const activateScreen = (
 	el,
 	{
@@ -170,6 +190,8 @@ export const handleAccountModal = (el) => {
 				return
 			}
 
+			maybeAddLoadingState(maybeLogin)
+
 			let body = new FormData(maybeLogin)
 
 			// let url = maybeLogin.action
@@ -187,6 +209,7 @@ export const handleAccountModal = (el) => {
 					})
 						.then((response) => response.json())
 						.then((res) => {
+							maybeCleanupLoadingState(maybeLogin)
 							let hasError = !!res.error
 
 							const container = maybeLogin.closest(
@@ -315,6 +338,7 @@ export const handleAccountModal = (el) => {
 				})
 					.then((response) => response.text())
 					.then((html) => {
+						maybeCleanupLoadingState(maybeLogin)
 						const { doc, hasError } = maybeAddErrors(
 							maybeLogin.closest('.ct-login-form'),
 							html
@@ -353,6 +377,8 @@ export const handleAccountModal = (el) => {
 				return
 			}
 
+			maybeAddLoadingState(maybeRegister)
+
 			formPreSubmitHook(maybeRegister).then(() =>
 				fetch(
 					// maybeRegister.action,
@@ -369,6 +395,8 @@ export const handleAccountModal = (el) => {
 							maybeRegister.closest('.ct-register-form'),
 							html
 						)
+
+						maybeCleanupLoadingState(maybeRegister)
 
 						if (!hasError) {
 							maybeAddMessage(
@@ -410,6 +438,8 @@ export const handleAccountModal = (el) => {
 				return
 			}
 
+			maybeAddLoadingState(maybeLostPassword)
+
 			fetch(
 				// maybeLostPassword.action,
 				`${ct_localizations.ajax_url}?action=blc_implement_user_lostpassword`,
@@ -425,6 +455,8 @@ export const handleAccountModal = (el) => {
 						maybeLostPassword.closest('.ct-forgot-password-form'),
 						html
 					)
+
+					maybeCleanupLoadingState(maybeLostPassword)
 
 					if (!hasError) {
 						maybeAddMessage(
