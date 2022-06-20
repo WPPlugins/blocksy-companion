@@ -24,6 +24,7 @@ class HeaderAdditions {
 		);
 
 		add_filter('blocksy:header:selective_refresh', function ($selective_refresh) {
+
 			$selective_refresh[] = [
 				'id' => 'header_placements_item:account',
 				'fallback_refresh' => false,
@@ -33,6 +34,22 @@ class HeaderAdditions {
 				'render_callback' => function () {
 					$header = new \Blocksy_Header_Builder_Render();
 					echo $header->render_single_item('account');
+				}
+			];
+
+			$selective_refresh[] = [
+				'id' => 'header_placements_item:account:offcanvas',
+				'fallback_refresh' => false,
+				'container_inclusive' => false,
+				'selector' => '#offcanvas',
+				'loader_selector' => '[data-id="account"]',
+				'settings' => ['header_placements'],
+				'render_callback' => function () {
+					$elements = new \Blocksy_Header_Builder_Elements();
+
+					echo $elements->render_offcanvas([
+						'has_container' => false
+					]);
 				}
 			];
 

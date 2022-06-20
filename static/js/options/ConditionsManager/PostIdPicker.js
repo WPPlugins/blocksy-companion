@@ -61,7 +61,6 @@ const PostIdPicker = ({ condition, onChange }) => {
 
 	return (
 		<Select
-			key={allPosts.length}
 			option={{
 				appendToBody: true,
 				defaultToFirstItem: false,

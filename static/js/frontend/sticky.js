@@ -87,6 +87,10 @@ const getStartPositionFor = (stickyContainer) => {
 		bodyComp.getPropertyValue('--header-sticky-offset') || 0
 	)
 
+	maybeDynamicOffset =
+		maybeDynamicOffset +
+			parseFloat(bodyComp.getPropertyValue('--frame-size')) || 0
+
 	if (
 		row.parentNode.children.length === 1 ||
 		row.parentNode.children[0].classList.contains('ct-sticky-container')

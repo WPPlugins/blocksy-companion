@@ -4,6 +4,12 @@ if (! function_exists('blocksy_render_archive_cards')) {
 	return;
 }
 
+$shortcode_class = 'ct-posts-shortcode';
+
+if (! empty($args['class'])) {
+	$shortcode_class .= ' ' . $args['class'];
+}
+
 $query_args = [
 	'order' => $args['order'],
 	'ignore_sticky_posts' => true,
@@ -144,7 +150,7 @@ if ($args['view'] === 'slider') {
 	}
 
 	echo blocksy_flexy(array_merge([
-		'class' => 'ct-posts-shortcode',
+		'class' => $shortcode_class,
 		'images' => $images,
 		'slide_image_args' => function ($index, $args) use ($posts_to_render) {
 			$post = $posts_to_render[$index];
@@ -167,7 +173,7 @@ if ($args['view'] === 'slider') {
 		}
 	}
 
-	echo '<div class="ct-posts-shortcode" data-prefix="' . $prefix . '">';
+	echo '<div class="' . $shortcode_class . '" data-prefix="' . $prefix . '">';
 
 	if (
 		$args['filtering']

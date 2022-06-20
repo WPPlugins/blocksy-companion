@@ -90,7 +90,9 @@ class ThemeIntegration {
 					'filtering' => false,
 
 					// 404 | skip
-					'no_results' => '404'
+					'no_results' => '404',
+
+					'class' => ''
 				]
 			);
 
