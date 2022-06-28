@@ -377,6 +377,18 @@ class DemoInstallOptionsInstaller {
 		$data->url = wp_get_attachment_url($id);
 		$data->thumbnail_url = wp_get_attachment_thumb_url($id);
 
+		if ('svg' === $file_array['extension']) {
+			$dimensions = Plugin::instance()
+				->theme_integration
+				->svg_dimensions($file);
+
+			$data->width = (int) $dimensions->width;
+			$data->height = (int) $dimensions->height;
+		} else {
+			$data->height = $meta['height'];
+			$data->width = $meta['width'];
+		}
+
 		if ($meta && is_array($meta)) {
 			$data->height = $meta['height'];
 			$data->width = $meta['width'];

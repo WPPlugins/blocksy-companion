@@ -166,49 +166,84 @@ $options = [
 						'type' => 'ct-condition',
 						'condition' => [ 'loggedin_media' => 'icon' ],
 						'options' => [
-
-							'account_loggedin_icon' => [
-								'label' => false,
-								'type' => 'ct-image-picker',
-								'value' => 'type-1',
-								'attr' => [
-									'data-type' => 'background',
-									'data-columns' => '3',
-								],
+							'loggedin_icon_source' => [
+								'label' => __( 'Icon Source', 'blocksy' ),
+								'type' => 'ct-radio',
+								'value' => 'default',
+								'view' => 'text',
+								'design' => 'block',
 								'divider' => 'top',
 								'setting' => [ 'transport' => 'postMessage' ],
 								'choices' => [
-
-									'type-1' => [
-										'src'   => blocksy_image_picker_file( 'account-1' ),
-										'title' => __( 'Type 1', 'blocksy-companion' ),
-									],
-
-									'type-2' => [
-										'src'   => blocksy_image_picker_file( 'account-2' ),
-										'title' => __( 'Type 2', 'blocksy-companion' ),
-									],
-
-									'type-3' => [
-										'src'   => blocksy_image_picker_file( 'account-3' ),
-										'title' => __( 'Type 3', 'blocksy-companion' ),
-									],
-
-									'type-4' => [
-										'src'   => blocksy_image_picker_file( 'account-4' ),
-										'title' => __( 'Type 4', 'blocksy-companion' ),
-									],
-
-									'type-5' => [
-										'src'   => blocksy_image_picker_file( 'account-5' ),
-										'title' => __( 'Type 5', 'blocksy-companion' ),
-									],
-
-									'type-6' => [
-										'src'   => blocksy_image_picker_file( 'account-6' ),
-										'title' => __( 'Type 6', 'blocksy-companion' ),
-									],
+									'default' => __( 'Default', 'blocksy' ),
+									'custom' => __( 'Custom', 'blocksy' ),
 								],
+							],
+				
+							blocksy_rand_md5() => [
+								'type' => 'ct-condition',
+								'condition' => ['loggedin_icon_source' => 'custom'],
+								'options' => [
+									'loggedin_custom_icon' => [
+										'type' => 'icon-picker',
+										'label' => __('Icon', 'blocksy-companion'),
+										'design' => 'inline',
+										'divider' => 'top',
+										'value' => [
+											'icon' => 'blc blc-user'
+										]
+									]
+								]
+							],
+
+							blocksy_rand_md5() => [
+								'type' => 'ct-condition',
+								'condition' => ['loggedin_icon_source' => 'default'],
+								'options' => [
+									'account_loggedin_icon' => [
+										'label' => false,
+										'type' => 'ct-image-picker',
+										'value' => 'type-1',
+										'attr' => [
+											'data-type' => 'background',
+											'data-columns' => '3',
+										],
+										'divider' => 'top',
+										'setting' => [ 'transport' => 'postMessage' ],
+										'choices' => [
+		
+											'type-1' => [
+												'src'   => blocksy_image_picker_file( 'account-1' ),
+												'title' => __( 'Type 1', 'blocksy-companion' ),
+											],
+		
+											'type-2' => [
+												'src'   => blocksy_image_picker_file( 'account-2' ),
+												'title' => __( 'Type 2', 'blocksy-companion' ),
+											],
+		
+											'type-3' => [
+												'src'   => blocksy_image_picker_file( 'account-3' ),
+												'title' => __( 'Type 3', 'blocksy-companion' ),
+											],
+		
+											'type-4' => [
+												'src'   => blocksy_image_picker_file( 'account-4' ),
+												'title' => __( 'Type 4', 'blocksy-companion' ),
+											],
+		
+											'type-5' => [
+												'src'   => blocksy_image_picker_file( 'account-5' ),
+												'title' => __( 'Type 5', 'blocksy-companion' ),
+											],
+		
+											'type-6' => [
+												'src'   => blocksy_image_picker_file( 'account-6' ),
+												'title' => __( 'Type 6', 'blocksy-companion' ),
+											],
+										],
+									],
+								]
 							],
 
 							'account_loggedin_icon_size' => [
@@ -373,48 +408,84 @@ $options = [
 						'condition' => [ 'logged_out_style' => 'icon' ],
 						'options' => [
 
-							'accountHeaderIcon' => [
-								'label' => false,
-								'type' => 'ct-image-picker',
-								'value' => 'type-1',
-								'attr' => [
-									'data-type' => 'background',
-									'data-columns' => '3',
-								],
+							'logged_out_icon_source' => [
+								'label' => __( 'Icon Source', 'blocksy' ),
+								'type' => 'ct-radio',
+								'value' => 'default',
+								'view' => 'text',
+								'design' => 'block',
 								'divider' => 'top',
 								'setting' => [ 'transport' => 'postMessage' ],
 								'choices' => [
-
-									'type-1' => [
-										'src'   => blocksy_image_picker_file( 'account-1' ),
-										'title' => __( 'Type 1', 'blocksy-companion' ),
-									],
-
-									'type-2' => [
-										'src'   => blocksy_image_picker_file( 'account-2' ),
-										'title' => __( 'Type 2', 'blocksy-companion' ),
-									],
-
-									'type-3' => [
-										'src'   => blocksy_image_picker_file( 'account-3' ),
-										'title' => __( 'Type 3', 'blocksy-companion' ),
-									],
-
-									'type-4' => [
-										'src'   => blocksy_image_picker_file( 'account-4' ),
-										'title' => __( 'Type 4', 'blocksy-companion' ),
-									],
-
-									'type-5' => [
-										'src'   => blocksy_image_picker_file( 'account-5' ),
-										'title' => __( 'Type 5', 'blocksy-companion' ),
-									],
-
-									'type-6' => [
-										'src'   => blocksy_image_picker_file( 'account-6' ),
-										'title' => __( 'Type 6', 'blocksy-companion' ),
-									],
+									'default' => __( 'Default', 'blocksy' ),
+									'custom' => __( 'Custom', 'blocksy' ),
 								],
+							],
+				
+							blocksy_rand_md5() => [
+								'type' => 'ct-condition',
+								'condition' => ['logged_out_icon_source' => 'custom'],
+								'options' => [
+									'logged_out_custom_icon' => [
+										'type' => 'icon-picker',
+										'label' => __('Icon', 'blocksy-companion'),
+										'design' => 'inline',
+										'divider' => 'top',
+										'value' => [
+											'icon' => 'blc blc-user'
+										]
+									]
+								]
+							],
+
+							blocksy_rand_md5() => [
+								'type' => 'ct-condition',
+								'condition' => ['logged_out_icon_source' => 'default'],
+								'options' => [
+									'accountHeaderIcon' => [
+										'label' => false,
+										'type' => 'ct-image-picker',
+										'value' => 'type-1',
+										'attr' => [
+											'data-type' => 'background',
+											'data-columns' => '3',
+										],
+										'divider' => 'top',
+										'setting' => [ 'transport' => 'postMessage' ],
+										'choices' => [
+		
+											'type-1' => [
+												'src'   => blocksy_image_picker_file( 'account-1' ),
+												'title' => __( 'Type 1', 'blocksy-companion' ),
+											],
+		
+											'type-2' => [
+												'src'   => blocksy_image_picker_file( 'account-2' ),
+												'title' => __( 'Type 2', 'blocksy-companion' ),
+											],
+		
+											'type-3' => [
+												'src'   => blocksy_image_picker_file( 'account-3' ),
+												'title' => __( 'Type 3', 'blocksy-companion' ),
+											],
+		
+											'type-4' => [
+												'src'   => blocksy_image_picker_file( 'account-4' ),
+												'title' => __( 'Type 4', 'blocksy-companion' ),
+											],
+		
+											'type-5' => [
+												'src'   => blocksy_image_picker_file( 'account-5' ),
+												'title' => __( 'Type 5', 'blocksy-companion' ),
+											],
+		
+											'type-6' => [
+												'src'   => blocksy_image_picker_file( 'account-6' ),
+												'title' => __( 'Type 6', 'blocksy-companion' ),
+											],
+										],
+									],
+								]
 							],
 
 							'accountHeaderIconSize' => [

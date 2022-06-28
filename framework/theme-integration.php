@@ -4,7 +4,6 @@ namespace Blocksy;
 
 class ThemeIntegration {
 	public function __construct() {
-
 		add_filter('blocksy:frontend:dynamic-js-chunks', function ($chunks) {
 			$render = new \Blocksy_Header_Builder_Render();
 
@@ -453,7 +452,7 @@ class ThemeIntegration {
 		);
 	}
 
-	protected function svg_dimensions($svg) {
+	public function svg_dimensions($svg) {
 		$svg = @simplexml_load_file($svg);
 		$width = 0;
 		$height = 0;

@@ -106,6 +106,22 @@ class ConditionsManager {
 			return is_front_page();
 		}
 
+		if ($rule['rule'] === 'privacy_policy_page') {
+			$is_blocksy_page = blocksy_is_page();
+
+			if (is_singular() || $is_blocksy_page) {
+				$post_id = get_the_ID();
+
+				if ($is_blocksy_page) {
+					$post_id = $is_blocksy_page;
+				}
+
+				return intval($post_id) === intval(
+					get_option('wp_page_for_privacy_policy')
+				);
+			}
+		}
+
 		if ($rule['rule'] === 'date') {
 			return is_date();
 		}
@@ -683,6 +699,11 @@ class ConditionsManager {
 					[
 						'id' => 'front_page',
 						'title' => __('Front Page', 'blocksy-companion')
+					],
+
+					[
+						'id' => 'privacy_policy_page',
+						'title' => __('Privacy Policy Page', 'blocksy-companion')
 					],
 
 					/*

@@ -57,9 +57,26 @@ if (! empty($login_label)) {
 }
 
 if (blocksy_akg('logged_out_style', $atts, 'icon') === 'icon') {
-	echo $icon[
+	$media_html = $icon[
 		blocksy_default_akg('accountHeaderIcon', $atts, 'type-1')
 	];
+
+	if (function_exists('blc_get_icon')) {
+		$icon_source = blocksy_default_akg('logged_out_icon_source', $atts, 'default');
+		
+		if ( $icon_source === 'custom' ) {
+			$media_html = blc_get_icon([
+				'icon_descriptor' => blocksy_akg(
+					'logged_out_custom_icon',
+					$atts,
+					['icon' => 'blc blc-user']
+				),
+			]);
+		}
+
+	}
+
+	echo $media_html ;
 }
 
 echo '</a>';

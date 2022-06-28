@@ -130,6 +130,7 @@ class AccountAuth {
 		$res = ob_get_clean();
 
 		$_POST['woocommerce-register-nonce'] = '~';
+		add_filter('dokan_register_nonce_check', '__return_false');
 
 		$users_can_register = get_option('users_can_register');
 

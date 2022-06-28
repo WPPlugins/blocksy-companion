@@ -62,6 +62,23 @@ if ($loggedin_media === 'icon') {
 	$media_html = $icon[
 		blocksy_akg('account_loggedin_icon', $atts, 'type-1')
 	];
+
+	if (function_exists('blc_get_icon')) {
+		$icon_source = blocksy_default_akg('loggedin_icon_source', $atts, 'default');
+		
+		if ( $icon_source === 'custom' ) {
+			$media_html = blc_get_icon([
+				'icon_descriptor' => blocksy_akg(
+					'loggedin_custom_icon',
+					$atts,
+					['icon' => 'blc blc-user']
+				),
+				'icon_container' => false,
+				'icon_class' => 'ct-icon'
+			]);
+		}
+	
+	}
 }
 
 // Label

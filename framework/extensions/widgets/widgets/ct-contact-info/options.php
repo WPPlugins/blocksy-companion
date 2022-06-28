@@ -14,26 +14,18 @@ $options = [
 		'type' => 'text',
 		'label' => __( 'Title', 'blocksy-companion' ),
 		'field_attr' => [ 'id' => 'widget-title' ],
-		'design' => 'inline',
+		'design' => 'block',
 		'value' => __( 'Contact Info', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 	],
 
-	// 'contact_text' => [
-	// 	'label' => __( 'Text', 'blocksy-companion' ),
-	// 	'type' => 'textarea',
-	// 	'design' => 'inline',
-	// 	'disableRevertButton' => true,
-	// ],
-
 	'contact_text' => [
 		'label' => __( 'Text', 'blocksy-companion' ),
 		'type' => 'wp-editor',
-		'design' => 'inline',
+		'design' => 'block',
 		'desc' => __( 'You can add here some arbitrary HTML code.', 'blocksy-companion' ),
 		'disableRevertButton' => true,
 		'setting' => [ 'transport' => 'postMessage' ],
-
 		'mediaButtons' => false,
 		'tinymce' => [
 			'toolbar1' => 'bold,italic,link,undo,redo',
@@ -92,7 +84,36 @@ $options = [
 						'type' => 'text',
 						'label' => __('Link (optional)', 'blocksy-companion'),
 						'design' => 'inline',
-					]
+					],
+
+					'icon_source' => [
+						'label' => __( 'Icon Source', 'blocksy' ),
+						'type' => 'ct-radio',
+						'value' => 'default',
+						'view' => 'text',
+						'design' => 'block',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'choices' => [
+							'default' => __( 'Default', 'blocksy' ),
+							'custom' => __( 'Custom', 'blocksy' ),
+						],
+					],
+		
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => ['icon_source' => 'custom'],
+						'options' => [
+							'icon' => [
+								'type' => 'icon-picker',
+								'label' => __('Icon', 'blocksy-companion'),
+								'design' => 'inline',
+								'value' => [
+									'icon' => 'blc blc-map-pin'
+								]
+							]
+						]
+					],
+
 				],
 
 				'clone' => true
@@ -122,7 +143,35 @@ $options = [
 						'label' => __('Link (optional)', 'blocksy-companion'),
 						'value' => 'tel:578-393-4937',
 						'design' => 'inline',
-					]
+					],
+
+					'icon_source' => [
+						'label' => __( 'Icon Source', 'blocksy' ),
+						'type' => 'ct-radio',
+						'value' => 'default',
+						'view' => 'text',
+						'design' => 'block',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'choices' => [
+							'default' => __( 'Default', 'blocksy' ),
+							'custom' => __( 'Custom', 'blocksy' ),
+						],
+					],
+		
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => ['icon_source' => 'custom'],
+						'options' => [
+							'icon' => [
+								'type' => 'icon-picker',
+								'label' => __('Icon', 'blocksy-companion'),
+								'design' => 'inline',
+								'value' => [
+									'icon' => 'blc blc-phone'
+								]
+							]
+						]
+					],
 
 				]
 			],
@@ -150,6 +199,34 @@ $options = [
 						'label' => __('Link (optional)', 'blocksy-companion'),
 						'value' => 'tel:578-393-4937',
 						'design' => 'inline',
+					],
+
+					'icon_source' => [
+						'label' => __( 'Icon Source', 'blocksy' ),
+						'type' => 'ct-radio',
+						'value' => 'default',
+						'view' => 'text',
+						'design' => 'block',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'choices' => [
+							'default' => __( 'Default', 'blocksy' ),
+							'custom' => __( 'Custom', 'blocksy' ),
+						],
+					],
+		
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => ['icon_source' => 'custom'],
+						'options' => [
+							'icon' => [
+								'type' => 'icon-picker',
+								'label' => __('Icon', 'blocksy-companion'),
+								'design' => 'inline',
+								'value' => [
+									'icon' => 'blc blc-mobile-phone'
+								]
+							]
+						]
 					],
 
 				]
@@ -180,6 +257,34 @@ $options = [
 						'design' => 'inline',
 					],
 
+					'icon_source' => [
+						'label' => __( 'Icon Source', 'blocksy' ),
+						'type' => 'ct-radio',
+						'value' => 'default',
+						'view' => 'text',
+						'design' => 'block',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'choices' => [
+							'default' => __( 'Default', 'blocksy' ),
+							'custom' => __( 'Custom', 'blocksy' ),
+						],
+					],
+		
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => ['icon_source' => 'custom'],
+						'options' => [
+							'icon' => [
+								'type' => 'icon-picker',
+								'label' => __('Icon', 'blocksy-companion'),
+								'design' => 'inline',
+								'value' => [
+									'icon' => 'blc blc-clock'
+								]
+							]
+						]
+					],
+
 				]
 			],
 
@@ -206,6 +311,34 @@ $options = [
 						'label' => __('Link (optional)', 'blocksy-companion'),
 						'value' => 'tel:578-393-4937',
 						'design' => 'inline',
+					],
+
+					'icon_source' => [
+						'label' => __( 'Icon Source', 'blocksy' ),
+						'type' => 'ct-radio',
+						'value' => 'default',
+						'view' => 'text',
+						'design' => 'block',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'choices' => [
+							'default' => __( 'Default', 'blocksy' ),
+							'custom' => __( 'Custom', 'blocksy' ),
+						],
+					],
+		
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => ['icon_source' => 'custom'],
+						'options' => [
+							'icon' => [
+								'type' => 'icon-picker',
+								'label' => __('Icon', 'blocksy-companion'),
+								'design' => 'inline',
+								'value' => [
+									'icon' => 'blc blc-fax'
+								]
+							]
+						]
 					],
 
 				]
@@ -236,6 +369,34 @@ $options = [
 						'design' => 'inline',
 					],
 
+					'icon_source' => [
+						'label' => __( 'Icon Source', 'blocksy' ),
+						'type' => 'ct-radio',
+						'value' => 'default',
+						'view' => 'text',
+						'design' => 'block',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'choices' => [
+							'default' => __( 'Default', 'blocksy' ),
+							'custom' => __( 'Custom', 'blocksy' ),
+						],
+					],
+		
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => ['icon_source' => 'custom'],
+						'options' => [
+							'icon' => [
+								'type' => 'icon-picker',
+								'label' => __('Icon', 'blocksy-companion'),
+								'design' => 'inline',
+								'value' => [
+									'icon' => 'blc blc-email'
+								]
+							]
+						]
+					],
+
 				]
 			],
 
@@ -262,6 +423,34 @@ $options = [
 						'label' => __('Link (optional)', 'blocksy-companion'),
 						'value' => 'https://creativethemes.com',
 						'design' => 'inline',
+					],
+					
+					'icon_source' => [
+						'label' => __( 'Icon Source', 'blocksy' ),
+						'type' => 'ct-radio',
+						'value' => 'default',
+						'view' => 'text',
+						'design' => 'block',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'choices' => [
+							'default' => __( 'Default', 'blocksy' ),
+							'custom' => __( 'Custom', 'blocksy' ),
+						],
+					],
+		
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => ['icon_source' => 'custom'],
+						'options' => [
+							'icon' => [
+								'type' => 'icon-picker',
+								'label' => __('Icon', 'blocksy-companion'),
+								'design' => 'inline',
+								'value' => [
+									'icon' => 'blc blc-globe'
+								]
+							]
+						]
 					],
 				]
 			],

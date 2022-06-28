@@ -2,7 +2,8 @@
 	--listItemSpacing: 20px;
 
 	a {
-		display: var(--display, flex);
+		display: flex;
+		gap: var(--items-gap, 20px);
 	}
 
 	.ct-image-container {
@@ -43,54 +44,32 @@
 	&[data-type="small-thumbs"] {
 		.ct-image-container {
 			flex: 0 0 25%;
-			margin-inline-end: 20px;
 		}
 	}
 
 
-	&[data-type="no-thumbs"] a {
-		--display: block;
-	}
-
-	&[data-type="large-thumbs"] {
-		--listItemSpacing: 25px;
-
-		a {
-			--display: block;
-
-			.ct-image-container {
-				margin-bottom: 12px;
-			}
-
-			.ct-post-title {
-				--fontSize: 17px;
-				--fontWeight: 600;
-			}
-		}
-	}
-
+	&[data-type="large-thumbs"],
 	&[data-type="large-small"] li:first-child {
 		--listItemSpacing: 30px;
 
 		a {
-			--display: block;
+			flex-direction: column;
+		}
 
-			.ct-image-container {
-				margin-bottom: 20px;
-			}
+		.ct-entry-content {
+			align-self: initial;
+		}
 
-			.ct-post-title {
-				--fontSize: 17px;
-				--fontWeight: 600;
-			}
+		.ct-post-title {
+			--fontSize: 17px;
+			--fontWeight: 600;
 		}
 	}
 
+
 	&[data-type="rounded"] {
 		.ct-image-container {
-			overflow: hidden;
 			border-radius: 100%;
-			-webkit-mask-image: -webkit-radial-gradient(white, black);
 		}
 	}
 

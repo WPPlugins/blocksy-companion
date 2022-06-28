@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.36
+Stable tag: 1.8.37
 
 == Description ==
 
@@ -23,6 +23,10 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.37: 2022-06-28
+- Improvement: Account register form better handle when Dokan plugin is active
+- Improvement: Correct calculation of SVG dimensions during the demo import process
+
 1.8.36: 2022-06-21
 - Improvement: Automatically reset minified CSS/JS files from WPRocket after update
 
