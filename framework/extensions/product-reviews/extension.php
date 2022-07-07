@@ -157,7 +157,7 @@ class BlocksyExtensionProductReviews {
 				wp_enqueue_script(
 					'blocksy-product-reviews-customizer-sync',
 					BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/sync.js',
-					[ 'ct-scripts', 'customize-preview' ],
+					[ 'ct-scripts', 'customize-preview', 'blocksy-companion-sync-scripts' ],
 					$data['Version'],
 					true
 				);
@@ -199,6 +199,58 @@ class BlocksyExtensionProductReviews {
 
 			return $layers;
 		}, 10, 2);
+
+		add_filter(
+			'blocksy:options:posts-listing:design:before_card_background',
+			function ($opts, $prefix) {
+				if ($prefix !== 'blc-product-review_archive') {
+					return $opts;
+				}
+
+				$opts[blocksy_rand_md5()] = [
+					'type' => 'ct-condition',
+					'condition' => [
+						$prefix . '_archive_order:array-ids:overall_score:enabled' => '!no'
+					],
+					'options' => [
+						$prefix . '_star_rating_color' => [
+							'label' => __( 'Star Rating Color', 'blocksy-companion' ),
+							'type'  => 'ct-color-picker',
+							'design' => 'inline',
+							'divider' => 'top:full',
+							'setting' => [ 'transport' => 'postMessage' ],
+		
+							'value' => [
+								'default' => [
+									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+								],
+		
+								'inactive' => [
+									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+								],
+							],
+		
+							'pickers' => [
+								[
+									'title' => __( 'Active', 'blocksy-companion' ),
+									'id' => 'default',
+									'inherit' => '#FDA256'
+								],
+		
+								[
+									'title' => __( 'Inactive', 'blocksy-companion' ),
+									'id' => 'inactive',
+									'inherit' => '#F9DFCC'
+								],
+							],
+						]
+					]
+				];
+				
+				return $opts;
+			},
+			10, 2
+		);
 
 		add_filter('blocksy:posts-listing:archive-order:default', function ($default, $prefix) {
 			if ($prefix !== 'blc-product-review_archive') {

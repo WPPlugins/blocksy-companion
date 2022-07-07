@@ -160,10 +160,10 @@ function blc_ext_newsletter_subscribe_output_form($args = []) {
 			class="ct-newsletter-subscribe-block-form" <?php echo $skip_submit_output ?>>
 			<section data-fields="<?php echo $fields_number ?>">
 				<?php if ($has_name) { ?>
-					<input type="text" name="FNAME" placeholder="<?php esc_attr_e($args['name_label'], 'blocksy-companion'); ?>" title="<?php echo __('Name', 'blocksy-companion') ?>" />
+					<input type="text" name="FNAME" placeholder="<?php esc_attr_e($args['name_label'], 'blocksy-companion'); ?>" aria-label="<?php echo __('First name', 'blocksy-companion') ?>" />
 				<?php } ?>
 
-				<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($args['email_label'], 'blocksy-companion'); ?> *" title="<?php echo __('Email', 'blocksy-companion') ?>" required />
+				<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($args['email_label'], 'blocksy-companion'); ?> *" aria-label="<?php echo __('Email address', 'blocksy-companion') ?>" required />
 
 				<button class="button">
 					<?php echo esc_html($args['button_text']) ?>

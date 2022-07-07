@@ -2498,7 +2498,7 @@
             ) {
                 return;
             }
-            
+
             $subscription_cancellation_dialog_box_template_params = $this->apply_filters( 'show_deactivation_subscription_cancellation', true ) ?
                 $this->_get_subscription_cancellation_dialog_box_template_params() :
                 array();
@@ -3635,8 +3635,35 @@
             }
 
             return (
-                fs_strip_url_protocol( trailingslashit( $this->_site->url ) ) !== fs_strip_url_protocol( trailingslashit( get_site_url() ) )
+                fs_strip_url_protocol( trailingslashit( $this->_site->url ) ) !== fs_strip_url_protocol( trailingslashit( self::get_site_url() ) )
             );
+        }
+
+        /**
+         * @author Leo Fajardo (@leorw)
+         * @since 2.5.0
+         *
+         * @param int|null $blog_id
+         *
+         * @return string
+         */
+        static function get_site_url( $blog_id = null ) {
+            global $wp_filter;
+
+            $site_url_filters = null;
+
+            if ( ! empty( $wp_filter['site_url'] ) ) {
+                $site_url_filters = $wp_filter['site_url'];
+                unset( $wp_filter['site_url'] );
+            }
+
+            $url = get_site_url( $blog_id );
+
+            if ( ! empty( $site_url_filters ) ) {
+                $wp_filter['site_url'] = $site_url_filters;
+            }
+
+            return $url;
         }
 
         /**
@@ -3665,7 +3692,7 @@
             if (
                 is_object( $this->_license ) &&
                 ! $this->_license->is_utilized(
-                    ( WP_FS__IS_LOCALHOST_FOR_SERVER || FS_Site::is_localhost_by_address( get_site_url() ) )
+                    ( WP_FS__IS_LOCALHOST_FOR_SERVER || FS_Site::is_localhost_by_address( self::get_site_url() ) )
                 )
             ) {
                 $license_key = $this->_license->secret_key;
@@ -3977,7 +4004,7 @@
         /**
          * @author Leo Fajardo (@leorw)
          * @since  2.5.0
-         * 
+         *
          * @return array
          */
         static function get_all_modules_sites() {
@@ -4231,7 +4258,7 @@
             if ( $is_connected ) {
                 FS_GDPR_Manager::instance()->store_is_required( $pong->is_gdpr_required );
             }
-            
+
             $this->store_connectivity_info( $pong, $is_connected );
 
             return $this->_has_api_connection;
@@ -4315,7 +4342,7 @@
             $unique_id = self::$_accounts->get_option( 'unique_id', null, $blog_id );
 
             if ( empty( $unique_id ) || ! is_string( $unique_id ) ) {
-                $key = fs_strip_url_protocol( get_site_url( $blog_id ) );
+                $key = fs_strip_url_protocol( self::get_site_url( $blog_id ) );
 
                 $secure_auth = defined( 'SECURE_AUTH_KEY' ) ? SECURE_AUTH_KEY : '';
                 if ( empty( $secure_auth ) ||
@@ -8593,7 +8620,7 @@
             $parent_licenses_endpoint = "/plugins/{$this->get_id()}/parent_licenses.json?filter=activatable";
 
             $fs = $this;
-            
+
             if ( $this->is_addon() ) {
                 $parent_instance = $this->get_parent_instance();
 
@@ -9653,7 +9680,7 @@
                     'language' => get_bloginfo( 'language' ),
                     'charset'  => get_bloginfo( 'charset' ),
                     'title'    => get_bloginfo( 'name' ),
-                    'url'      => get_site_url(),
+                    'url'      => self::get_site_url(),
                 ) :
                 array();
 
@@ -10324,7 +10351,7 @@
 
             if ( is_object( $fs ) ) {
                 $fs->remove_sdk_reference();
-                
+
                 self::require_plugin_essentials();
 
                 if ( is_plugin_active( $fs->_free_plugin_basename ) ||
@@ -10904,7 +10931,7 @@
             if ( fs_starts_with( $option_name, WP_FS__MODULE_TYPE_THEME . '_' ) ) {
                 $option_name = str_replace( WP_FS__MODULE_TYPE_THEME . '_', '', $option_name );
             }
-            
+
             switch ( $option_name ) {
                 case 'plugins':
                 case 'themes':
@@ -12558,7 +12585,7 @@
                 } else {
                     $url = is_object( $site ) ?
                         $site->siteurl :
-                        get_site_url( $blog_id );
+                        self::get_site_url( $blog_id );
 
                     $disconnected_site_ids[] = $blog_id;
                 }
@@ -13518,7 +13545,7 @@
                 // Subscription cancellation dialog box is currently not supported for multisite networks.
                 return array();
             }
-            
+
             if ( $this->is_whitelabeled() ) {
                 return array();
             }
@@ -13618,7 +13645,7 @@
                 ! $this->is_premium() &&
                 /**
                  * Also handle the case when an upgrade was made using the free version.
-                 * 
+                 *
                  * @author Leo Fajardo (@leorw)
                  * @since 2.3.2
                  */
@@ -13849,7 +13876,7 @@
          */
         function _activate_license_ajax_action() {
             $this->_logger->entrance();
-            
+
             $this->check_ajax_referer( 'activate_license' );
 
             $license_key = trim( fs_request_get( 'license_key' ) );
@@ -13919,7 +13946,7 @@
             foreach ( $installs_info_by_slug_map as $slug => $install_info ) {
                 $install_ids[ $slug ] = $install_info['install']->id;
             }
-            
+
             $params['install_ids'] = implode( ',', array_values( $install_ids ) );
 
             $install = $this->get_api_site_scope()->call( $this->add_show_pending( '/' ), 'put', $params );
@@ -14012,7 +14039,7 @@
          *
          * @author Vova Feldman (@svovaf)
          * @since  2.3.0
-         *         
+         *
          * @param string      $license_key
          * @param null|bool   $is_marketing_allowed
          * @param null|number $plugin_id
@@ -15813,7 +15840,7 @@
             $address_to_blog_map = array();
             foreach ( $sites as $site ) {
                 $blog_id                         = self::get_site_blog_id( $site );
-                $address                         = trailingslashit( fs_strip_url_protocol( get_site_url( $blog_id ) ) );
+                $address                         = trailingslashit( fs_strip_url_protocol( self::get_site_url( $blog_id ) ) );
                 $address_to_blog_map[ $address ] = $blog_id;
             }
 
@@ -16049,7 +16076,7 @@
             $switched = false;
 
             if ( is_null( $site ) ) {
-                $url     = get_site_url();
+                $url     = self::get_site_url();
                 $name    = get_bloginfo( 'name' );
                 $blog_id = null;
             } else {
@@ -16064,7 +16091,7 @@
                     $url  = $site->siteurl;
                     $name = $site->blogname;
                 } else {
-                    $url  = get_site_url( $blog_id );
+                    $url  = self::get_site_url( $blog_id );
                     $name = get_bloginfo( 'name' );
                 }
             }
@@ -17005,6 +17032,7 @@
             }
 
             if (
+                $this->is_user_in_admin() &&
                 $this->is_clone() &&
                 empty( FS_Clone_Manager::instance()->get_clone_identification_timestamp() )
             ) {
@@ -18551,7 +18579,7 @@
             if ( is_object( $this->_site ) && ! $this->is_registered() ) {
                 return;
             }
-            
+
             /**
              * When running from a site admin with a network activated module and the connection
              * was NOT delegated and the user still haven't skipped or opted-in, then hide the
@@ -22889,7 +22917,7 @@
                                             sprintf(
                                                 $this->get_text_inline( 'We will no longer be sending any usage data of %s on %s to %s.', 'opted-out-successfully' ),
                                                 $this->get_plugin_title(),
-                                                fs_strip_url_protocol( get_site_url( $blog_id ) ),
+                                                fs_strip_url_protocol( self::get_site_url( $blog_id ) ),
                                                 sprintf(
                                                     '<a href="%s" target="_blank" rel="noopener">%s</a>',
                                                     'https://freemius.com',
@@ -23596,7 +23624,7 @@
                     ! $this->is_live(),
                     $this->_site->secret_key,
                     $this->get_sdk_version(),
-                    get_site_url()
+                    self::get_site_url()
                 );
             }
 
@@ -23637,7 +23665,7 @@
                 $this->_store_site();
             }
 
-            if ( fs_strip_url_protocol( $stored_remote_url ) !== fs_strip_url_protocol( trailingslashit( get_site_url() ) ) ) {
+            if ( fs_strip_url_protocol( $stored_remote_url ) !== fs_strip_url_protocol( trailingslashit( self::get_site_url() ) ) ) {
                     FS_Clone_Manager::instance()->maybe_run_clone_resolution();
             }
         }

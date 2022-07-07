@@ -13,6 +13,7 @@ $title = blocksy_default_akg( 'title', $atts, __('Social Icons', 'blocksy-compan
 echo wp_kses_post($before_widget . $before_title . $title . $after_title);
 
 $size = blocksy_default_akg('social_icons_size', $atts, 'medium');
+$color = blocksy_default_akg('social_icons_color', $atts, 'default');
 $type = blocksy_default_akg('social_type', $atts, 'simple');
 $fill = blocksy_default_akg('social_icons_fill', $atts, 'outline');
 
@@ -61,6 +62,7 @@ echo blc_call_fn(
 	),
 	[
 		'size' => $size,
+		'icons-color' => $color,
 		'fill' => $fill,
 		'type' => $type,
 		'links_target' => $link_target,
@@ -69,4 +71,3 @@ echo blc_call_fn(
 );
 
 echo wp_kses_post($after_widget);
-

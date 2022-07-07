@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.37
+Stable tag: 1.8.38
 
 == Description ==
 
@@ -23,6 +23,11 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.38: 2022-07-07
+- Improvement: Icons for the footer contacts element now respect the column alignment
+- Improvement: Newsletter subscribe form has better compatibility with accessibility apps
+- Fix: Contacts footer element icons now show up correctly
+
 1.8.37: 2022-06-28
 - Improvement: Account register form better handle when Dokan plugin is active
 - Improvement: Correct calculation of SVG dimensions during the demo import process

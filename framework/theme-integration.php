@@ -27,6 +27,7 @@ class ThemeIntegration {
 					),
 					'trigger' => 'click',
 					'has_modal_loader' => [
+						'skip_if_no_template' => true,
 						'id' => 'account-modal'
 					]
 				];

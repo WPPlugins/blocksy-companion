@@ -75,6 +75,19 @@ $options = [
 		'design' => 'inline-full',
 	],
 
+	'social_icons_color' => [
+		'label' => __('Icons Color', 'blocksy'),
+		'type' => 'ct-radio',
+		'value' => 'default',
+		'view' => 'text',
+		'design' => 'block',
+		'setting' => [ 'transport' => 'postMessage' ],
+		'choices' => [
+			'default' => __( 'Default', 'blocksy' ),
+			'official' => __( 'Official', 'blocksy' ),
+		],
+	],
+
 	'social_icons_size' => [
 		'label' => __( 'Icons Size', 'blocksy-companion' ),
 		'type' => 'ct-radio',
