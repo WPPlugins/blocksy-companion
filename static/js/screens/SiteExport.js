@@ -12,13 +12,15 @@ import useActivationAction from '../helpers/useActivationAction'
 import fileSaver from 'file-saver'
 import Overlay from '../helpers/Overlay'
 
+import { getPluginsMap } from './DemoInstall/Wizzard/Plugins'
+
 const SiteExport = () => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [isShowing, setIsShowing] = useState(false)
 
 	const [name, setName] = useState('')
 	const [builder, setBuilder] = useState('')
-	const [plugins, setPlugins] = useState('coblocks,elementor,contact-form-7')
+	const [plugins, setPlugins] = useState('')
 	const [url, setUrl] = useState('')
 	const [isPro, setIsPro] = useState(false)
 
@@ -94,7 +96,10 @@ const SiteExport = () => {
 							{__('Preview URL', 'blocksy-companion')}
 							<input
 								type="text"
-								placeholder={__('Preview URL', 'blocksy-companion')}
+								placeholder={__(
+									'Preview URL',
+									'blocksy-companion'
+								)}
 								value={url}
 								onChange={({ target: { value } }) =>
 									setUrl(value)
@@ -125,15 +130,39 @@ const SiteExport = () => {
 							/>
 						</label>
 
-						<label>
-							{__('Plugins', 'blocksy-companion')}
-							<textarea
-								placeholder={__('Plugins', 'blocksy-companion')}
-								value={plugins}
-								onChange={({ target: { value } }) =>
-									setPlugins(value)
-								}></textarea>
-						</label>
+						<h3>Required plugins</h3>
+
+						<div className="ct-bundled-plugins-list ct-modal-scroll">
+							{Object.keys(getPluginsMap()).map((plugin) => (
+								<label
+									tabindex="0"
+									onClick={(e) => {
+										e.preventDefault()
+										const newPlugins = plugins.split(',')
+
+										if (newPlugins.includes(plugin)) {
+											newPlugins.splice(
+												newPlugins.indexOf(plugin),
+												1
+											)
+										} else {
+											newPlugins.push(plugin)
+										}
+
+										setPlugins(newPlugins.join(','))
+									}}>
+									<span>{getPluginsMap()[plugin]}</span>
+
+									<input
+										type="checkbox"
+										checked={plugins.indexOf(plugin) > -1}
+										onChange={({
+											target: { checked },
+										}) => {}}
+									/>
+								</label>
+							))}
+						</div>
 
 						<button
 							className="ct-button"

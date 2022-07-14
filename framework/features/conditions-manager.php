@@ -339,6 +339,13 @@ class ConditionsManager {
 					isset($rule['payload']['taxonomy_id'])
 					&&
 					$post_id
+					&&
+					in_array(
+						get_term($rule['payload']['taxonomy_id'])->taxonomy,
+						get_object_taxonomies([
+							'post_type' => get_post_type($post_id)
+						])
+					)
 				) {
 					return has_term(
 						$rule['payload']['taxonomy_id'],

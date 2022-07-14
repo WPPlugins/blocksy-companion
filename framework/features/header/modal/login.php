@@ -52,6 +52,8 @@ if (! $forgot_password_inline) {
 			}
 		}
 
+		remove_action("login_form", "wp_login_attempt_focus_start");
+
 		do_action('login_form')
 	?>
 
