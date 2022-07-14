@@ -1,12 +1,8 @@
 /**
- *  - v1.8.40
+ *  - v1.8.41
  * 
  * Copyright (c) 2022
  * Licensed GPLv2+
  */
 
-.ct-product-reviews-settings-modal .ct-controls-group {
-  padding-top: 30px;
-  margin-top: 5px;
-  border-top: 1px dashed #eee;
-}
+.ct-product-reviews-settings-modal .ct-controls-group{padding-top:30px;margin-top:5px;border-top:1px dashed #eee}
