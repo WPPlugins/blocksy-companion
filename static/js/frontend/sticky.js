@@ -5,7 +5,10 @@ import { computeShrink } from './sticky/shrink'
 import { computeAutoHide } from './sticky/auto-hide'
 import { computeFadeSlide } from './sticky/fade-slide'
 
-import { getRowStickyHeight } from './sticky/shrink-utils'
+import {
+	getRowStickyHeight,
+	maybeSetStickyHeightAnimated,
+} from './sticky/shrink-utils'
 
 import { clearShrinkCache } from './sticky/shrink-handle-middle-row'
 import { clearLogoShrinkCache } from './sticky/shrink-handle-logo'
@@ -132,8 +135,6 @@ const compute = () => {
 		return
 	}
 
-	prevScrollY = scrollY
-
 	const stickyContainer = document.querySelector(
 		`[data-device="${getCurrentScreen()}"] [data-sticky]`
 	)
@@ -144,6 +145,10 @@ const compute = () => {
 
 	let startPosition = cachedStartPosition
 
+	if (scrollY < startPosition) {
+		prevScrollY = window.scrollY
+	}
+
 	if (startPosition === null) {
 		startPosition = getStartPositionFor(stickyContainer)
 		cachedStartPosition = startPosition
@@ -151,24 +156,25 @@ const compute = () => {
 
 	let stickyContainerHeight = cachedStickyContainerHeight
 
+	const stickyComponents = stickyContainer.dataset.sticky
+		.split(':')
+		.filter((c) => c !== 'yes' && c !== 'no' && c !== 'fixed')
+
 	if (!stickyContainerHeight) {
 		stickyContainerHeight = parseInt(
 			stickyContainer.getBoundingClientRect().height
 		)
 		cachedStickyContainerHeight = parseInt(stickyContainerHeight)
 
-		document.body.style.setProperty(
-			'--header-sticky-height-animated',
-			`${[...stickyContainer.querySelectorAll('[data-row]')].reduce(
-				(res, row) => res + getRowStickyHeight(row),
-				0
-			)}px`
-		)
+		maybeSetStickyHeightAnimated(() => {
+			return stickyComponents.indexOf('auto-hide') === -1
+				? `${[...stickyContainer.querySelectorAll('[data-row]')].reduce(
+						(res, row) => res + getRowStickyHeight(row),
+						0
+				  )}px`
+				: '0px'
+		})
 	}
-
-	const stickyComponents = stickyContainer.dataset.sticky
-		.split(':')
-		.filter((c) => c !== 'yes' && c !== 'no' && c !== 'fixed')
 
 	let isSticky =
 		(startPosition > 0 && Math.abs(window.scrollY - startPosition) < 5) ||
@@ -195,6 +201,8 @@ const compute = () => {
 	}, 300)
 
 	let containerInitialHeight = cachedContainerInitialHeight
+
+	let currentScrollY = scrollY
 
 	if (!containerInitialHeight) {
 		cachedContainerInitialHeight = Array.from(
@@ -224,6 +232,12 @@ const compute = () => {
 			isSticky,
 			startPosition,
 			stickyComponents,
+
+			containerInitialHeight,
+			stickyContainerHeight,
+
+			currentScrollY,
+			prevScrollY,
 		})
 	}
 
@@ -238,6 +252,8 @@ const compute = () => {
 			stickyComponents,
 		})
 	}
+
+	prevScrollY = currentScrollY
 }
 
 export const mountStickyHeader = () => {

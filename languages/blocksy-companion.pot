@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-07-14 15:58+0000\n"
+"POT-Creation-Date: 2022-07-26 15:56+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -236,29 +236,29 @@ msgstr ""
 msgid "Register For This Site"
 msgstr ""
 
-#: framework/features/conditions-manager.php:486
+#: framework/features/conditions-manager.php:494
 msgid "Entire Website"
 msgstr ""
 
-#: framework/features/conditions-manager.php:494,
-#: framework/features/conditions-manager.php:536,
-#: framework/features/conditions-manager.php:568
+#: framework/features/conditions-manager.php:502,
+#: framework/features/conditions-manager.php:544,
+#: framework/features/conditions-manager.php:576
 msgid "Basic"
 msgstr ""
 
-#: framework/features/conditions-manager.php:498,
-#: framework/features/conditions-manager.php:572
+#: framework/features/conditions-manager.php:506,
+#: framework/features/conditions-manager.php:580
 msgid "Singulars"
 msgstr ""
 
-#: framework/features/conditions-manager.php:503,
-#: framework/features/conditions-manager.php:540
+#: framework/features/conditions-manager.php:511,
+#: framework/features/conditions-manager.php:548
 msgid "Archives"
 msgstr ""
 
-#: framework/features/conditions-manager.php:509,
-#: framework/features/conditions-manager.php:546,
-#: framework/features/conditions-manager.php:578,
+#: framework/features/conditions-manager.php:517,
+#: framework/features/conditions-manager.php:554,
+#: framework/features/conditions-manager.php:586,
 #: framework/extensions/trending/customizer.php:4,
 #: framework/extensions/widgets/widgets/ct-posts/options.php:11,
 #: framework/extensions/widgets/widgets/ct-posts/options.php:98,
@@ -268,8 +268,8 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: framework/features/conditions-manager.php:513,
-#: framework/features/conditions-manager.php:582,
+#: framework/features/conditions-manager.php:521,
+#: framework/features/conditions-manager.php:590,
 #: framework/premium/features/content-blocks/hooks-manager.php:408,
 #: framework/premium/features/content-blocks/hooks-manager.php:416,
 #: framework/premium/features/content-blocks/hooks-manager.php:424,
@@ -279,143 +279,143 @@ msgstr ""
 msgid "Single Post"
 msgstr ""
 
-#: framework/features/conditions-manager.php:518,
-#: framework/features/conditions-manager.php:550
+#: framework/features/conditions-manager.php:526,
+#: framework/features/conditions-manager.php:558
 msgid "All Post Archives"
 msgstr ""
 
-#: framework/features/conditions-manager.php:523,
-#: framework/features/conditions-manager.php:555
+#: framework/features/conditions-manager.php:531,
+#: framework/features/conditions-manager.php:563
 msgid "Post Categories"
 msgstr ""
 
-#: framework/features/conditions-manager.php:528,
-#: framework/features/conditions-manager.php:560
+#: framework/features/conditions-manager.php:536,
+#: framework/features/conditions-manager.php:568
 msgid "Post Tags"
 msgstr ""
 
-#: framework/features/conditions-manager.php:590,
+#: framework/features/conditions-manager.php:598,
 #: framework/extensions/widgets/widgets/ct-posts/options.php:12,
 #: framework/premium/features/premium-header/items/search-input/options.php:5
 msgid "Pages"
 msgstr ""
 
-#: framework/features/conditions-manager.php:594
+#: framework/features/conditions-manager.php:602
 msgid "Single Page"
 msgstr ""
 
-#: framework/features/conditions-manager.php:621
+#: framework/features/conditions-manager.php:629
 msgid "%s Single"
 msgstr ""
 
-#: framework/features/conditions-manager.php:631
+#: framework/features/conditions-manager.php:639
 msgid "%s Archive"
 msgstr ""
 
-#: framework/features/conditions-manager.php:644
+#: framework/features/conditions-manager.php:652
 msgid "%s %s Taxonomy"
 msgstr ""
 
-#: framework/features/conditions-manager.php:659
+#: framework/features/conditions-manager.php:667
 msgid "Post ID"
 msgstr ""
 
-#: framework/features/conditions-manager.php:664
+#: framework/features/conditions-manager.php:672
 msgid "Page ID"
 msgstr ""
 
-#: framework/features/conditions-manager.php:669
+#: framework/features/conditions-manager.php:677
 #: static/js/options/ConditionsManager/PostIdPicker.js:76
 msgid "Custom Post Type ID"
 msgstr ""
 
-#: framework/features/conditions-manager.php:674
+#: framework/features/conditions-manager.php:682
 msgid "Post with Taxonomy ID"
 msgstr ""
 
-#: framework/features/conditions-manager.php:679
+#: framework/features/conditions-manager.php:687
 msgid "Taxonomy ID"
 msgstr ""
 
-#: framework/features/conditions-manager.php:683
+#: framework/features/conditions-manager.php:691
 msgid "Specific"
 msgstr ""
 
-#: framework/features/conditions-manager.php:689
+#: framework/features/conditions-manager.php:697
 msgid "Other Pages"
 msgstr ""
 
-#: framework/features/conditions-manager.php:693
+#: framework/features/conditions-manager.php:701
 msgid "404"
 msgstr ""
 
-#: framework/features/conditions-manager.php:698,
+#: framework/features/conditions-manager.php:706,
 #: framework/premium/features/premium-header/items/search-input/options.php:45,
 #: framework/premium/features/premium-header/items/search-input/view.php:95
 msgid "Search"
 msgstr ""
 
-#: framework/features/conditions-manager.php:703
+#: framework/features/conditions-manager.php:711
 msgid "Blog"
 msgstr ""
 
-#: framework/features/conditions-manager.php:708
+#: framework/features/conditions-manager.php:716
 msgid "Front Page"
 msgstr ""
 
-#: framework/features/conditions-manager.php:713
+#: framework/features/conditions-manager.php:721
 msgid "Privacy Policy Page"
 msgstr ""
 
-#: framework/features/conditions-manager.php:725
-msgid "Author"
+#: framework/features/conditions-manager.php:733
+msgid "Author Archives"
 msgstr ""
 
-#: framework/features/conditions-manager.php:735
+#: framework/features/conditions-manager.php:743
 msgid "WooCommerce"
 msgstr ""
 
-#: framework/features/conditions-manager.php:739
+#: framework/features/conditions-manager.php:747
 msgid "Shop Home"
 msgstr ""
 
-#: framework/features/conditions-manager.php:744
+#: framework/features/conditions-manager.php:752
 msgid "Single Product"
 msgstr ""
 
-#: framework/features/conditions-manager.php:749
+#: framework/features/conditions-manager.php:757
 msgid "Product Archives"
 msgstr ""
 
-#: framework/features/conditions-manager.php:754
+#: framework/features/conditions-manager.php:762
 msgid "Product Categories"
 msgstr ""
 
-#: framework/features/conditions-manager.php:759
+#: framework/features/conditions-manager.php:767
 msgid "Product Tags"
 msgstr ""
 
-#: framework/features/conditions-manager.php:767
+#: framework/features/conditions-manager.php:775
 msgid "Custom Post Types"
 msgstr ""
 
-#: framework/features/conditions-manager.php:776
+#: framework/features/conditions-manager.php:784
 msgid "User Auth"
 msgstr ""
 
-#: framework/features/conditions-manager.php:780
+#: framework/features/conditions-manager.php:788
 msgid "User Logged In"
 msgstr ""
 
-#: framework/features/conditions-manager.php:785
+#: framework/features/conditions-manager.php:793
 msgid "User Logged Out"
 msgstr ""
 
-#: framework/features/conditions-manager.php:791
+#: framework/features/conditions-manager.php:799
 msgid "User Roles"
 msgstr ""
 
-#: framework/features/conditions-manager.php:796,
+#: framework/features/conditions-manager.php:804,
 #: framework/premium/features/content-blocks/options/404.php:19,
 #: framework/premium/features/content-blocks/options/header.php:19,
 #: framework/premium/features/content-blocks/options/hook.php:24,
@@ -423,38 +423,38 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: framework/features/conditions-manager.php:800
+#: framework/features/conditions-manager.php:808
 msgid "Post Author"
 msgstr ""
 
-#: framework/features/conditions-manager.php:812,
+#: framework/features/conditions-manager.php:820,
 #: framework/premium/features/premium-header/items/language-switcher/config.php:14
 msgid "Languages"
 msgstr ""
 
-#: framework/features/conditions-manager.php:816
+#: framework/features/conditions-manager.php:824
 msgid "Current Language"
 msgstr ""
 
-#: framework/features/conditions-manager.php:824
+#: framework/features/conditions-manager.php:832
 msgid "bbPress"
 msgstr ""
 
-#: framework/features/conditions-manager.php:828
+#: framework/features/conditions-manager.php:836
 msgid "Profile"
 msgstr ""
 
-#: framework/features/conditions-manager.php:840
-#: static/js/options/ConditionsManager.js:104
+#: framework/features/conditions-manager.php:848
+#: static/js/options/ConditionsManager.js:105
 msgid "Include"
 msgstr ""
 
-#: framework/features/conditions-manager.php:840
-#: static/js/options/ConditionsManager.js:105
+#: framework/features/conditions-manager.php:848
+#: static/js/options/ConditionsManager.js:106
 msgid "Exclude"
 msgstr ""
 
-#: framework/features/conditions-manager.php:893
+#: framework/features/conditions-manager.php:901
 msgid "Language"
 msgstr ""
 
@@ -2136,7 +2136,8 @@ msgid ""
 msgstr ""
 
 #: framework/premium/extensions/code-snippets/extension.php:31,
-#: framework/premium/extensions/code-snippets/extension.php:78
+#: framework/premium/extensions/code-snippets/extension.php:78,
+#: framework/premium/extensions/code-snippets/extension.php:123
 msgid "Header scripts"
 msgstr ""
 
@@ -2150,10 +2151,6 @@ msgstr ""
 #: framework/premium/extensions/code-snippets/extension.php:100,
 #: framework/premium/extensions/code-snippets/extension.php:145
 msgid "Footer scripts"
-msgstr ""
-
-#: framework/premium/extensions/code-snippets/extension.php:123
-msgid "Header scripts2"
 msgstr ""
 
 #: framework/premium/extensions/code-snippets/readme.php:4
@@ -2798,47 +2795,47 @@ msgstr ""
 msgid "Thumbnails Arrows Visibility"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:392
+#: framework/premium/extensions/woocommerce-extra/extension.php:391
 msgid "Icons Spacing"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:436
+#: framework/premium/extensions/woocommerce-extra/extension.php:439
 msgid "WooCommerce Offcanvas Filters"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:438
+#: framework/premium/extensions/woocommerce-extra/extension.php:441
 msgid "Add widgets here."
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:711
+#: framework/premium/extensions/woocommerce-extra/extension.php:714
 msgid "Available Filters"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:712
+#: framework/premium/extensions/woocommerce-extra/extension.php:715
 msgid "Close filters modal"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:805
+#: framework/premium/extensions/woocommerce-extra/extension.php:808
 msgid "Quick view title before"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:810
+#: framework/premium/extensions/woocommerce-extra/extension.php:813
 msgid "Quick view title after"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:815
+#: framework/premium/extensions/woocommerce-extra/extension.php:818
 msgid "Quick view price before"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:820
+#: framework/premium/extensions/woocommerce-extra/extension.php:823
 msgid "Quick view price after"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:825
+#: framework/premium/extensions/woocommerce-extra/extension.php:828
 msgid "Quick view summary before"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:830
+#: framework/premium/extensions/woocommerce-extra/extension.php:833
 msgid "Quick view summary after"
 msgstr ""
 
@@ -5134,7 +5131,7 @@ msgstr ""
 #: framework/extensions/newsletter-subscribe/admin-static/js/ListPicker.js:14
 #: framework/extensions/newsletter-subscribe/admin-static/js/ListPicker/Implementation.js:63
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:213
-#: static/js/screens/SiteExport.js:172
+#: static/js/screens/SiteExport.js:170
 msgid "Loading..."
 msgstr ""
 
@@ -5332,7 +5329,7 @@ msgid "Choose"
 msgstr ""
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:174
-#: static/js/options/ConditionsManager.js:99
+#: static/js/options/ConditionsManager.js:100
 msgid "Select variation"
 msgstr ""
 
@@ -5665,7 +5662,7 @@ msgid ""
 msgstr ""
 
 #: framework/premium/static/js/footer/PanelsManager.js:211
-#: framework/premium/static/js/hooks/CodeEditor.js:183
+#: framework/premium/static/js/hooks/CodeEditor.js:203
 #: static/js/header/PanelsManager.js:216
 #: static/js/options/CustomizerOptionsManager.js:422
 msgid "Cancel"
@@ -5708,29 +5705,29 @@ msgstr ""
 msgid "Header name"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:144
+#: framework/premium/static/js/hooks/CodeEditor.js:164
 msgid "Use code editor"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:147
+#: framework/premium/static/js/hooks/CodeEditor.js:167
 msgid "Exit code editor"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:159
+#: framework/premium/static/js/hooks/CodeEditor.js:179
 msgid "Heads up!"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:161
+#: framework/premium/static/js/hooks/CodeEditor.js:181
 msgid ""
 "Enabling & disabling the code editor will erase everything from your post "
 "editor and this action is irreversible."
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:168
+#: framework/premium/static/js/hooks/CodeEditor.js:188
 msgid "Are you sure you want to continue?"
 msgstr ""
 
-#: framework/premium/static/js/hooks/CodeEditor.js:232
+#: framework/premium/static/js/hooks/CodeEditor.js:252
 msgid "Yes, continue"
 msgstr ""
 
@@ -5961,31 +5958,35 @@ msgid ""
 "features and future updates."
 msgstr ""
 
-#: static/js/options/ConditionsManager.js:127
+#: static/js/options/ConditionsManager.js:128
 msgid "Select rule"
 msgstr ""
 
-#: static/js/options/ConditionsManager.js:184
+#: static/js/options/ConditionsManager.js:185
 msgid "Select taxonomy"
 msgstr ""
 
-#: static/js/options/ConditionsManager.js:221
+#: static/js/options/ConditionsManager.js:222
 msgid "Select language"
 msgstr ""
 
-#: static/js/options/ConditionsManager.js:255
-msgid "Select user"
-msgstr ""
-
-#: static/js/options/ConditionsManager.js:262
+#: static/js/options/ConditionsManager.js:263
 msgid "Current user"
 msgstr ""
 
-#: static/js/options/ConditionsManager.js:325
+#: static/js/options/ConditionsManager.js:299
+msgid "Select user"
+msgstr ""
+
+#: static/js/options/ConditionsManager.js:306
+msgid "All authors"
+msgstr ""
+
+#: static/js/options/ConditionsManager.js:369
 msgid "Add Display Condition"
 msgstr ""
 
-#: static/js/options/ConditionsManager.js:344
+#: static/js/options/ConditionsManager.js:388
 msgid "Add User Condition"
 msgstr ""
 
@@ -6391,7 +6392,7 @@ msgstr ""
 msgid "Builder"
 msgstr ""
 
-#: static/js/screens/SiteExport.js:173
+#: static/js/screens/SiteExport.js:171
 msgid "Export site"
 msgstr ""
 

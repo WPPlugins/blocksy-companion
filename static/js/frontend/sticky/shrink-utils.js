@@ -74,3 +74,13 @@ export const getRowStickyHeight = (el) => {
 
 	return rowStickyHeight
 }
+
+export const maybeSetStickyHeightAnimated = (cb = () => 0) => {
+	const maybeFloatingCart = document.querySelector('.ct-floating-bar')
+
+	if (!maybeFloatingCart) {
+		return
+	}
+
+	maybeFloatingCart.style.setProperty('--header-sticky-height-animated', cb())
+}

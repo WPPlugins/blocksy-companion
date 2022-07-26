@@ -127,6 +127,14 @@ class ConditionsManager {
 		}
 
 		if ($rule['rule'] === 'author') {
+			if (
+				isset($rule['payload'])
+				&&
+				isset($rule['payload']['user_id'])
+			) {
+				return is_author($rule['payload']['user_id']);
+			}
+
 			return is_author();
 		}
 
@@ -722,7 +730,7 @@ class ConditionsManager {
 
 					[
 						'id' => 'author',
-						'title' => __('Author', 'blocksy-companion')
+						'title' => __('Author Archives', 'blocksy-companion')
 					],
 				],
 			];

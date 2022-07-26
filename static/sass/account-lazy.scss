@@ -2,14 +2,15 @@
 
 // account modal
 #account-modal {
-	--horizontal-alignment: center;
-	--vertical-alignment: center;
+	// --horizontal-alignment: center;
+	// --vertical-alignment: center;
 
 	background-color: rgba(18, 21, 25, 0.6);
 }
 
 .ct-account-form {
 	width: 100%;
+	margin: auto;
 	color: var(--color);
 	background-color: #fff;
 	--linkInitialColor: var(--color);

@@ -20,7 +20,7 @@ const SiteExport = () => {
 
 	const [name, setName] = useState('')
 	const [builder, setBuilder] = useState('')
-	const [plugins, setPlugins] = useState('')
+	const [plugins, setPlugins] = useState([])
 	const [url, setUrl] = useState('')
 	const [isPro, setIsPro] = useState(false)
 
@@ -34,7 +34,7 @@ const SiteExport = () => {
 		body.append('is_pro', isPro)
 		body.append('url', url)
 		body.append('builder', builder)
-		body.append('plugins', plugins)
+		body.append('plugins', plugins.join(','))
 		body.append('wp_customize', 'on')
 
 		try {
@@ -138,18 +138,16 @@ const SiteExport = () => {
 									tabindex="0"
 									onClick={(e) => {
 										e.preventDefault()
-										const newPlugins = plugins.split(',')
 
-										if (newPlugins.includes(plugin)) {
-											newPlugins.splice(
-												newPlugins.indexOf(plugin),
-												1
-											)
-										} else {
-											newPlugins.push(plugin)
-										}
+										setPlugins((plugins) => {
+											if (plugins.includes(plugin)) {
+												return plugins.filter(
+													(p) => p !== plugin
+												)
+											}
 
-										setPlugins(newPlugins.join(','))
+											return [...plugins, plugin]
+										})
 									}}>
 									<span>{getPluginsMap()[plugin]}</span>
 
