@@ -47,13 +47,13 @@ export const computeAutoHide = (args) => {
 		isSticky,
 	} = args
 
+	let direction = currentScrollY < args.prevScrollY ? 'up' : 'down'
+
 	if (isSticky && currentScrollY - args.prevScrollY === 0) {
 		maybeSetStickyHeightAnimated(() => {
 			return '0px'
 		})
 	}
-
-	let direction = currentScrollY < args.prevScrollY ? 'up' : 'down'
 
 	if (direction === 'up') {
 		processUpDirection(args)
@@ -90,6 +90,7 @@ const processUpDirection = ({
 	stickyComponents,
 	isSticky,
 	prevScrollY,
+	startPosition,
 	currentScrollY,
 }) => {
 	let { stickyContainerHeight } = getData({ stickyContainer })
@@ -102,7 +103,7 @@ const processUpDirection = ({
 
 	if (
 		!payload.up.anchor &&
-		currentScrollY > containerInitialHeight * 2 &&
+		currentScrollY > containerInitialHeight * 2 + startPosition &&
 		stickyContainer.dataset.sticky.indexOf('yes:') === -1
 	) {
 		payload.up.anchor = currentScrollY

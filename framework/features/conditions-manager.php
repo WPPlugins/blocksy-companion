@@ -257,35 +257,37 @@ class ConditionsManager {
 			||
 			$rule['rule'] === 'custom_post_type_ids'
 		) {
-			$is_blocksy_page = blocksy_is_page();
+			if (function_exists('blocksy_is_page')) {
+				$is_blocksy_page = blocksy_is_page();
 
-			if (is_singular() || $is_blocksy_page) {
-				$post_id = get_the_ID();
+				if (is_singular() || $is_blocksy_page) {
+					$post_id = get_the_ID();
 
-				if ($is_blocksy_page) {
-					$post_id = $is_blocksy_page;
-				}
-
-				global $post;
-
-				if (intval($post_id) === 0 && isset($post->post_name)) {
-					$maybe_post = get_page_by_path($post->post_name);
-
-					if ($maybe_post) {
-						$post_id = $maybe_post->ID;
+					if ($is_blocksy_page) {
+						$post_id = $is_blocksy_page;
 					}
-				}
 
-				if (
-					isset($rule['payload'])
-					&&
-					isset($rule['payload']['post_id'])
-					&&
-					$post_id
-					&&
-					intval($post_id) === intval($rule['payload']['post_id'])
-				) {
-					return true;
+					global $post;
+
+					if (intval($post_id) === 0 && isset($post->post_name)) {
+						$maybe_post = get_page_by_path($post->post_name);
+
+						if ($maybe_post) {
+							$post_id = $maybe_post->ID;
+						}
+					}
+
+					if (
+						isset($rule['payload'])
+						&&
+						isset($rule['payload']['post_id'])
+						&&
+						$post_id
+						&&
+						intval($post_id) === intval($rule['payload']['post_id'])
+					) {
+						return true;
+					}
 				}
 			}
 		}

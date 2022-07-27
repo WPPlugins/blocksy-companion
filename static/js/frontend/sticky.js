@@ -145,10 +145,6 @@ const compute = () => {
 
 	let startPosition = cachedStartPosition
 
-	if (scrollY < startPosition) {
-		prevScrollY = window.scrollY
-	}
-
 	if (startPosition === null) {
 		startPosition = getStartPositionFor(stickyContainer)
 		cachedStartPosition = startPosition
