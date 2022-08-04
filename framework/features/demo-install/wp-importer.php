@@ -669,6 +669,7 @@ class Blocksy_WP_Import extends WP_Importer {
 		foreach ( $this->posts as $post ) {
 			$post = apply_filters( 'wp_import_post_data_raw', $post );
 
+			/*
 			if ( ! post_type_exists( $post['post_type'] ) ) {
 				printf( __( 'Failed to import &#8220;%s&#8221;: Invalid post type %s', 'wordpress-importer' ),
 					esc_html($post['post_title']), esc_html($post['post_type']) );
@@ -676,6 +677,7 @@ class Blocksy_WP_Import extends WP_Importer {
 				do_action( 'wp_import_post_exists', $post );
 				continue;
 			}
+			 */
 
 			if ( isset( $this->processed_posts[$post['post_id']] ) && ! empty( $post['post_id'] ) )
 				continue;

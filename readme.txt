@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.44
+Stable tag: 1.8.45
 
 == Description ==
 
@@ -23,6 +23,9 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.45: 2022-08-04
+- Improvement: Widgets strings - better compatibility with translation plugins
+
 1.8.44: 2022-07-27
 - Improvement: Better calculate sticky top position when auto-hide effect is used
 - Improvement: Better handling of conditions module when Blocksy is not active

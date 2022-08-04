@@ -9,45 +9,31 @@ import {
 import { shrinkHandleLogo } from './shrink-handle-logo'
 import { shrinkHandleMiddleRow } from './shrink-handle-middle-row'
 
-let cache = null
-
 const getData = ({ stickyContainer }) => {
-	if (cache) {
-		return cache
-	}
-
-	let stickyContainerHeight = [
+	const stickyContainerHeight = [
 		...stickyContainer.querySelectorAll('[data-row]'),
 	].reduce((res, row) => res + getRowStickyHeight(row), 0)
 
-	cache = {
+	return {
 		stickyContainerHeight,
+		stickyContainerHeightAbsolute:
+			stickyContainerHeight +
+			parseFloat(getComputedStyle(stickyContainer).top),
 	}
-
-	return cache
 }
 
-let payload = {
-	up: {
-		anchor: null,
-		offset: 100,
-	},
-	down: {
-		anchor: null,
-		offset: 0,
-	},
-}
+let prevOffset = null
 
 export const computeAutoHide = (args) => {
 	let {
 		currentScrollY,
 		stickyContainer,
 		containerInitialHeight,
+		headerInitialHeight,
 		startPosition,
 		isSticky,
+		stickyComponents,
 	} = args
-
-	let direction = currentScrollY < args.prevScrollY ? 'up' : 'down'
 
 	if (isSticky && currentScrollY - args.prevScrollY === 0) {
 		maybeSetStickyHeightAnimated(() => {
@@ -55,21 +41,24 @@ export const computeAutoHide = (args) => {
 		})
 	}
 
-	if (direction === 'up') {
-		processUpDirection(args)
-	}
-
-	if (direction === 'down') {
-		processDownDirection(args)
-	}
-
 	if (isSticky) {
-		shrinkHandleLogo({ stickyContainer, startPosition })
-		shrinkHandleMiddleRow({
-			stickyContainer,
-			containerInitialHeight,
-			startPosition,
-		})
+		if (
+			stickyContainer.dataset.sticky.indexOf('yes') === -1 &&
+			currentScrollY > headerInitialHeight * 2 + startPosition
+		) {
+			stickyContainer.dataset.sticky = ['yes', ...stickyComponents].join(
+				':'
+			)
+
+			shrinkHandleLogo({ stickyContainer, startPosition })
+			shrinkHandleMiddleRow({
+				stickyContainer,
+				containerInitialHeight,
+				startPosition,
+			})
+			setTransparencyFor(stickyContainer, 'no')
+			document.body.removeAttribute('style')
+		}
 	} else {
 		Array.from(stickyContainer.querySelectorAll('[data-row]')).map((row) =>
 			row.removeAttribute('style')
@@ -79,51 +68,6 @@ export const computeAutoHide = (args) => {
 				'[data-row*="middle"] .site-logo-container'
 			)
 		).map((el) => el.removeAttribute('style'))
-	}
-
-	renderPayload(args)
-}
-
-const processUpDirection = ({
-	containerInitialHeight,
-	stickyContainer,
-	stickyComponents,
-	isSticky,
-	prevScrollY,
-	startPosition,
-	currentScrollY,
-}) => {
-	let { stickyContainerHeight } = getData({ stickyContainer })
-
-	if (isSticky && currentScrollY - prevScrollY === 0) {
-		maybeSetStickyHeightAnimated(() => {
-			return '0px'
-		})
-	}
-
-	if (
-		!payload.up.anchor &&
-		currentScrollY > containerInitialHeight * 2 + startPosition &&
-		stickyContainer.dataset.sticky.indexOf('yes:') === -1
-	) {
-		payload.up.anchor = currentScrollY
-		stickyContainer.dataset.sticky = ['yes', ...stickyComponents].join(':')
-
-		setTransparencyFor(stickyContainer, 'no')
-		document.body.removeAttribute('style')
-	}
-
-	if (
-		!payload.up.anchor &&
-		payload.down.anchor &&
-		payload.down.offset === stickyContainerHeight
-	) {
-		payload.up.anchor = currentScrollY
-		payload.down.anchor = null
-	}
-
-	if (!isSticky) {
-		payload.up.anchor = null
 
 		stickyContainer.dataset.sticky = [...stickyComponents].join(':')
 
@@ -132,59 +76,57 @@ const processUpDirection = ({
 		maybeSetStickyHeightAnimated(() => {
 			return '0px'
 		})
-	}
-}
 
-const processDownDirection = ({ currentScrollY, stickyContainer }) => {
-	let { stickyContainerHeight } = getData({ stickyContainer })
-
-	if (!payload.down.anchor && payload.up.anchor && payload.up.offset === 0) {
-		payload.up.anchor = null
-		payload.down.anchor = currentScrollY
+		prevOffset = null
 	}
+
+	if (prevOffset === null) {
+		prevOffset = 1000
+	}
+
+	var elTopOff = prevOffset + args.prevScrollY - currentScrollY
+
+	let offset = 0
 
 	if (
-		!payload.down.anchor &&
-		payload.up.anchor &&
-		payload.up.offset === stickyContainerHeight
+		currentScrollY > headerInitialHeight * 2 + startPosition ||
+		stickyContainer.dataset.sticky.indexOf('yes') > -1
 	) {
-		payload.up.anchor = null
-		payload.down.anchor = currentScrollY - stickyContainerHeight
-	}
-}
+		if (currentScrollY <= startPosition) {
+			offset = 0
+		} else if (currentScrollY > args.prevScrollY) {
+			let { stickyContainerHeightAbsolute } = getData({ stickyContainer })
 
-const renderPayload = ({ currentScrollY, stickyContainer }) => {
-	let offset = null
+			offset =
+				Math.abs(elTopOff) > stickyContainerHeightAbsolute
+					? -stickyContainerHeightAbsolute
+					: elTopOff
+		} else {
+			offset = elTopOff > 0 ? 0 : elTopOff
+		}
 
-	let { stickyContainerHeight } = getData({ stickyContainer })
+		stickyContainer.style.transform = `translateY(${offset}px)`
 
-	if (payload.down.anchor) {
-		payload.down.offset = clamp(
-			0,
-			stickyContainerHeight,
-			currentScrollY - payload.down.anchor
-		)
-
-		offset = payload.down.offset
-	}
-
-	if (!payload.down.anchor && payload.up.anchor) {
-		payload.up.offset = clamp(
-			0,
-			stickyContainerHeight,
-			stickyContainerHeight - (payload.up.anchor - currentScrollY)
-		)
-
-		offset = payload.up.offset
+		prevOffset = offset
+	} else {
+		stickyContainer.removeAttribute('style')
 	}
 
-	if (offset !== null) {
-		stickyContainer.style.transform = `translate3d(0px, ${
-			Math.floor(offset) * -1
-		}px, 0px)`
-
-		maybeSetStickyHeightAnimated(() => {
-			return `${stickyContainerHeight - offset}px`
-		})
+	if (stickyContainer.dataset.sticky.indexOf('yes') > -1) {
+		if (currentScrollY <= startPosition) {
+		} else if (currentScrollY > args.prevScrollY) {
+		} else {
+			shrinkHandleLogo({ stickyContainer, startPosition })
+			shrinkHandleMiddleRow({
+				stickyContainer,
+				containerInitialHeight,
+				startPosition,
+			})
+		}
 	}
+
+	maybeSetStickyHeightAnimated(() => {
+		let { stickyContainerHeight } = getData({ stickyContainer })
+		return `${stickyContainerHeight - Math.abs(offset)}px`
+	})
 }

@@ -13,7 +13,7 @@ import { DemosContext } from '../../DemoInstall'
 import Checkbox from '../../../helpers/Checkbox'
 
 export const getPluginsMap = (plugins) => ({
-	'stackable-ultimate-gutenberg-blocks': 'Stackable – Gutenberg Blocks',
+	'stackable-ultimate-gutenberg-blocks': 'Stackable - Gutenberg Blocks',
 	'wpforms-lite': 'WPForms - Contact Form',
 	woocommerce: 'WooCommerce',
 	elementor: 'Elementor',
@@ -27,8 +27,11 @@ export const getPluginsMap = (plugins) => ({
 	'block-slider': 'Block Slider',
 })
 
-export const getNameForPlugin = (plugin) =>
-	(getPluginsMap[plugin] || plugin).replace(/\b\w/, (v) => v.toUpperCase())
+export const getNameForPlugin = (plugin) => {
+	return (getPluginsMap()[plugin] || plugin).replace(/\b\w/, (v) =>
+		v.toUpperCase()
+	)
+}
 
 const Plugins = ({ demoConfiguration, setDemoConfiguration, style }) => {
 	const { currentDemo, demos_list, pluginsStatus, setCurrentDemo } =

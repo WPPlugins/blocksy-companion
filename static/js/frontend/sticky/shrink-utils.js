@@ -28,6 +28,21 @@ export const getRowInitialHeight = (el) => {
 }
 
 export const getRowStickyHeight = (el) => {
+	if (el.blcStickyHeight) {
+		return el.blcStickyHeight
+	}
+
+	let rowStickyHeight = getRowInitialHeight(el)
+
+	if (el.closest('[data-sticky*="yes"]')) {
+		let stickyHeight = el.getBoundingClientRect().height
+
+		if (stickyHeight !== rowStickyHeight) {
+			el.blcStickyHeight = stickyHeight
+			return stickyHeight
+		}
+	}
+
 	let styles = getComputedStyle(el)
 
 	let maybeShrink = 100
@@ -36,7 +51,6 @@ export const getRowStickyHeight = (el) => {
 		maybeShrink = styles.getPropertyValue('--sticky-shrink')
 	}
 
-	let rowStickyHeight = getRowInitialHeight(el)
 	let finalInitialHeight = 0
 
 	// if (el.querySelector('.site-logo-container')) {
