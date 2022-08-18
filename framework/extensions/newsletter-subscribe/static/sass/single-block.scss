@@ -1,22 +1,20 @@
-@use "../../../../../static/sass/frontend/common-frontend/functions";
-
-.ct-newsletter-subscribe-container {
+.ct-newsletter-subscribe-block {
 	margin-top: 60px;
-	padding: var(--padding, 30px);
-	color: var(--text-color, var(--theme-text-color));
-	border-radius: var(--theme-border-radius, 0px);
+	text-align: center;
 	border: var(--newsletter-container-border, none);
-	box-shadow: var(--theme-box-shadow);
+	border-radius: var(--border-radius, 0px);
+	--linkInitialColor: var(--color);
 
 	h3 {
 		font-size: 20px;
 	}
 
 	> * {
-		text-align: center;
-		margin-inline: auto;
+		// max-width: 550px;
+		margin-left: auto;
+		margin-right: auto;
 
-		@include functions.media-breakpoint-up(md) {
+		@include media-breakpoint-up(md) {
 			width: 80%;
 		}
 

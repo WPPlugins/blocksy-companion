@@ -199,4 +199,4 @@ var saveAs =
 				}
 		  }
 
-export default saveAs
+module.exports = saveAs

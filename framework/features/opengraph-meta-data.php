@@ -2,10 +2,6 @@
 
 namespace Blocksy;
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 class OpenGraphMetaData {
 	public function __construct() {
 		add_filter(
@@ -13,11 +9,14 @@ class OpenGraphMetaData {
 			function ($opts) {
 
 				$opts[] = [
+					blocksy_rand_md5() => [
+						'type' => 'ct-divider',
+					],
+
 					'enable_opengraph' => [
 						'label' => __( 'OpenGraph Meta Data', 'blocksy-companion' ),
 						'type' => 'ct-switch',
 						'value' => 'no',
-						'divider' => 'top:full',
 						'desc' => __( 'Enable the OpenGraph rich meta data features for your website.', 'blocksy-companion' ),
 					],
 
@@ -41,7 +40,7 @@ class OpenGraphMetaData {
 							],
 
 							'opengraph_twitter_username' => [
-								'label' => __( 'X (Twitter) Username', 'blocksy-companion' ),
+								'label' => __( 'Twitter Username', 'blocksy-companion' ),
 								'type' => 'text',
 								'design' => 'inline',
 								'value' => ''
@@ -67,11 +66,11 @@ class OpenGraphMetaData {
 			return;
 		}
 
-		if (blocksy_companion_theme_functions()->blocksy_get_theme_mod('enable_opengraph', 'no') !== 'yes') {
+		if (get_theme_mod('enable_opengraph', 'no') !== 'yes') {
 			return;
 		}
 
-		$facebook_url = blocksy_companion_theme_functions()->blocksy_get_theme_mod('opengraph_facebook_page_url', '');
+		$facebook_url = get_theme_mod('opengraph_facebook_page_url', '');
 
 		add_filter('jetpack_disable_twitter_cards', '__return_true', 999999);
 		add_filter('jetpack_enable_open_graph', '__return_false', 999999);
@@ -92,13 +91,11 @@ class OpenGraphMetaData {
 			$title = get_the_archive_title();
 		}
 
-		$title = wp_strip_all_tags($title);
-
 		// Description
 		if (is_category() || is_tag() || is_tax()) {
 			$description = wp_strip_all_tags(term_description());
 		} else if (is_singular()) {
-			$description = wp_strip_all_tags(get_the_excerpt());
+			$description = wp_strip_all_tags(blocksy_entry_excerpt(40));
 		}
 
 		// Image
@@ -138,9 +135,9 @@ class OpenGraphMetaData {
 			$publisher = $facebook_url;
 		}
 
-		$fb_app_id = blocksy_companion_theme_functions()->blocksy_get_theme_mod('opengraph_facebook_app_id', '');
+		$fb_app_id = get_theme_mod('opengraph_facebook_app_id', '');
 
-		$twitter_handle = '@' . str_replace('@', '', blocksy_companion_theme_functions()->blocksy_get_theme_mod('opengraph_twitter_username'));
+		$twitter_handle = '@' . str_replace('@', '', get_theme_mod('opengraph_twitter_username'));
 
 		$output = $this->get_open_graph_tag('property', 'og:type', trim($type));
 		$output .= $this->get_open_graph_tag('property', 'og:title', trim($title));
@@ -212,12 +209,11 @@ class OpenGraphMetaData {
 			$output .= $this->get_open_graph_tag('name', 'twitter:creator', trim($twitter_handle));
 		}
 
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $output;
 	}
 
 	private function get_open_graph_tag($attr, $property, $content) {
-		return blocksy_companion_html_tag(
+		return blocksy_html_tag(
 			'meta',
 			[
 				$attr => $property,

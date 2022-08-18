@@ -1,5 +1,4 @@
 import { setTransparencyFor } from '../sticky'
-import { whenTransitionEnds } from '../../helpers/when-transition-ends'
 
 export const computeFadeSlide = ({
 	stickyContainer,
@@ -15,16 +14,17 @@ export const computeFadeSlide = ({
 			].join(':')
 
 			setTimeout(() => {
-				stickyContainer.dataset.sticky =
-					stickyContainer.dataset.sticky.replace(
-						'yes-start',
-						'yes-end'
-					)
+				stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+					'yes-start',
+					'yes-end'
+				)
 
-				whenTransitionEnds(stickyContainer, () => {
-					stickyContainer.dataset.sticky =
-						stickyContainer.dataset.sticky.replace('yes-end', 'yes')
-				})
+				setTimeout(() => {
+					stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+						'yes-end',
+						'yes'
+					)
+				}, 200)
 			}, 1)
 		}
 
@@ -51,15 +51,15 @@ export const computeFadeSlide = ({
 				].join(':')
 
 				requestAnimationFrame(() => {
-					stickyContainer.dataset.sticky =
-						stickyContainer.dataset.sticky.replace(
-							'yes-hide-start',
-							'yes-hide-end'
-						)
+					stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
+						'yes-hide-start',
+						'yes-hide-end'
+					)
 
-					whenTransitionEnds(stickyContainer, () => {
-						stickyContainer.dataset.sticky =
-							stickyComponents.join(':')
+					setTimeout(() => {
+						stickyContainer.dataset.sticky = stickyComponents.join(
+							':'
+						)
 
 						setTimeout(() => {
 							Array.from(
@@ -68,7 +68,7 @@ export const computeFadeSlide = ({
 						}, 300)
 
 						setTransparencyFor(stickyContainer, 'yes')
-					})
+					}, 200)
 				})
 			}
 		}

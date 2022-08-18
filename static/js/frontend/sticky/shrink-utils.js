@@ -4,88 +4,9 @@ export const computeLinearScale = (domain, range, value) =>
 	range[0] +
 	((range[1] - range[0]) / (domain[1] - domain[0])) * (value - domain[0])
 
-export const getRowInitialMinHeight = (el) => {
+const getRowInitialMinHeight = (el) => {
 	const elComp = getComputedStyle(el)
-	let containerStyles = getComputedStyle(el.firstElementChild)
-
-	// If row is not visible, return 0
-	if (elComp.display === 'none') {
-		return 0
-	}
-
-	let borderHeight =
-		parseFloat(elComp.borderTopWidth) +
-		parseFloat(elComp.borderBottomWidth) +
-		parseFloat(containerStyles.borderTopWidth) +
-		parseFloat(containerStyles.borderBottomWidth)
-
-	let rowHeight = parseFloat(elComp.getPropertyValue('--height'))
-
-	if (el.querySelector('[data-items] > [data-id="logo"]')) {
-		const logoComp = getComputedStyle(
-			el.querySelector('[data-items] > [data-id="logo"]')
-		)
-
-		let logoHeight = parseFloat(logoComp.height)
-
-		let marginHeight =
-			parseFloat(logoComp.marginTop) + parseFloat(logoComp.marginBottom)
-
-		logoHeight = logoHeight + marginHeight
-
-		if (el.querySelector('.site-logo-container')) {
-			const logoImgComp = getComputedStyle(
-				el.querySelector('.site-logo-container')
-			)
-
-			let maybeShrink = parseFloat(
-				logoImgComp.getPropertyValue('--logo-shrink-height') || 0
-			)
-
-			if (maybeShrink > 0) {
-				logoHeight =
-					logoHeight -
-					maybeShrink +
-					parseFloat(
-						logoImgComp.getPropertyValue('--logo-max-height') || 50
-					)
-			}
-		}
-
-		if (logoHeight > rowHeight) {
-			rowHeight = logoHeight
-		}
-	}
-
-	const selectorsWithExpandedHeight = ['[data-items] > [data-id*="menu"]']
-
-	const selectors = [
-		'[data-items] > [data-id*="widget-area"]',
-		'[data-items] > [data-id*="content-block"]',
-		'[data-items] > [data-id*="text"]',
-
-		...selectorsWithExpandedHeight,
-	]
-
-	let maxHeight = selectors.reduce((acc, selector) => {
-		if (el.querySelector(selector)) {
-			const comp = getComputedStyle(el.querySelector(selector))
-
-			let height = parseFloat(comp.height)
-
-			if (height > acc) {
-				return height
-			}
-		}
-
-		return acc
-	}, 0)
-
-	if (maxHeight > rowHeight) {
-		rowHeight = maxHeight
-	}
-
-	return rowHeight + borderHeight
+	return parseFloat(elComp.getPropertyValue('--height'))
 }
 
 export const getRowInitialHeight = (el) => {
@@ -106,7 +27,7 @@ export const getRowInitialHeight = (el) => {
 	return initialHeight
 }
 
-export const getRowStickyHeight = (el, hasBorder = true) => {
+export const getRowStickyHeight = (el) => {
 	if (el.blcStickyHeight) {
 		return el.blcStickyHeight
 	}
@@ -123,31 +44,11 @@ export const getRowStickyHeight = (el, hasBorder = true) => {
 			parseFloat(containerStyles.borderTopWidth) +
 			parseFloat(containerStyles.borderBottomWidth)
 
-		if (!hasBorder) {
-			borderHeight = 0
-		}
-
 		let stickyHeight = el.getBoundingClientRect().height - borderHeight
 
-		const rowInitialMinHeight = getRowInitialMinHeight(el)
-
-		const hasLogoWithShrink =
-			el.querySelector('.site-logo-container') &&
-			parseFloat(
-				getComputedStyle(
-					el.querySelector('.site-logo-container')
-				).getPropertyValue('--logo-sticky-shrink') || 1
-			) < 1
-
-		if (!hasLogoWithShrink) {
-			if (
-				Math.round(stickyHeight) !== Math.round(rowStickyHeight) ||
-				// case when content is forcing the initial height to be bigger
-				Math.round(rowStickyHeight) > Math.round(rowInitialMinHeight)
-			) {
-				el.blcStickyHeight = el.getBoundingClientRect().height
-				return stickyHeight
-			}
+		if (stickyHeight !== rowStickyHeight) {
+			el.blcStickyHeight = el.getBoundingClientRect().height
+			return stickyHeight
 		}
 	}
 
@@ -196,18 +97,11 @@ export const getRowStickyHeight = (el, hasBorder = true) => {
 }
 
 export const maybeSetStickyHeightAnimated = (cb = () => 0) => {
-	const value = cb()
+	const maybeFloatingCart = document.querySelector('.ct-floating-bar')
 
-	document
-		.querySelectorAll(
-			[
-				'.ct-floating-bar',
-				'.ct-order-review',
-				'.sticky-summary .entry-summary',
-				'.sticky-gallery .woocommerce-product-gallery',
-			].join(',')
-		)
-		.forEach((el) => {
-			el.style.setProperty('--header-sticky-height-animated', value)
-		})
+	if (!maybeFloatingCart) {
+		return
+	}
+
+	maybeFloatingCart.style.setProperty('--header-sticky-height-animated', cb())
 }

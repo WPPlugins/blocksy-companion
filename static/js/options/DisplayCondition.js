@@ -5,7 +5,8 @@ import {
 	useState,
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
-import { Switch } from 'blocksy-options'
+import { Switch, Select } from 'blocksy-options'
+import cls from 'classnames'
 import ConditionsManager from './ConditionsManager'
 import { Overlay } from 'blocksy-options'
 
@@ -24,11 +25,6 @@ const DisplayCondition = ({
 			'Add one or more conditions to display the transparent header.',
 			'blocksy-companion'
 		),
-
-		addConditionButtonLabel = __(
-			'Add Display Condition',
-			'blocksy-companion'
-		),
 	},
 	value,
 	onChange,
@@ -42,7 +38,6 @@ const DisplayCondition = ({
 				filter={filter}
 				value={value}
 				onChange={onChange}
-				addConditionButtonLabel={addConditionButtonLabel}
 			/>
 		)
 	}
@@ -50,16 +45,14 @@ const DisplayCondition = ({
 	return (
 		<Fragment>
 			<button
-				className="ct-ui-button ct-ui-button-primary"
+				className="button-primary"
 				style={{ width: '100%' }}
 				onClick={(e) => {
 					e.preventDefault()
 					setIsEditing(true)
 					setLocalValue(null)
 				}}>
-				{Object.keys(value).length > 0
-					? __('Edit Conditions', 'blocksy-companion')
-					: __('Add Conditions', 'blocksy-companion')}
+				{__('Add/Edit Conditions', 'blocksy-companion')}
 			</button>
 
 			<Overlay
@@ -81,15 +74,12 @@ const DisplayCondition = ({
 								onChange={(value) => {
 									setLocalValue(value)
 								}}
-								addConditionButtonLabel={
-									addConditionButtonLabel
-								}
 							/>
 						</div>
 
 						<div className="ct-modal-actions has-divider">
 							<button
-								className="ct-ui-button ct-ui-button-primary"
+								className="button-primary"
 								disabled={!localValue}
 								onClick={() => {
 									onChange(localValue)

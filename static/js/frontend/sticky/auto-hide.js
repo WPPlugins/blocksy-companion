@@ -12,7 +12,7 @@ import { shrinkHandleMiddleRow } from './shrink-handle-middle-row'
 const getData = ({ stickyContainer }) => {
 	const stickyContainerHeight = [
 		...stickyContainer.querySelectorAll('[data-row]'),
-	].reduce((res, row) => res + getRowStickyHeight(row, false), 0)
+	].reduce((res, row) => res + getRowStickyHeight(row), 0)
 
 	return {
 		stickyContainerHeight,
@@ -126,18 +126,7 @@ export const computeAutoHide = (args) => {
 	}
 
 	maybeSetStickyHeightAnimated(() => {
-		const { stickyContainerHeight } = getData({ stickyContainer })
-
-		let finalOffset = clamp(
-			0,
-			stickyContainerHeight - Math.abs(offset),
-			stickyContainerHeight
-		)
-
-		if (stickyContainer.dataset.sticky.indexOf('yes') === -1) {
-			finalOffset = 0
-		}
-
-		return `${finalOffset}px`
+		let { stickyContainerHeight } = getData({ stickyContainer })
+		return `${stickyContainerHeight - Math.abs(offset)}px`
 	})
 }

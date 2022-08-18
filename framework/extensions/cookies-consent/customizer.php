@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $options = [
 	//  translators: This is a brand name. Preferably to not be translated
 	'title' => _x('Cookies Consent', 'Extension Brand Name', 'blocksy-companion'),
@@ -113,16 +109,15 @@ $options = [
 
 						blocksy_rand_md5() => [
 							'type' => 'ct-title',
-							'label' => __( 'Forms Cookies Content', 'blocksy-companion' ),
+							'label' => __( 'Forms Cookies Content', 'blocksy' ),
 						],
 
 						'forms_cookie_consent_content' => [
 							'label' => false,
 							'type' => 'wp-editor',
-							'value' => blocksy_companion_safe_sprintf(
-								// translators: %1$s and %2$s are HTML tags for a link.
-								__('I accept the %1$sPrivacy Policy%2$s*', 'blocksy-companion'),
-								'<a href="' . get_privacy_policy_url() . '">',
+							'value' => sprintf(
+								__('I accept the %sPrivacy Policy%s*', 'blocksy-companion'),
+								'<a href="/privacy-policy">',
 								'</a>'
 							),
 							'desc' => __( 'This text will appear under each comment form and subscribe form.', 'blocksy-companion' ),
@@ -168,13 +163,13 @@ $options = [
 								[
 									'title' => __( 'Initial', 'blocksy-companion' ),
 									'id' => 'default',
-									'inherit' => 'var(--theme-text-color)'
+									'inherit' => 'var(--color)'
 								],
 
 								[
 									'title' => __( 'Hover', 'blocksy-companion' ),
 									'id' => 'hover',
-									'inherit' => 'var(--theme-link-hover-color)'
+									'inherit' => 'var(--colorHover)'
 								],
 							],
 						],
@@ -187,7 +182,7 @@ $options = [
 
 							'value' => [
 								'default' => [
-									'color' => 'var(--theme-palette-color-8)',
+									'color' => '#ffffff',
 								],
 							],
 
@@ -201,7 +196,7 @@ $options = [
 
 						blocksy_rand_md5() => [
 							'type' => 'ct-title',
-							'label' => __( 'Accept Button', 'blocksy-companion' ),
+							'label' => __( 'Accept Button', 'blocksy' ),
 						],
 
 						'cookieButtonText' => [
@@ -224,13 +219,13 @@ $options = [
 								[
 									'title' => __( 'Initial', 'blocksy-companion' ),
 									'id' => 'default',
-									'inherit' => 'var(--theme-button-text-initial-color)',
+									'inherit' => 'var(--buttonTextInitialColor)',
 								],
 
 								[
 									'title' => __( 'Hover', 'blocksy-companion' ),
 									'id' => 'hover',
-									'inherit' => 'var(--theme-button-text-hover-color)',
+									'inherit' => 'var(--buttonTextHoverColor)',
 								],
 							],
 						],
@@ -255,20 +250,20 @@ $options = [
 								[
 									'title' => __( 'Initial', 'blocksy-companion' ),
 									'id' => 'default',
-									'inherit' => 'var(--theme-button-background-initial-color)'
+									'inherit' => 'var(--buttonInitialColor)'
 								],
 
 								[
 									'title' => __( 'Hover', 'blocksy-companion' ),
 									'id' => 'hover',
-									'inherit' => 'var(--theme-button-background-hover-color)'
+									'inherit' => 'var(--buttonHoverColor)'
 								],
 							],
 						],
 
 						blocksy_rand_md5() => [
 							'type' => 'ct-title',
-							'label' => __( 'Decline Button', 'blocksy-companion' ),
+							'label' => __( 'Decline Button', 'blocksy' ),
 						],
 
 						'cookieDeclineButtonText' => [
@@ -279,11 +274,11 @@ $options = [
 							'setting' => [ 'transport' => 'postMessage' ],
 							'value' => [
 								'default' => [
-									'color' => 'var(--theme-palette-color-3)',
+									'color' => 'var(--paletteColor3)',
 								],
 
 								'hover' => [
-									'color' => 'var(--theme-palette-color-3)',
+									'color' => 'var(--paletteColor3)',
 								],
 							],
 
