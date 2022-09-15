@@ -1,6 +1,6 @@
 import ctEvents from 'ct-events'
 import { formPreSubmitHook } from './account/hooks'
-import { resetCaptchaFor } from './account/captcha'
+import { resetCaptchaFor, reCreateCaptchaFor } from './account/captcha'
 
 const maybeAddLoadingState = (form) => {
 	const maybeButton = form.querySelector('[name*="submit"]')
@@ -62,6 +62,8 @@ export const activateScreen = (
 	if (maybeErrorContainer) {
 		maybeErrorContainer.remove()
 	}
+
+	reCreateCaptchaFor(el)
 }
 
 let actuallyInsertError = (container, errorHtml) => {
@@ -212,9 +214,8 @@ export const handleAccountModal = (el) => {
 							maybeCleanupLoadingState(maybeLogin)
 							let hasError = !!res.error
 
-							const container = maybeLogin.closest(
-								'.ct-login-form'
-							)
+							const container =
+								maybeLogin.closest('.ct-login-form')
 							const form = maybeLogin
 								.closest('.ct-login-form')
 								.querySelector('form')
@@ -345,9 +346,11 @@ export const handleAccountModal = (el) => {
 						)
 
 						if (!hasError) {
-							location = maybeLogin.querySelector(
-								'[name="redirect_to"]'
-							).value
+							setTimeout(() => {
+								location = maybeLogin.querySelector(
+									'[name="redirect_to"]'
+								).value
+							}, 2000)
 						}
 
 						if (

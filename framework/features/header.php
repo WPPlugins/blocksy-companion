@@ -567,7 +567,9 @@ class HeaderAdditions {
 	}
 
 	public function retrieve_account_modal() {
-		remove_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
+		if (function_exists('wc_lostpassword_url')) {
+			remove_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
+		}
 
 		$body = json_decode(file_get_contents('php://input'), true);
 
@@ -593,7 +595,9 @@ class HeaderAdditions {
 			]
 		);
 
-		add_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
+		if (function_exists('wc_lostpassword_url')) {
+			add_filter('lostpassword_url', 'wc_lostpassword_url', 10, 1);
+		}
 
 		return $html;
 	}

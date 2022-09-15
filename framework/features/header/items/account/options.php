@@ -18,7 +18,7 @@ if (class_exists('WooCommerce')) {
 	$logout_link_options['woocommerce_account'] = __('WooCommerce Account', 'blocksy-companion');
 }
 
-$is_pro = blc_fs()->can_use_premium_code();
+$is_pro = function_exists('blc_fs') && blc_fs()->can_use_premium_code();
 
 $options = [
 	blocksy_rand_md5() => [

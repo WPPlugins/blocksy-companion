@@ -7,7 +7,7 @@
  * @package   Blocksy
  */
 
-$is_pro = blc_fs()->can_use_premium_code();
+$is_pro = function_exists('blc_fs') && blc_fs()->can_use_premium_code();
 
 $options = [
 
@@ -74,21 +74,21 @@ $options = [
 							'value' => __('Address:', 'blocksy-companion'),
 							'design' => 'inline',
 						],
-	
+
 						'content' => [
 							'type' => 'text',
 							'label' => __('Content', 'blocksy-companion'),
 							'value' => 'Street Name, NY 38954',
 							'design' => 'inline',
 						],
-	
+
 						'link' => [
 							'type' => 'text',
 							'label' => __('Link (optional)', 'blocksy-companion'),
 							'design' => 'inline',
 						],
 					],
-					
+
 					$is_pro ? [
 						'icon_source' => [
 							'label' => __( 'Icon Source', 'blocksy' ),
@@ -102,7 +102,7 @@ $options = [
 								'custom' => __( 'Custom', 'blocksy' ),
 							],
 						],
-			
+
 						blocksy_rand_md5() => [
 							'type' => 'ct-condition',
 							'condition' => ['icon_source' => 'custom'],
@@ -135,14 +135,14 @@ $options = [
 							'value' => __('Phone:', 'blocksy-companion'),
 							'design' => 'inline',
 						],
-	
+
 						'content' => [
 							'type' => 'text',
 							'label' => __('Content', 'blocksy-companion'),
 							'value' => '578-393-4937',
 							'design' => 'inline',
 						],
-	
+
 						'link' => [
 							'type' => 'text',
 							'label' => __('Link (optional)', 'blocksy-companion'),
@@ -164,7 +164,7 @@ $options = [
 								'custom' => __( 'Custom', 'blocksy' ),
 							],
 						],
-			
+
 						blocksy_rand_md5() => [
 							'type' => 'ct-condition',
 							'condition' => ['icon_source' => 'custom'],
@@ -195,14 +195,14 @@ $options = [
 							'value' => __('Mobile:', 'blocksy-companion'),
 							'design' => 'inline',
 						],
-	
+
 						'content' => [
 							'type' => 'text',
 							'label' => __('Content', 'blocksy-companion'),
 							'value' => '578-393-4937',
 							'design' => 'inline',
 						],
-	
+
 						'link' => [
 							'type' => 'text',
 							'label' => __('Link (optional)', 'blocksy-companion'),
@@ -224,7 +224,7 @@ $options = [
 								'custom' => __( 'Custom', 'blocksy' ),
 							],
 						],
-			
+
 						blocksy_rand_md5() => [
 							'type' => 'ct-condition',
 							'condition' => ['icon_source' => 'custom'],
@@ -255,14 +255,14 @@ $options = [
 							'value' => __('Opening hours', 'blocksy-companion'),
 							'design' => 'inline',
 						],
-	
+
 						'content' => [
 							'type' => 'text',
 							'label' => __('Content', 'blocksy-companion'),
 							'value' => '9AM - 5PM',
 							'design' => 'inline',
 						],
-	
+
 						'link' => [
 							'type' => 'text',
 							'label' => __('Link (optional)', 'blocksy-companion'),
@@ -284,7 +284,7 @@ $options = [
 								'custom' => __( 'Custom', 'blocksy' ),
 							],
 						],
-			
+
 						blocksy_rand_md5() => [
 							'type' => 'ct-condition',
 							'condition' => ['icon_source' => 'custom'],
@@ -315,14 +315,14 @@ $options = [
 							'value' => __('Fax:', 'blocksy-companion'),
 							'design' => 'inline',
 						],
-	
+
 						'content' => [
 							'type' => 'text',
 							'label' => __('Content', 'blocksy-companion'),
 							'value' => '578-393-4937',
 							'design' => 'inline',
 						],
-	
+
 						'link' => [
 							'type' => 'text',
 							'label' => __('Link (optional)', 'blocksy-companion'),
@@ -344,7 +344,7 @@ $options = [
 								'custom' => __( 'Custom', 'blocksy' ),
 							],
 						],
-			
+
 						blocksy_rand_md5() => [
 							'type' => 'ct-condition',
 							'condition' => ['icon_source' => 'custom'],
@@ -375,14 +375,14 @@ $options = [
 							'value' => __('Email:', 'blocksy-companion'),
 							'design' => 'inline',
 						],
-	
+
 						'content' => [
 							'type' => 'text',
 							'label' => __('Content', 'blocksy-companion'),
 							'value' => 'contact@yourwebsite.com',
 							'design' => 'inline',
 						],
-	
+
 						'link' => [
 							'type' => 'text',
 							'label' => __('Link (optional)', 'blocksy-companion'),
@@ -404,7 +404,7 @@ $options = [
 								'custom' => __( 'Custom', 'blocksy' ),
 							],
 						],
-			
+
 						blocksy_rand_md5() => [
 							'type' => 'ct-condition',
 							'condition' => ['icon_source' => 'custom'],
@@ -435,14 +435,14 @@ $options = [
 							'value' => __('Website:', 'blocksy-companion'),
 							'design' => 'inline',
 						],
-	
+
 						'content' => [
 							'type' => 'text',
 							'label' => __('Content', 'blocksy-companion'),
 							'value' => 'creativethemes.com',
 							'design' => 'inline',
 						],
-	
+
 						'link' => [
 							'type' => 'text',
 							'label' => __('Link (optional)', 'blocksy-companion'),
@@ -450,7 +450,7 @@ $options = [
 							'design' => 'inline',
 						],
 					],
-					
+
 					$is_pro ? [
 						'icon_source' => [
 							'label' => __( 'Icon Source', 'blocksy' ),
@@ -464,7 +464,7 @@ $options = [
 								'custom' => __( 'Custom', 'blocksy' ),
 							],
 						],
-			
+
 						blocksy_rand_md5() => [
 							'type' => 'ct-condition',
 							'condition' => ['icon_source' => 'custom'],

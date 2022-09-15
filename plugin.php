@@ -101,7 +101,13 @@ class Plugin {
 			return;
 		}
 
-		if (blc_fs()->can_use_premium_code() && class_exists('Blocksy\Premium')) {
+		if (
+			function_exists('blc_fs')
+			&&
+			blc_fs()->can_use_premium_code()
+			&&
+			class_exists('Blocksy\Premium')
+		) {
 			$this->premium = new Premium();
 		}
 

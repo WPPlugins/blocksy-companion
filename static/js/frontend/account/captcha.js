@@ -78,3 +78,10 @@ export const resetCaptchaFor = (container) => {
 		}
 	)
 }
+
+export const reCreateCaptchaFor = (el) => {
+	;[...el.querySelectorAll('.g-recaptcha, .anr_captcha_field')].map((el) => {
+		el.innerHTML = ''
+		grecaptcha.render(el)
+	})
+}

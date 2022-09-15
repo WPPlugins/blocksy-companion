@@ -14,10 +14,6 @@
 	}
 }
 
-// .activate-license.blocksy-companion {
-// 	display: none !important;
-// }
-
 [data-slug='blocksy-companion'] {
 	.upgrade {
 		display: none;
@@ -26,4 +22,17 @@
 
 .fs-field-beta_program {
 	display: none;
+}
+
+#fs_account {
+
+	tr.fs-field-plan form.button-group {
+		.fs-change-plan {
+			display: none;
+		}
+
+		input.button {
+			border-radius: 3px;
+		}
+	}
 }

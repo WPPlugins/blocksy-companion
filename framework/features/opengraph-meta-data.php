@@ -91,6 +91,8 @@ class OpenGraphMetaData {
 			$title = get_the_archive_title();
 		}
 
+		$title = wp_strip_all_tags($title);
+
 		// Description
 		if (is_category() || is_tag() || is_tax()) {
 			$description = wp_strip_all_tags(term_description());

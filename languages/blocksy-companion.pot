@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-18 15:24+0000\n"
+"POT-Creation-Date: 2022-09-15 18:59+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -21,12 +21,12 @@ msgstr ""
 "x-generator: babel-plugin-wp-i18n\n"
 
 #. translators: %s: PHP version
-#: blocksy-companion.php:128
+#: blocksy-companion.php:159
 msgid "Blocksy requires PHP version %s+, plugin is currently NOT RUNNING."
 msgstr ""
 
 #. translators: %s: WordPress version
-#: blocksy-companion.php:139
+#: blocksy-companion.php:170
 msgid ""
 "Blocksy requires WordPress version %s+. Because you are using an earlier "
 "version, the plugin is currently NOT RUNNING."
@@ -188,7 +188,7 @@ msgstr ""
 msgid "Companion"
 msgstr ""
 
-#: framework/theme-integration.php:411 static/js/screens/SiteExport.js:111
+#: framework/theme-integration.php:413 static/js/screens/SiteExport.js:111
 msgid "PRO"
 msgstr ""
 
@@ -693,7 +693,7 @@ msgstr ""
 #: framework/extensions/newsletter-subscribe/customizer.php:147,
 #: framework/extensions/product-reviews/extension.php:383,
 #: framework/extensions/trending/customizer.php:333,
-#: framework/premium/extensions/mega-menu/options.php:516,
+#: framework/premium/extensions/mega-menu/options.php:526,
 #: framework/premium/extensions/shortcuts/customizer.php:778,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:81,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:31,
@@ -712,7 +712,7 @@ msgid "Design"
 msgstr ""
 
 #: framework/extensions/cookies-consent/customizer.php:147,
-#: framework/premium/extensions/mega-menu/options.php:615
+#: framework/premium/extensions/mega-menu/options.php:625
 msgid "Text Color"
 msgstr ""
 
@@ -729,9 +729,9 @@ msgstr ""
 #: framework/extensions/newsletter-subscribe/customizer.php:290,
 #: framework/extensions/newsletter-subscribe/customizer.php:322,
 #: framework/extensions/trending/customizer.php:366,
-#: framework/premium/extensions/mega-menu/options.php:772,
-#: framework/premium/extensions/mega-menu/options.php:819,
-#: framework/premium/extensions/mega-menu/options.php:838,
+#: framework/premium/extensions/mega-menu/options.php:782,
+#: framework/premium/extensions/mega-menu/options.php:829,
+#: framework/premium/extensions/mega-menu/options.php:848,
 #: framework/premium/extensions/shortcuts/customizer.php:812,
 #: framework/premium/extensions/shortcuts/customizer.php:844,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:99,
@@ -805,7 +805,7 @@ msgstr ""
 #: framework/extensions/newsletter-subscribe/customizer.php:196,
 #: framework/extensions/newsletter-subscribe/customizer.php:327,
 #: framework/extensions/trending/customizer.php:372,
-#: framework/premium/extensions/mega-menu/options.php:777,
+#: framework/premium/extensions/mega-menu/options.php:787,
 #: framework/premium/extensions/shortcuts/customizer.php:818,
 #: framework/premium/extensions/shortcuts/customizer.php:850,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:374,
@@ -844,7 +844,7 @@ msgstr ""
 #: framework/extensions/cookies-consent/customizer.php:178,
 #: framework/extensions/cookies-consent/customizer.php:234,
 #: framework/extensions/cookies-consent/customizer.php:299,
-#: framework/premium/extensions/mega-menu/options.php:826,
+#: framework/premium/extensions/mega-menu/options.php:836,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:425,
 #: framework/features/header/items/account/options.php:1247,
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-options.php:173,
@@ -856,7 +856,7 @@ msgstr ""
 #: framework/extensions/cookies-consent/customizer.php:203,
 #: framework/extensions/cookies-consent/customizer.php:270,
 #: framework/extensions/trending/customizer.php:348,
-#: framework/premium/extensions/mega-menu/options.php:806,
+#: framework/premium/extensions/mega-menu/options.php:816,
 #: framework/premium/extensions/shortcuts/customizer.php:794,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:86,
 #: framework/features/header/items/account/options.php:975,
@@ -1303,7 +1303,7 @@ msgstr ""
 #: framework/extensions/product-reviews/extension.php:405,
 #: framework/extensions/product-reviews/extension.php:433,
 #: framework/extensions/product-reviews/extension.php:454,
-#: framework/premium/extensions/mega-menu/options.php:782
+#: framework/premium/extensions/mega-menu/options.php:792
 msgid "Active"
 msgstr ""
 
@@ -1951,10 +1951,10 @@ msgid "Header Widget Area "
 msgstr ""
 
 #: framework/premium/features/premium-header.php:198,
-#: framework/premium/features/premium-header.php:274,
-#: framework/premium/features/premium-header.php:294,
-#: framework/premium/features/premium-header.php:333,
-#: framework/premium/features/premium-header.php:355,
+#: framework/premium/features/premium-header.php:279,
+#: framework/premium/features/premium-header.php:299,
+#: framework/premium/features/premium-header.php:338,
+#: framework/premium/features/premium-header.php:360,
 #: framework/premium/extensions/mega-menu/options.php:422,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:112,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:174,
@@ -1981,22 +1981,22 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: framework/premium/features/premium-header.php:212,
-#: framework/premium/extensions/mega-menu/options.php:436,
-#: framework/premium/extensions/woocommerce-extra/extension.php:381,
+#: framework/premium/features/premium-header.php:217,
+#: framework/premium/extensions/mega-menu/options.php:441,
+#: framework/premium/extensions/woocommerce-extra/extension.php:397,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:489,
 #: framework/extensions/widgets/widgets/ct-socials/options.php:92,
 #: framework/premium/features/premium-header/items/contacts/options.php:310
 msgid "Icons Size"
 msgstr ""
 
-#: framework/premium/features/premium-header.php:224,
-#: framework/premium/extensions/mega-menu/options.php:458
+#: framework/premium/features/premium-header.php:229,
+#: framework/premium/extensions/mega-menu/options.php:468
 msgid "Icon Position"
 msgstr ""
 
-#: framework/premium/features/premium-header.php:231,
-#: framework/premium/extensions/mega-menu/options.php:465,
+#: framework/premium/features/premium-header.php:236,
+#: framework/premium/extensions/mega-menu/options.php:475,
 #: framework/premium/extensions/shortcuts/customizer.php:659,
 #: framework/features/header/items/account/options.php:318,
 #: framework/features/header/items/account/options.php:615,
@@ -2004,8 +2004,8 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
-#: framework/premium/features/premium-header.php:232,
-#: framework/premium/extensions/mega-menu/options.php:466,
+#: framework/premium/features/premium-header.php:237,
+#: framework/premium/extensions/mega-menu/options.php:476,
 #: framework/premium/extensions/shortcuts/customizer.php:660,
 #: framework/features/header/items/account/options.php:319,
 #: framework/features/header/items/account/options.php:616,
@@ -2019,7 +2019,7 @@ msgid "Newsletter"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:30,
-#: framework/premium/extensions/mega-menu/options.php:493,
+#: framework/premium/extensions/mega-menu/options.php:503,
 #: framework/premium/extensions/shortcuts/customizer.php:889,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:24,
 #: framework/extensions/widgets/widgets/ct-quote/options.php:31,
@@ -2100,11 +2100,11 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: framework/features/header/modal/register.php:58
+#: framework/features/header/modal/register.php:59
 msgid "Registration confirmation will be emailed to you"
 msgstr ""
 
-#: framework/features/header/modal/register.php:63
+#: framework/features/header/modal/register.php:64
 msgid "Register"
 msgstr ""
 
@@ -2240,7 +2240,7 @@ msgid "New"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:16,
-#: framework/premium/extensions/mega-menu/options.php:530
+#: framework/premium/extensions/mega-menu/options.php:540
 msgid "Mega Menu Settings"
 msgstr ""
 
@@ -2297,7 +2297,7 @@ msgid "Create a new content Block/Hook"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:394,
-#: framework/premium/extensions/mega-menu/options.php:720
+#: framework/premium/extensions/mega-menu/options.php:730
 msgid "Item Label Settings"
 msgstr ""
 
@@ -2326,28 +2326,28 @@ msgstr ""
 msgid "Label Link"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:481,
-#: framework/premium/extensions/mega-menu/options.php:802
+#: framework/premium/extensions/mega-menu/options.php:491,
+#: framework/premium/extensions/mega-menu/options.php:812
 msgid "Menu Badge Settings"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:499,
+#: framework/premium/extensions/mega-menu/options.php:509,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:260
 msgid "Vertical Alignment"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:534,
+#: framework/premium/extensions/mega-menu/options.php:544,
 #: framework/premium/extensions/shortcuts/customizer.php:883,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:346,
 #: framework/features/header/items/account/options.php:1166
 msgid "Background"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:548
+#: framework/premium/extensions/mega-menu/options.php:558
 msgid "Link Color"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:568,
+#: framework/premium/extensions/mega-menu/options.php:578,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:144,
 #: framework/premium/features/premium-header/items/contacts/options.php:478,
 #: framework/premium/features/premium-header/items/contacts/options.php:520,
@@ -2355,54 +2355,54 @@ msgstr ""
 msgid "Link Initial"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:573
+#: framework/premium/extensions/mega-menu/options.php:583
 msgid "Link Hover/Active"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:578
+#: framework/premium/extensions/mega-menu/options.php:588
 msgid "Background Hover"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:586
+#: framework/premium/extensions/mega-menu/options.php:596
 msgid "Heading Font"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:595,
-#: framework/premium/extensions/mega-menu/options.php:729
+#: framework/premium/extensions/mega-menu/options.php:605,
+#: framework/premium/extensions/mega-menu/options.php:739
 msgid "Heading Color"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:607,
-#: framework/premium/extensions/mega-menu/options.php:627,
-#: framework/premium/extensions/mega-menu/options.php:741
+#: framework/premium/extensions/mega-menu/options.php:617,
+#: framework/premium/extensions/mega-menu/options.php:637,
+#: framework/premium/extensions/mega-menu/options.php:751
 msgid "Initial Color"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:634,
+#: framework/premium/extensions/mega-menu/options.php:644,
 #: framework/premium/extensions/shortcuts/customizer.php:900,
 #: framework/premium/features/premium-header/items/language-switcher/options.php:432,
 #: framework/premium/features/premium-header/items/search-input/options.php:836
 msgid "Items Divider"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:649
+#: framework/premium/extensions/mega-menu/options.php:659
 msgid "Columns Divider"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:664,
+#: framework/premium/extensions/mega-menu/options.php:674,
 #: framework/premium/features/premium-header/items/search-input/options.php:818
 msgid "Dropdown Shadow"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:696
+#: framework/premium/extensions/mega-menu/options.php:706
 msgid "Column Settings"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:700
+#: framework/premium/extensions/mega-menu/options.php:710
 msgid "Column Spacing"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:752,
+#: framework/premium/extensions/mega-menu/options.php:762,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:352,
 #: framework/features/header/items/account/options.php:827,
 #: framework/features/header/items/account/options.php:855,
@@ -2795,47 +2795,47 @@ msgstr ""
 msgid "Thumbnails Arrows Visibility"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:391
+#: framework/premium/extensions/woocommerce-extra/extension.php:407
 msgid "Icons Spacing"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:439
+#: framework/premium/extensions/woocommerce-extra/extension.php:455
 msgid "WooCommerce Offcanvas Filters"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:441
+#: framework/premium/extensions/woocommerce-extra/extension.php:457
 msgid "Add widgets here."
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:714
+#: framework/premium/extensions/woocommerce-extra/extension.php:734
 msgid "Available Filters"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:715
+#: framework/premium/extensions/woocommerce-extra/extension.php:735
 msgid "Close filters modal"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:808
+#: framework/premium/extensions/woocommerce-extra/extension.php:828
 msgid "Quick view title before"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:813
+#: framework/premium/extensions/woocommerce-extra/extension.php:833
 msgid "Quick view title after"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:818
+#: framework/premium/extensions/woocommerce-extra/extension.php:838
 msgid "Quick view price before"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:823
+#: framework/premium/extensions/woocommerce-extra/extension.php:843
 msgid "Quick view price after"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:828
+#: framework/premium/extensions/woocommerce-extra/extension.php:848
 msgid "Quick view summary before"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:833
+#: framework/premium/extensions/woocommerce-extra/extension.php:853
 msgid "Quick view summary after"
 msgstr ""
 
@@ -2870,15 +2870,15 @@ msgstr ""
 msgid "Go to product page"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/helpers.php:152
-msgid "Quick view toggle"
-msgstr ""
-
-#: framework/premium/extensions/woocommerce-extra/helpers.php:152
+#: framework/premium/extensions/woocommerce-extra/helpers.php:149
 msgid "Quick view icon"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/helpers.php:186
+#: framework/premium/extensions/woocommerce-extra/helpers.php:157
+msgid "Quick view toggle"
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/helpers.php:191
 msgid "Filter"
 msgstr ""
 
@@ -4452,7 +4452,7 @@ msgid "Accent Color"
 msgstr ""
 
 #: framework/premium/extensions/shortcuts/views/bar.php:49,
-#: framework/premium/extensions/woocommerce-extra/includes/wish-list.php:170
+#: framework/premium/extensions/woocommerce-extra/includes/wish-list.php:172
 msgid "Wish List"
 msgstr ""
 
@@ -5281,12 +5281,12 @@ msgid ""
 msgstr ""
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/AllFonts.js:117
-#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:256
+#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:271
 msgid "Upload Simple Font"
 msgstr ""
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/AllFonts.js:125
-#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:280
+#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:295
 msgid "Upload Variable Font"
 msgstr ""
 
@@ -5338,18 +5338,18 @@ msgid "Regular"
 msgstr ""
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:201
-#: framework/premium/static/js/typography/providers/kadence.js:70
+#: framework/premium/static/js/typography/providers/kadence.js:71
 msgid "Italic"
 msgstr ""
 
-#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:260
+#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:275
 msgid ""
 "Upload only the %s.woff2%s or %s.ttf%s font file formats (see browser "
 "coverage %shere%s). Use %sthis converter tool%s if you don't have these font "
 "formats."
 msgstr ""
 
-#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:284
+#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:299
 msgid ""
 "Upload only the %s.woff2%s or %s.ttf%s font file formats. Please don't "
 "convert non-woff variable fonts by yourself. Instead, just ask the font "
@@ -5357,19 +5357,19 @@ msgid ""
 "its capabilities."
 msgstr ""
 
-#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:310
+#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:325
 msgid "Font Name"
 msgstr ""
 
-#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:353
+#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:368
 msgid "Add/upload another font variation"
 msgstr ""
 
-#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:374
+#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:389
 msgid "Back to All Fonts"
 msgstr ""
 
-#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:399
+#: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:414
 msgid "Save Custom Font"
 msgstr ""
 
@@ -5797,15 +5797,15 @@ msgstr ""
 msgid "Attach MP4"
 msgstr ""
 
-#: framework/premium/static/js/options/IconPicker.js:134
+#: framework/premium/static/js/options/IconPicker.js:133
 msgid "Change Icon"
 msgstr ""
 
-#: framework/premium/static/js/options/IconPicker.js:151
+#: framework/premium/static/js/options/IconPicker.js:150
 msgid "Remove Icon"
 msgstr ""
 
-#: framework/premium/static/js/options/IconPicker.js:157
+#: framework/premium/static/js/options/IconPicker.js:156
 msgid "Select"
 msgstr ""
 
@@ -5869,22 +5869,22 @@ msgstr ""
 msgid "%s Local Google Fonts"
 msgstr ""
 
-#: framework/premium/static/js/typography/providers/kadence.js:25
+#: framework/premium/static/js/typography/providers/kadence.js:26
 #: framework/premium/static/js/typography/providers/plus-addons.js:27
 #: framework/premium/static/js/typography/providers/stackable.js:27
 msgid "%s Typekit"
 msgstr ""
 
-#: framework/premium/static/js/typography/providers/kadence.js:30
+#: framework/premium/static/js/typography/providers/kadence.js:31
 #: framework/premium/static/js/typography/providers/stackable.js:31
 msgid "%s Custom Fonts"
 msgstr ""
 
-#: framework/premium/static/js/typography/providers/kadence.js:58
+#: framework/premium/static/js/typography/providers/kadence.js:59
 msgid "Normal"
 msgstr ""
 
-#: framework/premium/static/js/typography/providers/kadence.js:82
+#: framework/premium/static/js/typography/providers/kadence.js:83
 msgid "Inherit"
 msgstr ""
 

@@ -45,13 +45,14 @@ if (
 	<?php } ?>
 
 	<?php
-		if (blc_fs()->can_use_premium_code()) {
+		if (function_exists('blc_fs') && blc_fs()->can_use_premium_code()) {
 			if (class_exists('NextendSocialLogin')) {
 				\NextendSocialLogin::addRegisterFormButtons();
 			}
 		}
 
-		do_action('register_form')
+		do_action('register_form');
+		do_action('woocommerce_register_form');
 	?>
 
 	<p id="reg_passmail">

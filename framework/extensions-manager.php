@@ -234,7 +234,7 @@ class ExtensionsManager {
 	}
 
 	private function register_fake_extensions() {
-		if (blc_fs()->can_use_premium_code()) {
+		if (function_exists('blc_fs') && blc_fs()->can_use_premium_code()) {
 			return;
 		}
 

@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.46
+Stable tag: 1.8.47
 
 == Description ==
 
@@ -23,6 +23,16 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.47: 2022-09-15
+- Improvement: Don't print html tags in OpenGraph output
+- Improvement: Account modal integration with German Market plugin
+- Improvement: Correctly add lostpassword_url action in account modal
+
+1.8.46: 2022-08-18
+- Improvement: Subscribe form small accessibility improvement
+- Improvement: More reliable integration between header account and Nextend Social Login plugin
+- Fix: Enabling header row sticky state border breaks the sticky state shrink
+
 1.8.45: 2022-08-04
 - Improvement: Widgets strings - better compatibility with translation plugins
 

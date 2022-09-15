@@ -399,6 +399,8 @@ class ThemeIntegration {
 					}
 
 					if (
+						function_exists('blc_fs')
+						&&
 						blc_fs()->can_use_premium_code()
 						&&
 						BLOCKSY_PATH . '/framework/premium/changelog.txt'

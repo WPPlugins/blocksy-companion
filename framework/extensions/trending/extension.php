@@ -59,7 +59,7 @@ class BlocksyExtensionTrending {
 		add_action('wp', function () {
 			$location = 'blocksy:template:after';
 
-			if (blc_fs()->can_use_premium_code()) {
+			if (function_exists('blc_fs') && blc_fs()->can_use_premium_code()) {
 				$location = get_theme_mod(
 					'trending_block_location',
 					'blocksy:content:bottom'
@@ -69,7 +69,7 @@ class BlocksyExtensionTrending {
 			add_action(
 				$location,
 				function () {
-					if (blc_fs()->can_use_premium_code()) {
+					if (function_exists('blc_fs') && blc_fs()->can_use_premium_code()) {
 						$conditions = get_theme_mod(
 							'trending_block_conditions',
 							[
