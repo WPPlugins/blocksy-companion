@@ -442,6 +442,10 @@ class ThemeIntegration {
 		add_action(
 			'customize_preview_init',
 			function () {
+				if (! function_exists('get_plugin_data')){
+					require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				}
+
 				$data = get_plugin_data(BLOCKSY__FILE__);
 
 				wp_enqueue_script(
