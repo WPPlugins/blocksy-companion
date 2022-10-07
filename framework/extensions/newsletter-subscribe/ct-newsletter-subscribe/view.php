@@ -101,10 +101,10 @@ echo $before_title . wp_kses_post($title) . $after_title;
 		<?php echo $skip_submit_output ?>>
 
 		<?php if ($has_name) { ?>
-			<input type="text" name="FNAME" placeholder="<?php esc_attr_e($name_label, 'blocksy-companion'); ?>" title="<?php echo __('Name', 'blocksy') ?>" />
+			<input type="text" name="FNAME" placeholder="<?php esc_attr_e($name_label, 'blocksy-companion'); ?>" title="<?php echo __('Name', 'blocksy') ?>">
 		<?php } ?>
 
-		<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($email_label, 'blocksy-companion'); ?> *" title="<?php echo __('Email', 'blocksy') ?>" required />
+		<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($email_label, 'blocksy-companion'); ?> *" title="<?php echo __('Email', 'blocksy') ?>" required>
 
 		<?php
 			if (function_exists('blocksy_ext_cookies_checkbox')) {

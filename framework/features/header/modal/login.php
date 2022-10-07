@@ -29,9 +29,10 @@ if (! $forgot_password_inline) {
 		<input type="text" name="log" id="user_login" class="input" value="" size="20">
 	</p>
 
-	<p class="login-password">
+	<p class="login-password-input">
 		<label for="user_pass"><?php echo __('Password', 'blocksy-companion') ?></label>
 		<input type="password" name="pwd" id="user_pass" class="input" value="" size="20">
+		<span class="show-password-input"></span>
 	</p>
 
 	<p class="login-remember col-2">

@@ -12,7 +12,7 @@ import { shrinkHandleMiddleRow } from './shrink-handle-middle-row'
 const getData = ({ stickyContainer }) => {
 	const stickyContainerHeight = [
 		...stickyContainer.querySelectorAll('[data-row]'),
-	].reduce((res, row) => res + getRowStickyHeight(row), 0)
+	].reduce((res, row) => res + getRowStickyHeight(row, false), 0)
 
 	return {
 		stickyContainerHeight,

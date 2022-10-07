@@ -183,6 +183,14 @@ export const handleAccountModal = (el) => {
 		},
 		true
 	)
+	;[...el.querySelectorAll('.show-password-input')].map((eye) => {
+		eye.addEventListener('click', (e) => {
+			eye.previousElementSibling.type =
+				eye.previousElementSibling.type === 'password'
+					? 'text'
+					: 'password'
+		})
+	})
 
 	if (maybeLogin) {
 		maybeLogin.addEventListener('submit', (e) => {

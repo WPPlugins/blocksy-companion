@@ -162,10 +162,10 @@ function blc_ext_newsletter_subscribe_output_form($args = []) {
 			<?php echo $skip_submit_output ?>>
 
 			<?php if ($has_name) { ?>
-				<input type="text" name="FNAME" placeholder="<?php esc_attr_e($args['name_label'], 'blocksy-companion'); ?>" aria-label="<?php echo __('First name', 'blocksy-companion') ?>" />
+				<input type="text" name="FNAME" placeholder="<?php esc_attr_e($args['name_label'], 'blocksy-companion'); ?>" aria-label="<?php echo __('First name', 'blocksy-companion') ?>">
 			<?php } ?>
 
-			<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($args['email_label'], 'blocksy-companion'); ?> *" aria-label="<?php echo __('Email address', 'blocksy-companion') ?>" required />
+			<input type="email" name="EMAIL" placeholder="<?php esc_attr_e($args['email_label'], 'blocksy-companion'); ?> *" aria-label="<?php echo __('Email address', 'blocksy-companion') ?>" required>
 
 			<?php
 				if (function_exists('blocksy_ext_cookies_checkbox')) {

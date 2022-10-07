@@ -38,9 +38,10 @@ if (
 	</p>
 
 	<?php if ($has_password) { ?>
-		<p>
+		<p class="register-password-input">
 			<label for="user_pass_register"><?php echo __('Password', 'blocksy-companion') ?></label>
 			<input type="password" name="user_pass" id="user_pass_register" class="input" value="" size="20" autocapitalize="off" autocomplete="new-password">
+			<span class="show-password-input"></span>
 		</p>
 	<?php } ?>
 
@@ -49,6 +50,13 @@ if (
 			if (class_exists('NextendSocialLogin')) {
 				\NextendSocialLogin::addRegisterFormButtons();
 			}
+		}
+
+		if (class_exists('LoginNocaptcha')) {
+			remove_action(
+				'woocommerce_register_form',
+				array('LoginNocaptcha', 'nocaptcha_form')
+			);
 		}
 
 		do_action('register_form');

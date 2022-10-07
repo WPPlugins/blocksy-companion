@@ -27,7 +27,7 @@ export const getRowInitialHeight = (el) => {
 	return initialHeight
 }
 
-export const getRowStickyHeight = (el) => {
+export const getRowStickyHeight = (el, hasBorder = true) => {
 	if (el.blcStickyHeight) {
 		return el.blcStickyHeight
 	}
@@ -43,6 +43,10 @@ export const getRowStickyHeight = (el) => {
 			parseFloat(styles.borderBottomWidth) +
 			parseFloat(containerStyles.borderTopWidth) +
 			parseFloat(containerStyles.borderBottomWidth)
+
+		if (!hasBorder) {
+			borderHeight = 0
+		}
 
 		let stickyHeight = el.getBoundingClientRect().height - borderHeight
 
