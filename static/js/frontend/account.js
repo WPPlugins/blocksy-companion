@@ -1,6 +1,7 @@
 import ctEvents from 'ct-events'
 import { formPreSubmitHook } from './account/hooks'
 import { resetCaptchaFor, reCreateCaptchaFor } from './account/captcha'
+import { mountPasswordStrength } from './account/password-strength'
 
 const maybeAddLoadingState = (form) => {
 	const maybeButton = form.querySelector('[name*="submit"]')
@@ -439,6 +440,12 @@ export const handleAccountModal = (el) => {
 					})
 			)
 		})
+
+		let maybePassField = maybeRegister.querySelector('#user_pass_register')
+
+		if (maybePassField) {
+			mountPasswordStrength(maybePassField)
+		}
 	}
 
 	if (maybeLostPassword) {

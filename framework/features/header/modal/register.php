@@ -21,7 +21,7 @@ if (
 
 ?>
 
-<form name="registerform" id="registerform" action="#" method="post" novalidate="novalidate">
+<form name="registerform" id="registerform" class="register" action="#" method="post" novalidate="novalidate">
 	<?php do_action('woocommerce_register_form_start') ?>
 	<?php do_action('blocksy:account:modal:register:start'); ?>
 
@@ -38,11 +38,19 @@ if (
 	</p>
 
 	<?php if ($has_password) { ?>
-		<p class="register-password-input">
+		<p>
 			<label for="user_pass_register"><?php echo __('Password', 'blocksy-companion') ?></label>
-			<input type="password" name="user_pass" id="user_pass_register" class="input" value="" size="20" autocapitalize="off" autocomplete="new-password">
-			<span class="show-password-input"></span>
+			<span class="account-password-input">
+				<input type="password" name="user_pass" id="user_pass_register" class="input" value="" size="20" autocapitalize="off" autocomplete="new-password">
+				<span class="show-password-input"></span>
+			</span>
 		</p>
+	<?php } ?>
+
+	<?php if (\Blocksy\Plugin::instance()->account_auth->has_woo_register_flow() && ! $has_password) { ?>
+	<p>
+		<?php echo __('A link to set a new password will be sent to your email address.', 'blocksy-companion') ?>
+	</p>
 	<?php } ?>
 
 	<?php
@@ -63,9 +71,11 @@ if (
 		do_action('woocommerce_register_form');
 	?>
 
+	<?php if (! \Blocksy\Plugin::instance()->account_auth->has_woo_register_flow()) { ?>
 	<p id="reg_passmail">
-		<?php echo __('Registration confirmation will be emailed to you', 'blocksy-companion') ?>
+		<?php echo __('Registration confirmation will be emailed to you.', 'blocksy-companion') ?>
 	</p>
+	<?php } ?>
 
 	<p>
 		<button name="wp-submit" class="ct-button">
