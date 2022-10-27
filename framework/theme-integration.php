@@ -48,7 +48,7 @@ class ThemeIntegration {
 									'Please enter a stronger password.',
 									'woocommerce'
 								),
-								'i18n_password_hint' => esc_attr( wp_get_password_hint() ),
+								'i18n_password_hint' => addslashes(wp_get_password_hint()),
 							]
 						],
 

@@ -423,6 +423,21 @@ export const handleAccountModal = (el) => {
 							}`
 						)
 
+						if (!hasError) {
+							if (
+								maybeRegister.querySelector(
+									'[name="redirect_to"]'
+								) &&
+								maybeRegister.querySelector(
+									'[name="role"][value="seller"]:checked'
+								)
+							) {
+								location = maybeRegister.querySelector(
+									'[name="redirect_to"]'
+								).value
+							}
+						}
+
 						if (
 							!hasError ||
 							(hasError &&
