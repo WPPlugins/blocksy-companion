@@ -1,4 +1,9 @@
 .blocksy-fs-optin-dashboard {
+	background: #fff;
+
+	#wpcontent {
+		padding-inline-start: 0;
+	}
 
 	#wpbody-content {
 		height: 100vh;
@@ -244,6 +249,25 @@
 
 		.fs-terms {
 			display: none;
+		}
+	}
+}
+
+
+// multisite
+.multisite.blocksy-fs-optin-dashboard {
+
+	#fs_connect {
+
+		.fs-multisite-options-container {
+			margin-top: 15px;
+		}
+
+		#delegate_to_site_admins {
+			height: 49px;
+			line-height: 49px;
+			font-weight: 500;
+			border: none;
 		}
 	}
 }

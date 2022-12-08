@@ -34,12 +34,12 @@ msgid ""
 "version, the plugin is currently NOT RUNNING."
 msgstr ""
 
-#: framework/dashboard.php:272, framework/dashboard.php:273,
+#: framework/dashboard.php:276, framework/dashboard.php:277,
 #: framework/extensions/product-reviews/extension.php:619
 msgid "Blocksy"
 msgstr ""
 
-#: framework/dashboard.php:310
+#: framework/dashboard.php:322
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
@@ -76,7 +76,7 @@ msgid ""
 msgstr ""
 
 #: framework/extensions-manager.php:281,
-#: framework/premium/extensions/local-google-fonts/extension.php:188
+#: framework/premium/extensions/local-google-fonts/extension.php:225
 msgid "Local Google Fonts"
 msgstr ""
 
@@ -566,7 +566,7 @@ msgstr ""
 #: framework/extensions/product-reviews/metabox.php:6,
 #: framework/extensions/trending/customizer.php:110,
 #: framework/premium/extensions/mega-menu/options.php:6,
-#: framework/premium/extensions/shortcuts/customizer.php:534,
+#: framework/premium/extensions/shortcuts/customizer.php:537,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:11,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:164,
 #: framework/features/header/items/account/options.php:70,
@@ -584,7 +584,7 @@ msgid "General"
 msgstr ""
 
 #: framework/extensions/cookies-consent/customizer.php:28,
-#: framework/premium/extensions/shortcuts/customizer.php:546,
+#: framework/premium/extensions/shortcuts/customizer.php:549,
 #: framework/premium/extensions/woocommerce-extra/extension.php:81,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:186,
 #: framework/features/header/items/account/options.php:225,
@@ -596,7 +596,7 @@ msgid "Type 1"
 msgstr ""
 
 #: framework/extensions/cookies-consent/customizer.php:33,
-#: framework/premium/extensions/shortcuts/customizer.php:551,
+#: framework/premium/extensions/shortcuts/customizer.php:554,
 #: framework/premium/extensions/woocommerce-extra/extension.php:86,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:191,
 #: framework/features/header/items/account/options.php:230,
@@ -666,7 +666,7 @@ msgid "Content"
 msgstr ""
 
 #: framework/extensions/cookies-consent/customizer.php:64,
-#: framework/extensions/cookies-consent/helpers.php:30
+#: framework/extensions/cookies-consent/helpers.php:15
 msgid ""
 "We use cookies to ensure that we give you the best experience on our website."
 msgstr ""
@@ -676,7 +676,7 @@ msgid "Accept Button text"
 msgstr ""
 
 #: framework/extensions/cookies-consent/customizer.php:80,
-#: framework/extensions/cookies-consent/helpers.php:33
+#: framework/extensions/cookies-consent/helpers.php:18
 msgid "Accept"
 msgstr ""
 
@@ -685,7 +685,7 @@ msgid "Decline Button text"
 msgstr ""
 
 #: framework/extensions/cookies-consent/customizer.php:88,
-#: framework/extensions/cookies-consent/helpers.php:34
+#: framework/extensions/cookies-consent/helpers.php:19
 msgid "Decline"
 msgstr ""
 
@@ -702,11 +702,11 @@ msgid "This text will appear under each comment form and subscribe form."
 msgstr ""
 
 #: framework/extensions/cookies-consent/customizer.php:142,
-#: framework/extensions/newsletter-subscribe/customizer.php:147,
+#: framework/extensions/newsletter-subscribe/customizer.php:149,
 #: framework/extensions/product-reviews/extension.php:422,
 #: framework/extensions/trending/customizer.php:333,
 #: framework/premium/extensions/mega-menu/options.php:526,
-#: framework/premium/extensions/shortcuts/customizer.php:778,
+#: framework/premium/extensions/shortcuts/customizer.php:781,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:81,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:31,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:279,
@@ -734,18 +734,18 @@ msgstr ""
 #: framework/extensions/cookies-consent/customizer.php:251,
 #: framework/extensions/cookies-consent/customizer.php:287,
 #: framework/extensions/cookies-consent/customizer.php:316,
-#: framework/extensions/newsletter-subscribe/customizer.php:165,
-#: framework/extensions/newsletter-subscribe/customizer.php:190,
-#: framework/extensions/newsletter-subscribe/customizer.php:222,
-#: framework/extensions/newsletter-subscribe/customizer.php:253,
-#: framework/extensions/newsletter-subscribe/customizer.php:290,
-#: framework/extensions/newsletter-subscribe/customizer.php:322,
+#: framework/extensions/newsletter-subscribe/customizer.php:167,
+#: framework/extensions/newsletter-subscribe/customizer.php:192,
+#: framework/extensions/newsletter-subscribe/customizer.php:224,
+#: framework/extensions/newsletter-subscribe/customizer.php:255,
+#: framework/extensions/newsletter-subscribe/customizer.php:292,
+#: framework/extensions/newsletter-subscribe/customizer.php:324,
 #: framework/extensions/trending/customizer.php:366,
 #: framework/premium/extensions/mega-menu/options.php:782,
 #: framework/premium/extensions/mega-menu/options.php:829,
 #: framework/premium/extensions/mega-menu/options.php:848,
-#: framework/premium/extensions/shortcuts/customizer.php:812,
-#: framework/premium/extensions/shortcuts/customizer.php:844,
+#: framework/premium/extensions/shortcuts/customizer.php:815,
+#: framework/premium/extensions/shortcuts/customizer.php:847,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:99,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:73,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:369,
@@ -814,12 +814,12 @@ msgstr ""
 #: framework/extensions/cookies-consent/customizer.php:257,
 #: framework/extensions/cookies-consent/customizer.php:292,
 #: framework/extensions/cookies-consent/customizer.php:321,
-#: framework/extensions/newsletter-subscribe/customizer.php:196,
-#: framework/extensions/newsletter-subscribe/customizer.php:327,
+#: framework/extensions/newsletter-subscribe/customizer.php:198,
+#: framework/extensions/newsletter-subscribe/customizer.php:329,
 #: framework/extensions/trending/customizer.php:372,
 #: framework/premium/extensions/mega-menu/options.php:787,
-#: framework/premium/extensions/shortcuts/customizer.php:818,
-#: framework/premium/extensions/shortcuts/customizer.php:850,
+#: framework/premium/extensions/shortcuts/customizer.php:821,
+#: framework/premium/extensions/shortcuts/customizer.php:853,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:374,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:409,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:448,
@@ -869,7 +869,7 @@ msgstr ""
 #: framework/extensions/cookies-consent/customizer.php:270,
 #: framework/extensions/trending/customizer.php:348,
 #: framework/premium/extensions/mega-menu/options.php:816,
-#: framework/premium/extensions/shortcuts/customizer.php:794,
+#: framework/premium/extensions/shortcuts/customizer.php:797,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:86,
 #: framework/features/header/items/account/options.php:991,
 #: framework/premium/extensions/post-types-extra/includes/filtering/customizer.php:184,
@@ -888,7 +888,7 @@ msgstr ""
 msgid "Font Color"
 msgstr ""
 
-#: framework/extensions/cookies-consent/helpers.php:79
+#: framework/extensions/cookies-consent/helpers.php:64
 msgid "I accept the %sPrivacy Policy%s"
 msgstr ""
 
@@ -960,8 +960,8 @@ msgid "Title"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/customizer.php:21,
-#: framework/extensions/newsletter-subscribe/helpers.php:42,
-#: framework/extensions/newsletter-subscribe/helpers.php:96
+#: framework/extensions/newsletter-subscribe/helpers.php:24,
+#: framework/extensions/newsletter-subscribe/helpers.php:74
 msgid "Newsletter Updates"
 msgstr ""
 
@@ -971,8 +971,8 @@ msgid "Description"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/customizer.php:29,
-#: framework/extensions/newsletter-subscribe/helpers.php:45,
-#: framework/extensions/newsletter-subscribe/helpers.php:97,
+#: framework/extensions/newsletter-subscribe/helpers.php:27,
+#: framework/extensions/newsletter-subscribe/helpers.php:75,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:33,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:16
 msgid "Enter your email address below to subscribe to our newsletter"
@@ -1014,58 +1014,58 @@ msgstr ""
 msgid "Name Field"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:93,
+#: framework/extensions/newsletter-subscribe/customizer.php:95,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:88
 msgid "Name Label"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:95,
+#: framework/extensions/newsletter-subscribe/customizer.php:97,
 #: framework/extensions/newsletter-subscribe/extension.php:180,
-#: framework/extensions/newsletter-subscribe/helpers.php:57,
-#: framework/extensions/newsletter-subscribe/helpers.php:108,
+#: framework/extensions/newsletter-subscribe/helpers.php:39,
+#: framework/extensions/newsletter-subscribe/helpers.php:86,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:90,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:69
 msgid "Your name"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:105,
+#: framework/extensions/newsletter-subscribe/customizer.php:107,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:99
 msgid "Mail Label"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:107,
+#: framework/extensions/newsletter-subscribe/customizer.php:109,
 #: framework/extensions/newsletter-subscribe/extension.php:181,
-#: framework/extensions/newsletter-subscribe/helpers.php:61,
-#: framework/extensions/newsletter-subscribe/helpers.php:109,
+#: framework/extensions/newsletter-subscribe/helpers.php:43,
+#: framework/extensions/newsletter-subscribe/helpers.php:87,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:101,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:70
 msgid "Your email"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:114,
+#: framework/extensions/newsletter-subscribe/customizer.php:116,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:107
 msgid "Button Label"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:116,
+#: framework/extensions/newsletter-subscribe/customizer.php:118,
 #: framework/extensions/newsletter-subscribe/extension.php:175,
-#: framework/extensions/newsletter-subscribe/helpers.php:52,
-#: framework/extensions/newsletter-subscribe/helpers.php:101,
+#: framework/extensions/newsletter-subscribe/helpers.php:34,
+#: framework/extensions/newsletter-subscribe/helpers.php:79,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:109,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:19
 msgid "Subscribe"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:126,
+#: framework/extensions/newsletter-subscribe/customizer.php:128,
 #: framework/premium/extensions/shortcuts/customizer.php:45,
 #: framework/premium/extensions/shortcuts/customizer.php:107,
 #: framework/premium/extensions/shortcuts/customizer.php:169,
 #: framework/premium/extensions/shortcuts/customizer.php:225,
-#: framework/premium/extensions/shortcuts/customizer.php:312,
-#: framework/premium/extensions/shortcuts/customizer.php:371,
-#: framework/premium/extensions/shortcuts/customizer.php:427,
-#: framework/premium/extensions/shortcuts/customizer.php:483,
-#: framework/premium/extensions/shortcuts/customizer.php:742,
+#: framework/premium/extensions/shortcuts/customizer.php:315,
+#: framework/premium/extensions/shortcuts/customizer.php:374,
+#: framework/premium/extensions/shortcuts/customizer.php:430,
+#: framework/premium/extensions/shortcuts/customizer.php:486,
+#: framework/premium/extensions/shortcuts/customizer.php:745,
 #: framework/premium/features/content-blocks/options/404.php:146,
 #: framework/premium/features/content-blocks/options/header.php:166,
 #: framework/premium/features/content-blocks/options/hook.php:343,
@@ -1075,7 +1075,7 @@ msgstr ""
 msgid "Visibility"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:137,
+#: framework/extensions/newsletter-subscribe/customizer.php:139,
 #: framework/extensions/trending/customizer.php:279,
 #: framework/features/header/header-options.php:103,
 #: framework/features/header/header-options.php:185,
@@ -1083,12 +1083,12 @@ msgstr ""
 #: framework/premium/extensions/shortcuts/customizer.php:121,
 #: framework/premium/extensions/shortcuts/customizer.php:183,
 #: framework/premium/extensions/shortcuts/customizer.php:239,
-#: framework/premium/extensions/shortcuts/customizer.php:327,
-#: framework/premium/extensions/shortcuts/customizer.php:385,
-#: framework/premium/extensions/shortcuts/customizer.php:441,
-#: framework/premium/extensions/shortcuts/customizer.php:497,
-#: framework/premium/extensions/shortcuts/customizer.php:634,
-#: framework/premium/extensions/shortcuts/customizer.php:756,
+#: framework/premium/extensions/shortcuts/customizer.php:330,
+#: framework/premium/extensions/shortcuts/customizer.php:388,
+#: framework/premium/extensions/shortcuts/customizer.php:444,
+#: framework/premium/extensions/shortcuts/customizer.php:500,
+#: framework/premium/extensions/shortcuts/customizer.php:637,
+#: framework/premium/extensions/shortcuts/customizer.php:759,
 #: framework/premium/extensions/woocommerce-extra/extension.php:176,
 #: framework/premium/extensions/woocommerce-extra/extension.php:197,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:47,
@@ -1106,18 +1106,18 @@ msgstr ""
 msgid "Desktop"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:138,
+#: framework/extensions/newsletter-subscribe/customizer.php:140,
 #: framework/extensions/trending/customizer.php:280,
 #: framework/premium/extensions/shortcuts/customizer.php:60,
 #: framework/premium/extensions/shortcuts/customizer.php:122,
 #: framework/premium/extensions/shortcuts/customizer.php:184,
 #: framework/premium/extensions/shortcuts/customizer.php:240,
-#: framework/premium/extensions/shortcuts/customizer.php:328,
-#: framework/premium/extensions/shortcuts/customizer.php:386,
-#: framework/premium/extensions/shortcuts/customizer.php:442,
-#: framework/premium/extensions/shortcuts/customizer.php:498,
-#: framework/premium/extensions/shortcuts/customizer.php:635,
-#: framework/premium/extensions/shortcuts/customizer.php:757,
+#: framework/premium/extensions/shortcuts/customizer.php:331,
+#: framework/premium/extensions/shortcuts/customizer.php:389,
+#: framework/premium/extensions/shortcuts/customizer.php:445,
+#: framework/premium/extensions/shortcuts/customizer.php:501,
+#: framework/premium/extensions/shortcuts/customizer.php:638,
+#: framework/premium/extensions/shortcuts/customizer.php:760,
 #: framework/premium/extensions/woocommerce-extra/extension.php:177,
 #: framework/premium/extensions/woocommerce-extra/extension.php:198,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:48,
@@ -1136,7 +1136,7 @@ msgstr ""
 msgid "Tablet"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:139,
+#: framework/extensions/newsletter-subscribe/customizer.php:141,
 #: framework/extensions/trending/customizer.php:281,
 #: framework/features/header/header-options.php:105,
 #: framework/features/header/header-options.php:187,
@@ -1144,12 +1144,12 @@ msgstr ""
 #: framework/premium/extensions/shortcuts/customizer.php:123,
 #: framework/premium/extensions/shortcuts/customizer.php:185,
 #: framework/premium/extensions/shortcuts/customizer.php:241,
-#: framework/premium/extensions/shortcuts/customizer.php:329,
-#: framework/premium/extensions/shortcuts/customizer.php:387,
-#: framework/premium/extensions/shortcuts/customizer.php:443,
-#: framework/premium/extensions/shortcuts/customizer.php:499,
-#: framework/premium/extensions/shortcuts/customizer.php:636,
-#: framework/premium/extensions/shortcuts/customizer.php:758,
+#: framework/premium/extensions/shortcuts/customizer.php:332,
+#: framework/premium/extensions/shortcuts/customizer.php:390,
+#: framework/premium/extensions/shortcuts/customizer.php:446,
+#: framework/premium/extensions/shortcuts/customizer.php:502,
+#: framework/premium/extensions/shortcuts/customizer.php:639,
+#: framework/premium/extensions/shortcuts/customizer.php:761,
 #: framework/premium/extensions/woocommerce-extra/extension.php:178,
 #: framework/premium/extensions/woocommerce-extra/extension.php:199,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:49,
@@ -1170,15 +1170,15 @@ msgstr ""
 msgid "Mobile"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:152
+#: framework/extensions/newsletter-subscribe/customizer.php:154
 msgid "Title Color"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:173
+#: framework/extensions/newsletter-subscribe/customizer.php:175
 msgid "Description Color"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:204,
+#: framework/extensions/newsletter-subscribe/customizer.php:206,
 #: framework/features/header/items/account/options.php:1023,
 #: framework/premium/features/premium-header/items/search-input/options.php:194,
 #: framework/premium/features/premium-header/items/search-input/options.php:223,
@@ -1187,9 +1187,9 @@ msgstr ""
 msgid "Input Font Color"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:228,
-#: framework/extensions/newsletter-subscribe/customizer.php:259,
-#: framework/extensions/newsletter-subscribe/customizer.php:295,
+#: framework/extensions/newsletter-subscribe/customizer.php:230,
+#: framework/extensions/newsletter-subscribe/customizer.php:261,
+#: framework/extensions/newsletter-subscribe/customizer.php:297,
 #: framework/features/header/items/account/options.php:1045,
 #: framework/features/header/items/account/options.php:1075,
 #: framework/features/header/items/account/options.php:1111,
@@ -1208,7 +1208,7 @@ msgstr ""
 msgid "Focus"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:236,
+#: framework/extensions/newsletter-subscribe/customizer.php:238,
 #: framework/features/header/items/account/options.php:1053,
 #: framework/premium/features/premium-header/items/search-input/options.php:454,
 #: framework/premium/features/premium-header/items/search-input/options.php:483,
@@ -1217,7 +1217,7 @@ msgstr ""
 msgid "Input Border Color"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:273,
+#: framework/extensions/newsletter-subscribe/customizer.php:275,
 #: framework/features/header/items/account/options.php:1089,
 #: framework/premium/features/premium-header/items/search-input/options.php:590,
 #: framework/premium/features/premium-header/items/search-input/options.php:618,
@@ -1226,28 +1226,28 @@ msgstr ""
 msgid "Input Background Color"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:305,
+#: framework/extensions/newsletter-subscribe/customizer.php:307,
 #: framework/premium/extensions/post-types-extra/includes/filtering/customizer.php:220
 msgid "Button Color"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:334,
+#: framework/extensions/newsletter-subscribe/customizer.php:336,
 #: framework/extensions/trending/customizer.php:380,
-#: framework/premium/extensions/shortcuts/customizer.php:953
+#: framework/premium/extensions/shortcuts/customizer.php:956
 msgid "Container Background"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:350
+#: framework/extensions/newsletter-subscribe/customizer.php:352
 msgid "Container Border"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:385,
+#: framework/extensions/newsletter-subscribe/customizer.php:387,
 #: framework/extensions/trending/customizer.php:396
 msgid "Container Inner Spacing"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/customizer.php:400,
-#: framework/premium/extensions/shortcuts/customizer.php:974
+#: framework/extensions/newsletter-subscribe/customizer.php:402,
+#: framework/premium/extensions/shortcuts/customizer.php:977
 msgid "Container Border Radius"
 msgstr ""
 
@@ -1255,11 +1255,11 @@ msgstr ""
 msgid "Disable Subscribe Form"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/helpers.php:165
+#: framework/extensions/newsletter-subscribe/helpers.php:143
 msgid "First name"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/helpers.php:168
+#: framework/extensions/newsletter-subscribe/helpers.php:146
 msgid "Email address"
 msgstr ""
 
@@ -1723,7 +1723,7 @@ msgstr ""
 
 #: framework/extensions/trending/customizer.php:312,
 #: framework/features/header/header-options.php:158,
-#: framework/premium/extensions/shortcuts/customizer.php:763,
+#: framework/premium/extensions/shortcuts/customizer.php:766,
 #: framework/premium/features/content-blocks/options/archive.php:186,
 #: framework/premium/features/content-blocks/options/header.php:142,
 #: framework/premium/features/content-blocks/options/hook.php:236,
@@ -2005,7 +2005,7 @@ msgstr ""
 
 #: framework/premium/features/premium-header.php:236,
 #: framework/premium/extensions/mega-menu/options.php:475,
-#: framework/premium/extensions/shortcuts/customizer.php:659,
+#: framework/premium/extensions/shortcuts/customizer.php:662,
 #: framework/features/header/items/account/options.php:318,
 #: framework/features/header/items/account/options.php:615,
 #: framework/premium/extensions/woocommerce-extra/header-items/wish-list/options.php:130
@@ -2014,7 +2014,7 @@ msgstr ""
 
 #: framework/premium/features/premium-header.php:237,
 #: framework/premium/extensions/mega-menu/options.php:476,
-#: framework/premium/extensions/shortcuts/customizer.php:660,
+#: framework/premium/extensions/shortcuts/customizer.php:663,
 #: framework/features/header/items/account/options.php:319,
 #: framework/features/header/items/account/options.php:616,
 #: framework/premium/extensions/woocommerce-extra/header-items/wish-list/options.php:131
@@ -2028,7 +2028,7 @@ msgstr ""
 
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:30,
 #: framework/premium/extensions/mega-menu/options.php:503,
-#: framework/premium/extensions/shortcuts/customizer.php:889,
+#: framework/premium/extensions/shortcuts/customizer.php:892,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:24,
 #: framework/extensions/widgets/widgets/ct-quote/options.php:31,
 #: framework/features/header/items/account/options.php:336
@@ -2342,7 +2342,7 @@ msgid "Label Link"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:441,
-#: framework/premium/extensions/shortcuts/customizer.php:672,
+#: framework/premium/extensions/shortcuts/customizer.php:675,
 #: framework/features/header/items/account/options.php:258,
 #: framework/features/header/items/account/options.php:499,
 #: framework/features/header/items/account/options.php:555,
@@ -2361,7 +2361,7 @@ msgid "Vertical Alignment"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:544,
-#: framework/premium/extensions/shortcuts/customizer.php:883,
+#: framework/premium/extensions/shortcuts/customizer.php:886,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:346,
 #: framework/features/header/items/account/options.php:1182
 msgid "Background"
@@ -2403,7 +2403,7 @@ msgid "Initial Color"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:644,
-#: framework/premium/extensions/shortcuts/customizer.php:900,
+#: framework/premium/extensions/shortcuts/customizer.php:903,
 #: framework/premium/features/premium-header/items/language-switcher/options.php:441,
 #: framework/premium/features/premium-header/items/search-input/options.php:836
 msgid "Items Divider"
@@ -2528,7 +2528,7 @@ msgstr ""
 #. translators: This is a brand name. Preferably to not be translated
 #. translators: This is a brand name. Preferably to not be translated
 #: framework/premium/extensions/shortcuts/config.php:5,
-#: framework/premium/extensions/shortcuts/customizer.php:524
+#: framework/premium/extensions/shortcuts/customizer.php:527
 msgctxt "Extension Brand Name"
 msgid "Shortcuts Bar"
 msgstr ""
@@ -2541,7 +2541,7 @@ msgstr ""
 
 #: framework/premium/extensions/shortcuts/customizer.php:12,
 #: framework/premium/extensions/shortcuts/customizer.php:35,
-#: framework/premium/extensions/shortcuts/customizer.php:563,
+#: framework/premium/extensions/shortcuts/customizer.php:566,
 #: framework/premium/extensions/shortcuts/views/bar.php:13,
 #: framework/premium/extensions/shortcuts/views/bar.php:43
 msgid "Home"
@@ -2549,7 +2549,7 @@ msgstr ""
 
 #: framework/premium/extensions/shortcuts/customizer.php:68,
 #: framework/premium/extensions/shortcuts/customizer.php:91,
-#: framework/premium/extensions/shortcuts/customizer.php:572,
+#: framework/premium/extensions/shortcuts/customizer.php:575,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:128,
 #: framework/premium/extensions/shortcuts/views/bar.php:22,
 #: framework/premium/extensions/shortcuts/views/bar.php:44,
@@ -2563,33 +2563,33 @@ msgstr ""
 msgid "Scroll Top"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:293,
+#: framework/premium/extensions/shortcuts/customizer.php:296,
 #: framework/extensions/widgets/widgets/ct-advertisement/options.php:83,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:539
 msgid "Open link in new tab"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:300
+#: framework/premium/extensions/shortcuts/customizer.php:303
 msgid "Set link to nofollow"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:306
+#: framework/premium/extensions/shortcuts/customizer.php:309
 msgid "Custom class"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:338,
-#: framework/premium/extensions/shortcuts/customizer.php:361,
+#: framework/premium/extensions/shortcuts/customizer.php:341,
+#: framework/premium/extensions/shortcuts/customizer.php:364,
 #: framework/premium/extensions/shortcuts/views/bar.php:47
 msgid "Cart"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:394,
-#: framework/premium/extensions/shortcuts/customizer.php:417
+#: framework/premium/extensions/shortcuts/customizer.php:397,
+#: framework/premium/extensions/shortcuts/customizer.php:420
 msgid "Shop"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:450,
-#: framework/premium/extensions/shortcuts/customizer.php:473,
+#: framework/premium/extensions/shortcuts/customizer.php:453,
+#: framework/premium/extensions/shortcuts/customizer.php:476,
 #: framework/premium/extensions/woocommerce-extra/readme.php:70,
 #: framework/premium/extensions/woocommerce-extra/header-items/wish-list/config.php:4,
 #: framework/premium/extensions/woocommerce-extra/header-items/wish-list/options.php:141,
@@ -2598,30 +2598,30 @@ msgstr ""
 msgid "Wishlist"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:538,
+#: framework/premium/extensions/shortcuts/customizer.php:541,
 #: framework/premium/features/content-blocks/admin-ui.php:196
 msgid "Type"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:557
+#: framework/premium/extensions/shortcuts/customizer.php:560
 msgid "Shortcuts"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:612,
+#: framework/premium/extensions/shortcuts/customizer.php:615,
 #: framework/features/header/items/account/options.php:275,
 #: framework/features/header/items/account/options.php:572,
 #: framework/premium/extensions/woocommerce-extra/header-items/wish-list/options.php:92
 msgid "Label Visibility"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:652,
+#: framework/premium/extensions/shortcuts/customizer.php:655,
 #: framework/features/header/items/account/options.php:311,
 #: framework/features/header/items/account/options.php:608,
 #: framework/premium/extensions/woocommerce-extra/header-items/wish-list/options.php:123
 msgid "Label Position"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:661,
+#: framework/premium/extensions/shortcuts/customizer.php:664,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:25,
 #: framework/premium/features/content-blocks/hooks-manager.php:445,
 #: framework/features/header/items/account/options.php:320,
@@ -2631,19 +2631,19 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:682
+#: framework/premium/extensions/shortcuts/customizer.php:685
 msgid "Container Height"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:697
+#: framework/premium/extensions/shortcuts/customizer.php:700
 msgid "Container Max Width"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:721
+#: framework/premium/extensions/shortcuts/customizer.php:724
 msgid "Scroll Interaction"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:726,
+#: framework/premium/extensions/shortcuts/customizer.php:729,
 #: framework/premium/features/content-blocks/admin-ui.php:225,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:510,
 #: framework/extensions/widgets/widgets/ct-socials/options.php:113,
@@ -2657,19 +2657,19 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:727
+#: framework/premium/extensions/shortcuts/customizer.php:730
 msgid "Hide"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:769
+#: framework/premium/extensions/shortcuts/customizer.php:772
 msgid "Shortcuts Bar Display Conditions"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:770
+#: framework/premium/extensions/shortcuts/customizer.php:773
 msgid "Add one or more conditions to display the shortcuts bar."
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:784,
+#: framework/premium/extensions/shortcuts/customizer.php:787,
 #: framework/premium/extensions/post-types-extra/includes/filtering/customizer.php:173,
 #: framework/premium/features/premium-header/items/contacts/options.php:410,
 #: framework/premium/features/premium-header/items/language-switcher/options.php:192,
@@ -2677,7 +2677,7 @@ msgstr ""
 msgid "Font"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:826,
+#: framework/premium/extensions/shortcuts/customizer.php:829,
 #: framework/premium/features/premium-header/items/contacts/options.php:590,
 #: framework/premium/features/premium-header/items/contacts/options.php:619,
 #: framework/premium/features/premium-header/items/contacts/options.php:650,
@@ -2685,15 +2685,15 @@ msgstr ""
 msgid "Icons Color"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:865
+#: framework/premium/extensions/shortcuts/customizer.php:868
 msgid "Cart Badge Color"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:920
+#: framework/premium/extensions/shortcuts/customizer.php:923
 msgid "Items Divider Height"
 msgstr ""
 
-#: framework/premium/extensions/shortcuts/customizer.php:934,
+#: framework/premium/extensions/shortcuts/customizer.php:937,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:123,
 #: framework/premium/features/content-blocks/options/popup.php:387,
 #: framework/premium/features/premium-header/items/language-switcher/options.php:455
@@ -4450,7 +4450,7 @@ msgstr ""
 msgid "Read Time"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/includes/estimated-read-time.php:126
+#: framework/premium/extensions/post-types-extra/includes/estimated-read-time.php:130
 msgid "%s min"
 msgid_plural "%s mins"
 msgstr[0] ""
