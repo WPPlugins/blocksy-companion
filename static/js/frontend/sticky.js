@@ -80,7 +80,7 @@ const getStartPositionFor = (stickyContainer) => {
 		stickyContainer.dataset.sticky.indexOf('shrink') === -1 &&
 		stickyContainer.dataset.sticky.indexOf('auto-hide') === -1
 	) {
-		return stickyContainer.parentNode.getBoundingClientRect().height + 200
+		// return stickyContainer.parentNode.getBoundingClientRect().height + 200
 	}
 
 	const headerRect = stickyContainer.closest('header').getBoundingClientRect()
@@ -102,6 +102,13 @@ const getStartPositionFor = (stickyContainer) => {
 				stickyOffset -= element.getBoundingClientRect().height
 			}
 		}
+	}
+
+	if (
+		stickyContainer.dataset.sticky.indexOf('shrink') === -1 &&
+		stickyContainer.dataset.sticky.indexOf('auto-hide') === -1
+	) {
+		stickyOffset += 200
 	}
 
 	const row = stickyContainer.parentNode
