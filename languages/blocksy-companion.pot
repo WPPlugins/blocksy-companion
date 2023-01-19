@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-01-11 17:05+0000\n"
+"POT-Creation-Date: 2023-01-19 17:17+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -131,73 +131,73 @@ msgid ""
 "a wishlits page."
 msgstr ""
 
-#: framework/theme-integration.php:369,
+#: framework/theme-integration.php:371,
 #: framework/extensions/widgets/widgets/ct-facebook/options.php:16,
 #: framework/extensions/widgets/widgets/ct-facebook/view.php:12,
 #: framework/extensions/widgets/widgets/ct-facebook/widget.php:13
 msgid "Facebook"
 msgstr ""
 
-#: framework/theme-integration.php:370
+#: framework/theme-integration.php:372
 msgid "Twitter"
 msgstr ""
 
-#: framework/theme-integration.php:371
+#: framework/theme-integration.php:373
 msgid "LinkedIn"
 msgstr ""
 
-#: framework/theme-integration.php:372
+#: framework/theme-integration.php:374
 msgid "Dribbble"
 msgstr ""
 
-#: framework/theme-integration.php:373
+#: framework/theme-integration.php:375
 msgid "Instagram"
 msgstr ""
 
-#: framework/theme-integration.php:374
+#: framework/theme-integration.php:376
 msgid "Pinterest"
 msgstr ""
 
-#: framework/theme-integration.php:375
+#: framework/theme-integration.php:377
 msgid "WordPress"
 msgstr ""
 
-#: framework/theme-integration.php:376
+#: framework/theme-integration.php:378
 msgid "GitHub"
 msgstr ""
 
-#: framework/theme-integration.php:377,
+#: framework/theme-integration.php:379,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:497,
 #: framework/extensions/widgets/widgets/ct-socials/options.php:100,
 #: framework/premium/features/content-blocks/options/archive.php:47
 msgid "Medium"
 msgstr ""
 
-#: framework/theme-integration.php:378
+#: framework/theme-integration.php:380
 msgid "YouTube"
 msgstr ""
 
-#: framework/theme-integration.php:379
+#: framework/theme-integration.php:381
 msgid "Vimeo"
 msgstr ""
 
-#: framework/theme-integration.php:380
+#: framework/theme-integration.php:382
 msgid "VKontakte"
 msgstr ""
 
-#: framework/theme-integration.php:381
+#: framework/theme-integration.php:383
 msgid "Odnoklassniki"
 msgstr ""
 
-#: framework/theme-integration.php:382
+#: framework/theme-integration.php:384
 msgid "TikTok"
 msgstr ""
 
-#: framework/theme-integration.php:454
+#: framework/theme-integration.php:456
 msgid "Companion"
 msgstr ""
 
-#: framework/theme-integration.php:472 static/js/screens/SiteExport.js:111
+#: framework/theme-integration.php:474 static/js/screens/SiteExport.js:111
 msgid "PRO"
 msgstr ""
 
@@ -1630,7 +1630,7 @@ msgid "Module Title"
 msgstr ""
 
 #: framework/extensions/trending/customizer.php:118,
-#: framework/extensions/trending/helpers.php:220
+#: framework/extensions/trending/helpers.php:222
 msgid "Trending now"
 msgstr ""
 

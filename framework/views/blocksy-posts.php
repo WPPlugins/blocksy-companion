@@ -19,6 +19,14 @@ $query_args = [
 	'ignore_sticky_posts' => $args['ignore_sticky_posts'] === 'yes'
 ];
 
+if (! empty($args['meta_value'])) {
+	$query_args['meta_value'] = $args['meta_value'];
+}
+
+if (! empty($args['meta_key'])) {
+	$query_args['meta_key'] = $args['meta_key'];
+}
+
 if ($args['has_pagination'] === 'yes') {
 	if (get_query_var('paged')) {
 		$query_args['paged'] = get_query_var('paged');
