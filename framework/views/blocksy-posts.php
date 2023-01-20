@@ -7,7 +7,7 @@ if (! function_exists('blocksy_render_archive_cards')) {
 $shortcode_class = 'ct-posts-shortcode';
 
 if (! empty($args['class'])) {
-	$shortcode_class .= ' ' . $args['class'];
+	$shortcode_class .= ' ' . esc_attr($args['class']);
 }
 
 $query_args = [
