@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.70-beta1
+Stable tag: 1.8.71-beta1
 
 == Description ==
 
@@ -23,6 +23,9 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.71: 2023-01-26
+- Improvement: General fixes and improvements
+
 1.8.70: 2023-01-26
 - Improvement: Smarter handling of login links in the account modal
 - Improvement: Small improvement for filter argument in posts shortcode
