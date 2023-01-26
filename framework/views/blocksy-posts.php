@@ -186,6 +186,8 @@ if ($args['view'] === 'slider') {
 	if (
 		$args['filtering']
 		&&
+		$args['filtering'] === 'yes'
+		&&
 		function_exists('blc_cpt_extra_filtering_output')
 	) {
 		blc_cpt_extra_filtering_output([
