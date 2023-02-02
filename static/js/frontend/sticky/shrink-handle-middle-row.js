@@ -39,10 +39,7 @@ export const shrinkHandleMiddleRow = ({
 		if (rowInitialHeight !== rowStickyHeight) {
 			let shrinkHeight = rowStickyHeight
 
-			if (
-				true ||
-				stickyContainer.dataset.sticky.indexOf('auto-hide') === -1
-			) {
+			if (true || stickyContainer.dataset.sticky.indexOf('auto-hide') === -1) {
 				shrinkHeight = computeLinearScale(
 					[
 						startPosition,
@@ -61,10 +58,7 @@ export const shrinkHandleMiddleRow = ({
 				)
 			}
 
-			row.style.setProperty(
-				'--shrink-height',
-				`${Math.round(shrinkHeight)}px`
-			)
+			row.style.setProperty('--shrink-height', `${shrinkHeight}px`)
 		}
 	})
 }
