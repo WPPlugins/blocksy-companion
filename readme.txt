@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.77
+Stable tag: 1.8.78
 
 == Description ==
 
@@ -23,6 +23,10 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.78: 2023-03-09
+- Improvement: Prefix XML parser class to not clash with other plugins
+- Improvement: Correctly extract SVG sizes in blocksy_image function
+
 1.8.77: 2023-03-02
 - Improvement: General fixes and improvements
 

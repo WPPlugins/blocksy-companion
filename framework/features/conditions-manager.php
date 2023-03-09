@@ -17,6 +17,11 @@ class ConditionsManager {
 			return false;
 		}
 
+		// Check if it looks like a normal rules array. If it doesn't -- bail out.
+		if (! isset($rules[0]) || ! isset($rules[0]['rule'])) {
+			return false;
+		}
+
 		$all_includes = array_filter($rules, function ($el) {
 			return $el['type'] === 'include';
 		});

@@ -1560,7 +1560,7 @@ msgstr "Цвет значка"
 
 #: framework/premium/extensions/post-types-extra/config.php:6
 msgid "Enables support for Custom Fields inside archive cards and single page post title, adds a reading progress bar for your posts and lets you set featured images and colors for your categories archives."
-msgstr "Включает поддержку настраиваемых полей внутри карточек архива и заголовка отел��ной страницы записи, добавляет индикатор хода чтения для записей и позволяет устанавливать изображения и цвета для архивов категорий."
+msgstr "Включает поддержку настраиваемых полей внутри карточек архива и заголовка отел��ной страницы записи, добавляет индикатор хода чтения для записей и позволяет устанавли��ать изображения и цвета для архивов категорий."
 
 #: framework/premium/extensions/post-types-extra/readme.php:4
 msgid "After activating this extension you will be able to enable the read progress bar for your single posts, add a featured image and set different colors to each taxonomy, add custom fields to your archive cards or page/post title section with the help of ACF, MetaBox and Toolset plugins, and also add taxonomies archive filters."
@@ -2480,7 +2480,7 @@ msgstr "После сведений о клиенте"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:780
 msgid "Checkout billing"
-msgstr "В��ставление счёта"
+msgstr "Выставление счёта"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:784
 msgid "Before checkout billing form"

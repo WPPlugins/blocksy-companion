@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-03-02 18:53+0000\n"
+"POT-Creation-Date: 2023-03-09 15:26+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -193,11 +193,11 @@ msgstr ""
 msgid "TikTok"
 msgstr ""
 
-#: framework/theme-integration.php:456
+#: framework/theme-integration.php:460
 msgid "Companion"
 msgstr ""
 
-#: framework/theme-integration.php:474 static/js/screens/SiteExport.js:111
+#: framework/theme-integration.php:478 static/js/screens/SiteExport.js:111
 msgid "PRO"
 msgstr ""
 
@@ -247,29 +247,29 @@ msgstr ""
 msgid "Register For This Site"
 msgstr ""
 
-#: framework/features/conditions-manager.php:501
+#: framework/features/conditions-manager.php:506
 msgid "Entire Website"
 msgstr ""
 
-#: framework/features/conditions-manager.php:509,
-#: framework/features/conditions-manager.php:551,
-#: framework/features/conditions-manager.php:583
+#: framework/features/conditions-manager.php:514,
+#: framework/features/conditions-manager.php:556,
+#: framework/features/conditions-manager.php:588
 msgid "Basic"
 msgstr ""
 
-#: framework/features/conditions-manager.php:513,
-#: framework/features/conditions-manager.php:587
+#: framework/features/conditions-manager.php:518,
+#: framework/features/conditions-manager.php:592
 msgid "Singulars"
 msgstr ""
 
-#: framework/features/conditions-manager.php:518,
-#: framework/features/conditions-manager.php:555
+#: framework/features/conditions-manager.php:523,
+#: framework/features/conditions-manager.php:560
 msgid "Archives"
 msgstr ""
 
-#: framework/features/conditions-manager.php:524,
-#: framework/features/conditions-manager.php:561,
-#: framework/features/conditions-manager.php:593,
+#: framework/features/conditions-manager.php:529,
+#: framework/features/conditions-manager.php:566,
+#: framework/features/conditions-manager.php:598,
 #: framework/extensions/trending/customizer.php:4,
 #: framework/extensions/widgets/widgets/ct-posts/options.php:11,
 #: framework/extensions/widgets/widgets/ct-posts/options.php:98,
@@ -279,8 +279,8 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: framework/features/conditions-manager.php:528,
-#: framework/features/conditions-manager.php:597,
+#: framework/features/conditions-manager.php:533,
+#: framework/features/conditions-manager.php:602,
 #: framework/premium/features/content-blocks/hooks-manager.php:440,
 #: framework/premium/features/content-blocks/hooks-manager.php:448,
 #: framework/premium/features/content-blocks/hooks-manager.php:456,
@@ -290,143 +290,143 @@ msgstr ""
 msgid "Single Post"
 msgstr ""
 
-#: framework/features/conditions-manager.php:533,
-#: framework/features/conditions-manager.php:565
-msgid "All Post Archives"
-msgstr ""
-
 #: framework/features/conditions-manager.php:538,
 #: framework/features/conditions-manager.php:570
-msgid "Post Categories"
+msgid "All Post Archives"
 msgstr ""
 
 #: framework/features/conditions-manager.php:543,
 #: framework/features/conditions-manager.php:575
+msgid "Post Categories"
+msgstr ""
+
+#: framework/features/conditions-manager.php:548,
+#: framework/features/conditions-manager.php:580
 msgid "Post Tags"
 msgstr ""
 
-#: framework/features/conditions-manager.php:605,
+#: framework/features/conditions-manager.php:610,
 #: framework/extensions/widgets/widgets/ct-posts/options.php:12,
 #: framework/premium/features/premium-header/items/search-input/options.php:5
 msgid "Pages"
 msgstr ""
 
-#: framework/features/conditions-manager.php:609
+#: framework/features/conditions-manager.php:614
 msgid "Single Page"
 msgstr ""
 
-#: framework/features/conditions-manager.php:636
+#: framework/features/conditions-manager.php:641
 msgid "%s Single"
 msgstr ""
 
-#: framework/features/conditions-manager.php:646
+#: framework/features/conditions-manager.php:651
 msgid "%s Archive"
 msgstr ""
 
-#: framework/features/conditions-manager.php:659
+#: framework/features/conditions-manager.php:664
 msgid "%s %s Taxonomy"
 msgstr ""
 
-#: framework/features/conditions-manager.php:674
+#: framework/features/conditions-manager.php:679
 msgid "Post ID"
 msgstr ""
 
-#: framework/features/conditions-manager.php:679
+#: framework/features/conditions-manager.php:684
 msgid "Page ID"
 msgstr ""
 
-#: framework/features/conditions-manager.php:684
+#: framework/features/conditions-manager.php:689
 #: static/js/options/ConditionsManager/PostIdPicker.js:76
 msgid "Custom Post Type ID"
 msgstr ""
 
-#: framework/features/conditions-manager.php:689
+#: framework/features/conditions-manager.php:694
 msgid "Post with Taxonomy ID"
 msgstr ""
 
-#: framework/features/conditions-manager.php:694
+#: framework/features/conditions-manager.php:699
 msgid "Taxonomy ID"
 msgstr ""
 
-#: framework/features/conditions-manager.php:698
+#: framework/features/conditions-manager.php:703
 msgid "Specific"
 msgstr ""
 
-#: framework/features/conditions-manager.php:704
+#: framework/features/conditions-manager.php:709
 msgid "Other Pages"
 msgstr ""
 
-#: framework/features/conditions-manager.php:708
+#: framework/features/conditions-manager.php:713
 msgid "404"
 msgstr ""
 
-#: framework/features/conditions-manager.php:713,
+#: framework/features/conditions-manager.php:718,
 #: framework/premium/features/premium-header/items/search-input/options.php:45,
 #: framework/premium/features/premium-header/items/search-input/view.php:100
 msgid "Search"
 msgstr ""
 
-#: framework/features/conditions-manager.php:718
+#: framework/features/conditions-manager.php:723
 msgid "Blog"
 msgstr ""
 
-#: framework/features/conditions-manager.php:723
+#: framework/features/conditions-manager.php:728
 msgid "Front Page"
 msgstr ""
 
-#: framework/features/conditions-manager.php:728
+#: framework/features/conditions-manager.php:733
 msgid "Privacy Policy Page"
 msgstr ""
 
-#: framework/features/conditions-manager.php:740
+#: framework/features/conditions-manager.php:745
 msgid "Author Archives"
 msgstr ""
 
-#: framework/features/conditions-manager.php:750
+#: framework/features/conditions-manager.php:755
 msgid "WooCommerce"
 msgstr ""
 
-#: framework/features/conditions-manager.php:754
+#: framework/features/conditions-manager.php:759
 msgid "Shop Home"
 msgstr ""
 
-#: framework/features/conditions-manager.php:759
+#: framework/features/conditions-manager.php:764
 msgid "Single Product"
 msgstr ""
 
-#: framework/features/conditions-manager.php:764
+#: framework/features/conditions-manager.php:769
 msgid "Product Archives"
 msgstr ""
 
-#: framework/features/conditions-manager.php:769
+#: framework/features/conditions-manager.php:774
 msgid "Product Categories"
 msgstr ""
 
-#: framework/features/conditions-manager.php:774
+#: framework/features/conditions-manager.php:779
 msgid "Product Tags"
 msgstr ""
 
-#: framework/features/conditions-manager.php:782
+#: framework/features/conditions-manager.php:787
 msgid "Custom Post Types"
 msgstr ""
 
-#: framework/features/conditions-manager.php:791
+#: framework/features/conditions-manager.php:796
 msgid "User Auth"
 msgstr ""
 
-#: framework/features/conditions-manager.php:795
+#: framework/features/conditions-manager.php:800
 msgid "User Logged In"
 msgstr ""
 
-#: framework/features/conditions-manager.php:800
+#: framework/features/conditions-manager.php:805
 msgid "User Logged Out"
 msgstr ""
 
-#: framework/features/conditions-manager.php:806
+#: framework/features/conditions-manager.php:811
 msgid "User Roles"
 msgstr ""
 
-#: framework/features/conditions-manager.php:811,
+#: framework/features/conditions-manager.php:816,
 #: framework/premium/features/content-blocks/options/404.php:19,
 #: framework/premium/features/content-blocks/options/header.php:19,
 #: framework/premium/features/content-blocks/options/hook.php:24,
@@ -434,38 +434,38 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: framework/features/conditions-manager.php:815
+#: framework/features/conditions-manager.php:820
 msgid "Post Author"
 msgstr ""
 
-#: framework/features/conditions-manager.php:827,
+#: framework/features/conditions-manager.php:832,
 #: framework/premium/features/premium-header/items/language-switcher/config.php:14
 msgid "Languages"
 msgstr ""
 
-#: framework/features/conditions-manager.php:831
+#: framework/features/conditions-manager.php:836
 msgid "Current Language"
 msgstr ""
 
-#: framework/features/conditions-manager.php:839
+#: framework/features/conditions-manager.php:844
 msgid "bbPress"
 msgstr ""
 
-#: framework/features/conditions-manager.php:843
+#: framework/features/conditions-manager.php:848
 msgid "Profile"
 msgstr ""
 
-#: framework/features/conditions-manager.php:855
+#: framework/features/conditions-manager.php:860
 #: static/js/options/ConditionsManager.js:105
 msgid "Include"
 msgstr ""
 
-#: framework/features/conditions-manager.php:855
+#: framework/features/conditions-manager.php:860
 #: static/js/options/ConditionsManager.js:106
 msgid "Exclude"
 msgstr ""
 
-#: framework/features/conditions-manager.php:908
+#: framework/features/conditions-manager.php:913
 msgid "Language"
 msgstr ""
 
