@@ -854,6 +854,11 @@ class ConditionsManager {
 	}
 
 	public function humanize_conditions($conditions) {
+		// Check if it looks like a normal rules array. If it doesn't -- bail out.
+		if (! isset($conditions[0]) || ! isset($conditions[0]['rule'])) {
+			return [];
+		}
+
 		$result = [];
 
 		foreach ($conditions as $condition) {
