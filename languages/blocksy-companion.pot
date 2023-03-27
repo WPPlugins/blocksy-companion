@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-03-16 18:20+0000\n"
+"POT-Creation-Date: 2023-03-27 14:37+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -63,7 +63,7 @@ msgid ""
 msgstr ""
 
 #: framework/extensions-manager.php:269,
-#: framework/premium/extensions/custom-fonts/extension.php:158
+#: framework/premium/extensions/custom-fonts/extension.php:190
 msgid "Custom Fonts"
 msgstr ""
 
@@ -213,42 +213,41 @@ msgstr ""
 msgid "Widget Title"
 msgstr ""
 
-#. translators: %s: Link to the login page.
+#. translators: 1: link open 2: link close
 #: framework/features/account-auth.php:106
 msgid ""
-"Check your email for the confirmation link, then visit the <a href=\"%s\" "
-"data-login=\"yes\">login page</a>."
+"Check your email for the confirmation link, then visit the %slogin page%s."
 msgstr ""
 
-#: framework/features/account-auth.php:118,
-#: framework/features/account-auth.php:272
+#: framework/features/account-auth.php:119,
+#: framework/features/account-auth.php:273
 msgid "Check your email"
 msgstr ""
 
 #. translators: 1: link open 2: link close
-#: framework/features/account-auth.php:258
+#: framework/features/account-auth.php:259
 msgid ""
 "Registration complete. Please check your email, then visit the %1$sslogin "
 "page%2$s."
 msgstr ""
 
-#: framework/features/account-auth.php:231
+#: framework/features/account-auth.php:232
 msgid ""
 "Your account was created successfully. Your login details have been sent to "
 "your email address. Please visit the %1$slogin page%2$s."
 msgstr ""
 
-#: framework/features/account-auth.php:243
+#: framework/features/account-auth.php:244
 msgid ""
 "Your account was created successfully and a password has been sent to your "
 "email address. Please visit the %1$slogin page%2$s."
 msgstr ""
 
-#: framework/features/account-auth.php:278
+#: framework/features/account-auth.php:279
 msgid "Registration Form"
 msgstr ""
 
-#: framework/features/account-auth.php:279
+#: framework/features/account-auth.php:280
 msgid "Register For This Site"
 msgstr ""
 
@@ -728,6 +727,7 @@ msgid "Design"
 msgstr ""
 
 #: framework/extensions/cookies-consent/customizer.php:147,
+#: framework/extensions/newsletter-subscribe/customizer.php:175,
 #: framework/premium/extensions/mega-menu/options.php:649
 msgid "Text Color"
 msgstr ""
@@ -1179,10 +1179,6 @@ msgstr ""
 
 #: framework/extensions/newsletter-subscribe/customizer.php:154
 msgid "Title Color"
-msgstr ""
-
-#: framework/extensions/newsletter-subscribe/customizer.php:175
-msgid "Description Color"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/customizer.php:206,
@@ -1870,50 +1866,50 @@ msgstr ""
 msgid "Show WooCommerce Hooks"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:598,
-#: framework/premium/features/content-blocks.php:604
+#: framework/premium/features/content-blocks.php:604,
+#: framework/premium/features/content-blocks.php:610
 msgid "Content Blocks"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:599,
+#: framework/premium/features/content-blocks.php:605,
 #: framework/premium/extensions/mega-menu/options.php:333
 msgid "Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:600
+#: framework/premium/features/content-blocks.php:606
 msgid "Add New"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:601
+#: framework/premium/features/content-blocks.php:607
 msgid "Add New Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:602
+#: framework/premium/features/content-blocks.php:608
 msgid "Edit Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:603
+#: framework/premium/features/content-blocks.php:609
 #: framework/premium/static/js/hooks/CreateHook.js:33
 msgid "New Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:605
+#: framework/premium/features/content-blocks.php:611
 msgid "View Content Block"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:606
+#: framework/premium/features/content-blocks.php:612
 msgid "Search Content Blocks"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:607
+#: framework/premium/features/content-blocks.php:613
 msgid "Nothing found"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:608
+#: framework/premium/features/content-blocks.php:614
 msgid "Nothing found in Trash"
 msgstr ""
 
-#: framework/premium/features/content-blocks.php:902
+#: framework/premium/features/content-blocks.php:908
 msgid "Close popup"
 msgstr ""
 
@@ -4341,7 +4337,8 @@ msgid "Label Text"
 msgstr ""
 
 #: framework/features/header/items/account/options.php:352,
-#: framework/features/header/items/account/views/login.php:85
+#: framework/features/header/items/account/views/login.php:85,
+#: framework/features/header/items/account/views/login.php:90
 msgid "My Account"
 msgstr ""
 
@@ -5730,7 +5727,7 @@ msgstr ""
 #: framework/premium/static/js/footer/PanelsManager.js:211
 #: framework/premium/static/js/hooks/CodeEditor.js:203
 #: static/js/header/PanelsManager.js:216
-#: static/js/options/CustomizerOptionsManager.js:422
+#: static/js/options/CustomizerOptionsManager.js:424
 msgid "Cancel"
 msgstr ""
 
@@ -6081,83 +6078,83 @@ msgstr ""
 msgid "Select page"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:104
+#: static/js/options/CustomizerOptionsManager.js:106
 msgid "Export Customizations"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:110
+#: static/js/options/CustomizerOptionsManager.js:112
 msgid "Import Options"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:113
+#: static/js/options/CustomizerOptionsManager.js:115
 msgid "Easily import the theme customizer settings."
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:136
+#: static/js/options/CustomizerOptionsManager.js:138
 msgid "Click or drop to upload a file..."
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:197
+#: static/js/options/CustomizerOptionsManager.js:199
 msgid "Import Customizations"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:206
+#: static/js/options/CustomizerOptionsManager.js:208
 msgid "Copy Options"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:209
+#: static/js/options/CustomizerOptionsManager.js:211
 msgid "Copy and import your customizations from parent or child theme."
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:269
+#: static/js/options/CustomizerOptionsManager.js:271
 msgid "Copy From Parent Theme"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:275
+#: static/js/options/CustomizerOptionsManager.js:277
 msgid "Copy From Child Theme"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:282
+#: static/js/options/CustomizerOptionsManager.js:284
 msgid ""
 "You are about to copy all the settings from your parent theme into the child "
 "theme. Are you sure you want to continue?"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:288
+#: static/js/options/CustomizerOptionsManager.js:290
 msgid ""
 "You are about to copy all the settings from your child theme into the parent "
 "theme. Are you sure you want to continue?"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:337
+#: static/js/options/CustomizerOptionsManager.js:339
 msgid "Yes, I am sure"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:351
+#: static/js/options/CustomizerOptionsManager.js:353
 msgid "Export Settings"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:355
+#: static/js/options/CustomizerOptionsManager.js:357
 msgid "Choose what set of settings you want to export."
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:383
+#: static/js/options/CustomizerOptionsManager.js:385
 msgid "Customizer settings"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:387
+#: static/js/options/CustomizerOptionsManager.js:389
 msgid "Widgets settings"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:496
+#: static/js/options/CustomizerOptionsManager.js:497
 msgid "Export"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:84
+#: static/js/options/CustomizerOptionsManager.js:86
 msgid "Export Options"
 msgstr ""
 
-#: static/js/options/CustomizerOptionsManager.js:87
+#: static/js/options/CustomizerOptionsManager.js:89
 msgid "Easily export the theme customizer settings."
 msgstr ""
 

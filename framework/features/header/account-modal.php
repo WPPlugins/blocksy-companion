@@ -68,7 +68,7 @@ $close_button_type = blocksy_akg('account_close_button_type', $atts, 'type-1');
 			<div class="ct-account-panel ct-forgot-password-form">
 				<?php echo $form_views['lostpassword'] ?>
 
-				<a href="<?php echo wp_login_url() ?>" class="ct-back-to-login ct-login">
+				<a href="#" class="ct-back-to-login ct-login">
 					← <?php echo __('Back to login', 'blocksy-companion') ?>
 				</a>
 			</div>
