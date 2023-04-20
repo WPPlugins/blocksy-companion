@@ -83,13 +83,16 @@ if ($loggedin_media === 'icon') {
 
 // Label
 $loggedin_label = blocksy_akg('loggedin_label', $atts, __('My Account', 'blocksy-companion'));
-$loggedin_label = blocksy_translate_dynamic(
-	blocksy_default_akg(
-		'loggedin_label',
-		$atts,
-		__('My Account', 'blocksy-companion')
-	),
-	'header:' . $section_id . ':' . $item_id . ':loggedin_label'
+
+$loggedin_label = do_shortcode(
+	blocksy_translate_dynamic(
+		blocksy_default_akg(
+			'loggedin_label',
+			$atts,
+			__('My Account', 'blocksy-companion')
+		),
+		'header:' . $section_id . ':' . $item_id . ':loggedin_label'
+	)
 );
 
 if (blocksy_akg('loggedin_text', $atts, 'label') === 'username') {

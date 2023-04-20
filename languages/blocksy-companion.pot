@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-04-13 19:42+0000\n"
+"POT-Creation-Date: 2023-04-20 20:37+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -131,73 +131,73 @@ msgid ""
 "a wishlits page."
 msgstr ""
 
-#: framework/theme-integration.php:413,
+#: framework/theme-integration.php:408,
 #: framework/extensions/widgets/widgets/ct-facebook/options.php:16,
 #: framework/extensions/widgets/widgets/ct-facebook/view.php:12,
 #: framework/extensions/widgets/widgets/ct-facebook/widget.php:13
 msgid "Facebook"
 msgstr ""
 
-#: framework/theme-integration.php:414
+#: framework/theme-integration.php:409
 msgid "Twitter"
 msgstr ""
 
-#: framework/theme-integration.php:415
+#: framework/theme-integration.php:410
 msgid "LinkedIn"
 msgstr ""
 
-#: framework/theme-integration.php:416
+#: framework/theme-integration.php:411
 msgid "Dribbble"
 msgstr ""
 
-#: framework/theme-integration.php:417
+#: framework/theme-integration.php:412
 msgid "Instagram"
 msgstr ""
 
-#: framework/theme-integration.php:418
+#: framework/theme-integration.php:413
 msgid "Pinterest"
 msgstr ""
 
-#: framework/theme-integration.php:419
+#: framework/theme-integration.php:414
 msgid "WordPress"
 msgstr ""
 
-#: framework/theme-integration.php:420
+#: framework/theme-integration.php:415
 msgid "GitHub"
 msgstr ""
 
-#: framework/theme-integration.php:421,
+#: framework/theme-integration.php:416,
 #: framework/extensions/widgets/widgets/ct-contact-info/options.php:497,
 #: framework/extensions/widgets/widgets/ct-socials/options.php:100,
 #: framework/premium/features/content-blocks/options/archive.php:47
 msgid "Medium"
 msgstr ""
 
-#: framework/theme-integration.php:422
+#: framework/theme-integration.php:417
 msgid "YouTube"
 msgstr ""
 
-#: framework/theme-integration.php:423
+#: framework/theme-integration.php:418
 msgid "Vimeo"
 msgstr ""
 
-#: framework/theme-integration.php:424
+#: framework/theme-integration.php:419
 msgid "VKontakte"
 msgstr ""
 
-#: framework/theme-integration.php:425
+#: framework/theme-integration.php:420
 msgid "Odnoklassniki"
 msgstr ""
 
-#: framework/theme-integration.php:426
+#: framework/theme-integration.php:421
 msgid "TikTok"
 msgstr ""
 
-#: framework/theme-integration.php:502
+#: framework/theme-integration.php:497
 msgid "Companion"
 msgstr ""
 
-#: framework/theme-integration.php:520 static/js/screens/SiteExport.js:111
+#: framework/theme-integration.php:515 static/js/screens/SiteExport.js:111
 msgid "PRO"
 msgstr ""
 
@@ -469,7 +469,7 @@ msgstr ""
 msgid "Exclude"
 msgstr ""
 
-#: framework/features/conditions-manager.php:918
+#: framework/features/conditions-manager.php:920
 msgid "Language"
 msgstr ""
 
@@ -1771,7 +1771,7 @@ msgstr ""
 
 #: framework/features/header/account-modal.php:53,
 #: framework/features/header/items/account/options.php:631,
-#: framework/features/header/items/account/views/logout.php:7
+#: framework/features/header/items/account/views/logout.php:8
 msgid "Login"
 msgstr ""
 
@@ -2112,15 +2112,15 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: framework/features/header/modal/register.php:61
+#: framework/features/header/modal/register.php:60
 msgid "A link to set a new password will be sent to your email address."
 msgstr ""
 
-#: framework/features/header/modal/register.php:91
+#: framework/features/header/modal/register.php:90
 msgid "Registration confirmation will be emailed to you."
 msgstr ""
 
-#: framework/features/header/modal/register.php:97
+#: framework/features/header/modal/register.php:96
 msgid "Register"
 msgstr ""
 
@@ -4346,7 +4346,7 @@ msgstr ""
 
 #: framework/features/header/items/account/options.php:352,
 #: framework/features/header/items/account/views/login.php:85,
-#: framework/features/header/items/account/views/login.php:90
+#: framework/features/header/items/account/views/login.php:92
 msgid "My Account"
 msgstr ""
 
@@ -4452,8 +4452,8 @@ msgid "You have no %s fields declared for this custom post type."
 msgstr ""
 
 #: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:431,
-#: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:906,
-#: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:917
+#: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:910,
+#: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:921
 msgid "Field"
 msgstr ""
 
@@ -4470,15 +4470,15 @@ msgstr ""
 msgid "%s Field"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:890
+#: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:894
 msgid "Custom Field"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:904
+#: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:908
 msgid "%s %s Font"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:915
+#: framework/premium/extensions/post-types-extra/includes/dynamic-data.php:919
 msgid "%s %s Color"
 msgstr ""
 

@@ -258,19 +258,14 @@ class ThemeIntegration {
 				$local_terms = array_map(function ($tax) {
 					return [
 						'id' => $tax->term_id,
-						'name' => $tax->name
+						'name' => $tax->name,
+						'group' => get_taxonomy($tax->taxonomy)->label
 					];
 				}, get_terms(['taxonomy' => $taxonomy, 'lang' => '']));
 
 				if (empty($local_terms)) {
 					continue;
 				}
-
-				$terms[] = [
-					'id' => $taxonomy,
-					'name' => $taxonomy,
-					'group' => get_taxonomy($taxonomy)->label
-				];
 
 				$terms = array_merge($terms, $local_terms);
 			}

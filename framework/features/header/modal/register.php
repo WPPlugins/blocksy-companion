@@ -51,7 +51,6 @@ if (\Blocksy\Plugin::instance()->account_auth->has_woo_register_flow()) {
 			<label for="user_pass_register"><?php echo __('Password', 'blocksy-companion') ?></label>
 			<span class="<?php echo $password_class ?>">
 				<input type="password" name="user_pass" id="user_pass_register" class="input" value="" size="20" autocapitalize="off" autocomplete="new-password">
-				<span class="show-password-input"></span>
 			</span>
 		</p>
 	<?php } ?>

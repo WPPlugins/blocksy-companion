@@ -1,12 +1,14 @@
 <?php
 
-$login_label = blocksy_translate_dynamic(
-	blocksy_default_akg(
-		'login_label',
-		$atts,
-		__('Login', 'blocksy-companion')
-	),
-	'header:' . $section_id . ':' . $item_id . ':login_label'
+$login_label = do_shortcode(
+	blocksy_translate_dynamic(
+		blocksy_default_akg(
+			'login_label',
+			$atts,
+			__('Login', 'blocksy-companion')
+		),
+		'header:' . $section_id . ':' . $item_id . ':login_label'
+	)
 );
 
 $loggedout_account_label_visibility = blocksy_akg(

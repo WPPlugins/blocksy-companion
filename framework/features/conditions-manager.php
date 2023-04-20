@@ -900,9 +900,11 @@ class ConditionsManager {
 					$condition['payload']['taxonomy_id']
 				);
 
-				$to_append .= ' (<a href="' . get_edit_term_link(
-					$condition['payload']['taxonomy_id']
-				) . '" target="_blank">' . $tax->name . '</a>)';
+				if ($tax) {
+					$to_append .= ' (<a href="' . get_edit_term_link(
+						$condition['payload']['taxonomy_id']
+					) . '" target="_blank">' . $tax->name . '</a>)';
+				}
 			}
 
 			if ($condition['rule'] === 'current_language') {
