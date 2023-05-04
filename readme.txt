@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.84
+Stable tag: 1.8.85
 
 == Description ==
 
@@ -23,6 +23,9 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.85: 2023-05-04
+- Improvement: Add autocomplete attribute to account modal input fields
+
 1.8.84: 2023-04-20
 - Improvement: Sticky header increased height calculation for widget area
 - Improvement: Better display logic for taxonomy IDs condition
