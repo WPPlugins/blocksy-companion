@@ -3,7 +3,7 @@
 /*
 Plugin Name: Blocksy Companion
 Description: This plugin is the companion for the Blocksy theme, it runs and adds its enhacements only if the Blocksy theme is installed and active.
-Version: 1.8.88
+Version: 1.8.89
 Author: CreativeThemes
 Author URI: https://creativethemes.com
 Text Domain: blocksy-companion

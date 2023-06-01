@@ -35,7 +35,8 @@ class Plugin {
 	public $account_auth = null;
 
 	private $is_blocksy = '__NOT_SET__';
-	private $desired_blocksy_version = '1.7.18';
+	public $is_blocksy_data = null;
+	private $desired_blocksy_version = '1.8.80';
 
 	/**
 	 * Instance.
@@ -55,10 +56,6 @@ class Plugin {
 	}
 
 	public function init() {
-		if (! $this->check_if_blocksy_is_activated()) {
-			return;
-		}
-
 		add_action('widgets_init', [
 			'BlocksyWidgetFactory',
 			'register_all_widgets',
@@ -97,10 +94,34 @@ class Plugin {
 	 * @access private
 	 */
 	public function early_init() {
-		if (! $this->check_if_blocksy_is_activated()) {
-			return;
-		}
+		$this->dashboard = new Dashboard();
 
+		add_action(
+			'admin_enqueue_scripts',
+			function () {
+				if (!function_exists('get_plugin_data')) {
+					require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+				}
+
+				$data = get_plugin_data(BLOCKSY__FILE__);
+
+				wp_enqueue_style(
+					'blocksy-styles',
+					BLOCKSY_URL . 'static/bundle/options.min.css',
+					[],
+					$data['Version']
+				);
+			},
+			50
+		);
+	}
+
+	/**
+	 * Init components that need early access to the system.
+	 *
+	 * @access private
+	 */
+	public function early_init_with_blocksy_theme() {
 		if (
 			function_exists('blc_fs')
 			&&
@@ -113,7 +134,6 @@ class Plugin {
 
 		$this->extensions = new ExtensionsManager();
 
-		$this->dashboard = new Dashboard();
 		$this->header = new HeaderAdditions();
 
 		$this->feat_google_analytics = new GoogleAnalytics();
@@ -151,14 +171,16 @@ class Plugin {
 		$this->register_autoloader();
 		$this->early_init();
 
+		if (! $this->check_if_blocksy_is_activated()) {
+			return;
+		}
+
+		$this->early_init_with_blocksy_theme();
+
 		add_action('init', [$this, 'init'], 0);
 	}
 
-	public function check_if_blocksy_is_activated($forced = false) {
-		if (! $forced) {
-			return true;
-		}
-
+	public function check_if_blocksy_is_activated() {
 		if ($this->is_blocksy === '__NOT_SET__') {
 			$theme = wp_get_theme(get_template());
 
@@ -190,6 +212,14 @@ class Plugin {
 			) {
 				$another_theme_in_preview = true;
 			}
+
+			$this->is_blocksy_data = [
+				'is_correct_theme' => (
+					$is_correct_theme
+					&&
+					! $another_theme_in_preview
+				)
+			];
 
 			$this->is_blocksy = (
 				$is_correct_theme
