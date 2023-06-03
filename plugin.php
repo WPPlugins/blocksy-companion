@@ -184,6 +184,7 @@ class Plugin {
 		if ($this->is_blocksy === '__NOT_SET__') {
 			$theme = wp_get_theme(get_template());
 
+
 			$is_correct_theme = strpos(
 				$theme->get('Name'), 'Blocksy'
 			) !== false;
@@ -195,22 +196,38 @@ class Plugin {
 
 			$another_theme_in_preview = false;
 
+			$maybe_foreign_theme = '';
+
 			if (
-				(
-					(
-						isset(
-							$_REQUEST['theme']
-						) && strpos(strtolower($_REQUEST['theme']), 'blocksy') === false
-						||
-						isset(
-							$_REQUEST['customize_theme']
-						) && strpos(strtolower($_REQUEST['customize_theme']), 'blocksy') === false
-					)
-					&&
-					strpos($_SERVER['REQUEST_URI'], 'customize') !== false
-				)
+				isset($_REQUEST['customize_theme'])
+				&&
+				! empty($_REQUEST['customize_theme'])
 			) {
-				$another_theme_in_preview = true;
+				$maybe_foreign_theme = $_REQUEST['customize_theme'];
+			}
+
+			if (
+				isset($_REQUEST['theme'])
+				&&
+				! empty($_REQUEST['theme'])
+			) {
+				$maybe_foreign_theme = $_REQUEST['theme'];
+			}
+
+			if ($is_correct_theme && $maybe_foreign_theme) {
+				$foreign_theme_obj = wp_get_theme($maybe_foreign_theme);
+
+				if ($foreign_theme_obj) {
+					if ($foreign_theme_obj->parent()) {
+						$foreign_theme_obj = $foreign_theme_obj->parent();
+					}
+
+					if (
+						$foreign_theme_obj->get_stylesheet() !== $theme->get_stylesheet()
+					) {
+						$another_theme_in_preview = true;
+					}
+				}
 			}
 
 			$this->is_blocksy_data = [
@@ -218,7 +235,8 @@ class Plugin {
 					$is_correct_theme
 					&&
 					! $another_theme_in_preview
-				)
+				),
+				'another_theme_in_preview' => $another_theme_in_preview
 			];
 
 			$this->is_blocksy = (
@@ -226,7 +244,7 @@ class Plugin {
 				&&
 				$is_correct_version
 				&&
-				!$another_theme_in_preview
+				! $another_theme_in_preview
 			);
 		}
 
