@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.8.91
+Stable tag: 1.8.92
 
 == Description ==
 
@@ -23,6 +23,9 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.8.92: 2023-06-14
+- Improvement: General fixes and improvements
+
 1.8.91: 2023-06-12
 - Improvement: Don't perform HTTP JSON request in order to retrieve Google Fonts list
 - Improvement: Do not allow bypassing comment form if privacy policy is not accepted
