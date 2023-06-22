@@ -93,6 +93,14 @@ class BlocksyExtensionCookiesConsent {
 				}
 
 				if (
+					! isset($data['ct_has_gdprconfirm'])
+					||
+					$data['ct_has_gdprconfirm'] !== 'yes'
+				) {
+					return;
+				}
+
+				if (
 					! isset($data['gdprconfirm'])
 					||
 					$data['gdprconfirm'] !== 'on'
