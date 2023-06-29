@@ -46,11 +46,11 @@ const NoTheme = () => {
 
 					wp.updates.ajax('install-theme', {
 						success: (...a) => {
-							console.log('here we go s')
-							location = ctDashboardLocalizations.activate
+							setTimeout(() => {
+								location = ctDashboardLocalizations.activate
+							})
 						},
 						error: (...a) => {
-							console.log('here we go error')
 							setTimeout(() => {
 								location = ctDashboardLocalizations.activate
 							})

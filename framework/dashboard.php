@@ -299,7 +299,11 @@ class Dashboard {
 			$slug = 'blocksy';
 
 			$localize_data = [
-				'themeIsInstalled' => !! wp_get_theme('blocksy'),
+				'themeIsInstalled' => (
+					!! wp_get_theme($slug)
+					&&
+					! wp_get_theme($slug)->errors()
+				),
 				'activate'=> current_user_can('switch_themes') ? wp_nonce_url(admin_url('themes.php?action=activate&amp;stylesheet=' . $slug), 'switch-theme_' . $slug) : null
 			];
 
