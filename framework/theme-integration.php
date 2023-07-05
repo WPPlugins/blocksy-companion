@@ -390,6 +390,7 @@ class ThemeIntegration {
 				$fields['vkontakte'] = __( 'VKontakte', 'blocksy-companion' );
 				$fields['odnoklassniki'] = __( 'Odnoklassniki', 'blocksy-companion' );
 				$fields['tiktok'] = __( 'TikTok', 'blocksy-companion' );
+				$fields['mastodon'] = __( 'Mastodon', 'blocksy-companion' );
 
 				return $fields;
 			}
