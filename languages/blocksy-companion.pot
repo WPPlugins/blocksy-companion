@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-07-05 07:28+0000\n"
+"POT-Creation-Date: 2023-07-13 16:49+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -753,9 +753,9 @@ msgstr ""
 #: framework/extensions/newsletter-subscribe/customizer.php:292,
 #: framework/extensions/newsletter-subscribe/customizer.php:324,
 #: framework/extensions/trending/customizer.php:366,
-#: framework/premium/extensions/mega-menu/options.php:804,
-#: framework/premium/extensions/mega-menu/options.php:851,
-#: framework/premium/extensions/mega-menu/options.php:870,
+#: framework/premium/extensions/mega-menu/options.php:807,
+#: framework/premium/extensions/mega-menu/options.php:854,
+#: framework/premium/extensions/mega-menu/options.php:873,
 #: framework/premium/extensions/shortcuts/customizer.php:825,
 #: framework/premium/extensions/shortcuts/customizer.php:859,
 #: framework/premium/extensions/shortcuts/customizer.php:891,
@@ -830,7 +830,7 @@ msgstr ""
 #: framework/extensions/newsletter-subscribe/customizer.php:198,
 #: framework/extensions/newsletter-subscribe/customizer.php:329,
 #: framework/extensions/trending/customizer.php:372,
-#: framework/premium/extensions/mega-menu/options.php:809,
+#: framework/premium/extensions/mega-menu/options.php:812,
 #: framework/premium/extensions/shortcuts/customizer.php:831,
 #: framework/premium/extensions/shortcuts/customizer.php:865,
 #: framework/premium/extensions/shortcuts/customizer.php:897,
@@ -870,7 +870,7 @@ msgstr ""
 #: framework/extensions/cookies-consent/customizer.php:178,
 #: framework/extensions/cookies-consent/customizer.php:234,
 #: framework/extensions/cookies-consent/customizer.php:299,
-#: framework/premium/extensions/mega-menu/options.php:858,
+#: framework/premium/extensions/mega-menu/options.php:861,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:425,
 #: framework/features/header/items/account/options.php:1263,
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-options.php:173,
@@ -882,7 +882,7 @@ msgstr ""
 #: framework/extensions/cookies-consent/customizer.php:203,
 #: framework/extensions/cookies-consent/customizer.php:270,
 #: framework/extensions/trending/customizer.php:348,
-#: framework/premium/extensions/mega-menu/options.php:838,
+#: framework/premium/extensions/mega-menu/options.php:841,
 #: framework/premium/extensions/shortcuts/customizer.php:807,
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:86,
 #: framework/features/header/items/account/options.php:991,
@@ -1336,7 +1336,7 @@ msgstr ""
 #: framework/extensions/product-reviews/extension.php:444,
 #: framework/extensions/product-reviews/extension.php:472,
 #: framework/extensions/product-reviews/extension.php:493,
-#: framework/premium/extensions/mega-menu/options.php:814
+#: framework/premium/extensions/mega-menu/options.php:817
 msgid "Active"
 msgstr ""
 
@@ -2372,8 +2372,8 @@ msgid "Icon Size"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:515,
-#: framework/premium/extensions/mega-menu/options.php:834
-msgid "Menu Badge Settings"
+#: framework/premium/extensions/mega-menu/options.php:837
+msgid "Badge Settings"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:533,
@@ -2413,13 +2413,13 @@ msgid "Heading Font"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:629,
-#: framework/premium/extensions/mega-menu/options.php:762
+#: framework/premium/extensions/mega-menu/options.php:765
 msgid "Heading Color"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:641,
 #: framework/premium/extensions/mega-menu/options.php:660,
-#: framework/premium/extensions/mega-menu/options.php:774
+#: framework/premium/extensions/mega-menu/options.php:777
 msgid "Initial Color"
 msgstr ""
 
@@ -2447,7 +2447,7 @@ msgstr ""
 msgid "Column Spacing"
 msgstr ""
 
-#: framework/premium/extensions/mega-menu/options.php:784,
+#: framework/premium/extensions/mega-menu/options.php:787,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:352,
 #: framework/features/header/items/account/options.php:843,
 #: framework/features/header/items/account/options.php:871,
