@@ -7,7 +7,7 @@ import './variables'
 
 wp.customize('newsletter_subscribe_subscribe_visibility', (val) =>
 	val.bind((to) => {
-		const block = document.querySelector('.ct-newsletter-subscribe-container')
+		const block = document.querySelector('.ct-newsletter-subscribe-block')
 		responsiveClassesFor('newsletter_subscribe_subscribe_visibility', block)
 	})
 )
@@ -35,7 +35,7 @@ if (
 			}
 
 			const block = document.querySelector(
-				'.ct-newsletter-subscribe-container'
+				'.ct-newsletter-subscribe-block'
 			)
 
 			if (!block) {
@@ -72,7 +72,7 @@ if (
 			)()
 
 			block.querySelector(
-				'.ct-newsletter-subscribe-container > p'
+				'.ct-newsletter-subscribe-description'
 			).innerHTML = wp.customize('newsletter_subscribe_text')()
 		},
 	})
