@@ -185,7 +185,7 @@ function blc_get_contacts_output($args = []) {
 							?>
 
 							<?php if (! empty($link)) { ?>
-								<a href="<?php echo $link ?>" <?php echo $data_target ?>>
+								<a href="<?php echo do_shortcode($link) ?>" <?php echo $data_target ?>>
 							<?php } ?>
 
 							<?php
