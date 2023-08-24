@@ -118,6 +118,8 @@ class Dashboard {
 
 			blc_fs()->add_filter('hide_freemius_powered_by', '__return_true');
 
+			blc_fs()->add_filter( 'show_deactivation_subscription_cancellation', '__return_false' );
+
 			blc_fs()->add_filter(
 				'connect-message_on-premium',
 				function ($text) {

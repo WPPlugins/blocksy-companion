@@ -40,9 +40,9 @@ function blocksy_ext_cookies_consent_output() {
 			<?php } ?>
 
 			<div class="ct-button-group">
-				<button type="submit" class="ct-button ct-cookies-accept-button"><?php echo esc_html($accept_button_text) ?></button>
+				<button type="button" class="ct-button ct-cookies-accept-button"><?php echo esc_html($accept_button_text) ?></button>
 
-				<button type="submit" class="ct-button ct-cookies-decline-button"><?php echo esc_html($decline_button_text) ?></button>
+				<button type="button" class="ct-button ct-cookies-decline-button"><?php echo esc_html($decline_button_text) ?></button>
 			</div>
 		</div>
 	</div>
