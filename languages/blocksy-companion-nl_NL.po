@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-05-28 17:53:03+0000\n"
+"PO-Revision-Date: 2023-09-06 18:40:48+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -670,7 +670,7 @@ msgstr ""
 
 #: framework/features/account-auth.php:226
 msgid "Your account was created successfully and a password has been sent to your email address. Please visit the <a href=\"%s\">login page</a>."
-msgstr ""
+msgstr "Je account is succesvol aangemaakt en er is een wachtwoord naar je e-mailadres gestuurd. Bezoek de <a href=\"%s\">loginpagina</a>."
 
 #. translators: This is a brand name. Preferably to not be translated
 #: framework/extensions/cookies-consent/config.php:5,
@@ -6107,32 +6107,32 @@ msgstr ""
 #: framework/features/header/modal/login.php:33,
 #: framework/features/header/modal/register.php:42
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #: framework/features/header/modal/login.php:43
 msgid "Remember Me"
-msgstr ""
+msgstr "Herinner mij"
 
 #: framework/features/header/modal/login.php:47
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Wachtwoord vergeten?"
 
 #: framework/features/header/modal/login.php:65
 msgid "Log In"
-msgstr ""
+msgstr "Inloggen"
 
 #: framework/features/header/modal/login.php:28,
 #: framework/features/header/modal/lostpassword.php:5
 msgid "Username or Email Address"
-msgstr ""
+msgstr "Gebruikersnaam of E-mailadres"
 
 #: framework/features/header/modal/lostpassword.php:13
 msgid "Get New Password"
-msgstr ""
+msgstr "Nieuw wachtwoord aanvragen"
 
 #: framework/features/header/modal/register.php:30
 msgid "Username"
-msgstr ""
+msgstr "Gebruikersnaam"
 
 #: framework/features/header/modal/register.php:76
 msgid "Registration confirmation will be emailed to you."

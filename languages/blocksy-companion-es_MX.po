@@ -1885,7 +1885,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/helpers.php:106
 msgid "Go to product page"
-msgstr ""
+msgstr "Ir a página del producto"
 
 #: framework/premium/extensions/woocommerce-extra/helpers.php:191
 msgid "Filter"
