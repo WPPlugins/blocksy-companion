@@ -280,7 +280,7 @@ class ThemeIntegration {
 			$users = [];
 
 			foreach (get_users([
-				'number' => 500
+				'number' => 2000
 			]) as $user) {
 				$users[] = [
 					'id' => $user->ID,

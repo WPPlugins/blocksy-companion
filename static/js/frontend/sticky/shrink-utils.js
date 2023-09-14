@@ -109,9 +109,9 @@ export const getRowStickyHeight = (el, hasBorder = true) => {
 		let stickyHeight = el.getBoundingClientRect().height - borderHeight
 
 		if (
-			stickyHeight !== rowStickyHeight ||
+			Math.round(stickyHeight) !== Math.round(rowStickyHeight) ||
 			// case when content is forcing the initial height to be bigger
-			rowStickyHeight > getRowInitialMinHeight(el)
+			Math.round(rowStickyHeight) > Math.round(getRowInitialMinHeight(el))
 		) {
 			el.blcStickyHeight = el.getBoundingClientRect().height
 			return stickyHeight
