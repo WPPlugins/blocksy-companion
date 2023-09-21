@@ -114,7 +114,7 @@ if (! empty(trim($title))) {
 			}
 		?>
 
-		<button class="button">
+		<button class="ct-button has-text-align-center">
 			<?php echo esc_html($button_text) ?>
 		</button>
 

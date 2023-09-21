@@ -48,7 +48,6 @@ $options = [
 		'type' => 'ct-image-picker',
 		'value' => 'in',
 		'attr' => [ 'data-type' => 'background' ],
-		'switchDeviceOnChange' => 'desktop',
 		'choices' => [
 			'in' => [
 				'src'   => blocksy_image_picker_url( 'log-in-state.svg' ),

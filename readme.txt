@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.9.5
+Stable tag: 1.9.6
 
 == Description ==
 
@@ -23,6 +23,9 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.9.6: 2023-09-21
+- Improvement: General fixes and improvements
+
 1.9.5: 2023-09-14
 - Improvement: Conditions module bump limit of 500 users
 - Improvement: Improve rounding logic in sticky shrink logic to better handle fractional header heights

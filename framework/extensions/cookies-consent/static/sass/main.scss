@@ -102,10 +102,6 @@
 		display: flex;
 		gap: 10px;
 
-		@include media-breakpoint-down (xs) {
-			width: 100%;
-		}
-
 		.ct-button {
 			--buttonFontSize: 13px;
 			--buttonMinHeight: 35px;
