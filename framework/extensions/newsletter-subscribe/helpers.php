@@ -151,7 +151,7 @@ function blc_ext_newsletter_subscribe_output_form($args = []) {
 				}
 			?>
 
-			<button class="ct-button has-text-align-center">
+			<button class="ct-button">
 				<?php echo esc_html($args['button_text']) ?>
 			</button>
 

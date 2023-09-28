@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-09-06 18:40:24+0000\n"
+"PO-Revision-Date: 2023-09-26 07:36:29+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -662,7 +662,7 @@ msgstr ""
 #. translators: %s: Link to the login page.
 #: framework/features/account-auth.php:92
 msgid "Check your email for the confirmation link, then visit the <a href=\"%s\">login page</a>."
-msgstr ""
+msgstr "Revise en su correo electrónico el enlace de confirmación, luego visite la <a href=\"%s\">página de inicio de sesión</a>."
 
 #: framework/features/account-auth.php:217
 msgid "Your account was created successfully. Your login details have been sent to your email address. Please visit the <a href=\"%s\">login page</a>."
@@ -1877,7 +1877,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:34
 msgid "Product Title Visibility"
-msgstr ""
+msgstr "Visibilidad del Título del Producto"
 
 #: framework/premium/extensions/woocommerce-extra/floating-cart.php:58
 msgid "Floating Cart Visibility"
@@ -1979,7 +1979,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/readme.php:10
 msgid "Product Quick View"
-msgstr ""
+msgstr "Vista Rápida del Producto"
 
 #: framework/premium/extensions/woocommerce-extra/readme.php:14,
 #: framework/premium/extensions/woocommerce-extra/readme.php:29,
@@ -3229,7 +3229,7 @@ msgstr ""
 #: framework/premium/extensions/shortcuts/views/bar.php:49,
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list.php:172
 msgid "Wish List"
-msgstr ""
+msgstr "Lista de deseos"
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-helpers.php:46,
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-helpers.php:54
@@ -3258,11 +3258,11 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-options.php:45
 msgid "Wish List Page"
-msgstr ""
+msgstr "Pagina de Lista de deseos"
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-options.php:51
 msgid "The page you select here will display the wish list for your logged out users."
-msgstr ""
+msgstr "La página que selecciones aquí, mostrará la lista de deseos de los usuarios que cerraron sesión."
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-options.php:60
 msgid "Display Wishlist Button On"
@@ -3282,7 +3282,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-options.php:95
 msgid "AJAX Add To Cart"
-msgstr ""
+msgstr "AJAX Comprar"
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-options.php:137
 msgid "Archive Button"
@@ -3310,11 +3310,11 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:192
 msgid "You don't have any products in your wish list yet."
-msgstr ""
+msgstr "No tienes ningún producto en tu lista de deseos."
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:35
 msgid "Add to cart"
-msgstr ""
+msgstr "Comprar"
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:128,
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:152
@@ -5562,7 +5562,7 @@ msgstr ""
 #: framework/extensions/product-reviews/metabox.php:18,
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-table.php:34
 msgid "Product"
-msgstr ""
+msgstr "Producto"
 
 #: framework/extensions/product-reviews/metabox.php:19
 msgid "Book"
