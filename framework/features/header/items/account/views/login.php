@@ -45,7 +45,11 @@ if ($loggedin_media === 'avatar') {
 	);
 
 	$media_html = blocksy_simple_image(
-		blocksy_get_avatar_url($avatar_size * 2, $current_user_id),
+		blc_call_fn(
+			['fn' => 'blocksy_get_avatar_url'],
+			$avatar_size * 2,
+			$current_user_id
+		),
 		[
 			'img_atts' => [
 				'width' => $avatar_size,
