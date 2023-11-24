@@ -27,8 +27,12 @@ class Autoloader {
 		}
 
 		self::$classes_map = [
-			'ExtensionsManager' => 'framework/extensions-manager.php',
-			'ExtensionsManagerApi' => 'framework/extensions-manager-api.php',
+			'Capabilities' => 'framework/includes/capabilities.php',
+
+			'ExtensionsManager' => 'framework/includes/extensions-manager.php',
+			'ExtensionWithFeatures' => 'framework/includes/extension-with-features.php',
+			'ExtensionsManagerApi' => 'framework/includes/extensions-manager-api.php',
+
 			'Dashboard' => 'framework/dashboard.php',
 			'ThemeIntegration' => 'framework/theme-integration.php',
 			'AccountAuth' => 'framework/features/account-auth.php',
@@ -38,9 +42,11 @@ class Autoloader {
 			'OpenGraphMetaData' => 'framework/features/opengraph-meta-data.php',
 			'HeaderAdditions' => 'framework/features/header.php',
 			'ConditionsManager' => 'framework/features/conditions-manager.php',
+			'ConditionsRulesResolver' => 'framework/features/conditions/rules-resolver.php',
 
 			'Cli' => 'framework/cli.php',
 
+			'SvgHandling' => 'framework/features/svg.php',
 			'DynamicCss' => 'framework/features/dynamic-css.php',
 			'CustomizerOptionsManager' => 'framework/features/customizer-options-manager.php',
 			'DemoInstall' => 'framework/features/demo-install.php',
@@ -49,6 +55,7 @@ class Autoloader {
 			'DemoInstallOptionsExport' => 'framework/features/demo-install/options-export.php',
 
 			'DemoInstallChildThemeInstaller' => 'framework/features/demo-install/child-theme.php',
+			'DemoInstallAcfData' => 'framework/features/demo-install/acf-data.php',
 			'DemoInstallPluginsInstaller' => 'framework/features/demo-install/required-plugins.php',
 			'DemoInstallPluginsUninstaller' => 'framework/features/demo-install/plugins-uninstaller.php',
 			'DemoInstallContentInstaller' => 'framework/features/demo-install/content-installer.php',
@@ -62,7 +69,6 @@ class Autoloader {
 			/**
 			 * No namespace
 			 */
-			'_BlocksyWidgetFactory' => 'framework/widgets-manager.php',
 			'_Blocksy_WP_Import' => 'framework/features/demo-install/wp-importer.php',
 		];
 

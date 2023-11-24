@@ -147,17 +147,7 @@ class AccountAuth {
 		$_POST['woocommerce-register-nonce'] = '~';
 		add_filter('dokan_register_nonce_check', '__return_false');
 
-		$users_can_register = get_option('users_can_register');
-
-		if (
-			function_exists('is_product')
-			&&
-			get_option('woocommerce_enable_myaccount_registration') === 'yes'
-		) {
-			$users_can_register = true;
-		}
-
-		if (!$users_can_register) {
+		if (! $this->get_registration_strategy()) {
 			exit;
 		}
 
@@ -191,7 +181,7 @@ class AccountAuth {
 			exit;
 		}
 
-		if ($this->has_woo_register_flow()) {
+		if ($this->get_registration_strategy() === 'woocommerce') {
 			$validation_error = new \WP_Error();
 			$validation_error = apply_filters(
 				'woocommerce_process_registration_errors',
@@ -231,7 +221,7 @@ class AccountAuth {
 		if (! is_wp_error($errors)) {
 			$errors = new \WP_Error();
 
-			if ($this->has_woo_register_flow()) {
+			if ($this->get_registration_strategy() === 'woocommerce') {
 				$error_message = sprintf(
 					__(
 						/* translators: 1: link open 2: link close */
@@ -293,10 +283,21 @@ class AccountAuth {
 		wp_die();
 	}
 
-	public function has_woo_register_flow() {
-		return apply_filters(
-			'blocksy:account:register:has_woo_register',
-			function_exists('wc_create_new_customer')
-		);
+	public function get_registration_strategy() {
+		$strategy = null;
+
+		if (get_option('users_can_register')) {
+			$strategy = 'wp';
+		}
+
+		if (
+			function_exists('is_product')
+			&&
+			get_option('woocommerce_enable_myaccount_registration') === 'yes'
+		) {
+			$strategy = 'woocommerce';
+		}
+
+		return apply_filters('blocksy:account:register:strategy', $strategy);
 	}
 }

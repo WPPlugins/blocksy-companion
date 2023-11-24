@@ -34,7 +34,7 @@ if (! function_exists('blc_get_trending_posts_value')) {
 
 		$date_query = [];
 
-		$date_filter = get_theme_mod('trending_block_filter', 'all_time');
+		$date_filter = blocksy_get_theme_mod('trending_block_filter', 'all_time');
 
 		if ($date_filter && 'all_time' !== $date_filter) {
 			$days = [
@@ -64,13 +64,13 @@ if (! function_exists('blc_get_trending_posts_value')) {
 			);
 		}
 
-		$post_type = get_theme_mod('trending_block_post_type', 'post');
+		$post_type = blocksy_get_theme_mod('trending_block_post_type', 'post');
 
 		if ($post_type === 'product' && ! class_exists('WooCommerce')) {
 			$post_type = 'post';
 		}
 
-		$source = get_theme_mod('trending_block_post_source', 'categories');
+		$source = blocksy_get_theme_mod('trending_block_post_source', 'categories');
 
 		$query_args = [
 			'post_type' => $post_type,
@@ -91,7 +91,7 @@ if (! function_exists('blc_get_trending_posts_value')) {
 				$cat_option_id = 'trending_block_' . $post_type . '_taxonomy';
 			}
 
-			$cat_id = get_theme_mod($cat_option_id, 'all_categories');
+			$cat_id = blocksy_get_theme_mod($cat_option_id, 'all_categories');
 			$cat_id = (empty($cat_id) || 'all_categories' === $cat_id) ? '' : $cat_id;
 
 			if (! empty($cat_id)) {
@@ -110,7 +110,7 @@ if (! function_exists('blc_get_trending_posts_value')) {
 		}
 
 		if ($source === 'custom') {
-			$post_id = get_theme_mod('trending_block_post_id', '');
+			$post_id = blocksy_get_theme_mod('trending_block_post_id', '');
 
 			$query_args['orderby'] = 'post__in';
 			$query_args['post__in'] = ['__INEXISTING__'];
@@ -148,11 +148,10 @@ if (! function_exists('blc_get_trending_posts_value')) {
 			];
 
 			if (get_post_thumbnail_id()) {
-				$individual_entry['image'] = blc_call_fn(
-					['fn' => 'blocksy_image'],
+				$individual_entry['image'] = blocksy_media(
 					[
 						'attachment_id' => get_post_thumbnail_id(),
-						'size' => get_theme_mod(
+						'size' => blocksy_get_theme_mod(
 							'trending_block_thumbnails_size',
 							'thumbnail'
 						),
@@ -197,9 +196,8 @@ function blc_get_trending_block($result = null) {
 
 	$class = 'ct-trending-block';
 
-	$class .= ' ' . blc_call_fn(
-		['fn' => 'blocksy_visibility_classes'],
-		get_theme_mod('trending_block_visibility', [
+	$class .= ' ' . blocksy_visibility_classes(
+		blocksy_get_theme_mod('trending_block_visibility', [
 			'desktop' => true,
 			'tablet' => true,
 			'mobile' => false,
@@ -212,12 +210,12 @@ function blc_get_trending_block($result = null) {
 
 	if (is_customize_preview()) {
 		$attr['data-shortcut'] = 'border';
-		$attr['data-location'] = 'trending_posts_ext';
+		$attr['data-shortcut-location'] = 'trending_posts_ext';
 	}
 
-	$label_tag = get_theme_mod('trending_block_label_tag', 'h3');
+	$label_tag = blocksy_get_theme_mod('trending_block_label_tag', 'h3');
 
-	$trending_label = get_theme_mod(
+	$trending_label = blocksy_get_theme_mod(
 		'trending_block_label',
 		__('Trending now', 'blocksy-companion')
 	);

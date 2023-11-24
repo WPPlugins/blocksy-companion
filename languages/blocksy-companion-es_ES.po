@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-09-26 07:36:29+0000\n"
+"PO-Revision-Date: 2023-11-20 08:22:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,11 +33,11 @@ msgstr ""
 
 #: framework/features/conditions-manager.php:759
 msgid "Product Archives"
-msgstr ""
+msgstr "Archivos de producto"
 
 #: framework/features/conditions-manager.php:764
 msgid "Product Categories"
-msgstr ""
+msgstr "Categorías de Producto"
 
 #: framework/features/conditions-manager.php:769
 msgid "Product Tags"
@@ -1465,7 +1465,7 @@ msgstr ""
 #: framework/premium/extensions/mega-menu/options.php:509,
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:260
 msgid "Vertical Alignment"
-msgstr ""
+msgstr "Alineación Vertical"
 
 #: framework/premium/extensions/mega-menu/options.php:544,
 #: framework/premium/extensions/shortcuts/customizer.php:883,
@@ -1484,7 +1484,7 @@ msgstr ""
 #: framework/premium/features/premium-header/items/contacts/options.php:520,
 #: framework/premium/features/premium-header/items/contacts/options.php:560
 msgid "Link Initial"
-msgstr ""
+msgstr "Enlace Inicial"
 
 #: framework/premium/extensions/mega-menu/options.php:583
 msgid "Link Hover/Active"
@@ -1834,7 +1834,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/extension.php:739
 msgid "Available Filters"
-msgstr ""
+msgstr "Filtros Disponibles"
 
 #: framework/premium/extensions/woocommerce-extra/extension.php:833
 msgid "Quick view title before"
@@ -1889,7 +1889,7 @@ msgstr "Ir a página del producto"
 
 #: framework/premium/extensions/woocommerce-extra/helpers.php:191
 msgid "Filter"
-msgstr ""
+msgstr "Filtrar"
 
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:3
 msgid "Off Canvas Filter"
@@ -1928,7 +1928,7 @@ msgstr ""
 #: framework/premium/features/premium-header/items/contacts/options.php:515,
 #: framework/premium/features/premium-header/items/contacts/options.php:555
 msgid "Text Initial"
-msgstr ""
+msgstr "Texto inicial"
 
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:149,
 #: framework/premium/features/premium-header/items/contacts/options.php:484,
@@ -1947,7 +1947,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:207
 msgid "Filter Button Visibility"
-msgstr ""
+msgstr "Visibilidad del botón Filtrar"
 
 #: framework/premium/extensions/woocommerce-extra/offcanvas-filter.php:230
 msgid "Panel Reveal"
@@ -3234,7 +3234,7 @@ msgstr "Lista de deseos"
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-helpers.php:46,
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-helpers.php:54
 msgid "Add to wishlist"
-msgstr ""
+msgstr "Incluir a lista de deseos"
 
 #: framework/premium/extensions/woocommerce-extra/includes/wish-list-options.php:9
 msgid "Select a page"
@@ -5781,7 +5781,7 @@ msgstr ""
 
 #: framework/extensions/widgets/config.php:6
 msgid "Add new handcrafted widgets to your sidebars! Social Network Icons, Newsletter Subscribe, Contact Info, Custom Ads and even a Popular/Recent Posts are the choices available."
-msgstr ""
+msgstr "¡Agrega nuevos widgets manualmente o a tus barras laterales! Las opciones disponibles son íconos de redes sociales, suscripción a boletines informativos, información de contacto, anuncios personalizados e incluso publicaciones populares/recientes."
 
 #: framework/features/header/account-modal.php:49,
 #: framework/features/header/items/account/options.php:631,

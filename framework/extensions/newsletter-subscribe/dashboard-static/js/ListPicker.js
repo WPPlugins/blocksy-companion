@@ -54,7 +54,12 @@ const ListPicker = ({ listId, provider, apiKey, onChange }) => {
 				if (body.success) {
 					if (body.data.result !== 'api_key_invalid') {
 						setListsLoading(false)
-						setLists(body.data.result)
+						setLists(
+							body.data.result.map((list) => ({
+								...list,
+								id: list.id.toString(),
+							}))
+						)
 
 						return
 					}
@@ -76,13 +81,11 @@ const ListPicker = ({ listId, provider, apiKey, onChange }) => {
 	}, [provider, apiKey])
 
 	return lists.length === 0 ? (
-		<div className="ct-select-input">
+		<div className={classnames('ct-select-input', 'ct-no-results')}>
 			<input
 				disabled
 				placeholder={
-					isLoadingLists
-						? __('Loading', 'blocksy-companion')
-						: __('Invalid API Key...', 'blocksy-companion')
+					isLoadingLists ? __('Fetching...', 'blocksy-companion') : ''
 				}
 			/>
 		</div>

@@ -1,4 +1,5 @@
-@import '../../../../../static/sass/common-frontend';
+@import '../../../../../static/sass/frontend/common-frontend/functions';
+@import '../../../../../static/sass/frontend/common-frontend/mixins';
 
 .ct-trending-block {
 	padding: var(--padding, 30px) 0;
@@ -110,10 +111,10 @@
 	a {
 		display: flex;
 		align-items: center;
-		--linkInitialColor: var(--color);
+		--theme-link-initial-color: var(--theme-text-color);
 	}
 
-	.ct-image-container {
+	.ct-media-container {
 		flex: 0 0 60px;
 		border-radius: 100%;
 		margin-inline-end: 20px;
@@ -135,9 +136,9 @@
 		background: transparent;
 		border-radius: 2px;
 		opacity: 0.5;
-		color: var(--color);
+		color: var(--theme-text-color);
 		border: 1px solid currentColor;
-		transition: var(--transition);
+		transition: var(--theme-transition);
 
 		&:before {
 			content: '';
@@ -151,15 +152,15 @@
 		&:hover {
 			opacity: 1;
 			color: #fff;
-			border-color: var(--linkHoverColor);
-			background: var(--linkHoverColor);
+			border-color: var(--theme-link-hover-color);
+			background: var(--theme-link-hover-color);
 		}
 	}
 
 	.ct-arrow-left {
 		margin-inline-start: auto;
 		margin-inline-end: 8px;
-		padding-left: 1px;
+		padding-inline-start: 1px;
 
 		&:before {
 			transform: rotate(-45deg);
@@ -167,7 +168,7 @@
 	}
 
 	.ct-arrow-right {
-		padding-right: 1px;
+		padding-inline-end: 1px;
 
 		&:before {
 			transform: rotate(135deg);

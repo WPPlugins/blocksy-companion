@@ -641,7 +641,7 @@ class Blocksy_WP_Import extends WP_Importer {
 			}
 
 			// Export gets meta straight from the DB so could have a serialized string
-			$value = maybe_unserialize( $meta['value'] );
+			$value = maybe_unserialize( wp_unslash($meta['value']) );
 
 			add_term_meta($term_id, wp_slash($key), $value);
 

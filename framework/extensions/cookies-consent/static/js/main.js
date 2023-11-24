@@ -76,6 +76,44 @@ const initCookies = () => {
 					),
 					sameSite: 'lax',
 				})
+
+				const body = new FormData()
+				body.append('action', 'blc_load_blocked_scripts')
+
+				fetch(ct_localizations.ajax_url, {
+					method: 'POST',
+					body,
+				})
+					.then((r) => r.json())
+					.then(({ data: scripts }) => {
+						scripts.map((scriptTag) => {
+							const parser = new DOMParser()
+							const html = parser.parseFromString(
+								scriptTag,
+								'text/html'
+							)
+
+							const scriptsToLoad =
+								html.querySelectorAll('script')
+
+							if (!scriptsToLoad) return
+							;[...scriptsToLoad].map((script) => {
+								const newTag = document.createElement('script')
+
+								if (script.innerHTML) {
+									newTag.innerHTML = script.innerHTML
+								}
+
+								;[...script.attributes].map(
+									({ name, value }) => {
+										newTag.setAttribute(name, value)
+									}
+								)
+
+								document.head.appendChild(newTag)
+							})
+						})
+					})
 			}
 
 			if (el.classList.contains('ct-cookies-decline-button')) {

@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.9.11
+Stable tag: 2.0.0
 
 == Description ==
 
@@ -23,6 +23,119 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+2.0.0: 2023-11-24
+- New: Convert old legacy widgets to block widgets
+- New: Dropdown menu for account widget in header
+- New: Footer builder logo element - add lazy loading attribute to image
+- New: More integrations for newsletter module (Sendinblue, CampaignMonitor, ConvertKit)
+- New: New dashboard extensions screen
+- Improvement: Account modal - integration with Two-Factor plugin
+- Improvement: Account modal - use core registration if WooCommerce registration is disabled
+- Improvement: Automatically load Google analytics on cookies notice approve
+- Improvement: Performance - Faster PHP classes autoloader
+- Improvement: Performance - Smarter load extensions CSS files (only when extensions is activated and present on a page)
+- Improvement: Prefix CSS variables in order to not conflict with other plugins
+- Fix: Prevent errors on SVG's size calculation
+
+2.0.0-rc4: 2023-11-21
+- Improvement: General fixes and improvements
+
+2.0.0-rc3: 2023-11-17
+- Improvement: General fixes and improvements
+
+2.0.0-rc2: 2023-11-10
+- Improvement: General fixes and improvements
+
+2.0.0-rc1: 2023-10-27
+- New: Convert old legacy widgets to block widgets
+- New: Dropdown menu for account widget in header
+- New: Footer builder logo element - add lazy loading attribute to image
+- New: More integrations for newsletter module (Sendinblue, CampaignMonitor, ConvertKit)
+- New: New dashboard extensions screen
+- Improvement: Account modal - integration with Two-Factor plugin
+- Improvement: Account modal - use core registration if WooCommerce registration is disabled
+- Improvement: Automatically load Google analytics on cookies notice approve
+- Improvement: Performance - Faster PHP classes autoloader
+- Improvement: Performance - Smarter load extensions CSS files (only when extensions is activated and present on a page)
+- Improvement: Prefix CSS variables in order to not conflict with other plugins
+- Fix: Prevent errors on SVG's size calculation
+
+2.0.0-beta26: 2023-10-25
+- Improvement: General fixes and improvements
+
+2.0.0-beta25: 2023-10-06
+- Improvement: General fixes and improvements
+
+2.0.0-beta24: 2023-10-06
+- Improvement: General fixes and improvements
+
+2.0.0-beta23: 2023-09-29
+- Improvement: General fixes and improvements
+
+2.0.0-beta22: 2023-09-22
+- Improvement: General fixes and improvements
+
+2.0.0-beta21: 2023-09-15
+- Improvement: General fixes and improvements
+
+2.0.0-beta20: 2023-09-08
+- Improvement: General fixes and improvements
+
+2.0.0-beta19: 2023-09-01
+- Improvement: General fixes and improvements
+
+2.0.0-beta18: 2023-08-28
+- Improvement: General fixes and improvements
+
+2.0.0-beta17: 2023-08-25
+- Improvement: General fixes and improvements
+
+2.0.0-beta16: 2023-08-18
+- Improvement: General fixes and improvements
+
+2.0.0-beta15: 2023-08-11
+- Improvement: General fixes and improvements
+
+2.0.0-beta14: 2023-08-04
+- Improvement: General fixes and improvements
+
+2.0.0-beta13: 2023-07-28
+- Improvement: General fixes and improvements
+
+2.0.0-beta12: 2023-07-21
+- Improvement: General fixes and improvements
+
+2.0.0-beta11: 2023-07-14
+- Improvement: General fixes and improvements
+
+2.0.0-beta10: 2023-07-07
+- Improvement: General fixes and improvements
+
+2.0.0-beta9: 2023-06-30
+- Improvement: General fixes and improvements
+
+2.0.0-beta8: 2023-06-23
+- Improvement: General fixes and improvements
+
+2.0.0-beta7: 2023-06-16
+- Improvement: General fixes and improvements
+
+2.0.0-beta6: 2023-05-26
+- Improvement: General fixes and improvements
+
+2.0.0-beta5: 2023-05-26
+- Improvement: General fixes and improvements
+
+2.0.0-beta4: 2023-05-17
+- Improvement: General fixes and improvements
+
+2.0.0-beta3: 2023-05-12
+- New: Convert old legacy widgets to block widgets
+- New: Dropdown menu for account widget in header
+- New: More integrations for newsletter module (Sendinblue & CampaignMonitor)
+- New: New dashboard extensions screen
+- Improvement: Account modal - use core registration if WooCommerce registration is disabled
+
 1.9.11: 2023-11-09
 - Improvement: Better compatibility with WordPress 6.4
 

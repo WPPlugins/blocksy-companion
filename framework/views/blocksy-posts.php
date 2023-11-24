@@ -182,6 +182,12 @@ if ($args['view'] === 'slider') {
 		}
 	}
 
+	global $wp_query;
+
+	$previous_query = $wp_query;
+
+	$wp_query = $query;
+
 	echo '<div class="' . $shortcode_class . '" data-prefix="' . $prefix . '">';
 
 	if (
@@ -207,8 +213,12 @@ if ($args['view'] === 'slider') {
 		'has_pagination' => $args['has_pagination'] === 'yes'
 	]);
 
+	$wp_query = $previous_query;
+	
 	wp_reset_postdata();
+	
 
 	echo '</div>';
 }
+
 

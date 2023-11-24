@@ -9,13 +9,6 @@ ctEvents.on(
 	'ct:customizer:sync:collect-variable-descriptors',
 	(allVariables) => {
 		allVariables.result = {
-			...allVariables.result,
-			trendingBlockContainerSpacing: {
-				selector: '.ct-trending-block',
-				variable: 'padding',
-				responsive: true,
-				unit: '',
-			},
 
 			...typographyOption({
 				id: 'trendingBlockHeadingFont',
@@ -24,7 +17,7 @@ ctEvents.on(
 
 			trendingBlockHeadingFontColor: {
 				selector: '.ct-trending-block .ct-block-title',
-				variable: 'heading-color',
+				variable: 'theme-heading-color',
 				type: 'color',
 				responsive: true,
 			},
@@ -37,14 +30,14 @@ ctEvents.on(
 			trendingBlockFontColor: [
 				{
 					selector: '.ct-trending-block a',
-					variable: 'color',
+					variable: 'theme-text-color',
 					type: 'color:default',
 					responsive: true,
 				},
 
 				{
 					selector: '.ct-trending-block a',
-					variable: 'linkHoverColor',
+					variable: 'theme-link-hover-color',
 					type: 'color:hover',
 					responsive: true,
 				},
@@ -53,14 +46,14 @@ ctEvents.on(
 			trendingBlockArrowsColor: [
 				{
 					selector: '.ct-trending-block [class*="ct-arrow"]',
-					variable: 'color',
+					variable: 'theme-text-color',
 					type: 'color:default',
 					responsive: true,
 				},
 
 				{
 					selector: '.ct-trending-block [class*="ct-arrow"]',
-					variable: 'linkHoverColor',
+					variable: 'theme-link-hover-color',
 					type: 'color:hover',
 					responsive: true,
 				},
@@ -71,6 +64,14 @@ ctEvents.on(
 				selector: '.ct-trending-block',
 				responsive: true,
 			}),
+
+			...allVariables.result,
+			trendingBlockContainerSpacing: {
+				selector: '.ct-trending-block',
+				variable: 'padding',
+				responsive: true,
+				unit: '',
+			},
 		}
 	}
 )

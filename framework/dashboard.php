@@ -173,8 +173,7 @@ class Dashboard {
 			blc_fs()->add_action('connect/before', function () {
 				$path = dirname(__FILE__) . '/views/optin.php';
 
-				echo blc_call_fn(
-					['fn' => 'blocksy_render_view'],
+				echo blocksy_render_view(
 					$path,
 					[]
 				);
@@ -216,8 +215,19 @@ class Dashboard {
 						$connect_template = ob_get_clean();
 					}
 
+					$current_plan = blc_get_capabilities()->get_plan();
+
+					// $current_plan = 'free';
+
 					$result = [
-						'is_pro' => blc_fs()->can_use_premium_code(),
+						// 'is_pro' => blc_fs()->can_use_premium_code(),
+
+						'is_pro' => $current_plan !== 'free',
+						'current_plan' => $current_plan,
+
+						'pro_starter_sites' => blc_get_capabilities()->get_features()['pro_starter_sites'],
+						'pro_starter_sites_enhanced' => blc_get_capabilities()->get_features()['pro_starter_sites_enhanced'],
+
 						'is_anonymous' => $is_anonymous,
 						'connect_template' => $connect_template
 					];
@@ -334,7 +344,7 @@ class Dashboard {
 	}
 
 	public function setup_framework_page() {
-		if (! current_user_can('activate_plugins')) {
+		if (! current_user_can('manage_options')) {
 			return;
 		}
 
@@ -343,12 +353,12 @@ class Dashboard {
 		$options = [
 			'title' => __('Blocksy', 'blocksy-companion'),
 			'menu-title' => __('Blocksy', 'blocksy-companion'),
-			'permision' => 'activate_plugins',
+			'permision' => 'manage_options',
 			'top-level-handle' => 'ct-dashboard',
 			'callback' => [$this, 'welcome_page_template'],
 			'icon-url' => apply_filters(
 				'blocksy:dashboard:icon-url',
-				'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDE4IDE4IiB2aWV3Qm94PSIwIDAgMTggMTgiPjxwYXRoIGQ9Ik05IDBjNSAwIDkgNCA5IDlzLTQgOS05IDktOS00LTktOSA0LTkgOS05em0yLjQgOS4yaC0uMmwtNC45IDQuNnYuMUgxMWMuMSAwIC4xIDAgLjItLjFsMi4yLTJjLjItLjIuMy0uNiAwLS44bC0yLTEuOHptMC01aC0uMkw1LjggOS4zbC0uMS4xdjMuOHMuMS4xLjEgMGw3LjEtNi42Yy4zLS4yLjMtLjggMC0xbC0xLjUtMS40em0tMS0uM0g1LjhjLS4xIDAtLjEgMC0uMS4xdjQuMnMuMS4xLjEgMGw0LjYtNC4zYy4xLjEuMSAwIDAgMHoiLz48L3N2Zz4='
+				'data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMzUgMzUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDM1IDM1OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxwYXRoIGQ9Ik0yMS42LDIxLjNjMCwwLjYtMC41LDEuMS0xLjEsMS4xaC0zLjVsLTAuOS0yLjJoNC40QzIxLjEsMjAuMiwyMS42LDIwLjcsMjEuNiwyMS4zeiBNMjAuNiwxMy41aC00LjRsMC45LDIuMmgzLjUKCWMwLjYsMCwxLjEtMC41LDEuMS0xLjFDMjEuNiwxNCwyMS4xLDEzLjUsMjAuNiwxMy41eiBNMzUsMTcuNUMzNSwyNy4yLDI3LjIsMzUsMTcuNSwzNUM3LjgsMzUsMCwyNy4yLDAsMTcuNUMwLDcuOCw3LjgsMCwxNy41LDAKCUMyNy4yLDAsMzUsNy44LDM1LDE3LjV6IE0yNSwxNy45YzAuNy0wLjksMS4xLTIuMSwxLjEtMy40YzAtMS4yLTAuNC0yLjQtMS4xLTMuM2MtMS0xLjQtMi42LTIuMy00LjQtMi4zYzAsMC0wLjEsMC0wLjEsMHYwSDkuOQoJYy0wLjMsMC0wLjUsMC4zLTAuNCwwLjVsMi42LDYuMkg5LjljLTAuMywwLTAuNSwwLjMtMC40LDAuNUwxNCwyNi45aDYuNWMzLjEsMCw1LjYtMi41LDUuNi01LjZDMjYuMiwyMCwyNS44LDE4LjksMjUsMTcuOQoJQzI1LjEsMTcuOSwyNS4xLDE3LjksMjUsMTcuOXoiLz4KPC9zdmc+Cg=='
 			),
 			'position' => 2,
 		];
@@ -392,5 +402,26 @@ class Dashboard {
 		}
 
 		echo '<div id="ct-dashboard"></div>';
+	}
+}
+
+if (! function_exists('blocksy_render_view')) {
+	function blocksy_render_view(
+		$file_path,
+		$view_variables = [],
+		$default_value = ''
+	) {
+		if (! is_file($file_path)) {
+			return $default_value;
+		}
+
+		// phpcs:ignore WordPress.PHP.DontExtract.extract_extract
+		extract($view_variables, EXTR_REFS);
+		unset($view_variables);
+
+		ob_start();
+		require $file_path;
+
+		return ob_get_clean();
 	}
 }

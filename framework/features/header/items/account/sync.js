@@ -22,7 +22,7 @@ ctEvents.on(
 							to_add: '[data-state="out"]',
 						})
 					),
-					variable: 'icon-size',
+					variable: 'theme-icon-size',
 					responsive: true,
 					unit: 'px',
 				},
@@ -35,7 +35,7 @@ ctEvents.on(
 							to_add: '[data-state="in"]',
 						})
 					),
-					variable: 'icon-size',
+					variable: 'theme-icon-size',
 					responsive: true,
 					unit: 'px',
 				},
@@ -53,7 +53,7 @@ ctEvents.on(
 						mutateSelector({
 							selector: [getRootSelectorFor({ itemId })[0]],
 							operation: 'suffix',
-							to_add: '#account-modal .ct-account-form',
+							to_add: '#account-modal .ct-account-modal',
 						})
 					),
 				}),
@@ -74,24 +74,24 @@ ctEvents.on(
 						mutateSelector({
 							selector: [getRootSelectorFor({ itemId })[0]],
 							operation: 'suffix',
-							to_add: '#account-modal .ct-account-form',
+							to_add: '#account-modal .ct-account-modal',
 						})
 					),
 					type: 'box-shadow',
-					variable: 'box-shadow',
+					variable: 'theme-box-shadow',
 					// responsive: true,
 				},
 
 				account_modal_font_color: [
 					{
-						selector: '#account-modal .ct-account-form',
-						variable: 'color',
+						selector: '#account-modal .ct-account-modal',
+						variable: 'theme-text-color',
 						type: 'color:default',
 					},
 
 					{
-						selector: '#account-modal .ct-account-form',
-						variable: 'linkHoverColor',
+						selector: '#account-modal .ct-account-modal',
+						variable: 'theme-link-hover-color',
 						type: 'color:hover',
 					},
 				],
@@ -99,13 +99,13 @@ ctEvents.on(
 				account_modal_form_text_color: [
 					{
 						selector: '#account-modal form',
-						variable: 'form-text-initial-color',
+						variable: 'theme-form-text-initial-color',
 						type: 'color:default',
 					},
 
 					{
 						selector: '#account-modal form',
-						variable: 'form-text-focus-color',
+						variable: 'theme-form-text-focus-color',
 						type: 'color:focus',
 					},
 				],
@@ -113,13 +113,13 @@ ctEvents.on(
 				account_modal_form_border_color: [
 					{
 						selector: '#account-modal form',
-						variable: 'form-field-border-initial-color',
+						variable: 'theme-form-field-border-initial-color',
 						type: 'color:default',
 					},
 
 					{
 						selector: '#account-modal form',
-						variable: 'form-field-border-focus-color',
+						variable: 'theme-form-field-border-focus-color',
 						type: 'color:focus',
 					},
 				],
@@ -127,13 +127,13 @@ ctEvents.on(
 				account_modal_form_background_color: [
 					{
 						selector: '#account-modal form',
-						variable: 'form-field-initial-background',
+						variable: 'theme-form-field-background-initial-color',
 						type: 'color:default',
 					},
 
 					{
 						selector: '#account-modal form',
-						variable: 'form-field-focus-background',
+						variable: 'theme-form-field-background-focus-color',
 						type: 'color:focus',
 					},
 				],
@@ -141,13 +141,13 @@ ctEvents.on(
 				account_close_button_color: [
 					{
 						selector: '#account-modal .ct-toggle-close',
-						variable: 'icon-color',
+						variable: 'theme-icon-color',
 						type: 'color:default',
 					},
 
 					{
 						selector: '#account-modal .ct-toggle-close:hover',
-						variable: 'icon-color',
+						variable: 'theme-icon-color',
 						type: 'color:hover',
 					},
 				],
@@ -207,18 +207,26 @@ ctEvents.on(
 				accountHeaderColor: [
 					{
 						selector: assembleSelector(
-							getRootSelectorFor({ itemId })
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-account-item',
+							})
 						),
-						variable: 'linkInitialColor',
+						variable: 'theme-link-initial-color',
 						type: 'color:default',
 						responsive: true,
 					},
 
 					{
 						selector: assembleSelector(
-							getRootSelectorFor({ itemId })
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-account-item',
+							})
 						),
-						variable: 'linkHoverColor',
+						variable: 'theme-link-hover-color',
 						type: 'color:hover',
 						responsive: true,
 					},
@@ -227,18 +235,26 @@ ctEvents.on(
 				header_account_icon_color: [
 					{
 						selector: assembleSelector(
-							getRootSelectorFor({ itemId })
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-account-item',
+							})
 						),
-						variable: 'icon-color',
+						variable: 'theme-icon-color',
 						type: 'color:default',
 						responsive: true,
 					},
 
 					{
 						selector: assembleSelector(
-							getRootSelectorFor({ itemId })
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-account-item',
+							})
 						),
-						variable: 'icon-hover-color',
+						variable: 'theme-icon-hover-color',
 						type: 'color:hover',
 						responsive: true,
 					},
@@ -249,13 +265,17 @@ ctEvents.on(
 					{
 						selector: assembleSelector(
 							mutateSelector({
-								selector: getRootSelectorFor({ itemId }),
+								selector: mutateSelector({
+									selector: getRootSelectorFor({ itemId }),
+									operation: 'suffix',
+									to_add: '.ct-account-item',
+								}),
 								operation: 'between',
 								to_add: '[data-transparent-row="yes"]',
 							})
 						),
 
-						variable: 'linkInitialColor',
+						variable: 'theme-link-initial-color',
 						type: 'color:default',
 						responsive: true,
 					},
@@ -263,13 +283,17 @@ ctEvents.on(
 					{
 						selector: assembleSelector(
 							mutateSelector({
-								selector: getRootSelectorFor({ itemId }),
+								selector: mutateSelector({
+									selector: getRootSelectorFor({ itemId }),
+									operation: 'suffix',
+									to_add: '.ct-account-item',
+								}),
 								operation: 'between',
 								to_add: '[data-transparent-row="yes"]',
 							})
 						),
 
-						variable: 'linkHoverColor',
+						variable: 'theme-link-hover-color',
 						type: 'color:hover',
 						responsive: true,
 					},
@@ -279,12 +303,16 @@ ctEvents.on(
 					{
 						selector: assembleSelector(
 							mutateSelector({
-								selector: getRootSelectorFor({ itemId }),
+								selector: mutateSelector({
+									selector: getRootSelectorFor({ itemId }),
+									operation: 'suffix',
+									to_add: '.ct-account-item',
+								}),
 								operation: 'between',
 								to_add: '[data-transparent-row="yes"]',
 							})
 						),
-						variable: 'icon-color',
+						variable: 'theme-icon-color',
 						type: 'color:default',
 						responsive: true,
 					},
@@ -292,12 +320,16 @@ ctEvents.on(
 					{
 						selector: assembleSelector(
 							mutateSelector({
-								selector: getRootSelectorFor({ itemId }),
+								selector: mutateSelector({
+									selector: getRootSelectorFor({ itemId }),
+									operation: 'suffix',
+									to_add: '.ct-account-item',
+								}),
 								operation: 'between',
 								to_add: '[data-transparent-row="yes"]',
 							})
 						),
-						variable: 'icon-hover-color',
+						variable: 'theme-icon-hover-color',
 						type: 'color:hover',
 						responsive: true,
 					},
@@ -308,12 +340,16 @@ ctEvents.on(
 					{
 						selector: assembleSelector(
 							mutateSelector({
-								selector: getRootSelectorFor({ itemId }),
+								selector: mutateSelector({
+									selector: getRootSelectorFor({ itemId }),
+									operation: 'suffix',
+									to_add: '.ct-account-item',
+								}),
 								operation: 'between',
 								to_add: '[data-sticky*="yes"]',
 							})
 						),
-						variable: 'linkInitialColor',
+						variable: 'theme-link-initial-color',
 						type: 'color:default',
 						responsive: true,
 					},
@@ -321,12 +357,16 @@ ctEvents.on(
 					{
 						selector: assembleSelector(
 							mutateSelector({
-								selector: getRootSelectorFor({ itemId }),
+								selector: mutateSelector({
+									selector: getRootSelectorFor({ itemId }),
+									operation: 'suffix',
+									to_add: '.ct-account-item',
+								}),
 								operation: 'between',
 								to_add: '[data-sticky*="yes"]',
 							})
 						),
-						variable: 'linkHoverColor',
+						variable: 'theme-link-hover-color',
 						type: 'color:hover',
 						responsive: true,
 					},
@@ -336,12 +376,16 @@ ctEvents.on(
 					{
 						selector: assembleSelector(
 							mutateSelector({
-								selector: getRootSelectorFor({ itemId }),
+								selector: mutateSelector({
+									selector: getRootSelectorFor({ itemId }),
+									operation: 'suffix',
+									to_add: '.ct-account-item',
+								}),
 								operation: 'between',
 								to_add: '[data-sticky*="yes"]',
 							})
 						),
-						variable: 'icon-color',
+						variable: 'theme-icon-color',
 						type: 'color:default',
 						responsive: true,
 					},
@@ -349,16 +393,109 @@ ctEvents.on(
 					{
 						selector: assembleSelector(
 							mutateSelector({
-								selector: getRootSelectorFor({ itemId }),
+								selector: mutateSelector({
+									selector: getRootSelectorFor({ itemId }),
+									operation: 'suffix',
+									to_add: '.ct-account-item',
+								}),
 								operation: 'between',
 								to_add: '[data-sticky*="yes"]',
 							})
 						),
-						variable: 'icon-hover-color',
+						variable: 'theme-icon-hover-color',
 						type: 'color:hover',
 						responsive: true,
 					},
 				],
+
+				// interation type dropdown
+				header_account_dropdown_font_color: [
+					{
+						selector: assembleSelector(
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '> ul',
+							})
+						),
+						variable: 'theme-text-color',
+						type: 'color:default',
+					},
+
+					{
+						selector: assembleSelector(
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '> ul',
+							})
+						),
+						variable: 'theme-link-initial-color',
+						type: 'color:link_initial',
+					},
+
+					{
+						selector: assembleSelector(
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '> ul',
+							})
+						),
+						variable: 'theme-link-hover-color',
+						type: 'color:link_hover',
+					},
+				],
+
+				header_account_dropdown_color: {
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '> ul',
+						})
+					),
+					variable: 'background-color',
+					type: 'color:default',
+				},
+
+				header_account_dropdown_divider: {
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '> ul',
+						})
+					),
+					variable: 'theme-border',
+					type: 'border',
+				},
+
+				header_account_dropdown_shadow: {
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '> ul',
+						})
+					),
+					type: 'box-shadow',
+					variable: 'theme-box-shadow',
+					responsive: true,
+				},
+
+				header_account_dropdown_radius: {
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '> ul',
+						})
+					),
+					type: 'spacing',
+					variable: 'theme-border-radius',
+					responsive: true,
+				},
 			}
 		}
 	}
@@ -366,6 +503,39 @@ ctEvents.on(
 
 ctEvents.on('ct:header:sync:item:account', ({ optionId, optionValue }) => {
 	const selector = '[data-id="account"]'
+
+	if (optionId === 'dropdown_items') {
+		let accountContainer = document.querySelector(selector)
+
+		optionValue
+			.filter(({ enabled }) => !!enabled)
+			.map((layer, index) => {
+				if (!accountContainer) {
+					return
+				}
+
+				const maybeLayer =
+					accountContainer.querySelector('ul').children[index]
+
+				if (!maybeLayer) {
+					return
+				}
+
+				const linkContainer = maybeLayer.querySelector('a')
+
+				if (!linkContainer) {
+					return
+				}
+
+				if (layer.id === 'custom_link') {
+					linkContainer.setAttribute('href', layer.link)
+				}
+
+				if (layer.label) {
+					linkContainer.innerHTML = layer.label
+				}
+			})
+	}
 
 	if (optionId === 'header_account_visibility') {
 		updateAndSaveEl(selector, (el) =>
@@ -390,6 +560,40 @@ ctEvents.on('ct:header:sync:item:account', ({ optionId, optionValue }) => {
 				label.innerHTML = optionValue
 			})
 		})
+
+		updateAndSaveEl(
+			selector,
+			(el) => {
+				if (!optionValue.desktop) {
+					optionValue = {
+						desktop: optionValue,
+						mobile: optionValue,
+					}
+				}
+
+				;[...el.querySelectorAll('.ct-label')].map((label) => {
+					label.innerHTML = optionValue.desktop
+				})
+			},
+			{ onlyView: 'desktop' }
+		)
+
+		updateAndSaveEl(
+			selector,
+			(el) => {
+				if (!optionValue.desktop) {
+					optionValue = {
+						desktop: optionValue,
+						mobile: optionValue,
+					}
+				}
+
+				;[...el.querySelectorAll('.ct-label')].map((label) => {
+					label.innerHTML = optionValue.mobile
+				})
+			},
+			{ onlyView: 'mobile' }
+		)
 	}
 
 	if (optionId === 'login_label') {
@@ -405,7 +609,7 @@ ctEvents.on('ct:header:sync:item:account', ({ optionId, optionValue }) => {
 		optionId === 'loggedin_label_position'
 	) {
 		updateAndSaveEl(
-			selector,
+			'.ct-account-item',
 			(el) => {
 				if (!optionValue.desktop) {
 					optionValue = {
@@ -420,7 +624,7 @@ ctEvents.on('ct:header:sync:item:account', ({ optionId, optionValue }) => {
 		)
 
 		updateAndSaveEl(
-			selector,
+			'.ct-account-item',
 			(el) => {
 				if (!optionValue.desktop) {
 					optionValue = {

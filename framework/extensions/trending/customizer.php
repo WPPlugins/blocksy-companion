@@ -283,7 +283,7 @@ $options = [
 							],
 						],
 
-						function_exists('blc_fs') && blc_fs()->can_use_premium_code() ? [
+						blc_site_has_feature() ? [
 							'trending_block_location' => [
 								'label' => __('Display Location', 'blocksy-companion'),
 								'type' => 'ct-select',
@@ -419,13 +419,13 @@ $options = [
 								[
 									'title' => __( 'Initial', 'blocksy-companion' ),
 									'id' => 'default',
-									'inherit' => 'var(--color)'
+									'inherit' => 'var(--theme-text-color)'
 								],
 
 								[
 									'title' => __( 'Hover', 'blocksy-companion' ),
 									'id' => 'hover',
-									'inherit' => 'var(--linkHoverColor)'
+									'inherit' => 'var(--theme-link-hover-color)'
 								],
 							],
 						],
@@ -472,7 +472,7 @@ $options = [
 							'value' => blocksy_background_default_value([
 								'backgroundColor' => [
 									'default' => [
-										'color' => 'var(--paletteColor5)',
+										'color' => 'var(--theme-palette-color-5)',
 									],
 								],
 							])

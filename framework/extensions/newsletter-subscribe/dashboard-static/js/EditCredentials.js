@@ -3,6 +3,8 @@ import {
 	Component,
 	useEffect,
 	useState,
+	useMemo,
+	useReducer,
 	Fragment,
 } from '@wordpress/element'
 
@@ -12,17 +14,28 @@ import ListPicker from './ListPicker'
 import Overlay from '../../../../../static/js/helpers/Overlay'
 import { Select } from 'blocksy-options'
 
-const EditCredentials = ({
-	extension,
-	isEditingCredentials,
-	setIsEditingCredentials,
-	onCredentialsValidated,
-}) => {
+import useProExtensionInFree from '../../../../../static/js/dashboard/helpers/useProExtensionInFree'
+
+const EditCredentials = ({ extension, onCredentialsValidated }) => {
 	const [provider, setProvider] = useState(extension.data.provider)
+
 	const [apiKey, setApiKey] = useState(extension.data.api_key)
 	const [listId, setListId] = useState(extension.data.list_id)
 	const [isLoading, setIsLoading] = useState(false)
-	const [isApiKeyInvalid, makeKeyInvalid] = useState(false)
+
+	const { isPro, showNotice, content } = useProExtensionInFree(extension, {
+		strategy: 'pro',
+	})
+
+	useEffect(() => {
+		if (
+			extension.data &&
+			extension.data.provider !== 'mailchimp' &&
+			!isPro
+		) {
+			setProvider('mailchimp')
+		}
+	}, [])
 
 	const attemptToSaveCredentials = async () => {
 		const body = new FormData()
@@ -50,15 +63,10 @@ const EditCredentials = ({
 				if (body.success) {
 					if (body.data.result !== 'api_key_invalid') {
 						onCredentialsValidated()
-						makeKeyInvalid(false)
 					}
 				}
 			}
-
-			makeKeyInvalid(true)
-		} catch (e) {
-			makeKeyInvalid(true)
-		}
+		} catch (e) {}
 
 		await new Promise((r) => setTimeout(() => r(), 1000))
 
@@ -66,164 +74,257 @@ const EditCredentials = ({
 	}
 
 	return (
-		<Overlay
-			items={isEditingCredentials}
-			onDismiss={() => setIsEditingCredentials(false)}
-			className={'ct-mailchimp-modal'}
-			render={() => (
-				<div
-					className={classnames('ct-modal-content', {
-						'ct-key-invalid': isApiKeyInvalid,
-					})}>
-					<h2>{__('API Credentials', 'blocksy-companion')}</h2>
+		<div
+			className={classnames(
+				'ct-extension-options ct-newsletter-subscribe-options'
+			)}>
+			<h4>{__('Connect Newsletter Provider', 'blocksy-companion')}</h4>
 
-					<p
+			<div
+				className="ct-newsletter-credentials"
+				data-columns={provider.indexOf('mailerlite') > -1 ? 4 : 3}>
+				<section>
+					<label>{__('Provider', 'blocksy-companion')}</label>
+					<Select
+						onChange={(copy) => {
+							if (!isPro) {
+								setProvider(copy)
+								setTimeout(() => {
+									setProvider('mailchimp')
+								})
+								showNotice()
+								return
+							}
+
+							setProvider(copy)
+						}}
+						option={{
+							placeholder: __(
+								'Pick Mailing Service',
+								'blocksy-companion'
+							),
+							choices: [
+								{
+									key: 'mailchimp',
+									value: 'Mailchimp',
+								},
+
+								{
+									key: 'mailerlite',
+									value: 'Mailerlite',
+								},
+
+								{
+									key: 'sendinblue',
+									value: 'Sendinblue',
+								},
+
+								{
+									key: 'campaignmonitor',
+									value: 'Campaign Monitor',
+								},
+
+								{
+									key: 'convertkit',
+									value: 'ConvertKit',
+								},
+
+								{
+									key: 'demo',
+									value: 'Demo',
+								},
+							],
+						}}
+						value={
+							provider.indexOf('mailerlite') > -1
+								? 'mailerlite'
+								: provider
+						}
+					/>
+				</section>
+
+				{provider.indexOf('mailerlite') > -1 && (
+					<section>
+						<label>{__('Version', 'blocksy-companion')}</label>
+						<Select
+							onChange={(copy) => {
+								setProvider(
+									copy === 'new'
+										? 'mailerlite-new'
+										: 'mailerlite'
+								)
+							}}
+							option={{
+								placeholder: __(
+									'Pick Mailing Service',
+									'blocksy-companion'
+								),
+								choices: [
+									{
+										key: 'classic',
+										value: 'Classic',
+									},
+
+									{
+										key: 'new',
+										value: 'New',
+									},
+								],
+							}}
+							value={
+								provider === 'mailerlite-new'
+									? 'new'
+									: 'classic'
+							}
+						/>
+					</section>
+				)}
+
+				{(provider === 'mailchimp' ||
+					ctDashboardLocalizations.plugin_data.is_pro) && (
+					<Fragment>
+						<section>
+							<label>{__('API Key', 'blocksy-companion')}</label>
+
+							<div className="ct-option-input">
+								<input
+									type="text"
+									onChange={({ target: { value } }) =>
+										setApiKey(value)
+									}
+									value={apiKey || ''}
+								/>
+							</div>
+						</section>
+						<section>
+							<label>{__('List ID', 'blocksy-companion')}</label>
+
+							<ListPicker
+								listId={listId}
+								onChange={(id) => setListId(id)}
+								provider={provider}
+								apiKey={apiKey}
+							/>
+						</section>
+					</Fragment>
+				)}
+			</div>
+
+			{provider === 'mailchimp' && (
+				<span
+					className="ct-option-description"
+					dangerouslySetInnerHTML={{
+						__html: sprintf(
+							__(
+								'More information on how to generate an API key for Mailchimp can be found %shere%s.',
+								'blocksy-companion'
+							),
+
+							'<a target="_blank" href="https://mailchimp.com/help/about-api-keys/">',
+							'</a>'
+						),
+					}}
+				/>
+			)}
+
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider.indexOf('mailerlite') > -1 && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to generate an API key for Mailerlite can be found %shere%s. Please note that it is required at least one group to be created in your account for the integration to work. More info on how to create a group %shere%s.',
+									'blocksy-companion'
+								),
+
+								'<a target="_blank" href="https://www.mailerlite.com/help/where-to-find-the-mailerlite-api-key-and-documentation">',
+								'</a>',
+								'<a target="_blank" href="https://www.mailerlite.com/help/how-to-create-and-use-groups">',
+								'</a>'
+							),
+						}}
+					/>
+				)}
+
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider.indexOf('demo') > -1 && (
+					<span
+						className="ct-option-description"
 						dangerouslySetInnerHTML={{
 							__html: __(
-								'Enter your Newsletter provider API credentials in the form below.',
+								'This provider is used only for testing purposes. It doesnt register any real subscribers.',
 								'blocksy-companion'
 							),
 						}}
 					/>
+				)}
 
-					<div className="ct-newsletter-select-provider">
-						<Fragment>
-							<h4>
-								{__('Select Provider', 'blocksy-companion')}
-							</h4>
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider === 'sendinblue' && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to generate an API key for Sendiblue can be found %shere%s.',
+									'blocksy-companion'
+								),
 
-							<Select
-								onChange={(copy) => {
-									setProvider(copy)
-								}}
-								option={{
-									placeholder: __(
-										'Pick Mailing Service',
-										'blocksy-companion'
-									),
-									choices: [
-										{
-											key: 'mailchimp',
-											value: 'Mailchimp',
-										},
+								'<a target="_blank" href="https://help.sendinblue.com/hc/en-us/articles/209467485-Create-or-delete-an-API-key">',
+								'</a>'
+							),
+						}}
+					/>
+				)}
 
-										{
-											key: 'mailerlite',
-											value: 'Mailerlite',
-										},
-									],
-								}}
-								value={provider}
-							/>
-						</Fragment>
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider === 'convertkit' && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to generate an API key for ConvertKit can be found %shere%s.',
+									'blocksy-companion'
+								),
 
-						{!ctDashboardLocalizations.plugin_data.is_pro &&
-							provider !== 'mailchimp' && (
-								<p
-									dangerouslySetInnerHTML={{
-										__html: sprintf(
-											__(
-												'This option is available only in Blocksy premium %sversion%s.',
-												'blocksy-companion'
-											),
+								'<a target="_blank" href="https://developers.convertkit.com/#api-basics">',
+								'</a>'
+							),
+						}}
+					/>
+				)}
 
-											'<a target="_blank" href="https://creativethemes.com/blocksy/pricing/">',
-											'</a>'
-										),
-									}}
-								/>
-							)}
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider === 'campaignmonitor' && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to generate an API key for Campaign Monitor can be found %shere%s.',
+									'blocksy-companion'
+								),
 
-						{provider === 'mailchimp' && (
-							<p
-								dangerouslySetInnerHTML={{
-									__html: sprintf(
-										__(
-											'More info on how to generate an API key for Mailchimp can be found %shere%s.',
-											'blocksy-companion'
-										),
+								'<a target="_blank" href="https://help.campaignmonitor.com/api-keys">',
+								'</a>'
+							),
+						}}
+					/>
+				)}
 
-										'<a target="_blank" href="https://mailchimp.com/help/about-api-keys/">',
-										'</a>'
-									),
-								}}
-							/>
-						)}
+			<button
+				className="ct-button-primary"
+				disabled={!apiKey || !listId || isLoading}
+				onClick={() => attemptToSaveCredentials()}>
+				{isLoading
+					? __('Loading...', 'blocksy-companion')
+					: __('Save Settings', 'blocksy-companion')}
+			</button>
 
-						{ctDashboardLocalizations.plugin_data.is_pro &&
-							provider === 'mailerlite' && (
-								<p
-									dangerouslySetInnerHTML={{
-										__html: sprintf(
-											__(
-												'More info on how to generate an API key for Mailerlite can be found %shere%s. Please note that we require at least one group to be created in your account for the integration to work. More info on how to create a group %shere%s.',
-												'blocksy-companion'
-											),
-
-											'<a target="_blank" href="https://www.mailerlite.com/help/where-to-find-the-mailerlite-api-key-and-documentation">',
-											'</a>',
-											'<a target="_blank" href="https://www.mailerlite.com/help/how-to-create-and-use-groups">',
-											'</a>'
-										),
-									}}
-								/>
-							)}
-					</div>
-
-					{(provider === 'mailchimp' ||
-						ctDashboardLocalizations.plugin_data.is_pro) && (
-						<div className="mailchimp-credentials">
-							<section>
-								<label>
-									{__('API Key', 'blocksy-companion')}
-								</label>
-
-								<div className="ct-option-input">
-									<input
-										type="text"
-										onChange={({ target: { value } }) =>
-											setApiKey(value)
-										}
-										value={apiKey || ''}
-									/>
-								</div>
-							</section>
-
-							<section>
-								<label>
-									{__('List ID', 'blocksy-companion')}
-								</label>
-
-								<ListPicker
-									listId={listId}
-									onChange={(id) => setListId(id)}
-									provider={provider}
-									apiKey={apiKey}
-								/>
-							</section>
-
-							<section>
-								<label>&nbsp;</label>
-								<button
-									className="ct-button"
-									data-button="blue"
-									disabled={!apiKey || !listId || isLoading}
-									onClick={() => attemptToSaveCredentials()}>
-									{isLoading
-										? __('Loading...', 'blocksy-companion')
-										: !extension.__object
-										? __('Activate', 'blocksy-companion')
-										: __(
-												'Save Settings',
-												'blocksy-companion'
-										  )}
-								</button>
-							</section>
-						</div>
-					)}
-				</div>
-			)}
-		/>
+			{content}
+		</div>
 	)
 }
 

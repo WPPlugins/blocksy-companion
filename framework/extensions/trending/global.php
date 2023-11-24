@@ -1,7 +1,7 @@
 <?php
 
-blc_call_fn(['fn' => 'blocksy_output_font_css'], [
-	'font_value' => get_theme_mod( 'trendingBlockHeadingFont',
+blocksy_output_font_css([
+	'font_value' => blocksy_get_theme_mod( 'trendingBlockHeadingFont',
 		blocksy_typography_default_values([
 			'size' => '15px',
 		])
@@ -12,8 +12,8 @@ blc_call_fn(['fn' => 'blocksy_output_font_css'], [
 	'selector' => '.ct-trending-block .ct-block-title',
 ]);
 
-blc_call_fn(['fn' => 'blocksy_output_colors'], [
-	'value' => get_theme_mod('trendingBlockHeadingFontColor'),
+blocksy_output_colors([
+	'value' => blocksy_get_theme_mod('trendingBlockHeadingFontColor'),
 	'default' => [
 		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 	],
@@ -23,15 +23,15 @@ blc_call_fn(['fn' => 'blocksy_output_colors'], [
 	'variables' => [
 		'default' => [
 			'selector' => '.ct-trending-block .ct-block-title',
-			'variable' => 'heading-color'
+			'variable' => 'theme-heading-color'
 		],
 	],
 	'responsive' => true,
 ]);
 
 
-blc_call_fn(['fn' => 'blocksy_output_font_css'], [
-	'font_value' => get_theme_mod( 'trendingBlockPostsFont',
+blocksy_output_font_css([
+	'font_value' => blocksy_get_theme_mod( 'trendingBlockPostsFont',
 		blocksy_typography_default_values([
 			'size' => '15px',
 			'variation' => 'n5',
@@ -43,8 +43,8 @@ blc_call_fn(['fn' => 'blocksy_output_font_css'], [
 	'selector' => '.ct-trending-block .ct-item-title',
 ]);
 
-blc_call_fn(['fn' => 'blocksy_output_colors'], [
-	'value' => get_theme_mod('trendingBlockFontColor'),
+blocksy_output_colors([
+	'value' => blocksy_get_theme_mod('trendingBlockFontColor'),
 	'default' => [
 		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -55,19 +55,19 @@ blc_call_fn(['fn' => 'blocksy_output_colors'], [
 	'variables' => [
 		'default' => [
 			'selector' => '.ct-trending-block a',
-			'variable' => 'color'
+			'variable' => 'theme-text-color'
 		],
 
 		'hover' => [
 			'selector' => '.ct-trending-block a',
-			'variable' => 'linkHoverColor'
+			'variable' => 'theme-link-hover-color'
 		],
 	],
 	'responsive' => true,
 ]);
 
-blc_call_fn(['fn' => 'blocksy_output_colors'], [
-	'value' => get_theme_mod('trendingBlockArrowsColor'),
+blocksy_output_colors([
+	'value' => blocksy_get_theme_mod('trendingBlockArrowsColor'),
 	'default' => [
 		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -78,31 +78,28 @@ blc_call_fn(['fn' => 'blocksy_output_colors'], [
 	'variables' => [
 		'default' => [
 			'selector' => '.ct-trending-block [class*="ct-arrow"]',
-			'variable' => 'color'
+			'variable' => 'theme-text-color'
 		],
 
 		'hover' => [
 			'selector' => '.ct-trending-block [class*="ct-arrow"]',
-			'variable' => 'linkHoverColor'
+			'variable' => 'theme-link-hover-color'
 		],
 	],
 	'responsive' => true,
 ]);
 
-blc_call_fn(['fn' => 'blocksy_output_background_css'], [
+blocksy_output_background_css([
 	'selector' => '.ct-trending-block',
 	'css' => $css,
 	'tablet_css' => $tablet_css,
 	'mobile_css' => $mobile_css,
-	'value' => get_theme_mod(
+	'value' => blocksy_get_theme_mod(
 		'trending_block_background',
-		blc_call_fn([
-			'fn' => 'blocksy_background_default_value',
-			'default' => null
-		], [
+		blocksy_background_default_value([
 			'backgroundColor' => [
 				'default' => [
-					'color' => 'var(--paletteColor5)'
+					'color' => 'var(--theme-palette-color-5)'
 				],
 			],
 		])
@@ -110,10 +107,10 @@ blc_call_fn(['fn' => 'blocksy_output_background_css'], [
 	'responsive' => true,
 ]);
 
-$container_inner_spacing = get_theme_mod( 'trendingBlockContainerSpacing', '30px' );
+$container_inner_spacing = blocksy_get_theme_mod( 'trendingBlockContainerSpacing', '30px' );
 
 if ($container_inner_spacing !== '30px') {
-	blc_call_fn(['fn' => 'blocksy_output_responsive'], [
+	blocksy_output_responsive([
 		'css' => $css,
 		'tablet_css' => $tablet_css,
 		'mobile_css' => $mobile_css,

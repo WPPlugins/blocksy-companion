@@ -7,6 +7,7 @@ class DemoInstall {
 		'blocksy_demo_export',
 		'blocksy_demo_list',
 		'blocksy_demo_install_child_theme',
+		'blocksy_demo_install_acf_data',
 		'blocksy_demo_activate_plugins',
 		'blocksy_demo_fake_step',
 		'blocksy_demo_erase_content',
@@ -46,8 +47,19 @@ class DemoInstall {
 		// add_filter( 'woocommerce_prevent_automatic_wizard_redirect', '__return_false' );
 	}
 
+	public function get_demo_remote_url($args = []) {
+		$endpoint = 'https://demo.creativethemes.com/';
+		// $endpoint = 'http://localhost:3008/';
+		return $endpoint . '?' . http_build_query($args);
+	}
+
 	public function blocksy_demo_install_child_theme() {
 		$m = new DemoInstallChildThemeInstaller();
+		$m->import();
+	}
+
+	public function blocksy_demo_install_acf_data() {
+		$m = new DemoInstallAcfData();
 		$m->import();
 	}
 
@@ -155,13 +167,16 @@ class DemoInstall {
 			]
 		);
 
-		$request = wp_remote_get('https://demo.creativethemes.com/?' . http_build_query([
-			'route' => 'get_single',
-			'demo' => $args['demo'] . ':' . $args['builder'],
-			'field' => $args['field']
-		]), [
-			'sslverify' => false
-		]);
+		$request = wp_remote_get(
+			$this->get_demo_remote_url([
+				'route' => 'get_single',
+				'demo' => $args['demo'] . ':' . $args['builder'],
+				'field' => $args['field']
+			]),
+			[
+				'sslverify' => false
+			]
+		);
 
 		if (is_wp_error($request)) {
 			return false;
@@ -179,11 +194,12 @@ class DemoInstall {
 	}
 
 	public function fetch_all_demos() {
-		$request = wp_remote_get('https://demo.creativethemes.com/?route=get_all', [
-			'sslverify' => false
-		]);
-
-		// $request = wp_remote_get('https://demo.creativethemes.BROKEN/?route=get_all');
+		$request = wp_remote_get(
+			$this->get_demo_remote_url([
+				'route' => 'get_all'
+			]),
+			['sslverify' => false]
+		);
 
 		if (is_wp_error($request)) {
 			return false;
@@ -197,7 +213,26 @@ class DemoInstall {
 			return false;
 		}
 
-		return $body;
+		$data = get_plugin_data(BLOCKSY__FILE__);
+
+		$result = [];
+
+		foreach ($body as $single_demo) {
+			if (! isset($single_demo['required_companion_version'])) {
+				$result[] = $single_demo;
+				continue;
+			}
+
+			if (version_compare(
+				$data['Version'],
+				$single_demo['required_companion_version'],
+				'>='
+			)) {
+				$result[] = $single_demo;
+			}
+		}
+
+		return $result;
 	}
 
 	public function blocksy_demo_list() {
@@ -207,13 +242,19 @@ class DemoInstall {
 			wp_send_json_error();
 		}
 
-		$plugins = [
-			'coblocks' => false,
-			'contact-form-7' => false,
-			'woocommerce' => false,
-			'brizy' => false,
-			'elementor' => false,
-		];
+		$plugins = [];
+
+		foreach ($demos as $demo_index => $demo) {
+			foreach ($demo['plugins'] as $plugin) {
+				if (! isset($plugins[$plugin])) {
+					$plugins[$plugin] = false;
+				}
+			}
+
+			if ($demo_index === 0) {
+				// $demos[0]['is_pro'] = true;
+			}
+		}
 
 		foreach ($plugins as $plugin_name => $status) {
 			$plugins_manager = $this->get_plugins_manager();
@@ -272,21 +313,44 @@ class DemoInstall {
 		$content_data = new DemoInstallContentExport();
 		$content_data = $content_data->export();
 
+		$demo_data = [
+			'name' => $name,
+			'options' => $options_data->export(),
+			'widgets' => $widgets_data,
+			'content' => $content_data,
+
+			'pages_ids_options' => $options_data->export_pages_ids_options(),
+			'created_at' => date('d-m-Y'),
+
+			'url' => $url,
+			'is_pro' => !!$is_pro,
+			'builder' => $builder,
+			'plugins' => $plugins
+		];
+
+		if (function_exists('acf_get_internal_post_type_posts')) {
+			$acf_data = [];
+
+			$acf_types = ['acf-field-group', 'acf-post-type', 'acf-taxonomy'];
+
+			foreach ($acf_types as $acf_type) {
+				$result_for_type = acf_get_internal_post_type_posts($acf_type);
+
+				foreach ($result_for_type as $single_field) {
+					$acf_data[] = acf_prepare_internal_post_type_for_export(
+						$single_field,
+						$acf_type
+					);
+				}
+			}
+
+			if (! empty($acf_data)) {
+				$demo_data['acf'] = $acf_data;
+			}
+		}
+
 		wp_send_json_success([
-			'demo' => [
-				'name' => $name,
-				'options' => $options_data->export(),
-				'widgets' => $widgets_data,
-				'content' => $content_data,
-
-				'pages_ids_options' => $options_data->export_pages_ids_options(),
-				'created_at' => date('d-m-Y'),
-
-				'url' => $url,
-				'is_pro' => !!$is_pro,
-				'builder' => $builder,
-				'plugins' => $plugins
-			]
+			'demo' => $demo_data
 		]);
 	}
 

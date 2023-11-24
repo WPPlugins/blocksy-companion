@@ -10,16 +10,16 @@ function blocksy_ext_cookies_consent_output() {
 	}
 	 */
 
-	$content = get_theme_mod(
+	$content = blocksy_get_theme_mod(
 		'cookie_consent_content',
 		__('We use cookies to ensure that we give you the best experience on our website.', 'blocksy-companion')
 	);
 
-	$accept_button_text = get_theme_mod('cookie_consent_button_text', __('Accept', 'blocksy-companion'));
-	$decline_button_text = get_theme_mod('cookie_consent_decline_button_text', __('Decline', 'blocksy-companion'));
+	$accept_button_text = blocksy_get_theme_mod('cookie_consent_button_text', __('Accept', 'blocksy-companion'));
+	$decline_button_text = blocksy_get_theme_mod('cookie_consent_decline_button_text', __('Decline', 'blocksy-companion'));
 
-	$period = get_theme_mod('cookie_consent_period', 'forever');
-	$type = get_theme_mod('cookie_consent_type', 'type-1');
+	$period = blocksy_get_theme_mod('cookie_consent_period', 'forever');
+	$type = blocksy_get_theme_mod('cookie_consent_type', 'type-1');
 
 	$class = 'container';
 
@@ -58,7 +58,7 @@ function blocksy_ext_cookies_checkbox($prefix = '') {
 		$prefix = '_' . $prefix;
 	}
 
-	$message = get_theme_mod(
+	$message = blocksy_get_theme_mod(
 		'forms_cookie_consent_content',
 		sprintf(
 			__('I accept the %sPrivacy Policy%s', 'blocksy-companion'),

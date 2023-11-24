@@ -16,10 +16,18 @@ class BlocksyExtensionCookiesConsent {
 	}
 
 	public function __construct() {
-		add_filter('blocksy:footer:offcanvas-drawer', function ($els) {
-			$els[] = blocksy_ext_cookies_consent_output();
-			return $els;
-		});
+		add_filter(
+			'blocksy:footer:offcanvas-drawer',
+			function ($els, $payload) {
+				if ($payload['location'] === 'start') {
+					$els[] = blocksy_ext_cookies_consent_output();
+				}
+
+				return $els;
+			},
+			10,
+			2
+		);
 
 		add_filter('blocksy-async-scripts-handles', function ($d) {
 			$d[] = 'blocksy-ext-cookies-consent-scripts';
@@ -116,6 +124,32 @@ class BlocksyExtensionCookiesConsent {
 				}
 			}
 		);
+
+		add_action('wp', function() {
+			add_filter('woocommerce_product_review_comment_form_args', [$this, 'change_comment_form']);
+		}, 999);
+
+		add_action('wp_ajax_blc_load_blocked_scripts', [
+			$this,
+			'blc_load_blocked_scripts',
+		]);
+
+		add_action(
+			'wp_ajax_nopriv_blc_load_blocked_scripts',
+			[$this, 'blc_load_blocked_scripts']
+		);
+	}
+
+	public function blc_load_blocked_scripts() {
+		$scripts = apply_filters('blocksy:cookies-consent:scripts-to-load', [], PHP_INT_MAX);
+
+		wp_send_json_success($scripts);
+	}
+
+	public function change_comment_form($comment_form) {
+		$comment_form['comment_field'] .= blocksy_ext_cookies_checkbox('reviews');
+
+		return $comment_form;
 	}
 
 	static public function add_global_styles($args) {
@@ -134,13 +168,10 @@ class BlocksyExtensionCookiesConsent {
 	}
 
 	public function add_options_panel($options) {
-		$options['cookie_consent_ext'] = blc_call_fn(
-			[
-				'fn' => 'blocksy_get_options',
-				'default' => 'array'
-			],
+		$options['cookie_consent_ext'] = blocksy_get_options(
 			dirname(__FILE__) . '/customizer.php',
-			[], false
+			[],
+			false
 		);
 
 		return $options;

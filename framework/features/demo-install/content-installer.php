@@ -170,7 +170,7 @@ class DemoInstallContentInstaller {
 		$demo = $demo_name[0];
 		$builder = $demo_name[1];
 
-		$url = 'https://demo.creativethemes.com/?' . http_build_query([
+		$url = \Blocksy\Plugin::instance()->demo->get_demo_remote_url([
 			'route' => 'get_single_xml',
 			'demo' => $demo . ':' . $builder
 		]);
@@ -272,7 +272,7 @@ class DemoInstallContentInstaller {
 			$header_builder->patch_header_value_for($wp_import->processed_terms);
 		}
 
-		$old_nav_menu_locations = get_theme_mod('nav_menu_locations', []);
+		$old_nav_menu_locations = blocksy_get_theme_mod('nav_menu_locations', []);
 		$should_update_nav_menu_locations = false;
 
 		foreach ($old_nav_menu_locations as $location => $menu_id) {

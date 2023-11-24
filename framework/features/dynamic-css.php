@@ -64,11 +64,23 @@ class DynamicCss {
 			}
 		);
 
-		add_action('updated_option', function($option_name, $old_value, $value) {
-			if ('active_plugins' === $option_name) {
-				$this->generate_css_files();
+		add_action('current_screen', function () {
+			$screen = get_current_screen();
+
+			if ($screen->base === 'plugins') {
+				if (
+					isset($_GET['activate-multi'])
+					||
+					isset($_GET['activate'])
+					||
+					isset($_GET['deactivate'])
+					||
+					isset($_GET['deactivate-multi'])
+				) {
+					$this->generate_css_files();
+				}
 			}
-		}, 10, 3);
+		});
 
 		add_action('blocksy:dynamic-css:refresh-caches', function () {
 			$this->generate_css_files();
@@ -78,7 +90,7 @@ class DynamicCss {
 	}
 
 	public function should_use_files() {
-		return get_theme_mod('dynamic_css_file', 'file') === 'file';
+		return blocksy_get_theme_mod('dynamic_css_file', 'file') === 'file';
 	}
 
 	public function get_chunks() {

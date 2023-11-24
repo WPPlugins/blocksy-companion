@@ -1,9 +1,5 @@
 <?php
 
-require_once dirname(__FILE__) . '/includes/BlocksyNewsletterManager.php';
-require_once dirname(__FILE__) . '/includes/BlocksyMailchimpManager.php';
-require_once dirname(__FILE__) . '/includes/BlocksyMailerliteManager.php';
-
 class BlocksyExtensionNewsletterSubscribePreBoot {
 	public function __construct() {
 		add_action(
@@ -44,7 +40,7 @@ class BlocksyExtensionNewsletterSubscribePreBoot {
 	}
 
 	public function ext_data() {
-		$m = new BlocksyMailchimpManager();
+		$m = new \Blocksy\Extensions\NewsletterSubscribe\MailchimpProvider();
 		return $m->get_settings();
 	}
 
@@ -53,7 +49,7 @@ class BlocksyExtensionNewsletterSubscribePreBoot {
 	}
 
 	public function get_actual_lists() {
-		$m = BlocksyNewsletterManager::get_for_settings();
+		$m = \Blocksy\Extensions\NewsletterSubscribe\Provider::get_for_settings();
 
 		if (! $m->can()) {
 			wp_send_json_error();
@@ -75,7 +71,7 @@ class BlocksyExtensionNewsletterSubscribePreBoot {
 	public function maybe_save_credentials($save = true) {
 		$provider = $this->get_provider_from_request();
 
-		$m = BlocksyNewsletterManager::get_for_provider($provider);
+		$m = \Blocksy\Extensions\NewsletterSubscribe\Provider::get_for_provider($provider);
 
 		if (! $m->can()) {
 			wp_send_json_error();

@@ -151,11 +151,8 @@ class DemoInstallOptionsInstaller {
 					&&
 					$key !== 'woocommerce_thumbnail_cropping'
 				) {
-					if (empty(get_option($key))) {
-						update_option($key, $val);
-					} else {
-						add_option($key, $val);
-					}
+					add_option($key, $val);
+					update_option($key, $val);
 				} else {
 					update_option($key, $val);
 				}
@@ -167,13 +164,129 @@ class DemoInstallOptionsInstaller {
 		$all['sidebar-1'] = [];
 		update_option('sidebars_widgets', $all);
 
-		$all = get_theme_mod('sidebars_widgets');
+		$all = blocksy_get_theme_mod('sidebars_widgets');
 
 		if ($all) {
 			$all['data']['sidebar-1'] = [];
 			set_theme_mod('sidebars_widgets', $all);
 		}
 		 */
+
+		if (
+			class_exists('\FluentForm\App\Hooks\Handlers\ActivationHandler')
+			&&
+			isset($options['fluent_form_forms'])
+		) {
+			$fluentFormActivation = new \FluentForm\App\Hooks\Handlers\ActivationHandler();
+			$fluentFormActivation->migrate();
+
+			$forms = $options['fluent_form_forms'];
+
+			$insertedForms = [];
+
+			if ($forms && is_array($forms)) {
+				foreach ($forms as $formItem) {
+					$formFields = json_encode([]);
+
+					if ($fields = \FluentForm\Framework\Support\Arr::get($formItem, 'form', '')) {
+						$formFields = json_encode($fields);
+					} elseif ($fields = \FluentForm\Framework\Support\Arr::get($formItem, 'form_fields', '')) {
+						$formFields = json_encode($fields);
+					} else {
+					}
+
+					$form = [
+						'title'       => \FluentForm\Framework\Support\Arr::get($formItem, 'title'),
+						'form_fields' => $formFields,
+						'status'      => \FluentForm\Framework\Support\Arr::get($formItem, 'status', 'published'),
+						'has_payment' => \FluentForm\Framework\Support\Arr::get($formItem, 'has_payment', 0),
+						'type'        => \FluentForm\Framework\Support\Arr::get($formItem, 'type', 'form'),
+						'created_by'  => get_current_user_id(),
+					];
+
+					if (\FluentForm\Framework\Support\Arr::get($formItem, 'conditions')) {
+						$form['conditions'] = \FluentForm\Framework\Support\Arr::get($formItem, 'conditions');
+					}
+
+					if (isset($formItem['appearance_settings'])) {
+						$form['appearance_settings'] = \FluentForm\Framework\Support\Arr::get($formItem, 'appearance_settings');
+					}
+
+					$formId = \FluentForm\App\Models\Form::insertGetId($form);
+					$insertedForms[$formId] = [
+						'title'    => $form['title'],
+						'edit_url' => admin_url('admin.php?page=fluent_forms&route=editor&form_id=' . $formId),
+					];
+
+					if (isset($formItem['metas'])) {
+						foreach ($formItem['metas'] as $metaData) {
+							$metaKey = \FluentForm\Framework\Support\Arr::get($metaData, 'meta_key');
+							$metaValue = \FluentForm\Framework\Support\Arr::get($metaData, 'value');
+							if ("ffc_form_settings_generated_css" == $metaKey || "ffc_form_settings_meta" == $metaKey) {
+								$metaValue = str_replace('ff_conv_app_' . \FluentForm\Framework\Support\Arr::get($formItem, 'id'), 'ff_conv_app_' . $formId, $metaValue);
+							}
+							$settings = [
+								'form_id'  => $formId,
+								'meta_key' => $metaKey,
+								'value'    => $metaValue,
+							];
+							\FluentForm\App\Models\FormMeta::insert($settings);
+						}
+					} else {
+						$oldKeys = [
+							'formSettings',
+							'notifications',
+							'mailchimp_feeds',
+							'slack',
+						];
+						foreach ($oldKeys as $key) {
+							if (isset($formItem[$key])) {
+								\FluentForm\App\Models\FormMeta::persist($formId, $key, json_encode(\FluentForm\Framework\Support\Arr::get($formItem, $key)));
+							}
+						}
+					}
+					do_action_deprecated(
+						'fluentform_form_imported',
+						[
+							$formId
+						],
+						FLUENTFORM_FRAMEWORK_UPGRADE,
+						'fluentform/form_imported',
+						'Use fluentform/form_imported instead of fluentform_form_imported.'
+					);
+					do_action('fluentform/form_imported', $formId);
+				}
+			}
+		}
+
+		if (
+			function_exists('wc_get_attribute_taxonomies')
+			&&
+			isset($options['woocommerce_attribute_taxonomies'])
+		) {
+			$current = wc_get_attribute_taxonomies();
+
+			foreach ($options['woocommerce_attribute_taxonomies'] as $attr) {
+				$found = false;
+
+				foreach (array_values($current) as $current_attr) {
+					if ($current_attr->attribute_name === $attr['attribute_name']) {
+						$found = true;
+						break;
+					}
+				}
+
+				if (! $found) {
+					wc_create_attribute([
+						'name' => $attr['attribute_label'],
+						'slug' => $attr['attribute_name'],
+						'type' => $attr['attribute_type'],
+						'order_by' => $attr['attribute_orderby'],
+						'has_archives' => !! $attr['attribute_public']
+					]);
+				}
+			}
+		}
 
 		if (
 			function_exists('wp_update_custom_css_post')

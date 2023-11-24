@@ -340,8 +340,7 @@ class BlocksyExtensionProductReviews {
 					return;
 				}
 
-				echo blc_call_fn(
-					['fn' => 'blocksy_render_view'],
+				echo blocksy_render_view(
 					dirname(__FILE__) . '/views/single-top.php',
 					[]
 				);
@@ -625,8 +624,7 @@ class BlocksyExtensionProductReviews {
 					$values = [[]];
 				}
 
-				$options = blc_call_fn(
-					['fn' => 'blocksy_get_options'],
+				$options = blocksy_get_options(
 					dirname(__FILE__) . '/metabox.php',
 					[],
 					false
