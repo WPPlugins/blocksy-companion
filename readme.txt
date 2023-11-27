@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 
 == Description ==
 
@@ -23,6 +23,10 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+2.0.2: 2023-11-27
+- Improvement: Correctly load styles for the newsletter subscribe shortcode
+- Improvement: Ensure extensions pre boot isn't executed on every ajax request
+
 2.0.1: 2023-11-25
 - Improvement: General fixes and improvements related to update
 

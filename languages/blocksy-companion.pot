@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-24 22:55+0000\n"
+"POT-Creation-Date: 2023-11-27 21:48+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -662,7 +662,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/compare/header-items/compare/options.php:5,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:5
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:352
-#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:107
+#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:111
 #: framework/premium/extensions/white-label/dashboard-static/js/EditSettings.js:100
 msgid "General"
 msgstr ""
@@ -1194,7 +1194,7 @@ msgid "Name Label"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/customizer.php:96,
-#: framework/extensions/newsletter-subscribe/extension.php:193,
+#: framework/extensions/newsletter-subscribe/extension.php:208,
 #: framework/extensions/newsletter-subscribe/helpers.php:36,
 #: framework/extensions/newsletter-subscribe/helpers.php:79,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:108,
@@ -1208,7 +1208,7 @@ msgid "Mail Label"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/customizer.php:108,
-#: framework/extensions/newsletter-subscribe/extension.php:194,
+#: framework/extensions/newsletter-subscribe/extension.php:209,
 #: framework/extensions/newsletter-subscribe/helpers.php:40,
 #: framework/extensions/newsletter-subscribe/helpers.php:80
 msgid "Your email"
@@ -1221,7 +1221,7 @@ msgid "Button Label"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/customizer.php:117,
-#: framework/extensions/newsletter-subscribe/extension.php:188,
+#: framework/extensions/newsletter-subscribe/extension.php:203,
 #: framework/extensions/newsletter-subscribe/helpers.php:31,
 #: framework/extensions/newsletter-subscribe/helpers.php:75,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:122,
@@ -1465,7 +1465,7 @@ msgstr ""
 msgid "Container Border Radius"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/extension.php:140
+#: framework/extensions/newsletter-subscribe/extension.php:155
 msgid "Disable Subscribe Form"
 msgstr ""
 
@@ -6791,7 +6791,7 @@ msgstr ""
 
 #: framework/premium/extensions/adobe-typekit/dashboard-static/js/AdobeTypekit.js:182
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/AllFonts.js:54
-#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:35
+#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:39
 msgid "Variations"
 msgstr ""
 
@@ -6806,7 +6806,7 @@ msgid ""
 msgstr ""
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/AllFonts.js:100
-#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:74
+#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:78
 msgid "Remove Font"
 msgstr ""
 
@@ -6881,7 +6881,7 @@ msgid "Variable Font"
 msgstr ""
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:364
-#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:112
+#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:116
 msgid "Preload"
 msgstr ""
 
@@ -6909,7 +6909,7 @@ msgid "Preload Subsets"
 msgstr ""
 
 #: framework/premium/extensions/local-google-fonts/dashboard-static/js/GeneralTab.js:10
-#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:61
+#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:65
 msgid "Select Variations"
 msgstr ""
 
@@ -6931,7 +6931,7 @@ msgstr ""
 msgid "Download Font"
 msgstr ""
 
-#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:213
+#: framework/premium/extensions/local-google-fonts/dashboard-static/js/SingleFont.js:217
 msgid "Save Font"
 msgstr ""
 

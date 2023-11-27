@@ -87,6 +87,21 @@ class BlocksyExtensionNewsletterSubscribe {
 					$data['Version']
 				);
 
+				$obj = get_queried_object();
+
+				if (
+					$obj
+					&&
+					! empty($obj->post_content)
+					&&
+					has_shortcode(
+						$obj->post_content,
+						'blocksy_newsletter_subscribe'
+					)
+				) {
+					wp_enqueue_style('blocksy-block-newsletter-styles');
+				}
+
 				if (
 					blocksy_get_theme_mod('newsletter_subscribe_single_post_enabled', 'yes') === 'yes'
 					&&
@@ -251,11 +266,25 @@ class BlocksyExtensionNewsletterSubscribe {
 	}
 
 	public function enqueue_admin() {
+		$deps = [
+			'wp-blocks',
+			'wp-element',
+			'wp-block-editor',
+		];
+
+		global $wp_customize;
+
+		if ($wp_customize) {
+			$deps[] = 'ct-customizer-controls';
+		} else {
+			$deps[] = 'ct-options-scripts';
+		}
+
 		wp_enqueue_script(
 			'blocksy/newsletter',
 			BLOCKSY_URL .
 				'framework/extensions/newsletter-subscribe/admin-static/bundle/newsletter-block.js',
-			['ct-options-scripts', 'wp-blocks', 'wp-element', 'wp-block-editor']
+				$deps
 		);
 
 		$data = [
