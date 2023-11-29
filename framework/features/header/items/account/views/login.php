@@ -173,7 +173,11 @@ if ($loggedin_interaction_type === 'dropdown') {
 	$dropdown_items_html = [];
 
 	foreach ($dropdown_items as $dropdown_row) {
-		if (isset($dropdown_row['enabled']) && ! $dropdown_row['enabled']) {
+		if (
+			! isset($dropdown_row['enabled'])
+			||
+			! $dropdown_row['enabled']
+		) {
 			continue;
 		}
 

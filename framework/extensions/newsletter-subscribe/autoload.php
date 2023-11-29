@@ -4,7 +4,7 @@ $autoload = [
 	'Provider' => 'includes/provider.php',
 
 	'MailchimpProvider' => 'providers/mailchimp.php',
-	'SendinblueProvider' => 'providers/sendinblue.php',
+	'BrevoProvider' => 'providers/brevo.php',
 	'CampaignMonitorProvider' => 'providers/campaign-monitor.php',
 	'MailerliteClassicProvider' => 'providers/mailerlite-classic.php',
 	'MailerliteNewProvider' => 'providers/mailerlite-new.php',

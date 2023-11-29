@@ -17,8 +17,8 @@ class Provider {
 			return new MailchimpProvider();
 		}
 
-		if ($provider === 'sendinblue') {
-			return new SendinblueProvider();
+		if ($provider === 'brevo') {
+			return new BrevoProvider();
 		}
 
 		if ($provider === 'campaignmonitor') {

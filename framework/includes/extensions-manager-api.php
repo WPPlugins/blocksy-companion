@@ -5,6 +5,7 @@ namespace Blocksy;
 class ExtensionsManagerApi {
 	public function __construct() {
 		$this->attach_ajax_actions();
+
 	}
 
 	protected $ajax_actions = [
@@ -78,9 +79,6 @@ class ExtensionsManagerApi {
 	}
 
 	public function check_capability($cap = 'install_plugins') {
-		$manager = Plugin::instance()->extensions;
-		$manager->do_extensions_preboot();
-
 		$manager = Plugin::instance()->extensions;
 
 		if (! $manager->can($cap)) {

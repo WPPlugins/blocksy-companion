@@ -115,8 +115,8 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 								},
 
 								{
-									key: 'sendinblue',
-									value: 'Sendinblue',
+									key: 'brevo',
+									value: 'Brevo (Sendinblue)',
 								},
 
 								{
@@ -261,17 +261,17 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 				)}
 
 			{ctDashboardLocalizations.plugin_data.is_pro &&
-				provider === 'sendinblue' && (
+				provider === 'brevo' && (
 					<span
 						className="ct-option-description"
 						dangerouslySetInnerHTML={{
 							__html: sprintf(
 								__(
-									'More information on how to generate an API key for Sendiblue can be found %shere%s.',
+									'More information on how to generate an API key for Brevo can be found %shere%s.',
 									'blocksy-companion'
 								),
 
-								'<a target="_blank" href="https://help.sendinblue.com/hc/en-us/articles/209467485-Create-or-delete-an-API-key">',
+								'<a target="_blank" href="https://help.brevo.com/hc/en-us/articles/209467485-Create-and-manage-your-API-keys">',
 								'</a>'
 							),
 						}}

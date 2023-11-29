@@ -249,7 +249,7 @@ function blc_get_trending_block($result = null) {
 						$post['image'] . blocksy_html_tag(
 							'span',
 							[
-								'class' => 'ct-item-title',
+								'class' => 'ct-post-title',
 							],
 							$post['title']
 						)

@@ -40,7 +40,7 @@ blocksy_output_font_css([
 	'css' => $css,
 	'tablet_css' => $tablet_css,
 	'mobile_css' => $mobile_css,
-	'selector' => '.ct-trending-block .ct-item-title',
+	'selector' => '.ct-trending-block .ct-post-title',
 ]);
 
 blocksy_output_colors([

@@ -24,7 +24,7 @@ ctEvents.on(
 
 			...typographyOption({
 				id: 'trendingBlockPostsFont',
-				selector: '.ct-trending-block .ct-item-title',
+				selector: '.ct-trending-block .ct-post-title',
 			}),
 
 			trendingBlockFontColor: [

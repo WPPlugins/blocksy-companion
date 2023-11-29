@@ -108,6 +108,14 @@ class ExtensionsManager {
 	private function is_dashboard_page() {
 		global $pagenow;
 
+		if (
+			isset($_SERVER['HTTP_REFERER'])
+			&&
+			strpos($_SERVER['HTTP_REFERER'], 'ct-dashboard') !== false
+		) {
+			return true;
+		}
+
 		$is_ct_settings =
 			// 'themes.php' === $pagenow &&
 			isset( $_GET['page'] ) && 'ct-dashboard' === $_GET['page'];

@@ -2,14 +2,14 @@
 
 namespace Blocksy\Extensions\NewsletterSubscribe;
 
-class SendinblueProvider extends Provider {
+class BrevoProvider extends Provider {
 	public function fetch_lists($api_key) {
 		if (! $api_key) {
 			return 'api_key_invalid';
 		}
 
 		$response = wp_remote_get(
-			'https://api.sendinblue.com/v3/contacts/lists?limit=50&offset=0&sort=desc',
+			'https://api.brevo.com/v3/contacts/lists?limit=50&offset=0&sort=desc',
 			[
 				'headers' => [
 					'api-key' => $api_key
@@ -43,7 +43,7 @@ class SendinblueProvider extends Provider {
 		return [
 			'form_url' => '#',
 			'has_gdpr_fields' => false,
-			'provider' => 'sendinblue'
+			'provider' => 'brevo'
 		];
 	}
 
@@ -70,7 +70,7 @@ class SendinblueProvider extends Provider {
 
 		curl_setopt_array($curl, array(
 			// CURLOPT_URL => "https://api.mailerlite.com/api/v2/groups/" . $args['group'] . "/subscribers",
-			CURLOPT_URL => 'https://api.sendinblue.com/v3/contacts',
+			CURLOPT_URL => 'https://api.brevo.com/v3/contacts',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,

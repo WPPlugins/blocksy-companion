@@ -361,27 +361,27 @@ $options = [
 									'title' => __( 'Initial', 'blocksy-companion' ),
 									'id' => 'default',
 									'inherit' => [
-										'var(--heading-1-color, var(--headings-color))' => [
+										'var(--theme-heading-1-color, var(--theme-headings-color))' => [
 											'trending_block_label_tag' => 'h1'
 										],
 
-										'var(--heading-2-color, var(--headings-color))' => [
+										'var(--theme-heading-2-color, var(--theme-headings-color))' => [
 											'trending_block_label_tag' => 'h2'
 										],
 
-										'var(--heading-3-color, var(--headings-color))' => [
+										'var(--theme-heading-3-color, var(--theme-headings-color))' => [
 											'trending_block_label_tag' => 'h3'
 										],
 
-										'var(--heading-4-color, var(--headings-color))' => [
+										'var(--theme-heading-4-color, var(--theme-headings-color))' => [
 											'trending_block_label_tag' => 'h4'
 										],
 
-										'var(--heading-5-color, var(--headings-color))' => [
+										'var(--theme-heading-5-color, var(--theme-headings-color))' => [
 											'trending_block_label_tag' => 'h5'
 										],
 
-										'var(--heading-6-color, var(--headings-color))' => [
+										'var(--theme-heading-6-color, var(--theme-headings-color))' => [
 											'trending_block_label_tag' => 'h6'
 										]
 									]
@@ -451,13 +451,13 @@ $options = [
 								[
 									'title' => __( 'Initial', 'blocksy-companion' ),
 									'id' => 'default',
-									'inherit' => 'var(--color)'
+									'inherit' => 'var(--theme-text-color)'
 								],
 
 								[
 									'title' => __( 'Hover', 'blocksy-companion' ),
 									'id' => 'hover',
-									'inherit' => 'var(--linkHoverColor)'
+									'inherit' => 'var(--theme-link-hover-color)'
 								],
 							],
 						],

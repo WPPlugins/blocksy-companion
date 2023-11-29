@@ -2,21 +2,6 @@
 
 class BlocksyExtensionNewsletterSubscribePreBoot {
 	public function __construct() {
-		add_action(
-			'wp_ajax_blocksy_ext_newsletter_subscribe_maybe_get_lists',
-			[$this, 'get_lists']
-		);
-
-		add_action(
-			'wp_ajax_blocksy_ext_newsletter_subscribe_get_actual_lists',
-			[$this, 'get_actual_lists']
-		);
-
-		add_action(
-			'wp_ajax_blocksy_ext_newsletter_subscribe_maybe_save_credentials',
-			[$this, 'save_credentials']
-		);
-
 		add_filter('blocksy-dashboard-scripts-dependencies', function ($s) {
 			$s[] = 'blocksy-ext-mailchimp-dashboard-scripts';
 			return $s;
@@ -37,6 +22,21 @@ class BlocksyExtensionNewsletterSubscribePreBoot {
 				true
 			);
 		});
+
+		add_action(
+			'wp_ajax_blocksy_ext_newsletter_subscribe_maybe_get_lists',
+			[$this, 'get_lists']
+		);
+
+		add_action(
+			'wp_ajax_blocksy_ext_newsletter_subscribe_get_actual_lists',
+			[$this, 'get_actual_lists']
+		);
+
+		add_action(
+			'wp_ajax_blocksy_ext_newsletter_subscribe_maybe_save_credentials',
+			[$this, 'save_credentials']
+		);
 	}
 
 	public function ext_data() {

@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-27 21:48+0000\n"
+"POT-Creation-Date: 2023-11-29 19:23+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -37,7 +37,7 @@ msgstr ""
 #: framework/features/header/items/account/options.php:32,
 #: framework/features/header/items/account/options.php:325,
 #: framework/features/header/items/account/views/login.php:157,
-#: framework/features/header/items/account/views/login.php:245
+#: framework/features/header/items/account/views/login.php:249
 msgid "Dashboard"
 msgstr ""
 
@@ -460,7 +460,7 @@ msgstr ""
 #: framework/helpers/exts.php:205,
 #: framework/premium/extensions/shortcuts/customizer.php:449,
 #: framework/premium/extensions/shortcuts/customizer.php:472,
-#: framework/features/header/items/account/views/login.php:384,
+#: framework/features/header/items/account/views/login.php:388,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/feature.php:356,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/feature.php:378,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/feature.php:382,
@@ -895,7 +895,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:341,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:381,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:409,
-#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:70,
+#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:60,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:139,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:233,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:269,
@@ -991,7 +991,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:347,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:386,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:414,
-#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:76,
+#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:66,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:238,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:275,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:316,
@@ -2364,12 +2364,12 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
+#: framework/extensions/newsletter-subscribe/providers/brevo.php:116,
 #: framework/extensions/newsletter-subscribe/providers/campaign-monitor.php:136,
 #: framework/extensions/newsletter-subscribe/providers/convertkit.php:97,
 #: framework/extensions/newsletter-subscribe/providers/demo.php:40,
 #: framework/extensions/newsletter-subscribe/providers/mailerlite-classic.php:104,
-#: framework/extensions/newsletter-subscribe/providers/mailerlite-new.php:123,
-#: framework/extensions/newsletter-subscribe/providers/sendinblue.php:116
+#: framework/extensions/newsletter-subscribe/providers/mailerlite-new.php:123
 msgid "Thank you for subscribing to our newsletter!"
 msgstr ""
 
@@ -3341,7 +3341,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:300,
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:351,
 #: framework/premium/extensions/woocommerce-extra/features/product-sale-countdown/feature.php:300,
-#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:201,
+#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:191,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:133,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:334
 msgid "Bottom Spacing"
@@ -4174,7 +4174,7 @@ msgstr ""
 #: framework/features/header/items/account/options.php:7,
 #: framework/features/header/items/account/options.php:72,
 #: framework/features/header/items/account/options.php:210,
-#: framework/features/header/items/account/views/login.php:323
+#: framework/features/header/items/account/views/login.php:327
 msgid "Custom Link"
 msgstr ""
 
@@ -4197,7 +4197,7 @@ msgstr ""
 #: framework/features/header/items/account/options.php:46,
 #: framework/features/header/items/account/options.php:334,
 #: framework/features/header/items/account/views/login.php:163,
-#: framework/features/header/items/account/views/login.php:275
+#: framework/features/header/items/account/views/login.php:279
 msgid "Edit Profile"
 msgstr ""
 
@@ -4205,37 +4205,37 @@ msgstr ""
 #: framework/features/header/items/account/options.php:60,
 #: framework/features/header/items/account/options.php:343,
 #: framework/features/header/items/account/views/login.php:169,
-#: framework/features/header/items/account/views/login.php:297
+#: framework/features/header/items/account/views/login.php:301
 msgid "Log Out"
 msgstr ""
 
 #: framework/features/header/items/account/options.php:103,
 #: framework/features/header/items/account/options.php:681,
 #: framework/features/header/items/account/views/login.php:100,
-#: framework/features/header/items/account/views/login.php:343
+#: framework/features/header/items/account/views/login.php:347
 msgid "My Account"
 msgstr ""
 
 #: framework/features/header/items/account/options.php:115,
 #: framework/features/header/items/account/options.php:119,
-#: framework/features/header/items/account/views/login.php:413
+#: framework/features/header/items/account/views/login.php:417
 msgid "Dokan Dashboard"
 msgstr ""
 
 #: framework/features/header/items/account/options.php:129,
 #: framework/features/header/items/account/options.php:133,
-#: framework/features/header/items/account/views/login.php:443
+#: framework/features/header/items/account/views/login.php:447
 msgid "Dokan Shop"
 msgstr ""
 
 #: framework/features/header/items/account/options.php:145,
 #: framework/features/header/items/account/options.php:149,
-#: framework/features/header/items/account/views/login.php:472
+#: framework/features/header/items/account/views/login.php:476
 msgid "Tutor LMS Dashboard"
 msgstr ""
 
 #: framework/features/header/items/account/options.php:165,
-#: framework/features/header/items/account/views/login.php:496
+#: framework/features/header/items/account/views/login.php:500
 msgid "bbPress Dashboard"
 msgstr ""
 
@@ -6005,11 +6005,11 @@ msgstr ""
 msgid "Number of products"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:52
+#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:42
 msgid "Share Box Icons Color"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:175
+#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:165
 msgid "Share Box"
 msgstr ""
 
@@ -6154,7 +6154,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:81,
 #: framework/premium/extensions/woocommerce-extra/features/compare/views/table.php:501,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/includes/frontend.php:231,
-#: framework/premium/extensions/woocommerce-extra/features/swatches/includes/render.php:115
+#: framework/premium/extensions/woocommerce-extra/features/swatches/includes/render.php:116
 msgid "Out of Stock"
 msgstr ""
 
@@ -6715,7 +6715,7 @@ msgstr ""
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:269
 msgid ""
-"More information on how to generate an API key for Sendiblue can be found "
+"More information on how to generate an API key for Brevo can be found "
 "%shere%s."
 msgstr ""
 
