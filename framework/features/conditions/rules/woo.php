@@ -17,6 +17,12 @@ if ($filter === 'all') {
 			'title' => __('Product with Taxonomy ID', 'blocksy-companion'),
 			'post_type' => 'product'
 		],
+
+		[
+			'id' => 'product_taxonomy_ids',
+			'title' => __('Product Taxonomy ID', 'blocksy-companion')
+		],
+
 		[
 			'id' => 'woo_shop',
 			'title' => __('Shop Home', 'blocksy-companion')

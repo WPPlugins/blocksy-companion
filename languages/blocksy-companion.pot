@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-29 19:23+0000\n"
+"POT-Creation-Date: 2023-11-30 19:39+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -162,13 +162,13 @@ msgstr ""
 
 #: framework/features/conditions-manager.php:197,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:81
-#: static/js/options/ConditionsManager/SingleCondition.js:81
+#: static/js/options/ConditionsManager/SingleCondition.js:89
 msgid "Include"
 msgstr ""
 
 #: framework/features/conditions-manager.php:197,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:82
-#: static/js/options/ConditionsManager/SingleCondition.js:82
+#: static/js/options/ConditionsManager/SingleCondition.js:90
 msgid "Exclude"
 msgstr ""
 
@@ -676,7 +676,7 @@ msgstr ""
 #: framework/premium/extensions/post-types-extra/features/filtering/customizer.php:48,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:25,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:204,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:86,
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:94,
 #: framework/premium/extensions/woocommerce-extra/features/compare/header-items/compare/options.php:55,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:56
 msgid "Type 1"
@@ -691,7 +691,7 @@ msgstr ""
 #: framework/premium/extensions/post-types-extra/features/filtering/customizer.php:53,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:30,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:209,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:91,
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:99,
 #: framework/premium/extensions/woocommerce-extra/features/compare/header-items/compare/options.php:60,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:61
 msgid "Type 2"
@@ -895,7 +895,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:341,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:381,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:409,
-#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:60,
+#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:50,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:139,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:233,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:269,
@@ -991,7 +991,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:347,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:386,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:414,
-#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:66,
+#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:56,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:238,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:275,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:316,
@@ -1275,8 +1275,8 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/floating-cart/options.php:43,
 #: framework/premium/extensions/woocommerce-extra/features/floating-cart/options.php:67,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:237,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:181,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:202,
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:189,
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:210,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:49,
 #: framework/premium/features/premium-header/items/contacts/options.php:483,
 #: framework/premium/features/premium-header/items/language-switcher/options.php:176,
@@ -1314,8 +1314,8 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/floating-cart/options.php:44,
 #: framework/premium/extensions/woocommerce-extra/features/floating-cart/options.php:68,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:238,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:182,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:203,
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:190,
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:211,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:50,
 #: framework/premium/features/premium-header/items/contacts/options.php:484,
 #: framework/premium/features/premium-header/items/language-switcher/options.php:177,
@@ -1360,8 +1360,8 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/floating-cart/options.php:45,
 #: framework/premium/extensions/woocommerce-extra/features/floating-cart/options.php:69,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:239,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:183,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:204,
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:191,
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:212,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:51,
 #: framework/premium/features/premium-header/items/contacts/options.php:144,
 #: framework/premium/features/premium-header/items/contacts/options.php:485,
@@ -2569,39 +2569,43 @@ msgid "User Role"
 msgstr ""
 
 #: framework/features/conditions/rules/woo.php:12,
-#: framework/features/conditions/rules/woo.php:51
+#: framework/features/conditions/rules/woo.php:57
 msgid "Product ID"
 msgstr ""
 
 #: framework/features/conditions/rules/woo.php:17,
-#: framework/features/conditions/rules/woo.php:56
+#: framework/features/conditions/rules/woo.php:62
 msgid "Product with Taxonomy ID"
 msgstr ""
 
-#: framework/features/conditions/rules/woo.php:22
+#: framework/features/conditions/rules/woo.php:23
+msgid "Product Taxonomy ID"
+msgstr ""
+
+#: framework/features/conditions/rules/woo.php:28
 msgid "Shop Home"
 msgstr ""
 
-#: framework/features/conditions/rules/woo.php:27,
+#: framework/features/conditions/rules/woo.php:33,
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:66
 msgid "Single Product"
 msgstr ""
 
-#: framework/features/conditions/rules/woo.php:32
+#: framework/features/conditions/rules/woo.php:38
 msgid "Product Archives"
 msgstr ""
 
-#: framework/features/conditions/rules/woo.php:37,
+#: framework/features/conditions/rules/woo.php:43,
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/options.php:92
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/TaxonomySelector.js:46
 msgid "Product Categories"
 msgstr ""
 
-#: framework/features/conditions/rules/woo.php:42
+#: framework/features/conditions/rules/woo.php:48
 msgid "Product Tags"
 msgstr ""
 
-#: framework/features/conditions/rules/woo.php:65,
+#: framework/features/conditions/rules/woo.php:71,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:42
 msgid "WooCommerce"
 msgstr ""
@@ -3341,7 +3345,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:300,
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:351,
 #: framework/premium/extensions/woocommerce-extra/features/product-sale-countdown/feature.php:300,
-#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:191,
+#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:201,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:133,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:334
 msgid "Bottom Spacing"
@@ -4308,7 +4312,7 @@ msgstr ""
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:33,
 #: framework/premium/extensions/woocommerce-extra/features/archive-card/feature.php:13,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:214,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:96,
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:104,
 #: framework/premium/extensions/woocommerce-extra/features/compare/header-items/compare/options.php:65,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:66
 msgid "Type 3"
@@ -4318,7 +4322,7 @@ msgstr ""
 #: framework/features/header/items/account/options.php:843,
 #: framework/features/header/items/account/options.php:931,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:219,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:101
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:109
 msgid "Type 4"
 msgstr ""
 
@@ -5864,16 +5868,16 @@ msgstr ""
 msgid "Widgets Font Color"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:124,
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:143
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:132,
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:151
 msgid "Number of Columns"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:167
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:175
 msgid "Gallery Arrows Visibility"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:188
+#: framework/premium/extensions/woocommerce-extra/features/product-gallery/feature.php:196
 msgid "Thumbnails Arrows Visibility"
 msgstr ""
 
@@ -5904,6 +5908,10 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/product-sale-countdown/feature.php:285
 msgid "Countdown Box"
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/features/quick-view/feature.php:14
+msgid "Quick View Button"
 msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/helpers.php:26
@@ -6005,11 +6013,11 @@ msgstr ""
 msgid "Number of products"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:42
+#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:32
 msgid "Share Box Icons Color"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:165
+#: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:175
 msgid "Share Box"
 msgstr ""
 
@@ -6851,7 +6859,7 @@ msgid ""
 msgstr ""
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:127
-#: static/js/options/ConditionsManager/SingleCondition.js:79
+#: static/js/options/ConditionsManager/SingleCondition.js:87
 msgid "Select variation"
 msgstr ""
 
@@ -8200,44 +8208,44 @@ msgstr ""
 msgid "Only weekdays"
 msgstr ""
 
-#: static/js/options/ConditionsManager/SingleCondition.js:185
+#: static/js/options/ConditionsManager/SingleCondition.js:106
+msgid "Select rule"
+msgstr ""
+
+#: static/js/options/ConditionsManager/SingleCondition.js:194
 msgid "Select taxonomy"
 msgstr ""
 
-#: static/js/options/ConditionsManager/SingleCondition.js:217
+#: static/js/options/ConditionsManager/SingleCondition.js:226
 msgid "Select language"
 msgstr ""
 
-#: static/js/options/ConditionsManager/SingleCondition.js:246
+#: static/js/options/ConditionsManager/SingleCondition.js:255
 msgid "Current user"
 msgstr ""
 
-#: static/js/options/ConditionsManager/SingleCondition.js:273
+#: static/js/options/ConditionsManager/SingleCondition.js:282
 msgid "Select user"
 msgstr ""
 
-#: static/js/options/ConditionsManager/SingleCondition.js:277
+#: static/js/options/ConditionsManager/SingleCondition.js:286
 msgid "All authors"
 msgstr ""
 
-#: static/js/options/ConditionsManager/SingleCondition.js:306
+#: static/js/options/ConditionsManager/SingleCondition.js:315
 msgid "Select sub field"
 msgstr ""
 
-#: static/js/options/ConditionsManager/SingleCondition.js:357
+#: static/js/options/ConditionsManager/SingleCondition.js:366
 msgid "Display based on referer domain"
 msgstr ""
 
-#: static/js/options/ConditionsManager/SingleCondition.js:389
+#: static/js/options/ConditionsManager/SingleCondition.js:398
 msgid "Display if cookie is present"
 msgstr ""
 
-#: static/js/options/ConditionsManager/SingleCondition.js:421
+#: static/js/options/ConditionsManager/SingleCondition.js:430
 msgid "Display if query string is present in URL"
-msgstr ""
-
-#: static/js/options/ConditionsManager/SingleCondition.js:98
-msgid "Select rule"
 msgstr ""
 
 #: static/js/options/CustomizerOptionsManager.js:107

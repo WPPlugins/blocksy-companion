@@ -52,8 +52,16 @@ class ExtensionsManager {
 
 		spl_autoload_register([$this, 'perform_autoload']);
 
-		if ($this->is_dashboard_page()) {
-			$this->do_extensions_preboot();
+		if (wp_doing_ajax()) {
+			add_action('init', function () {
+				if ($this->is_dashboard_page()) {
+					$this->do_extensions_preboot();
+				}
+			});
+		} else {
+			if ($this->is_dashboard_page()) {
+				$this->do_extensions_preboot();
+			}
 		}
 
 		foreach ($this->get_activated_extensions() as $single_id) {

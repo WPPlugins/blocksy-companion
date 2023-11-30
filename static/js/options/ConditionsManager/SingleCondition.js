@@ -10,6 +10,13 @@ import ExpireCondition from './ExpireCondition'
 import ScheduleDate from './ScheduleDate'
 
 const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
+	condition = {
+		...condition,
+		payload: {
+			...condition.payload,
+		},
+	}
+
 	const { allRules, allTaxonomies, allLanguages, allUsers } =
 		useConditionsData(condition)
 
@@ -23,6 +30,7 @@ const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
 		condition.rule === 'taxonomy_ids' ||
 		condition.rule === 'post_with_taxonomy_ids' ||
 		condition.rule === 'product_with_taxonomy_ids' ||
+		condition.rule === 'product_taxonomy_ids' ||
 		condition.rule === 'current_language' ||
 		condition.rule === 'user_post_author_id' ||
 		condition.rule === 'author' ||
@@ -177,7 +185,8 @@ const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
 				/>
 			)}
 
-			{condition.rule === 'product_with_taxonomy_ids' && (
+			{(condition.rule === 'product_with_taxonomy_ids' ||
+				condition.rule === 'product_taxonomy_ids') && (
 				<Select
 					option={{
 						appendToBody: true,

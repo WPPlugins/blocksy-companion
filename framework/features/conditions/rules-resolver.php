@@ -394,7 +394,11 @@ class ConditionsRulesResolver {
 			return bbp_is_single_user_profile();
 		}
 
-		if ($rule['rule'] === 'taxonomy_ids') {
+		if (
+			$rule['rule'] === 'taxonomy_ids'
+			||
+			$rule['rule'] === 'product_taxonomy_ids'
+		) {
 			if (is_tax() || is_category() || is_tag()) {
 				$tax_id = get_queried_object_id();
 
