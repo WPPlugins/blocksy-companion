@@ -123,7 +123,7 @@ $attr['data-interaction'] = $loggedin_interaction_type;
 $link_attr = [
 	'class' => 'ct-account-item',
 	'aria-label' => $loggedin_label,
-	'href' => $link
+	'href' => $link,
 ];
 
 $link_tag_name = 'a';
@@ -135,6 +135,8 @@ if (! empty($media_html)) {
 // dropdown menu
 if ($loggedin_interaction_type === 'dropdown') {
 	$link_tag_name = 'span';
+
+	$link_attr['tabindex'] = '0';
 
 	unset($link_attr['href'], $link_attr['aria-label']);
 

@@ -57,7 +57,11 @@ class SvgHandling {
 	}
 
 	public function svg_dimensions($svg) {
-		if (! preg_match('/.svg$/', $svg)) {
+		if (
+			! preg_match('/.svg$/', $svg)
+			||
+			! file_exists($svg)
+		) {
 			return null;
 		}
 

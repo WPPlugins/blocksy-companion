@@ -186,6 +186,26 @@ class Plugin {
 		if ($this->is_blocksy === '__NOT_SET__') {
 			$theme = wp_get_theme(get_template());
 
+			$keys_to_check = [
+				'wp_theme_preview',
+				'theme',
+				'customize_theme'
+			];
+
+			foreach ($keys_to_check as $key) {
+				if (! isset($_GET[$key])) {
+					continue;
+				}
+
+				$maybe_theme = wp_get_theme($_GET[$key]);
+
+				if (! $maybe_theme->exists()) {
+					continue;
+				}
+
+				$theme = $maybe_theme;
+			}
+
 			$is_correct_theme = strpos(
 				$theme->get('Name'), 'Blocksy'
 			) !== false;

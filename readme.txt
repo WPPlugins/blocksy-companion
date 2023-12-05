@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 
 == Description ==
 
@@ -23,6 +23,10 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+2.0.5: 2023-12-06
+- Improvement: Account drop down on mobile is placed out of bounds
+- Fix: Content Blocks cannot be turned on/off if quick edited
+
 2.0.4: 2023-11-30
 - Improvement: Correctly execute pre boot for extensions in the dashboard
 - Improvement: Introduce Product Taxonomy ID condition rule

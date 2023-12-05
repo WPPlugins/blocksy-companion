@@ -92,7 +92,8 @@
 
 	&:hover,
 	&:focus-within {
-		> ul {
+		
+		> ul[data-placement] {
 			visibility: visible;
 			opacity: 1;
 			transform: translate3d(0, 0, 0);
