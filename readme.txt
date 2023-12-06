@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 
 == Description ==
 
@@ -23,6 +23,9 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+2.0.6: 2023-12-06
+- Fix: Customizer mode issue if child theme is active
+
 2.0.5: 2023-12-06
 - Improvement: Account drop down on mobile is placed out of bounds
 - Fix: Content Blocks cannot be turned on/off if quick edited

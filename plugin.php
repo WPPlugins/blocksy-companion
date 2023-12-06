@@ -203,6 +203,10 @@ class Plugin {
 					continue;
 				}
 
+				if ($maybe_theme->parent() && $maybe_theme->parent()->exists()) {
+					$maybe_theme = $maybe_theme->parent();
+				}
+
 				$theme = $maybe_theme;
 			}
 
