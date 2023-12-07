@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-06 07:25+0000\n"
+"POT-Creation-Date: 2023-12-07 18:20+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -41,12 +41,12 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: framework/dashboard.php:354, framework/dashboard.php:355,
+#: framework/dashboard.php:352, framework/dashboard.php:353,
 #: framework/extensions/product-reviews/extension.php:618
 msgid "Blocksy"
 msgstr ""
 
-#: framework/dashboard.php:399
+#: framework/dashboard.php:397
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
@@ -1178,7 +1178,7 @@ msgstr ""
 
 #: framework/extensions/newsletter-subscribe/customizer.php:61,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:50
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:200
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:202
 msgid "List ID"
 msgstr ""
 
@@ -2147,8 +2147,8 @@ msgstr ""
 
 #: framework/premium/features/content-blocks.php:279,
 #: framework/premium/extensions/mega-menu/options.php:346,
-#: framework/premium/features/content-blocks/content-block-layer.php:134,
-#: framework/premium/features/content-blocks/content-block-layer.php:169,
+#: framework/premium/features/content-blocks/content-block-layer.php:153,
+#: framework/premium/features/content-blocks/content-block-layer.php:188,
 #: framework/features/header/items/account/options.php:177,
 #: framework/premium/features/premium-header/items/content-block/config.php:4
 #: framework/premium/static/js/blocks/ContentBlock.js:78
@@ -2198,11 +2198,11 @@ msgstr ""
 msgid "Nothing found in Trash"
 msgstr ""
 
-#: framework/premium/features/local-gravatars.php:32
+#: framework/premium/features/local-gravatars.php:34
 msgid "Store Gravatars Locally"
 msgstr ""
 
-#: framework/premium/features/local-gravatars.php:37
+#: framework/premium/features/local-gravatars.php:39
 msgid "Store and load Gravatars locally for increased privacy and performance."
 msgstr ""
 
@@ -2758,10 +2758,10 @@ msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:377,
 #: framework/premium/extensions/mega-menu/options.php:385,
-#: framework/premium/features/content-blocks/content-block-layer.php:141,
-#: framework/premium/features/content-blocks/content-block-layer.php:149,
-#: framework/premium/features/content-blocks/content-block-layer.php:176,
-#: framework/premium/features/content-blocks/content-block-layer.php:184,
+#: framework/premium/features/content-blocks/content-block-layer.php:160,
+#: framework/premium/features/content-blocks/content-block-layer.php:168,
+#: framework/premium/features/content-blocks/content-block-layer.php:195,
+#: framework/premium/features/content-blocks/content-block-layer.php:203,
 #: framework/features/header/items/account/options.php:184,
 #: framework/features/header/items/account/options.php:192,
 #: framework/premium/features/premium-header/items/content-block/options.php:13,
@@ -2771,8 +2771,8 @@ msgid "Select Content Block"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:380,
-#: framework/premium/features/content-blocks/content-block-layer.php:144,
-#: framework/premium/features/content-blocks/content-block-layer.php:179,
+#: framework/premium/features/content-blocks/content-block-layer.php:163,
+#: framework/premium/features/content-blocks/content-block-layer.php:198,
 #: framework/features/header/items/account/options.php:187,
 #: framework/premium/features/premium-header/items/content-block/options.php:16
 msgid "Create a new content Block/Hook"
@@ -3339,7 +3339,7 @@ msgstr ""
 msgid "Show WooCommerce Hooks"
 msgstr ""
 
-#: framework/premium/features/content-blocks/content-block-layer.php:199,
+#: framework/premium/features/content-blocks/content-block-layer.php:218,
 #: framework/premium/extensions/woocommerce-extra/features/sku-layer.php:62,
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:300,
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:351,
@@ -6169,7 +6169,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:81,
 #: framework/premium/extensions/woocommerce-extra/features/compare/views/table.php:501,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/includes/frontend.php:231,
-#: framework/premium/extensions/woocommerce-extra/features/swatches/includes/render.php:116
+#: framework/premium/extensions/woocommerce-extra/features/swatches/includes/render.php:120
 msgid "Out of Stock"
 msgstr ""
 
@@ -6673,7 +6673,7 @@ msgstr ""
 
 #: framework/extensions/newsletter-subscribe/admin-static/js/ListPicker.js:14
 #: framework/extensions/newsletter-subscribe/admin-static/js/ListPicker/Implementation.js:63
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:322
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:323
 #: static/js/dashboard/NoTheme.js:62
 #: static/js/dashboard/screens/SiteExport.js:169
 msgid "Loading..."
@@ -6696,25 +6696,25 @@ msgstr ""
 msgid "Newsletter Controls"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:148
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:150
 msgid "Version"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:158
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:160
 msgid "Pick Mailing Service"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:187
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:189
 msgid "API Key"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:218
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:220
 msgid ""
 "More information on how to generate an API key for Mailchimp can be found "
 "%shere%s."
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:236
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:238
 msgid ""
 "More information on how to generate an API key for Mailerlite can be found "
 "%shere%s. Please note that it is required at least one group to be created "
@@ -6722,31 +6722,31 @@ msgid ""
 "group %shere%s."
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:255
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:256
 msgid ""
 "This provider is used only for testing purposes. It doesnt register any real "
 "subscribers."
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:269
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:270
 msgid ""
 "More information on how to generate an API key for Brevo can be found "
 "%shere%s."
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:287
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:288
 msgid ""
 "More information on how to generate an API key for ConvertKit can be found "
 "%shere%s."
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:305
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:306
 msgid ""
 "More information on how to generate an API key for Campaign Monitor can be "
 "found %shere%s."
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:323
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:324
 #: framework/extensions/product-reviews/static/js/ProductReviews.js:94
 #: framework/premium/extensions/mega-menu/static/js/SettingsManager.js:262
 #: framework/premium/extensions/sidebars/static/js/SettingsManager.js:111
@@ -6756,11 +6756,11 @@ msgstr ""
 msgid "Save Settings"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:81
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:83
 msgid "Connect Newsletter Provider"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:87
+#: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:89
 msgid "Provider"
 msgstr ""
 

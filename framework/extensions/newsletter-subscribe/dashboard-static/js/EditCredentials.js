@@ -16,6 +16,8 @@ import { Select } from 'blocksy-options'
 
 import useProExtensionInFree from '../../../../../static/js/dashboard/helpers/useProExtensionInFree'
 
+const freeProviders = ['mailchimp', 'demo']
+
 const EditCredentials = ({ extension, onCredentialsValidated }) => {
 	const [provider, setProvider] = useState(extension.data.provider)
 
@@ -30,10 +32,10 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 	useEffect(() => {
 		if (
 			extension.data &&
-			extension.data.provider !== 'mailchimp' &&
+			!freeProviders.includes(extension.data.provider) &&
 			!isPro
 		) {
-			setProvider('mailchimp')
+			setProvider(freeProviders[0])
 		}
 	}, [])
 
@@ -87,10 +89,10 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 					<label>{__('Provider', 'blocksy-companion')}</label>
 					<Select
 						onChange={(copy) => {
-							if (!isPro) {
+							if (!isPro && !freeProviders.includes(copy)) {
 								setProvider(copy)
 								setTimeout(() => {
-									setProvider('mailchimp')
+									setProvider(freeProviders[0])
 								})
 								showNotice()
 								return
@@ -180,7 +182,7 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 					</section>
 				)}
 
-				{(provider === 'mailchimp' ||
+				{(freeProviders.includes(provider) ||
 					ctDashboardLocalizations.plugin_data.is_pro) && (
 					<Fragment>
 						<section>
@@ -247,18 +249,17 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 					/>
 				)}
 
-			{ctDashboardLocalizations.plugin_data.is_pro &&
-				provider.indexOf('demo') > -1 && (
-					<span
-						className="ct-option-description"
-						dangerouslySetInnerHTML={{
-							__html: __(
-								'This provider is used only for testing purposes. It doesnt register any real subscribers.',
-								'blocksy-companion'
-							),
-						}}
-					/>
-				)}
+			{provider.indexOf('demo') > -1 && (
+				<span
+					className="ct-option-description"
+					dangerouslySetInnerHTML={{
+						__html: __(
+							'This provider is used only for testing purposes. It doesnt register any real subscribers.',
+							'blocksy-companion'
+						),
+					}}
+				/>
+			)}
 
 			{ctDashboardLocalizations.plugin_data.is_pro &&
 				provider === 'brevo' && (

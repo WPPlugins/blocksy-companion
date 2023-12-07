@@ -110,7 +110,8 @@ class SvgHandling {
 						}
 					}
 				},
-				'tag_close'
+				function ($parser, $tag) {
+				}
 			);
 
 			if (xml_parse($xml, $svg, true)) {

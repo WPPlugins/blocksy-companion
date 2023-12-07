@@ -220,8 +220,6 @@ class Dashboard {
 					// $current_plan = 'free';
 
 					$result = [
-						// 'is_pro' => blc_fs()->can_use_premium_code(),
-
 						'is_pro' => $current_plan !== 'free',
 						'current_plan' => $current_plan,
 
