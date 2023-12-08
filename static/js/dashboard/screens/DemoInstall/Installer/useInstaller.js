@@ -56,10 +56,6 @@ export const getStepsForDemoConfiguration = ({
 		steps.push('widgets')
 	}
 
-	if (demoConfiguration.acf) {
-		steps.push('acf')
-	}
-
 	if (demoConfiguration.content.content) {
 		steps.push('content')
 	}
@@ -122,16 +118,6 @@ export const useInstaller = (demoConfiguration) => {
 			title: __('Child theme', 'blocksy-companion'),
 			query_string: `action=blocksy_demo_install_child_theme`,
 			expected_signals: 3,
-		},
-
-		acf: {
-			title: __('Advanced Custom Fields data', 'blocksy-companion'),
-			query_string: `action=blocksy_demo_install_acf_data&wp_customize=on&demo_name=${currentDemo}:${
-				demoConfiguration.builder === null
-					? demoVariations[0].builder
-					: demoConfiguration.builder
-			}`,
-			expected_signals: 1,
 		},
 
 		plugins: {

@@ -55,7 +55,6 @@ class Autoloader {
 			'DemoInstallOptionsExport' => 'framework/features/demo-install/options-export.php',
 
 			'DemoInstallChildThemeInstaller' => 'framework/features/demo-install/child-theme.php',
-			'DemoInstallAcfData' => 'framework/features/demo-install/acf-data.php',
 			'DemoInstallPluginsInstaller' => 'framework/features/demo-install/required-plugins.php',
 			'DemoInstallPluginsUninstaller' => 'framework/features/demo-install/plugins-uninstaller.php',
 			'DemoInstallContentInstaller' => 'framework/features/demo-install/content-installer.php',

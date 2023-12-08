@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-07 18:20+0000\n"
+"POT-Creation-Date: 2023-12-08 18:35+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -176,7 +176,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: framework/features/demo-install.php:274
+#: framework/features/demo-install.php:268
 msgid ""
 "Your PHP installation doesn't have support for XML. Please install the "
 "<i>xml</i> or <i>simplexml</i> PHP extension in order to be able to install "
@@ -876,7 +876,7 @@ msgstr ""
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:345,
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:376,
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:405,
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1094,
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1102,
 #: framework/premium/extensions/post-types-extra/features/filtering/customizer.php:208,
 #: framework/premium/extensions/post-types-extra/features/filtering/customizer.php:244,
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:440,
@@ -978,7 +978,7 @@ msgstr ""
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:351,
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:381,
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:410,
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1100,
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1108,
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:446,
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:477,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:368,
@@ -1167,7 +1167,7 @@ msgstr ""
 #: framework/premium/features/content-blocks/options/archive.php:75,
 #: framework/premium/features/content-blocks/options/hook.php:154,
 #: framework/premium/features/content-blocks/options/popup.php:268,
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:453,
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:459,
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:182,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:133,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:41,
@@ -2244,7 +2244,7 @@ msgstr ""
 #: framework/features/header/items/account/options.php:467,
 #: framework/features/header/items/account/options.php:737,
 #: framework/features/header/items/account/options.php:777,
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:529,
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:535,
 #: framework/premium/extensions/post-types-extra/features/read-time/estimated-read-time.php:20,
 #: framework/premium/features/premium-header/items/contacts/options.php:90,
 #: framework/premium/features/premium-header/items/contacts/options.php:133,
@@ -3611,7 +3611,7 @@ msgid "After related posts"
 msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:411,
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:541
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:547
 msgid "Before"
 msgstr ""
 
@@ -3621,7 +3621,7 @@ msgid "Loop"
 msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:418,
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:552
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:558
 msgid "After"
 msgstr ""
 
@@ -5105,38 +5105,38 @@ msgstr ""
 msgid "Color mode switch"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:491
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:497
 msgid "You have no %s fields declared for this custom post type."
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:503,
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1065,
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1076
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:509,
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1073,
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1084
 msgid "Field"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:515,
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:521,
 #: framework/premium/features/premium-header/items/language-switcher/options.php:60
 msgid "Label"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:564
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:570
 msgid "Fallback"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:576
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:582
 msgid "%s Field"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1049
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1057
 msgid "Custom Field"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1063
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1071
 msgid "%s %s Font"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1074
+#: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:1082
 msgid "%s %s Color"
 msgstr ""
 
@@ -6168,7 +6168,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:81,
 #: framework/premium/extensions/woocommerce-extra/features/compare/views/table.php:501,
-#: framework/premium/extensions/woocommerce-extra/features/swatches/includes/frontend.php:231,
+#: framework/premium/extensions/woocommerce-extra/features/swatches/includes/frontend.php:235,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/includes/render.php:120
 msgid "Out of Stock"
 msgstr ""
@@ -7763,15 +7763,15 @@ msgid ""
 "ask them to white list our demo server address."
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:309
+#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:306
 msgid "Back"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:349
+#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:346
 msgid "Install"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:350
+#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:347
 msgid "Next"
 msgstr ""
 
@@ -7872,40 +7872,36 @@ msgstr ""
 msgid "comments"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:111
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:107
 msgid "Register demo"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:122
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:118
 msgid "Child theme"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:128
-msgid "Advanced Custom Fields data"
-msgstr ""
-
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:138
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:124
 msgid "Required plugins"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:146
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:132
 #: static/js/dashboard/screens/DemoInstall/Wizzard/ModifyDemo.js:49
 msgid "Erase content"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:152
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:138
 msgid "Final touches"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:158
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:144
 msgid "Import options"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:168
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:154
 msgid "Import widgets"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:178
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:164
 msgid "Import content"
 msgstr ""
 

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-12-06 00:18:00+0000\n"
+"PO-Revision-Date: 2023-12-08 17:04:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -61,7 +61,7 @@ msgstr "Jeu."
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:234
 msgid "Stop Time"
-msgstr ""
+msgstr "Heure de fin"
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:23
 msgid "Wed"
@@ -73,35 +73,35 @@ msgstr "Mar."
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:211
 msgid "Start Time"
-msgstr ""
+msgstr "Heure de début"
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:21
 msgid "Mon"
-msgstr ""
+msgstr "Lun"
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:179
 msgid "Sunday"
-msgstr ""
+msgstr "Dimanche"
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:174
 msgid "Saturday"
-msgstr ""
+msgstr "Samedi"
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:169
 msgid "Friday"
-msgstr ""
+msgstr "Vendredi"
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:164
 msgid "Thursday"
-msgstr ""
+msgstr "Jeudi"
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:159
 msgid "Wednesday"
-msgstr ""
+msgstr "Mercredi"
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:154
 msgid "Tuesday"
-msgstr ""
+msgstr "Mardi"
 
 #: static/js/options/ConditionsManager/ScheduleDate.js:149
 msgid "Monday"
@@ -357,19 +357,19 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters.js:248
 msgid "List"
-msgstr ""
+msgstr "Liste"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters.js:237
 msgid "Display Type"
-msgstr ""
+msgstr "Type d’affichage"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters.js:223
 msgid "Attribute"
-msgstr ""
+msgstr "Attribut"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters.js:201
 msgid "Filter By"
-msgstr ""
+msgstr "Filtrer par"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/index.js:94
 msgid "Display order details section."
@@ -397,7 +397,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderOverview.js:8
 msgid "Order number"
-msgstr ""
+msgstr "Numéro de commande"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderOverview.js:12
 msgid "Dete"
@@ -406,7 +406,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderDetails.js:88
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderOverview.js:28
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderDetails.js:85
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderOverview.js:43
@@ -416,23 +416,23 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderDetails.js:83
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderOverview.js:42
 msgid "Payment method"
-msgstr ""
+msgstr "Moyen de paiement"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderDetails.js:79
 msgid "Free shipping"
-msgstr ""
+msgstr "Livraison gratuite"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderDetails.js:77
 msgid "Shipping"
-msgstr ""
+msgstr "Livraison"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderDetails.js:64
 msgid "Subtotal"
-msgstr ""
+msgstr "Sous-total"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/CustomerDetails.js:34
 msgid "Shipping address"
-msgstr ""
+msgstr "Adresse de livraison"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/CustomerDetails.js:10
 msgid "Billing address"

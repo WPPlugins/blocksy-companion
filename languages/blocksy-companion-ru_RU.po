@@ -3534,7 +3534,7 @@ msgstr "Указать или перетащить файл..."
 
 #: static/js/options/CustomizerOptionsManager.js:116
 msgid "Easily import the theme customizer settings."
-msgstr "Легко экспортиру��те параметры настройщика темы."
+msgstr "Легко экспортируйте параметры настройщика темы."
 
 #: static/js/options/CustomizerOptionsManager.js:113
 msgid "Import Options"

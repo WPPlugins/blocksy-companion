@@ -51,7 +51,6 @@ const DemoToInstall = ({ location, navigate }) => {
 		builder: '',
 		child_theme: false,
 		plugins: [],
-		acf: false,
 		content: {
 			options: true,
 			widgets: true,
@@ -162,8 +161,6 @@ const DemoToInstall = ({ location, navigate }) => {
 				plugin,
 				enabled: true,
 			})),
-
-			acf: !!demoVariations[0].acf,
 
 			content: {
 				options: true,

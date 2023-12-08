@@ -7,7 +7,6 @@ class DemoInstall {
 		'blocksy_demo_export',
 		'blocksy_demo_list',
 		'blocksy_demo_install_child_theme',
-		'blocksy_demo_install_acf_data',
 		'blocksy_demo_activate_plugins',
 		'blocksy_demo_fake_step',
 		'blocksy_demo_erase_content',
@@ -55,11 +54,6 @@ class DemoInstall {
 
 	public function blocksy_demo_install_child_theme() {
 		$m = new DemoInstallChildThemeInstaller();
-		$m->import();
-	}
-
-	public function blocksy_demo_install_acf_data() {
-		$m = new DemoInstallAcfData();
 		$m->import();
 	}
 
@@ -327,27 +321,6 @@ class DemoInstall {
 			'builder' => $builder,
 			'plugins' => $plugins
 		];
-
-		if (function_exists('acf_get_internal_post_type_posts')) {
-			$acf_data = [];
-
-			$acf_types = ['acf-field-group', 'acf-post-type', 'acf-taxonomy'];
-
-			foreach ($acf_types as $acf_type) {
-				$result_for_type = acf_get_internal_post_type_posts($acf_type);
-
-				foreach ($result_for_type as $single_field) {
-					$acf_data[] = acf_prepare_internal_post_type_for_export(
-						$single_field,
-						$acf_type
-					);
-				}
-			}
-
-			if (! empty($acf_data)) {
-				$demo_data['acf'] = $acf_data;
-			}
-		}
 
 		wp_send_json_success([
 			'demo' => $demo_data

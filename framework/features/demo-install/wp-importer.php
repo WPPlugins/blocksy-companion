@@ -576,6 +576,10 @@ class Blocksy_WP_Import extends WP_Importer {
 			$description = isset( $term['term_description'] ) ? $term['term_description'] : '';
 			$termarr = array( 'slug' => $term['slug'], 'description' => $description, 'parent' => intval($parent) );
 
+			if (! taxonomy_exists($term['term_taxonomy'])) {
+				register_taxonomy($term['term_taxonomy'], 'post');
+			}
+
 			$id = wp_insert_term( $term['term_name'], $term['term_taxonomy'], $termarr );
 			if ( ! is_wp_error( $id ) ) {
 				if ( isset($term['term_id']) )

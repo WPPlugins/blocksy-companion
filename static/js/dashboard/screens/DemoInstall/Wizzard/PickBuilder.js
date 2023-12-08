@@ -81,7 +81,7 @@ const PickBuilder = ({ demoConfiguration, setDemoConfiguration, style }) => {
 
 								return 0
 							})
-							.map(({ builder, plugins, acf }) => (
+							.map(({ builder, plugins }) => (
 								<li
 									className={classnames({
 										active:
@@ -99,8 +99,6 @@ const PickBuilder = ({ demoConfiguration, setDemoConfiguration, style }) => {
 												plugin,
 												enabled: true,
 											})),
-
-											acf: !!acf,
 										})
 									}}>
 									<figure>
