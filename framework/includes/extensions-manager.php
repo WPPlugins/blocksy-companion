@@ -54,7 +54,15 @@ class ExtensionsManager {
 
 		if (wp_doing_ajax()) {
 			add_action('init', function () {
-				if ($this->is_dashboard_page()) {
+				if (
+					$this->is_dashboard_page()
+					||
+					(
+						isset($_REQUEST['action'])
+						&&
+						strpos($_REQUEST['action'], 'blocksy') !== false
+					)
+				) {
 					$this->do_extensions_preboot();
 				}
 			});
