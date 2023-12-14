@@ -1,13 +1,9 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $prefix = 'blc-product-review_single';
 
 
-$product_scores_width = blocksy_companion_theme_functions()->blocksy_get_theme_mod($prefix . '_product_scores_width', 800);
+$product_scores_width = blocksy_get_theme_mod($prefix . '_product_scores_width', 800);
 
 if ($product_scores_width !== 800) {
 	$css->put(
@@ -17,7 +13,7 @@ if ($product_scores_width !== 800) {
 }
 
 blocksy_output_colors([
-	'value' => blocksy_companion_theme_functions()->blocksy_get_theme_mod(
+	'value' => blocksy_get_theme_mod(
 		$prefix . '_star_rating_color',
 		[]
 	),
@@ -50,7 +46,7 @@ blocksy_output_colors([
 ]);
 
 blocksy_output_colors([
-	'value' => blocksy_companion_theme_functions()->blocksy_get_theme_mod(
+	'value' => blocksy_get_theme_mod(
 		$prefix . '_overall_score_text',
 		[]
 	),
@@ -72,7 +68,7 @@ blocksy_output_colors([
 ]);
 
 blocksy_output_colors([
-	'value' => blocksy_companion_theme_functions()->blocksy_get_theme_mod(
+	'value' => blocksy_get_theme_mod(
 		$prefix . '_overall_score_backgroud',
 		[]
 	),
@@ -97,7 +93,7 @@ blocksy_output_colors([
 $prefix = 'blc-product-review_archive';
 
 blocksy_output_colors([
-	'value' => blocksy_companion_theme_functions()->blocksy_get_theme_mod(
+	'value' => blocksy_get_theme_mod(
 		$prefix . '_star_rating_color',
 		[]
 	),

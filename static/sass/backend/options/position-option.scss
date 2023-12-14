@@ -18,10 +18,6 @@
 			border-color: var(--ui-accent-color);
 		}
 
-		&:not(.active) {
-			background: rgba(255, 255, 255, 0.5);
-		}
-
 		&:hover {
 			border-color: var(--ui-accent-color);
 		}

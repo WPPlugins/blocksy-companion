@@ -6,22 +6,15 @@ class ConditionsManager {
 	public function __construct() {
 	}
 
-	public function condition_matches($rules_param = [], $args = []) {
+	public function condition_matches($rules = [], $args = []) {
 		$args = wp_parse_args($args, [
 			// prefix | current-screen
-			'strategy' => 'current-screen',
-
-			// global | archive-loop
-			'conditions_purpose' => 'global'
+			'strategy' => 'current-screen'
 		]);
 
-		$rules = $this->normalize_rules($rules_param, $args);
+		$rules = $this->normalize_rules($rules);
 
 		if (! isset($rules['conditions']) || empty($rules['conditions'])) {
-			if ($args['conditions_purpose'] === 'archive-loop') {
-				return true;
-			}
-
 			return false;
 		}
 
@@ -45,34 +38,26 @@ class ConditionsManager {
 			return $el['type'] === 'exclude';
 		});
 
-		$resolved_includes = array_filter(
-			$all_includes,
-			function ($el) use ($args) {
-				if (isset($el['conditions'])) {
-					return $this->condition_matches($el, $args);
-				}
 
-				$resolver = new ConditionsRulesResolver($el, $args);
-
-				return $resolver->resolve();
+		$resolved_includes = array_filter($all_includes, function ($el) use ($args) {
+			if (isset($el['conditions'])) {
+				return $this->condition_matches($el, $args);
 			}
-		);
 
-		$resolved_excludes = array_filter(
-			$all_excludes,
-			function ($el) use ($args) {
-				$resolver = new ConditionsRulesResolver($el, $args);
+			$resolver = new ConditionsRulesResolver($el, $args);
+			return $resolver->resolve();
+		});
 
-				return $resolver->resolve();
-			}
-		);
+		$resolved_excludes = array_filter($all_excludes, function ($el) use ($args) {
+			$resolver = new ConditionsRulesResolver($el, $args);
+			return $resolver->resolve();
+		});
 
 		if ($rules['relation'] === 'AND') {
-			// If we have at least one exclude and ALL exclusions are true -- return false
 			if (
-				! empty($all_excludes)
+				! empty($resolved_excludes)
 				&&
-				count($all_excludes) === count($resolved_excludes)
+				count($resolved_excludes) === count($resolved_includes)
 			) {
 				return false;
 			}
@@ -91,7 +76,7 @@ class ConditionsManager {
 		}
 
 		if ($rules['relation'] === 'OR') {
-			// If AT LEAST ONE exclusion is true -- return false
+			// If at least one exclusion is true -- return false
 			if (! empty($resolved_excludes)) {
 				return false;
 			}
@@ -110,11 +95,8 @@ class ConditionsManager {
 
 	public function get_all_rules($args = []) {
 		$args = wp_parse_args($args, [
-			// all | archive | singular | product_tabs | maintenance-mode | content_block_hook
-			'filter' => 'all',
-
-			// frontend | backend
-			'context' => 'frontend'
+			// all | archive | singular | product_tabs | maintenance-mode
+			'filter' => 'all'
 		]);
 
 		$rules = [];
@@ -125,41 +107,13 @@ class ConditionsManager {
 			'pages',
 			'woo',
 			'cpt',
-			'specific'
+			'specific',
+			'user-auth',
+			'date-time',
+			'requests',
+			'localization',
+			'bbPress',
 		];
-
-		if ($args['context'] === 'backend') {
-			$sections[] = 'archive-loop';
-		}
-
-		if ($args['filter'] === 'content_block_hook') {
-			$sections[] = 'archive-loop';
-			$args['filter'] = 'all';
-		}
-
-		if (
-			$args['filter'] === 'all'
-			||
-			$args['filter'] === 'product_tabs'
-		) {
-			$sections[] = 'user-auth';
-		}
-		
-		$sections[] = 'date-time';
-		$sections[] = 'requests';
-		$sections[] = 'localization';
-		$sections[] = 'bbPress';
-		$sections[] = 'custom';
-
-		if ($args['filter'] === 'product_waitlist') {
-			$sections = [
-				'basic',
-				'woo',
-				'requests',
-				'localization',
-				'custom'
-			];
-		}
 
 		if ($args['filter'] === 'archive' || $args['filter'] === 'singular') {
 			$sections = [
@@ -170,8 +124,6 @@ class ConditionsManager {
 				'specific',
 				'user-auth',
 				'date-time',
-				'localization',
-				'custom'
 			];
 		}
 
@@ -180,13 +132,11 @@ class ConditionsManager {
 				'basic',
 				'user-auth',
 				'date-time',
-				'localization',
-				'custom'
 			];
 		}
 
 		foreach ($sections as $section) {
-			$maybe_rules = blocksy_companion_get_options(
+			$maybe_rules = blocksy_get_options(
 				dirname(__FILE__) . '/conditions/rules/' . $section . '.php',
 				['filter' => $args['filter']],
 				false
@@ -206,15 +156,13 @@ class ConditionsManager {
 		}
 
 		// Check if it looks like a normal rules array. If it doesn't -- bail out.
-		if (! isset($conditions[0])) {
+		if (! isset($conditions[0]) || ! isset($conditions[0]['rule'])) {
 			return [];
 		}
 
 		$result = [];
 
-		$conditions = $this->normalize_rules($conditions, [
-			'conditions_purpose' => 'all'
-		]);
+		$conditions = $this->normalize_rules($conditions);
 
 		$has_and = false;
 
@@ -282,12 +230,6 @@ class ConditionsManager {
 					$condition['rule'] === 'post_with_taxonomy_ids'
 					||
 					$condition['rule'] === 'product_with_taxonomy_ids'
-					||
-					$condition['rule'] === 'card_product_with_taxonomy_ids'
-					||
-					$condition['rule'] === 'card_post_with_taxonomy_ids'
-					||
-					$condition['rule'] === 'product_taxonomy_ids'
 				) && isset($condition['payload']['taxonomy_id'])
 			) {
 				$tax = get_term_by(
@@ -295,7 +237,7 @@ class ConditionsManager {
 					$condition['payload']['taxonomy_id']
 				);
 
-				if ($tax && ! is_wp_error($tax)) {
+				if ($tax) {
 					$to_append .= ' (<a href="' . get_edit_term_link(
 						$condition['payload']['taxonomy_id']
 					) . '" target="_blank">' . $tax->name . '</a>)';
@@ -347,23 +289,13 @@ class ConditionsManager {
 	}
 
 	private function find_rule_descriptor($rule) {
-		$all = $this->get_all_rules([
-			'context' => 'backend'
-		]);
-
-		$user_roles = $this->get_user_roles_rules();
+		$all = $this->get_all_rules();
 
 		foreach ($all as $rules_group) {
 			foreach ($rules_group['rules'] as $single_rule) {
 				if ($single_rule['id'] === $rule) {
 					return $single_rule;
 				}
-			}
-		}
-
-		foreach ($user_roles as $single_rule) {
-			if ($single_rule['id'] === $rule) {
-				return $single_rule;
 			}
 		}
 
@@ -383,66 +315,15 @@ class ConditionsManager {
 		return $result;
 	}
 
-	private function normalize_rules($rules = [], $args = []) {
-		$args = wp_parse_args($args, [
-			// all | global | archive-loop
-			'conditions_purpose' => 'global'
-		]);
-
-		$normalized = $rules;
-
-		if (! isset($rules['relation'])) {
-			$normalized = [
-				'relation' => 'OR',
-				'conditions' => $rules
-			];
+	private function normalize_rules($rules = []) {
+		if (isset($rules['relation'])) {
+			return $rules;
 		}
 
-		$normalized['conditions'] = array_filter(
-			$normalized['conditions'],
-			function ($condition) use ($args) {
-				if ($args['conditions_purpose'] === 'all') {
-					return true;
-				}
-
-				if ($args['conditions_purpose'] === 'archive-loop') {
-					return $this->is_card_rule($condition);
-				}
-
-				return true;
-			}
-		);
-
-		return $normalized;
-	}
-
-	public function is_card_rule($rule) {
-		$resolver = new ConditionsRulesResolver($rule, [
-			'conditions_purpose' => 'archive-loop'
-		]);
-
-		// Allow further inspection of nested rules
-		if (isset($rule['conditions'])) {
-			return true;
-		}
-
-		if (
-			$rule['rule'] === 'card_product_with_taxonomy_ids'
-			&&
-			$resolver->is_woo_archive()
-		) {
-			return true;
-		}
-
-		if (
-			$rule['rule'] === 'card_post_with_taxonomy_ids'
-			&&
-			$resolver->is_cpt_archive()
-		) {
-			return true;
-		}
-
-		return false;
+		return [
+			'relation' => 'OR',
+			'conditions' => $rules
+		];
 	}
 }
 

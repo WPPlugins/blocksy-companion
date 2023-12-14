@@ -1,18 +1,12 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 // wp_login_form([]);
 
-/**
- * Filters whether the forgot password link is rendered inline with the password field.
- *
- * @since 1.8.11
- *
- * @param bool $forgot_password_inline Whether to render the link inline. Default true.
- */
+$redirect_to_url = apply_filters(
+	'blocksy:account:modal:login:redirect_to',
+	$current_url
+);
+
 $forgot_password_inline = apply_filters(
 	'blocksy:account:modal:login:forgot-password-inline',
 	true
@@ -24,80 +18,38 @@ if (! $forgot_password_inline) {
 	$forgot_pass_class .= '-static';
 }
 
-$login_field_name = 'log';
-
-if (function_exists('is_account_page') && is_account_page()) {
-	$login_field_name = 'username';
-}
-
 ?>
 
 <form name="loginform" id="loginform" class="login" action="#" method="post">
 	<?php do_action('woocommerce_login_form_start'); ?>
-	<?php
-	/**
-	 * Fires at the start of the account modal login form.
-	 *
-	 * @since 1.7.43
-	 */
-	do_action('blocksy:account:modal:login:start'); ?>
+	<?php do_action('blocksy:account:modal:login:start'); ?>
 
 	<p>
-		<label for="user_login"><?php echo esc_html__('Username or Email Address', 'blocksy-companion') ?></label>
-		<input type="text" name="<?php echo esc_attr($login_field_name); ?>" id="user_login" class="input" value="" size="20" autocomplete="username" autocapitalize="off">
+		<label for="user_login"><?php echo __('Username or Email Address', 'blocksy-companion') ?></label>
+		<input type="text" name="log" id="user_login" class="input" value="" size="20" autocomplete="username" autocapitalize="off">
 	</p>
 
 	<p>
-		<label for="user_pass"><?php echo esc_html__('Password', 'blocksy-companion') ?></label>
+		<label for="user_pass"><?php echo __('Password', 'blocksy-companion') ?></label>
 		<span class="account-password-input">
-			<?php
-				blocksy_companion_html_tag_e(
-					'input',
-					/**
-					 * Filters the HTML attributes of the account modal login password input.
-					 *
-					 * @since 2.0.46
-					 *
-					 * @param array $attr HTML attributes, keyed by attribute name.
-					 */
-					apply_filters('blocksy:account:modal:login:password:attr', [
-						'type' => 'password',
-						'name' => 'pwd',
-						'id' => 'user_pass',
-						'class' => 'input',
-						'value' => '',
-						'size' => '20',
-						'autocomplete' => 'current-password',
-						'spellcheck' => 'false'
-					])
-				);
-			?>
-
+			<input type="password" name="pwd" id="user_pass" class="input" value="" size="20" autocomplete="current-password" spellcheck="false">
 			<span class="show-password-input"></span>
 		</span>
 	</p>
 
-	<?php
-		remove_action("login_form", "wp_login_attempt_focus_start");
-
-		// login_form action hook should be right after password field, just like
-		// in the wp-login.php core file.
-		do_action('login_form')
-	?>
-
 	<p class="login-remember col-2">
 		<span>
 			<input name="rememberme" type="checkbox" id="rememberme" class="ct-checkbox" value="forever">
-			<label for="rememberme"><?php echo esc_html__('Remember Me', 'blocksy-companion') ?></label>
+			<label for="rememberme"><?php echo __('Remember Me', 'blocksy-companion') ?></label>
 		</span>
 
-		<a href="#" class="<?php echo esc_attr($forgot_pass_class) ?>">
-			<?php echo esc_html__('Forgot Password?', 'blocksy-companion') ?>
+		<a href="#" class="<?php echo $forgot_pass_class ?>">
+			<?php echo __('Forgot Password?', 'blocksy-companion') ?>
 		</a>
 	</p>
 
 	<?php
-		if (blocksy_companion_site_has_feature()) {
+		if (blc_site_has_feature()) {
 			if (
 				class_exists('NextendSocialLogin', false)
 				&&
@@ -107,14 +59,14 @@ if (function_exists('is_account_page') && is_account_page()) {
 			}
 		}
 
-		// remove_action("login_form", "wp_login_attempt_focus_start");
+		remove_action("login_form", "wp_login_attempt_focus_start");
 
-		// do_action('login_form')
+		do_action('login_form')
 	?>
 
 	<p class="login-submit">
-		<button class="ct-button ct-account-login-submit has-text-align-center" name="wp-submit">
-			<?php echo esc_html__('Log In', 'blocksy-companion') ?>
+		<button class="ct-button has-text-align-center" name="wp-submit">
+			<?php echo __('Log In', 'blocksy-companion') ?>
 
 			<svg class="ct-button-loader" width="16" height="16" viewBox="0 0 24 24">
 				<circle cx="12" cy="12" r="10" opacity="0.2" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2.5"/>
@@ -132,15 +84,11 @@ if (function_exists('is_account_page') && is_account_page()) {
 				</path>
 			</svg>
 		</button>
+
+		<input type="hidden" name="redirect_to" value="<?php echo $redirect_to_url ?>">
 	</p>
 
-	<?php
-	/**
-	 * Fires at the end of the account modal login form.
-	 *
-	 * @since 1.7.43
-	 */
-	do_action('blocksy:account:modal:login:end'); ?>
+	<?php do_action('blocksy:account:modal:login:end'); ?>
 	<?php do_action('woocommerce_login_form_end'); ?>
 </form>
 

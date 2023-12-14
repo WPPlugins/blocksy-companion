@@ -4,18 +4,18 @@ import {
 	useState,
 	Fragment,
 } from '@wordpress/element'
-import { Overlay } from 'blocksy-options'
+import Overlay from '../../helpers/Overlay'
 import { __, sprintf } from 'ct-i18n'
 
 const plans = {
 	free: __('Free', 'blocksy-companion'),
 
 	personal: __('Personal', 'blocksy-companion'),
-	professional: __('Business', 'blocksy-companion'),
+	professional: __('Professional', 'blocksy-companion'),
 	agency: __('Agency', 'blocksy-companion'),
 
 	personal_v2: __('Personal', 'blocksy-companion'),
-	professional_v2: __('Business', 'blocksy-companion'),
+	professional_v2: __('Professional', 'blocksy-companion'),
 	agency_v2: __('Agency', 'blocksy-companion'),
 }
 
@@ -33,7 +33,7 @@ const useUpsellModal = ({
 
 	professional = {
 		description: __(
-			'Upgrade to the business or agency plan and get instant access to this and many other features.',
+			'Upgrade to the professional or agency plan and get instant access to this and many other features.',
 			'blocksy-companion'
 		),
 	},
@@ -85,7 +85,10 @@ const useUpsellModal = ({
 							<span>Required plan</span>
 
 							<h2 className="ct-modal-title">
-								{__('Business or Agency', 'blocksy-companion')}
+								{__(
+									'Professional or Agency',
+									'blocksy-companion'
+								)}
 							</h2>
 
 							<p>{professional.description}</p>
@@ -108,24 +111,14 @@ const useUpsellModal = ({
 						className="ct-modal-actions has-divider"
 						data-buttons="2">
 						<a
-							href={
-								ctDashboardLocalizations.plugin_data
-									? ctDashboardLocalizations.plugin_data
-											.modal_links['compare-plans']
-									: 'https://creativethemes.com/blocksy/pricing/#comparison-free-vs-pro'
-							}
+							href="https://creativethemes.com/blocksy/pricing/#comparison-free-vs-pro"
 							target="_blank"
 							className="button">
 							{__('Compare Plans', 'blocksy-companion')}
 						</a>
 
 						<a
-							href={
-								ctDashboardLocalizations.plugin_data.modal_links
-									? ctDashboardLocalizations.plugin_data
-											.modal_links.pricing
-									: 'https://creativethemes.com/blocksy/pricing/'
-							}
+							href="https://creativethemes.com/blocksy/pricing/"
 							target="_blank"
 							className="button button-primary">
 							{__('Upgrade Now', 'blocksy-companion')}

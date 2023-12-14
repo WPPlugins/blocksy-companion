@@ -1,17 +1,13 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 if (! isset($root_selector)) {
 	$root_selector = ['.ct-header-account'];
 }
 
-$forms_type = blocksy_companion_theme_functions()->blocksy_get_theme_mod('forms_type', 'classic-forms');
+$forms_type = blocksy_get_theme_mod('forms_type', 'classic-forms');
 
 // Icon size
-$accountHeaderIconSize = blocksy_companion_akg( 'accountHeaderIconSize', $atts, 15 );
+$accountHeaderIconSize = blocksy_akg( 'accountHeaderIconSize', $atts, 15 );
 
 if ($accountHeaderIconSize !== 15) {
 	blocksy_output_responsive([
@@ -30,7 +26,7 @@ if ($accountHeaderIconSize !== 15) {
 	]);
 }
 
-$accountHeaderIconSize = blocksy_companion_akg( 'account_loggedin_icon_size', $atts, 15 );
+$accountHeaderIconSize = blocksy_akg( 'account_loggedin_icon_size', $atts, 15 );
 
 if ($accountHeaderIconSize !== 15) {
 	blocksy_output_responsive([
@@ -51,7 +47,7 @@ if ($accountHeaderIconSize !== 15) {
 
 
 // Avatar size
-$accountHeaderAvatarSize = blocksy_companion_akg( 'accountHeaderAvatarSize', $atts, 18 );
+$accountHeaderAvatarSize = blocksy_akg( 'accountHeaderAvatarSize', $atts, 18 );
 
 if ($accountHeaderAvatarSize !== 18) {
 	blocksy_output_responsive([
@@ -74,11 +70,11 @@ blocksy_output_background_css([
 		])
 	),
 	'css' => $css,
-	'value' => blocksy_companion_akg('accountHeaderFormBackground', $atts,
+	'value' => blocksy_akg('accountHeaderFormBackground', $atts,
 		blocksy_background_default_value([
 			'backgroundColor' => [
 				'default' => [
-					'color' => 'var(--theme-palette-color-8)'
+					'color' => '#ffffff'
 				],
 			],
 		])
@@ -95,7 +91,7 @@ blocksy_output_background_css([
 		])
 	),
 	'css' => $css,
-	'value' => blocksy_companion_akg('accountHeaderBackground', $atts,
+	'value' => blocksy_akg('accountHeaderBackground', $atts,
 		blocksy_background_default_value([
 			'backgroundColor' => [
 				'default' => [
@@ -117,7 +113,7 @@ blocksy_output_box_shadow([
 			'to_add' => '#account-modal .ct-account-modal'
 		])
 	),
-	'value' => blocksy_companion_akg('account_form_shadow', $atts, blocksy_box_shadow_value([
+	'value' => blocksy_akg('account_form_shadow', $atts, blocksy_box_shadow_value([
 		'enable' => true,
 		'h_offset' => 0,
 		'v_offset' => 0,
@@ -138,7 +134,7 @@ blocksy_output_spacing([
 	'mobile_css' => $mobile_css,
 	'selector' => blocksy_assemble_selector($root_selector),
 	'important' => true,
-	'value' => blocksy_companion_akg(
+	'value' => blocksy_default_akg(
 		'accountHeaderMargin',
 		$atts,
 		blocksy_spacing_value()
@@ -146,7 +142,7 @@ blocksy_output_spacing([
 ]);
 
 blocksy_output_font_css([
-	'font_value' => blocksy_companion_akg( 'account_label_font', $atts,
+	'font_value' => blocksy_akg( 'account_label_font', $atts,
 		blocksy_typography_default_values([
 			'size' => '12px',
 			'variation' => 'n6',
@@ -167,7 +163,7 @@ blocksy_output_font_css([
 
 // default state
 blocksy_output_colors([
-	'value' => blocksy_companion_akg('accountHeaderColor', $atts),
+	'value' => blocksy_akg('accountHeaderColor', $atts),
 	'default' => [
 		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -202,7 +198,7 @@ blocksy_output_colors([
 ]);
 
 blocksy_output_colors([
-	'value' => blocksy_companion_akg('header_account_icon_color', $atts),
+	'value' => blocksy_akg('header_account_icon_color', $atts),
 	'default' => [
 		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -239,7 +235,7 @@ blocksy_output_colors([
 // transparent state
 if (isset($has_transparent_header) && $has_transparent_header) {
 	blocksy_output_colors([
-		'value' => blocksy_companion_akg('transparentAccountHeaderColor', $atts),
+		'value' => blocksy_akg('transparentAccountHeaderColor', $atts),
 		'default' => [
 			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 			'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -283,7 +279,7 @@ if (isset($has_transparent_header) && $has_transparent_header) {
 	]);
 
 	blocksy_output_colors([
-		'value' => blocksy_companion_akg('transparent_header_account_icon_color', $atts),
+		'value' => blocksy_akg('transparent_header_account_icon_color', $atts),
 		'default' => [
 			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 			'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -330,7 +326,7 @@ if (isset($has_transparent_header) && $has_transparent_header) {
 // sticky state
 if (isset($has_sticky_header) && $has_sticky_header) {
 	blocksy_output_colors([
-		'value' => blocksy_companion_akg('stickyAccountHeaderColor', $atts),
+		'value' => blocksy_akg('stickyAccountHeaderColor', $atts),
 		'default' => [
 			'default' => ['color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT')],
 			'hover' => ['color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT')],
@@ -374,7 +370,7 @@ if (isset($has_sticky_header) && $has_sticky_header) {
 	]);
 
 	blocksy_output_colors([
-		'value' => blocksy_companion_akg('sticky_header_account_icon_color', $atts),
+		'value' => blocksy_akg('sticky_header_account_icon_color', $atts),
 		'default' => [
 			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 			'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -419,7 +415,7 @@ if (isset($has_sticky_header) && $has_sticky_header) {
 }
 
 blocksy_output_colors([
-	'value' => blocksy_companion_akg('account_modal_font_color', $atts),
+	'value' => blocksy_akg('account_modal_font_color', $atts),
 	'default' => [
 		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -452,7 +448,7 @@ blocksy_output_colors([
 ]);
 
 blocksy_output_colors([
-	'value' => blocksy_companion_akg('account_modal_form_text_color', $atts),
+	'value' => blocksy_akg('account_modal_form_text_color', $atts),
 	'default' => [
 		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'focus' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -485,7 +481,7 @@ blocksy_output_colors([
 ]);
 
 blocksy_output_colors([
-	'value' => blocksy_companion_akg('account_modal_form_border_color', $atts),
+	'value' => blocksy_akg('account_modal_form_border_color', $atts),
 	'default' => [
 		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'focus' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -517,9 +513,9 @@ blocksy_output_colors([
 	],
 ]);
 
-if ($forms_type === 'classic-forms') {
+if ($forms_type !== 'classic-forms' || is_customize_preview()) {
 	blocksy_output_colors([
-		'value' => blocksy_companion_akg('account_modal_form_background_color', $atts),
+		'value' => blocksy_akg('account_modal_form_background_color', $atts),
 		'default' => [
 			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 			'focus' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -552,10 +548,10 @@ if ($forms_type === 'classic-forms') {
 	]);
 }
 
-$close_button_type = blocksy_companion_akg('account_close_button_type', $atts, 'type-1');
+$close_button_type = blocksy_akg('account_close_button_type', $atts, 'type-1');
 
 blocksy_output_colors([
-	'value' => blocksy_companion_akg('account_close_button_color', $atts),
+	'value' => blocksy_akg('account_close_button_color', $atts),
 	'default' => [
 		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -590,7 +586,7 @@ blocksy_output_colors([
 
 if (is_customize_preview() || $close_button_type === 'type-2') {
 	blocksy_output_colors([
-		'value' => blocksy_companion_akg('account_close_button_border_color', $atts),
+		'value' => blocksy_akg('account_close_button_border_color', $atts),
 		'default' => [
 			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 			'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -626,7 +622,7 @@ if (is_customize_preview() || $close_button_type === 'type-2') {
 if (is_customize_preview() || $close_button_type === 'type-3') {
 
 	blocksy_output_colors([
-		'value' => blocksy_companion_akg('account_close_button_shape_color', $atts),
+		'value' => blocksy_akg('account_close_button_shape_color', $atts),
 		'default' => [
 			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 			'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -660,68 +656,16 @@ if (is_customize_preview() || $close_button_type === 'type-3') {
 }
 
 // interation type dropdown
-$loggedin_interaction_type = blocksy_companion_akg( 'loggedin_interaction_type', $atts, 'dropdown' );
+$loggedin_interaction_type = blocksy_akg( 'loggedin_interaction_type', $atts, 'dropdown' );
 
 if ($loggedin_interaction_type === 'dropdown') {
 
-	$account_dropdown_top_offset = blocksy_companion_akg( 'account_dropdown_top_offset', $atts, 15 );
-
-	$css->put(
-		blocksy_assemble_selector(
-			blocksy_mutate_selector([
-				'selector' => $root_selector,
-				'operation' => 'suffix',
-				'to_add' => '.ct-header-account-dropdown'
-			])
-		),
-		'--dropdown-top-offset: ' . $account_dropdown_top_offset . 'px'
-	);
-
-	if (isset($has_sticky_header) && $has_sticky_header) {
-
-		$sticky_state_account_dropdown_top_offset = blocksy_companion_akg( 'sticky_state_account_dropdown_top_offset', $atts, 15 );
-
-		$css->put(
-			blocksy_assemble_selector(
-				blocksy_mutate_selector([
-					'selector' => blocksy_mutate_selector([
-						'selector' => $root_selector,
-						'operation' => 'suffix',
-						'to_add' => '.ct-header-account-dropdown'
-					]),
-					'operation' => 'between',
-					'to_add' => '[data-sticky*="yes"]'
-				])
-			),
-			'--sticky-state-dropdown-top-offset: ' . $sticky_state_account_dropdown_top_offset . 'px'
-		);
-	}
-
-	blocksy_output_font_css([
-		'font_value' => blocksy_companion_akg( 'header_account_dropdown_font', $atts,
-			blocksy_typography_default_values([
-				'size' => '14px',
-			])
-		),
-		'css' => $css,
-		'tablet_css' => $tablet_css,
-		'mobile_css' => $mobile_css,
-		'selector' => blocksy_assemble_selector(
-			blocksy_mutate_selector([
-				'selector' => $root_selector,
-				'operation' => 'suffix',
-				'to_add' => '.ct-header-account-dropdown'
-			])
-		),
-	]);
-
 	blocksy_output_colors([
-		'value' => blocksy_companion_akg('header_account_dropdown_font_color', $atts),
+		'value' => blocksy_akg('header_account_dropdown_font_color', $atts),
 		'default' => [
 			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
-			'link_initial' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+			'link_initial' => [ 'color' => 'var(--theme-text-color)' ],
 			'link_hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
-			'link_active' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		],
 		'css' => $css,
 		'tablet_css' => $tablet_css,
@@ -732,7 +676,7 @@ if ($loggedin_interaction_type === 'dropdown') {
 					blocksy_mutate_selector([
 						'selector' => $root_selector,
 						'operation' => 'suffix',
-						'to_add' => '.ct-header-account-dropdown'
+						'to_add' => '> ul'
 					])
 				),
 				'variable' => 'theme-text-color'
@@ -743,7 +687,7 @@ if ($loggedin_interaction_type === 'dropdown') {
 					blocksy_mutate_selector([
 						'selector' => $root_selector,
 						'operation' => 'suffix',
-						'to_add' => '.ct-header-account-dropdown'
+						'to_add' => '> ul'
 					])
 				),
 				'variable' => 'theme-link-initial-color'
@@ -754,31 +698,18 @@ if ($loggedin_interaction_type === 'dropdown') {
 					blocksy_mutate_selector([
 						'selector' => $root_selector,
 						'operation' => 'suffix',
-						'to_add' => '.ct-header-account-dropdown'
+						'to_add' => '> ul'
 					])
 				),
 				'variable' => 'theme-link-hover-color'
-			],
-
-			'link_active' => [
-				'selector' => blocksy_assemble_selector(
-					blocksy_mutate_selector([
-						'selector' => $root_selector,
-						'operation' => 'suffix',
-						'to_add' => '.ct-header-account-dropdown'
-					])
-				),
-				'variable' => 'theme-link-active-color'
 			],
 		],
 	]);
 
 	blocksy_output_colors([
-		'value' => blocksy_companion_akg('header_account_dropdown_color', $atts),
+		'value' => blocksy_akg('header_account_dropdown_color', $atts),
 		'default' => [
 			'default' => [ 'color' => 'var(--theme-palette-color-8)' ],
-			'hover' => [ 'color' => 'rgba(0, 0, 0, 0.05)' ],
-			'active' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		],
 		'css' => $css,
 		'tablet_css' => $tablet_css,
@@ -789,32 +720,10 @@ if ($loggedin_interaction_type === 'dropdown') {
 					blocksy_mutate_selector([
 						'selector' => $root_selector,
 						'operation' => 'suffix',
-						'to_add' => '.ct-header-account-dropdown'
+						'to_add' => '> ul'
 					])
 				),
-				'variable' => 'dropdown-background-color'
-			],
-
-			'hover' => [
-				'selector' => blocksy_assemble_selector(
-					blocksy_mutate_selector([
-						'selector' => $root_selector,
-						'operation' => 'suffix',
-						'to_add' => '.ct-header-account-dropdown'
-					])
-				),
-				'variable' => 'dropdown-items-background-hover-color'
-			],
-
-			'active' => [
-				'selector' => blocksy_assemble_selector(
-					blocksy_mutate_selector([
-						'selector' => $root_selector,
-						'operation' => 'suffix',
-						'to_add' => '.ct-header-account-dropdown'
-					])
-				),
-				'variable' => 'dropdown-items-background-active-color'
+				'variable' => 'background-color'
 			],
 		],
 		'responsive' => true
@@ -826,11 +735,11 @@ if ($loggedin_interaction_type === 'dropdown') {
 			blocksy_mutate_selector([
 				'selector' => $root_selector,
 				'operation' => 'suffix',
-				'to_add' => '.ct-header-account-dropdown'
+				'to_add' => '> ul'
 			])
 		),
 		'variableName' => 'theme-border',
-		'value' => blocksy_companion_akg('header_account_dropdown_divider', $atts),
+		'value' => blocksy_akg('header_account_dropdown_divider', $atts),
 		'default' => [
 			'width' => 1,
 			'style' => 'solid',
@@ -848,10 +757,10 @@ if ($loggedin_interaction_type === 'dropdown') {
 			blocksy_mutate_selector([
 				'selector' => $root_selector,
 				'operation' => 'suffix',
-				'to_add' => '.ct-header-account-dropdown'
+				'to_add' => '> ul'
 			])
 		),
-		'value' => blocksy_companion_akg('header_account_dropdown_shadow', $atts, blocksy_box_shadow_value([
+		'value' => blocksy_akg('header_account_dropdown_shadow', $atts, blocksy_box_shadow_value([
 			'enable' => true,
 			'h_offset' => 0,
 			'v_offset' => 10,
@@ -873,14 +782,18 @@ if ($loggedin_interaction_type === 'dropdown') {
 			blocksy_mutate_selector([
 				'selector' => $root_selector,
 				'operation' => 'suffix',
-				'to_add' => '.ct-header-account-dropdown'
+				'to_add' => '> ul'
 			])
 		),
 		'property' => 'theme-border-radius',
-		'value' => blocksy_companion_akg(
+		'value' => blocksy_default_akg(
 			'header_account_dropdown_radius', $atts,
-			blocksy_spacing_value()
-		),
-		'empty_value' => 2,
+			blocksy_spacing_value([
+				'top' => '2px',
+				'left' => '2px',
+				'right' => '2px',
+				'bottom' => '2px',
+			])
+		)
 	]);
 }

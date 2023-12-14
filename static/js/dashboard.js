@@ -12,48 +12,23 @@ import DemoInstall from './dashboard/screens/DemoInstall'
 import SiteExport from './dashboard/screens/SiteExport'
 import DemoToInstall from './dashboard/screens/DemoInstall/DemoToInstall'
 
-import { getStarterSitesStatus } from './dashboard/helpers/starter-sites'
-
-getStarterSitesStatus()
-	.then((response) => {
-		if (response.status !== 511) {
-			// We are good, do nothing
-			return
-		}
-
-		fetch(
-			`${ctDashboardLocalizations.ajax_url}?action=blocksy_dashboard_handle_incorrect_license&nonce=${ctDashboardLocalizations.dashboard_actions_nonce}`,
-			{
-				method: 'POST',
-				body: JSON.stringify({}),
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json'
-				}
-			}
-		).then(({ success, data }) => {
-			// Ignore result
-		})
-	})
-	.catch((response) => {
-		console.error('Error:', response)
-	})
+import { getRawExtsStatus } from './dashboard/screens/Extensions/useExtsStatus'
 
 ctEvents.on('ct:dashboard:routes', (r) => {
 	r.push({
 		Component: (props) => <Extensions {...props} />,
-		path: '/extensions'
+		path: '/extensions',
 	})
 
 	r.push({
 		Component: (props) => <Extension {...props} />,
-		path: '/extensions/:extension'
+		path: '/extensions/:extension',
 	})
 
 	if (ctDashboardLocalizations.plugin_data.has_demo_install === 'yes') {
 		r.push({
 			Component: (props) => <DemoInstall {...props} />,
-			path: '/demos'
+			path: '/demos',
 		})
 	}
 })
@@ -66,9 +41,9 @@ ctEvents.on('ct:dashboard:navigation-links', (r) => {
 			getProps: ({ isPartiallyCurrent, isCurrent }) =>
 				isPartiallyCurrent
 					? {
-							'aria-current': 'page'
-						}
-					: {}
+							'aria-current': 'page',
+					  }
+					: {},
 		})
 	}
 
@@ -86,11 +61,11 @@ ctEvents.on('ct:dashboard:navigation-links', (r) => {
 			return {
 				...(isPartiallyCurrent || isCurrent
 					? {
-							'aria-current': 'page'
-						}
-					: {})
+							'aria-current': 'page',
+					  }
+					: {}),
 			}
-		}
+		},
 	})
 })
 

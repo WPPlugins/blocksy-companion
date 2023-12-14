@@ -3,7 +3,7 @@
 namespace Blocksy\Extensions\NewsletterSubscribe;
 
 class CampaignMonitorProvider extends Provider {
-	public function fetch_lists($api_key, $api_url = '') {
+	public function fetch_lists($api_key) {
 		if (! $api_key) {
 			return 'api_key_invalid';
 		}
@@ -72,6 +72,14 @@ class CampaignMonitorProvider extends Provider {
 		}, $lists);
 	}
 
+	public function get_form_url_and_gdpr_for($maybe_custom_list = null) {
+		return [
+			'form_url' => '#',
+			'has_gdpr_fields' => false,
+			'provider' => 'campaignmonitor'
+		];
+	}
+
 	public function subscribe_form($args = []) {
 		$args = wp_parse_args($args, [
 			'email' => '',
@@ -81,12 +89,10 @@ class CampaignMonitorProvider extends Provider {
 
 		$settings = $this->get_settings();
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_init
 		$curl = curl_init();
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt_array
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://api.createsend.com/api/v3.3/subscribers/' . rawurlencode($args['group']) . '.json',
+			CURLOPT_URL => 'https://api.createsend.com/api/v3.3/subscribers/' . $args['group'] . '.json',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -105,12 +111,9 @@ class CampaignMonitorProvider extends Provider {
 			CURLOPT_USERPWD => $settings['api_key'] . ':x'
 		));
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_exec
 		$response = curl_exec($curl);
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_error
 		$err = curl_error($curl);
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_close
 		curl_close($curl);
 
 		if ($err) {
@@ -130,8 +133,9 @@ class CampaignMonitorProvider extends Provider {
 
 			return [
 				'result' => 'yes',
-				'message' => NewsletterMessages::subscribed_successfully()
+				'message' => __('Thank you for subscribing to our newsletter!', 'blocksy-companion')
 			];
 		}
 	}
 }
+
