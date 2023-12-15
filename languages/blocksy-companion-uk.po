@@ -3309,7 +3309,7 @@ msgstr "Необхідні плагіни"
 
 #: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:122
 msgid "Child theme"
-msgstr "Дочірня тем��"
+msgstr "Дочірня тема"
 
 #: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:111
 msgid "Register demo"
@@ -3707,7 +3707,7 @@ msgstr "Ви впевнені, що бажаєте продовжити?"
 
 #: framework/premium/static/js/hooks/CodeEditor.js:183
 msgid "Enabling & disabling the code editor will erase everything from your post editor and this action is irreversible."
-msgstr "Включення та відключення редактору кода знищить все у вашому редакторі постів та ці дії незворотні"
+msgstr "Включення та відключення редактору кода знищить все у вашому редакторі постів та ці дії незворотн��"
 
 #: framework/premium/static/js/hooks/CodeEditor.js:181
 msgid "Heads up!"

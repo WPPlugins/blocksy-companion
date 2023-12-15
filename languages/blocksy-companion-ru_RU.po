@@ -3534,7 +3534,7 @@ msgstr "Указать или перетащить файл..."
 
 #: static/js/options/CustomizerOptionsManager.js:116
 msgid "Easily import the theme customizer settings."
-msgstr "Легко экспортируйте параметры настройщика темы."
+msgstr "Легко экспортиру��те параметры настройщика темы."
 
 #: static/js/options/CustomizerOptionsManager.js:113
 msgid "Import Options"
@@ -4254,7 +4254,7 @@ msgstr "Контакты"
 #: framework/premium/extensions/woocommerce-extra/features/compare/header-items/compare/options.php:178,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:181
 msgid "Label Font Color"
-msgstr "Цвет шрифт�� ярлыка"
+msgstr "Цвет шрифта ярлыка"
 
 #: framework/premium/extensions/woocommerce-extra/features/compare/header-items/compare/options.php:83,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:84
@@ -5745,7 +5745,7 @@ msgstr "Видимость плавающей корзины"
 
 #: framework/premium/extensions/woocommerce-extra/features/floating-cart/options.php:30
 msgid "Product Title Visibility"
-msgstr "Видимость з��головка товара"
+msgstr "Видимость заголовка товара"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:439,
 #: framework/premium/extensions/woocommerce-extra/features/floating-cart/options.php:20
@@ -6776,7 +6776,7 @@ msgstr "Артикул"
 
 #: framework/extensions/product-reviews/metabox.php:69
 msgid "Product Price"
-msgstr "Ц��на товара"
+msgstr "Цена товара"
 
 #: framework/extensions/product-reviews/metabox.php:38
 msgid "More info about review entity and how to choose the right one can be found %shere%s."

@@ -3444,7 +3444,7 @@ msgstr ""
 
 #: static/js/dashboard/screens/DemoInstall.js:160
 msgid "The connection to our <b>demo.creativethemes.com</b> server didn't worked. This connection is required for importing the starter sites from our demo content server. All you have to do is to contact your hosting provider and ask them to white list our demo server address."
-msgstr "Kết nối chúng tôi <b>demo.creativethemes.com</b> với máy chủ không hoạt động. Cần có kết nối này để nhập trang web mẫu từ máy chủ nội dung demo của chúng tôi. Tất cả những gì bạn phải làm là liên hệ với nhà cung cấp dịch vụ hosting của mình và yêu cầu họ đưa vào white list địa chỉ máy chủ demo của chúng tôi."
+msgstr "Kết nối chúng tôi <b>demo.creativethemes.com</b> với máy chủ không hoạt ��ộng. Cần có kết nối này để nhập trang web mẫu từ máy chủ nội dung demo của chúng tôi. Tất cả những gì bạn phải làm là liên hệ với nhà cung cấp dịch vụ hosting của mình và yêu cầu họ đưa vào white list địa chỉ máy chủ demo của chúng tôi."
 
 #: static/js/dashboard/screens/DemoInstall.js:146
 msgid "Loading Starter Sites..."
