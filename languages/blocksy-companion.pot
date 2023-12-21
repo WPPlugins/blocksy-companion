@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-15 06:50+0000\n"
+"POT-Creation-Date: 2023-12-21 19:54+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -161,13 +161,13 @@ msgid "Register For This Site"
 msgstr ""
 
 #: framework/features/conditions-manager.php:198,
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:81
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:123
 #: static/js/options/ConditionsManager/SingleCondition.js:89
 msgid "Include"
 msgstr ""
 
 #: framework/features/conditions-manager.php:198,
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:82
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:124
 #: static/js/options/ConditionsManager/SingleCondition.js:90
 msgid "Exclude"
 msgstr ""
@@ -521,8 +521,9 @@ msgid ""
 msgstr ""
 
 #: framework/helpers/exts.php:245,
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:123,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:4
-msgid "Free Shipping"
+msgid "Free Shipping Bar"
 msgstr ""
 
 #: framework/helpers/exts.php:246
@@ -813,7 +814,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:267,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:543,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:132,
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:118,
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:187,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:66,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:180,
 #: framework/premium/features/premium-header/items/contacts/options.php:501,
@@ -896,7 +897,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:381,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:409,
 #: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:50,
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:139,
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:208,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:233,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:269,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/customizer-options.php:310,
@@ -1506,7 +1507,7 @@ msgstr ""
 #: framework/extensions/product-reviews/extension.php:471,
 #: framework/extensions/product-reviews/extension.php:492,
 #: framework/premium/extensions/mega-menu/options.php:855,
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:145,
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:214,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:221,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:265,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:310,
@@ -1603,7 +1604,7 @@ msgstr ""
 
 #: framework/extensions/product-reviews/extension.php:589,
 #: framework/extensions/product-reviews/extension.php:599,
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:117,
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:100,
 #: framework/premium/extensions/woocommerce-extra/features/filters/includes/base-filter.php:104
 msgid "Categories"
 msgstr ""
@@ -2194,7 +2195,7 @@ msgstr ""
 
 #: framework/premium/features/content-blocks.php:289,
 #: framework/premium/extensions/woocommerce-extra/features/custom-tabs/feature.php:103,
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:458,
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:474,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/feature.php:261
 msgid "Add New"
 msgstr ""
@@ -2223,14 +2224,14 @@ msgstr ""
 
 #: framework/premium/features/content-blocks.php:296,
 #: framework/premium/extensions/woocommerce-extra/features/custom-tabs/feature.php:110,
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:465,
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:481,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/feature.php:268
 msgid "Nothing found"
 msgstr ""
 
 #: framework/premium/features/content-blocks.php:297,
 #: framework/premium/extensions/woocommerce-extra/features/custom-tabs/feature.php:111,
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:466,
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:482,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/feature.php:269
 msgid "Nothing found in Trash"
 msgstr ""
@@ -2993,8 +2994,8 @@ msgstr ""
 #: framework/premium/extensions/shortcuts/customizer.php:512,
 #: framework/premium/extensions/shortcuts/customizer.php:535,
 #: framework/premium/extensions/shortcuts/views/bar.php:51,
-#: framework/premium/extensions/woocommerce-extra/features/compare/feature.php:233,
-#: framework/premium/extensions/woocommerce-extra/features/compare/feature.php:237,
+#: framework/premium/extensions/woocommerce-extra/features/compare/feature.php:239,
+#: framework/premium/extensions/woocommerce-extra/features/compare/feature.php:243,
 #: framework/premium/extensions/woocommerce-extra/features/compare/helpers.php:108,
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:36,
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:378,
@@ -3188,6 +3189,14 @@ msgstr ""
 msgid "Cart Page"
 msgstr ""
 
+#: framework/premium/extensions/woocommerce-extra/utils.php:102
+msgid "Private: %s"
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/utils.php:92
+msgid "Protected: %s"
+msgstr ""
+
 #: framework/premium/features/content-blocks/admin-ui.php:132
 msgid "Enable"
 msgstr ""
@@ -3359,7 +3368,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/product-sale-countdown/feature.php:300,
 #: framework/premium/extensions/woocommerce-extra/features/share-box-layer/feature.php:201,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:133,
-#: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:334
+#: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:350
 msgid "Bottom Spacing"
 msgstr ""
 
@@ -5516,15 +5525,15 @@ msgstr ""
 msgid "Quantity Input"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/compare/feature.php:220
+#: framework/premium/extensions/woocommerce-extra/features/compare/feature.php:226
 msgid "Compare Button"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/compare/feature.php:268
+#: framework/premium/extensions/woocommerce-extra/features/compare/feature.php:274
 msgid "Compare Products"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/compare/feature.php:274
+#: framework/premium/extensions/woocommerce-extra/features/compare/feature.php:280
 msgid "Close Compare Modal"
 msgstr ""
 
@@ -5693,45 +5702,45 @@ msgid ""
 "30."
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:123
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:106
 msgid "Payment Gateways"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:129,
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:112,
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/options.php:66
 msgid "Shipping Methods"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:253
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:269
 msgid "Thank you Page"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:456,
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:462
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:472,
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:478
 msgid "Thank You Pages"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:457
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:473
 msgid "Thank You Page"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:459
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:475
 msgid "Add New Thank You Page"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:460
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:476
 msgid "Edit Thank You Page"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:461
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:477
 msgid "New Thank You Page"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:463
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:479
 msgid "View Thank You Page"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:464
+#: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/feature.php:480
 msgid "Search Thank You Pages"
 msgstr ""
 
@@ -6049,22 +6058,23 @@ msgstr ""
 msgid "Share Box"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:123
-msgid "Free Shipping Bar"
-msgstr ""
-
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:126
 msgid "Show if cart is empty"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:290,
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:104
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:315,
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:173
 msgid "Congratulations! You got free shipping 🎉"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:281,
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:90
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:292,
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:132
 msgid "Add {price} more to get free shipping!"
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:305,
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:157
+msgid "Add {items} more items to get free shipping!"
 msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:15
@@ -6084,39 +6094,64 @@ msgid "Calculation Method"
 msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:52
+msgid "Count Criteria"
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:59
+msgid "Price"
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:60
+msgid "Items"
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:69
 msgid "Goal Amount"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:56
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:73
 msgid "Amount the client has to reach in order to get free shipping."
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:68
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:83
+msgid "Goal Items"
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:87
+msgid "Amount of items the client has to buy in order to get free shipping."
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:101
 msgid "The calculation method will be based on WooCommerce zones."
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:74
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:116
 msgid "Discount Calculation"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:84
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:126
 msgid ""
 "Include or exclude the discount code when calculating the shipping progress."
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:88
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:130,
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:155
 msgid "Default Message"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:98
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:140
 msgid "You can use dynamic code tags such as {price} inside this option."
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:102
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:165
+msgid "You can use dynamic code tags such as {items} inside this option."
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:171
 msgid "Success Message"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:123
+#: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:192
 msgid "Progress Bar Color"
 msgstr ""
 
@@ -6189,16 +6224,16 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:81,
 #: framework/premium/extensions/woocommerce-extra/features/compare/views/table.php:501,
-#: framework/premium/extensions/woocommerce-extra/features/swatches/includes/frontend.php:242,
+#: framework/premium/extensions/woocommerce-extra/features/swatches/includes/frontend.php:248,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/includes/render.php:120
 msgid "Out of Stock"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:315
+#: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:331
 msgid "Display Variations Inline"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:331
+#: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:347
 msgid "Swatches"
 msgstr ""
 
@@ -6622,11 +6657,11 @@ msgstr ""
 msgid "Reset Filter"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/views/panel.php:46
+#: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/views/panel.php:49
 msgid "Available Filters"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/views/panel.php:47
+#: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/views/panel.php:50
 msgid "Close filters modal"
 msgstr ""
 
@@ -7644,12 +7679,12 @@ msgstr ""
 msgid "Select location"
 msgstr ""
 
-#: framework/premium/static/js/options/PreviewedPostsSelect.js:166
+#: framework/premium/static/js/options/PreviewedPostsSelect.js:170
 #: static/js/options/ConditionsManager/PostIdPicker.js:68
 msgid "Type to search by ID or title..."
 msgstr ""
 
-#: framework/premium/static/js/options/PreviewedPostsSelect.js:170
+#: framework/premium/static/js/options/PreviewedPostsSelect.js:174
 #: static/js/options/ConditionsManager/PostIdPicker.js:74
 msgid "Select post"
 msgstr ""

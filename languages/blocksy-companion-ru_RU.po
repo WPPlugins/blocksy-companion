@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/3.0.0-alpha.4\n"
+"X-Generator: GlotPress/3.0.0\n"
 "Language: ru\n"
 "Project-Id-Version: Blocksy Companion Pro\n"
 
@@ -3450,7 +3450,7 @@ msgstr "Установка"
 
 #: static/js/dashboard/screens/DemoInstall.js:160
 msgid "The connection to our <b>demo.creativethemes.com</b> server didn't worked. This connection is required for importing the starter sites from our demo content server. All you have to do is to contact your hosting provider and ask them to white list our demo server address."
-msgstr "Подключение к нашему серверу <b>demo.creativethemes.com</b> не сработало. Это соединение требуется для импорта стартовых сайтов с нашего сервера демонстрационного контента. Всё, что вам нужно сделать, это связаться с вашим хостинг-провайдером и попросить его внести в белый список адрес нашего демонстрационного сервера."
+msgstr "Подключение к нашему серверу <b>demo.creativethemes.com</b> не сработало. Это соединение требуется для импорта стартовых сайтов �� нашего сервера демонстрационного контента. Всё, что вам нужно сделать, это связаться с вашим хостинг-провайдером и попросить его внести в белый список адрес нашего демонстрационного сервера."
 
 #: static/js/dashboard/screens/DemoInstall.js:146
 msgid "Loading Starter Sites..."
@@ -3534,7 +3534,7 @@ msgstr "Указать или перетащить файл..."
 
 #: static/js/options/CustomizerOptionsManager.js:116
 msgid "Easily import the theme customizer settings."
-msgstr "Легко экспортиру��те параметры настройщика темы."
+msgstr "Легко экспортируйте параметры настройщика темы."
 
 #: static/js/options/CustomizerOptionsManager.js:113
 msgid "Import Options"
@@ -4613,7 +4613,7 @@ msgstr "При наведении/активная"
 
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/options.php:46
 msgid "The page you select here will display the wish list for your logged out users."
-msgstr " На странице, которую вы выберете здесь, будет отображаться список желаний для невошедших в систему пользователей."
+msgstr " На стр��нице, которую вы выберете здесь, будет отображаться список желаний для невошедших в систему пользователей."
 
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/options.php:40
 msgid "Wish List Page"

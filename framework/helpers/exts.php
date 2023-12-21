@@ -242,7 +242,7 @@ function blc_exts_get_preliminary_config($ext = null) {
 
 				[
 					'id' => 'free-shipping',
-					'title' => __('Free Shipping', 'blocksy-companion'),
+					'title' => __('Free Shipping Bar', 'blocksy-companion'),
 					'description' => __('Add a visual cue that tells your visitors how much the cart total must be to be able to benefit of free shipping.', 'blocksy-companion'),
 					'documentation' => 'https://creativethemes.com/blocksy/docs/extensions/woocommerce-extra/',
 					'customize' => admin_url('customize.php?ct_autofocus=woocommerce_general:has_free_shipping_panel'),
