@@ -918,6 +918,7 @@ class Blocksy_WP_Import extends WP_Importer {
 
 			$post['postmeta'] = apply_filters( 'wp_import_post_meta', $post['postmeta'], $post_id, $post );
 
+
 			// add/update post meta
 			if ( ! empty( $post['postmeta'] ) ) {
 				foreach ( $post['postmeta'] as $meta ) {
@@ -934,7 +935,7 @@ class Blocksy_WP_Import extends WP_Importer {
 					if ( $key ) {
 						// export gets meta straight from the DB so could have a serialized string
 						if (! $value) {
-							$value = maybe_unserialize( $meta['value'] );
+							$value = maybe_unserialize(wp_unslash($meta['value']));
 						}
 
 						// add_post_meta($post_id, wp_slash($key), wp_slash_strings_only($value));
@@ -1039,6 +1040,26 @@ class Blocksy_WP_Import extends WP_Importer {
 
 
 		$id = wp_update_nav_menu_item( $menu_id, 0, $args );
+
+		if (! empty($item['postmeta'])) {
+			foreach ($item['postmeta'] as $meta) {
+				$key = apply_filters('import_post_meta_key', $meta['key'], $id, $item);
+				$value = false;
+
+				if ($key) {
+					// export gets meta straight from the DB so could have a serialized string
+					if (! $value) {
+						$value = maybe_unserialize(wp_unslash($meta['value']));
+					}
+
+					// add_post_meta($post_id, wp_slash($key), wp_slash_strings_only($value));
+					add_post_meta($id, wp_slash($key), $value);
+
+					do_action('import_post_meta', $id, $key, $value);
+				}
+			}
+		}
+
 		if ( $id && ! is_wp_error( $id ) )
 			$this->processed_menu_items[intval($item['post_id'])] = (int) $id;
 	}
