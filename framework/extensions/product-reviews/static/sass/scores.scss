@@ -18,17 +18,23 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
+		position: relative;
 		padding: 10px 20px;
-		background: rgba(243, 243, 243, 0.5);
-		border-radius: 2px;
 
-		&:hover {
-			background: rgba(243, 243, 243, 1);
+		&:before {
+			position: absolute;
+			z-index: 0;
+			inset: 0;
+			content: '';
+			border-radius: 2px;
+			opacity: 0.2;
+			background: var(--theme-border-color);
 		}
 
 		> span {
 			font-size: 15px;
 			font-weight: 500;
+			position: relative;
 		}
 	}
 }
@@ -39,9 +45,9 @@
 	align-items: center;
 	justify-content: center;
 	padding: 20px;
-	color: var(--overall-score-text-color, #fff);
+	color: var(--overall-score-text-color, var(--theme-palette-color-8));
 	border-radius: 2px;
-	background: var(--overall-score-box-background, #1A202C);
+	background: var(--overall-score-box-background, var(--theme-palette-color-4));
 
 	.ct-average-score {
 		font-size: 55px;

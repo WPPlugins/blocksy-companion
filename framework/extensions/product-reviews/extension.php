@@ -470,7 +470,7 @@ class BlocksyExtensionProductReviews {
 									[
 										'title' => __( 'Active', 'blocksy-companion' ),
 										'id' => 'default',
-										'inherit' => '#ffffff'
+										'inherit' => 'var(--theme-palette-color-8)'
 									],
 								],
 							],
@@ -491,7 +491,7 @@ class BlocksyExtensionProductReviews {
 									[
 										'title' => __( 'Active', 'blocksy-companion' ),
 										'id' => 'default',
-										'inherit' => '#1A202C'
+										'inherit' => 'var(--theme-palette-color-4)'
 									],
 								],
 							],

@@ -83,7 +83,7 @@ class BrevoProvider extends Provider {
 					'FIRSTNAME' => $fname,
 					'LASTNAME' => $lname
 				],
-				'listIds' => [intval($args['group'])]
+				'listIds' => [intval($settings['list_id'])]
 			]),
 			CURLOPT_HTTPHEADER => array(
 				"content-type: application/json",

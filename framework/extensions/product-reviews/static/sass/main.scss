@@ -13,12 +13,13 @@
 
 	.ct-container {
 		padding-bottom: var(--theme-content-vertical-spacing, 60px);
-		border-bottom: 1px solid #ececec;
+		border-bottom: 1px solid var(--theme-border-color);
 	}
 
-	ul {
-		--theme-list-indent: 0;
-		--theme-list-style-type: none;
-		--theme-content-spacing: 0;
+	ul li {
+	
+		&:not(:last-child) {
+			margin-bottom: 0.3em;
+		}
 	}
 }

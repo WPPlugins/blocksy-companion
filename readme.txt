@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 2.0.13
+Stable tag: 2.0.14
 
 == Description ==
 
@@ -23,6 +23,9 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+2.0.14: 2023-12-26
+- Improvement: Dont attempt to unslash post meta data upon starter site installation
+
 2.0.13: 2023-12-22
 - Improvement: Demo importer - make sure mega menus are imported correctly
 

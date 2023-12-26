@@ -301,7 +301,7 @@ class ThemeIntegration {
 			if (strpos($initial_query_args_post_type, 'ct_all_posts') !== false) {
 				$query_args['post_type'] = array_diff(
 					get_post_types(['public' => true]),
-					['product', 'attachment', 'ct_content_block']
+					['attachment', 'ct_content_block']
 				);
 			}
 
