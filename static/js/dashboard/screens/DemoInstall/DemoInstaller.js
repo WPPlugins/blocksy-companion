@@ -1,6 +1,6 @@
 import { createElement, Component, Fragment } from '@wordpress/element'
 import { __ } from 'ct-i18n'
-import { Transition, animated } from 'blocksy-options'
+import { Transition } from 'blocksy-options'
 
 import InstallCompleted from './Installer/InstallCompleted'
 
@@ -9,13 +9,19 @@ import Progress from './components/Progress'
 import Error from './components/Error'
 
 const DemoInstaller = ({ demoConfiguration, style }) => {
-	const { isCompleted, isError, lastMessage, progress } =
-		useInstaller(demoConfiguration)
+	const {
+		isCompleted,
+		isError,
+		stepName,
+		stepsDescriptors,
+		lastMessage,
+		progress,
+	} = useInstaller(demoConfiguration)
 
 	const screenName = isCompleted ? 'complete' : isError ? 'error' : 'progress'
 
 	return (
-		<animated.div className="ct-demo-install" style={style}>
+		<div className="ct-demo-install" style={style}>
 			<Transition
 				initial
 				items={screenName}
@@ -32,22 +38,25 @@ const DemoInstaller = ({ demoConfiguration, style }) => {
 								duration: 300,
 						  }
 				}}>
-				{(props, screenName) => (
-					<animated.div style={props}>
-						{screenName === 'complete' && <InstallCompleted />}
-						{screenName === 'error' && <Error isError={isError} />}
-						{screenName === 'progress' && (
-							<Progress
-								{...{
-									lastMessage,
-									progress,
-								}}
-							/>
-						)}
-					</animated.div>
-				)}
+				{(screenName) => (props) =>
+					(
+						<div style={props}>
+							{screenName === 'complete' && <InstallCompleted />}
+							{screenName === 'error' && <Error />}
+							{screenName === 'progress' && (
+								<Progress
+									{...{
+										stepName,
+										stepsDescriptors,
+										lastMessage,
+										progress,
+									}}
+								/>
+							)}
+						</div>
+					)}
 			</Transition>
-		</animated.div>
+		</div>
 	)
 }
 

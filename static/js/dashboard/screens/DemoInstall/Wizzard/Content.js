@@ -11,8 +11,6 @@ import { __, sprintf } from 'ct-i18n'
 import classnames from 'classnames'
 import Checkbox from '../../../../helpers/Checkbox'
 
-import { animated } from 'blocksy-options'
-
 const Content = ({
 	demoConfiguration,
 	setDemoConfiguration,
@@ -20,7 +18,7 @@ const Content = ({
 	style,
 }) => {
 	return (
-		<animated.div style={style}>
+		<div style={style}>
 			<div className="ct-demo-content">
 				<i className="ct-demo-icon">
 					<svg width="40" height="40" viewBox="0 0 40 40">
@@ -79,15 +77,12 @@ const Content = ({
 								})
 							}
 							key={option}>
-							<span className="ct-label">
-								{
-									{
-										options: __('Theme settings', 'blocksy-companion'),
-										widgets: __('Widgets', 'blocksy-companion'),
-										content: __('Content', 'blocksy-companion'),
-									}[option]
-								}
-							</span>
+							{option
+								.split('_')
+								.map((w) =>
+									w.replace(/^\w/, (c) => c.toUpperCase())
+								)
+								.join(' ')}
 						</Checkbox>
 					))}
 
@@ -106,9 +101,7 @@ const Content = ({
 							})
 						}>
 						<div>
-							<span className="ct-label">
-								{__('Clean Install', 'blocksy-companion')}
-							</span>
+							{__('Clean Install', 'blocksy-companion')}
 							<i>
 								{__(
 									'This option will remove the previous imported content and will perform a fresh and clean install.',
@@ -119,7 +112,7 @@ const Content = ({
 					</Checkbox>
 				</div>
 			</div>
-		</animated.div>
+		</div>
 	)
 }
 

@@ -1,26 +1,14 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $everywhere_title = __('Entire Website', 'blocksy-companion');
 
-if (
-	$filter === 'product_tabs'
-	||
-	$filter === 'product_waitlist'
-) {
+if ($filter === 'product_tabs') {
 	$everywhere_title = __('All Products', 'blocksy-companion');
 }
 
 $options = [];
 
-if (
-	$filter !== 'archive'
-	&&
-	$filter !== 'singular'
-) {
+if ($filter !== 'archive' && $filter !== 'singular') {
 	$options[] = [
 		'title' => '',
 		'rules' => [
@@ -34,22 +22,14 @@ if (
 
 $basic_rules = [];
 
-if (
-	$filter === 'all'
-	||
-	$filter === 'singular'
-) {
+if ($filter === 'all' || $filter === 'singular') {
 	$basic_rules[] = [
 		'id' => 'singulars',
 		'title' => __('All Singulars', 'blocksy-companion')
 	];
 }
 
-if (
-	$filter === 'all'
-	||
-	$filter === 'archive'
-) {
+if ($filter === 'all' || $filter === 'archive') {
 	$basic_rules[] = [
 		'id' => $filter === 'archive' ? 'everywhere' : 'archives',
 		'title' => __('All Archives', 'blocksy-companion')

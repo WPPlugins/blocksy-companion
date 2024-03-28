@@ -1,4 +1,5 @@
-@use '../../frontend/common-frontend/functions';
+@import '../../frontend/common-frontend/functions';
+@import '../../frontend/common-frontend/mixins';
 
 // account modal
 #account-modal {
@@ -20,11 +21,11 @@
 	background-color: #fff;
 	--theme-link-initial-color: var(--theme-text-color);
 
-	@include functions.media-breakpoint-down(xs) {
+	@include media-breakpoint-down(xs) {
 		max-width: 88vw;
 	}
 
-	@include functions.media-breakpoint-up(sm) {
+	@include media-breakpoint-up(sm) {
 		max-width: 480px;
 	}
 
@@ -51,9 +52,7 @@
 			letter-spacing: 0.03em;
 			cursor: pointer;
 			border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-			transition:
-				opacity 0.1s ease,
-				background 0.1s ease;
+			transition: opacity 0.1s ease, background 0.1s ease;
 
 			&.active {
 				border-bottom-color: transparent;
@@ -77,11 +76,11 @@
 	.ct-account-forms {
 		overflow-y: auto;
 
-		@include functions.media-breakpoint-down(xs) {
+		@include media-breakpoint-down(xs) {
 			padding: 40px 30px;
 		}
 
-		@include functions.media-breakpoint-up(sm) {
+		@include media-breakpoint-up(sm) {
 			padding: 60px 70px;
 		}
 
@@ -99,7 +98,7 @@
 	}
 
 	label {
-		display: inline-block;
+		display: block;
 		font-size: 14px;
 	}
 
@@ -120,7 +119,7 @@
 		display: flex;
 		justify-content: space-between;
 
-		@include functions.media-breakpoint-down(sm) {
+		@include media-breakpoint-down (sm) {
 			flex-direction: column;
 			row-gap: 10px;
 		}
@@ -165,10 +164,6 @@
 				background: transparent;
 			}
 		}
-
-		ul {
-			--theme-list-indent: 15px;
-		}
 	}
 
 	.ct-form-notification-error {
@@ -178,6 +173,7 @@
 
 	[class*='ct-form-notification'],
 	.woocommerce-privacy-policy-text {
+
 		a:not(:hover) {
 			text-decoration: underline;
 		}
@@ -217,48 +213,8 @@
 
 // two factor plugin integrationo
 .ct-account-modal {
-	
-	[name='validate_2fa_form'] + [name='loginform'],
-	[name='itsec-2fa'] + [name='loginform'] {
+
+	[name="validate_2fa_form"] + [name="loginform"] {
 		display: none;
-	}
-}
-
-// jetpack integration
-.ct-account-modal #loginform {
-	div:has(#jetpack_protect_answer) {
-		display: flex;
-		padding-top: 5px;
-
-		p {
-			margin-bottom: 0;
-			margin-inline-end: auto;
-		}
-
-		label {
-			margin: 0;
-		}
-
-		input[type='number'] {
-			padding-inline: 8px;
-			-moz-appearance: textfield;
-
-			&::-webkit-inner-spin-button,
-			&::-webkit-outer-spin-button {
-				-webkit-appearance: none;
-			}
-		}
-	}
-}
-
-// Google Site Kit integration
-.ct-account-modal #loginform {
-	.googlesitekit-sign-in-with-google__frontend-output-button {
-		max-width: initial;
-		margin-block-start: var(--theme-content-spacing);
-
-		iframe {
-			margin-inline: auto !important;
-		}
 	}
 }

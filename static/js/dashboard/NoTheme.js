@@ -1,29 +1,9 @@
-import { createElement, useState } from '@wordpress/element'
+import { createElement, render, useState } from '@wordpress/element'
 import * as check from '@wordpress/element'
 import { __ } from 'ct-i18n'
 
-import { wpUpdatesAjax } from '../helpers/wp-updates'
-
 const NoTheme = () => {
 	const [isLoading, setIsLoading] = useState(false)
-
-	const activateTheme = () => {
-		if (!ctDashboardLocalizations.activate) {
-			return
-		}
-
-		if (ctDashboardLocalizations.activate_multi_site) {
-			fetch(ctDashboardLocalizations.activate_multi_site).then(
-				(response) => {
-					location = ctDashboardLocalizations.activate
-				}
-			)
-
-			return
-		}
-
-		location = ctDashboardLocalizations.activate
-	}
 
 	return (
 		<div className="ct-theme-required">
@@ -52,41 +32,39 @@ const NoTheme = () => {
 				)}
 			</p>
 
-			{ctDashboardLocalizations.activate && (
-				<button
-					className="button button-primary"
-					onClick={(e) => {
-						e.preventDefault()
+			<button
+				className="button button-primary"
+				onClick={(e) => {
+					e.preventDefault()
 
-						setIsLoading(true)
+					setIsLoading(true)
 
-						if (ctDashboardLocalizations.themeIsInstalled) {
-							activateTheme()
-							return
-						}
+					if (ctDashboardLocalizations.themeIsInstalled) {
+						location = ctDashboardLocalizations.activate
+						return
+					}
 
-						wpUpdatesAjax('install-theme', {
-							success: (...a) => {
-								setTimeout(() => {
-									activateTheme()
-								})
-							},
-							error: (...a) => {
-								setTimeout(() => {
-									activateTheme()
-								})
-							},
-							slug: 'blocksy',
-						})
-					}}>
-					{isLoading
-						? __('Loading...', 'blocksy-companion')
-						: __(
-								'Install and activate the Blocksy theme',
-								'blocksy-companion'
-						  )}
-				</button>
-			)}
+					wp.updates.ajax('install-theme', {
+						success: (...a) => {
+							setTimeout(() => {
+								location = ctDashboardLocalizations.activate
+							})
+						},
+						error: (...a) => {
+							setTimeout(() => {
+								location = ctDashboardLocalizations.activate
+							})
+						},
+						slug: 'blocksy',
+					})
+				}}>
+				{isLoading
+					? __('Loading...', 'blocksy-companion')
+					: __(
+							'Install and activate the Blocksy theme',
+							'blocksy-companion'
+					  )}
+			</button>
 		</div>
 	)
 }

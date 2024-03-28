@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $options = [
 	[
 		'title' => __('Requests', 'blocksy-companion'),

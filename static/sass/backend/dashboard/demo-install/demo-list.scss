@@ -1,13 +1,12 @@
 .ct-demos-list-container {
 	container-type: inline-size;
 
-	.ct-demo-list {
+	ul {
 		display: grid;
 		grid-column-gap: 30px;
 		grid-row-gap: 30px;
-		list-style: none;
-		margin: 0;
-		padding: 30px 0 0 0;
+		@include list-normalize;
+		padding-top: 30px;
 		border-top: 1px dashed #eee;
 
 		@container (min-width: 650px) {

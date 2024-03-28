@@ -6,7 +6,7 @@ class DemoProvider extends Provider {
 	public function __construct() {
 	}
 
-	public function fetch_lists($api_key, $api_url = '') {
+	public function fetch_lists($api_key) {
 		if (! $api_key) {
 			return 'api_key_invalid';
 		}
@@ -16,6 +16,14 @@ class DemoProvider extends Provider {
 				'name' => __('Demo List', 'blocksy-companion'),
 				'id' => 'demolist'
 			]
+		];
+	}
+
+	public function get_form_url_and_gdpr_for($maybe_custom_list = null) {
+		return [
+			'form_url' => '#',
+			'has_gdpr_fields' => false,
+			'provider' => 'demo'
 		];
 	}
 
@@ -29,7 +37,9 @@ class DemoProvider extends Provider {
 		return [
 			// 'response' => $response,
 			'result' => 'yes',
-			'message' => NewsletterMessages::subscribed_successfully()
+			'message' => __('Thank you for subscribing to our newsletter!', 'blocksy-companion')
 		];
 	}
 }
+
+

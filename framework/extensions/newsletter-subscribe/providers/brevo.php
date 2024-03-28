@@ -3,7 +3,7 @@
 namespace Blocksy\Extensions\NewsletterSubscribe;
 
 class BrevoProvider extends Provider {
-	public function fetch_lists($api_key, $api_url = '') {
+	public function fetch_lists($api_key) {
 		if (! $api_key) {
 			return 'api_key_invalid';
 		}
@@ -31,12 +31,20 @@ class BrevoProvider extends Provider {
 			return array_map(function($list) {
 				return [
 					'name' => $list['name'],
-					'id' => (string) $list['id'],
+					'id' => $list['id'],
 				];
 			}, $body['lists']);
 		} else {
 			return 'api_key_invalid';
 		}
+	}
+
+	public function get_form_url_and_gdpr_for($maybe_custom_list = null) {
+		return [
+			'form_url' => '#',
+			'has_gdpr_fields' => false,
+			'provider' => 'brevo'
+		];
 	}
 
 	public function subscribe_form($args = []) {
@@ -48,14 +56,18 @@ class BrevoProvider extends Provider {
 
 		$settings = $this->get_settings();
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_init
 		$curl = curl_init();
 
-		$name_parts = $this->maybe_split_name($args['name']);
-		$fname = $name_parts['first_name'];
-		$lname = $name_parts['last_name'];
+		$lname = '';
+		$fname = '';
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt_array
+		if (! empty($args['name'])) {
+			$parts = explode(' ', $args['name']);
+
+			$lname = array_pop($parts);
+			$fname = implode(' ', $parts);
+		}
+
 		curl_setopt_array($curl, array(
 			// CURLOPT_URL => "https://api.mailerlite.com/api/v2/groups/" . $args['group'] . "/subscribers",
 			CURLOPT_URL => 'https://api.brevo.com/v3/contacts',
@@ -67,26 +79,21 @@ class BrevoProvider extends Provider {
 			CURLOPT_CUSTOMREQUEST => "POST",
 			CURLOPT_POSTFIELDS => json_encode([
 				'email' => $args['email'],
-				'attributes' => array_merge(
-					[
-						'FIRSTNAME' => $fname
-					],
-					(! empty($lname) ? [ 'LASTNAME' => $lname ] : [])
-				),
-				'listIds' => [intval($args['group'])]
+				'attributes' => [
+					'FIRSTNAME' => $fname,
+					'LASTNAME' => $lname
+				],
+				'listIds' => [intval($settings['list_id'])]
 			]),
-			CURLOPT_HTTPHEADER => [
+			CURLOPT_HTTPHEADER => array(
 				"content-type: application/json",
 				"api-key: " . $settings['api_key']
-			]
+			),
 		));
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_exec
 		$response = curl_exec($curl);
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_error
 		$err = curl_error($curl);
 
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_close
 		curl_close($curl);
 
 		if ($err) {
@@ -106,8 +113,9 @@ class BrevoProvider extends Provider {
 
 			return [
 				'result' => 'yes',
-				'message' => NewsletterMessages::subscribed_successfully()
+				'message' => __('Thank you for subscribing to our newsletter!', 'blocksy-companion')
 			];
 		}
 	}
 }
+

@@ -30,6 +30,7 @@ const SingleDemo = ({ demo }) => {
 		currentlyInstalledDemo,
 		demos_list,
 		setCurrentDemo,
+		demo_error,
 		setInstallerBlockingReleased,
 	} = useContext(DemosContext)
 
@@ -59,7 +60,7 @@ const SingleDemo = ({ demo }) => {
 
 			professional: {
 				description: __(
-					'Upgrade to the business or agency plan and get instant access to this starter site and many other features.',
+					'Upgrade to the professional or agency plan and get instant access to this starter site and many other features.',
 					'blocksy-companion'
 				),
 			},
@@ -109,7 +110,7 @@ const SingleDemo = ({ demo }) => {
 														'blocksy-companion'
 													),
 													professional_v2: __(
-														'Business',
+														'Professional',
 														'blocksy-companion'
 													),
 													agency_v2: __(
@@ -175,7 +176,8 @@ const SingleDemo = ({ demo }) => {
 									setInstallerBlockingReleased(false)
 									setCurrentDemo(demo.name)
 								}
-							}}>
+							}}
+							disabled={!!demo_error}>
 							{currentlyInstalledDemo &&
 							currentlyInstalledDemo.demo.indexOf(demo.name) > -1
 								? __('Modify', 'blocksy-companion')

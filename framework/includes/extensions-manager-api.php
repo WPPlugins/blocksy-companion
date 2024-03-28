@@ -2,10 +2,6 @@
 
 namespace Blocksy;
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 class ExtensionsManagerApi {
 	public function __construct() {
 		$this->attach_ajax_actions();
@@ -23,9 +19,7 @@ class ExtensionsManagerApi {
 			wp_send_json_error('nonce');
 		}
 
-		$this->check_capability(
-			blocksy_companion_get_capabilities()->get_wp_capability_by('dashboard')
-		);
+		$this->check_capability('edit_theme_options');
 
 		flush_rewrite_rules();
 
@@ -37,9 +31,7 @@ class ExtensionsManagerApi {
 			wp_send_json_error('nonce');
 		}
 
-		$this->check_capability(
-			blocksy_companion_get_capabilities()->get_wp_capability_by('dashboard')
-		);
+		$this->check_capability('edit_theme_options');
 
 		$manager = Plugin::instance()->extensions;
 
@@ -79,19 +71,11 @@ class ExtensionsManagerApi {
 			wp_send_json_error('nonce');
 		}
 
-		$this->check_capability(
-			blocksy_companion_get_capabilities()->get_wp_capability_by('dashboard')
-		);
-
-		if (! isset($_POST['ext'])) {
-			wp_send_json_error();
-		}
-
-		$extension = sanitize_text_field(wp_unslash($_POST['ext']));
+		$this->check_capability('edit_theme_options');
 
 		$manager = Plugin::instance()->extensions;
 
-		$manager->activate_extension($extension);
+		$manager->activate_extension($this->get_extension_from_request());
 
 		wp_send_json_success();
 	}
@@ -101,19 +85,11 @@ class ExtensionsManagerApi {
 			wp_send_json_error('nonce');
 		}
 
-		$this->check_capability(
-			blocksy_companion_get_capabilities()->get_wp_capability_by('dashboard')
-		);
-
-		if (! isset($_POST['ext'])) {
-			wp_send_json_error();
-		}
-
-		$extension = sanitize_text_field(wp_unslash($_POST['ext']));
+		$this->check_capability('edit_theme_options');
 
 		$manager = Plugin::instance()->extensions;
 
-		$manager->deactivate_extension($extension);
+		$manager->deactivate_extension($this->get_extension_from_request());
 
 		wp_send_json_success();
 	}
@@ -126,6 +102,14 @@ class ExtensionsManagerApi {
 		}
 
 		return true;
+	}
+
+	public function get_extension_from_request() {
+		if ( ! isset( $_POST['ext'] ) ) {
+			wp_send_json_error();
+		}
+
+		return addslashes($_POST['ext']);
 	}
 
 	public function attach_ajax_actions() {
