@@ -6735,7 +6735,7 @@ msgstr "Краткое описание"
 #: framework/extensions/product-reviews/metabox.php:150,
 #: framework/extensions/product-reviews/views/single-top.php:162
 msgid "Read More"
-msgstr "Читайте далее"
+msgstr "Читай��е далее"
 
 #: framework/extensions/product-reviews/metabox.php:148
 msgid "Read More Button Label"

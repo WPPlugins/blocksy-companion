@@ -17,7 +17,7 @@ class MailchimpProvider extends Provider {
 
 		$region = explode('-', $api_key);
 
-		if (strpos($region, '.') !== false) {
+		if (strpos($region[1], '.') !== false) {
 			return 'api_key_invalid';
 		}
 
