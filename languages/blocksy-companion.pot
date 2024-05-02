@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-04-25 19:25+0000\n"
+"POT-Creation-Date: 2024-05-02 19:09+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -21,12 +21,12 @@ msgstr ""
 "x-generator: babel-plugin-wp-i18n\n"
 
 #. translators: %s: PHP version
-#: blocksy-companion.php:173
+#: blocksy-companion.php:171
 msgid "Blocksy requires PHP version %s+, plugin is currently NOT RUNNING."
 msgstr ""
 
 #. translators: %s: WordPress version
-#: blocksy-companion.php:184
+#: blocksy-companion.php:182
 msgid ""
 "Blocksy requires WordPress version %s+. Because you are using an earlier "
 "version, the plugin is currently NOT RUNNING."
@@ -160,29 +160,30 @@ msgstr ""
 msgid "Register For This Site"
 msgstr ""
 
-#: framework/features/conditions-manager.php:206,
+#: framework/features/conditions-manager.php:205,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:126
 #: static/js/options/ConditionsManager/SingleCondition.js:89
 msgid "Include"
 msgstr ""
 
-#: framework/features/conditions-manager.php:206,
+#: framework/features/conditions-manager.php:205,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:127
 #: static/js/options/ConditionsManager/SingleCondition.js:90
 msgid "Exclude"
 msgstr ""
 
-#: framework/features/conditions-manager.php:267
+#: framework/features/conditions-manager.php:266
 msgid "Language"
 msgstr ""
 
 #: framework/features/demo-install.php:115,
-#: framework/features/demo-install/content-installer.php:128,
+#: framework/features/demo-install/content-installer.php:147,
+#: framework/features/demo-install/content-installer.php:142,
 #: framework/features/demo-install/demo-register.php:9
 msgid "No demo name provided."
 msgstr ""
 
-#: framework/features/demo-install.php:177
+#: framework/features/demo-install.php:181
 msgid ""
 "Your PHP installation doesn't have support for XML. Please install the "
 "<i>xml</i> or <i>simplexml</i> PHP extension in order to be able to install "
@@ -2029,70 +2030,78 @@ msgstr ""
 msgid "Sorry, you don't have permission to install child themes."
 msgstr ""
 
-#: framework/features/demo-install/content-eraser.php:11
+#: framework/features/demo-install/content-eraser.php:23
 msgid "Sorry, you don't have permission to erase content."
 msgstr ""
 
-#: framework/features/demo-install/content-installer.php:39
+#: framework/features/demo-install/content-installer.php:52
 msgid "Sorry, you don't have permission to install content."
 msgstr ""
 
-#: framework/features/demo-install/content-installer.php:284
+#: framework/features/demo-install/content-installer.php:181,
+#: framework/features/demo-install/content-installer.php:175
+msgid "No demo data found."
+msgstr ""
+
+#: framework/features/demo-install/content-installer.php:337,
+#: framework/features/demo-install/content-installer.php:332
 msgid "No pages to assign."
 msgstr ""
 
-#: framework/features/demo-install/install-finish.php:11
+#: framework/features/demo-install/install-finish.php:23
 msgid "Sorry, you don't have permission to finish the installation."
 msgstr ""
 
-#: framework/features/demo-install/options-import.php:31
+#: framework/features/demo-install/options-import.php:38
 msgid "Sorry, you don't have permission to install options."
 msgstr ""
 
-#: framework/features/demo-install/options-import.php:37
+#: framework/features/demo-install/options-import.php:50,
+#: framework/features/demo-install/options-import.php:45,
+#: framework/features/demo-install/options-import.php:83,
+#: framework/features/demo-install/options-import.php:78,
+#: framework/features/demo-install/widgets-import.php:48,
+#: framework/features/demo-install/widgets-import.php:43
 msgid "No demo to install"
-msgstr ""
-
-#: framework/features/demo-install/options-import.php:54
-msgid "Downloaded demo is corrupted."
 msgstr ""
 
 #: framework/features/demo-install/plugins-uninstaller.php:9
 msgid "Sorry, you don't have permission to uninstall plugins."
 msgstr ""
 
-#: framework/features/demo-install/required-plugins.php:30
+#: framework/features/demo-install/required-plugins.php:37
 msgid "Sorry, you don't have permission to install plugins."
 msgstr ""
 
-#: framework/features/demo-install/required-plugins.php:36
+#: framework/features/demo-install/required-plugins.php:49,
+#: framework/features/demo-install/required-plugins.php:44
 msgid "No plugins to install."
 msgstr ""
 
-#: framework/features/demo-install/widgets-import.php:29
+#: framework/features/demo-install/widgets-import.php:36
 msgid "Sorry, you don't have permission to install widgets."
 msgstr ""
 
-#: framework/features/demo-install/widgets-import.php:35,
-#: framework/features/demo-install/widgets-import.php:52
+#: framework/features/demo-install/widgets-import.php:82,
+#: framework/features/demo-install/widgets-import.php:76
 msgid "No widgets to install."
 msgstr ""
 
-#: framework/features/header/account-modal.php:31
+#: framework/features/header/account-modal.php:25
 msgid "Close account modal"
 msgstr ""
 
-#: framework/features/header/account-modal.php:43,
+#: framework/features/header/account-modal.php:37,
 #: framework/features/header/items/account/options.php:1053,
 #: framework/features/header/items/account/views/logout.php:8
 msgid "Login"
 msgstr ""
 
-#: framework/features/header/account-modal.php:47
+#: framework/features/header/account-modal.php:41
 msgid "Sign Up"
 msgstr ""
 
-#: framework/features/header/account-modal.php:67
+#: framework/features/header/account-modal.php:61
 msgid "Back to login"
 msgstr ""
 
@@ -2724,25 +2733,25 @@ msgstr ""
 msgid "WooCommerce"
 msgstr ""
 
-#: framework/features/header/modal/login.php:28,
+#: framework/features/header/modal/login.php:23,
 #: framework/features/header/modal/lostpassword.php:5
 msgid "Username or Email Address"
 msgstr ""
 
-#: framework/features/header/modal/login.php:33,
+#: framework/features/header/modal/login.php:28,
 #: framework/features/header/modal/register.php:53
 msgid "Password"
 msgstr ""
 
-#: framework/features/header/modal/login.php:43
+#: framework/features/header/modal/login.php:38
 msgid "Remember Me"
 msgstr ""
 
-#: framework/features/header/modal/login.php:47
+#: framework/features/header/modal/login.php:42
 msgid "Forgot Password?"
 msgstr ""
 
-#: framework/features/header/modal/login.php:69
+#: framework/features/header/modal/login.php:64
 msgid "Log In"
 msgstr ""
 
@@ -5938,15 +5947,15 @@ msgstr ""
 msgid "Choose a custom thank you page for this product."
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/filters/feature.php:46
+#: framework/premium/extensions/woocommerce-extra/features/filters/feature.php:49
 msgid "AJAX Filtering"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/filters/feature.php:52
+#: framework/premium/extensions/woocommerce-extra/features/filters/feature.php:55
 msgid "Scroll to Top"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/filters/feature.php:53
+#: framework/premium/extensions/woocommerce-extra/features/filters/feature.php:56
 msgid "Automatically scroll page to top after user interaction."
 msgstr ""
 
@@ -6295,7 +6304,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:59,
 #: framework/premium/extensions/woocommerce-extra/features/filters/includes/active-filters.php:250,
-#: framework/premium/extensions/woocommerce-extra/features/filters/includes/price-filter.php:278
+#: framework/premium/extensions/woocommerce-extra/features/filters/includes/price-filter.php:280
 msgid "Price"
 msgstr ""
 
@@ -6987,7 +6996,7 @@ msgid "Find by %s"
 msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/includes/filter-presenter.php:123,
-#: framework/premium/extensions/woocommerce-extra/features/filters/includes/price-filter.php:184
+#: framework/premium/extensions/woocommerce-extra/features/filters/includes/price-filter.php:186
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/price-filter/Preview.js:59
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/tax-filters/Preview.js:352
 msgid "Reset Filter"
@@ -8140,11 +8149,18 @@ msgstr ""
 msgid "Professional or Agency"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall.js:170
+#: static/js/dashboard/screens/DemoInstall.js:188
 msgid "Loading Starter Sites..."
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall.js:187
+#: static/js/dashboard/screens/DemoInstall.js:205
+msgid ""
+"Your site is misconfigured and AJAX requests are not reaching your backend. "
+"Please click %shere%s to find the common causes and possible solutions to "
+"this.<br> Error code - %s"
+msgstr ""
+
+#: static/js/dashboard/screens/DemoInstall.js:223
 msgid "Failed to retrieve starter sites list.<br> Error code - %s"
 msgstr ""
 
@@ -8261,28 +8277,28 @@ msgstr ""
 msgid "comments"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:122
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:118
 msgid "Child theme"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:133
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:129
 msgid "Installing %s"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:147
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:143
 #: static/js/dashboard/screens/DemoInstall/Wizzard/ModifyDemo.js:70
 msgid "Erase content"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:159
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:155
 msgid "Import options"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:174
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:168
 msgid "Import widgets"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:195
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:185
 msgid "Final touches"
 msgstr ""
 
@@ -8292,7 +8308,7 @@ msgid ""
 "requirements for importing a starter site."
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:351
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:341
 msgid "Preparing data..."
 msgstr ""
 
