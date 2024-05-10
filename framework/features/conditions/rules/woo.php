@@ -5,10 +5,7 @@ $options = [];
 $has_woo = class_exists('WooCommerce');
 $woo_rules = [];
 
-$storage = new \Blocksy\Extensions\WoocommerceExtra\Storage();
-$settings = $storage->get_settings();
-
-$brands_enabled = isset($settings['features']['product-brands']) && $settings['features']['product-brands'];
+$brands_enabled = taxonomy_exists('product_brands');
 
 if ($filter === 'all') {
 	$woo_rules = array_merge(
