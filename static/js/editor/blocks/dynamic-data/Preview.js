@@ -23,6 +23,10 @@ const Preview = ({
 	postId,
 	postType,
 
+	termId,
+	taxonomy,
+	termImageId,
+
 	attributes,
 	attributes: {
 		tagName: TagName,
@@ -54,6 +58,9 @@ const Preview = ({
 				attributes={attributes}
 				postId={postId}
 				postType={postType}
+				termId={termId}
+				taxonomy={taxonomy}
+				termImageId={termImageId}
 			/>
 		)
 	}
