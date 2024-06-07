@@ -33,7 +33,7 @@ if (strpos($field, 'wp:') === 0) {
 
 	if ($field === 'wp:term_image') {
 		global $blocksy_term_obj;
-		
+
 		echo blocksy_render_view(
 			dirname(__FILE__) . '/views/archive-image-field.php',
 			[

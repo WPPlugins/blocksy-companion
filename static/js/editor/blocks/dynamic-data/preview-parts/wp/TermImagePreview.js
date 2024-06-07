@@ -14,7 +14,8 @@ function getMediaSourceUrlBySizeSlug(media, slug) {
 }
 
 const TermImagePreview = ({
-	termImageId,
+	termImage,
+	termIcon,
 
 	attributes,
 	attributes: {
@@ -26,6 +27,7 @@ const TermImagePreview = ({
 		has_field_link,
 		sizeSlug,
 		image_hover_effect,
+		imageSource,
 	},
 }) => {
 	const [isLoaded, setIsLoaded] = useState(false)
@@ -53,19 +55,24 @@ const TermImagePreview = ({
 			: {}),
 	})
 
+	const maybeImageId =
+		imageSource === 'icon'
+			? termIcon?.attachment_id
+			: termImage?.attachment_id
+
 	const { media } = useSelect(
 		(select) => {
 			const { getMedia } = select(coreStore)
 
 			return {
 				media:
-					termImageId &&
-					getMedia(termImageId, {
+					maybeImageId &&
+					getMedia(maybeImageId, {
 						context: 'view',
 					}),
 			}
 		},
-		[termImageId]
+		[maybeImageId]
 	)
 
 	const maybeUrl = getMediaSourceUrlBySizeSlug(media, sizeSlug)

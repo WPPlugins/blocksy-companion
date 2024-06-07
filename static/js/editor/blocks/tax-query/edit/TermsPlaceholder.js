@@ -37,13 +37,13 @@ const TermsPlaceholder = ({
 					/>
 				</svg>
 
-				{__('Advanced Taxonomy', 'blocksy')}
+				{__('Advanced Taxonomies', 'blocksy-companion')}
 			</div>
 			<fieldset className="components-placeholder__fieldset">
 				<legend className="components-placeholder__instructions">
 					{__(
 						'Start with a pattern or create a custom layout',
-						'blocksy'
+						'blocksy-companion'
 					)}
 				</legend>
 
@@ -54,7 +54,7 @@ const TermsPlaceholder = ({
 
 						setIsPatternSelectionModalOpen(true)
 					}}>
-					{__('Choose Pattern', 'blocksy')}
+					{__('Choose Pattern', 'blocksy-companion')}
 				</button>
 
 				<button
@@ -88,7 +88,7 @@ const TermsPlaceholder = ({
 							false
 						)
 					}}>
-					{__('Create Custom Layout', 'blocksy')}
+					{__('Create Custom Layout', 'blocksy-companion')}
 				</button>
 			</fieldset>
 		</div>

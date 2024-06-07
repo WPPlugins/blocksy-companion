@@ -3188,7 +3188,7 @@ msgid "Link Hover/Active"
 msgstr ""
 
 #: framework/premium/extensions/mega-menu/options.php:629,
-#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:139
+#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:149
 msgid "Background Hover"
 msgstr ""
 
@@ -3409,7 +3409,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/swatches/woo-tab-options.php:97,
 #: framework/premium/features/premium-header/items/contacts/options.php:409
 #: framework/premium/static/js/blocks/ContentBlock.js:56
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:144
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:170
 msgid "None"
 msgstr ""
 
@@ -3964,7 +3964,7 @@ msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:411,
 #: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:650
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:272
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:298
 msgid "Before"
 msgstr ""
 
@@ -3975,7 +3975,7 @@ msgstr ""
 
 #: framework/premium/features/content-blocks/hooks-manager.php:418,
 #: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:661
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:281
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:307
 msgid "After"
 msgstr ""
 
@@ -4863,7 +4863,7 @@ msgid "Dropdown Options"
 msgstr ""
 
 #: framework/features/header/items/account/options.php:1927,
-#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:124,
+#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:134,
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:613,
 #: framework/premium/features/premium-header/items/contacts/options.php:573,
 #: framework/premium/features/premium-header/items/contacts/options.php:615,
@@ -5554,7 +5554,7 @@ msgid "Label"
 msgstr ""
 
 #: framework/premium/extensions/post-types-extra/features/dynamic-data/feature.php:673
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:293
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:319
 msgid "Fallback"
 msgstr ""
 
@@ -5678,26 +5678,34 @@ msgid ""
 "cycling an item."
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:92
+#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:92,
+#: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:743
 #: static/js/editor/blocks/dynamic-data/hooks/use-dynamic-data-descriptor.js:74
 msgid "Featured Image"
 msgstr ""
 
 #: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:96,
-#: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:748,
+#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:106,
+#: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:749,
+#: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:759,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/woo-tab-options.php:72
 msgid "Select Image"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:100
+#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:100,
+#: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:753
+msgid "Featured Icon/Logo"
+msgstr ""
+
+#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:110
 msgid "Accent Color"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:129
+#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:139
 msgid "Text Hover"
 msgstr ""
 
-#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:134
+#: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:144
 msgid "Background Initial"
 msgstr ""
 
@@ -5880,7 +5888,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:535,
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:586
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:231
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:257
 msgid "Logo Size"
 msgstr ""
 
@@ -6412,6 +6420,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/swatches/woo-tab-options.php:68,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/woo-tab-options.php:99,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/woo-tab-options.php:143
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:96
 msgid "Image"
 msgstr ""
 
@@ -8923,55 +8932,59 @@ msgstr ""
 msgid "3:2"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:112
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:100
+msgid "Icon/Logo"
+msgstr ""
+
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:138
 msgid "Expand on click"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:125
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:151
 msgid "Video thumbnail"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:135
-msgid "Hover Effect"
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:161
+msgid "Image Hover Effect"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:148
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:174
 msgid "Zoom In"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:152
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:178
 msgid "Zoom Out"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:176
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:202
 msgid "Alternative Text"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:189
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:215
 msgid "Describe the purpose of the image."
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:195
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:221
 msgid "Leave empty if decorative."
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:212
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:238
 msgid "Image size"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:245
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:271
 msgid "Logo Gap"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:297
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:323
 msgid "Custom field fallback"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:317
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:343
 msgid "Term additional class"
 msgstr ""
 
-#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:324
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:350
 msgid "Additional class for term items. Useful for styling."
 msgstr ""
 
@@ -8981,6 +8994,10 @@ msgstr ""
 
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:51
 msgid "Search for field"
+msgstr ""
+
+#: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:87
+msgid "Image Source"
 msgstr ""
 
 #: static/js/editor/blocks/dynamic-data/components/TagNameDropdown.js:14
@@ -9355,19 +9372,23 @@ msgid "Count"
 msgstr ""
 
 #: static/js/editor/blocks/tax-query/edit/TermsPlaceholder.js:40
-#: static/js/editor/blocks/tax-query/index.js:13
-msgid "Advanced Taxonomy"
+#: static/js/editor/blocks/tax-query/index.js:12
+msgid "Advanced Taxonomies"
 msgstr ""
 
 #: static/js/editor/blocks/tax-query/edit/TermsPlaceholder.js:44
 msgid "Start with a pattern or create a custom layout"
 msgstr ""
 
+#: static/js/editor/blocks/tax-query/index.js:13
+msgid "Advanced taxonomies query."
+msgstr ""
+
 #: static/js/editor/blocks/tax-template/Edit.js:194
 msgid "Tablet Columns"
 msgstr ""
 
-#: static/js/editor/blocks/tax-template/Edit.js:209
+#: static/js/editor/blocks/tax-template/Edit.js:212
 msgid "Mobile Columns"
 msgstr ""
 

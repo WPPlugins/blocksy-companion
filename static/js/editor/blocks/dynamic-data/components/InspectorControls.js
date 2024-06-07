@@ -80,6 +80,32 @@ const DynamicDataInspectorControls = ({
 								  }
 								: {}),
 
+							...(attributes.field === 'wp:term_image'
+								? {
+										imageSource: {
+											type: 'ct-radio',
+											label: __(
+												'Image Source',
+												'blocksy-companion'
+											),
+											value: attributes.imageSource,
+											design: 'inline',
+											purpose: 'gutenberg',
+											divider: 'bottom',
+											choices: {
+												featured: __(
+													'Image',
+													'blocksy-companion'
+												),
+												icon: __(
+													'Icon/Logo',
+													'blocksy-companion'
+												),
+											},
+										},
+								  }
+								: {}),
+
 							...options,
 						}}
 						value={{
@@ -133,7 +159,7 @@ const DynamicDataInspectorControls = ({
 
 									image_hover_effect: {
 										label: __(
-											'Hover Effect',
+											'Image Hover Effect',
 											'blocksy-companion'
 										),
 										type: 'ct-select',

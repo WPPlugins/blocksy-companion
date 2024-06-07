@@ -141,8 +141,8 @@ const Edit = ({
 
 	let blockContexts = blockData.all_terms.map((term) => ({
 		termId: term.term_id,
-		termImageUrl: term?.url,
-		termImageId: term?.attachment_id,
+		termIcon: term?.icon,
+		termImage: term?.image,
 	}))
 
 	const setDisplayLayout = (newDisplayLayout) =>
@@ -191,7 +191,10 @@ const Edit = ({
 						<PanelBody>
 							<RangeControl
 								__nextHasNoMarginBottom
-								label={__('Tablet Columns', 'blocksy-companion')}
+								label={__(
+									'Tablet Columns',
+									'blocksy-companion'
+								)}
 								onChange={(columns) =>
 									setAttributes({
 										tabletColumns: columns,
@@ -206,7 +209,10 @@ const Edit = ({
 						<PanelBody>
 							<RangeControl
 								__nextHasNoMarginBottom
-								label={__('Mobile Columns', 'blocksy-companion')}
+								label={__(
+									'Mobile Columns',
+									'blocksy-companion'
+								)}
 								onChange={(columns) =>
 									setAttributes({
 										mobileColumns: columns,

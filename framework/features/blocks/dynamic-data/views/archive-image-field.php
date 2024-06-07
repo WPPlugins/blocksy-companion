@@ -1,7 +1,12 @@
 <?php
 
+if (! isset($term_id)) {
+	$term_id = null;
+}
+
 $aspectRatio = blocksy_akg('aspectRatio', $attributes, 'auto');
 $imageFit = blocksy_akg('imageFit', $attributes, 'cover');
+$imageSource = blocksy_akg('imageSource', $attributes, 'featured');
 $height = blocksy_akg('height', $attributes, '');
 
 $lightbox = blocksy_akg('lightbox', $attributes, '');
@@ -62,6 +67,10 @@ if ($term_id) {
 	}
 
 	$maybe_image = blocksy_akg('image', $term_atts[0], '');
+
+	if ($imageSource === 'icon') {
+		$maybe_image = blocksy_akg('icon_image', $term_atts[0], '');
+	}
 
 	if (
 		$maybe_image

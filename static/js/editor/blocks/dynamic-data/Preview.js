@@ -25,7 +25,8 @@ const Preview = ({
 
 	termId,
 	taxonomy,
-	termImageId,
+	termIcon,
+	termImage,
 
 	attributes,
 	attributes: {
@@ -60,7 +61,8 @@ const Preview = ({
 				postType={postType}
 				termId={termId}
 				taxonomy={taxonomy}
-				termImageId={termImageId}
+				termImage={termImage}
+				termIcon={termIcon}
 			/>
 		)
 	}

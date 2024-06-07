@@ -127,6 +127,11 @@
 		"brands_gap": {
 			"type": "number",
 			"default": 10
+		},
+
+		"imageSource": {
+			"type": "string",
+			"default": "featured"
 		}
 	},
 	"supports": {
@@ -183,6 +188,7 @@
 		"queryId",
 		"taxonomy",
 		"termId",
-		"termImageId"
+		"termIcon",
+		"termImage"
 	]
 }

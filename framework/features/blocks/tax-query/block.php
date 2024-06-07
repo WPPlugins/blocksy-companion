@@ -357,18 +357,14 @@ class TaxQuery {
 
 				$term_atts = $term_atts[0];
 
+				$maybe_icon = blocksy_akg('icon_image', $term_atts, '');
 				$maybe_image = blocksy_akg('image', $term_atts, '');
 
-				if (is_array($maybe_image)) {
-					$attachment = $maybe_image;
-				}
-
-				$terms_descriptors[] = array_merge(
-					[
-						'term_id' => $term->term_id
-					],
-					$attachment
-				);
+				$terms_descriptors[] = [
+					'term_id' => $term->term_id,
+					'icon' => $maybe_icon,
+					'image' => $maybe_image,
+				];
 			}
 		}
 

@@ -169,7 +169,7 @@ class DynamicData {
 
 						$term_atts = $term_atts[0];
 
-						$maybe_image = blocksy_akg('image', $term_atts, '');
+						$maybe_image = blocksy_akg('icon_image', $term_atts, '');
 
 						if (is_array($maybe_image)) {
 							$attachment = $maybe_image;
