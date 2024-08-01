@@ -16,35 +16,29 @@ import DemoToInstall from './DemoInstall/DemoToInstall'
 
 import useDemoListFilters from './DemoInstall/filters/useDemoListFilters'
 
-import SubmitSupport from '../helpers/SubmitSupport'
-
-import NoLicense from '../NoLicense'
-
-import { getStarterSitesStatus } from '../helpers/starter-sites'
-
 export const DemosContext = createContext({
 	demos: [],
 })
 
+import SubmitSupport from '../helpers/SubmitSupport'
+
 let demos_cache = null
+let plugins_cache = null
+let currently_installed_demo_cache = null
 let demos_error_cache = null
 
 const DemoInstall = ({ children, path, location }) => {
 	const [isLoading, setIsLoading] = useState(!demos_cache)
 	const [demos_list, setDemosList] = useState(demos_cache || [])
-	const [pluginsStatus, setPluginsStatus] = useState(
-		ctDashboardLocalizations.plugin_data.active_plugins
-	)
+	const [pluginsStatus, setPluginsStatus] = useState(plugins_cache || {})
 	const [currentDemo, setCurrentDemo] = useState(null)
 	const [currentlyInstalledDemo, setCurrentlyInstalledDemo] = useState(
-		ctDashboardLocalizations.plugin_data.current_installed_demo
+		currently_installed_demo_cache
 	)
 
 	const filtersPayload = useDemoListFilters({
 		demos_list,
 	})
-
-	const [forceEmptyDemos, setForceEmptyDemos] = useState(false)
 
 	const [demo_error, setDemoError] = useState({
 		isError: false,
@@ -65,49 +59,77 @@ const DemoInstall = ({ children, path, location }) => {
 			setIsLoading(true)
 		}
 
-		try {
-			let demosResponse = await getStarterSitesStatus()
+		const body = new FormData()
+		body.append('action', 'blocksy_demo_list')
+		body.append('nonce', ctDashboardLocalizations.dashboard_actions_nonce)
 
-			if (demosResponse.status && demosResponse.status === 511) {
-				// This is a special case where the license is invalid
-				setForceEmptyDemos(true)
-				return
+		try {
+			const response = await fetch(ctDashboardLocalizations.ajax_url, {
+				method: 'POST',
+				body,
+			})
+
+			if (response.status === 200) {
+				const { success, data } = await response.json()
+
+				if (success) {
+					setDemosList(data.demos)
+					setPluginsStatus(data.active_plugins)
+					setCurrentlyInstalledDemo(data.current_installed_demo)
+					plugins_cache = data.active_plugins
+					demos_cache = data.demos
+				}
+
+				if (!success) {
+					demos_error_cache = {
+						isError: true,
+						message: data.error_message,
+						reason: data.error_reason || 'generic',
+					}
+
+					setDemoError(demos_error_cache)
+
+					console.error('Blocksy:Dashboard:DemoInstall:demos_list', {
+						...data,
+						demos_error_cache,
+					})
+				}
 			}
 
-			const data = await demosResponse.json()
+			if (response.status !== 200) {
+				demos_error_cache = {
+					isError: true,
+					message: response.statusText,
+					reason: 'generic',
+				}
 
-			setDemosList(data)
-			demos_cache = data
-		} catch (response) {
-			// Usually this is a network error or some policty blocking
-			// external frontend requests
+				setDemoError(demos_error_cache)
+
+				console.error('Blocksy:Dashboard:DemoInstall:demos_list', {
+					demos_error_cache,
+				})
+			}
+		} catch (e) {
 			console.error('Blocksy:Dashboard:DemoInstall:demos_list', {
-				response,
-				reason: 'frontend_starter_sites_fetch_failed',
+				e,
+				reason: 'ajax_request_failed',
 			})
+
+			demos_error_cache = {
+				isError: true,
+				message: e.message || e,
+				reason: 'ajax_request_failed',
+			}
+
+			setDemoError(demos_error_cache)
 		}
 
 		setIsLoading(false)
 	}
 
 	useEffect(() => {
-		if (ctDashboardLocalizations.plugin_data.demo_install_error) {
-			setIsLoading(false)
-
-			setDemoError({
-				isError: true,
-				message:
-					ctDashboardLocalizations.plugin_data.demo_install_error,
-				reason: 'generic',
-			})
-		} else {
-			syncDemos(!demos_cache)
-		}
+		syncDemos(!demos_cache)
 	}, [])
-
-	if (forceEmptyDemos) {
-		return <NoLicense />
-	}
 
 	return (
 		<div className="ct-demos-list-container">
@@ -116,19 +138,19 @@ const DemoInstall = ({ children, path, location }) => {
 				from={{ opacity: 0 }}
 				enter={[{ opacity: 1 }]}
 				leave={[{ opacity: 0 }]}
-				initial={null}
 				config={(key, phase) => {
 					return phase === 'leave'
 						? {
 								duration: 300,
 						  }
 						: {
+								delay: 300,
 								duration: 300,
 						  }
 				}}>
-				{(props, isLoading) => {
+				{(isLoading) => {
 					if (isLoading) {
-						return (
+						return (props) => (
 							<animated.p
 								style={props}
 								className="ct-loading-text">
@@ -172,7 +194,7 @@ const DemoInstall = ({ children, path, location }) => {
 					}
 
 					if (demo_error.isError) {
-						return (
+						return (props) => (
 							<animated.div style={props}>
 								{demo_error.reason ===
 									'ajax_request_failed' && (
@@ -222,7 +244,7 @@ const DemoInstall = ({ children, path, location }) => {
 						)
 					}
 
-					return (
+					return (props) => (
 						<animated.div style={props}>
 							<Fragment>
 								<DemosContext.Provider

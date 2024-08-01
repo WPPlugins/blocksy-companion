@@ -1,45 +1,78 @@
 import { useEffect, useState } from '@wordpress/element'
 
-import cachedFetch from '@creative-themes/wordpress-helpers/cached-fetch'
+import { getStableJsonKey } from 'blocksy-options'
+
+function getJsonFromUrl(url) {
+	if (!url) url = location.search
+	var query = url.substr(1)
+	var result = {}
+	query.split('&').forEach(function (part) {
+		var item = part.split('=')
+		result[item[0]] = decodeURIComponent(item[1])
+	})
+	return result
+}
+
+const cache = {}
 
 export const useTaxBlockData = ({ attributes }) => {
 	const [blockData, setBlockData] = useState(null)
 
+	let [{ controller }, setAbortState] = useState({
+		controller: null,
+	})
+
 	useEffect(() => {
-		const queryString = new URLSearchParams(window.location.search)
+		const input = { attributes }
 
-		cachedFetch(
-			`${wp.ajax.settings.url}?action=blocksy_get_tax_block_data${
-				queryString.get('lang')
-					? '&lang=' + queryString.get('lang')
-					: ''
-			}`,
+		const key = getStableJsonKey(input)
 
-			{
-				attributes,
-			},
-
-			{
-				// Abort intermediary requests.
-				fetcherName: `tax-block-data-${attributes.uniqueId}`,
-
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-
-				method: 'POST',
+		if (cache[key]) {
+			setBlockData(cache[key])
+		} else {
+			if (controller) {
+				controller.abort()
 			}
-		)
-			.then((response) => response.json())
-			.then(({ success, data }) => {
-				if (!success) {
-					return
-				}
 
-				setBlockData(data)
-			})
-			.catch((e) => {})
+			if ('AbortController' in window) {
+				controller = new AbortController()
+
+				setAbortState({
+					controller,
+				})
+			}
+
+			let qs = getJsonFromUrl(location.search)
+
+			fetch(
+				`${wp.ajax.settings.url}?action=blocksy_get_tax_block_data${
+					qs.lang ? '&lang=' + qs.lang : ''
+				}`,
+				{
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+					method: 'POST',
+					signal: controller.signal,
+					body: JSON.stringify({ attributes }),
+				}
+			)
+				.then((res) => res.json())
+				.then(({ success, data }) => {
+					if (!success) {
+						return
+					}
+
+					cache[key] = data
+
+					setAbortState({
+						controller: null,
+					})
+
+					setBlockData(data)
+				})
+		}
 	}, [attributes])
 
 	return {

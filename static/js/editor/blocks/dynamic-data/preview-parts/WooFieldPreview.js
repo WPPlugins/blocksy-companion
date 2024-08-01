@@ -19,47 +19,20 @@ import RatingPreview from './woo/RatingPreview'
 import SkuPreview from './woo/SkuPreview'
 import BrandsPreview from './woo/BrandsPreview'
 
-import { useBlockSupportsCustom } from '../hooks/use-block-supports-custom'
-import AttributesPreview from './woo/AttributesPreview'
-
-import ContentWithBeforeAndAfter from '../components/ContentWithBeforeAndAfter'
-
-const WooFieldPreviewWithContext = ({
+const TextField = ({
 	fieldDescriptor,
-	fieldsDescriptor,
-
 	attributes,
 	attributes: { align, tagName: TagName, before, after, fallback },
-
 	postId,
 	postType,
-
-	termId,
-	taxonomy,
-
-	colors,
 }) => {
-	const ref = useRef(null)
-	const shadowMutationRef = useRef(null)
-
-	const { product, isLoading } =
+	const { product, isLoading, ...da } =
 		wc.wcBlocksSharedContext.useProductDataContext()
 
 	const blockProps = useBlockProps({
 		className: classnames('ct-dynamic-data', {
 			[`has-text-align-${align}`]: align,
 		}),
-		ref,
-	})
-
-	const uniqueClass = blockProps.className
-		.split(' ')
-		.find((c) => c.startsWith('wp-elements-'))
-
-	const previewData = useBlockSupportsCustom({
-		fieldType: 'text',
-		attributes,
-		uniqueClass,
 	})
 
 	const borderProps = useBorderProps(attributes)
@@ -90,16 +63,6 @@ const WooFieldPreviewWithContext = ({
 		Component = SkuPreview
 	}
 
-	if (fieldDescriptor.id === 'attributes') {
-		Component = AttributesPreview
-	}
-
-	let css = ''
-
-	if (previewData.css) {
-		css += previewData.css
-	}
-
 	if (Component) {
 		return (
 			<TagName
@@ -108,27 +71,22 @@ const WooFieldPreviewWithContext = ({
 				style={{
 					...(blockProps.style || {}),
 					...(borderProps.style || {}),
-					...(previewData.style || {}),
 				}}
 				className={classnames(
 					blockProps.className,
-					borderProps.className,
-					previewData.className
+					borderProps.className
 				)}>
-				{css && <style>{css}</style>}
+				{before}
 
-				<ContentWithBeforeAndAfter before={before} after={after}>
-					<Component
-						attributes={attributes}
-						postId={postId}
-						postType={postType}
-						termId={termId}
-						taxonomy={taxonomy}
-						fallback={fallback}
-						fieldsDescriptor={fieldsDescriptor}
-						product={product}
-					/>
-				</ContentWithBeforeAndAfter>
+				<Component
+					attributes={attributes}
+					postId={postId}
+					postType={postType}
+					fallback={fallback}
+					product={product}
+				/>
+
+				{after}
 			</TagName>
 		)
 	}
@@ -141,7 +99,7 @@ const WooFieldPreview = (props) => {
 
 	const { withProductDataContext } = wc.wcBlocksSharedHocs
 
-	return withProductDataContext(WooFieldPreviewWithContext)({
+	return withProductDataContext(TextField)({
 		...props,
 		productId: postId,
 	})

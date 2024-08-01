@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "blocksy/post-template",
-	"parent": ["blocksy/query"],
+	"parent": "blocksy/query",
 	"title": "Post Template",
 	"category": "theme",
 	"description": "Contains the block elements used to render a post, like the title, date, featured image, content or excerpt, and more.",
@@ -10,7 +10,7 @@
 	"supports": {
 		"reusable": false,
 		"html": false,
-		"layout": false,
+		"layout": true,
 		"spacing": {
 			"blockGap": {
 				"__experimentalDefault": "1.25em"
@@ -32,13 +32,6 @@
 		},
 		"verticalAlignment": {
 			"type": "string"
-		},
-		"layout": {
-			"type": "object"
-		},
-		"has_item_link": {
-			"type": "string",
-			"default": "no"
 		}
 	},
 
@@ -52,18 +45,9 @@
 		"offset",
 		"postId",
 		"postType",
-		"has_slideshow",
-		"has_slideshow_arrows",
-		"has_slideshow_pills",
-		"has_slideshow_autoplay",
-		"has_slideshow_autoplay_speed",
 		"has_pagination",
 		"include_term_ids",
 		"exclude_term_ids",
 		"sticky_posts"
-	],
-
-	"providesContext": {
-		"has_item_link": "has_item_link"
-	}
+	]
 }

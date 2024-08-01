@@ -1,34 +1,106 @@
 import { createElement } from '@wordpress/element'
 
-import ImagePreview from '../wp/ImagePreview'
+import {
+	useBlockProps,
+	__experimentalUseBorderProps as useBorderProps,
+} from '@wordpress/block-editor'
+
+import classnames from 'classnames'
 
 const CustomImageField = ({
+	fieldDescriptor,
 	fieldData,
 
 	attributes,
-	attributes: { sizeSlug },
+	attributes: {
+		aspectRatio,
+		width,
+		height,
+		imageAlign,
+		has_field_link,
+		image_hover_effect,
+		sizeSlug,
+	},
+
+	postId,
 }) => {
-	let maybeUrl = fieldData?.url
+	const blockProps = useBlockProps({
+		className: classnames('ct-dynamic-media wp-block-image', {
+			[`align${imageAlign}`]: imageAlign,
+		}),
 
-	if (fieldData?.full_url) {
-		maybeUrl = fieldData.full_url
-	}
+		style: {
+			aspectRatio,
+			width,
+			height,
+		},
 
-	if (fieldData?.sizes?.[sizeSlug]) {
-		if (typeof fieldData.sizes[sizeSlug] === 'string') {
-			maybeUrl = fieldData.sizes[sizeSlug]
+		...(image_hover_effect !== 'none'
+			? { 'data-hover': image_hover_effect }
+			: {}),
+	})
+
+	const borderProps = useBorderProps(attributes)
+	console.log(fieldData)
+	let maybeUrl = fieldData?.value?.url
+
+	if (fieldData?.value?.sizes[sizeSlug]) {
+		if (typeof fieldData.value.sizes[sizeSlug] === 'string') {
+			maybeUrl = fieldData.value.sizes[sizeSlug]
 		} else {
-			maybeUrl = fieldData.sizes[sizeSlug].url
+			maybeUrl = fieldData.value.sizes[sizeSlug].url
 		}
 	}
 
-	return (
-		<ImagePreview
-			attributes={attributes}
-			url={maybeUrl}
-			caption={fieldData?.caption}
+	const imageStyles = {
+		...borderProps.style,
+
+		height: aspectRatio ? '100%' : height,
+		width: !!aspectRatio && '100%',
+		objectFit: !!(height || aspectRatio) && 'cover',
+	}
+
+	if (!maybeUrl || !postId) {
+		return (
+			<figure {...blockProps}>
+				<div
+					className="ct-dynamic-data-placeholder"
+					style={{
+						...imageStyles,
+					}}>
+					<svg
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 60 60"
+						preserveAspectRatio="none"
+						class="components-placeholder__illustration"
+						aria-hidden="true"
+						focusable="false"
+						style={{
+							'min-height': '200px',
+							height: !!aspectRatio && '100%',
+							width: !!aspectRatio && '100%',
+						}}>
+						<path
+							vector-effect="non-scaling-stroke"
+							d="M60 60 0 0"></path>
+					</svg>
+				</div>
+			</figure>
+		)
+	}
+
+	let content = (
+		<img
+			style={{
+				...imageStyles,
+			}}
+			src={maybeUrl}
+			className={borderProps.className}
 		/>
 	)
+
+	return <figure {...blockProps}>{content}</figure>
 }
 
 export default CustomImageField

@@ -126,18 +126,7 @@ export const computeAutoHide = (args) => {
 	}
 
 	maybeSetStickyHeightAnimated(() => {
-		const { stickyContainerHeight } = getData({ stickyContainer })
-
-		let finalOffset = clamp(
-			0,
-			stickyContainerHeight - Math.abs(offset),
-			stickyContainerHeight
-		)
-
-		if (stickyContainer.dataset.sticky.indexOf('yes') === -1) {
-			finalOffset = 0
-		}
-
-		return `${finalOffset}px`
+		let { stickyContainerHeight } = getData({ stickyContainer })
+		return `${stickyContainerHeight - Math.abs(offset)}px`
 	})
 }

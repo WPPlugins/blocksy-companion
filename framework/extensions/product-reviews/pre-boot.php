@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 class BlocksyExtensionProductReviewsPreBoot {
 	public function __construct() {
 		add_action('admin_enqueue_scripts', function () {
@@ -20,8 +16,7 @@ class BlocksyExtensionProductReviewsPreBoot {
 				'blocksy-ext-product-reviews-admin-dashboard-scripts',
 				BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/dashboard.js',
 				['ct-options-scripts', 'ct-dashboard-scripts'],
-				$data['Version'],
-				false
+				$data['Version']
 			);
 
 			wp_enqueue_style(

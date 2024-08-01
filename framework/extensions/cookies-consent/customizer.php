@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $options = [
 	//  translators: This is a brand name. Preferably to not be translated
 	'title' => _x('Cookies Consent', 'Extension Brand Name', 'blocksy-companion'),
@@ -119,9 +115,8 @@ $options = [
 						'forms_cookie_consent_content' => [
 							'label' => false,
 							'type' => 'wp-editor',
-							'value' => blocksy_companion_safe_sprintf(
-								// translators: %1$s and %2$s are HTML tags for a link.
-								__('I accept the %1$sPrivacy Policy%2$s*', 'blocksy-companion'),
+							'value' => blc_safe_sprintf(
+								__('I accept the %sPrivacy Policy%s*', 'blocksy-companion'),
 								'<a href="' . get_privacy_policy_url() . '">',
 								'</a>'
 							),

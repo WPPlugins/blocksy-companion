@@ -178,7 +178,7 @@ class ConditionsRulesResolver {
 					];
 				}
 
-				$day = strtolower(gmdate('l'));
+				$day = strtolower(date('l'));
 
 				$day_matches = isset($days[$day]) && $days[$day];
 			}
@@ -237,24 +237,12 @@ class ConditionsRulesResolver {
 			return is_tag();
 		}
 
-		if (strpos($rule['rule'], 'post_type_post_taxonomy_') !== false) {
-			return is_tax(str_replace(
-				'post_type_post_taxonomy_',
-				'',
-				$rule['rule']
-			));
-		}
-
 		if ($rule['rule'] === 'single_page') {
 			return is_singular('page');
 		}
 
-		if (
-			$rule['rule'] === 'single_product'
-			&&
-			blocksy_companion_theme_functions()->blocksy_manager()
-		) {
-			return blocksy_companion_theme_functions()->blocksy_manager()->screen->is_product();
+		if ($rule['rule'] === 'single_product') {
+			return blocksy_manager()->screen->is_product();
 		}
 
 		if ($rule['rule'] === 'all_product_archives') {
@@ -279,16 +267,8 @@ class ConditionsRulesResolver {
 
 		if ($rule['rule'] === 'all_product_brands') {
 			if (function_exists('is_shop')) {
-				return is_tax('product_brand');
+				return is_tax('product_brands');
 			}
-		}
-
-		if (strpos($rule['rule'], 'post_type_product_taxonomy_') !== false) {
-			return is_tax(str_replace(
-				'post_type_product_taxonomy_',
-				'',
-				$rule['rule']
-			));
 		}
 
 		if ($rule['rule'] === 'all_product_attributes') {
@@ -381,11 +361,11 @@ class ConditionsRulesResolver {
 				return false;
 			}
 
-			if (! blocksy_companion_theme_functions()->blocksy_manager()) {
+			if (! function_exists('blocksy_manager')) {
 				return false;
 			}
 
-			$manager = blocksy_companion_theme_functions()->blocksy_manager();
+			$manager = blocksy_manager();
 
 			if (! isset($manager->archive) || ! $manager->archive) {
 				return false;
@@ -513,10 +493,8 @@ class ConditionsRulesResolver {
 					$post_id = get_the_ID();
 				}
 
-				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				if (wp_doing_ajax() && isset($_GET['product_id'])) {
-					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					$post_id = sanitize_text_field(wp_unslash($_GET['product_id']));
+					$post_id = sanitize_text_field($_GET['product_id']);
 				}
 
 				if (
@@ -527,8 +505,6 @@ class ConditionsRulesResolver {
 					$post_id
 					&&
 					get_term($rule['payload']['taxonomy_id'])
-					&&
-					! is_wp_error(get_term($rule['payload']['taxonomy_id']))
 					&&
 					in_array(
 						get_term($rule['payload']['taxonomy_id'])->taxonomy,
@@ -562,10 +538,8 @@ class ConditionsRulesResolver {
 			) {
 				$post_id = get_the_ID();
 
-				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				if (wp_doing_ajax() && isset($_GET['product_id'])) {
-					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-					$post_id = sanitize_text_field(wp_unslash($_GET['product_id']));
+					$post_id = sanitize_text_field($_GET['product_id']);
 				}
 
 				return $this->match_taxonomy_in_rule_for($rule, $post_id);
@@ -590,23 +564,7 @@ class ConditionsRulesResolver {
 			}
 		}
 
-		/**
-		 * Filters the result of resolving a display condition rule.
-		 *
-		 * Runs for the rules the built-in resolver doesn't handle, which lets custom rules
-		 * declared through `blocksy:conditions:rules:custom` be matched.
-		 *
-		 * @since 2.0.69
-		 *
-		 * @param bool  $result Whether the rule matches the current request. Default false.
-		 * @param array $rule   The rule being resolved. Has a `rule` key with the rule id and,
-		 *                      optionally, a `payload` key with the rule's stored value.
-		 */
-		return apply_filters(
-			'blocksy:conditions:rules:resolve',
-			false,
-			$rule
-		);
+		return false;
 	}
 
 	private function match_taxonomy_in_rule_for($rule, $post_id) {

@@ -2,10 +2,6 @@
 
 namespace Blocksy\Editor;
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 class GutenbergBlock {
 	protected $name;
 
@@ -67,7 +63,7 @@ class GutenbergBlock {
 			return '';
 		}
 
-		return blocksy_companion_render_view($file_path, [
+		return blocksy_render_view($file_path, [
 			'atts' => $attributes,
 		]);
 	}
@@ -91,39 +87,31 @@ class GutenbergBlock {
 			$block_data['attributes'] = $this->config['attributes'];
 		}
 
-		$block_json_path = BLOCKSY_PATH . '/static/js/editor/blocks/' . $this->name . '/block.json';
-
-		register_block_type(
-			file_exists($block_json_path)
-				? $block_json_path
-				: 'blocksy/' . $this->name,
-			$block_data
-		);
+		register_block_type('blocksy/' . $this->name, $block_data);
 	}
 
 	public function localize_data() {
 		$options_file = $this->widget_path . '/options.php';
 
-		if (! file_exists($options_file)) {
+		if (!file_exists($options_file)) {
 			return;
 		}
 
-		add_filter(
-			'blocksy:block-editor:localized_data',
-			function ($data) use ($options_file) {
-				$options = blocksy_companion_akg(
-					'options',
-					blocksy_companion_get_variables_from_file(
-						$options_file,
-						['options' => []]
-					)
-				);
+		add_filter('blocksy:gutenberg-blocks-data', function ($data) use (
+			$options_file
+		) {
+			$options = blocksy_akg(
+				'options',
+				blocksy_get_variables_from_file(
+					$options_file,
+					['options' => []]
+				)
+			);
 
-				$options_name = str_replace('-', '_', $this->name);
-				$data[$options_name] = $options;
+			$options_name = str_replace('-', '_', $this->name);
+			$data[$options_name] = $options;
 
-				return $data;
-			}
-		);
+			return $data;
+		});
 	}
 }

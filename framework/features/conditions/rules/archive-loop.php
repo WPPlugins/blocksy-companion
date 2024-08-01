@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $rules = [
 	[
 		'id' => 'card_post_with_taxonomy_ids',

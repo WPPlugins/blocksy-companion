@@ -1,4 +1,4 @@
-@use '../../../../../static/sass/frontend/common-frontend/functions';
+@import '../../../../../static/sass/frontend/common-frontend/functions';
 
 .ct-trending-block {
 	padding: var(--padding, 30px) 0;
@@ -9,11 +9,11 @@
 		grid-column-gap: 30px;
 		grid-row-gap: 20px;
 
-		@include functions.media-breakpoint-only(md) {
+		@include media-breakpoint-only(md) {
 			--grid-template-columns: repeat(2, 1fr);
 		}
 
-		@include functions.media-breakpoint-up(lg) {
+		@include media-breakpoint-up(lg) {
 			--grid-template-columns: repeat(4, 1fr);
 		}
 	}
@@ -31,20 +31,36 @@
 
 
 	// arrows
-	.ct-slider-arrows {
-		margin-inline-start: auto;
+	[class*='ct-arrow'] {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 23px;
+		height: 23px;
+		cursor: pointer;
+		background: transparent;
+		border-radius: 2px;
+		opacity: 0.5;
+		color: var(--theme-text-color);
+		border: 1px solid currentColor;
+		transition: var(--theme-transition);
 
-		--slider-arrow-button-size: 22px;
-		--theme-border-color: currentColor;
-
-		> *:not(:hover) {
-			opacity: 0.4;
+		&:hover {
+			opacity: 1;
+			color: #fff;
+			border-color: var(--theme-link-hover-color);
+			background: var(--theme-link-hover-color);
 		}
 	}
-	
+
+	.ct-arrow-left {
+		margin-inline-start: auto;
+		margin-inline-end: 8px;
+	}
+
 	// disable arrows
-	[data-page='1'] .ct-arrow-prev,
-	[data-page*='last'] .ct-arrow-next {
+	[data-page='1'] .ct-arrow-left,
+	[data-page*='last'] .ct-arrow-right {
 		opacity: 0.2;
 		pointer-events: none;
 	}

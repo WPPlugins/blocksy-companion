@@ -8,7 +8,6 @@ import { InnerBlocks } from '@wordpress/block-editor'
 import Edit from './Edit'
 
 import { addFilter } from '@wordpress/hooks'
-import metadata from './block.json'
 
 addFilter(
 	'blockEditor.__unstableCanInsertBlockType',
@@ -37,7 +36,7 @@ addFilter(
 )
 
 registerBlockType('blocksy/widgets-wrapper', {
-	...metadata,
+	apiVersion: 3,
 	title: __('Widgets Wrapper', 'blocksy-companion'),
 	icon: {
 		src: (
@@ -81,6 +80,15 @@ registerBlockType('blocksy/widgets-wrapper', {
 		defaultExpanded: {
 			type: 'boolean',
 			default: true,
+		},
+	},
+	supports: {
+		className: false,
+		spacing: {
+			margin: true,
+			__experimentalDefaultControls: {
+				margin: true,
+			},
 		},
 	},
 	variations: [],

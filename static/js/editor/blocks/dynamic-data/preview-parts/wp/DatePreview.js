@@ -16,7 +16,6 @@ const DatePreview = ({
 		date_format,
 		custom_date_format,
 		has_field_link,
-		has_field_link_wrap_content,
 	},
 }) => {
 	const [date] = useEntityProp(
@@ -39,7 +38,7 @@ const DatePreview = ({
 		return 'Date'
 	}
 
-	if (has_field_link === 'yes' && has_field_link_wrap_content === 'no') {
+	if (has_field_link) {
 		content = <a href="#">{content}</a>
 	}
 

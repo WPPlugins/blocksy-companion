@@ -1,56 +1,40 @@
 .ct-condition-location {
+	display: grid;
+	grid-template-columns: 1fr 90px;
+	grid-column-gap: 10px;
+	padding-bottom: 20px;
+	border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+	--x-select-dropdown-width: calc(100% + 100px);
+}
 
-	.ct-controls-group {
-		--options-vertical-spacing: 0;
+.ct-new-condition-location {
+	padding: var(--options-horizontal-spacing, 0 14px);
+	--options-vertical-spacing: 20px;
+
+	.ct-new-location {
+		position: relative;
 		--options-horizontal-spacing: 0;
-		--x-select-dropdown-width: calc(100% + 100px);
 
-		> section {
-			position: relative;
-			display: grid;
-			grid-template-columns: 1fr 85px;
-			grid-column-gap: 10px;
-			grid-row-gap: 20px;
-			margin-bottom: 20px;
+		.ct-control {
 			padding-bottom: 20px;
 			border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
 
-			.ct-remove-condition-location {
-				position: absolute;
-				width: 26px;
-				height: 30px;
-				top: 0;
-				inset-inline-end: -26px;
-			}
-
-			.ct-control {
-				padding-top: 20px;
-				border-top: 1px dashed rgba(0, 0, 0, 0.1);
-			}
-		}
-	}
-
-
-	.ct-control {
-		margin-top: 0;
-		grid-column: 1/-1;
-
-		&:not(:last-child) {
-			margin-bottom: 20px;
-			padding-bottom: 20px;
-			border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
-		}
-
-		&[data-design="inline"] {
-
-			input {
+			&[data-design="inline"] input {
 				text-align: center;
-				--ui-input-width: 85px;
+				--input-width: 90px;
 			}
+		}
+
+		.ct-remove-condition-location {
+			top: 0;
+			inset-inline-end: -26px;
+			width: 26px;
+			height: 30px;
 		}
 	}
 
-	.ct-ui-button {
+	.button {
 		width: 100%;
+		margin-top: 20px;
 	}
 }

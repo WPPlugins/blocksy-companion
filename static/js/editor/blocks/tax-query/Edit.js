@@ -58,7 +58,6 @@ const Edit = ({
 		attributes,
 		setAttributes,
 		clientId,
-		blockType: 'blocksy/tax-query',
 	})
 
 	const { postId } = context
@@ -154,10 +153,7 @@ const Edit = ({
 								options={{
 									taxonomy: {
 										type: 'ct-select',
-										label: __(
-											'Taxonomy',
-											'blocksy-companion'
-										),
+										label: __('Taxonomy', 'blocksy-companion'),
 										value: '',
 										defaultToFirstItem: false,
 										choices: taxonomiesSelectOptions,
@@ -169,85 +165,7 @@ const Edit = ({
 										label: __('Limit', 'blocksy-companion'),
 										value: '',
 										min: 1,
-										max: 200,
-									},
-
-									has_slideshow: {
-										type: 'ct-switch',
-										label: __(
-											'Slideshow',
-											'blocksy-companion'
-										),
-										value: '',
-									},
-
-									has_slideshow_condition: {
-										type: 'ct-condition',
-										condition: { has_slideshow: 'yes' },
-										options: {
-											has_slideshow_arrows: {
-												type: 'ct-switch',
-												label: __(
-													'Navigation Arrows',
-													'blocksy-companion'
-												),
-												value: '',
-											},
-
-											has_slideshow_pills: {
-												type: 'ct-switch',
-												label: __(
-													'Navigation Pills',
-													'blocksy-companion'
-												),
-												value: '',
-											},
-
-											has_slideshow_autoplay: {
-												type: 'ct-switch',
-												label: __(
-													'Autoplay',
-													'blocksy-companion'
-												),
-												value: '',
-											},
-
-											has_slideshow_autoplay_condition: {
-												type: 'ct-condition',
-												condition: {
-													has_slideshow_autoplay:
-														'yes',
-												},
-												options: {
-													has_slideshow_autoplay_speed:
-														{
-															type: 'ct-number',
-															label: __(
-																'Autoplay Speed',
-																'blocksy-companion'
-															),
-															value: '',
-															min: 1,
-															max: 100,
-														},
-												},
-											},
-										},
-									},
-
-									has_pagination_condition: {
-										type: 'ct-condition',
-										condition: { has_slideshow: 'no' },
-										options: {
-											has_pagination: {
-												type: 'ct-switch',
-												label: __(
-													'Pagination',
-													'blocksy-companion'
-												),
-												value: '',
-											},
-										},
+										max: 100,
 									},
 								}}
 								value={attributes}

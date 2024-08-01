@@ -1,20 +1,22 @@
-import { useState, useEffect, useMemo } from '@wordpress/element'
+import { useState, useEffect } from '@wordpress/element'
 import { __ } from 'ct-i18n'
-import { getOptionsForBlock } from 'blocksy-options'
-import cachedFetch from '@creative-themes/wordpress-helpers/cached-fetch'
+import { cachedFetch, getOptionsForBlock } from 'blocksy-options'
 
+import { getLabelForProvider } from '../utils'
 import { useTaxonomies } from '../../query/edit/utils/utils'
-
-import { useFieldsContext } from './use-fields-context'
 
 const options = getOptionsForBlock('dynamic-data')
 
 const wpFields = (args = {}) => {
-	const { fieldsContext } = args
+	const { termId } = args
+
+	const isContentBlock = document.body.classList.contains(
+		'post-type-ct_content_block'
+	)
 
 	let fields = []
 
-	if (fieldsContext.type === 'term') {
+	if (termId) {
 		fields = [
 			{
 				id: 'term_title',
@@ -35,7 +37,7 @@ const wpFields = (args = {}) => {
 		]
 	}
 
-	if (fieldsContext.type === 'all' || fieldsContext.type === 'post') {
+	if (!termId) {
 		fields = [
 			{
 				id: 'title',
@@ -79,7 +81,7 @@ const wpFields = (args = {}) => {
 		]
 	}
 
-	if (fieldsContext.type === 'all') {
+	if (!termId && isContentBlock) {
 		fields = [
 			...fields,
 
@@ -102,38 +104,23 @@ const wpFields = (args = {}) => {
 
 	return {
 		provider: 'wp',
-		provider_label: 'WordPress',
 		fields,
 	}
 }
 
-const wooFields = ({ fieldsContext, taxonomies = [] }) => {
+const wooFields = (postType, taxonomies = []) => {
 	const hasWoo = typeof window.wc !== 'undefined'
 
-	if (!hasWoo) {
-		return null
-	}
-
-	const shouldHaveWooFields =
-		// Single product picked
-		(fieldsContext.type === 'post' &&
-			fieldsContext.post_type === 'product') ||
-		// Product tab or size guide picked
-		(fieldsContext.type === 'post_type' &&
-			fieldsContext.post_type === 'product')
-
-	if (!shouldHaveWooFields) {
+	if (!hasWoo || postType !== 'product') {
 		return null
 	}
 
 	const hasBrands = (taxonomies || []).find(
-		({ slug }) => slug === 'product_brand'
+		({ slug }) => slug === 'product_brands'
 	)
 
 	return {
 		provider: 'woo',
-		provider_label: 'WooCommerce',
-
 		fields: [
 			{
 				id: 'price',
@@ -151,10 +138,6 @@ const wooFields = ({ fieldsContext, taxonomies = [] }) => {
 				id: 'sku',
 				label: __('SKU', 'blocksy-companion'),
 			},
-			{
-				id: 'attributes',
-				label: __('Attributes', 'blocksy-companion'),
-			},
 			...(hasBrands
 				? [
 						{
@@ -168,42 +151,28 @@ const wooFields = ({ fieldsContext, taxonomies = [] }) => {
 }
 
 const useDynamicDataDescriptor = ({ postId, postType, termId, taxonomy }) => {
+	const taxonomies = useTaxonomies(postType)
+
 	const [additionalFields, setAdditionalFields] = useState([])
-	const [fullDescriptorLoaded, setFullDescriptorLoaded] = useState(false)
-
-	const fieldsContext = useFieldsContext({ postId, postType, termId })
-
-	let postTypeForTaxonomies = postType
-
-	if (fieldsContext.type === 'post_type' && fieldsContext.post_type) {
-		postTypeForTaxonomies = fieldsContext.post_type
-	}
-
-	if (fieldsContext.type === 'post' && fieldsContext.post_type) {
-		postTypeForTaxonomies = fieldsContext.post_type
-	}
-
-	const taxonomies = useTaxonomies(postTypeForTaxonomies)
 
 	useEffect(() => {
-		cachedFetch(
-			`${wp.ajax.settings.url}?action=blocksy_blocks_retrieve_dynamic_data_descriptor`,
-			{
-				context: fieldsContext,
-			}
-		)
-			.then((response) => response.json())
-			.then(({ success, data }) => {
+		if (postId && !termId) {
+			cachedFetch(
+				`${wp.ajax.settings.url}?action=blocksy_blocks_retrieve_dynamic_data_descriptor`,
+				{
+					post_id: postId,
+				}
+			).then(({ success, data }) => {
 				setAdditionalFields(data.fields)
-				setFullDescriptorLoaded(true)
 			})
-	}, [fieldsContext])
+		}
+	}, [postId, termId])
 
 	const fieldsDescriptor = {
-		fields: [wpFields({ fieldsContext })],
+		fields: [wpFields({ termId })],
 	}
 
-	const maybeWooFields = wooFields({ fieldsContext, taxonomies })
+	const maybeWooFields = wooFields(postType, taxonomies)
 
 	if (maybeWooFields) {
 		fieldsDescriptor.fields.push(maybeWooFields)
@@ -216,20 +185,8 @@ const useDynamicDataDescriptor = ({ postId, postType, termId, taxonomy }) => {
 		]
 	}
 
-	const linkFieldsChoices = additionalFields.flatMap((p) =>
-		p.fields
-			.filter((f) => f.type === 'text')
-			.map((f) => ({
-				group: p.provider_label,
-				key: `${p.provider}:${f.id}`,
-				value: f.label,
-			}))
-	)
-
 	return {
-		fullDescriptorLoaded,
 		fieldsDescriptor,
-		linkFieldsChoices,
 		options,
 		fieldsChoices: fieldsDescriptor.fields.reduce(
 			(acc, currentProvider) => [
@@ -246,7 +203,7 @@ const useDynamicDataDescriptor = ({ postId, postType, termId, taxonomy }) => {
 						return taxonomies && taxonomies.length > 0
 					})
 					.map((field) => ({
-						group: currentProvider.provider_label,
+						group: getLabelForProvider(currentProvider.provider),
 						key: `${currentProvider.provider}:${field.id}`,
 						value: field.label,
 					})),

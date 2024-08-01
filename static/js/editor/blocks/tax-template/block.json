@@ -10,7 +10,7 @@
 	"supports": {
 		"reusable": false,
 		"html": false,
-		"layout": false,
+		"layout": true,
 		"spacing": {
 			"blockGap": {
 				"__experimentalDefault": "1.25em"
@@ -32,37 +32,17 @@
 		},
 		"verticalAlignment": {
 			"type": "string"
-		},
-		"layout": {
-			"type": "object"
-		},
-		"has_item_link": {
-			"type": "string",
-			"default": "no"
 		}
 	},
 
 	"usesContext": [
 		"uniqueId",
 		"taxonomy",
-		"level",
 		"limit",
-		"hide_empty",
 		"order",
 		"orderby",
 		"offset",
 		"include_term_ids",
-		"exclude_term_ids",
-
-		"has_slideshow",
-		"has_slideshow_arrows",
-		"has_slideshow_pills",
-		"has_slideshow_autoplay",
-		"has_slideshow_autoplay_speed",
-		"has_pagination"
-	],
-
-	"providesContext": {
-		"has_item_link": "has_item_link"
-	}
+		"exclude_term_ids"
+	]
 }

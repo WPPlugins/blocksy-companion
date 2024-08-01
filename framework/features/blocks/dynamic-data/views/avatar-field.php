@@ -1,10 +1,6 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
-$avatar_size = blocksy_companion_akg('avatar_size', $attributes, 96);
+$avatar_size = blocksy_akg('avatar_size', $attributes, 96);
 
 $img_attr = [
 	'style' => ''
@@ -30,13 +26,12 @@ $value = get_avatar(
 	$author_id,
 	$avatar_size,
 	'',
-	blocksy_companion_safe_sprintf(
-		// translators: %s is the author's display name.
+	blocksy_safe_sprintf(
 		__('%s Avatar', 'blocksy-companion'),
 		blocksy_get_the_author_meta('display_name', $author_id)
 	),
 	[
-		'extra_attr' => blocksy_companion_attr_to_html($img_attr),
+		'extra_attr' => blocksy_attr_to_html($img_attr),
 		'class' => $img_class
 	]
 );
@@ -63,15 +58,15 @@ $wrapper_attr['class'] .= ' ' . implode(' ', $classes);
 
 $wrapper_attr['class'] = trim($wrapper_attr['class']);
 
-$has_field_link = blocksy_companion_akg('has_field_link', $attributes, 'no');
+$has_field_link = blocksy_akg('has_field_link', $attributes, 'no');
 
 if ($has_field_link === 'yes') {
 	$link_attr = [
 		'href' => get_author_posts_url($author_id),
 	];
 
-	$has_field_link_new_tab = blocksy_companion_akg('has_field_link_new_tab', $attributes, '_self');
-	$has_field_link_rel = blocksy_companion_akg('has_field_link_rel', $attributes, '');
+	$has_field_link_new_tab = blocksy_akg('has_field_link_new_tab', $attributes, '_self');
+	$has_field_link_rel = blocksy_akg('has_field_link_rel', $attributes, '');
 
 	if ($has_field_link_new_tab !== '_self') {
 		$link_attr['target'] = $has_field_link_new_tab;
@@ -81,7 +76,7 @@ if ($has_field_link === 'yes') {
 		$link_attr['rel'] = $has_field_link_rel;
 	}
 
-	$value = blocksy_companion_html_tag('a', $link_attr, $value);
+	$value = blocksy_html_tag('a', $link_attr, $value);
 }
 
 $wrapper_attr['style'] = implode(' ', $styles);
@@ -92,5 +87,5 @@ if (empty($value)) {
 
 $wrapper_attr = get_block_wrapper_attributes($wrapper_attr);
 
-blocksy_companion_html_tag_e('figure', $wrapper_attr, $value);
+echo blocksy_html_tag('figure', $wrapper_attr, $value);
 

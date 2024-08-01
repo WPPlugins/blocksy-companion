@@ -9,7 +9,7 @@ import { __ } from 'ct-i18n'
 import classnames from 'classnames'
 import useActivationAction from '../helpers/useActivationAction'
 import fileSaver from 'file-saver'
-import { Overlay } from 'blocksy-options'
+import Overlay from '../../helpers/Overlay'
 
 import { getPluginsMap } from './DemoInstall/Wizzard/Plugins'
 
@@ -138,10 +138,6 @@ const SiteExport = ({ allPlans, allCategories }) => {
 						...data.demo,
 					}
 
-					if (finalDemo.builder.toLowerCase() === 'elementor') {
-						finalDemo.elementor_experiment_container = true
-					}
-
 					console.log('Blocksy:Dashboard:DemoInstall:exported', {
 						remoteDemo,
 						finalDemo,
@@ -172,7 +168,7 @@ const SiteExport = ({ allPlans, allCategories }) => {
 					width="24"
 					height="24"
 					viewBox="0 0 24 24"
-					fillRule="evenodd"
+					fill-rule="evenodd"
 					fill="currentColor">
 					<path d="M20 15v5H4v-5h1.5v3.5h6V6.8l-4 4-1-1.1L12.2 4l6.3 5.7-1 1.1L13 6.7v11.8h5.5V15H20z" />
 				</svg>

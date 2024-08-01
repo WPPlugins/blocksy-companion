@@ -15,14 +15,12 @@ import CurrentExtension from './Extensions/CurrentExtension'
 import SubmitSupport from '../helpers/SubmitSupport'
 
 import DashboardContext from '../DashboardContext'
-import NoLicense from '../NoLicense'
 
 const Extension = (props) => {
 	const { history } = useContext(DashboardContext)
 
 	const { navigate } = props
-	const { forceEmptyExts, exts_status, syncExts, isLoading, setExtsStatus } =
-		useExtsStatus()
+	const { exts_status, syncExts, isLoading, setExtsStatus } = useExtsStatus()
 
 	let currentExtension = null
 
@@ -31,10 +29,6 @@ const Extension = (props) => {
 			...exts_status[props.extension],
 			name: props.extension,
 		}
-	}
-
-	if (forceEmptyExts) {
-		return <NoLicense />
 	}
 
 	return (
@@ -46,13 +40,18 @@ const Extension = (props) => {
 				leave={[{ opacity: 0 }]}
 				initial={null}
 				config={(key, phase) => {
-					return {
-						duration: 300,
-					}
+					return phase === 'leave'
+						? {
+								duration: 300,
+						  }
+						: {
+								delay: 300,
+								duration: 300,
+						  }
 				}}>
-				{(props, isLoading) => {
+				{(isLoading) => {
 					if (isLoading) {
-						return (
+						return (props) => (
 							<animated.p
 								style={props}
 								className="ct-loading-text">
@@ -95,7 +94,7 @@ const Extension = (props) => {
 						)
 					}
 
-					return (
+					return (props) => (
 						<animated.div style={props}>
 							<section className="ct-extensions-list">
 								<Sidebar

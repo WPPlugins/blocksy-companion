@@ -68,11 +68,10 @@ class ConditionsManager {
 		);
 
 		if ($rules['relation'] === 'AND') {
-			// If we have at least one exclude and ALL exclusions are true -- return false
 			if (
-				! empty($all_excludes)
+				! empty($resolved_excludes)
 				&&
-				count($all_excludes) === count($resolved_excludes)
+				count($resolved_excludes) === count($resolved_includes)
 			) {
 				return false;
 			}
@@ -91,7 +90,7 @@ class ConditionsManager {
 		}
 
 		if ($rules['relation'] === 'OR') {
-			// If AT LEAST ONE exclusion is true -- return false
+			// If at least one exclusion is true -- return false
 			if (! empty($resolved_excludes)) {
 				return false;
 			}
@@ -137,29 +136,11 @@ class ConditionsManager {
 			$args['filter'] = 'all';
 		}
 
-		if (
-			$args['filter'] === 'all'
-			||
-			$args['filter'] === 'product_tabs'
-		) {
-			$sections[] = 'user-auth';
-		}
-		
+		$sections[] = 'user-auth';
 		$sections[] = 'date-time';
 		$sections[] = 'requests';
 		$sections[] = 'localization';
 		$sections[] = 'bbPress';
-		$sections[] = 'custom';
-
-		if ($args['filter'] === 'product_waitlist') {
-			$sections = [
-				'basic',
-				'woo',
-				'requests',
-				'localization',
-				'custom'
-			];
-		}
 
 		if ($args['filter'] === 'archive' || $args['filter'] === 'singular') {
 			$sections = [
@@ -170,8 +151,7 @@ class ConditionsManager {
 				'specific',
 				'user-auth',
 				'date-time',
-				'localization',
-				'custom'
+				'localization'
 			];
 		}
 
@@ -180,13 +160,12 @@ class ConditionsManager {
 				'basic',
 				'user-auth',
 				'date-time',
-				'localization',
-				'custom'
+				'localization'
 			];
 		}
 
 		foreach ($sections as $section) {
-			$maybe_rules = blocksy_companion_get_options(
+			$maybe_rules = blocksy_get_options(
 				dirname(__FILE__) . '/conditions/rules/' . $section . '.php',
 				['filter' => $args['filter']],
 				false
@@ -205,8 +184,13 @@ class ConditionsManager {
 			$conditions = $conditions['conditions'];
 		}
 
+		// Check for nested conditions in Advanced Mode
+		if (isset($conditions[0]['conditions'])) {
+			$conditions = $conditions[0]['conditions'];
+		}
+
 		// Check if it looks like a normal rules array. If it doesn't -- bail out.
-		if (! isset($conditions[0])) {
+		if (! isset($conditions[0]) || ! isset($conditions[0]['rule'])) {
 			return [];
 		}
 
@@ -295,7 +279,7 @@ class ConditionsManager {
 					$condition['payload']['taxonomy_id']
 				);
 
-				if ($tax && ! is_wp_error($tax)) {
+				if ($tax) {
 					$to_append .= ' (<a href="' . get_edit_term_link(
 						$condition['payload']['taxonomy_id']
 					) . '" target="_blank">' . $tax->name . '</a>)';

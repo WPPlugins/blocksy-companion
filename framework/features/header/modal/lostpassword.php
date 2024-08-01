@@ -1,21 +1,8 @@
-<?php
-
-if (! defined('ABSPATH')) {
-	exit;
-}
-
-?>
 <form name="lostpasswordform" id="lostpasswordform" action="#" method="post">
-	<?php
-	/**
-	 * Fires at the start of the account modal lost password form.
-	 *
-	 * @since 1.7.43
-	 */
-	do_action('blocksy:account:modal:lostpassword:start'); ?>
+	<?php do_action('blocksy:account:modal:lostpassword:start'); ?>
 
 	<p>
-		<label for="user_login_forgot"><?php echo esc_html__('Username or Email Address', 'blocksy-companion')?></label>
+		<label for="user_login_forgot"><?php echo __('Username or Email Address', 'blocksy-companion')?></label>
 		<input type="text" name="user_login" id="user_login_forgot" class="input" value="" size="20" autocomplete="username" autocapitalize="off" required>
 	</p>
 
@@ -23,7 +10,7 @@ if (! defined('ABSPATH')) {
 
 	<p>
 		<button class="ct-button ct-account-lost-password-submit has-text-align-center" name="wp-submit">
-			<?php echo esc_html__('Get New Password', 'blocksy-companion') ?>
+			<?php echo __('Get New Password', 'blocksy-companion') ?>
 
 			<svg class="ct-button-loader" width="16" height="16" viewBox="0 0 24 24">
 				<circle cx="12" cy="12" r="10" opacity="0.2" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2.5"/>
@@ -43,11 +30,7 @@ if (! defined('ABSPATH')) {
 		</button>
 	</p>
 
-	<?php
-	/**
-	 * Fires at the end of the account modal lost password form.
-	 *
-	 * @since 1.7.43
-	 */
-	do_action('blocksy:account:modal:lostpassword:end'); ?>
+	<?php do_action('blocksy:account:modal:lostpassword:end'); ?>
+	<?php wp_nonce_field('blocksy-lostpassword', 'blocksy-lostpassword-nonce'); ?>
 </form>
+
