@@ -4,14 +4,9 @@ import { __ } from 'ct-i18n'
 
 import useCustomFieldData from '../../hooks/use-custom-field-data'
 
-const BrandsPreview = ({ postId, attributes }) => {
+const BrandsPreview = ({ product, attributes }) => {
 	const { fieldData } = useCustomFieldData({
-		fieldsContext: {
-			type: 'post',
-			post_type: 'product',
-			post_id: postId,
-		},
-
+		postId: product.id,
 		fieldDescriptor: {
 			provider: 'woo',
 			id: 'brands',
@@ -40,7 +35,7 @@ const BrandsPreview = ({ postId, attributes }) => {
 					return (
 						<span
 							key={brand.slug}
-							dangerouslySetInnerHTML={{ __html: brand.name }}
+							dangerouslySetInnerHTML={{ __html: t.name }}
 						/>
 					)
 				})}

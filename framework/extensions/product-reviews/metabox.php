@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $options = [
 
 	blocksy_rand_md5() => [
@@ -38,30 +34,14 @@ $options = [
 						// 'SoftwareApplication' => __( 'Software Application', 'blocksy-companion' ),
 					]
 				),
-				'desc' => blocksy_companion_safe_sprintf(
-					// translators: %1$s and %2$s are HTML tags.
+				'desc' => blc_safe_sprintf(
 					__(
-						'More info about review entity and how to choose the right one can be found %1$shere%2$s.',
+						'More info about review entity and how to choose the right one can be found %shere%s.',
 						'blocksy-companion'
 					),
 					'<a href="https://developers.google.com/search/blog/2019/09/making-review-rich-results-more-helpful" target="_blank">',
 					'</a>'
 				),
-			],
-
-			blocksy_rand_md5() => [
-				'type' => 'ct-condition',
-				'condition' => ['product_review_entity' => 'LocalBusiness'],
-				'options' => [
-
-					'local_business_address' => [
-						'type' => 'text',
-						'label' => __('Business Address', 'blocksy-companion'),
-						'design' => 'inline:start',
-						'value' => '',
-					],
-
-				]
 			],
 
 			blocksy_rand_md5() => [

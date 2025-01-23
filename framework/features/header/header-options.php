@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $options = [
 
 	blocksy_rand_md5() => [
@@ -82,25 +78,6 @@ $options = [
 							'fade' => __('Fade', 'blocksy-companion'),
 							'auto-hide' => __('Auto Hide/Show', 'blocksy-companion'),
 						]),
-					],
-
-					blocksy_rand_md5() => [
-						'type' => 'ct-condition',
-						'condition' => [
-							'sticky_effect' => 'slide|fade',
-						],
-						'options' => [
-							'sticky_animation_speed' => [
-								'label' => __( 'Animation Speed', 'blocksy-companion' ),
-								'type' => 'ct-number',
-								'design' => 'inline',
-								'value' => 0.2,
-								'min' => 0.1,
-								'max' => 10,
-								'step' => 0.1,
-								'sync' => 'live'
-							],
-						]
 					],
 
 					'sticky_offset' => [

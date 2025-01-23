@@ -6,11 +6,7 @@ import { __ } from 'ct-i18n'
 import { useEntityProp } from '@wordpress/core-data'
 import { toPlainText } from '../../utils'
 
-const TitlePreview = ({
-	attributes: { has_field_link, has_field_link_wrap_content },
-	postId,
-	postType,
-}) => {
+const TitlePreview = ({ attributes: { has_field_link }, postId, postType }) => {
 	const [rawTitle = '', setTitle, fullTitle] = useEntityProp(
 		'postType',
 		postType,
@@ -26,7 +22,7 @@ const TitlePreview = ({
 		return null
 	}
 
-	if (has_field_link === 'yes' && has_field_link_wrap_content === 'no') {
+	if (has_field_link === 'yes') {
 		return (
 			<a href="#" rel="noopener noreferrer">
 				{toPlainText(rawTitle)}

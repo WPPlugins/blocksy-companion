@@ -12,11 +12,14 @@ class DemoInstallWidgetsInstaller {
 			'is_ajax_request' => true,
 		]);
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$request_demo_name = isset($_REQUEST['demo_name']) ? sanitize_text_field(wp_unslash($_REQUEST['demo_name'])) : '';
-
-		if (! $args['demo_name'] && $request_demo_name !== '') {
-			$args['demo_name'] = $request_demo_name;
+		if (
+			!$args['demo_name']
+			&&
+			isset($_REQUEST['demo_name'])
+			&&
+			$_REQUEST['demo_name']
+		) {
+			$args['demo_name'] = $_REQUEST['demo_name'];
 		}
 
 		$this->demo_name = $args['demo_name'];
@@ -201,7 +204,6 @@ class DemoInstallWidgetsInstaller {
 
 			$single_widget_instances = [];
 
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$row = $wpdb->get_row(
 				$wpdb->prepare(
 					"SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1",
@@ -268,3 +270,4 @@ class DemoInstallWidgetsInstaller {
 		return $available_widgets;
 	}
 }
+

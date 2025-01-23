@@ -39,7 +39,14 @@ const FeaturedImagePreview = ({
 
 	const maybeUrl = getMediaSourceUrlBySizeSlug(media, sizeSlug)
 
-	return <ImagePreview attributes={attributes} url={maybeUrl} media={media} />
+	return (
+		<ImagePreview
+			postId={postId}
+			attributes={attributes}
+			url={maybeUrl}
+			media={media}
+		/>
+	)
 }
 
 export default FeaturedImagePreview

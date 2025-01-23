@@ -17,16 +17,8 @@ const OVERWRITE_ATTRIBUTES = {
 	...colors,
 }
 
-const justifyContentMap = {
-	left: 'flex-start',
-	center: 'center',
-	right: 'flex-end',
-	'space-between': 'space-between',
-}
-
 const Preview = ({ attributes }) => {
 	const {
-		justifyContent,
 		social_icons_color,
 		social_icons_size,
 		social_type,
@@ -64,13 +56,6 @@ const Preview = ({ attributes }) => {
 	) : (
 		<RawHTML
 			className="ct-social-box"
-			style={{
-				...(justifyContent !== 'left'
-					? {
-							justifyContent: justifyContentMap[justifyContent],
-					  }
-					: {}),
-			}}
 			data-icons-type={
 				social_type === 'simple'
 					? social_type

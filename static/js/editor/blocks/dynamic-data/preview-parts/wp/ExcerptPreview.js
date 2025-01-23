@@ -19,12 +19,12 @@ const ExcerptPreview = ({
 	attributes: { excerpt_length },
 	postId,
 	postType,
-	fallback
+	fallback,
 }) => {
 	const [
 		rawExcerpt,
 		setExcerpt,
-		{ rendered: renderedExcerpt, protected: isProtected } = {}
+		{ rendered: renderedExcerpt, protected: isProtected } = {},
 	] = useEntityProp('postType', postType, 'excerpt', postId)
 
 	const [rawContent, setContent, { rendered: renderedContent } = {}] =
@@ -36,9 +36,9 @@ const ExcerptPreview = ({
 		strippedRenderedExcerpt(renderedContent)
 	).trim()
 
-	let trimmedExcerpt = !rawExcerpt
-		? rawOrRenderedExcerpt.split(' ', excerpt_length).join(' ')
-		: rawOrRenderedExcerpt
+	let trimmedExcerpt = rawOrRenderedExcerpt
+		.split(' ', excerpt_length)
+		.join(' ')
 
 	const maybeMore = trimmedExcerpt !== rawOrRenderedExcerpt ? '...' : ''
 
@@ -48,15 +48,6 @@ const ExcerptPreview = ({
 
 	if (!trimmedExcerpt) {
 		return fallback
-	}
-
-	if (!rawExcerpt) {
-		return (
-			<div>
-				{trimmedExcerpt}
-				{maybeMore}
-			</div>
-		)
 	}
 
 	return (

@@ -1,10 +1,4 @@
 <?php
-// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound, VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable -- view scope, variables come from blocksy_companion_render_view()
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 /**
  * Shares Widget
  *
@@ -13,178 +7,161 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package Blocksy
  */
 
-$classes       = blocksy_companion_akg( 'className', $atts, '' );
-$color         = blocksy_companion_akg( 'share_icons_color', $atts, 'default' );
-$type          = blocksy_companion_akg( 'share_type', $atts, 'simple' );
-$fill          = blocksy_companion_akg( 'share_icons_fill', $atts, 'outline' );
-$icons_size    = (float) blocksy_companion_akg( 'share_icons_size', $atts, '' );
-$items_spacing = (float) blocksy_companion_akg( 'items_spacing', $atts, '' );
+$classes = blocksy_default_akg('className', $atts, '');
+$color = blocksy_default_akg('share_icons_color', $atts, 'default');
+$type = blocksy_default_akg('share_type', $atts, 'simple');
+$fill = blocksy_default_akg('share_icons_fill', $atts, 'outline');
+$icons_size = blocksy_akg('share_icons_size', $atts, '');
+$items_spacing = blocksy_akg('items_spacing', $atts, '');
 
-$colors = array();
+$colors = [];
 
-$wrapper_attr = array(
-	'class' => trim( 'ct-shares-block ' . $classes ),
-	'style' => '',
-);
+$wrapper_attr = [
+	'class' => trim('ct-shares-block ' . $classes),
+	'style' => ''
+];
 
-if ( 'official' !== $color ) {
-	$colors['--theme-icon-color']       = blocksy_companion_akg( 'customInitialColor', $atts, '' );
-	$colors['--theme-icon-hover-color'] = blocksy_companion_akg( 'customHoverColor', $atts, '' );
+if ($color !== 'official') {
+	$colors['--theme-icon-color'] = blocksy_default_akg('customInitialColor', $atts, '');
+	$colors['--theme-icon-hover-color'] = blocksy_default_akg('customHoverColor', $atts, '');
 
-	if ( 'simple' !== $type ) {
-		$base_color  = blocksy_companion_akg( 'customBorderColor', $atts, 'rgba(218, 222, 228, 0.5)' );
-		$hover_color = blocksy_companion_akg( 'customBorderHoverColor', $atts, 'rgba(218, 222, 228, 0.7)' );
+	if ($type !== 'simple') {
+		$base_color = blocksy_default_akg('customBorderColor', $atts, 'rgba(218, 222, 228, 0.5)');
+		$hover_color = blocksy_default_akg('customBorderHoverColor', $atts, 'rgba(218, 222, 228, 0.7)');
 
-		if ( isset( $atts['borderColor'] ) ) {
-			$var        = $atts['borderColor'];
+		if (isset($atts['borderColor'])) {
+			$var = $atts['borderColor'];
 			$base_color = "var(--wp--preset--color--$var)";
 		}
 
-		if ( isset( $atts['borderHoverColor'] ) ) {
-			$var         = $atts['borderHoverColor'];
+		if (isset($atts['borderHoverColor'])) {
+			$var = $atts['borderHoverColor'];
 			$hover_color = "var(--wp--preset--color--$var)";
 		}
 
-		if ( 'solid' === $fill ) {
-			$base_color  = blocksy_companion_akg( 'customBackgroundColor', $atts, 'rgba(218, 222, 228, 0.5)' );
-			$hover_color = blocksy_companion_akg( 'customBackgroundHoverColor', $atts, 'rgba(218, 222, 228, 0.7)' );
+		if ($fill === 'solid') {
+			$base_color = blocksy_default_akg('customBackgroundColor', $atts, 'rgba(218, 222, 228, 0.5)');
+			$hover_color = blocksy_default_akg('customBackgroundHoverColor', $atts, 'rgba(218, 222, 228, 0.7)');
 
-			if ( isset( $atts['backgroundColor'] ) ) {
-				$var        = $atts['backgroundColor'];
+			if (isset($atts['backgroundColor'])) {
+				$var = $atts['backgroundColor'];
 				$base_color = "var(--wp--preset--color--$var)";
 			}
 
-			if ( isset( $atts['backgroundHoverColor'] ) ) {
-				$var         = $atts['backgroundHoverColor'];
+			if (isset($atts['backgroundHoverColor'])) {
+				$var = $atts['backgroundHoverColor'];
 				$hover_color = "var(--wp--preset--color--$var)";
 			}
 		}
 
 		$colors = array_merge(
 			$colors,
-			array(
-				'--background-color'       => $base_color,
-				'--background-hover-color' => $hover_color,
-			)
+			[
+				'--background-color' => $base_color,
+				'--background-hover-color' => $hover_color
+			]
 		);
 	}
 
-	if ( isset( $atts['initialColor'] ) ) {
-		$var                          = $atts['initialColor'];
+	if (isset($atts['initialColor'])) {
+		$var = $atts['initialColor'];
 		$colors['--theme-icon-color'] = "var(--wp--preset--color--$var)";
 	}
 
-	if ( isset( $atts['hoverColor'] ) ) {
-		$var                                = $atts['hoverColor'];
+	if (isset($atts['hoverColor'])) {
+		$var = $atts['hoverColor'];
 		$colors['--theme-icon-hover-color'] = "var(--wp--preset--color--$var)";
 	}
 
-	$wrapper_attr['style'] .= blocksy_companion_colors_to_css( $colors );
+	foreach ($colors as $key => $value) {
+		if (empty($value)) {
+			continue;
+		}
+
+		$wrapper_attr['style'] .= $key . ':' . $value . ';';
+	}
 }
 
-if ( ! empty( $icons_size ) ) {
+if (! empty($icons_size)) {
 	$wrapper_attr['style'] .= '--theme-icon-size:' . $icons_size . 'px;';
 }
 
-if ( ! empty( $items_spacing ) ) {
+if (! empty($items_spacing)) {
 	$wrapper_attr['style'] .= '--items-spacing:' . $items_spacing . 'px;';
 }
 
-if ( empty( $wrapper_attr['style'] ) ) {
-	unset( $wrapper_attr['style'] );
+if (empty($wrapper_attr['style'])) {
+	unset($wrapper_attr['style']);
 }
 
-blocksy_companion_html_tag_e( 'div', $wrapper_attr, false );
+echo '<div ' . blocksy_attr_to_html($wrapper_attr) . '>';
 
 /**
  * blocksy_share_icons() function is already properly escaped.
  * Escaping it again here would cause SVG icons to not be outputed
  */
 
-$attr = array();
+$attr = [];
 
 $data_icons_type = $type;
 
-if ( $fill ) {
-	if ( 'simple' !== $type ) {
+if ($fill) {
+	if ($type !== 'simple') {
 		$data_icons_type .= ':' . $fill;
 	}
 }
 
 
 // v.2.0.74 migration
-$share_networks = blocksy_companion_akg(
-	'share_networks',
-	$atts,
-	array(
-		array(
-			'id'      => 'facebook',
-			'enabled' => true,
-		),
-		array(
-			'id'      => 'twitter',
-			'enabled' => true,
-		),
-		array(
-			'id'      => 'pinterest',
-			'enabled' => true,
-		),
-		array(
-			'id'      => 'linkedin',
-			'enabled' => true,
-		),
-	)
-);
+$share_networks = blocksy_akg('share_networks', $atts, []);
 
-if ( empty( $share_networks ) ) {
-	foreach ( $atts as $key => $value ) {
-		if ( 'yes' !== $value && 'no' !== $value ) {
+if (empty($share_networks)) {
+	foreach ($atts as $key => $value) {
+		if ($value !== 'yes' && $value !== 'no') {
 			continue;
 		}
-
-		if ( strpos( $key, 'share_' ) !== 0 ) {
+	
+		if (strpos($key, 'share_') !== 0) {
 			continue;
 		}
-
-		$share_networks[ str_replace( 'share_', '', $key ) ] = array(
-			'id'      => str_replace( 'share_', '', $key ),
-			'enabled' => 'yes' === $value,
-		);
+	
+		$share_networks[str_replace('share_', '', $key)] = [
+			'id' => str_replace('share_', '', $key),
+			'enabled' => $value === 'yes'
+		];
 	}
 }
 
 $atts['share_networks'] = $share_networks;
 // v.2.0.74 migration
 
-// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-echo blocksy_get_social_share_box(
-	array(
-		'type'               => 'share',
-		'class'              => '',
-		'html_atts'          => array_merge(
-			array(
-				'data-type' => 'type-3',
-			),
-			$attr
+echo blocksy_get_social_share_box([
+	'type' => 'share',
+	'class' => '',
+	'html_atts' => array_merge(
+		[
+			'data-type' => 'type-3',
+		],
+		$attr
+	),
+	'strategy' => [
+		'strategy' => array_merge(
+			$atts,
+			[
+				'share_box_visibility' => [
+					'desktop' => true,
+					'tablet' => true,
+					'mobile' => true,
+				],
+				'share_box_title' => '',
+			]
 		),
-		'strategy'           => array(
-			'strategy' => array_merge(
-				$atts,
-				array(
-					'share_box_visibility' => array(
-						'desktop' => true,
-						'tablet'  => true,
-						'mobile'  => true,
-					),
-					'share_box_title'      => '',
-				)
-			),
-		),
-		'links_wrapper_attr' => array(
-			'data-icons-type' => $data_icons_type,
-			'data-color'      => $color,
-		),
-	)
-);
+	],
+	'links_wrapper_attr' => [
+		'data-icons-type' => $data_icons_type,
+		'data-color' => $color
+	],
+]);
 
 echo '</div>';
+?>

@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $pattern = [
 	'title'      => __( 'Posts - Layout 1', 'blocksy-companion' ),
 	'categories' => ['blocksy'],

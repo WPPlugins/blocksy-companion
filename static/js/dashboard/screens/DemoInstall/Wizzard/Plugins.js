@@ -36,7 +36,6 @@ export const getPluginsMap = (plugins) => ({
 	fluentform: 'Fluent Forms',
 	'translatepress-multilingual': 'TranslatePress',
 	'fluent-booking': 'Fluent Booking',
-	'easy-code-manager': 'Fluent Snippets',
 })
 
 export const getNameForPlugin = (plugin) => {

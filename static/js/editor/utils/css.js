@@ -7,7 +7,7 @@ import {
 } from '@wordpress/element'
 
 import { syncHelpers } from 'blocksy-options'
-import { nanoid } from 'nanoid'
+import nanoid from 'nanoid'
 
 export const getStylesForBlock = (variables, cssURLs = []) => {
 	let result = ''
@@ -44,10 +44,7 @@ export const getStylesForBlock = (variables, cssURLs = []) => {
 
 	let styles = result ? <style>{result}</style> : null
 
-	cssURLs = [
-		(window.ct_localizations || window.ct_customizer_localizations)
-			.backend_dynamic_styles_urls.flexy,
-	]
+	cssURLs = [ct_localizations.backend_dynamic_styles_urls.flexy]
 
 	return (
 		<Fragment>

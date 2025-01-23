@@ -24,11 +24,6 @@
 			"default": 5
 		},
 
-		"hide_empty": {
-			"type": "string",
-			"default": "yes"
-		},
-
 		"include_term_ids": {
 			"type": "object",
 			"default": {}
@@ -88,11 +83,6 @@
 			"default": "yes"
 		},
 
-		"has_slideshow_pills": {
-			"type": "string",
-			"default": "no"
-		},
-
 		"has_slideshow_autoplay": {
 			"type": "string",
 			"default": "no"
@@ -101,11 +91,6 @@
 		"has_slideshow_autoplay_speed": {
 			"type": "number",
 			"default": 3
-		},
-
-		"has_pagination": {
-			"type": "string",
-			"default": "no"
 		}
 	},
 
@@ -151,7 +136,6 @@
 		"taxonomy": "taxonomy",
 		"level": "level",
 		"limit": "limit",
-		"hide_empty": "hide_empty",
 		"order": "order",
 		"orderby": "orderby",
 		"offset": "offset",
@@ -161,9 +145,7 @@
 
 		"has_slideshow": "has_slideshow",
 		"has_slideshow_arrows": "has_slideshow_arrows",
-		"has_slideshow_pills": "has_slideshow_pills",
 		"has_slideshow_autoplay": "has_slideshow_autoplay",
-		"has_slideshow_autoplay_speed": "has_slideshow_autoplay_speed",
-		"has_pagination": "has_pagination"
+		"has_slideshow_autoplay_speed": "has_slideshow_autoplay_speed"
 	}
 }

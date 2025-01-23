@@ -1,4 +1,4 @@
-import { createElement, createRoot, useState } from '@wordpress/element'
+import { createElement, render, useState } from '@wordpress/element'
 import * as check from '@wordpress/element'
 import { __ } from 'ct-i18n'
 
@@ -21,7 +21,6 @@ const Dashboard = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
 	if (document.getElementById('ct-dashboard')) {
-		const root = createRoot(document.getElementById('ct-dashboard'))
-		root.render(<Dashboard />)
+		render(<Dashboard />, document.getElementById('ct-dashboard'))
 	}
 })

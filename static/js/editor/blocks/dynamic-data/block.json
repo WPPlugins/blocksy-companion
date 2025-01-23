@@ -14,26 +14,6 @@
 			"default": "wp:title"
 		},
 
-		"has_archive_prefix": {
-			"type": "string",
-			"default": "no"
-		},
-
-		"has_field_link": {
-			"type": "string",
-			"default": "no"
-		},
-
-		"has_field_link_wrap_content": {
-			"type": "string",
-			"default": "no"
-		},
-
-		"link_source": {
-			"type": "string",
-			"default": ""
-		},
-
 		"before": {
 			"type": "string",
 			"default": ""
@@ -114,22 +94,12 @@
 			"default": ""
 		},
 
-		"attribute": {
-			"type": "string",
-			"default": ""
-		},
-
 		"lightbox": {
 			"type": "string",
 			"default": "no"
 		},
 
 		"videoThumbnail": {
-			"type": "string",
-			"default": "no"
-		},
-
-		"has_image_caption": {
 			"type": "string",
 			"default": "no"
 		},
@@ -222,9 +192,9 @@
 			"radius": true,
 			"width": true,
 			"__experimentalDefaultControls": {
-				"color": false,
-				"radius": false,
-				"width": false
+				"color": true,
+				"radius": true,
+				"width": true
 			},
 			"__experimentalSelector": "img, .block-editor-media-placeholder, .wp-block-post-featured-image__overlay",
 			"__experimentalSkipSerialization": true
@@ -240,7 +210,7 @@
 			"__experimentalLetterSpacing": true,
 			"__experimentalTextTransform": true,
 			"__experimentalDefaultControls": {
-				"fontSize": false
+				"fontSize": true
 			}
 		}
 	},
@@ -251,7 +221,6 @@
 		"taxonomy",
 		"termId",
 		"termIcon",
-		"termImage",
-		"has_item_link"
+		"termImage"
 	]
 }

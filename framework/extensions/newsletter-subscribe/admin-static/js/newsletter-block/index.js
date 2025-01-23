@@ -8,44 +8,12 @@ import Edit from './Edit'
 import { getAttributesFromOptions, getOptionsForBlock } from 'blocksy-options'
 
 import { colorsDefaults } from './colors'
-import metadata from './block.json'
 
 export const options = getOptionsForBlock('newsletter')
 export const defaultAttributes = getAttributesFromOptions(options)
 
-addFilter(
-	'editor.BlockEdit',
-	'custom/removeUnlinkBorderRadius',
-	function (BlockEdit) {
-		return function (props) {
-			if (!props || !props.name || props.name !== 'blocksy/newsletter') {
-				return <BlockEdit {...props} />
-			}
-
-			if (props.attributes?.style?.border?.radius) {
-				const radiusValues = Object.values(
-					props.attributes.style.border.radius
-				)
-
-				const differentValue = radiusValues.find(
-					(value) => value !== radiusValues[0]
-				)
-
-				props.attributes.style.border.radius = {
-					topLeft: differentValue || radiusValues[0],
-					topRight: differentValue || radiusValues[0],
-					bottomRight: differentValue || radiusValues[0],
-					bottomLeft: differentValue || radiusValues[0],
-				}
-			}
-
-			return <BlockEdit {...props} />
-		}
-	}
-)
-
 registerBlockType('blocksy/newsletter', {
-	...metadata,
+	apiVersion: 3,
 	title: __('Newsletter Controls', 'blocksy-companion'),
 	icon: {
 		src: (
@@ -58,6 +26,23 @@ registerBlockType('blocksy/newsletter', {
 		),
 	},
 	category: 'widgets',
+	supports: {
+		html: false,
+		inserter: false,
+		lock: false,
+
+		__experimentalBorder: {
+			color: false,
+			radius: true,
+			width: false,
+			__experimentalSkipSerialization: true,
+			__experimentalDefaultControls: {
+				color: false,
+				radius: true,
+				width: false,
+			},
+		},
+	},
 	parent: ['blocksy/widgets-wrapper'],
 	attributes: { ...defaultAttributes, ...colorsDefaults },
 	edit: (props) => <Edit {...props} />,

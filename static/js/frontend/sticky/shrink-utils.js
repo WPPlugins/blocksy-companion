@@ -8,11 +8,6 @@ export const getRowInitialMinHeight = (el) => {
 	const elComp = getComputedStyle(el)
 	let containerStyles = getComputedStyle(el.firstElementChild)
 
-	// If row is not visible, return 0
-	if (elComp.display === 'none') {
-		return 0
-	}
-
 	let borderHeight =
 		parseFloat(elComp.borderTopWidth) +
 		parseFloat(elComp.borderBottomWidth) +
@@ -196,18 +191,11 @@ export const getRowStickyHeight = (el, hasBorder = true) => {
 }
 
 export const maybeSetStickyHeightAnimated = (cb = () => 0) => {
-	const value = cb()
+	const maybeFloatingCart = document.querySelector('.ct-floating-bar')
 
-	document
-		.querySelectorAll(
-			[
-				'.ct-floating-bar',
-				'.ct-order-review',
-				'.sticky-summary .entry-summary',
-				'.sticky-gallery .woocommerce-product-gallery',
-			].join(',')
-		)
-		.forEach((el) => {
-			el.style.setProperty('--header-sticky-height-animated', value)
-		})
+	if (!maybeFloatingCart) {
+		return
+	}
+
+	maybeFloatingCart.style.setProperty('--header-sticky-height-animated', cb())
 }

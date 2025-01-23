@@ -1,4 +1,5 @@
 import { createElement, useEffect, useMemo } from '@wordpress/element'
+import { withColors } from '@wordpress/block-editor'
 import { __ } from 'ct-i18n'
 
 import Preview from './Preview'
@@ -10,7 +11,6 @@ import useDynamicDataDescriptor from './hooks/use-dynamic-data-descriptor'
 import DynamicDataInspectorControls from './components/InspectorControls'
 
 import { useTaxonomies } from '../query/edit/utils/utils'
-import { useFieldsContext } from './hooks/use-fields-context'
 
 const Edit = ({
 	clientId,
@@ -25,13 +25,8 @@ const Edit = ({
 }) => {
 	const { postType, taxonomy } = context
 
-	const {
-		fieldsDescriptor,
-		linkFieldsChoices,
-		options,
-		fieldsChoices,
-		fullDescriptorLoaded,
-	} = useDynamicDataDescriptor(context)
+	const { fieldsDescriptor, options, fieldsChoices } =
+		useDynamicDataDescriptor(context)
 
 	const taxonomies = useTaxonomies(postType)
 
@@ -64,61 +59,17 @@ const Edit = ({
 		}
 	}, [attributes.field, fieldsDescriptor])
 
-	const isFieldMissing = useMemo(() => {
-		if (!attributes.field || !fieldsDescriptor) {
-			return false
-		}
-
-		const [provider, field] = attributes.field.split(':')
-
-		let providerFields = fieldsDescriptor.fields.find(
-			({ provider: p }) => p === provider
-		)
-
-		// If we found the provider, check for the field and return the result.
-		if (providerFields) {
-			const maybeFieldDescriptor = providerFields.fields.find(
-				({ id }) => id === field
-			)
-
-			return !maybeFieldDescriptor
-		}
-
-		// No field is missing if the full descriptor is not loaded yet.
-		if (!fullDescriptorLoaded) {
-			return false
-		}
-
-		providerFields = fieldsDescriptor.fields.find(
-			({ provider: p }) => p === provider
-		)
-
-		// If we still don't have the provider, the field is missing.
-		if (!providerFields) {
-			return true
-		}
-
-		const maybeFieldDescriptor = providerFields.fields.find(
-			({ id }) => id === field
-		)
-
-		// If we don't have the field, it's missing.
-		return !maybeFieldDescriptor
-	}, [attributes.field, fieldDescriptor, fullDescriptorLoaded])
-
-	if (isFieldMissing) {
-		console.warn('Field is missing:', attributes.field)
-	}
-
 	useEffect(() => {
 		if (attributes.field === 'wp:title' && taxonomy) {
 			setAttributes({
 				field: 'wp:term_title',
 			})
 		}
-	}, [taxonomy, attributes.field])
+	}, [taxonomy, attributes.fiel])
 
-	const fieldsContext = useFieldsContext(context)
+	if (!fieldDescriptor) {
+		return null
+	}
 
 	return (
 		<>
@@ -131,9 +82,7 @@ const Edit = ({
 			<Preview
 				attributes={attributes}
 				fieldsDescriptor={fieldsDescriptor}
-				isFieldMissing={isFieldMissing}
 				fieldDescriptor={fieldDescriptor}
-				fieldsContext={fieldsContext}
 				{...context}
 			/>
 
@@ -145,7 +94,6 @@ const Edit = ({
 				fieldsChoices={fieldsChoices}
 				clientId={clientId}
 				fieldsDescriptor={fieldsDescriptor}
-				linkFieldsChoices={linkFieldsChoices}
 				taxonomies={taxonomies}
 				{...context}
 				name={name}

@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $options = [
 	'label' => __( 'Subscribe Form', 'blocksy-companion' ),
 	'type' => 'ct-panel',

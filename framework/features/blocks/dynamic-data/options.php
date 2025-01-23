@@ -1,17 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
-$tax_choices = \Blocksy\Editor\Blocks\DynamicData::get_product_attribute_choices();
-
-$default_tax_choice = '';
-
-if (count($tax_choices) > 0) {
-	$default_tax_choice = array_keys($tax_choices)[0];
-}
-
 $options = [
 	blocksy_rand_md5() => [
 		'type' => 'ct-condition',
@@ -86,7 +74,7 @@ $options = [
 								'type' => 'text',
 								'label' => __('Custom date format', 'blocksy-companion'),
 								'value' => 'F j, Y',
-								'desc' => blocksy_companion_safe_sprintf(
+								'desc' => blocksy_safe_sprintf(
 									'%s <a href="%s" target="_blank">format string</a>',
 									__('Enter a date or time', 'blocksy-companion'),
 									'https://wordpress.org/documentation/article/customize-date-and-time-format/'
@@ -125,22 +113,7 @@ $options = [
 
 	blocksy_rand_md5() => [
 		'type' => 'ct-condition',
-		'condition' => ['field' => 'woo:attributes'],
-		'options' => [
-			'attribute' => [
-				'label' => __('Attribute', 'blocksy-companion'),
-				'type' => 'ct-select',
-				'value' => $default_tax_choice,
-				'design' => 'inline',
-				'setting' => [ 'transport' => 'postMessage' ],
-				'choices' => blocksy_ordered_keys($tax_choices),
-			]
-		]
-	],
-
-	blocksy_rand_md5() => [
-		'type' => 'ct-condition',
-		'condition' => ['field' => 'wp:terms|woo:attributes'],
+		'condition' => ['field' => 'wp:terms'],
 		'options' => [
 			'separator' => [
 				'type' => 'text',
@@ -168,7 +141,6 @@ $options = [
 						'last_name' => __('Last Name', 'blocksy-companion'),
 						'description' => __('Description', 'blocksy-companion'),
 						'email' => __('Email', 'blocksy-companion'),
-						'user_url' => __('Website', 'blocksy-companion'),
 					]
 				),
 			]
@@ -187,17 +159,15 @@ $options = [
 					'wp:comments',
 
 					'wp:term_title',
+					'wp:term_image',
 					'wp:term_count',
 
 					'wp:author_avatar',
 				]),
 				'all' => [
 					'viewType' => 'default',
-					'field' => implode('|', [
-						'wp:featured_image',
-						'wp:term_image'
-					]),
-				],
+					'field' => 'wp:featured_image',
+				]
 			]
 		],
 		'options' => [
@@ -209,22 +179,7 @@ $options = [
 					],
 
 					__('Link to author page', 'blocksy-companion') => [
-						'field' => 'wp:author_avatar'
-					],
-
-					__('Link to author page', 'blocksy-companion') => [
-						'field' => 'wp:author',
-						'author_field' => 'display_name|nicename|first_name|last_name|description'
-					],
-
-					__('Link to email', 'blocksy-companion') => [
-						'field' => 'wp:author',
-						'author_field' => 'email'
-					],
-
-					__('Link to website', 'blocksy-companion') => [
-						'field' => 'wp:author',
-						'author_field' => 'user_url'
+						'field' => 'wp:author|wp:author_avatar'
 					],
 
 					__('Link to term page', 'blocksy-companion') => [

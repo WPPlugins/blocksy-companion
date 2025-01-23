@@ -21,7 +21,7 @@ ctEvents.on(
 
 			cookieBackground: {
 				selector: '.cookie-notification',
-				variable: 'notice-background-color',
+				variable: 'backgroundColor',
 				type: 'color',
 			},
 
@@ -83,7 +83,7 @@ ctEvents.on(
 
 			cookieMaxWidth: {
 				selector: '.cookie-notification',
-				variable: 'notice-max-width',
+				variable: 'maxWidth',
 				unit: 'px',
 			},
 		}

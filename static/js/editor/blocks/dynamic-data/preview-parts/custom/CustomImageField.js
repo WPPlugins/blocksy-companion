@@ -7,27 +7,21 @@ const CustomImageField = ({
 
 	attributes,
 	attributes: { sizeSlug },
+
+	postId,
 }) => {
-	let maybeUrl = fieldData?.url
+	let maybeUrl = fieldData?.value?.url
 
-	if (fieldData?.full_url) {
-		maybeUrl = fieldData.full_url
-	}
-
-	if (fieldData?.sizes?.[sizeSlug]) {
-		if (typeof fieldData.sizes[sizeSlug] === 'string') {
-			maybeUrl = fieldData.sizes[sizeSlug]
+	if (fieldData?.value?.sizes?.[sizeSlug]) {
+		if (typeof fieldData.value.sizes[sizeSlug] === 'string') {
+			maybeUrl = fieldData.value.sizes[sizeSlug]
 		} else {
-			maybeUrl = fieldData.sizes[sizeSlug].url
+			maybeUrl = fieldData.value.sizes[sizeSlug].url
 		}
 	}
 
 	return (
-		<ImagePreview
-			attributes={attributes}
-			url={maybeUrl}
-			caption={fieldData?.caption}
-		/>
+		<ImagePreview postId={postId} attributes={attributes} url={maybeUrl} />
 	)
 }
 

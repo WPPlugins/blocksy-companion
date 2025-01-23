@@ -44,13 +44,7 @@ class CacheResetManager {
 			$page_is_cached = \WP_Rocket\Buffer\Cache::can_generate_caching_files();
 		}
 
-		// Cloudflare APO plugin - new namespace (v4.14.0+)
-		if (class_exists("\Cloudflare\APO\API\Plugin")) {
-			if (\Cloudflare\APO\API\Plugin::SETTING_PLUGIN_SPECIFIC_CACHE === "plugin_specific_cache") {
-				$page_is_cached = true;
-			}
-		} elseif (class_exists("\CF\API\Plugin")) {
-			// Cloudflare APO plugin - old namespace (deprecated, pre v4.14.0)
+		if (class_exists("\CF\API\Plugin")) {
 			if (\CF\API\Plugin::SETTING_PLUGIN_SPECIFIC_CACHE === "plugin_specific_cache") {
 				$page_is_cached = true;
 			}
@@ -62,13 +56,6 @@ class CacheResetManager {
 			$page_is_cached = $super_cache_enabled;
 		}
 
-		/**
-		 * Filters whether the current page is served by a page caching solution.
-		 *
-		 * @since 2.0.1
-		 *
-		 * @param bool $page_is_cached Whether a known page caching plugin was detected as enabled. Default false.
-		 */
 		return apply_filters(
 			'blocksy:cache-manager:page-is-cached',
 			$page_is_cached

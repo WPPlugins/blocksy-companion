@@ -7,8 +7,15 @@ import {
 	createContext,
 	Fragment,
 } from '@wordpress/element'
+import {
+	Dialog,
+	DialogOverlay,
+	DialogContent,
+} from '../../../helpers/reach/dialog'
 
-import { Transition, Overlay } from 'blocksy-options'
+import Overlay from '../../../helpers/Overlay'
+
+import { Transition } from 'blocksy-options'
 import { __ } from 'ct-i18n'
 import cn from 'classnames'
 import DashboardContext from '../../DashboardContext'
@@ -59,10 +66,10 @@ const DemoToInstall = ({ location, navigate }) => {
 
 	const configurationSteps = [
 		'modify_demo',
-		// 'child_theme',
+		'child_theme',
 		'builder',
-		'content',
 		'plugins',
+		'content',
 		'installer',
 	].filter((step) => {
 		if (!currentDemo) {
@@ -123,8 +130,6 @@ const DemoToInstall = ({ location, navigate }) => {
 	})
 
 	const stepName = configurationSteps[currentConfigurationStep]
-	const isLastConfigStep =
-		currentConfigurationStep === configurationSteps.indexOf('installer') - 1
 
 	useEffect(() => {
 		if (!properDemoName) return
@@ -194,13 +199,6 @@ const DemoToInstall = ({ location, navigate }) => {
 				}
 
 				setCurrentDemo(`${properDemoName}:hide`)
-			}}
-			onDismissed={() => {
-				// Ideally, we should unmount this component fully when installer is done
-				// and have the state reset on mount.
-				//
-				// But, due to animation limitations in Overlay component, this will do.
-				setCurrentConfigurationStep(0)
 			}}
 			render={() => (
 				<div className="ct-modal-content ct-demo-step-container">
@@ -340,7 +338,7 @@ const DemoToInstall = ({ location, navigate }) => {
 							<button
 								className="ct-demo-btn demo-main-btn"
 								disabled={
-									isLastConfigStep &&
+									stepName === 'content' &&
 									getStepsForDemoConfiguration({
 										demoConfiguration,
 										pluginsStatus,
@@ -355,7 +353,7 @@ const DemoToInstall = ({ location, navigate }) => {
 										)
 									)
 								}}>
-								{isLastConfigStep
+								{stepName === 'content'
 									? __('Install', 'blocksy-companion')
 									: __('Next', 'blocksy-companion')}
 							</button>

@@ -2,47 +2,36 @@
 
 namespace Blocksy;
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 class AccountAuth {
 	public function __construct() {
-
-		add_filter('blocksy:general:ct-scripts-localizations', function ($data) {
-			$data['login_generic_error_msg'] = __('An unexpected error occurred. Please try again later.', 'blocksy-companion');
-
-			return $data;
-		});
-
 		add_action(
 			'wp_ajax_blc_implement_user_registration',
-			[$this, 'implement_user_registration']
+			[$this, 'blc_implement_user_registration']
 		);
 
 		add_action(
 			'wp_ajax_nopriv_blc_implement_user_registration',
-			[$this, 'implement_user_registration']
+			[$this, 'blc_implement_user_registration']
 		);
 
 		add_action(
 			'wp_ajax_blc_implement_user_login',
-			[$this, 'implement_user_login']
+			[$this, 'blc_implement_user_login']
 		);
 
 		add_action(
 			'wp_ajax_nopriv_blc_implement_user_login',
-			[$this, 'implement_user_login']
+			[$this, 'blc_implement_user_login']
 		);
 
 		add_action(
 			'wp_ajax_blc_implement_user_lostpassword',
-			[$this, 'implement_user_lostpassword']
+			[$this, 'blc_implement_user_lostpassword']
 		);
 
 		add_action(
 			'wp_ajax_nopriv_blc_implement_user_lostpassword',
-			[$this, 'implement_user_lostpassword']
+			[$this, 'blc_implement_user_lostpassword']
 		);
 
 		add_filter('bm_rgn_is_modal', function ($value) {
@@ -60,35 +49,30 @@ class AccountAuth {
 		});
 	}
 
-	// Avoids "Undefined variable" PHP warnings for $error/$user_login,
-	// which wp-login.php's inline code expects to already be set.
-	private function require_wp_login() {
-		ob_start();
-
-		$error = '';
-		$user_login = '';
-
-		require_once ABSPATH . 'wp-login.php';
-
-		return ob_get_clean();
-	}
-
-	public function implement_user_lostpassword() {
-		if (is_user_logged_in()) {
-			wp_send_json_error([]);
-		}
-
-		/**
-		 * Fires before the account modal handles a lost password request.
-		 *
-		 * @since 2.0.76
-		 */
+	public function blc_implement_user_lostpassword() {
 		do_action('blocksy:account:user-flow:before-lostpassword');
-
-		$this->require_wp_login();
+		
+		ob_start();
+		require_once ABSPATH . 'wp-login.php';
+		$res = ob_get_clean();
 
 		$errors = [];
 		$success = false;
+
+		$nonce_value = '';
+
+		if (
+			isset($_POST['blocksy-lostpassword-nonce'])
+			&&
+			is_string($_POST['blocksy-lostpassword-nonce'])
+		) {
+			$nonce_value = wp_unslash($_POST['blocksy-lostpassword-nonce']);
+		}
+
+		if (!wp_verify_nonce($nonce_value, 'blocksy-lostpassword')) {
+			wp_send_json_error([]);
+			exit;
+		}
 
 		if (class_exists('WC_Shortcode_My_Account')) {
 			$success = \WC_Shortcode_My_Account::retrieve_password();
@@ -101,9 +85,8 @@ class AccountAuth {
 					foreach ($notices['error'] as $notice) {
 						$errors->add(
 							'invalidcombo',
-							blocksy_companion_safe_sprintf(
-								// translators: %s is the error message.
-								__('<strong>Error</strong>: %s', 'blocksy-companion'),
+							blc_safe_sprintf(
+								__('<strong>Error</strong>: %s'),
 								$notice['notice']
 							)
 						);
@@ -120,10 +103,10 @@ class AccountAuth {
 
 			$errors->add(
 				'confirm',
-				blocksy_companion_safe_sprintf(
+				blc_safe_sprintf(
 					/* translators: 1: link open 2: link close */
 					__(
-						'Check your email for the confirmation link, then visit the %1$slogin page%2$s.',
+						'Check your email for the confirmation link, then visit the %slogin page%s.',
 						'blocksy-companion'
 					),
 					'<a href="#" data-login="yes">',
@@ -152,34 +135,21 @@ class AccountAuth {
 		do_action('lost_password', $errors);
 
 		login_header(
-			// We want to use translation from core here.
-			// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
 			__('Lost Password'),
-
-			// We want to use translation from core here.
-			// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
 			'<p class="message">' . __('Please enter your username or email address. You will receive an email message with instructions on how to reset your password.') . '</p>',
 			$errors
 		);
 	}
 
-	public function implement_user_registration() {
-		if (is_user_logged_in()) {
-			wp_send_json_error([]);
-		}
-
-		/**
-		 * Fires before the account modal handles a registration request.
-		 *
-		 * @since 2.0.76
-		 */
+	public function blc_implement_user_registration() {
 		do_action('blocksy:account:user-flow:before-registration');
 
-		$this->require_wp_login();
+		ob_start();
+		require_once ABSPATH . 'wp-login.php';
+		$res = ob_get_clean();
 
-		// Never disable dokan_register_nonce_check: Dokan then treats the
-		// request as its own vendor form and allows the seller role.
-		$_POST['woocommerce-register-nonce'] = wp_create_nonce('woocommerce-register');
+		$_POST['woocommerce-register-nonce'] = '~';
+		add_filter('dokan_register_nonce_check', '__return_false');
 
 		if (! $this->get_registration_strategy()) {
 			exit;
@@ -188,23 +158,31 @@ class AccountAuth {
 		$user_login = '';
 		$user_email = '';
 		$user_pass = '';
+		$nonce_value = '';
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if (isset($_POST['user_login']) && is_string($_POST['user_login'])) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$user_login = sanitize_user(wp_unslash($_POST['user_login']));
+			$user_login = wp_unslash($_POST['user_login']);
 		}
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if (isset($_POST['user_email']) && is_string($_POST['user_email'])) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$user_email = sanitize_email(wp_unslash($_POST['user_email']));
+			$user_email = wp_unslash($_POST['user_email']);
 		}
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if (isset($_POST['user_pass']) && is_string($_POST['user_pass'])) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Missing
-			$user_pass = sanitize_text_field(wp_unslash($_POST['user_pass']));
+			$user_pass = wp_unslash($_POST['user_pass']);
+		}
+
+		if (
+			isset($_POST['blocksy-register-nonce'])
+			&&
+			is_string($_POST['blocksy-register-nonce'])
+		) {
+			$nonce_value = wp_unslash($_POST['blocksy-register-nonce']);
+		}
+
+		if (!wp_verify_nonce($nonce_value, 'blocksy-register')) {
+			wp_send_json_error([]);
+			exit;
 		}
 
 		if ($this->get_registration_strategy() === 'woocommerce') {
@@ -217,30 +195,28 @@ class AccountAuth {
 				$user_email
 			);
 
-			$errors = $validation_error;
+			$errors = wc_create_new_customer(
+				sanitize_email($user_email),
+				wc_clean($user_login),
+				$user_pass
+			);
 
-			if (! $errors->has_errors()) {
-				$errors = wc_create_new_customer(
-					sanitize_email($user_email),
-					wc_clean($user_login),
-					$user_pass
-				);
-
-				if (
-					! is_wp_error($errors)
-					&&
-					apply_filters(
-						'woocommerce_registration_auth_new_customer',
-						true,
-						$errors
-					)
-					&&
-					in_array('seller', get_userdata($errors)->roles, true)
-				) {
-					ob_start();
-					wc_set_customer_auth_cookie($errors);
-					ob_clean();
-				}
+			if (
+				! is_wp_error($errors)
+				&&
+				apply_filters(
+					'woocommerce_registration_auth_new_customer',
+					true,
+					$errors
+				)
+				&&
+				isset($_POST['role'])
+				&&
+				$_POST['role'] === 'seller'
+			) {
+				ob_start();
+				wc_set_customer_auth_cookie($errors);
+				ob_clean();
 			}
 		} else {
 			$errors = register_new_user($user_login, $user_email);
@@ -250,9 +226,9 @@ class AccountAuth {
 			$errors = new \WP_Error();
 
 			if ($this->get_registration_strategy() === 'woocommerce') {
-				$error_message = blocksy_companion_safe_sprintf(
-					/* translators: 1: link open 2: link close */
+				$error_message = blc_safe_sprintf(
 					__(
+						/* translators: 1: link open 2: link close */
 						'Your account was created successfully. Your login details have been sent to your email address. Please visit the %1$slogin page%2$s.',
 						'blocksy-companion'
 					),
@@ -261,7 +237,7 @@ class AccountAuth {
 				);
 
 				if ('yes' === get_option('woocommerce_registration_generate_password')) {
-					$error_message = blocksy_companion_safe_sprintf(
+					$error_message = blc_safe_sprintf(
 						/* translators: 1: link open 2: link close */
 						__(
 							'Your account was created successfully and a password has been sent to your email address. Please visit the %1$slogin page%2$s.',
@@ -276,7 +252,7 @@ class AccountAuth {
 			} else {
 				$errors->add(
 					'registered',
-					blocksy_companion_safe_sprintf(
+					blc_safe_sprintf(
 						/* translators: 1: link open 2: link close */
 						__(
 							'Registration complete. Please check your email, then visit the %1$slogin page%2$s.',
@@ -306,32 +282,17 @@ class AccountAuth {
 		wp_die();
 	}
 
-	public function implement_user_login() {
-		/**
-		 * Fires before the account modal handles a login request.
-		 *
-		 * @since 2.0.76
-		 */
+	public function blc_implement_user_login() {
 		do_action('blocksy:account:user-flow:before-login');
 
 		add_filter(
 			'login_redirect',
 			function ($redirect_to, $requested_redirect_to, $user) {
-				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$reauth = empty($_REQUEST['reauth']) ? false : true;
 
 				if (! is_wp_error($user) && ! $reauth) {
 					wp_send_json_success([
 						'html' => '',
-						/**
-						 * Filters the URL the account modal redirects to after a successful login.
-						 *
-						 * @since 1.8.7
-						 *
-						 * @param string   $redirect_to           The redirect destination URL.
-						 * @param string   $requested_redirect_to The redirect destination requested with the login request.
-						 * @param \WP_User $user                  The user that was logged in.
-						 */
 						'redirect_to' => apply_filters(
 							'blocksy:account:modal:login:redirect_to',
 							$redirect_to,
@@ -347,7 +308,9 @@ class AccountAuth {
 			3
 		);
 
-		$html = $this->require_wp_login();
+		ob_start();
+		require_once ABSPATH . 'wp-login.php';
+		$html = ob_get_clean();
 
 		wp_send_json_success([
 			'html' => $html,
@@ -370,16 +333,6 @@ class AccountAuth {
 			$strategy = 'woocommerce';
 		}
 
-		/**
-		 * Filters the registration strategy used by the account modal.
-		 *
-		 * Returning null disables registration altogether.
-		 *
-		 * @since 1.8.86
-		 *
-		 * @param string|null $strategy Registration strategy. Either 'wp', 'woocommerce' or null when
-		 *                              registration is disabled.
-		 */
 		return apply_filters('blocksy:account:register:strategy', $strategy);
 	}
 }
