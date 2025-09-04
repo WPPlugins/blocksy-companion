@@ -42,6 +42,7 @@ class AllowedAttributes implements AttributeInterface
             'default',
             'dir',
             'disabled',
+            'download',
             'enctype',
             'encoding',
             'face',

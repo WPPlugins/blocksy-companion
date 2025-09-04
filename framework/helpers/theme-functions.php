@@ -11,101 +11,60 @@ namespace Blocksy;
 // For the blocksy_get_theme_mod() function, the special handling of the null
 // value is not necessary.
 //
-// Right now, these functions must be protected with this proxy:
+// Right now, only three functions must be protected with this proxy:
 //
 // - blocksy_get_theme_mod()
+// - blocksy_get_variables_from_file()
+// - blocksy_manager()
 // - blocksy_get_search_post_type()
 // - blocksy_has_dynamic_css_in_frontend()
-// - blocksy_theme_get_dynamic_styles()
-// - blocksy_woo_has_ajax_add_to_cart()
-// - blocksy_has_product_specific_layer()
-// - blocksy_get_special_post_id()
-// - blocksy_get_product_default_variation()
-// - blocksy_get_taxonomy_options()
-// - blocksy_get_terms()
-// - blocksy_flexy_pills()
-// - blocksy_companion_theme_functions()->blocksy_get_post_options()
-// - blocksy_sanitize_post_meta_options()
-// - blocksy_product_get_gallery_images()
-// - blocksy_get_header_builder()
-// - blocksy_lazy_zone_start()
-// - blocksy_lazy_zone_end()
-// - blocksy_start_fatal_containment()
-// - blocksy_restore_fatal_containment()
-//
-// This list is machine-enforced by scripts/check-theme-guarding.js (npm run guard).
 //
 // If more functions will be called earlier than `after_setup_theme`, they
 // should be added here and should be only called through this proxy object.
-//
-// A `null` return means the value was never processed, so callers that pass
-// data through a theme helper before storing it must treat `null` as "drop
-// the value", never as "store what I had". blocksy_sanitize_post_meta_options()
-// is the case that matters today: it guards a write path, so falling back to
-// the unsanitized input would defeat the sanitizer entirely.
 class ThemeFunctions {
-	const NON_EXISTING_FUNCTION = null;
+	public static $NON_EXISTING_FUNCTION = null;
 
-	public function __call( $name, $arguments ) {
-		if ( function_exists( $name ) ) {
-			return call_user_func_array( $name, $arguments );
-		}
-
-		$optional_functions = array(
-			'blocksy_lazy_zone_start',
-			'blocksy_lazy_zone_end',
-			'blocksy_start_fatal_containment',
-			'blocksy_restore_fatal_containment',
-			'blocksy_sanitize_builder_value',
-		);
-
-		if ( in_array( $name, $optional_functions, true ) ) {
-			return self::NON_EXISTING_FUNCTION;
+	public function __call($name, $arguments) {
+		if (function_exists($name)) {
+			return call_user_func_array($name, $arguments);
 		}
 
 		ob_start();
-		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_print_backtrace, PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.NeedsInspection -- no arguments are inspected
 		debug_print_backtrace();
 		$backtrace = ob_get_clean();
 
-		blocksy_companion_debug_log(
-			'ThemeFunctions->__call : missing function',
-			array(
-				'function_name'  => $name,
-				'is_cli'         => defined( 'WP_CLI' ) && WP_CLI ? 'yes' : 'no',
+		blc_debug_log('ThemeFunctions->__call : missing function', [
+			'function_name' => $name,
+			'is_cli' => defined('WP_CLI') && WP_CLI ? 'yes' : 'no',
+			'current_script' => $_SERVER['SCRIPT_FILENAME'],
+			'backtrace' => $backtrace,
+			'request' => $_REQUEST
+		]);
 
-				'current_script' => $_SERVER['SCRIPT_FILENAME'], // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-			'backtrace'          => $backtrace,
-
-			'request'            => $_REQUEST, // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			)
-		);
-
-		if ( 'blocksy_has_dynamic_css_in_frontend' === $name ) {
+		if ($name === 'blocksy_has_dynamic_css_in_frontend') {
 			return false;
 		}
 
-		if ( 'blocksy_get_search_post_type' === $name ) {
-			return array();
+		if ($name === 'blocksy_get_search_post_type') {
+			return [];
 		}
 
-		// Functions whose default value is one of their arguments, keyed by
-		// that argument's index. Other helpers are not handled like this and
-		// the caller is supposed to handle the `null` return value.
-		$functions_with_default = array(
-			'blocksy_get_theme_mod' => 1,
-		);
+		$functions_with_default = [
+			'blocksy_get_theme_mod',
+			'blocksy_get_variables_from_file',
+		];
 
-		if ( isset( $functions_with_default[ $name ] ) ) {
-			$default_index = $functions_with_default[ $name ];
-
-			if ( count( $arguments ) > $default_index ) {
-				return $arguments[ $default_index ];
+		// Special case for blocksy_get_theme_mod, when we know the default
+		// is the 2nd argument. Other helpers will not be handled like this
+		// and the caller are supposed to handle the `null` return value.
+		if (in_array($name, $functions_with_default)) {
+			if (count($arguments) > 1) {
+				return $arguments[1];
 			}
 		}
 
 		// Every other function should handle the special case of the `null`.
-		return self::NON_EXISTING_FUNCTION;
+		return self::$NON_EXISTING_FUNCTION;
 	}
 }
+

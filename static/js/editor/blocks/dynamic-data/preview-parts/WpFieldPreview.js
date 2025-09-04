@@ -36,15 +36,7 @@ const TextField = ({
 	fieldsDescriptor,
 
 	attributes,
-	attributes: {
-		align,
-		tagName: TagName,
-		before,
-		after,
-		fallback,
-		has_field_link,
-		has_field_link_wrap_content,
-	},
+	attributes: { align, tagName: TagName, before, after, fallback },
 	postId,
 	postType,
 
@@ -146,13 +138,7 @@ const TextField = ({
 					)}>
 					{css && <style>{css}</style>}
 
-					<ContentWithBeforeAndAfter
-						before={before}
-						after={after}
-						withLink={
-							has_field_link === 'yes' &&
-							has_field_link_wrap_content === 'yes'
-						}>
+					<ContentWithBeforeAndAfter before={before} after={after}>
 						<Component
 							attributes={attributes}
 							postId={postId}

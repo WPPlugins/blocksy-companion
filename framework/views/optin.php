@@ -1,10 +1,3 @@
-<?php
-
-if (! defined('ABSPATH')) {
-	exit;
-}
-
-?>
 <div class="blocksy-fs-optin-wrapper">
 
 <div class="ct-optin-svg">

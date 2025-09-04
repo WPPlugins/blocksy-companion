@@ -6,33 +6,11 @@ import CustomImageField from './custom/CustomImageField'
 
 const CustomFieldPreview = ({
 	fieldDescriptor,
-
-	fieldsContext,
-
-	attributes
+	postId,
+	postType,
+	attributes,
 }) => {
-	let before = ''
-	let after = ''
-
-	if (fieldDescriptor.type !== 'image') {
-		before = attributes.before
-		after = attributes.after
-
-		if (
-			attributes.has_field_link === 'yes' &&
-			attributes.has_field_link_wrap_content === 'no'
-		) {
-			before = `${before}<a href="#" rel="noopener noreferrer">`
-			after = `</a>${after}`
-		}
-	}
-
-	const { fieldData } = useCustomFieldData({
-		fieldDescriptor,
-		fieldsContext,
-		before,
-		after
-	})
+	const { fieldData } = useCustomFieldData({ postId, fieldDescriptor })
 
 	if (fieldDescriptor.type === 'image') {
 		return (
@@ -40,6 +18,7 @@ const CustomFieldPreview = ({
 				fieldData={fieldData}
 				fieldDescriptor={fieldDescriptor}
 				attributes={attributes}
+				postId={postId}
 			/>
 		)
 	}
@@ -49,6 +28,7 @@ const CustomFieldPreview = ({
 			fieldData={fieldData}
 			fieldDescriptor={fieldDescriptor}
 			attributes={attributes}
+			postId={postId}
 		/>
 	)
 }

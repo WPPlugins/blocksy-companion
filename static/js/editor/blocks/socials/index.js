@@ -6,13 +6,12 @@ import { registerBlockType } from '@wordpress/blocks'
 import { getAttributesFromOptions, getOptionsForBlock } from 'blocksy-options'
 import Edit from './Edit'
 import { colorsDefaults } from './colors'
-import metadata from './block.json'
 
 export const options = getOptionsForBlock('socials')
 export const defaultAttributes = getAttributesFromOptions(options)
 
 registerBlockType('blocksy/socials', {
-	...metadata,
+	apiVersion: 3,
 	title: __('Socials Controls', 'blocksy-companion'),
 	icon: {
 		src: (
@@ -24,12 +23,13 @@ registerBlockType('blocksy/socials', {
 			</svg>
 		),
 	},
+	supports: {
+		html: false,
+		inserter: false,
+		lock: false,
+	},
 	parent: ['blocksy/widgets-wrapper'],
 	attributes: {
-		justifyContent: {
-			type: 'string',
-			default: 'left',
-		},
 		...defaultAttributes,
 		...colorsDefaults,
 	},

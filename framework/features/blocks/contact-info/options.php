@@ -1,9 +1,4 @@
 <?php
-
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 /**
  * Contact Info widget
  *
@@ -11,7 +6,7 @@ if (! defined('ABSPATH')) {
  * @license   http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @package   Blocksy
  */
-$is_pro = function_exists('blocksy_companion_fs') && blocksy_companion_fs()->can_use_premium_code();
+$is_pro = function_exists('blc_fs') && blc_fs()->can_use_premium_code();
 
 $visibility_option = [
 	'visibility' => [

@@ -2,77 +2,58 @@
 
 namespace Blocksy\Editor\Blocks;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 class BreadCrumbs {
 	public function __construct() {
-		add_action( 'init', array( $this, 'blocksy_breadcrumbs_block' ) );
+		add_action('init', [$this, 'blocksy_breadcrumbs_block']);
 
 		add_action(
 			'wp_ajax_blocksy_blocks_retrieve_breadcrumbs_data_descriptor',
 			function () {
-				$blocksy_manager = blocksy_companion_theme_functions()->blocksy_manager();
+				$blocksy_manager = blc_theme_functions()->blocksy_manager();
 
 				if (
-					! current_user_can( 'manage_options' )
+					! current_user_can('manage_options')
 					||
 					! $blocksy_manager
 				) {
 					wp_send_json_error();
 				}
 
-				$data = json_decode( file_get_contents( 'php://input' ), true );
+				$data = json_decode(file_get_contents('php://input'), true);
 
-				if ( ! isset( $data['post_id'] ) ) {
-					wp_send_json_success(
-						/**
-						 * Filters the breadcrumbs block preview data sent to the block editor.
-						 *
-						 * @since 2.1.0
-						 *
-						 * @param array $data {
-						 *     Breadcrumbs preview data.
-						 *
-						 *     @type int|null $post_id   The previewed post ID. Default null.
-						 *     @type string   $post_type The previewed post type. Default 'post'.
-						 *     @type string   $render    Rendered breadcrumbs markup. Omitted when no post is selected.
-						 * }
-						 */
-						apply_filters(
-							'blocksy:general:blocks:breadcrumbs:data',
-							array(
-								'post_id'   => null,
-								'post_type' => 'post',
-							)
-						)
-					);
+				if (! isset($data['post_id'])) {
+					wp_send_json_success(apply_filters(
+						'blocksy:general:blocks:breadcrumbs:data',
+						[
+							'post_id' => null,
+							'post_type' => 'post',
+						]
+					));
 				}
 
-				if ( ! $data || ! isset( $data['post_id'] ) ) {
+				if (! $data || ! isset($data['post_id'])) {
 					wp_send_json_error();
 				}
 
 				global $post, $wp_query;
-				$post_id = intval( $data['post_id'] );
-				$post    = $post_id ? get_post( $post_id ) : null;
+				$post_id = intval($data['post_id']);
+				$post = $post_id ? get_post($post_id) : null;
 
 				if (
-					isset( $data['taxonomyTerms'] )
-					&& is_array( $data['taxonomyTerms'] )
-					&& ! empty( $data['taxonomyTerms'] )
+					isset($data['taxonomyTerms'])
+					&& is_array($data['taxonomyTerms'])
+					&& ! empty($data['taxonomyTerms'])
 				) {
 					add_filter(
 						'wp_get_object_terms',
-						function ( $terms, $object_ids, $taxonomies ) use ( $data ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
-							$terms = array();
+						function ($terms, $object_ids, $taxonomies) use ($data) {
+							$terms = [];
 
-							foreach ( $data['taxonomyTerms'] as $slug => $values ) {
-								foreach ( $values as $category_id ) {
-									$term = get_term( $category_id, $slug );
+							foreach ($data['taxonomyTerms'] as $slug => $values) {
+								foreach ($values as $category_id) {
+									$term = get_term($category_id, $slug);
 
-									if ( ! $term || is_wp_error( $term ) ) {
+									if (! $term || is_wp_error($term)) {
 										continue;
 									}
 
@@ -87,27 +68,27 @@ class BreadCrumbs {
 					);
 				}
 
-				if ( ! $post || is_wp_error( $post ) ) {
+				if (! $post || is_wp_error($post)) {
 					wp_send_json_error();
 				}
 
-				$wp_query->is_single   = true;
+				$wp_query->is_single = true;
 				$wp_query->is_singular = true;
 
-				if ( 'product' === $post->post_type ) {
+				if ($post->post_type === 'product') {
 					$wp_query->is_product = true;
-					add_filter( 'is_woocommerce', '__return_true' );
+					add_filter('is_woocommerce', '__return_true');
 
 					global $product;
 
-					$product = wc_get_product( $post_id ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- WooCommerce global
+					$product = wc_get_product($post_id);
 				}
 
 				$post->post_title = '__BLOCKSY_BREADCRUMBS_POST_TITLE__';
 				add_filter(
 					'the_title',
-					function ( $post_title, $post_id ) {
-						if ( $GLOBALS['post']->ID !== $post_id ) {
+					function ($post_title, $post_id) {
+						if ($GLOBALS['post']->ID !== $post_id) {
 							return $post_title;
 						}
 
@@ -116,112 +97,76 @@ class BreadCrumbs {
 					10,
 					2
 				);
+				
+				$breadcrumbs_builder = new \Blocksy\BreadcrumbsBuilder([
+					'is_frontend' => false,
+				]);
 
-				if ( ! class_exists( '\Blocksy\BreadcrumbsBuilder' ) ) {
-					wp_send_json_error();
-				}
-
-				$breadcrumbs_builder = new \Blocksy\BreadcrumbsBuilder(
-					array(
-						'is_frontend' => false,
-					)
-				);
-
-				wp_send_json_success(
-					/**
-					 * Filters the breadcrumbs block preview data sent to the block editor.
-					 *
-					 * @since 2.1.0
-					 *
-					 * @param array $data {
-					 *     Breadcrumbs preview data.
-					 *
-					 *     @type int|null $post_id   The previewed post ID. Default null.
-					 *     @type string   $post_type The previewed post type. Default 'post'.
-					 *     @type string   $render    Rendered breadcrumbs markup. Omitted when no post is selected.
-					 * }
-					 */
-					apply_filters(
-						'blocksy:general:blocks:breadcrumbs:data',
-						array(
-							'post_id'   => $post_id,
-							'post_type' => $post->post_type,
-							'render'    => $breadcrumbs_builder->render(
-								array(
-									'class' => 'ct-breadcrumbs-block',
-								)
-							),
-						)
-					)
-				);
+				wp_send_json_success(apply_filters(
+					'blocksy:general:blocks:breadcrumbs:data',
+					[
+						'post_id' => $post_id,
+						'post_type' => $post->post_type,
+						'render' => $breadcrumbs_builder->render(
+							[
+								'class' => 'ct-breadcrumbs-block',
+							]
+						),
+					]
+				));
 			}
 		);
 	}
 
 	public function blocksy_breadcrumbs_block() {
-		$block_data = array(
-			'render_callback' => function ( $attributes, $content ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+		$block_data = [
+			'api_version' => 3,
+			'render_callback' => function ($attributes, $content) {
 				$attributes = wp_parse_args(
 					$attributes,
-					array(
+					[
 						'className' => '',
-						'style'     => array(),
-					)
+						'style' => []
+					]
 				);
 
-				$colors = array();
+				$colors = isset($attributes['style']['color']) ? $attributes['style']['color'] : [];
 
-				if ( isset( $attributes['linkColor'] ) ) {
-					$var                                  = sanitize_key( $attributes['linkColor'] );
+				if (isset($attributes['linkColor'])) {
+					$var = $attributes['linkColor'];
 					$colors['--theme-link-initial-color'] = "var(--wp--preset--color--$var)";
 				}
 
-				if (
-					isset( $attributes['customLinkColor'] )
-					&&
-					blocksy_companion_theme_functions()->blocksy_validate_color( $attributes['customLinkColor'] )
-				) {
+				if (isset($attributes['customLinkColor'])) {
 					$colors['--theme-link-initial-color'] = $attributes['customLinkColor'];
 				}
 
-				if ( isset( $attributes['textColor'] ) ) {
-					$var                          = sanitize_key( $attributes['textColor'] );
+				if (isset($attributes['textColor'])) {
+					$var = $attributes['textColor'];
 					$colors['--theme-text-color'] = "var(--wp--preset--color--$var)";
 				}
 
-				if (
-					isset( $attributes['customTextColor'] )
-					&&
-					blocksy_companion_theme_functions()->blocksy_validate_color( $attributes['customTextColor'] )
-				) {
+				if (isset($attributes['customTextColor'])) {
 					$colors['--theme-text-color'] = $attributes['customTextColor'];
 				}
 
-				if ( isset( $attributes['linkHoverColor'] ) ) {
-					$var                                = sanitize_key( $attributes['linkHoverColor'] );
+				if (isset($attributes['linkHoverColor'])) {
+					$var = $attributes['linkHoverColor'];
 					$colors['--theme-link-hover-color'] = "var(--wp--preset--color--$var)";
 				}
 
-				if (
-					isset( $attributes['customLinkHoverColor'] )
-					&&
-					blocksy_companion_theme_functions()->blocksy_validate_color( $attributes['customLinkHoverColor'] )
-				) {
+				if (isset($attributes['customLinkHoverColor'])) {
 					$colors['--theme-link-hover-color'] = $attributes['customLinkHoverColor'];
 				}
 
 				$colors_css = '';
 
-				foreach ( $colors as $key => $value ) {
-					if ( empty( $value ) ) {
+				foreach ($colors as $key => $value) {
+					if (empty($value)) {
 						continue;
 					}
 
 					$colors_css .= $key . ':' . $value . ';';
-				}
-
-				if ( ! class_exists( '\Blocksy\BreadcrumbsBuilder' ) ) {
-					return '';
 				}
 
 				$breadcrumbs_builder = new \Blocksy\BreadcrumbsBuilder();
@@ -230,36 +175,21 @@ class BreadCrumbs {
 					$attributes['style']
 				);
 
-				$wp_styles_css = isset( $wp_styles['css'] ) ? $wp_styles['css'] : '';
-
-				$class = '';
-
-				if ( is_string( $attributes['className'] ) ) {
-					$class = implode(
-						' ',
-						array_map(
-							'sanitize_html_class',
-							explode( ' ', $attributes['className'] )
-						)
-					);
-				}
+				$wp_styles_css = isset($wp_styles['css']) ? $wp_styles['css'] : '';
 
 				return $breadcrumbs_builder->render(
 					array_merge(
-						array(
-							'class' => $class,
-						),
-						! empty( $wp_styles_css ) || ! empty( $colors_css ) ? array(
-							'style' => $wp_styles_css . $colors_css,
-						) : array()
+						[
+							'class' => $attributes['className'],
+						],
+						! empty($wp_styles_css) || ! empty($colors_css) ? [
+							'style' => $wp_styles_css . $colors_css
+						] : []
 					)
 				);
-			},
-		);
+			}
+		];
 
-		register_block_type(
-			BLOCKSY_PATH . '/static/js/editor/blocks/breadcrumbs/block.json',
-			$block_data
-		);
+		register_block_type('blocksy/breadcrumbs', $block_data);
 	}
 }

@@ -1,9 +1,4 @@
 <?php
-
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 /**
  * Options for shares widget.
  *
@@ -12,7 +7,7 @@ if (! defined('ABSPATH')) {
  * @package Blocksy
  */
 
-$share_options = blocksy_companion_get_options('single-elements/post-share-box', [
+$share_options = blocksy_get_options('single-elements/post-share-box', [
 	'display_style' => 'networks_only'
 ]);
 

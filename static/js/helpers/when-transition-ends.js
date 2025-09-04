@@ -1,9 +1,4 @@
 export function whenTransitionEnds(el, cb) {
-	if (!parseFloat(getComputedStyle(el).transitionDuration)) {
-		cb()
-		return
-	}
-
 	const end = () => {
 		el.removeEventListener('transitionend', onEnd)
 		cb()

@@ -36,7 +36,7 @@ const TermImagePreview = ({
 
 	const maybeUrl = getMediaSourceUrlBySizeSlug(media, sizeSlug)
 
-	return <ImagePreview attributes={attributes} url={maybeUrl} media={media} />
+	return <ImagePreview attributes={attributes} url={maybeUrl} postId />
 }
 
 export default TermImagePreview

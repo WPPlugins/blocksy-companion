@@ -46,9 +46,14 @@ const Extension = (props) => {
 				leave={[{ opacity: 0 }]}
 				initial={null}
 				config={(key, phase) => {
-					return {
-						duration: 300,
-					}
+					return phase === 'leave'
+						? {
+								duration: 300,
+						  }
+						: {
+								delay: 300,
+								duration: 300,
+						  }
 				}}>
 				{(props, isLoading) => {
 					if (isLoading) {

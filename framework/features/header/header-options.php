@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $options = [
 
 	blocksy_rand_md5() => [

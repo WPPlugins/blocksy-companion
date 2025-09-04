@@ -1,4 +1,4 @@
-@use "../../static/sass/main.scss";
+@import "../../static/sass/main.scss";
 
 .ct-newsletter-subscribe-block {
 
@@ -14,9 +14,4 @@
 			font-size: 13px;
 		}
 	}
-}
-
-// hide border radius link/unlink option from Gutenberg UI
-[role="tabpanel"]:has(.blocksy-options-hide-border-unlink) .components-border-radius-control__linked-button {
-    display: none
 }

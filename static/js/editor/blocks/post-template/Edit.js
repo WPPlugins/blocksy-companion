@@ -13,7 +13,6 @@ import classnames from 'classnames'
 
 import { useSelect } from '@wordpress/data'
 import { Panel, PanelBody, Spinner, ToolbarGroup } from '@wordpress/components'
-import { OptionsPanel } from 'blocksy-options'
 
 import { useFlexySlider } from '../../hooks/use-flexy-slider'
 
@@ -179,28 +178,6 @@ export const SlideshowArrows = ({ has_slideshow_arrows, sliderDescriptor }) => {
 	)
 }
 
-export const SlideshowPills = ({
-	has_slideshow_pills,
-	sliderDescriptor,
-	pillsCount,
-}) => {
-	if (!has_slideshow_pills) {
-		return null
-	}
-
-	return (
-		<div class="flexy-pills" data-type="circle">
-			<ol
-				data-flexy={pillsCount <= 5 ? 'no:paused' : 'no'}
-				{...sliderDescriptor.pillsContainerAttr}>
-				{Array.from({ length: pillsCount }, (_, index) => (
-					<li className={index === 0 ? 'active' : ''} key={index} />
-				))}
-			</ol>
-		</div>
-	)
-}
-
 const Edit = ({
 	clientId,
 
@@ -214,13 +191,7 @@ const Edit = ({
 	context,
 	__unstableLayoutClassNames,
 }) => {
-	const {
-		postId,
-		has_slideshow,
-		has_slideshow_arrows,
-		has_slideshow_pills,
-		uniqueId,
-	} = context
+	const { postId, has_slideshow, has_slideshow_arrows, uniqueId } = context
 
 	const [activeBlockContextId, setActiveBlockContextId] = useState()
 
@@ -253,7 +224,6 @@ const Edit = ({
 
 	const sliderDescriptor = useFlexySlider({
 		isSlideshow,
-		hasSlideshowPills: has_slideshow_pills === 'yes',
 		context,
 		attributes,
 		toWatch: blockData ? blockData.all_posts : {},
@@ -384,9 +354,7 @@ const Edit = ({
 
 			<InspectorControls>
 				{isGridLayout && isManualMode ? (
-					<PanelBody
-						title={__('Layout', 'blocksy-companion')}
-						initialOpen>
+					<PanelBody title="Layout" initialOpen>
 						<RangeControl
 							label={__('Desktop Columns', 'blocksy-companion')}
 							onChange={(columns) =>
@@ -419,29 +387,6 @@ const Edit = ({
 						/>
 					</PanelBody>
 				) : null}
-
-				<PanelBody>
-					<OptionsPanel
-						purpose="gutenberg"
-						onChange={(optionId, optionValue) => {
-							setAttributes({
-								[optionId]: optionValue,
-							})
-						}}
-						options={{
-							has_item_link: {
-								type: 'ct-switch',
-								label: __(
-									'Link to post',
-									'blocksy-companion'
-								),
-								value: '',
-							},
-						}}
-						value={attributes}
-						hasRevertButton={false}
-					/>
-				</PanelBody>
 			</InspectorControls>
 
 			<div {...blockProps}>
@@ -470,14 +415,6 @@ const Edit = ({
 								sliderDescriptor={sliderDescriptor}
 							/>
 						</div>
-
-						<SlideshowPills
-							has_slideshow_pills={
-								has_slideshow_pills === 'yes'
-							}
-							sliderDescriptor={sliderDescriptor}
-							pillsCount={blockContexts.length}
-						/>
 					</div>
 				)}
 			</div>

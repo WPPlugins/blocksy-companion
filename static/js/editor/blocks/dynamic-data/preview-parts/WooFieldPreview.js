@@ -24,13 +24,12 @@ import AttributesPreview from './woo/AttributesPreview'
 
 import ContentWithBeforeAndAfter from '../components/ContentWithBeforeAndAfter'
 
-const WooFieldPreviewWithContext = ({
+const TextField = ({
 	fieldDescriptor,
 	fieldsDescriptor,
 
 	attributes,
 	attributes: { align, tagName: TagName, before, after, fallback },
-
 	postId,
 	postType,
 
@@ -126,7 +125,6 @@ const WooFieldPreviewWithContext = ({
 						taxonomy={taxonomy}
 						fallback={fallback}
 						fieldsDescriptor={fieldsDescriptor}
-						product={product}
 					/>
 				</ContentWithBeforeAndAfter>
 			</TagName>
@@ -141,7 +139,7 @@ const WooFieldPreview = (props) => {
 
 	const { withProductDataContext } = wc.wcBlocksSharedHocs
 
-	return withProductDataContext(WooFieldPreviewWithContext)({
+	return withProductDataContext(TextField)({
 		...props,
 		productId: postId,
 	})

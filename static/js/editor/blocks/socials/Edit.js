@@ -3,9 +3,7 @@ import { __ } from 'ct-i18n'
 import {
 	InspectorControls,
 	useBlockProps,
-	JustifyContentControl,
 	withColors,
-	BlockControls,
 } from '@wordpress/block-editor'
 import { getOptionsForBlock } from 'blocksy-options'
 import Preview from './Preview'
@@ -71,15 +69,6 @@ const Edit = ({
 
 	return (
 		<div {...blockProps}>
-			<BlockControls group="block">
-				<JustifyContentControl
-					label={__('Alignment', 'blocksy-companion')}
-					value={attributes.justifyContent}
-					onChange={(justifyContent) =>
-						setAttributes({ justifyContent })
-					}
-				/>
-			</BlockControls>
 			<Preview attributes={attributes} setAttributes={setAttributes} />
 			<BasicEdit
 				attributes={attributes}

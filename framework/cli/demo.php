@@ -244,14 +244,13 @@ class DemoCli {
 			count($commands) + 1
 		);
 
+		// Run each command in sequence.
 		foreach ($commands as $command => $message) {
-			$escaped_args = \WP_CLI\Utils\args_to_str($args);
-			$full_command = $command . $escaped_args;
-
-			\WP_CLI::runcommand($full_command, [
+			\WP_CLI::runcommand($command, [
 				'return' => true,
 				'launch' => true,
 				'exit_error' => false,
+				'command_args' => $args
 			]);
 
 			// Update the progress bar.
