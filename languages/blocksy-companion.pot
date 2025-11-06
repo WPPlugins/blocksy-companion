@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-30 19:01+0000\n"
+"POT-Creation-Date: 2025-11-06 17:39+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -349,7 +349,7 @@ msgid "Facebook App ID"
 msgstr ""
 
 #: framework/features/opengraph-meta-data.php:40
-msgid "Twitter Username"
+msgid "X (Twitter) Username"
 msgstr ""
 
 #. translators: This is a brand name. Preferably to not be translated
@@ -4123,15 +4123,15 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: framework/features/header/modal/login.php:59
+#: framework/features/header/modal/login.php:67
 msgid "Remember Me"
 msgstr ""
 
-#: framework/features/header/modal/login.php:63
+#: framework/features/header/modal/login.php:71
 msgid "Forgot Password?"
 msgstr ""
 
-#: framework/features/header/modal/login.php:85
+#: framework/features/header/modal/login.php:93
 msgid "Log In"
 msgstr ""
 
@@ -4659,7 +4659,7 @@ msgstr ""
 msgid "Quick view summary after"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/extension.php:402,
+#: framework/premium/extensions/woocommerce-extra/extension.php:403,
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:66,
 #: framework/premium/extensions/woocommerce-extra/features/cart-suggested-products/options/main.php:80
 msgid "Cart Page"
@@ -7115,38 +7115,38 @@ msgstr ""
 msgid "Close Modal"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:390
+#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:402
 msgid "Star"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:390
+#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:402
 msgid "Stars"
 msgstr ""
 
 #. translators: %s is the percentage of customers
-#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:457
+#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:469
 msgid "%s%% of customers recommend this product."
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:583
+#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:595
 msgid "Upvote"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:597
+#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:609
 msgid "Downvote"
 msgstr ""
 
 #. translators: %1$s is the number of helpful votes, %2$s is the total votes
-#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:618
+#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:630
 msgid "%1$s of %2$s found this review helpful"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:686,
+#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:698,
 #: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/options.php:44
 msgid "Review Title"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:714
+#: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:726
 msgid "Upload Image (Optional)"
 msgstr ""
 
@@ -7338,11 +7338,14 @@ msgstr ""
 msgid "Quantity Auto Update"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/feature.php:251,
-#: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:40
+#: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/cart-reservation-cleaner.php:16
+msgid "Every 12 Hours"
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/feature.php:417
 msgid ""
-"<p><strong>🔥 Hurry up! Your selected items are in high demand!</"
-"strong><br>Your cart will be reserved for {time} minutes.</p>"
+"<p><strong>🔥 Hurry up! Your selected items are reserved for {time} minutes."
+"</strong></p>"
 msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:15,
@@ -7367,6 +7370,12 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:38,
 #: framework/premium/extensions/woocommerce-extra/features/stock-scarcity/options.php:27
 msgid "Message"
+msgstr ""
+
+#: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:40
+msgid ""
+"<p><strong>🔥 Hurry up! Your selected items are in high demand!</"
+"strong><br>Your cart will be reserved for {time} minutes.</p>"
 msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:48
@@ -8640,7 +8649,7 @@ msgstr ""
 msgid "Checkout Page"
 msgstr ""
 
-#: framework/premium/extensions/woocommerce-extra/features/compare/views/bar.php:105,
+#: framework/premium/extensions/woocommerce-extra/features/compare/views/bar.php:111,
 #: framework/premium/extensions/woocommerce-extra/features/compare/views/table.php:170,
 #: framework/premium/extensions/woocommerce-extra/features/compare/views/table.php:173,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/views/columns/product-remove-button.php:13
@@ -10526,15 +10535,15 @@ msgstr ""
 msgid "Failed to retrieve starter sites list.<br> Error code - %s"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:316
+#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:317
 msgid "Back"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:356
+#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:357
 msgid "Install"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:357
+#: static/js/dashboard/screens/DemoInstall/DemoToInstall.js:358
 msgid "Next"
 msgstr ""
 

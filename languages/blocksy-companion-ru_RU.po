@@ -1840,7 +1840,7 @@ msgstr "Скрыть ссылки на документацию"
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:316
 msgid "More information on how to generate an API key for Brevo can be found %shere%s."
-msgstr "Более подробную информацию о том, как сгенерировать API-ключ для Brevo, можно найт�� %sздесь%s."
+msgstr "Более подробную информацию о том, как сгенерировать API-ключ для Brevo, можно найти %sздесь%s."
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:188
 msgid "API Version"
@@ -2002,7 +2002,7 @@ msgstr "Произвольные атрибуты"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:723
 msgid "Swatches saved"
-msgstr "Образцы сохранены"
+msgstr "��бразцы сохранены"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:716
 msgid "Swatches removed"
@@ -4167,7 +4167,7 @@ msgstr "Условия отображения модального окна"
 
 #: framework/premium/features/content-blocks/options/maintenance.php:16
 msgid "Add one or more conditions to display the Maintenance block."
-msgstr "Добавление одного или нескольких условий для отображения блока техобслуживания."
+msgstr "Добавление одного или нескольких условий для отображения блока техоб��луживания."
 
 #: framework/premium/features/content-blocks/options/maintenance.php:15
 msgid "Maintenance Block Display Conditions"
@@ -4634,7 +4634,7 @@ msgstr "Цвет заголовка модуля"
 
 #: framework/extensions/trending/customizer.php:594
 msgid "Module Title Font"
-msgstr "Шриф�� заголовка модуля"
+msgstr "Шрифт заголовка модуля"
 
 #: framework/extensions/newsletter-subscribe/customizer.php:389
 msgid "Container Shadow"
@@ -5931,7 +5931,7 @@ msgstr "Выберите, какой набор настроек вы хотит
 
 #: static/js/options/CustomizerOptionsManager.js:420
 msgid "Export Settings"
-msgstr "Параметры экс��орта"
+msgstr "Параметры экспорта"
 
 #: static/js/options/CustomizerOptionsManager.js:406
 msgid "Yes, I am sure"
@@ -10747,7 +10747,7 @@ msgstr "Динамический вывод CSS"
 
 #: framework/features/demo-install.php:98
 msgid "Your PHP installation doesn't have support for XML. Please install the <i>xml</i> or <i>simplexml</i> PHP extension in order to be able to install starter sites. You might need to contact your hosting provider to assist you in doing so."
-msgstr "Ваша установка PHP не поддерживает XML. Установите расширение PHP <i>XML</i> или <i>simplexml</i>, чтобы иметь возможность устанавливать стартовые сайты. Возможно, вам потребуется связаться с вашим хостинг-провайдером, чтобы он помог вам в этом."
+msgstr "Ваша установка PHP не поддерживает XML. Установите расширение PHP <i>XML</i> или <i>simplexml</i>, чтобы иметь во��можность устанавливать стартовые сайты. Возможно, вам потребуется связаться с вашим хостинг-провайдером, чтобы он помог вам в этом."
 
 #: framework/features/conditions-manager.php:315
 msgid "Language"

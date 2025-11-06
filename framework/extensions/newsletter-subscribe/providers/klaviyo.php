@@ -14,7 +14,7 @@ class KlaviyoProvider extends Provider {
 				'headers' => [
 					'Authorization' => 'Klaviyo-API-Key ' . $api_key,
 					'accept' => 'application/json',
-					'revision' => gmdate('Y-m-d')
+					'revision' => '2025-10-15'
 				]
 			]
 		);
@@ -106,7 +106,7 @@ class KlaviyoProvider extends Provider {
 				'Authorization: Klaviyo-API-Key ' . $settings['api_key'],
 				'accept: application/vnd.api+json',
 				'content-type: application/vnd.api+json',
-				'revision: ' . gmdate('Y-m-d')
+				'revision: 2025-10-15'
 			),
 		));
 
