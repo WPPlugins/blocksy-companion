@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-10-05 19:16:51+0000\n"
+"PO-Revision-Date: 2025-11-09 08:57:18+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -468,7 +468,7 @@ msgstr "Дней до повторного запуска модального �
 
 #: framework/premium/features/content-blocks/options/popup.php:245
 msgid "Number of days before the popup will automatically relaunch again."
-msgstr "��оличество дней до того, как модальное окно будет автоматически запущено снова."
+msgstr "Количество дней до того, как модальное окно будет автоматически запущено снова."
 
 #: framework/premium/features/content-blocks/options/popup.php:228
 msgid "Custom interval"
@@ -484,7 +484,7 @@ msgstr "Триггер запуска"
 
 #: framework/premium/features/content-blocks/options/hook.php:352
 msgid "Separate multiple attributes with spaces."
-msgstr "Разделяйте атрибуты пробелами."
+msgstr "Разделяйте атрибуты пробела��и."
 
 #: framework/premium/features/content-blocks/options/hook.php:344
 msgid "Separate multiple classes with spaces."
@@ -1453,7 +1453,7 @@ msgstr "Динамическая цена"
 
 #: static/js/editor/blocks/dynamic-data/index.js:69
 msgid "Dynamic Author Avatar"
-msgstr "Динамический аватар автора"
+msgstr "Динамический аватар а��тора"
 
 #: static/js/editor/blocks/dynamic-data/index.js:65
 msgid "Dynamic Featured Image"
@@ -1832,7 +1832,7 @@ msgstr "Отображение активных фильтров."
 
 #: framework/premium/extensions/white-label/dashboard-static/js/EditSettings.js:846
 msgid "Hide Video Links"
-msgstr "Скрыть ��сылки на видео"
+msgstr "Скрыть ссылки на видео"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/EditSettings.js:838
 msgid "Hide Documentation Links"
@@ -1897,7 +1897,7 @@ msgstr "Обновляются данные таблицы поиска такс
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/includes/taxonomies-products-lookup-table.php:470
 msgid "This tool will regenerate the product taxonomies lookup table data from existing product(s) data. This process may take a while."
-msgstr "Этот механизм восстановит данные таблицы поиска таксон��мий товаров из существующих данных о товарах. Этот процесс может занять некоторое время."
+msgstr "Этот механизм восстановит данные таблицы поиска таксономий товаров из существующих данных о товарах. Этот процесс может занять некоторое время."
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/includes/taxonomies-products-lookup-table.php:469
 msgid "Regenerate the product taxonomies lookup table"
@@ -2792,7 +2792,7 @@ msgstr "Это профессиональное расширение"
 
 #: static/js/dashboard/NoTheme.js:84
 msgid "Install and activate the Blocksy theme"
-msgstr "Установить и активировать тему Blocksy"
+msgstr "Установить и активиро��ать тему Blocksy"
 
 #: static/js/dashboard/NoTheme.js:49
 msgid "In order to take full advantage of all features it has to offer - please install and activate the Blocksy theme also."
@@ -2941,7 +2941,7 @@ msgstr "Информация о клиенте"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderOverview.js:8
 msgid "Order number"
-msgstr "Номер зака��а"
+msgstr "Номер заказа"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderDetails.js:88
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderOverview.js:28
@@ -3349,7 +3349,7 @@ msgstr "Сообщение об успехе"
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:147
 msgid "You can use dynamic code tags such as {price} inside this option."
-msgstr "Внутри этой опции можно использовать теги динамического кода, такие как {price}."
+msgstr "Внутри этой опции можно использовать теги динамичес��ого кода, такие как {price}."
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:137,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:162
@@ -3574,7 +3574,7 @@ msgstr "Корзина покупок"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/feature.php:145
 msgid "Automatically scroll page to top after user interaction."
-msgstr "Автоматическая прокр��тка страницы вверх после действия."
+msgstr "Автоматическая прокрутка страницы вверх после действия."
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/feature.php:144
 msgid "Scroll to Top"
@@ -3959,7 +3959,7 @@ msgstr "Сначала новые"
 
 #: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/options.php:18
 msgid "Oldest First"
-msgstr "Сначала старые"
+msgstr "Сначала ста��ые"
 
 #: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/options.php:11
 msgid "Reviews Order"
@@ -4085,7 +4085,7 @@ msgstr "Реверсивное состояние значка"
 
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/config.php:4
 msgid "Color Switch"
-msgstr "Переключатель цвета"
+msgstr "Тумблер цвета"
 
 #: framework/premium/features/content-blocks/options/popup.php:568
 msgid "Scroll Lock"
@@ -4184,7 +4184,7 @@ msgstr "Выберите, где нужно отображать этот бло
 
 #: framework/premium/features/content-blocks/options/hook.php:40
 msgid "Content Block Display Conditions"
-msgstr "Условия отображения блока с��держимого"
+msgstr "Условия отображения блока содержимого"
 
 #: framework/premium/features/content-blocks/options/header.php:35,
 #: framework/premium/features/content-blocks/options/single.php:15
@@ -4353,7 +4353,7 @@ msgstr "Источник видео"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:743
 msgid "After single product meta"
-msgstr "После метаданных товара"
+msgstr "После метаданных тов��ра"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:738
 msgid "Before single product meta"
@@ -4389,7 +4389,7 @@ msgstr "После мета первой записи"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:202
 msgid "Before second post meta"
-msgstr "Перед мета второй запи��и"
+msgstr "Перед мета второй записи"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:194
 msgid "Before first post meta"
@@ -4634,7 +4634,7 @@ msgstr "Цвет заголовка модуля"
 
 #: framework/extensions/trending/customizer.php:594
 msgid "Module Title Font"
-msgstr "Шриф�� заголовка модуля"
+msgstr "Шрифт заголовка модуля"
 
 #: framework/extensions/newsletter-subscribe/customizer.php:389
 msgid "Container Shadow"
@@ -10747,7 +10747,7 @@ msgstr "Динамический вывод CSS"
 
 #: framework/features/demo-install.php:98
 msgid "Your PHP installation doesn't have support for XML. Please install the <i>xml</i> or <i>simplexml</i> PHP extension in order to be able to install starter sites. You might need to contact your hosting provider to assist you in doing so."
-msgstr "Ваша установка PHP не поддерживает XML. Установите расширение PHP <i>XML</i> или <i>simplexml</i>, чтобы иметь во��можность устанавливать стартовые сайты. Возможно, вам потребуется связаться с вашим хостинг-провайдером, чтобы он помог вам в этом."
+msgstr "Ваша установка PHP не поддерживает XML. Установите расширение PHP <i>XML</i> или <i>simplexml</i>, чтобы иметь возможность устанавливать стартовые сайты. Возможно, вам потребуется связаться с вашим хостинг-провайдером, чтобы он помог вам в этом."
 
 #: framework/features/conditions-manager.php:315
 msgid "Language"

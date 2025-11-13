@@ -6016,7 +6016,7 @@ msgstr "Оберіть мову"
 
 #: static/js/options/ConditionsManager/SingleCondition.js:204
 msgid "Select taxonomy"
-msgstr "��брати таксономію"
+msgstr "Обрати таксономію"
 
 #: static/js/options/ConditionsManager/SingleCondition.js:112
 msgid "Select rule"
@@ -7483,7 +7483,7 @@ msgstr "Square"
 #: framework/features/blocks/socials/options.php:113,
 #: framework/premium/features/premium-header/items/contacts/options.php:452
 msgid "Rounded"
-msgstr "Округлені"
+msgstr "Округле��і"
 
 #: framework/features/blocks/about-me/options.php:211,
 #: framework/features/blocks/contact-info/options.php:557,

@@ -5165,7 +5165,7 @@ msgstr "برچسب‌های محصول"
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/options.php:91
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/tax-filters/TaxonomySelector.js:16
 msgid "Product Categories"
-msgstr "دسته‌بندی‌های محصول"
+msgstr "دسته‌بندی‌های م��صول"
 
 #: framework/features/conditions/rules/woo.php:25
 msgid "Product Archives"
@@ -9304,7 +9304,7 @@ msgstr "7 روز اخیر"
 
 #: framework/extensions/trending/customizer.php:388
 msgid "Last 24 Hours"
-msgstr "24 ساعت ��خیر"
+msgstr "24 ساع�� اخیر"
 
 #: framework/extensions/trending/customizer.php:387
 msgid "All Time"

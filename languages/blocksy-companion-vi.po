@@ -650,7 +650,7 @@ msgstr "Nếu bạn không muốn nhận thêm thông báo, vui lòng hủy đă
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/templates/emails/plain/waitlist-confirm-subscription.php:23
 msgid "Click the link below to confirm your subscription. Once confirmed, we will notify you when the item is back in stock."
-msgstr "Nhấp vào liên kết dưới đây để xác nhận đăng ký của bạn. Sau khi xác nhận, chúng tôi sẽ thông báo cho bạn khi sản phẩm có hàng trở lại."
+msgstr "Nhấp vào liên kết dưới đây để xác nhận đăng ký của bạn. Sau khi xác nhận, chúng tôi sẽ thông báo cho bạn khi sản ph���m có hàng trở lại."
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/templates/emails/plain/waitlist-confirm-subscription.php:19
 msgid "Product link:"
@@ -673,7 +673,7 @@ msgstr "Sản phẩm:"
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/templates/emails/waitlist-subscription-confirmed.php:30,
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/templates/emails/plain/waitlist-subscription-confirmed.php:15
 msgid "You have been successfully added to the waitlist for the following item:"
-msgstr "Bạn đã được thêm thành công v��o danh sách chờ cho sản phẩm sau:"
+msgstr "Bạn đã được thêm thành công vào danh sách chờ cho sản phẩm sau:"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/templates/emails/waitlist-confirm-subscription.php:81,
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/templates/emails/waitlist-subscription-confirmed.php:70
@@ -692,7 +692,7 @@ msgstr "Lưu ý, thời gian xác nhận là 2 ngày."
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/templates/emails/waitlist-confirm-subscription.php:69
 msgid "Confirm Subscription"
-msgstr "Xác nhận đăng ký"
+msgstr "Xác nh���n đăng ký"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/templates/emails/waitlist-confirm-subscription.php:65
 msgid "Click the button below to confirm your subscription. Once confirmed, we will notify you when the item is back in stock."
@@ -725,7 +725,7 @@ msgstr "Chào, %s!"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/views/table.php:42
 msgid "Confirmed"
-msgstr "Đã xác nhận"
+msgstr "Đã xác nh���n"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/views/table.php:21
 msgid "You don't have any products in your waitlist yet."
@@ -3490,7 +3490,7 @@ msgstr "Loại nút"
 
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:19
 msgid "Additional Actions"
-msgstr "Hành động bổ sung"
+msgstr "Hành ��ộng bổ sung"
 
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/helpers.php:36
 msgid "Quick view"
@@ -4167,7 +4167,7 @@ msgstr "Điều Kiện Hiển Thị Popup"
 
 #: framework/premium/features/content-blocks/options/maintenance.php:16
 msgid "Add one or more conditions to display the Maintenance block."
-msgstr "Thêm một hoặc nhiều điều kiện để hiển thị khối bảo trì."
+msgstr "Thêm một ho���c nhiều điều kiện để hiển thị khối bảo trì."
 
 #: framework/premium/features/content-blocks/options/maintenance.php:15
 msgid "Maintenance Block Display Conditions"
@@ -4365,7 +4365,7 @@ msgstr "Sau nút \"Thêm vào giỏ hàng\" của sản phẩm đơn"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:728
 msgid "Before single product \"Add to cart\" button"
-msgstr "Trước nút \"Thêm vào giỏ hàng\" c���a sản phẩm đơn"
+msgstr "Trước nút \"Thêm vào giỏ hàng\" của sản phẩm đơn"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:723
 msgid "After single product gallery"
@@ -4652,7 +4652,7 @@ msgstr "Gửi bình luận thất bại"
 
 #: framework/extensions/cookies-consent/extension.php:105
 msgid "Please accept the Privacy Policy in order to comment."
-msgstr "Vui lòng chấp nh��n Chính Sách Bảo Mật để bình luận."
+msgstr "Vui lòng chấp nhận Chính Sách Bảo Mật để bình luận."
 
 #: framework/extensions/cookies-consent/customizer.php:266
 msgid "Decline Button"
@@ -5082,7 +5082,7 @@ msgstr "Tệp lệnh đầu trang"
 
 #: framework/features/header/modal/register.php:76
 msgid "A link to set a new password will be sent to your email address."
-msgstr "Một liên kết để đặt mật khẩu mới s��� được gửi đến địa chỉ email của bạn."
+msgstr "Một liên kết để đặt mật khẩu mới sẽ được gửi đến địa chỉ email của bạn."
 
 #: framework/premium/features/content-blocks/admin-ui.php:708
 msgid "Show WooCommerce Hooks"
