@@ -3540,7 +3540,7 @@ msgstr "Opcije videa"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/index.js:75
 msgid "Display order overhiew section."
-msgstr "Prikaz pregleda narud��be."
+msgstr "Prikaz pregleda narudžbe."
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/index.js:90
 msgid "Order Details"

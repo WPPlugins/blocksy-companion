@@ -15,12 +15,25 @@ export const prepareUrl = (query_string) => {
 	return `${ctDashboardLocalizations.ajax_url}?${params.toString()}`
 }
 
-const performSingleRequest = async (request, requestsPayload, extraBody = {}) => {
-	const response = await fetch(prepareUrl(request.params), {
+const performSingleRequest = async (
+	request,
+	requestsPayload,
+	extraBody = {},
+	{ strategy = 'default', onStatus = null } = {}
+) => {
+	const url = prepareUrl(request.params)
+
+	const headers = {
+		'Content-Type': 'application/json',
+	}
+
+	if (strategy === 'sse') {
+		headers['Accept'] = 'text/event-stream'
+	}
+
+	const response = await fetch(url, {
 		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
+		headers,
 		body: JSON.stringify({
 			requestsPayload,
 			...(request.body || {}),
@@ -28,17 +41,95 @@ const performSingleRequest = async (request, requestsPayload, extraBody = {}) =>
 		}),
 	})
 
-	return response
+	if (strategy === 'sse') {
+		if (!response.ok) {
+			throw new Error(`HTTP ${response.status}`)
+		}
+
+		return parseSSEResponse(response, onStatus)
+	}
+
+	// Default strategy - parse JSON
+	if (!response.ok) {
+		throw new Error(`HTTP ${response.status}`)
+	}
+
+	const body = await response.json()
+
+	if (!body || !body.success) {
+		throw new Error(body?.data?.message || 'Unknown error')
+	}
+
+	return {
+		success: true,
+		data: body.data,
+	}
+}
+
+const parseSSEResponse = async (response, onStatus) => {
+	const reader = response.body.getReader()
+	const decoder = new TextDecoder()
+	let buffer = ''
+
+	while (true) {
+		const { done, value } = await reader.read()
+
+		if (done) {
+			break
+		}
+
+		buffer += decoder.decode(value, { stream: true })
+
+		// Parse SSE events from buffer
+		const lines = buffer.split('\n')
+		buffer = lines.pop() || '' // Keep incomplete line in buffer
+
+		let currentEvent = null
+		let currentData = ''
+
+		for (const line of lines) {
+			if (line.startsWith('event: ')) {
+				currentEvent = line.slice(7)
+			} else if (line.startsWith('data: ')) {
+				currentData = line.slice(6)
+			} else if (line === '' && currentEvent && currentData) {
+				// End of event
+				try {
+					const data = JSON.parse(currentData)
+
+					if (currentEvent === 'status' && onStatus) {
+						onStatus(data.message)
+					} else if (currentEvent === 'complete') {
+						return {
+							success: true,
+							data: data,
+						}
+					} else if (currentEvent === 'error') {
+						throw new Error(data.message)
+					}
+				} catch (e) {
+					if (e.message) {
+						throw e
+					}
+					console.error('Failed to parse SSE data:', e)
+				}
+
+				currentEvent = null
+				currentData = ''
+			}
+		}
+	}
+
+	throw new Error('SSE stream ended without complete event')
 }
 
 export const performRequestWithExponentialBackoff = async (
 	request,
 	requestsPayload,
-	{ maxRetries = 5 } = {}
+	{ maxRetries = 5, strategy = 'default', onStatus = null } = {}
 ) => {
 	let attempt = 0
 	const label = request.title
-	const isContentRequest = request.params.action === 'blocksy_demo_install_content'
 
 	while (attempt < maxRetries) {
 		// Run cleanup request before retry attempts (not on first attempt)
@@ -56,7 +147,9 @@ export const performRequestWithExponentialBackoff = async (
 				)
 				console.log(`[${label}] Cleanup completed`)
 			} catch (e) {
-				console.log(`[${label}] Cleanup failed: ${e.message}, continuing anyway`)
+				console.log(
+					`[${label}] Cleanup failed: ${e.message}, continuing anyway`
+				)
 			}
 		}
 
@@ -73,153 +166,88 @@ export const performRequestWithExponentialBackoff = async (
 		console.log(`[${label}] Attempt ${attempt + 1}/${maxRetries}`)
 		const startTime = Date.now()
 
-		const response = await performSingleRequest(request, requestsPayload)
+		let response
+		try {
+			response = await performSingleRequest(
+				request,
+				requestsPayload,
+				{},
+				{ strategy, onStatus }
+			)
+		} catch (e) {
+			console.log(`[${label}] Attempt ${attempt + 1} failed: ${e.message}`)
+			attempt++
+			continue
+		}
 
 		const duration = Date.now() - startTime
 
-		// For content requests: non-200 on first request means server timed out
-		// Record safe duration and continue chunked flow as part of same attempt
-		if (response.status !== 200 && isContentRequest) {
-			console.log(
-				`[${label}] Attempt ${attempt + 1} got HTTP ${response.status}, server likely timed out (took ${duration}ms)`
-			)
-
+		// Check for timeout/chunked response (SSE content import)
+		if (
+			strategy === 'sse' &&
+			response.data?.status === 'content_import_timeout_reached'
+		) {
 			// Calculate safe duration: 70% of request time
 			const safeDuration = Math.floor((duration * 0.7) / 1000)
 			console.log(
-				`[${label}] Using safe duration: ${safeDuration}s for subsequent requests`
+				`[${label}] Timeout reached, continuing with chunked import (safe duration: ${safeDuration}s)`
 			)
 
-			// Run cleanup before continuing chunked flow
-			if (request.cleanup) {
-				console.log(`[${label}] Running cleanup before chunked flow`)
-
-				try {
-					await performRequestWithExponentialBackoff(
-						{
-							title: `${label} (cleanup)`,
-							params: request.cleanup.params,
-						},
-						{},
-						{ maxRetries: 3 }
-					)
-					console.log(`[${label}] Cleanup completed`)
-				} catch (e) {
-					console.log(`[${label}] Cleanup failed: ${e.message}, continuing anyway`)
-				}
+			let currentPayload = {
+				...requestsPayload,
+				importer_data: response.data.importer_data,
 			}
 
-			let currentPayload = requestsPayload
-
-			// Continue chunked import as part of same attempt
+			// Continue chunked import
 			while (true) {
-				console.log(`[${label}] Continuing chunked import...`)
-
-				const chunkResponse = await performSingleRequest(
-					request,
-					currentPayload,
-					{ duration: safeDuration }
+				console.log(
+					`[${label}] Continuing chunked import (processed: ${response.data.total_processed}/${response.data.total_posts})`
 				)
 
-				if (chunkResponse.status !== 200) {
-					console.log(
-						`[${label}] Chunked import failed: HTTP ${chunkResponse.status}, restarting attempt`
-					)
-					break
-				}
-
-				let chunkBody
-
+				let chunkResponse
 				try {
-					chunkBody = await chunkResponse.json()
+					chunkResponse = await performSingleRequest(
+						request,
+						currentPayload,
+						{ duration: safeDuration },
+						{ strategy, onStatus }
+					)
 				} catch (e) {
 					console.log(
-						`[${label}] Chunked import failed: Invalid JSON response, restarting attempt`
+						`[${label}] Chunked import failed: ${e.message}, restarting attempt`
 					)
 					break
 				}
 
-				if (!chunkBody || !chunkBody.success) {
-					const errorMsg = chunkBody?.data?.message || 'Unknown error'
+				// Another timeout - continue chunking
+				if (
+					chunkResponse.data?.status === 'content_import_timeout_reached'
+				) {
 					console.log(
-						`[${label}] Chunked import failed: ${errorMsg}, restarting attempt`
-					)
-					break
-				}
-
-				// Another timeout - update payload and continue
-				if (chunkBody.data?.status === 'content_import_timeout_reached') {
-					console.log(
-						`[${label}] Chunk completed, more content remaining (processed: ${chunkBody.data.total_processed}/${chunkBody.data.total_posts})`
+						`[${label}] Chunk completed, more content remaining (processed: ${chunkResponse.data.total_processed}/${chunkResponse.data.total_posts})`
 					)
 
 					currentPayload = {
 						...currentPayload,
-						importer_data: chunkBody.data.importer_data,
+						importer_data: chunkResponse.data.importer_data,
 					}
-
 					continue
 				}
 
 				// Success - content import complete
 				console.log(`[${label}] Chunked import complete`)
 
-				let nextPayload = currentPayload
-
-				if (
-					chunkBody.data &&
-					chunkBody.data != null &&
-					chunkBody.data.constructor.name === 'Object'
-				) {
-					nextPayload = {
-						...currentPayload,
-						...chunkBody.data,
-					}
-				}
-
 				return {
 					success: true,
-					data: chunkBody.data,
-					requestsPayload: nextPayload,
+					data: chunkResponse.data,
+					requestsPayload: {
+						...currentPayload,
+						...chunkResponse.data,
+					},
 				}
 			}
 
 			// Chunked flow failed, restart attempt
-			attempt++
-			continue
-		}
-
-		if (response.status !== 200) {
-			console.log(
-				`[${label}] Attempt ${attempt + 1} failed: HTTP ${
-					response.status
-				} (took ${duration}ms)`
-			)
-			attempt++
-			continue
-		}
-
-		let body
-
-		try {
-			body = await response.json()
-		} catch (e) {
-			console.log(
-				`[${label}] Attempt ${
-					attempt + 1
-				} failed: Invalid JSON response (took ${duration}ms)`
-			)
-			attempt++
-			continue
-		}
-
-		if (!body || !body.success) {
-			const errorMsg = body?.data?.message || 'Unknown error'
-			console.log(
-				`[${label}] Attempt ${
-					attempt + 1
-				} failed: ${errorMsg} (took ${duration}ms)`
-			)
 			attempt++
 			continue
 		}
@@ -232,19 +260,19 @@ export const performRequestWithExponentialBackoff = async (
 		let nextPayload = requestsPayload
 
 		if (
-			body.data &&
-			body.data != null &&
-			body.data.constructor.name === 'Object'
+			response.data &&
+			response.data != null &&
+			response.data.constructor.name === 'Object'
 		) {
 			nextPayload = {
 				...requestsPayload,
-				...body.data,
+				...response.data,
 			}
 		}
 
 		return {
 			success: true,
-			data: body.data,
+			data: response.data,
 			requestsPayload: nextPayload,
 		}
 	}

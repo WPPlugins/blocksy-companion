@@ -2033,7 +2033,7 @@ msgstr "Widżet do filtrowania produktów WooCommerce według ceny."
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/rating-filter/index.js:72
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/tax-filters/Edit.js:380
 msgid "Show Tooltip"
-msgstr "Pokaż podpowiedź"
+msgstr "Pokaż podpowied��"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/tax-filters/Disabled.js:7
 msgid "Please select a valid taxonomy."

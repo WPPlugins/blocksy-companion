@@ -3482,7 +3482,7 @@ msgstr "Yêu cầu hành động - Cài đặt giao diện Blocksy"
 
 #: static/js/dashboard/NoTheme.js:42
 msgid "Blocksy Companion is the complementary plugin to Blocksy theme. It adds a bunch of great features to the theme and acts as an unlocker for the Blocksy Pro package."
-msgstr "Blocksy Companion là plugin bổ sung cho chủ đ��� Blocksy. Nó thêm một loạt các tính năng tuyệt vời vào chủ đề và hoạt động như một bộ mở khóa cho gói Blocksy Pro."
+msgstr "Blocksy Companion là plugin bổ sung cho chủ đề Blocksy. Nó thêm một loạt các tính năng tuyệt vời vào chủ đề và hoạt động như một bộ mở khóa cho gói Blocksy Pro."
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/tax-filters/RenderOptions.js:151
 msgid "Show Image Frame"
@@ -4030,7 +4030,7 @@ msgstr "Thông điệp mặc định"
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:147
 msgid "You can use dynamic code tags such as {price} inside this option."
-msgstr "Bạn có thể sử dụng các thẻ mã động nh�� {price} bên trong tùy chọn này."
+msgstr "Bạn có thể sử dụng các thẻ mã động như {price} bên trong tùy chọn này."
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:178
 msgid "Success Message"
@@ -4519,7 +4519,7 @@ msgstr "Sản phẩm Affiliate"
 
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:12
 msgid "Product Archive"
-msgstr "Lưu Trữ Sản Phẩm"
+msgstr "Lưu Trữ Sản Ph���m"
 
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:16,
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:70
@@ -5251,7 +5251,7 @@ msgstr "Tất cả sản phẩm"
 
 #: framework/features/conditions/rules/basic.php:40
 msgid "All Singulars"
-msgstr "Tất cả nội dung đơn l��"
+msgstr "Tất cả nội dung đơn lẻ"
 
 #: framework/features/conditions/rules/basic.php:51
 msgid "All Archives"
@@ -5490,7 +5490,7 @@ msgstr "Tùy chỉnh phân loại"
 
 #: framework/helpers/exts-configs.php:164
 msgid "Additional customisation options for your taxonomies such as hero backgrounds and custom colour labels."
-msgstr "Các tùy chọn tùy chỉnh bổ sung cho các phân loại của bạn như hình nền nổi bật v�� nhãn màu tùy chỉnh."
+msgstr "Các tùy chọn tùy chỉnh bổ sung cho các phân loại của bạn như hình nền nổi bật và nhãn màu tùy chỉnh."
 
 #. translators: This is a brand name. Preferably to not be translated
 #: framework/helpers/exts-configs.php:227
@@ -5907,7 +5907,7 @@ msgstr "Thanh điều hướng nhanh"
 
 #: framework/premium/extensions/shortcuts/customizer.php:314
 msgid "Set link to nofollow"
-msgstr "Đặt liên k��t thành nofollow"
+msgstr "Đặt liên kết th��nh nofollow"
 
 #: framework/premium/extensions/shortcuts/customizer.php:320
 msgid "Custom class"
@@ -7455,7 +7455,7 @@ msgstr "Kết thúc hộp bật lên form đăng ký"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:548
 msgid "Lost password form modal start"
-msgstr "Bắt đầu hộp bật lên form quên mật khẩu"
+msgstr "B���t đầu hộp bật lên form quên mật khẩu"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:555
 msgid "Lost password form modal end"

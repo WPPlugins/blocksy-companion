@@ -128,7 +128,7 @@ const getInitialStepsDescriptors = (params) => {
 		erase_content: {
 			requests: [
 				{
-					title: __('Erase content', 'blocksy-companion'),
+					title: __('Preparing content', 'blocksy-companion'),
 
 					params: {
 						action: 'blocksy_demo_erase_content',
@@ -294,56 +294,24 @@ export const useInstaller = (demoConfiguration) => {
 					const isContentRequest =
 						request.params.action === 'blocksy_demo_install_content'
 
-					let loopMessagesTimer = null
-					let isStatusRequestPending = false
-
-					if (isContentRequest) {
-						loopMessagesTimer = setInterval(() => {
-							if (isStatusRequestPending) {
-								return
-							}
-
-							isStatusRequestPending = true
-
-							fetch(
-								prepareUrl({
-									action: 'blocksy_demo_get_content_install_status',
-								})
-							)
-								.then((response) => response.json())
-								.then((body) => {
-									if (body.success) {
-										const message = body.data
-										if (message) {
-											setLastMessage(message)
-										}
-									}
-								})
-								.finally(() => {
-									isStatusRequestPending = false
-								})
-						}, 2000)
-					}
-
 					try {
-						const result =
-							await performRequestWithExponentialBackoff(
-								request,
-								requestsPayload
-							)
+						const result = await performRequestWithExponentialBackoff(
+							request,
+							requestsPayload,
+							isContentRequest
+								? {
+										strategy: 'sse',
+										onStatus: (statusMessage) => {
+											setLastMessage(statusMessage)
+										},
+									}
+								: {}
+						)
 
 						requestsPayload = result.requestsPayload
 					} catch (e) {
-						if (loopMessagesTimer) {
-							clearInterval(loopMessagesTimer)
-						}
-
 						demoInstallFinish(false, e.message)
 						return
-					}
-
-					if (isContentRequest && loopMessagesTimer) {
-						clearInterval(loopMessagesTimer)
 					}
 				}
 

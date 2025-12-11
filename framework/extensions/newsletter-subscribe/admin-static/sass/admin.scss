@@ -15,3 +15,8 @@
 		}
 	}
 }
+
+// hide border radius link/unlink option from Gutenberg UI
+[role="tabpanel"]:has(.blocksy-options-hide-border-unlink) .components-border-radius-control__linked-button {
+    display: none
+}

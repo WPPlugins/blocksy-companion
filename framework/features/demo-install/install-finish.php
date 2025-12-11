@@ -79,6 +79,7 @@ class DemoInstallFinalActions {
 		}
 
 		$this->maybe_activate_elementor_experimental_container();
+		$this->maybe_recreate_elementor_kit();
 
 		$this->update_counts_for_all_terms();
 
@@ -554,6 +555,37 @@ class DemoInstallFinalActions {
 		if ($should_update_nav_menu_locations) {
 			set_theme_mod('nav_menu_locations', $old_nav_menu_locations);
 		}
+	}
+
+	/**
+	 * Recreate Elementor default kit if it doesn't exist.
+	 *
+	 * After demo import, Elementor may show a warning that the default kit
+	 * is missing. This method creates a new default kit if there isn't one.
+	 */
+	public function maybe_recreate_elementor_kit() {
+		if (! defined('ELEMENTOR_VERSION')) {
+			return;
+		}
+
+		if (! class_exists('\Elementor\Plugin')) {
+			return;
+		}
+
+		$kit = \Elementor\Plugin::$instance->kits_manager->get_active_kit();
+
+		// If there's already an active kit, do nothing
+		if ($kit->get_id()) {
+			return;
+		}
+
+		$created_default_kit = \Elementor\Plugin::$instance->kits_manager->create_default();
+
+		if (! $created_default_kit) {
+			return;
+		}
+
+		update_option(\Elementor\Core\Kits\Manager::OPTION_ACTIVE, $created_default_kit);
 	}
 
 	/**

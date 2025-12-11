@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-27 14:15+0000\n"
+"POT-Creation-Date: 2025-12-11 16:54+0000\n"
 "Project-Id-Version: undefined\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
@@ -290,9 +290,9 @@ msgid ""
 "in doing so."
 msgstr ""
 
-#: framework/features/demo-install.php:172,
-#: framework/features/demo-install/content-installer.php:170,
-#: framework/features/demo-install/content-installer.php:165,
+#: framework/features/demo-install.php:159,
+#: framework/features/demo-install/content-installer.php:179,
+#: framework/features/demo-install/content-installer.php:175,
 #: framework/features/demo-install/demo-register.php:12
 msgid "No demo name provided."
 msgstr ""
@@ -1200,7 +1200,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:372,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:403,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:432
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:273
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:274
 #: static/js/editor/blocks/about-me/Edit.js:196
 #: static/js/editor/blocks/contact-info/Edit.js:203
 #: static/js/editor/blocks/search/Edit.js:409
@@ -1291,7 +1291,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:378,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:408,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:437
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:282
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:283
 #: static/js/editor/blocks/about-me/Edit.js:205
 #: static/js/editor/blocks/contact-info/Edit.js:212
 #: static/js/editor/blocks/search/Edit.js:368
@@ -1528,7 +1528,7 @@ msgstr ""
 #: framework/extensions/newsletter-subscribe/helpers.php:37,
 #: framework/extensions/newsletter-subscribe/helpers.php:81,
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:122,
-#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:150
+#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:179
 msgid "Your name"
 msgstr ""
 
@@ -1773,7 +1773,7 @@ msgstr ""
 #: framework/premium/features/premium-header/items/search-input/options.php:314,
 #: framework/premium/features/premium-header/items/search-input/options.php:346,
 #: framework/premium/features/premium-header/items/search-input/options.php:376
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:131
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:132
 #: static/js/editor/blocks/search/Edit.js:196
 msgid "Input Font Color"
 msgstr ""
@@ -1796,7 +1796,7 @@ msgstr ""
 #: framework/premium/features/premium-header/items/search-input/options.php:732,
 #: framework/premium/features/premium-header/items/search-input/options.php:762,
 #: framework/premium/features/premium-header/items/search-input/options.php:792
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:222
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:223
 #: static/js/editor/blocks/search/Edit.js:269
 msgid "Focus"
 msgstr ""
@@ -1807,7 +1807,7 @@ msgstr ""
 #: framework/premium/features/premium-header/items/search-input/options.php:574,
 #: framework/premium/features/premium-header/items/search-input/options.php:606,
 #: framework/premium/features/premium-header/items/search-input/options.php:636
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:164
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:165
 #: static/js/editor/blocks/search/Edit.js:223
 msgid "Input Border Color"
 msgstr ""
@@ -1818,7 +1818,7 @@ msgstr ""
 #: framework/premium/features/premium-header/items/search-input/options.php:709,
 #: framework/premium/features/premium-header/items/search-input/options.php:739,
 #: framework/premium/features/premium-header/items/search-input/options.php:769
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:201
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:202
 #: static/js/editor/blocks/search/Edit.js:250
 msgid "Input Background Color"
 msgstr ""
@@ -1869,8 +1869,8 @@ msgid "First name"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/helpers.php:180,
-#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:268,
-#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:269
+#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:297,
+#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:298
 msgid "Email address"
 msgstr ""
 
@@ -2530,22 +2530,26 @@ msgstr ""
 msgid "Sorry, you don't have permission to erase content."
 msgstr ""
 
-#: framework/features/demo-install/content-installer.php:75
+#: framework/features/demo-install/content-installer.php:35
+msgid "Invalid request. SSE Accept header required."
+msgstr ""
+
+#: framework/features/demo-install/content-installer.php:87
 msgid "Sorry, you don't have permission to install content."
 msgstr ""
 
-#: framework/features/demo-install/content-installer.php:201,
-#: framework/features/demo-install/content-installer.php:195
+#: framework/features/demo-install/content-installer.php:207,
+#: framework/features/demo-install/content-installer.php:203
 msgid "No demo data found."
 msgstr ""
 
 #. translators: %1$s and %2$s are HTML tags for a link.
-#: framework/features/demo-install/content-installer.php:339
+#: framework/features/demo-install/content-installer.php:343
 msgid "Importing %1$s: %2$s"
 msgstr ""
 
-#: framework/features/demo-install/content-installer.php:437,
-#: framework/features/demo-install/content-installer.php:432
+#: framework/features/demo-install/content-installer.php:482,
+#: framework/features/demo-install/content-installer.php:478
 msgid "No pages to assign."
 msgstr ""
 
@@ -3230,17 +3234,17 @@ msgid "Fields Gap"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php:137,
-#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:155
+#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:184
 msgid "Your email *"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:14
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/index.js:56
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/index.js:87
 msgid "Newsletter"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:258,
-#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:259,
+#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:287,
+#: framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/view.php:288,
 #: framework/features/blocks/about-me/options.php:68,
 #: framework/features/header/items/account/options.php:611,
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:244,
@@ -3250,18 +3254,18 @@ msgid "Name"
 msgstr ""
 
 #: framework/extensions/newsletter-subscribe/providers/active-campaign.php:165,
-#: framework/extensions/newsletter-subscribe/providers/brevo.php:121,
+#: framework/extensions/newsletter-subscribe/providers/brevo.php:117,
 #: framework/extensions/newsletter-subscribe/providers/campaign-monitor.php:141,
 #: framework/extensions/newsletter-subscribe/providers/convertkit-new.php:151,
 #: framework/extensions/newsletter-subscribe/providers/convertkit.php:103,
 #: framework/extensions/newsletter-subscribe/providers/demo.php:40,
 #: framework/extensions/newsletter-subscribe/providers/emailoctopus.php:107,
 #: framework/extensions/newsletter-subscribe/providers/fluent-crm.php:87,
-#: framework/extensions/newsletter-subscribe/providers/klaviyo.php:172,
-#: framework/extensions/newsletter-subscribe/providers/mailchimp.php:194,
+#: framework/extensions/newsletter-subscribe/providers/klaviyo.php:165,
+#: framework/extensions/newsletter-subscribe/providers/mailchimp.php:203,
 #: framework/extensions/newsletter-subscribe/providers/mailerlite-classic.php:109,
 #: framework/extensions/newsletter-subscribe/providers/mailerlite-new.php:133,
-#: framework/extensions/newsletter-subscribe/providers/mailpoet.php:90
+#: framework/extensions/newsletter-subscribe/providers/mailpoet.php:87
 msgid "Thank you for subscribing to our newsletter!"
 msgstr ""
 
@@ -3270,7 +3274,7 @@ msgid "Demo List"
 msgstr ""
 
 #. translators: %s is the email address
-#: framework/extensions/newsletter-subscribe/providers/mailchimp.php:186
+#: framework/extensions/newsletter-subscribe/providers/mailchimp.php:195
 msgid "%s is already a list member."
 msgstr ""
 
@@ -7505,7 +7509,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:253,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:325,
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:393
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:262
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:263
 #: static/js/editor/blocks/search/Edit.js:311
 msgid "Button Background Color"
 msgstr ""
@@ -9359,20 +9363,20 @@ msgstr ""
 msgid "Invalid API Key..."
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:163
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:164
 msgid "Container Border Color"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:197
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:198
 msgid "Container Background Color"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:233
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:234
 #: static/js/editor/blocks/search/Edit.js:281
 msgid "Button Text Color"
 msgstr ""
 
-#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/index.js:17
+#: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/index.js:48
 msgid "Newsletter Controls"
 msgstr ""
 
@@ -10733,8 +10737,7 @@ msgid "Installing %s"
 msgstr ""
 
 #: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:131
-#: static/js/dashboard/screens/DemoInstall/Wizzard/ModifyDemo.js:72
-msgid "Erase content"
+msgid "Preparing content"
 msgstr ""
 
 #: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:143
@@ -10753,7 +10756,7 @@ msgstr ""
 msgid "Final touches"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:371
+#: static/js/dashboard/screens/DemoInstall/Installer/useInstaller.js:339
 msgid "Preparing data..."
 msgstr ""
 
@@ -10892,6 +10895,10 @@ msgstr ""
 msgid "Deactivate demo plugins"
 msgstr ""
 
+#: static/js/dashboard/screens/DemoInstall/Wizzard/ModifyDemo.js:72
+msgid "Erase content"
+msgstr ""
+
 #: static/js/dashboard/screens/DemoInstall/Wizzard/PickBuilder.js:64
 msgid "Choose Page Builder"
 msgstr ""
@@ -10902,11 +10909,11 @@ msgid ""
 "Please select one in order to continue."
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Wizzard/Plugins.js:73
+#: static/js/dashboard/screens/DemoInstall/Wizzard/Plugins.js:74
 msgid "Install & Activate Plugins"
 msgstr ""
 
-#: static/js/dashboard/screens/DemoInstall/Wizzard/Plugins.js:75
+#: static/js/dashboard/screens/DemoInstall/Wizzard/Plugins.js:76
 msgid ""
 "The following plugins are required for this starter site in order to work "
 "properly."

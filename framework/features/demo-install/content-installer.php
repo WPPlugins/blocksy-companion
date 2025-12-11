@@ -26,6 +26,19 @@ class DemoInstallContentInstaller {
 	}
 
 	public function import() {
+		// For AJAX requests, require SSE Accept header
+		if ($this->is_ajax_request) {
+			$accept_header = isset($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : '';
+
+			if (strpos($accept_header, 'text/event-stream') === false) {
+				wp_send_json_error([
+					'message' => __("Invalid request. SSE Accept header required.", 'blocksy-companion')
+				]);
+			}
+
+			$this->setup_sse_headers();
+		}
+
 		add_filter(
 			'option_uploads_use_yearmonth_folders',
 			'__return_true',
@@ -71,9 +84,7 @@ class DemoInstallContentInstaller {
 			&&
 			$this->is_ajax_request
 		) {
-			wp_send_json_error([
-				'message' => __("Sorry, you don't have permission to install content.", 'blocksy-companion')
-			]);
+			$this->send_sse_error(__("Sorry, you don't have permission to install content.", 'blocksy-companion'));
 		}
 
 		if (class_exists('\Elementor\Compatibility')) {
@@ -161,9 +172,7 @@ class DemoInstallContentInstaller {
 
 		if (! $this->demo_name) {
 			if ($this->is_ajax_request) {
-				wp_send_json_error([
-					'message' => __("No demo name provided.", 'blocksy-companion')
-				]);
+				$this->send_sse_error(__("No demo name provided.", 'blocksy-companion'));
 			} else {
 				return new \WP_Error(
 					'blocksy_demo_install_content_no_demo_name',
@@ -191,10 +200,7 @@ class DemoInstallContentInstaller {
 			! isset($demo_to_install['demo']['content'])
 		) {
 			if ($this->is_ajax_request) {
-				wp_send_json_error([
-					'message' => __("No demo data found.", 'blocksy-companion'),
-					'demo' => $demo_to_install
-				]);
+				$this->send_sse_error(__("No demo data found.", 'blocksy-companion'));
 			} else {
 				return new \WP_Error(
 					'blocksy_demo_install_content_no_demo_data',
@@ -291,10 +297,10 @@ class DemoInstallContentInstaller {
 		$_POST['user_map'] = $user_select;
 		$_POST['fetch_attachments'] = $wp_import->fetch_attachments;
 
+		$is_first_import_request = true;
+
 		if ($this->is_ajax_request) {
 			$body = json_decode(file_get_contents('php://input'), true);
-
-			$is_first_import_request = true;
 
 			if (isset($body['requestsPayload']['importer_data'])) {
 				$importer_data = $body['requestsPayload']['importer_data'];
@@ -332,21 +338,20 @@ class DemoInstallContentInstaller {
 				function($post) use ($wp_import, $content_import_timeout) {
 					$time = microtime(true) - $this->content_started_at;
 
-					update_option(
-						'blocksy_ext_demos_content_install_status',
-						blocksy_safe_sprintf(
-							// translators: %1$s and %2$s are HTML tags for a link.
-							__('Importing %1$s: %2$s', 'blocksy-companion'),
-							$post['post_type'],
-							$post['post_title']
-						)
+					$status_message = blocksy_safe_sprintf(
+						// translators: %1$s and %2$s are HTML tags for a link.
+						__('Importing %1$s: %2$s', 'blocksy-companion'),
+						$post['post_type'],
+						$post['post_title']
 					);
+
+					$this->send_sse_status($status_message);
 
 					if ($time > $content_import_timeout) {
 						$import_output = ob_get_clean();
 						wp_suspend_cache_invalidation(false);
 
-						wp_send_json_success([
+						$this->send_sse_complete([
 							'status' => 'content_import_timeout_reached',
 							'import_output' => $import_output,
 							'importer_data' => [
@@ -393,7 +398,7 @@ class DemoInstallContentInstaller {
 		$this->assign_pages_ids($demo, $builder);
 
 		if ($this->is_ajax_request) {
-			wp_send_json_success([
+			$this->send_sse_complete([
 				'processed_posts' => $wp_import->processed_posts,
 				'processed_terms' => $wp_import->processed_terms,
 				'import_output' => $import_output,
@@ -403,6 +408,48 @@ class DemoInstallContentInstaller {
 
 	public function track_post_insert($post_id) {
 		update_post_meta($post_id, 'blocksy_demos_imported_post', true);
+	}
+
+	private function setup_sse_headers() {
+		// Disable output buffering for SSE
+		while (ob_get_level()) {
+			ob_end_clean();
+		}
+
+		header('Content-Type: text/event-stream');
+		header('Cache-Control: no-cache');
+		header('Connection: keep-alive');
+		header('X-Accel-Buffering: no');
+
+		// Disable time limit for SSE
+		set_time_limit(0);
+
+		// Send initial connection event
+		$this->send_sse_event('connected', ['message' => 'SSE connection established']);
+	}
+
+	private function send_sse_event($event, $data) {
+		echo "event: {$event}\n";
+		echo "data: " . wp_json_encode($data) . "\n\n";
+
+		if (ob_get_level()) {
+			ob_flush();
+		}
+		flush();
+	}
+
+	private function send_sse_status($message) {
+		$this->send_sse_event('status', ['message' => $message]);
+	}
+
+	private function send_sse_complete($data) {
+		$this->send_sse_event('complete', $data);
+		exit;
+	}
+
+	private function send_sse_error($message) {
+		$this->send_sse_event('error', ['message' => $message]);
+		exit;
 	}
 
 	public function track_term_insert($term_id) {
@@ -428,9 +475,7 @@ class DemoInstallContentInstaller {
 
 		if (! isset($demo_content['pages_ids_options'])) {
 			if ($this->is_ajax_request) {
-				wp_send_json_error([
-					'message' => __("No pages to assign.", 'blocksy-companion')
-				]);
+				$this->send_sse_error(__("No pages to assign.", 'blocksy-companion'));
 			} else {
 				return new \WP_Error(
 					'blocksy_demo_install_content_no_pages',
@@ -440,6 +485,16 @@ class DemoInstallContentInstaller {
 		}
 
 		foreach ($demo_content['pages_ids_options'] as $option_id => $page_title) {
+			// If no page title provided, skip.
+			//
+			// Otherwise, we might accidentally set options like 'woocommerce_shop_page_id'
+			// to the first matching page found, even if the demo didn't intend to set it.
+			// This would lead to unexpected behavior.
+			// And Woo will drop that page in their migration tool if Woo is not active.
+			if (empty($page_title)) {
+				continue;
+			}
+
 			if (strpos($option_id, 'woocommerce') !== false) {
 				if (! class_exists('WooCommerce')) {
 					continue;

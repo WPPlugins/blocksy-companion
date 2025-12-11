@@ -150,6 +150,26 @@ class DemoInstallOptionsExport {
 			));
 		}
 
+		if (class_exists('\FluentSnippets\App\Model\Snippet')) {
+			$snippetModel = new \FluentSnippets\App\Model\Snippet();
+			$allSnippets = $snippetModel->get();
+
+			$formattedSnippets = [];
+
+			foreach ($allSnippets as $snippet) {
+				$code = $snippet['code'];
+				$meta = $snippet['meta'];
+
+				$formattedSnippets[] = [
+					'code'      => base64_encode($code),
+					'code_hash' => md5($code),
+					'info'      => $meta,
+				];
+			}
+
+			$data['fluent_snippets'] = $formattedSnippets;
+		}
+
 		return $data;
 	}
 

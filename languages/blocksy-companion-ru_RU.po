@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-11-09 08:57:18+0000\n"
+"PO-Revision-Date: 2025-11-29 14:59:59+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,663 +13,663 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:328
 msgid "Product brands that the coupon will not be applied to, or that cannot be in the cart in order for the \"Fixed cart discount\" to be applied."
-msgstr ""
+msgstr "Бренды товаров, к которым не будет применяться купон или которые не могут быть добавлены в корзину для применения «фиксированной скидки на покупку»."
 
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:343
 msgid "Exclude brands"
-msgstr ""
+msgstr "Исключить бренды"
 
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:383
 msgid "Product brands that the coupon will be applied to, or that must be in the cart in order for the \"Fixed cart discount\" to be applied."
-msgstr ""
+msgstr "Бренды товаров, к которым будет применён купон, или которые должны быть в корзине, чтобы была применена «фиксированная скидка на покупку»."
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/cart-reservation-cleaner.php:16
 msgid "Every 12 Hours"
-msgstr ""
+msgstr "Каждые 12 часов"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/feature.php:417
 msgid "<p><strong>🔥 Hurry up! Your selected items are reserved for {time} minutes.</strong></p>"
-msgstr ""
+msgstr "<p><strong>🔥 Поторопитесь! Выбранные вами товары зарезервированы на {time} мин.</strong></p>"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:28
 msgid "Countdown Duration"
-msgstr ""
+msgstr "Продолжительность обратного отсчёта"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:34
 msgid "Determine for how long items in the cart are reserved before being removed."
-msgstr ""
+msgstr "Определите, на какой срок товары помещённые в корзину будут зарезервированы перед удалением."
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:40
 msgid "<p><strong>🔥 Hurry up! Your selected items are in high demand!</strong><br>Your cart will be reserved for {time} minutes.</p>"
-msgstr ""
+msgstr "<p><strong>🔥 Поторопитесь! Выбранные вами товары пользуются большим спросом!</strong><br>Товары в вашей корзине зарезервированы на {time} мин.</p>"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:48
 msgid "You can use dynamic code tags such as {time} inside this option."
-msgstr ""
+msgstr "Можно использовать теги динамического кода, такие как {time}, внутри этого параметра."
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:603
 msgid "Select terms"
-msgstr ""
+msgstr "Выбрать объекты"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:622
 msgid "Select all"
-msgstr ""
+msgstr "Выбрать все"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:623
 msgid "Select none"
-msgstr ""
+msgstr "Сбросить выбор"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:624
 msgid "Add new"
-msgstr ""
+msgstr "Добавить новый"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:56
 msgid "Order number:"
-msgstr ""
+msgstr "Номер заказа:"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:61
 msgid "Date:"
-msgstr ""
+msgstr "Дата:"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:73
 msgid "Total:"
-msgstr ""
+msgstr "Итого:"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:79
 msgid "Payment method:"
-msgstr ""
+msgstr "Способ оплаты:"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/price.php:106
 msgid "Minimum:"
-msgstr ""
+msgstr "Минимум:"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/price.php:138
 msgid "Maximum:"
-msgstr ""
+msgstr "Максимум:"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:125
 msgid "Regenerating Taxonomies Data"
-msgstr ""
+msgstr "Регеренация таксономических данных"
 
 #. translators: %s is replaced with the current progress percentage.
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:145
 msgid "Progress <span>%s%%</span>"
-msgstr ""
+msgstr "Прогресс <span>%s%%</span>"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:162
 msgid "Please wait until the WooCommerce product taxonomies lookup table is regenerated."
-msgstr ""
+msgstr "Подождите, пока будет обновлена таблица поиска таксономий товаров WooCommerce."
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:175
 msgid "Why is the table being regenerated?"
-msgstr ""
+msgstr "Почему таблица генерируется заново?"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:187
 msgid "Regenerate table manually"
-msgstr ""
+msgstr "Генерировать таблицу заново вручную"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/includes/taxonomies-products-lookup-table.php:533
 msgid "This tool will abort the regenerate product taxonomies lookup table regeneration. After this is done the process can be either started over, or resumed to continue where it stopped."
-msgstr ""
+msgstr "Этот инструмент прервёт регенерацию таблицы поиска по таксономиям товаров. После этого процесс можно либо запустить заново, либо возобновить с прежнего места."
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:63
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "пользователь"
+msgstr[1] "пользователя"
+msgstr[2] "пользователей"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:67
 msgid "View Subscribers"
-msgstr ""
+msgstr "Просмотр подписчиков"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:87
 msgid "Edit this item"
-msgstr ""
+msgstr "Править этот товар"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:93,
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:94
 msgid "View Product"
-msgstr ""
+msgstr "Просмотр товара"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:155
 msgid "Out of stock"
-msgstr ""
+msgstr "Нет в наличии"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:152
 msgid "In stock"
-msgstr ""
+msgstr "В наличии"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:217
 msgid "Subscribers"
-msgstr ""
+msgstr "Подписчики"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:224
 msgid "Pending entries"
-msgstr ""
+msgstr "Ожидающие записи"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:232
 msgid "Failed entries"
-msgstr ""
+msgstr "Неудачные записи"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:245
 msgid "Stock"
-msgstr ""
+msgstr "Запас"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-users-table.php:188
 msgid "Failed to send"
-msgstr ""
+msgstr "Отправка не удалась"
 
 #: framework/premium/features/premium-header/items/language-switcher/options/common.php:18
 msgid "Flag Shape"
-msgstr ""
+msgstr "Форма флага"
 
 #: framework/premium/features/premium-header/items/language-switcher/options/common.php:25
 msgid "Rectangle"
-msgstr ""
+msgstr "Прямоугольник"
 
 #: framework/premium/features/premium-header/items/language-switcher/options/common.php:251
 msgid "Flag Border Radius"
-msgstr ""
+msgstr "Скругление углов"
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:316
 msgid "More information on how to generate an API key for Klaviyo can be found %shere%s."
-msgstr ""
+msgstr "Подробную информацию о том, как сгенерировать API-ключ для Klaviyo, можно найти %sздесь%s."
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:352
 msgid "More information on how to generate an API key for Kit (ConvertKit) can be found %shere%s."
-msgstr ""
+msgstr "Подробную информацию о том, как сгенерировать API-ключ ConvertKit, можно найти %sздесь%s."
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:149
 msgid "White Label Extension"
-msgstr ""
+msgstr "Расширение белой этикетка"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:161
 msgid "Please note that disabling this option will hide the white-label extension. To restore it, press the SHIFT key while clicking the dashboard logo."
-msgstr ""
+msgstr "При отключении этой опции расширение белой этикетки будет скрыто. Чтобы восстановить его, нажмите клавишу SHIFT, одновременно нажимая на логотип административной панели."
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:17
 msgid "Account Menu Item"
-msgstr ""
+msgstr "Пункт меню «Профиль»"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:27
 msgid "Starter Sites Tab"
-msgstr ""
+msgstr "Вкладка стартовых сайтов"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:31
 msgid "Useful Plugins Tab"
-msgstr ""
+msgstr "Вкладка полезных плагинов"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:36
 msgid "Changelog Tab"
-msgstr ""
+msgstr "Вкладка списка изменений"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:41
 msgid "Extension Documentation Link"
-msgstr ""
+msgstr "Ссылка на документацию расширения"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:46
 msgid "Extension Video Link"
-msgstr ""
+msgstr "Ссылка на видео о расширении"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:72
 msgid "Support Section"
-msgstr ""
+msgstr "Раздел поддержки"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:77
 msgid "Knowledge Base Section"
-msgstr ""
+msgstr "Раздел базы знаний"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:82
 msgid "Video Tutorials Section"
-msgstr ""
+msgstr "Раздел видеоуроков"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:87
 msgid "Facebook Section"
-msgstr ""
+msgstr "Раздел Facebook"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/SupportSectionModal.js:108
 msgid "Button Link"
-msgstr ""
+msgstr "Ссылка кнопки"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/SupportSectionModal.js:159
 msgid "Save Options"
-msgstr ""
+msgstr "Сохранить параметры"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/SupportSectionModal.js:34
 msgid "%s Content"
-msgstr ""
+msgstr "Содержимое %s"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/price-filter/index.js:109
 msgid "Show Price Range Text"
-msgstr ""
+msgstr "Показать текст ценового диапазона"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/price-filter/index.js:93
 msgid "Show Price Input Fields"
-msgstr ""
+msgstr "Показывать поля ввода цены"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:107
 msgid "Support"
-msgstr ""
+msgstr "Поддержка"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:110
 msgid "If your questions have not been answered by documentation or video tutorials, drop us a line."
-msgstr ""
+msgstr "Если вы не нашли ответов на свои вопросы в документации или видеоуроках, напишите нам."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:115
 msgid "Submit a Ticket"
-msgstr ""
+msgstr "Отправить запрос"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:32
 msgid "Facebook Community"
-msgstr ""
+msgstr "Сообщество в Facebook"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:35
 msgid "Share ideas, help others, ask questions and discuss your next project in our friendly community."
-msgstr ""
+msgstr "Делитесь идеями, помогайте другим, задавайте вопросы и обсуждайте свой следующий проект в нашем дружелюбном сообществе."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:43
 msgid "Join Our Community"
-msgstr ""
+msgstr "Вливайтесь в сообщество"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:57
 msgid "Video Tutorials"
-msgstr ""
+msgstr "Видеоуроки"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:60
 msgid "Learn how to do just about anything within Blocksy by following our byte-sized video tutorials."
-msgstr ""
+msgstr "Узнайте, как делать практически всё в Blocksy, посмотрев видеоуроки размером в байт."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:68
 msgid "Watch Tutorials"
-msgstr ""
+msgstr "Смотреть уроки"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:82
 msgid "Knowledge Base"
-msgstr ""
+msgstr "База знаний"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:85
 msgid "Dive in with our documentation and learn tips and tricks about Blocksy and its components."
-msgstr ""
+msgstr "Ознакомьтесь с нашей документацией и получите советы и рекомендации по Blocksy и его компонентах."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:93
 msgid "View Documentation"
-msgstr ""
+msgstr "Смотреть документацию"
 
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:401
 msgid "Enable field link"
-msgstr ""
+msgstr "Включить ссылку поля"
 
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:411
 msgid "Link Source"
-msgstr ""
+msgstr "Источник ссылки"
 
 #: framework/theme-integration.php:60
 msgid "Please enter a stronger password."
-msgstr ""
+msgstr "Введите более надёжный пароль."
 
 #: framework/theme-integration.php:71
 msgctxt "password strength"
 msgid "Password strength unknown"
-msgstr ""
+msgstr "Надёжность пароля неизвестна"
 
 #: framework/theme-integration.php:72
 msgctxt "password strength"
 msgid "Very weak"
-msgstr ""
+msgstr "Очень слабый"
 
 #: framework/theme-integration.php:73
 msgctxt "password strength"
 msgid "Weak"
-msgstr ""
+msgstr "Слабый"
 
 #: framework/theme-integration.php:74
 msgctxt "password strength"
 msgid "Medium"
-msgstr ""
+msgstr "Средний"
 
 #: framework/theme-integration.php:75
 msgctxt "password strength"
 msgid "Strong"
-msgstr ""
+msgstr "Сильный"
 
 #: framework/theme-integration.php:76
 msgctxt "password mismatch"
 msgid "Mismatch"
-msgstr ""
+msgstr "Несоответствие"
 
 #: framework/theme-integration.php:89
 msgid "This field is required"
-msgstr ""
+msgstr "Это поле является обязат��льным"
 
 #: framework/theme-integration.php:90
 msgid "Please fix this field."
-msgstr ""
+msgstr "Исправьте содержимое этого поля."
 
 #: framework/theme-integration.php:91
 msgid "Please enter a valid email address."
-msgstr ""
+msgstr "Введите действительный адрес электронной почты."
 
 #: framework/theme-integration.php:92
 msgid "Please enter a valid URL."
-msgstr ""
+msgstr "Введите действительный URL."
 
 #: framework/theme-integration.php:93
 msgid "Please enter a valid date."
-msgstr ""
+msgstr "Введите действительную дату."
 
 #: framework/theme-integration.php:94
 msgid "Please enter a valid date (ISO)."
-msgstr ""
+msgstr "Введите действительную дату (ISO)."
 
 #: framework/theme-integration.php:95
 msgid "Please enter a valid number."
-msgstr ""
+msgstr "Введите действительный номер."
 
 #: framework/theme-integration.php:96
 msgid "Please enter only digits."
-msgstr ""
+msgstr "Вводите только цифры."
 
 #: framework/theme-integration.php:97
 msgid "Please enter a valid credit card number."
-msgstr ""
+msgstr "Введите действительный номер банковской карты."
 
 #: framework/theme-integration.php:98
 msgid "Please enter the same value again."
-msgstr ""
+msgstr "Введите то же значение ещё раз."
 
 #: framework/theme-integration.php:99
 msgid "Please enter no more than {0} characters."
-msgstr ""
+msgstr "Введите не более {0} символов."
 
 #: framework/theme-integration.php:100
 msgid "Please enter at least {0} characters."
-msgstr ""
+msgstr "Введите не менее {0} символов."
 
 #: framework/theme-integration.php:101
 msgid "Please enter a value between {0} and {1} characters long."
-msgstr ""
+msgstr "Введите от {0} до {1} символов."
 
 #: framework/theme-integration.php:102
 msgid "Please enter a value between {0} and {1}."
-msgstr ""
+msgstr "Введите значение от {0} до {1}."
 
 #: framework/theme-integration.php:103
 msgid "Please enter a value less than or equal to {0}."
-msgstr ""
+msgstr "Введите значение, меньшее или равное {0}."
 
 #: framework/theme-integration.php:104
 msgid "Please enter a value greater than or equal to {0}."
-msgstr ""
+msgstr "Введите значение, большее или равное {0}."
 
 #. translators: %s is the error message.
 #: framework/features/account-auth.php:90
 msgid "<strong>Error</strong>: %s"
-msgstr ""
+msgstr "<strong>Ошибка</strong>: %s"
 
 #: framework/features/opengraph-meta-data.php:40
 msgid "X (Twitter) Username"
-msgstr ""
+msgstr "Имя пользователя X (Twitter)"
 
 #: framework/features/svg.php:28
 msgid "This file does not appear to be a valid SVG file."
-msgstr ""
+msgstr "Этот файл, в��роятно, не является допустимым файлом SVG."
 
 #: framework/features/svg.php:37
 msgid "SVG files cannot contain PHP code."
-msgstr ""
+msgstr "Файлы SVG не должны содержать PHP-код."
 
 #: framework/helpers/exts-configs.php:403,
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:4
 msgid "Cart Reserved Timer"
-msgstr ""
+msgstr "Таймер корзины"
 
 #: framework/helpers/exts-configs.php:404
 msgid "Display a countdown timer for reserved cart items, encouraging users to complete their purchase before the timer expires."
-msgstr ""
+msgstr "Отображает таймер обратного отсчёта для зарезервированных товаров в корзине, побуждая пользователей завершить покупку до истечения времени."
 
 #: framework/extensions/cookies-consent/config.php:6
 msgid "Display a simple consent banner to inform users about the use of cookies on the website."
-msgstr ""
+msgstr "Отображает простой баннер согласия, информирующий пользователей об использовании куки на сайте."
 
 #: framework/features/demo-install/parsers.php:55,
 #: framework/features/demo-install/parsers.php:99,
 #: framework/features/demo-install/parsers.php:107
 msgid "There was an error when reading this WXR file"
-msgstr ""
+msgstr "При чтении данного WXR-файла произошла ошибка!"
 
 #: framework/features/demo-install/parsers.php:56
 msgid "Details are shown above. The importer will now try again with a different parser..."
-msgstr ""
+msgstr "Подробности приведены выше. Теперь импортер повторит попытку с другим анализатором..."
 
 #: framework/features/demo-install/parsers.php:111,
 #: framework/features/demo-install/parsers.php:116,
 #: framework/features/demo-install/parsers.php:373,
 #: framework/features/demo-install/parsers.php:590
 msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
-msgstr ""
+msgstr "Похоже, это не WXR-файл, отсутствует/неверный номер версии WXR!"
 
 #: framework/features/demo-install/wp-importer.php:199,
 #: framework/features/demo-install/wp-importer.php:254,
 #: framework/features/demo-install/wp-importer.php:250,
 #: framework/features/demo-install/wp-importer.php:271
 msgid "Sorry, there has been an error."
-msgstr ""
+msgstr "Произошла ошибка."
 
 #: framework/features/demo-install/wp-importer.php:234
 msgid "All done."
-msgstr ""
+msgstr "Готово."
 
 #: framework/features/demo-install/wp-importer.php:234
 msgid "Have fun!"
-msgstr ""
+msgstr "Наслаждайте��ь!"
 
 #: framework/features/demo-install/wp-importer.php:235
 msgid "Remember to update the passwords and roles of imported users."
-msgstr ""
+msgstr "Не забудьте обновить пароли и роли импортированных пользователей."
 
 #. translators: %s is the path to the WXR file.
 #: framework/features/demo-install/wp-importer.php:258
 msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
-msgstr ""
+msgstr "Не удалось найти файл экспорта по адресу <code>%s</code>. Вероятно, это было вызвано проблемой с правами доступа."
 
 #. translators: %s is the WXR version number.
 #: framework/features/demo-install/wp-importer.php:282
 msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
-msgstr ""
+msgstr "Данный WXR-файл (версия %s) может не поддерживаться данной версией импортера. Рассмотрите возможность обновления."
 
 #. translators: %s is the author's display name.
 #: framework/features/demo-install/wp-importer.php:315
 msgid "Failed to import author %s. Their posts will be attributed to the current user."
-msgstr ""
+msgstr "Не удалось импортирова��ь автора %s. Его публикации будут приписаны к вашему профилю."
 
 #: framework/features/demo-install/wp-importer.php:349
 msgid "Assign Authors"
-msgstr ""
+msgstr "Назначить авторов"
 
 #: framework/features/demo-install/wp-importer.php:350
 msgid "To make it simpler for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site, such as your primary administrator account."
-msgstr ""
+msgstr "Чтобы упростить редактирование и сохранение импортированного контента, можно назначить автором импортированного контента существующего пользователя сайта, например, вас по вашей основной учётной записи администратора."
 
 #. translators: %s is the default user role.
 #: framework/features/demo-install/wp-importer.php:355
 msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
-msgstr ""
+msgstr "Если в WordPress будет создан новый пользователь, новый пароль будет сгенериров��н случайным образом, а роль нового пользователя будет установлена как %s. Потребуется вручную изменить данные нового пользователя."
 
 #: framework/features/demo-install/wp-importer.php:371
 msgid "Import Attachments"
-msgstr ""
+msgstr "Импорт вложений"
 
 #: framework/features/demo-install/wp-importer.php:374
 msgid "Download and import file attachments"
-msgstr ""
+msgstr "Загрузка и импорт вложенных файлов"
 
 #: framework/features/demo-install/wp-importer.php:378
 msgid "Submit"
-msgstr ""
+msgstr "Подтвердить"
 
 #: framework/features/demo-install/wp-importer.php:391
 msgid "Import author:"
-msgstr ""
+msgstr "Импорт автора:"
 
 #: framework/features/demo-install/wp-importer.php:405
 msgid "as a new user:"
-msgstr ""
+msgstr "новый пользователь:"
 
 #: framework/features/demo-install/wp-importer.php:402
 msgid "or create new user with login name:"
-msgstr ""
+msgstr "или создать нового пользователя с именем:"
 
 #: framework/features/demo-install/wp-importer.php:415
 msgid "or assign posts to an existing user:"
-msgstr ""
+msgstr "или назначать записи пользователю:"
 
 #: framework/features/demo-install/wp-importer.php:413
 msgid "assign posts to an existing user:"
-msgstr ""
+msgstr "назначать ��аписи пользователю:"
 
 #: framework/features/demo-install/wp-importer.php:421
 msgid "- Select -"
-msgstr ""
+msgstr "- Выбрать -"
 
 #. translators: %s is the author's display name.
 #: framework/features/demo-install/wp-importer.php:476
 msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
-msgstr ""
+msgstr "Не удалось создать нового пользователя для %s. Записи будут приписаны к вашему профилю."
 
 #. translators: %s is the category slug.
 #: framework/features/demo-install/wp-importer.php:540
 msgid "Failed to import category %s"
-msgstr ""
+msgstr "Не удалось импортировать рубрику %s"
 
 #. translators: %s is the tag name.
 #: framework/features/demo-install/wp-importer.php:593
 msgid "Failed to import post tag %s"
-msgstr ""
+msgstr "Не удалось импортировать метку записей %s"
 
 #. translators: %1$s is the term taxonomy, %2$s is the term name.
 #. translators: %1$s is the taxonomy name, %2$s is the term name.
 #: framework/features/demo-install/wp-importer.php:658,
 #: framework/features/demo-install/wp-importer.php:969
 msgid "Failed to import %1$s %2$s"
-msgstr ""
+msgstr "Не удалось импортировать %1$s %2$s"
 
 #. translators: %1$s is the post type name, %2$s is the post title.
 #: framework/features/demo-install/wp-importer.php:924
 msgid "Failed to import %1$s &#8220;%2$s&#8221;"
-msgstr ""
+msgstr "Не удалось импортировать %1$s &#8220;%2$s&#8221;"
 
 #: framework/features/demo-install/wp-importer.php:833
 msgid "%1$s &#8220;%1$s&#8221; already exists."
-msgstr ""
+msgstr "%1$s &#8220;%1$s&#8221; уже существует."
 
 #: framework/features/demo-install/wp-importer.php:1117
 msgid "Menu item skipped due to missing menu slug"
-msgstr ""
+msgstr "Пункт меню пропущен из-за отсутствия ярлыка меню"
 
 #. translators: %s is the menu slug.
 #: framework/features/demo-install/wp-importer.php:1131
 msgid "Menu item skipped due to invalid menu slug: %s"
-msgstr ""
+msgstr "Пункт меню пропущен из-за неверного ярлыка меню: %s"
 
 #: framework/features/demo-install/wp-importer.php:1222
 msgid "Fetching attachments is not enabled"
-msgstr ""
+msgstr "Функция извлечения вложений не включена"
 
 #: framework/features/demo-install/wp-importer.php:1236
 msgid "Invalid file type"
-msgstr ""
+msgstr "Недопустимый тип файла"
 
 #: framework/features/demo-install/wp-importer.php:1288
 msgid "Remote server did not respond"
-msgstr ""
+msgstr "Удалённый сервер не ответил"
 
 #. translators: %1$d is the HTTP response code, %2$s is the HTTP response
 #. message.
 #: framework/features/demo-install/wp-importer.php:1301
 msgid "Remote server returned error response %1$d %2$s"
-msgstr ""
+msgstr "Удалённый сервер вернул ответ об ошибке %1$d %2$s"
 
 #: framework/features/demo-install/wp-importer.php:1322
 msgid "Remote file is incorrect size"
-msgstr ""
+msgstr "Удалённый файл имеет неверный размер"
 
 #: framework/features/demo-install/wp-importer.php:1331
 msgid "Zero size file downloaded"
-msgstr ""
+msgstr "Загруженный файл имеет нулевой размер"
 
 #. translators: %s is the maximum file size allowed.
 #: framework/features/demo-install/wp-importer.php:1344
 msgid "Remote file is too large, limit is %s"
-msgstr ""
+msgstr "Удалённый файл слишком велик, допускаются не более %s"
 
 #: framework/features/demo-install/wp-importer.php:1456
 msgid "Import WordPress"
-msgstr ""
+msgstr "Импорт WordPress"
 
 #. translators: %s is the new version number.
 #: framework/features/demo-install/wp-importer.php:1468
 msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
-msgstr ""
+msgstr "Доступна новая версия этого импортера. Обновите его до версии %s, чтобы обеспечить совместимость с новыми файлами экспорта."
 
 #: framework/features/demo-install/wp-importer.php:1489
 msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
-msgstr ""
+msgstr "Привет! Загрузите расширенный RSS-файл WordPress (WXR), и система импортирует записи, страницы, комментарии, пользовательские поля, рубрики и теги на этот сайт."
 
 #: framework/features/demo-install/wp-importer.php:1490
 msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
-msgstr ""
+msgstr "Выберите файл WXR (.xml) для загрузки, затем нажмите «Загрузить файл» и импортируйте данные."
 
 #. translators: %1$s is the error message, %2$s is the line number
 #: framework/premium/features/code-editor.php:116
 msgid "Code execution has been canceled due to error: %1$s on line: %2$s"
-msgstr ""
+msgstr "Выполнение кода было отменено из-за ошибки: %1$s в строке: %2$s!"
 
 #. translators: %1$s is the post type name, %2$s is the post edit link
 #: framework/premium/features/code-editor.php:132
 msgid "%1$s that caused the error: %2$s"
-msgstr ""
+msgstr "Возникла ошибка из-за «%1$s»: %2$s"
 
 #. translators: %1$s is the singular name of the custom post type, %2$s is the
 #. label of the taxonomy.
 #: framework/features/conditions/rules/cpt.php:47
 msgid "%1$s %2$s Taxonomy"
-msgstr ""
+msgstr "Таксономия %1$s %2$s"
 
 #: framework/premium/features/content-blocks/admin-ui.php:740
 msgid "Popups"
-msgstr ""
+msgstr "Всплывающие окна"
 
 #: framework/premium/features/content-blocks/admin-ui.php:757
 msgid "Custom Templates"
-msgstr ""
+msgstr "Собственные шаблоны"
 
 #: framework/premium/features/content-blocks/options/hook.php:341
 msgid "Custom Class"
-msgstr ""
+msgstr "Собственный класс"
 
 #: framework/premium/features/content-blocks/options/hook.php:349
 msgid "Custom Attribute"
-msgstr ""
+msgstr "Собственный атрибут"
 
 #. translators: %1$s is the field title, %2$s is "Field INDEX"
 #: framework/premium/extensions/post-types-extra/features/dynamic-data/options.php:24
 msgid "%1$s %2$s Font"
-msgstr ""
+msgstr "Шрифт %1$s %2$s"
 
 #. translators: %1$s is the field title, %2$s is "Field INDEX"
 #: framework/premium/extensions/post-types-extra/features/dynamic-data/options.php:36
 msgid "%1$s %2$s Color"
-msgstr ""
+msgstr "Цвет %1$s %2$s"
 
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:288
 msgid "Include brands"
-msgstr ""
+msgstr "Включить бренды"
 
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:298,
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:353
 msgid "No brands"
-msgstr ""
+msgstr "Никакие бренды"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/rating-filter/index.js:12
 msgid "Filter by products rating."
@@ -835,7 +835,7 @@ msgstr "Соответствующие таксономии"
 
 #: static/js/editor/blocks/tax-query/edit/TermsInspectorControls.js:293
 msgid "Taxonomies Visibility"
-msgstr "Видимость таксоном��й"
+msgstr "Видимость таксономий"
 
 #: static/js/editor/blocks/tax-query/edit/TermsInspectorControls.js:311
 msgid "Hide Empty Taxonomies"
@@ -1020,7 +1020,7 @@ msgstr "Количество дней до того, как модальное �
 
 #: framework/premium/features/content-blocks/options/popup.php:279
 msgid "Days before the popup relaunches after the additional close trigger is activated."
-msgstr "Дней до повторного запуска модального окна после активации дополнительного триггера закрытия."
+msgstr "Дней до повторного запуска модального окна после активации дополнительного триггера закр��тия."
 
 #: framework/premium/features/content-blocks/options/popup.php:295
 msgid "Close Actions"
@@ -1089,7 +1089,7 @@ msgstr "Включение или исключение виртуальных и
 
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/modal-view.php:16
 msgid "Size guide modal"
-msgstr "Модальное окно таблицы раз��еров"
+msgstr "Модальное окно таблицы размеров"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:65
 msgid "+{items} More"
@@ -1133,7 +1133,7 @@ msgstr "Система показа скрытых при превышении �
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:611
 msgid "Out of Stock Swatch Type"
-msgstr "Тип образца отсутствующего на складе"
+msgstr "Тип о��разца отсутствующего на складе"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:618
 msgid "Faded"
@@ -1339,7 +1339,7 @@ msgstr "Добавлено в корзину: перед предложенны�
 
 #: framework/premium/features/content-blocks/hooks-manager.php:982
 msgid "Added to Cart: After suggested products"
-msgstr "Добавлено в корзину: ��осле предложенными товарами"
+msgstr "Добавлено в корзину: после предложенными товарами"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:984
 msgid "WooCommerce: Added to Cart"
@@ -1462,7 +1462,7 @@ msgstr "Вы уже включены в список ожидания"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-dashboard.php:303
 msgid "You have been added to the waitlist"
-msgstr "Вы добавлены в список ожидания"
+msgstr "Вы добавлены в сп��сок ожидания"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-dashboard.php:333
 msgid "You have been removed from the waitlist"
@@ -1472,7 +1472,7 @@ msgstr "Вы удалены из списка ожидания"
 #. (user/users)
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:57
 msgid "%1$s %2$s joined the waitlist for this item."
-msgstr ""
+msgstr "%1$s %2$s присоединился к списку ожидания этого товара."
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:293
 msgid "Waitlist Form"
@@ -1971,7 +1971,7 @@ msgstr "Прервать обновление таблицы поиска так
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/includes/taxonomies-products-lookup-table.php:553
 msgid "Product taxonomies lookup table regeneration process has been aborted."
-msgstr "Процесс о��новления таблицы поиска таксономий товаров прерван."
+msgstr "Процесс обновления таблицы поиска таксономий товаров прерван."
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/includes/taxonomies-products-lookup-table.php:555
 msgid "Abort"
@@ -2842,7 +2842,7 @@ msgstr "Перекрытие"
 #. translators: placeholder here means the actual URL.
 #: framework/premium/features/media-video/options.php:140
 msgid "Choose how the video will fill its container. More info about this can be found %1$shere%2$s."
-msgstr ""
+msgstr "Как видео будет размещено в контейнере. Подробную информацию об этом можно найти %1$sздесь%2$s."
 
 #. translators: %s is the author's display name.
 #: framework/features/blocks/dynamic-data/views/avatar-field.php:31
@@ -3034,7 +3034,7 @@ msgstr "Целевое количество"
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:90
 msgid "Amount of items the client has to buy in order to get free shipping."
-msgstr "Количество товаров, которые клиент должен приобрести, чтобы получить бесплатную доставку."
+msgstr "Количество товаров, которые клиен�� должен приобрести, чтобы получить бесплатную доставку."
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:172
 msgid "You can use dynamic code tags such as {items} inside this option."
@@ -3108,7 +3108,7 @@ msgstr "Название демо не указано."
 #: framework/premium/extensions/woocommerce-extra/features/stock-scarcity/feature.php:280,
 #: framework/premium/extensions/woocommerce-extra/features/stock-scarcity/options.php:4
 msgid "Stock Scarcity"
-msgstr "Нехватка запасов"
+msgstr "Нехватк�� запасов"
 
 #: framework/helpers/exts-configs.php:370
 msgid "Show the remaining stock of a product to create a sense of urgency and encourage your visitors to make a purchase."
@@ -3895,7 +3895,7 @@ msgstr "Круглая"
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:273,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:468
 msgid "Single Page Swatch Size"
-msgstr "Размер образца отдельной с��раницы"
+msgstr "Размер образца отдельной страницы"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:44,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:159,
@@ -4541,7 +4541,7 @@ msgstr "Заголовок партнёрской ссылки"
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:57,
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:90
 msgid "Open Button Link In New Tab"
-msgstr "Открыть ссылку кнопки в новой вкладке"
+msgstr "Открыть ссылку кно��ки в новой вкладке"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-page/options.php:14
 msgid "Quantity Auto Update"
@@ -4636,7 +4636,7 @@ msgstr "%s %% пользователей рекомендуют этот тов�
 #. translators: %1$s is the number of helpful votes, %2$s is the total votes
 #: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:630
 msgid "%1$s of %2$s found this review helpful"
-msgstr ""
+msgstr "%1$s из %2$s сочли этот отзыв полезным."
 
 #: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:698,
 #: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/options.php:44
@@ -4778,7 +4778,7 @@ msgstr "Распознавание ОС"
 
 #: framework/premium/features/content-blocks/options/popup.php:430
 msgid "Load Content With AJAX"
-msgstr "Загрузка сод��ржимого с помощью Ajax"
+msgstr "Загрузка содержимого с помощью Ajax"
 
 #: framework/premium/features/content-blocks/options/popup.php:434
 msgid "Enable this option if you want to load the popup content using AJAX."
@@ -5401,7 +5401,7 @@ msgstr "Произвольные страницы благодарности"
 
 #: framework/helpers/exts-configs.php:279
 msgid "Catch the attention of your clients by showcasing your product variations as colour, image or button swatches."
-msgstr "Привлечение внимания клиентов, демонстрацией вариаций товаров в виде образцов цвета, изображений или кнопок р��зм��ров."
+msgstr "Привлечение внимания клиентов, демонстрацией вариаций товаров в виде образцов цвета, изображений или кнопок размеров."
 
 #: framework/features/conditions/rules/woo.php:42
 msgid "Product Brands"
@@ -6013,7 +6013,7 @@ msgstr "После цикла действий с товарами"
 #. translators: placeholder here means the actual URL.
 #: framework/features/blocks/socials/options.php:24
 msgid "Configure the social links in Customizer ➝ General ➝ %1$sSocial Network Accounts%2$s."
-msgstr ""
+msgstr "Настройте ссылок соцсетей в разделе: Настройщик ➝ Общее ➝ %1$sПрофили в соцсетях%2$s."
 
 #: framework/features/header/items/account/options.php:320
 msgid "Customizing: Logged out State"
@@ -6218,7 +6218,7 @@ msgstr "Произвольный код"
 #. translators: 1: link open 2: link close
 #: framework/features/account-auth.php:109
 msgid "Check your email for the confirmation link, then visit the %1$slogin page%2$s."
-msgstr ""
+msgstr "Проверьте свою электронную почту на наличие ссылки для подтверждения, а затем перейдите на %1$sстраницу входа%2$s."
 
 #: framework/features/account-auth.php:237
 msgid "Your account was created successfully. Your login details have been sent to your email address. Please visit the %1$slogin page%2$s."
@@ -6672,7 +6672,7 @@ msgstr "загрузка демонстрационных опций"
 
 #: static/js/dashboard/screens/DemoInstall/Installer/messages.js:46
 msgid "importing images from customizer"
-msgstr "импорт изображений из настройщика"
+msgstr "импорт изображений из настро��щика"
 
 #: static/js/dashboard/screens/DemoInstall/Installer/messages.js:50
 msgid "import customizer options"
@@ -8104,7 +8104,7 @@ msgstr "Выберите меню..."
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/features/header/items/account/options.php:169
 msgid "Manage your menus in the %1$sMenus screen%2$s."
-msgstr ""
+msgstr "Управление пунктами меню в %1$sразделе «Меню»%2$s."
 
 #: framework/features/header/items/account/options.php:801,
 #: framework/features/header/items/account/options.php:1096
@@ -8923,7 +8923,7 @@ msgstr "Сохранить настройки"
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:198
 msgid "Pick Mailing Service"
-msgstr "Выбор службы до��тавки"
+msgstr "Выбор службы доставки"
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:503
 msgid "Save"
@@ -9746,7 +9746,7 @@ msgstr "Google Analytics v4"
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/features/google-analytics.php:87
 msgid "Link your Google Analytics 4 tracking ID. More info and instructions can be found %1$shere%2$s."
-msgstr ""
+msgstr "Подключите свой ID Google Analytics 4. Подробную информацию и инструкции можно найти %1$sздесь%2$s."
 
 #: framework/features/opengraph-meta-data.php:13
 msgid "OpenGraph Meta Data"
@@ -10255,7 +10255,7 @@ msgstr "Максимальная ширина"
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/extensions/cookies-consent/customizer.php:120
 msgid "I accept the %1$sPrivacy Policy%2$s*"
-msgstr ""
+msgstr "Я принимаю %1$sПолитику конфиденциальности%2$s*"
 
 #: framework/extensions/cookies-consent/customizer.php:124
 msgid "This text will appear under each comment form and subscribe form."
@@ -10264,7 +10264,7 @@ msgstr "Данный текст будет отображаться под ка�
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/extensions/cookies-consent/helpers.php:56
 msgid "I accept the %1$sPrivacy Policy%2$s"
-msgstr ""
+msgstr "Я принимаю %1$sПолитику конфиденциальности%2$s"
 
 #: framework/features/blocks/about-me/options.php:140
 msgid "Customizer"
@@ -11006,7 +11006,7 @@ msgstr "Организация"
 #. translators: %1$s and %2$s are HTML tags.
 #: framework/extensions/product-reviews/metabox.php:39
 msgid "More info about review entity and how to choose the right one can be found %1$shere%2$s."
-msgstr ""
+msgstr "Более подробную информацию об обозреваемом объекте и о том, как выбрать подходящий, можно найти %1$shere%2$s."
 
 #: framework/extensions/product-reviews/metabox.php:70
 msgid "Product Price"
@@ -11142,7 +11142,7 @@ msgstr "ID записей"
 #. translators: %1$s and %2$s are HTML tags
 #: framework/extensions/trending/customizer.php:367
 msgid "Separate posts ID by comma. How to find the %1$spost ID%2$s."
-msgstr ""
+msgstr "Разделяйте ID постов запятыми. Как найти %1$sID записи%2$s."
 
 #: framework/extensions/trending/customizer.php:392
 msgid "Trending From"

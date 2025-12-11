@@ -163,6 +163,10 @@
 				background: transparent;
 			}
 		}
+
+		ul {
+			--theme-list-indent: 15px;
+		}
 	}
 
 	.ct-form-notification-error {
@@ -243,6 +247,19 @@
 			&::-webkit-outer-spin-button {
 				-webkit-appearance: none;
 			}
+		}
+	}
+}
+
+// Google Site Kit integration
+.ct-account-modal #loginform {
+
+	.googlesitekit-sign-in-with-google__frontend-output-button {
+		max-width: initial;
+		margin-block-start: var(--theme-content-spacing);
+
+		iframe {
+			margin-inline: auto !important;
 		}
 	}
 }
