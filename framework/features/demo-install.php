@@ -140,6 +140,20 @@ class DemoInstall {
 				return $d;
 			}
 		);
+
+		add_action(
+			'wp_ajax_blocksy_demo_get_content_install_status',
+			function () {
+				$this->check_nonce();
+
+				$result = get_option(
+					'blocksy_ext_demos_content_install_status',
+					[]
+				);
+
+				wp_send_json_success($result);
+			}
+		);
 	}
 
 	public function get_demo_remote_url($args = []) {

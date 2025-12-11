@@ -6,6 +6,8 @@ class DemoInstallContentInstaller {
 	protected $demo_name = null;
 	protected $is_ajax_request = true;
 
+	private $content_started_at = 0;
+
 	public function __construct($args = []) {
 		$args = wp_parse_args($args, [
 			'demo_name' => null,
@@ -204,6 +206,7 @@ class DemoInstallContentInstaller {
 		$demo_to_install = $demo_to_install['demo'];
 
 		$wp_import = new \Blocksy_WP_Import();
+		$GLOBALS['wp_import'] = $wp_import;
 
 		$import_data = $wp_import->parse($demo_to_install['content']);
 
@@ -274,6 +277,11 @@ class DemoInstallContentInstaller {
 
 		unset($author_out);
 
+		// Clear object cache and suspend cache invalidation during import
+		// This prevents stale cached data from causing issues with concurrent requests
+		wp_cache_flush();
+		wp_suspend_cache_invalidation(true);
+
 		$wp_import->fetch_attachments = true;
 
 		$_GET['import'] = 'wordpress';
@@ -283,31 +291,103 @@ class DemoInstallContentInstaller {
 		$_POST['user_map'] = $user_select;
 		$_POST['fetch_attachments'] = $wp_import->fetch_attachments;
 
+		if ($this->is_ajax_request) {
+			$body = json_decode(file_get_contents('php://input'), true);
+
+			$is_first_import_request = true;
+
+			if (isset($body['requestsPayload']['importer_data'])) {
+				$importer_data = $body['requestsPayload']['importer_data'];
+
+				$is_first_import_request = false;
+
+				$wp_import->processed_authors = $importer_data['processed_authors'];
+				$wp_import->author_mapping = $importer_data['author_mapping'];
+				$wp_import->processed_terms = $importer_data['processed_terms'];
+				$wp_import->processed_posts = $importer_data['processed_posts'];
+				$wp_import->post_orphans = $importer_data['post_orphans'];
+				$wp_import->processed_menu_items = $importer_data['processed_menu_items'];
+				$wp_import->menu_item_orphans = $importer_data['menu_item_orphans'];
+				$wp_import->missing_menu_items = $importer_data['missing_menu_items'];
+				$wp_import->url_remap = $importer_data['url_remap'];
+				$wp_import->featured_images = $importer_data['featured_images'];
+			}
+
+			$this->content_started_at = microtime(true);
+
+			// Default to 10 minutes if not provided. We want first request to
+			// optimistically complete within server limits.
+			$content_import_timeout = 600;
+
+			if (
+				isset($body['duration'])
+				&&
+				intval($body['duration']) !== 0
+			) {
+				$content_import_timeout = intval($body['duration']);
+			}
+
+			add_filter(
+				'wp_import_post_data_raw',
+				function($post) use ($wp_import, $content_import_timeout) {
+					$time = microtime(true) - $this->content_started_at;
+
+					update_option(
+						'blocksy_ext_demos_content_install_status',
+						blocksy_safe_sprintf(
+							// translators: %1$s and %2$s are HTML tags for a link.
+							__('Importing %1$s: %2$s', 'blocksy-companion'),
+							$post['post_type'],
+							$post['post_title']
+						)
+					);
+
+					if ($time > $content_import_timeout) {
+						$import_output = ob_get_clean();
+						wp_suspend_cache_invalidation(false);
+
+						wp_send_json_success([
+							'status' => 'content_import_timeout_reached',
+							'import_output' => $import_output,
+							'importer_data' => [
+								'processed_authors' => $wp_import->processed_authors,
+								'author_mapping' => $wp_import->author_mapping,
+								'processed_terms' => $wp_import->processed_terms,
+								'processed_posts' => $wp_import->processed_posts,
+								'post_orphans' => $wp_import->post_orphans,
+								'processed_menu_items' => $wp_import->processed_menu_items,
+								'menu_item_orphans' => $wp_import->menu_item_orphans,
+								'missing_menu_items' => $wp_import->missing_menu_items,
+								'url_remap' => $wp_import->url_remap,
+								'featured_images' => $wp_import->featured_images,
+							],
+							'total_processed' => count($wp_import->processed_posts),
+							'total_posts' => count($wp_import->posts),
+						]);
+					}
+
+					return $post;
+				}
+			);
+		}
+
 		ob_start();
-		$wp_import->import($demo_to_install['content']);
-		ob_end_clean();
+
+		if ($is_first_import_request) {
+			$wp_import->import($demo_to_install['content']);
+		} else {
+			$wp_import->import_partial($demo_to_install['content']);
+		}
+
+		$import_output = ob_get_clean();
 
 		if (class_exists('Blocksy_Customizer_Builder')) {
 			$header_builder = new \Blocksy_Customizer_Builder();
 			$header_builder->patch_header_value_for($wp_import->processed_terms);
 		}
 
-		$old_nav_menu_locations = blc_theme_functions()->blocksy_get_theme_mod('nav_menu_locations', []);
-		$should_update_nav_menu_locations = false;
-
-		foreach ($old_nav_menu_locations as $location => $menu_id) {
-			if (isset($wp_import->processed_terms[$menu_id])) {
-				$should_update_nav_menu_locations = true;
-
-				$old_nav_menu_locations[
-					$location
-				] = $wp_import->processed_terms[$menu_id];
-			}
-		}
-
-		if ($should_update_nav_menu_locations) {
-			set_theme_mod('nav_menu_locations', $old_nav_menu_locations);
-		}
+		// Re-enable cache invalidation after import
+		wp_suspend_cache_invalidation(false);
 
 		$this->clean_plugins_cache();
 		$this->assign_pages_ids($demo, $builder);
@@ -315,6 +395,8 @@ class DemoInstallContentInstaller {
 		if ($this->is_ajax_request) {
 			wp_send_json_success([
 				'processed_posts' => $wp_import->processed_posts,
+				'processed_terms' => $wp_import->processed_terms,
+				'import_output' => $import_output,
 			]);
 		}
 	}

@@ -18,7 +18,10 @@ class DemoInstallOptionsExport {
 			'trp_advanced_settings',
 
 			// Elementor
-			'elementor_cpt_support'
+			'elementor_cpt_support',
+
+			// Greenshift
+			'gspb_global_settings'
 		];
 	}
 

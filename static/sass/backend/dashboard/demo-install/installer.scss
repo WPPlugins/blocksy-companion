@@ -11,7 +11,10 @@
 		position: absolute;
 		inset: 0;
 	}
+}
 
+:is(.ct-demo-install, .ct-modify-demo) {
+	
 	svg path {
 		transform-origin: 50% 50%;
 		transform-box: fill-box;
