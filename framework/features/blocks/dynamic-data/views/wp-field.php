@@ -7,6 +7,7 @@ $value = '';
 $has_fallback = false;
 
 $has_field_link = blocksy_akg('has_field_link', $attributes, 'no') === 'yes';
+$has_field_link_wrap_content = blocksy_akg('has_field_link_wrap_content', $attributes, 'no');
 
 if ($field === 'wp:archive_title') {
 	$archive_title_renderer = new \Blocksy\ArchiveTitleRenderer([
@@ -58,6 +59,8 @@ if ($field === 'wp:archive_description') {
 	}
 }
 
+$link_attr = [];
+
 if ($field === 'wp:title') {
 	$value = get_the_title();
 
@@ -78,7 +81,9 @@ if ($field === 'wp:title') {
 			);
 		}
 
-		$value = blocksy_html_tag('a', $link_attr, $value);
+		if ($has_field_link_wrap_content === 'no') {
+			$value = blocksy_html_tag('a', $link_attr, $value);
+		}
 	}
 }
 
@@ -105,7 +110,9 @@ if ($field === 'wp:term_title') {
 				);
 			}
 
-			$value = blocksy_html_tag('a', $link_attr, $value);
+			if ($has_field_link_wrap_content === 'no') {
+				$value = blocksy_html_tag('a', $link_attr, $value);
+			}
 		}
 	}
 }
@@ -133,7 +140,9 @@ if ($field === 'wp:term_count') {
 				);
 			}
 
-			$value = blocksy_html_tag('a', $link_attr, $value);
+			if ($has_field_link_wrap_content === 'no') {
+				$value = blocksy_html_tag('a', $link_attr, $value);
+			}
 		}
 	}
 }
@@ -198,7 +207,9 @@ if ($field === 'wp:date') {
 			);
 		}
 
-		$value = blocksy_html_tag('a', $link_attr, $value);
+		if ($has_field_link_wrap_content === 'no') {
+			$value = blocksy_html_tag('a', $link_attr, $value);
+		}
 	}
 }
 
@@ -440,6 +451,14 @@ if (! empty($border_result['style'])) {
 $block_type = WP_Block_Type_Registry::get_instance()->get_registered('blocksy/dynamic-data');
 $block_type->supports['color'] = true;
 wp_apply_colors_support($block_type, $attributes);
+
+if (
+	$has_field_link_wrap_content === 'yes'
+	&&
+	$has_field_link
+) {
+	$value = blocksy_html_tag('a', $link_attr, $value);
+}
 
 $wrapper_attr = get_block_wrapper_attributes($wrapper_attr);
 

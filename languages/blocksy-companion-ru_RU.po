@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-11-29 14:59:59+0000\n"
+"PO-Revision-Date: 2025-12-22 21:13:21+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -266,7 +266,7 @@ msgstr "Сообщество в Facebook"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:35
 msgid "Share ideas, help others, ask questions and discuss your next project in our friendly community."
-msgstr "Делитесь идеями, помогайте другим, задавайте вопросы и обсуждайте свой следующий проект в нашем дружелюбном сообществе."
+msgstr "��елитесь идеями, помогайте другим, задавайте вопросы и обсуждайте свой следующий проект в нашем дружелюбном сообществе."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:43
 msgid "Join Our Community"
@@ -340,7 +340,7 @@ msgstr "Несоответствие"
 
 #: framework/theme-integration.php:89
 msgid "This field is required"
-msgstr "Это поле является обязат��льным"
+msgstr "Это поле является обязател��ным"
 
 #: framework/theme-integration.php:90
 msgid "Please fix this field."
@@ -413,7 +413,7 @@ msgstr "Имя пользователя X (Twitter)"
 
 #: framework/features/svg.php:28
 msgid "This file does not appear to be a valid SVG file."
-msgstr "Этот файл, в��роятно, не является допустимым файлом SVG."
+msgstr "Этот файл, вер��ятно, не является допустимым файлом SVG."
 
 #: framework/features/svg.php:37
 msgid "SVG files cannot contain PHP code."
@@ -462,7 +462,7 @@ msgstr "Готово."
 
 #: framework/features/demo-install/wp-importer.php:234
 msgid "Have fun!"
-msgstr "Наслаждайте��ь!"
+msgstr "Наслаждайтесь!"
 
 #: framework/features/demo-install/wp-importer.php:235
 msgid "Remember to update the passwords and roles of imported users."
@@ -481,7 +481,7 @@ msgstr "Данный WXR-файл (версия %s) может не поддер
 #. translators: %s is the author's display name.
 #: framework/features/demo-install/wp-importer.php:315
 msgid "Failed to import author %s. Their posts will be attributed to the current user."
-msgstr "Не удалось импортирова��ь автора %s. Его публикации будут приписаны к вашему профилю."
+msgstr "Не удалось импортировать автора %s. Его публикации будут приписаны к вашему профилю."
 
 #: framework/features/demo-install/wp-importer.php:349
 msgid "Assign Authors"
@@ -494,7 +494,7 @@ msgstr "Чтобы упростить редактирование и сохра
 #. translators: %s is the default user role.
 #: framework/features/demo-install/wp-importer.php:355
 msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
-msgstr "Если в WordPress будет создан новый пользователь, новый пароль будет сгенериров��н случайным образом, а роль нового пользователя будет установлена как %s. Потребуется вручную изменить данные нового пользователя."
+msgstr "Если в WordPress будет создан новый пользователь, новый пароль будет сгенерирован случайным образом, а роль нового пользователя будет установлена как %s. Потребуется вручную изменить данные нового пользователя."
 
 #: framework/features/demo-install/wp-importer.php:371
 msgid "Import Attachments"
@@ -526,7 +526,7 @@ msgstr "или назначать записи пользователю:"
 
 #: framework/features/demo-install/wp-importer.php:413
 msgid "assign posts to an existing user:"
-msgstr "назначать ��аписи пользователю:"
+msgstr "назначать за��иси пользователю:"
 
 #: framework/features/demo-install/wp-importer.php:421
 msgid "- Select -"
@@ -1020,7 +1020,7 @@ msgstr "Количество дней до того, как модальное �
 
 #: framework/premium/features/content-blocks/options/popup.php:279
 msgid "Days before the popup relaunches after the additional close trigger is activated."
-msgstr "Дней до повторного запуска модального окна после активации дополнительного триггера закр��тия."
+msgstr "Дней до повторного запуска модального окна после активации дополнительного триггера закрытия."
 
 #: framework/premium/features/content-blocks/options/popup.php:295
 msgid "Close Actions"
@@ -1133,7 +1133,7 @@ msgstr "Система показа скрытых при превышении �
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:611
 msgid "Out of Stock Swatch Type"
-msgstr "Тип о��разца отсутствующего на складе"
+msgstr "Тип образца отсутствующего на складе"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:618
 msgid "Faded"
@@ -1462,7 +1462,7 @@ msgstr "Вы уже включены в список ожидания"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-dashboard.php:303
 msgid "You have been added to the waitlist"
-msgstr "Вы добавлены в сп��сок ожидания"
+msgstr "Вы добавлены в список ожидания"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-dashboard.php:333
 msgid "You have been removed from the waitlist"
@@ -2422,7 +2422,7 @@ msgstr "Вид сетки"
 #: static/js/editor/blocks/post-template/Edit.js:371
 #: static/js/editor/blocks/tax-template/Edit.js:309
 msgid "Tablet Columns"
-msgstr "Колонки планшета"
+msgstr "Колонки пла��шета"
 
 #: static/js/editor/blocks/post-template/Edit.js:380
 #: static/js/editor/blocks/tax-template/Edit.js:319
@@ -3034,7 +3034,7 @@ msgstr "Целевое количество"
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:90
 msgid "Amount of items the client has to buy in order to get free shipping."
-msgstr "Количество товаров, которые клиен�� должен приобрести, чтобы получить бесплатную доставку."
+msgstr "Количество товаров, которые клиент должен приобрести, чтобы получить бесплатную доставку."
 
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:172
 msgid "You can use dynamic code tags such as {items} inside this option."
@@ -3108,7 +3108,7 @@ msgstr "Название демо не указано."
 #: framework/premium/extensions/woocommerce-extra/features/stock-scarcity/feature.php:280,
 #: framework/premium/extensions/woocommerce-extra/features/stock-scarcity/options.php:4
 msgid "Stock Scarcity"
-msgstr "Нехватк�� запасов"
+msgstr "Нехватка запасов"
 
 #: framework/helpers/exts-configs.php:370
 msgid "Show the remaining stock of a product to create a sense of urgency and encourage your visitors to make a purchase."
@@ -3429,7 +3429,7 @@ msgstr "Это профессиональный стартовый сайт"
 
 #: static/js/dashboard/screens/DemoInstall/SingleDemo.js:54
 msgid "Upgrade to any pro plan and get instant access to this starter site and many other features."
-msgstr "Перейдите на любой профессиональный тариф и получите мгновенный доступ к этому стартовому сайту и многим другим функциям."
+msgstr "Перейдите на любой профессиона��ьный тариф и получите мгновенный доступ к этому стартовому сайту и многим другим функциям."
 
 #: static/js/dashboard/screens/DemoInstall/SingleDemo.js:61
 msgid "Upgrade to the business or agency plan and get instant access to this starter site and many other features."
@@ -3664,7 +3664,7 @@ msgstr "Адрес доставки"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderDetails.js:64
 msgid "Subtotal"
-msgstr "Подытог"
+msgstr "Подыт��г"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/ct-order/OrderDetails.js:77
 msgid "Shipping"
@@ -4415,7 +4415,7 @@ msgstr "Длина"
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:263
 #: static/js/editor/blocks/dynamic-data/hooks/use-dynamic-data-descriptor.js:156
 msgid "Attributes"
-msgstr "Атрибуты"
+msgstr "Ат��ибуты"
 
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:343,
 #: framework/premium/extensions/woocommerce-extra/features/compare/views/table.php:434
@@ -4517,7 +4517,7 @@ msgstr "Установите, каким пользователям разреш
 
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:5
 msgid "Affiliate Products"
-msgstr "Партнёрские продукты"
+msgstr "Партнёрские товары"
 
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:12
 msgid "Product Archive"
@@ -4541,7 +4541,7 @@ msgstr "Заголовок партнёрской ссылки"
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:57,
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:90
 msgid "Open Button Link In New Tab"
-msgstr "Открыть ссылку кно��ки в новой вкладке"
+msgstr "Открывать кнопкой но��ую вкладку"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-page/options.php:14
 msgid "Quantity Auto Update"
@@ -5371,7 +5371,7 @@ msgstr "Формирование содержимого куки"
 
 #: framework/helpers/exts-configs.php:362
 msgid "Better management for affiliate products with a few simple options that strengthen the external integration with these."
-msgstr "Улучшенное управление партнерскими продуктами с помощью нескольких простых опций, усиливающих внешнюю интеграцию с ними."
+msgstr "Улучшенное управление партнёрскими товарами с помощью простых опций, усиливающих внешнюю интеграцию с ними."
 
 #: framework/helpers/exts-configs.php:295
 msgid "Custom Tabs"
@@ -5379,7 +5379,7 @@ msgstr "Произвольные вкладки"
 
 #: framework/helpers/exts-configs.php:296
 msgid "Present additional information about your products by adding new custom tabs to the product information section."
-msgstr "Предоставление дополнительной информации о товарах, добавив нестандартные вкладки в раздел информации о товаре."
+msgstr "Предоставление дополнительной информации о товаре, добавлением нестандартной вкладки в раздел описания."
 
 #: framework/helpers/exts-configs.php:304,
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/feature.php:64,
@@ -5409,7 +5409,7 @@ msgstr "Бренды товаров"
 
 #: framework/helpers/exts-configs.php:287
 msgid "Categorise products by brands and show their logo in archive or single page so users could discover more about their makers."
-msgstr "Классификация товаров по брендам и отображения их логотипов в списках и на отдельных страницах, позволяя пользователи узнавать о производителях."
+msgstr "Классификация товаров по брендам и отображение их логотипов в списках и на отдельных страницах, позволяющая пользователям узнавать о производителях."
 
 #: framework/helpers/exts-configs.php:361
 msgid "Affiliate Product Links"
@@ -5438,7 +5438,7 @@ msgstr "Образцы вариаций"
 
 #: framework/helpers/exts-configs.php:271
 msgid "Compare products with a clear and concise table system that gives your users a way to make a quick decision."
-msgstr "Сравнение товаров с помощью чёткой и лаконичной системы таблиц, которая дает пользователям возможность быстро принимать решение."
+msgstr "Сравнение товаров с помощью чёткой и лаконичной системы таблиц, которая даёт пользователям возможность быстро принимать решение."
 
 #: framework/helpers/exts-configs.php:346
 msgid "Product Share Box"
@@ -5446,7 +5446,7 @@ msgstr "Блок публикации в соцсетях"
 
 #: framework/helpers/exts-configs.php:347
 msgid "Enable social sharing abilities for products available on the site, letting even more users discover your great shop selection."
-msgstr "Возможность публикации информации о товарах, доступных на сайте, в соцсетях, что позволит еще большему количеству пользователей ознакомиться с ассортиментом магазина."
+msgstr "Возможность публикации информации о товарах, доступных на сайте, в соцсетях, что позволит ещё большему количеству пользователей ознакомиться с ассортиментом магазина."
 
 #: framework/helpers/exts-configs.php:338
 msgid "Advanced Gallery"
@@ -5454,7 +5454,7 @@ msgstr "Расширенная галерея"
 
 #: framework/helpers/exts-configs.php:247
 msgid "Preview the available products and let your users make quick and informative decisions about their purchase."
-msgstr "Просмотр доступных товаров и помощь клиентам быстро и легко принимать особнованные решения об их покупке."
+msgstr "Просмотр доступных товаров и помощь клиентам быстро и легко принимать обоснованные решения об их покупке."
 
 #: framework/helpers/exts-configs.php:254,
 #: framework/premium/extensions/shortcuts/views/bar.php:54
@@ -6672,7 +6672,7 @@ msgstr "загрузка демонстрационных опций"
 
 #: static/js/dashboard/screens/DemoInstall/Installer/messages.js:46
 msgid "importing images from customizer"
-msgstr "импорт изображений из настро��щика"
+msgstr "импорт изображений из настройщика"
 
 #: static/js/dashboard/screens/DemoInstall/Installer/messages.js:50
 msgid "import customizer options"
@@ -10581,7 +10581,7 @@ msgstr "Десктоп"
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:125,
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/header-items/wish-list/options.php:608
 msgid "Tablet"
-msgstr " Планшет"
+msgstr "Планшет"
 
 #: framework/extensions/newsletter-subscribe/customizer.php:162,
 #: framework/extensions/trending/customizer.php:554,

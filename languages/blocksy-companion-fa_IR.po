@@ -4087,7 +4087,7 @@ msgstr "تبرک! شما حمل و نقل رایگان را دریافت کرد�
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/feature.php:422,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:139
 msgid "Add {price} more to get free shipping!"
-msgstr "{price} بیش��ر اضافه کنید تا حمل و نقل رایگان را دریافت کنید!"
+msgstr "{price} بیشتر اضافه کنی�� تا حمل و نقل رایگان را دریافت کنید!"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:15,
 #: framework/premium/extensions/woocommerce-extra/features/shipping-progress/options.php:15
@@ -4512,7 +4512,7 @@ msgstr "کاربران مجاز"
 
 #: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/options.php:106
 msgid "Set which users are allowed to vote."
-msgstr "تنظیم کنید که کدام ک��ربران مجاز به رای دادن باشند."
+msgstr "تنظیم کنید که کدام کاربران مجاز ��ه رای دادن باشند."
 
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:5
 msgid "Affiliate Products"
@@ -5302,7 +5302,7 @@ msgstr "دکمه‌ی پذیرش"
 
 #: framework/extensions/cookies-consent/customizer.php:267
 msgid "Decline Button"
-msgstr "دکمه‌ی رد کردن"
+msgstr "دک��ه‌ی رد کردن"
 
 #: framework/extensions/cookies-consent/extension.php:106
 msgid "Please accept the Privacy Policy in order to comment."
@@ -5466,7 +5466,7 @@ msgstr ""
 
 #: framework/helpers/exts-configs.php:263
 msgid "A set of features that lets you create easily your dream products wishlists and share them with friends and family."
-msgstr "دسته‌ای از امکانات که به شما اجازه می‌دهد به سادگی لیست علاقه‌مندی‌��ای محصول دلخواه خود را بسازید و آن‌ها را با دوستان و خانواده به اشتراک بگذارید."
+msgstr "دسته‌ای از امکانات که به شما اجازه می‌دهد به سادگی لیست علاقه‌مندی‌های محصول دلخواه خود را بسازید و آن‌ها را با دوستان و خانواده به اشتراک بگذارید."
 
 #: framework/helpers/exts-configs.php:270
 msgid "Compare View"
@@ -6656,7 +6656,7 @@ msgstr "در حال فعال‌سازی افزونه‌ی %s"
 
 #: static/js/dashboard/screens/DemoInstall/Installer/messages.js:34
 msgid "downloading demo widgets"
-msgstr "در حال دریافت ابزارک‌های نمایشی"
+msgstr "در ��ال دریافت ابزارک‌های نمایشی"
 
 #: static/js/dashboard/screens/DemoInstall/Installer/messages.js:38
 msgid "installing demo widgets"

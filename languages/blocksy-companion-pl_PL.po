@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-11-03 15:51:15+0000\n"
+"PO-Revision-Date: 2026-01-05 14:10:18+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,43 +13,43 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:328
 msgid "Product brands that the coupon will not be applied to, or that cannot be in the cart in order for the \"Fixed cart discount\" to be applied."
-msgstr ""
+msgstr "Marki produktów, do których kupon nie ma zastosowania lub które nie mogą znajdować się w koszyku, aby można było zastosować „Stałą zniżkę w koszyku”."
 
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:343
 msgid "Exclude brands"
-msgstr ""
+msgstr "Wyklucz marki"
 
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:383
 msgid "Product brands that the coupon will be applied to, or that must be in the cart in order for the \"Fixed cart discount\" to be applied."
-msgstr ""
+msgstr "Marki produktów, do których zostanie zastosowany kupon lub które muszą znajdować się w koszyku, aby można było zastosować „Stałą zniżkę w koszyku”."
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/cart-reservation-cleaner.php:16
 msgid "Every 12 Hours"
-msgstr ""
+msgstr "Co 12 godzin"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/feature.php:417
 msgid "<p><strong>🔥 Hurry up! Your selected items are reserved for {time} minutes.</strong></p>"
-msgstr ""
+msgstr "<p><strong>🔥 Pospiesz się! Wybrane produkty są zarezerwowane przez {time} minut.</strong></p>"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:28
 msgid "Countdown Duration"
-msgstr ""
+msgstr "Czas trwania odliczania"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:34
 msgid "Determine for how long items in the cart are reserved before being removed."
-msgstr ""
+msgstr "Określ, jak długo produkty w koszyku są zarezerwowane, zanim zostaną usunięte."
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:40
 msgid "<p><strong>🔥 Hurry up! Your selected items are in high demand!</strong><br>Your cart will be reserved for {time} minutes.</p>"
-msgstr ""
+msgstr "<p><strong>🔥 Pospiesz się! Wybrane przez Ciebie produkty cieszą się dużym zainteresowaniem!</strong><br>Twój koszyk zostanie zarezerwowany na {time} minut.</p>"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:48
 msgid "You can use dynamic code tags such as {time} inside this option."
-msgstr ""
+msgstr "W tej opcji można używać dynamicznych tagów kodu, takich jak {time}."
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:603
 msgid "Select terms"
-msgstr ""
+msgstr "Wybierz warunki"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:622
 msgid "Select all"
@@ -1472,7 +1472,7 @@ msgstr "Zostałeś usunięty z listy oczekujących"
 #. (user/users)
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:57
 msgid "%1$s %2$s joined the waitlist for this item."
-msgstr ""
+msgstr "%1$s %2$s dołączył do listy oczekujących na ten produkt."
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:293
 msgid "Waitlist Form"
@@ -2033,7 +2033,7 @@ msgstr "Widżet do filtrowania produktów WooCommerce według ceny."
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/rating-filter/index.js:72
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/tax-filters/Edit.js:380
 msgid "Show Tooltip"
-msgstr "Pokaż podpowied��"
+msgstr "Pokaż podpowiedź"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/tax-filters/Disabled.js:7
 msgid "Please select a valid taxonomy."
@@ -2842,7 +2842,7 @@ msgstr "Okładka"
 #. translators: placeholder here means the actual URL.
 #: framework/premium/features/media-video/options.php:140
 msgid "Choose how the video will fill its container. More info about this can be found %1$shere%2$s."
-msgstr ""
+msgstr "Wybierz sposób wypełnienia kontenera przez wideo. Więcej informacji na ten temat można znaleźć %1$stutaj%2$s."
 
 #. translators: %s is the author's display name.
 #: framework/features/blocks/dynamic-data/views/avatar-field.php:31
@@ -2916,7 +2916,7 @@ msgstr "Aktywny odnośnik"
 
 #: framework/premium/features/content-blocks/options/popup.php:375
 msgid "Close delay time (in seconds) after the form submit action is detected."
-msgstr ""
+msgstr "Czas opóźnienia zamknięcia (w sekundach) po wykryciu działania przesłania formularza."
 
 #: framework/premium/extensions/post-types-extra/features/taxonomies-customization/feature.php:111,
 #: framework/premium/extensions/woocommerce-extra/features/brands/feature.php:746
@@ -3118,13 +3118,13 @@ msgstr "Pokaż pozostałe zapasy produktu, aby stworzyć poczucie pilności i za
 #: framework/views/theme-mismatch.php:36
 #: static/js/notifications/VersionMismatchNotice.js:37
 msgid "Action required - please update %s to the latest version!"
-msgstr ""
+msgstr "Wymagane działanie — zaktualizuj %s do najnowszej wersji!"
 
 #. translators: %s is the product name (theme or plugin)
 #: framework/views/theme-mismatch.php:42
 #: static/js/notifications/VersionMismatchNotice.js:48
 msgid "We detected that you are using an outdated version of %s."
-msgstr ""
+msgstr "Wykryliśmy, że używasz nieaktualnej wersji %s."
 
 #: static/js/notifications/VersionMismatchNotice.js:59
 msgid "In order to take full advantage of all features the core has to offer - please install and activate the latest version of Blocksy theme."
@@ -4636,7 +4636,7 @@ msgstr "%s%% klientów poleca ten produkt"
 #. translators: %1$s is the number of helpful votes, %2$s is the total votes
 #: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:630
 msgid "%1$s of %2$s found this review helpful"
-msgstr ""
+msgstr "%1$s z %2$s uznało tę recenzję za pomocną"
 
 #: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/feature.php:698,
 #: framework/premium/extensions/woocommerce-extra/features/advanced-reviews/options.php:44
@@ -4812,7 +4812,7 @@ msgstr "Blokada przewijania"
 
 #: framework/premium/features/content-blocks/options/popup.php:362
 msgid "Button class selector that will trigger popup to close."
-msgstr ""
+msgstr "Selektor klasy przycisku, który spowoduje zamknięcie wyskakującego okienka."
 
 #: framework/premium/features/content-blocks/options/popup.php:220
 msgid "Relaunch Trigger"
@@ -6013,7 +6013,7 @@ msgstr "After shop loop item actions"
 #. translators: placeholder here means the actual URL.
 #: framework/features/blocks/socials/options.php:24
 msgid "Configure the social links in Customizer ➝ General ➝ %1$sSocial Network Accounts%2$s."
-msgstr ""
+msgstr "Skonfiguruj odnośniki społecznościowe w Konfigurator ➝ Ogólne ➝ %1$sKonta w sieciach społecznościowych%2$s."
 
 #: framework/features/header/items/account/options.php:320
 msgid "Customizing: Logged out State"
@@ -6218,7 +6218,7 @@ msgstr "Własne fragmenty kodu"
 #. translators: 1: link open 2: link close
 #: framework/features/account-auth.php:109
 msgid "Check your email for the confirmation link, then visit the %1$slogin page%2$s."
-msgstr ""
+msgstr "Sprawdź swoją skrzynkę e-mailową pod kątem odnośnika potwierdzającego, a następnie odwiedź stronę %1$sstronę logowania%2$s."
 
 #: framework/features/account-auth.php:237
 msgid "Your account was created successfully. Your login details have been sent to your email address. Please visit the %1$slogin page%2$s."
@@ -7915,7 +7915,7 @@ msgstr "Godziny pracy"
 #: framework/features/blocks/contact-info/options.php:272,
 #: framework/premium/features/premium-header/items/contacts/options.php:223
 msgid "Opening hours:"
-msgstr ""
+msgstr "Godziny otwarcia:"
 
 #: framework/features/blocks/contact-info/options.php:328,
 #: framework/premium/features/premium-header/items/contacts/options.php:263
@@ -8104,7 +8104,7 @@ msgstr "Wybierz menu..."
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/features/header/items/account/options.php:169
 msgid "Manage your menus in the %1$sMenus screen%2$s."
-msgstr ""
+msgstr "Zarządzaj menu na ekranie %1$sMenu%2$s."
 
 #: framework/features/header/items/account/options.php:801,
 #: framework/features/header/items/account/options.php:1096
@@ -8367,7 +8367,7 @@ msgstr "Podświetlenie/Aktywny"
 
 #: framework/premium/extensions/woocommerce-extra/features/wish-list/views/table-no-results.php:6
 msgid "You don't have any products in your wishlist yet."
-msgstr ""
+msgstr "Nie masz jeszcze żadnych produktów na swojej liście życzeń."
 
 #: framework/premium/extensions/woocommerce-extra/features/archive-card/feature.php:59,
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/templates/emails/waitlist-back-in-stock.php:58,
@@ -8905,7 +8905,7 @@ msgstr "Więcej informacji na temat generowania klucza API dla Mailchimp można 
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:406
 msgid "More information on how to generate an API key for EmailOctopus can be found %shere%s."
-msgstr ""
+msgstr "Więcej informacji na temat generowania klucza API dla EmailOctopus można znaleźć %stutaj%s."
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:229
 msgid "API Key"
@@ -9495,7 +9495,7 @@ msgstr "Lokalne czcionki Google"
 
 #: framework/premium/extensions/shortcuts/views/bar.php:513
 msgid "Shortcuts bar"
-msgstr ""
+msgstr "Pasek skrótów"
 
 #: framework/theme-integration.php:235
 msgid "Facebook"
@@ -9746,7 +9746,7 @@ msgstr "Google Analytics v4"
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/features/google-analytics.php:87
 msgid "Link your Google Analytics 4 tracking ID. More info and instructions can be found %1$shere%2$s."
-msgstr ""
+msgstr "Połącz swój identyfikator śledzenia Google Analytics 4. Więcej informacji i instrukcji można znaleźć %1$stutaj%2$s."
 
 #: framework/features/opengraph-meta-data.php:13
 msgid "OpenGraph Meta Data"
@@ -10255,7 +10255,7 @@ msgstr "Maksymalna szerokość"
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/extensions/cookies-consent/customizer.php:120
 msgid "I accept the %1$sPrivacy Policy%2$s*"
-msgstr ""
+msgstr "Akceptuję %1$sPolitykę prywatności%2$s*"
 
 #: framework/extensions/cookies-consent/customizer.php:124
 msgid "This text will appear under each comment form and subscribe form."
@@ -10264,7 +10264,7 @@ msgstr "Ten tekst pojawi się pod każdym formularzem komentarza i formularzem s
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/extensions/cookies-consent/helpers.php:56
 msgid "I accept the %1$sPrivacy Policy%2$s"
-msgstr ""
+msgstr "Akceptuję %1$sPolitykę prywatności%2$s"
 
 #: framework/features/blocks/about-me/options.php:140
 msgid "Customizer"
@@ -11006,7 +11006,7 @@ msgstr "Organizacja"
 #. translators: %1$s and %2$s are HTML tags.
 #: framework/extensions/product-reviews/metabox.php:39
 msgid "More info about review entity and how to choose the right one can be found %1$shere%2$s."
-msgstr ""
+msgstr "Więcej informacji na temat podmiotów dokonujących przeglądu oraz tego, jak wybrać odpowiedni podmiot, można znaleźć %1$stutaj%2$s."
 
 #: framework/extensions/product-reviews/metabox.php:70
 msgid "Product Price"
@@ -11142,7 +11142,7 @@ msgstr "Identyfikator wpisu"
 #. translators: %1$s and %2$s are HTML tags
 #: framework/extensions/trending/customizer.php:367
 msgid "Separate posts ID by comma. How to find the %1$spost ID%2$s."
-msgstr ""
+msgstr "Oddziel identyfikatory wpisów przecinkami. Jak znaleźć %1$sidentyfikator wpisu%2$s."
 
 #: framework/extensions/trending/customizer.php:392
 msgid "Trending From"

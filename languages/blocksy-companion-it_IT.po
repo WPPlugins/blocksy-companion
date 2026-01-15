@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-05-21 07:45:35+0000\n"
+"PO-Revision-Date: 2025-12-19 12:32:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -213,7 +213,7 @@ msgstr ""
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:72
 msgid "Support Section"
-msgstr ""
+msgstr "Sezione Supporto"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:77
 msgid "Knowledge Base Section"
@@ -233,7 +233,7 @@ msgstr ""
 
 #: framework/premium/extensions/white-label/dashboard-static/js/SupportSectionModal.js:159
 msgid "Save Options"
-msgstr ""
+msgstr "Salva opzioni"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/SupportSectionModal.js:34
 msgid "%s Content"
@@ -249,51 +249,51 @@ msgstr ""
 
 #: static/js/dashboard/helpers/SubmitSupport.js:107
 msgid "Support"
-msgstr ""
+msgstr "Supporto"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:110
 msgid "If your questions have not been answered by documentation or video tutorials, drop us a line."
-msgstr ""
+msgstr "Se la documentazione o i tutorial video non hanno risposto alle tue domande, scrivici."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:115
 msgid "Submit a Ticket"
-msgstr ""
+msgstr "Invia un Ticket"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:32
 msgid "Facebook Community"
-msgstr ""
+msgstr "Facebook Community"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:35
 msgid "Share ideas, help others, ask questions and discuss your next project in our friendly community."
-msgstr ""
+msgstr "Condividi idee, aiuta gli altri, fai domande e discuti del tuo prossimo progetto nella nostra community."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:43
 msgid "Join Our Community"
-msgstr ""
+msgstr "Unisciti alla nostra community"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:57
 msgid "Video Tutorials"
-msgstr ""
+msgstr "Video Tutorials"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:60
 msgid "Learn how to do just about anything within Blocksy by following our byte-sized video tutorials."
-msgstr ""
+msgstr "Scopri come fare praticamente qualsiasi cosa all'interno di Blocksy seguendo i nostri brevi tutorial video."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:68
 msgid "Watch Tutorials"
-msgstr ""
+msgstr "Guarda i tutorial"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:82
 msgid "Knowledge Base"
-msgstr ""
+msgstr "Conoscenza di base"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:85
 msgid "Dive in with our documentation and learn tips and tricks about Blocksy and its components."
-msgstr ""
+msgstr "Immergiti nella nostra documentazione e scopri suggerimenti e trucchi su Blocksy e i suoi componenti."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:93
 msgid "View Documentation"
-msgstr ""
+msgstr "Vedi la documentazione"
 
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:401
 msgid "Enable field link"
@@ -429,7 +429,7 @@ msgstr ""
 
 #: framework/extensions/cookies-consent/config.php:6
 msgid "Display a simple consent banner to inform users about the use of cookies on the website."
-msgstr ""
+msgstr "Visualizza un semplice banner di consenso per informare gli utenti sull'utilizzo dei cookie sul sito web."
 
 #: framework/features/demo-install/parsers.php:55,
 #: framework/features/demo-install/parsers.php:99,
@@ -838,7 +838,7 @@ msgstr ""
 
 #: static/js/editor/blocks/tax-query/edit/TermsInspectorControls.js:311
 msgid "Hide Empty Taxonomies"
-msgstr ""
+msgstr "Nascondi tassonomie vuote"
 
 #: static/js/notifications/VersionMismatchNotice.js:112
 msgid "Update %s Now"
@@ -3779,7 +3779,7 @@ msgstr "Controlli Newsletter"
 #: framework/features/blocks/search/options.php:143,
 #: framework/premium/features/premium-header/items/search-input/options.php:138
 msgid "Live Results Product Status"
-msgstr "Stato Prodotti con Risultato in Tempo Reale"
+msgstr "Risultati in tempo reale dello stato del prodotto"
 
 #: framework/features/blocks/search/options.php:155,
 #: framework/premium/features/premium-header/items/search-input/options.php:151
@@ -4688,7 +4688,7 @@ msgstr "Divario Loghi"
 
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/view.php:78
 msgid "Color mode switch"
-msgstr "Interruttore della modalità colore"
+msgstr "Commutatore della modalità colore"
 
 #: framework/premium/extensions/post-types-extra/features/filtering/customizer.php:92
 msgid "Items Counter"
@@ -4740,11 +4740,11 @@ msgstr "Scegli la modalità colore predefinita che un utente vedrà quando visit
 
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/config.php:4
 msgid "Color Switch"
-msgstr "Interruttore Colore"
+msgstr "Commutatore Colore"
 
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:39
 msgid "Reverse Icon State"
-msgstr "Stato icona Invertito"
+msgstr "Inverti stato dell'icona"
 
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:102
 msgid "Dark Mode Label"
@@ -4761,7 +4761,7 @@ msgstr "Modalità Chiara"
 
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:128
 msgid "Default Color Mode"
-msgstr "Colore Predefinito"
+msgstr "Modalità di colore predefinita"
 
 #: framework/premium/extensions/color-mode-switch/header-items/color-mode-switcher/options.php:136
 msgid "Light"
@@ -5302,7 +5302,7 @@ msgstr "Pulsante Accetta"
 
 #: framework/extensions/cookies-consent/customizer.php:267
 msgid "Decline Button"
-msgstr "Bottone Rifiuta"
+msgstr "Pulsante Rifiuta"
 
 #: framework/extensions/cookies-consent/extension.php:106
 msgid "Please accept the Privacy Policy in order to comment."
@@ -5614,11 +5614,11 @@ msgstr "Visualizza Posizione"
 
 #: framework/extensions/trending/customizer.php:569
 msgid "Before Footer"
-msgstr "Prima del Footer"
+msgstr "Prima del footer"
 
 #: framework/extensions/trending/customizer.php:574
 msgid "After Footer"
-msgstr "Dopo il Footer"
+msgstr "Dopo il footer"
 
 #: framework/extensions/trending/customizer.php:579
 msgid "After Header"
@@ -5662,7 +5662,7 @@ msgstr "Header scripts"
 #: framework/premium/extensions/code-snippets/extension.php:120,
 #: framework/premium/extensions/code-snippets/extension.php:165
 msgid "Footer scripts"
-msgstr "Footer scripts"
+msgstr "Scripts nel footer"
 
 #: framework/premium/extensions/mega-menu/options.php:377,
 #: framework/premium/extensions/mega-menu/options.php:385,
@@ -5898,7 +5898,7 @@ msgstr "Menù Avanzato"
 #: framework/helpers/exts-configs.php:136
 msgctxt "Extension Brand Name"
 msgid "Post Types Extra"
-msgstr "Tipo di Articolo Extra"
+msgstr "Tipo di contenuto Extra"
 
 #. translators: This is a brand name. Preferably to not be translated
 #: framework/helpers/exts-configs.php:179,
@@ -5920,7 +5920,7 @@ msgstr "Classe personalizzata"
 #: framework/helpers/exts-configs.php:194
 msgctxt "Extension Brand Name"
 msgid "Multiple Sidebars"
-msgstr "Più Sidebars"
+msgstr "Sidebar Multiple"
 
 #. translators: This is a brand name. Preferably to not be translated
 #: framework/helpers/exts-configs.php:214
@@ -6229,7 +6229,7 @@ msgstr "Il tuo account è stato creato con successo e una password è stata invi
 #: framework/extensions/cookies-consent/customizer.php:5
 msgctxt "Extension Brand Name"
 msgid "Cookies Consent"
-msgstr "Cookies Consent"
+msgstr "Consenso sui Cookie"
 
 #: framework/extensions/cookies-consent/customizer.php:76
 msgid "Accept Button text"
@@ -6237,7 +6237,7 @@ msgstr "Testo Bottone Accetta"
 
 #: framework/extensions/cookies-consent/customizer.php:85
 msgid "Decline Button text"
-msgstr "Testo Bottone Rifiuta"
+msgstr "Testo del pulsante Rifiuta"
 
 #: framework/extensions/cookies-consent/customizer.php:88,
 #: framework/extensions/cookies-consent/helpers.php:11
@@ -6385,7 +6385,7 @@ msgstr "Template Header"
 
 #: framework/premium/static/js/hooks/CreateHook.js:140
 msgid "Footer Template"
-msgstr "Template Footer"
+msgstr "Template del footer"
 
 #: framework/premium/static/js/options/IconPicker.js:137
 msgid "Change Icon"
@@ -6985,7 +6985,7 @@ msgstr "Crea set personalizzati illimitati di aree widget e visualizzali su qual
 
 #: framework/helpers/exts-configs.php:199
 msgid "Create New Sidebar"
-msgstr "Creare Nuova Sidebar"
+msgstr "Crea una nuova Barra Laterale"
 
 #: framework/premium/extensions/sidebars/form.php:3
 #: framework/premium/extensions/sidebars/static/js/main.js:50
@@ -6999,7 +6999,7 @@ msgstr "Per creare una nuova barra laterale/area widget, inserisci semplicemente
 #: framework/premium/extensions/sidebars/form.php:16
 #: framework/premium/extensions/sidebars/static/js/main.js:66
 msgid "Create Sidebar"
-msgstr "Creare Sidebar"
+msgstr "Crea Barra Laterale"
 
 #: framework/premium/extensions/sidebars/form.php:20
 msgid "Available Sidebars/Widget Areas"
@@ -7007,7 +7007,7 @@ msgstr "Barre Laterali/Aree Widget Disponibili"
 
 #: framework/helpers/exts-configs.php:215
 msgid "Replace Blocksy's branding with your own. Easily hide licensing info and other sections of the theme and companion plugin from your clients and make your final product look more professional."
-msgstr "Sostituisci il marchio di Blocksy con il tuo. Nascondi facilmente le informazioni sulla licenza e altre sezioni del tema e del plugin associato ai tuoi clienti e rendi il tuo"
+msgstr "Sostituisci il marchio di Blocksy con il tuo. Nascondi facilmente ai tuoi clienti le informazioni sulla licenza e altre sezioni del tema e del plugin complementare, rendendo il tuo prodotto finale più professionale."
 
 #: framework/helpers/exts-configs.php:228
 msgid "Make the shopping experience better for your visitors! Add features such as Product Quick View, Wishlist functionality and a Floating Add to Cart button. Customize the single product gallery/slider and the layout."
@@ -7245,30 +7245,30 @@ msgstr "Mobile bottom"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:102
 msgid "Sidebar before"
-msgstr "Prima della Sidebar"
+msgstr "Prima della Barra Laterale"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:103,
 #: framework/premium/features/content-blocks/hooks-manager.php:110,
 #: framework/premium/features/content-blocks/hooks-manager.php:117,
 #: framework/premium/features/content-blocks/hooks-manager.php:124
 msgid "Left/Right sidebar"
-msgstr "Sidebar sinistra/destra"
+msgstr "Barra Laterale sinistra/destra"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:109
 msgid "Sidebar start"
-msgstr "inizio Sidebar"
+msgstr "Inizio Barra Laterale"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:116
 msgid "Sidebar end"
-msgstr "Fine sidebar"
+msgstr "Fine Barra Laterale"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:123
 msgid "Sidebar after"
-msgstr "Dopo il Sidebar"
+msgstr "Dopo la Barra Laterale"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:130
 msgid "Dynamic sidebar before"
-msgstr "Barra laterale dinamica prima"
+msgstr "Prima della Barra Laterale dinamica"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:131,
 #: framework/premium/features/content-blocks/hooks-manager.php:138,
@@ -7278,11 +7278,11 @@ msgstr "Tutte le aree Widget"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:137
 msgid "Dynamic sidebar"
-msgstr "Sidebar Dinamica"
+msgstr "Barra Laterale dinamica"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:145
 msgid "Dynamic sidebar after"
-msgstr "Barra laterale dinamica dopo"
+msgstr "Dopo la Barra Laterale dinamica"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:154
 msgid "Before section"
@@ -8299,7 +8299,7 @@ msgstr "%s Campo"
 #: framework/premium/extensions/post-types-extra/features/read-time/estimated-read-time.php:36,
 #: framework/premium/extensions/post-types-extra/features/read-time/estimated-read-time.php:78
 msgid "Read Time"
-msgstr "In Tempo Reale"
+msgstr "Tempo di lettura"
 
 #: framework/premium/extensions/post-types-extra/features/filtering/helpers.php:194,
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:272,
@@ -8845,7 +8845,7 @@ msgstr "Risultati Live"
 #: framework/features/blocks/search/options.php:126,
 #: framework/premium/features/premium-header/items/search-input/options.php:119
 msgid "Live Results Images"
-msgstr "Immagini Risultati in Tempo Reale"
+msgstr "Risultati delle Immagini in tempo reale"
 
 #: framework/features/blocks/search/options.php:202,
 #: framework/premium/features/premium-header/items/search-input/options.php:194
@@ -9033,7 +9033,7 @@ msgstr "Impostazioni Item"
 
 #: framework/premium/extensions/sidebars/static/js/BlockWidgetControls.js:63
 msgid "Remove Sidebar"
-msgstr "Rimuovi Sidebar"
+msgstr "Rimuovi Barra Laterale"
 
 #: framework/premium/extensions/sidebars/static/js/SettingsManager.js:66
 msgid "%s - Sidebar Display Conditions"
@@ -9041,15 +9041,15 @@ msgstr "%s - Condizioni Visualizzazione Barra Laterale"
 
 #: framework/premium/extensions/sidebars/static/js/SettingsManager.js:74
 msgid "Add one or more conditions in order to display your sidebar."
-msgstr "Aggiungi una o più condizioni per visualizzare la barra laterale."
+msgstr "Aggiungi una o più condizioni per visualizzare la Barra Laterale."
 
 #: framework/premium/extensions/sidebars/static/js/main.js:53
 msgid "Enter a name in the input below and hit the Create Sidebar button."
-msgstr "Inserisci un nome nell'input sottostante e premi il pulsante Crea barra laterale."
+msgstr "Inserisci un nome nell'input sottostante e premi il pulsante Crea Barra Laterale."
 
 #: framework/premium/extensions/sidebars/static/js/main.js:60
 msgid "Sidebar name"
-msgstr "Nome Sidebar"
+msgstr "Nome della Barra Laterale"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/EditSettings.js:138
 msgid "Advanced"
@@ -9126,12 +9126,12 @@ msgstr "È possibile inserire il collegamento a un'immagine ospitata autonomamen
 #: framework/premium/static/js/footer/CloneItem.js:66
 #: framework/premium/static/js/header/CloneItem.js:66
 msgid "Clone Item"
-msgstr "Clona Item"
+msgstr "Clona elemento"
 
 #: framework/premium/static/js/footer/CloneItem.js:90
 #: framework/premium/static/js/header/CloneItem.js:90
 msgid "Remove Item"
-msgstr "Rimuovi Item"
+msgstr "Rimuovi elemento"
 
 #: framework/premium/static/js/footer/CreateFooter.js:107
 #: framework/premium/static/js/header/CreateHeader.js:106
@@ -9159,7 +9159,7 @@ msgstr "Centrato"
 
 #: framework/premium/static/js/footer/CreateFooter.js:172
 msgid "Create New Footer"
-msgstr "Creare Nuovo Footer"
+msgstr "Crea nuovo Footer"
 
 #: framework/premium/static/js/footer/CreateFooter.js:50
 msgid "Create new footer"
@@ -9167,15 +9167,15 @@ msgstr "Creare nuovo footer"
 
 #: framework/premium/static/js/footer/CreateFooter.js:53
 msgid "Create a new footer and assign it to different pages or posts based on your conditions."
-msgstr "Crea un nuovo piè di pagina e assegnalo a pagine o post diversi in base alle tue condizioni."
+msgstr "Crea un nuovo footer e assegnalo a pagine o articoli diversi in base alle tue condizioni."
 
 #: framework/premium/static/js/footer/CreateFooter.js:72
 msgid "Footer name"
-msgstr "Nome Footer"
+msgstr "Nome  del footer"
 
 #: framework/premium/static/js/footer/EditConditions.js:110
 msgid "Add one or more conditions in order to display your footer."
-msgstr "Aggiungi una o più condizioni per visualizzare il piè di pagina."
+msgstr "Aggiungi una o più condizioni per visualizzare il footer."
 
 #: framework/premium/static/js/footer/EditConditions.js:90
 #: static/js/header/EditConditions.js:87
@@ -9188,11 +9188,11 @@ msgstr "Rimuovi footer"
 
 #: framework/premium/static/js/footer/PanelsManager.js:193
 msgid "Remove Footer"
-msgstr "Rimuovi Footer"
+msgstr "Rimuovi footer"
 
 #: framework/premium/static/js/footer/PanelsManager.js:196
 msgid "You are about to remove a custom footer, are you sure you want to continue?"
-msgstr "Stai rimuovendo un footer personalizzato, sei sicuro di voler contuinuare?"
+msgstr "Stai rimuovendo un footer personalizzato, sei sicuro di voler continuare?"
 
 #: framework/premium/static/js/footer/PanelsManager.js:212
 #: framework/premium/static/js/hooks/CodeEditor.js:189
@@ -9423,7 +9423,7 @@ msgstr "Colore Icone"
 
 #: framework/helpers/exts-configs.php:137
 msgid "Enables support for Custom Fields inside archive cards and single page post title, adds a reading progress bar for your posts and lets you set featured images and colors for your categories archives."
-msgstr "Abilita il supporto per i campi personalizzati all'interno delle schede di archivio e del titolo dei post a pagina singola, aggiunge una barra di avanzamento della lettura per i tuoi post e ti consente di impostare immagini e colori in evidenza per i tuoi archivi di categorie."
+msgstr "Abilita il supporto per i campi personalizzati all'interno delle schede di archivio e del titolo dei singoli articoli, aggiunge una barra di avanzamento della lettura per i tuoi post e ti consente di impostare immagini e colori in evidenza per i tuoi archivi di categorie."
 
 #: framework/helpers/exts-configs.php:180,
 #: framework/premium/extensions/shortcuts/config.php:6
@@ -9906,7 +9906,7 @@ msgstr "Utilizziamo i cookie per assicurarti di offrirti la migliore esperienza 
 #: framework/features/blocks/search/options.php:75
 #: framework/premium/extensions/white-label/dashboard-static/js/SupportSectionModal.js:86
 msgid "Button Text"
-msgstr "Testo Pulsante"
+msgstr "Testo del pulsante"
 
 #: framework/extensions/cookies-consent/customizer.php:80,
 #: framework/extensions/cookies-consent/helpers.php:10
@@ -10816,7 +10816,7 @@ msgstr "Colore Stelle Recensione"
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:544
 #: static/js/dashboard/screens/Extensions/Sidebar.js:124
 msgid "Active"
-msgstr "Attivo"
+msgstr "Attiva"
 
 #: framework/extensions/product-reviews/extension.php:281,
 #: framework/extensions/product-reviews/extension.php:451

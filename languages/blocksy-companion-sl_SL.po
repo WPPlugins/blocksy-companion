@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-03-19 14:59:52+0000\n"
+"PO-Revision-Date: 2025-12-19 12:32:34+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,23 +29,23 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/feature.php:417
 msgid "<p><strong>🔥 Hurry up! Your selected items are reserved for {time} minutes.</strong></p>"
-msgstr ""
+msgstr "<p><strong>🔥 Pohitite! Izbrani artikli so rezervirani še {time}</strong></p>"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:28
 msgid "Countdown Duration"
-msgstr ""
+msgstr "Trajanje odštevanja"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:34
 msgid "Determine for how long items in the cart are reserved before being removed."
-msgstr ""
+msgstr "Določite, kako dolgo so artikli v košarici rezervirani, preden se odstranijo."
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:40
 msgid "<p><strong>🔥 Hurry up! Your selected items are in high demand!</strong><br>Your cart will be reserved for {time} minutes.</p>"
-msgstr ""
+msgstr "<p><strong>🔥 Pohitite! Po vaših izbranih izdelkih je veliko povpraševanja!</strong><br>Vaša košarica bo rezervirana za {time} minut.</p>"
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:48
 msgid "You can use dynamic code tags such as {time} inside this option."
-msgstr ""
+msgstr "Znotraj te možnosti lahko uporabite dinamične oznake kode, kot je {time}."
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:603
 msgid "Select terms"
@@ -53,7 +53,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:622
 msgid "Select all"
-msgstr ""
+msgstr "Izberi vse"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:623
 msgid "Select none"
@@ -65,40 +65,40 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:56
 msgid "Order number:"
-msgstr ""
+msgstr "Številka naročila:"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:61
 msgid "Date:"
-msgstr ""
+msgstr "Datum:"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:73
 msgid "Total:"
-msgstr ""
+msgstr "Skupaj:"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:79
 msgid "Payment method:"
-msgstr ""
+msgstr "Način plačila:"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/price.php:106
 msgid "Minimum:"
-msgstr ""
+msgstr "Minimalno:"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/price.php:138
 msgid "Maximum:"
-msgstr ""
+msgstr "Največ:"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:125
 msgid "Regenerating Taxonomies Data"
-msgstr ""
+msgstr "Obnavljanje podatkov taksonomij"
 
 #. translators: %s is replaced with the current progress percentage.
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:145
 msgid "Progress <span>%s%%</span>"
-msgstr ""
+msgstr "Napredek <span>%s%%</span>"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:162
 msgid "Please wait until the WooCommerce product taxonomies lookup table is regenerated."
-msgstr ""
+msgstr "Počakajte, da se tabela iskalnih taksonomij izdelkov WooCommerce ponovno ustvari."
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:175
 msgid "Why is the table being regenerated?"
@@ -115,39 +115,39 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:63
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "uporabnik"
+msgstr[1] "uporabnika"
+msgstr[2] "uporabniki"
+msgstr[3] "uporabnikov"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:67
 msgid "View Subscribers"
-msgstr ""
+msgstr "Ogled naročnikov"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:87
 msgid "Edit this item"
-msgstr ""
+msgstr "Uredi ta element"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:93,
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:94
 msgid "View Product"
-msgstr ""
+msgstr "Ogled izdelka"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:155
 msgid "Out of stock"
-msgstr ""
+msgstr "Ni na zalogi"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:152
 msgid "In stock"
-msgstr ""
+msgstr "Na zalogi"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:217
 msgid "Subscribers"
-msgstr ""
+msgstr "Naročniki"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:224
 msgid "Pending entries"
-msgstr ""
+msgstr "Čakajoči vnosi"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:232
 msgid "Failed entries"
@@ -155,19 +155,19 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:245
 msgid "Stock"
-msgstr ""
+msgstr "Zaloga"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-users-table.php:188
 msgid "Failed to send"
-msgstr ""
+msgstr "Pošiljanje ni uspelo"
 
 #: framework/premium/features/premium-header/items/language-switcher/options/common.php:18
 msgid "Flag Shape"
-msgstr ""
+msgstr "Oblika zastave"
 
 #: framework/premium/features/premium-header/items/language-switcher/options/common.php:25
 msgid "Rectangle"
-msgstr ""
+msgstr "Pravokotnik"
 
 #: framework/premium/features/premium-header/items/language-switcher/options/common.php:251
 msgid "Flag Border Radius"
@@ -199,7 +199,7 @@ msgstr ""
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:31
 msgid "Useful Plugins Tab"
-msgstr ""
+msgstr "Zavihek Uporabni vtičniki"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:36
 msgid "Changelog Tab"
@@ -243,19 +243,19 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/price-filter/index.js:109
 msgid "Show Price Range Text"
-msgstr ""
+msgstr "Prikaži besedilo cenovnega razpona"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/price-filter/index.js:93
 msgid "Show Price Input Fields"
-msgstr ""
+msgstr "Prikaži polja za vnos cene"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:107
 msgid "Support"
-msgstr ""
+msgstr "Podpora"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:110
 msgid "If your questions have not been answered by documentation or video tutorials, drop us a line."
-msgstr ""
+msgstr "Če na vaša vprašanja niste našli odgovorov v dokumentaciji ali video vadnicah, nam pišite."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:115
 msgid "Submit a Ticket"
@@ -267,11 +267,11 @@ msgstr ""
 
 #: static/js/dashboard/helpers/SubmitSupport.js:35
 msgid "Share ideas, help others, ask questions and discuss your next project in our friendly community."
-msgstr ""
+msgstr "Delite ideje, pomagajte drugim, postavljajte vprašanja in razpravljajte o svojem naslednjem projektu v naši prijazni skupnosti."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:43
 msgid "Join Our Community"
-msgstr ""
+msgstr "Pridružite se naši skupnosti"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:57
 msgid "Video Tutorials"
@@ -287,15 +287,15 @@ msgstr ""
 
 #: static/js/dashboard/helpers/SubmitSupport.js:82
 msgid "Knowledge Base"
-msgstr ""
+msgstr "Baza znanja"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:85
 msgid "Dive in with our documentation and learn tips and tricks about Blocksy and its components."
-msgstr ""
+msgstr "Poglobite se v našo dokumentacijo in se naučite nasvetov in trikov o Blocksyju in njegovih komponentah."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:93
 msgid "View Documentation"
-msgstr ""
+msgstr "Ogled dokumentacije"
 
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:401
 msgid "Enable field link"
@@ -303,163 +303,163 @@ msgstr ""
 
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:411
 msgid "Link Source"
-msgstr ""
+msgstr "Vir povezave"
 
 #: framework/theme-integration.php:60
 msgid "Please enter a stronger password."
-msgstr ""
+msgstr "Vnesite močnejše geslo."
 
 #: framework/theme-integration.php:71
 msgctxt "password strength"
 msgid "Password strength unknown"
-msgstr ""
+msgstr "Moč gesla ni znana"
 
 #: framework/theme-integration.php:72
 msgctxt "password strength"
 msgid "Very weak"
-msgstr ""
+msgstr "Zelo šibko"
 
 #: framework/theme-integration.php:73
 msgctxt "password strength"
 msgid "Weak"
-msgstr ""
+msgstr "Šibko"
 
 #: framework/theme-integration.php:74
 msgctxt "password strength"
 msgid "Medium"
-msgstr ""
+msgstr "Srednje"
 
 #: framework/theme-integration.php:75
 msgctxt "password strength"
 msgid "Strong"
-msgstr ""
+msgstr "Močno"
 
 #: framework/theme-integration.php:76
 msgctxt "password mismatch"
 msgid "Mismatch"
-msgstr ""
+msgstr "Neujemanje"
 
 #: framework/theme-integration.php:89
 msgid "This field is required"
-msgstr ""
+msgstr "To polje je obvezno"
 
 #: framework/theme-integration.php:90
 msgid "Please fix this field."
-msgstr ""
+msgstr "Prosim, popravite to polje."
 
 #: framework/theme-integration.php:91
 msgid "Please enter a valid email address."
-msgstr ""
+msgstr "Vnesite veljaven e-poštni naslov."
 
 #: framework/theme-integration.php:92
 msgid "Please enter a valid URL."
-msgstr ""
+msgstr "Vnesite veljaven URL."
 
 #: framework/theme-integration.php:93
 msgid "Please enter a valid date."
-msgstr ""
+msgstr "Vnesite veljaven datum."
 
 #: framework/theme-integration.php:94
 msgid "Please enter a valid date (ISO)."
-msgstr ""
+msgstr "Vnesite veljaven datum (ISO)."
 
 #: framework/theme-integration.php:95
 msgid "Please enter a valid number."
-msgstr ""
+msgstr "Vnesite veljavno številko."
 
 #: framework/theme-integration.php:96
 msgid "Please enter only digits."
-msgstr ""
+msgstr "Vnesite samo številke."
 
 #: framework/theme-integration.php:97
 msgid "Please enter a valid credit card number."
-msgstr ""
+msgstr "Vnesite veljavno številko kreditne kartice."
 
 #: framework/theme-integration.php:98
 msgid "Please enter the same value again."
-msgstr ""
+msgstr "Prosimo, vnesite isto vrednost še enkrat."
 
 #: framework/theme-integration.php:99
 msgid "Please enter no more than {0} characters."
-msgstr ""
+msgstr "Vnesite največ {0} znakov."
 
 #: framework/theme-integration.php:100
 msgid "Please enter at least {0} characters."
-msgstr ""
+msgstr "Vnesite vsaj {0} znakov."
 
 #: framework/theme-integration.php:101
 msgid "Please enter a value between {0} and {1} characters long."
-msgstr ""
+msgstr "Vnesite vrednost, dolgo med {0} in {1} znaki."
 
 #: framework/theme-integration.php:102
 msgid "Please enter a value between {0} and {1}."
-msgstr ""
+msgstr "Vnesite vrednost med {0} in {1}."
 
 #: framework/theme-integration.php:103
 msgid "Please enter a value less than or equal to {0}."
-msgstr ""
+msgstr "Vnesite vrednost, ki je manjša ali enaka {0}."
 
 #: framework/theme-integration.php:104
 msgid "Please enter a value greater than or equal to {0}."
-msgstr ""
+msgstr "Vnesite vrednost, ki je večja ali enaka {0}."
 
 #. translators: %s is the error message.
 #: framework/features/account-auth.php:90
 msgid "<strong>Error</strong>: %s"
-msgstr ""
+msgstr "<strong>Napaka</strong>: %s"
 
 #: framework/features/opengraph-meta-data.php:40
 msgid "X (Twitter) Username"
-msgstr ""
+msgstr "Uporabniško ime X (Twitter)"
 
 #: framework/features/svg.php:28
 msgid "This file does not appear to be a valid SVG file."
-msgstr ""
+msgstr "Zdi se, da ta datoteka ni veljavna datoteka SVG."
 
 #: framework/features/svg.php:37
 msgid "SVG files cannot contain PHP code."
-msgstr ""
+msgstr "Datoteke SVG ne morejo vsebovati kode PHP."
 
 #: framework/helpers/exts-configs.php:403,
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:4
 msgid "Cart Reserved Timer"
-msgstr ""
+msgstr "Časovnik rezervacije košarice"
 
 #: framework/helpers/exts-configs.php:404
 msgid "Display a countdown timer for reserved cart items, encouraging users to complete their purchase before the timer expires."
-msgstr ""
+msgstr "Prikažite odštevalnik za rezervirane artikle v košarici in s tem uporabnike spodbudite, da zaključijo nakup, preden se časovnik izteče."
 
 #: framework/extensions/cookies-consent/config.php:6
 msgid "Display a simple consent banner to inform users about the use of cookies on the website."
-msgstr ""
+msgstr "Prikažite preprost pasico za soglasje, ki uporabnike obvešča o uporabi piškotkov na spletnem mestu."
 
 #: framework/features/demo-install/parsers.php:55,
 #: framework/features/demo-install/parsers.php:99,
 #: framework/features/demo-install/parsers.php:107
 msgid "There was an error when reading this WXR file"
-msgstr ""
+msgstr "Pri branju te datoteke WXR je prišlo do napake."
 
 #: framework/features/demo-install/parsers.php:56
 msgid "Details are shown above. The importer will now try again with a different parser..."
-msgstr ""
+msgstr "Podrobnosti so prikazane zgoraj. Uvoznik bo zdaj poskusil znova z drugim razčlenjevalnikom ..."
 
 #: framework/features/demo-install/parsers.php:111,
 #: framework/features/demo-install/parsers.php:116,
 #: framework/features/demo-install/parsers.php:373,
 #: framework/features/demo-install/parsers.php:590
 msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
-msgstr ""
+msgstr "Zdi se, da to ni datoteka WXR, manjka/neveljavna številka različice WXR"
 
 #: framework/features/demo-install/wp-importer.php:199,
 #: framework/features/demo-install/wp-importer.php:254,
 #: framework/features/demo-install/wp-importer.php:250,
 #: framework/features/demo-install/wp-importer.php:271
 msgid "Sorry, there has been an error."
-msgstr ""
+msgstr "Oprostite, prišlo je do napake."
 
 #: framework/features/demo-install/wp-importer.php:234
 msgid "All done."
-msgstr ""
+msgstr "Vse opravljeno."
 
 #: framework/features/demo-install/wp-importer.php:234
 msgid "Have fun!"
@@ -467,7 +467,7 @@ msgstr ""
 
 #: framework/features/demo-install/wp-importer.php:235
 msgid "Remember to update the passwords and roles of imported users."
-msgstr ""
+msgstr "Ne pozabite posodobiti gesel in vlog uvoženih uporabnikov."
 
 #. translators: %s is the path to the WXR file.
 #: framework/features/demo-install/wp-importer.php:258
@@ -507,15 +507,15 @@ msgstr ""
 
 #: framework/features/demo-install/wp-importer.php:378
 msgid "Submit"
-msgstr ""
+msgstr "Pošlji"
 
 #: framework/features/demo-install/wp-importer.php:391
 msgid "Import author:"
-msgstr ""
+msgstr "Avtor uvoza:"
 
 #: framework/features/demo-install/wp-importer.php:405
 msgid "as a new user:"
-msgstr ""
+msgstr "kot nov uporabnik:"
 
 #: framework/features/demo-install/wp-importer.php:402
 msgid "or create new user with login name:"
@@ -531,29 +531,29 @@ msgstr ""
 
 #: framework/features/demo-install/wp-importer.php:421
 msgid "- Select -"
-msgstr ""
+msgstr "- Izberi -"
 
 #. translators: %s is the author's display name.
 #: framework/features/demo-install/wp-importer.php:476
 msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
-msgstr ""
+msgstr "Ni uspelo ustvariti novega uporabnika za %s. Njegove objave bodo pripisane trenutnemu uporabniku."
 
 #. translators: %s is the category slug.
 #: framework/features/demo-install/wp-importer.php:540
 msgid "Failed to import category %s"
-msgstr ""
+msgstr "Uvoz kategorije %s ni uspel"
 
 #. translators: %s is the tag name.
 #: framework/features/demo-install/wp-importer.php:593
 msgid "Failed to import post tag %s"
-msgstr ""
+msgstr "Uvoz oznake objave %s ni uspel"
 
 #. translators: %1$s is the term taxonomy, %2$s is the term name.
 #. translators: %1$s is the taxonomy name, %2$s is the term name.
 #: framework/features/demo-install/wp-importer.php:658,
 #: framework/features/demo-install/wp-importer.php:969
 msgid "Failed to import %1$s %2$s"
-msgstr ""
+msgstr "Uvoz %1$s %2$s ni uspel"
 
 #. translators: %1$s is the post type name, %2$s is the post title.
 #: framework/features/demo-install/wp-importer.php:924
@@ -611,7 +611,7 @@ msgstr ""
 #. translators: %s is the new version number.
 #: framework/features/demo-install/wp-importer.php:1468
 msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
-msgstr ""
+msgstr "Na voljo je nova različica tega uvoznika. Posodobite na različico %s, da zagotovite združljivost z novejšimi izvoznimi datotekami."
 
 #: framework/features/demo-install/wp-importer.php:1489
 msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
@@ -1070,7 +1070,7 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:218,
 #: framework/premium/extensions/woocommerce-extra/features/compare/views/table.php:341
 msgid "Add to Cart"
-msgstr ""
+msgstr "Dodaj v košarico"
 
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-cart/feature.php:162
 msgid "Shopping cart panel"
@@ -1193,27 +1193,27 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/rating.php:116
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/rating-filter/Preview.js:9
 msgid "1 star"
-msgstr ""
+msgstr "1 zvezdica"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/rating.php:117
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/rating-filter/Preview.js:13
 msgid "2 stars"
-msgstr ""
+msgstr "2 zvezdici"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/rating.php:118
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/rating-filter/Preview.js:17
 msgid "3 stars"
-msgstr ""
+msgstr "3 zvezdice"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/rating.php:119
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/rating-filter/Preview.js:21
 msgid "4 stars"
-msgstr ""
+msgstr "4 zvezdice"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/rating.php:120
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/rating-filter/Preview.js:25
 msgid "5 stars"
-msgstr ""
+msgstr "5 zvezdic"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/status.php:147
 msgid "On sale"
@@ -1239,16 +1239,16 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-users-table.php:228
 msgid "Retry Send"
-msgstr ""
+msgstr "Poskusi ponovno poslati"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/includes/frontend.php:219
 msgid "Show more swatches"
-msgstr ""
+msgstr "Prikaži več vzorcev"
 
 #. translators: %s is the number of additional swatches.
 #: framework/premium/extensions/woocommerce-extra/features/swatches/includes/frontend.php:225
 msgid "+%s More"
-msgstr ""
+msgstr "+%s Več"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/includes/options/status.php:31
 msgid "Statuses"
@@ -1256,7 +1256,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/emails/waitlist-email.php:203
 msgid "Product Name"
-msgstr ""
+msgstr "Ime izdelka"
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:442
 msgid "More information on how to create a list in fluentcrm can be found %shere%s."
@@ -1285,7 +1285,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/rating-filter/index.js:108
 msgid "Filter by Rating"
-msgstr ""
+msgstr "Filtriraj po oceni"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/rating-filter/index.js:11
 msgid "Filter by Rating Controls"
@@ -1316,7 +1316,7 @@ msgstr "Dovoli strankam, da se prijavijo na seznam čakanja za izdelke, ki niso 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/feature.php:202,
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-account.php:69
 msgid "Waitlist"
-msgstr "Seznam čakanja"
+msgstr "Čakalna lista"
 
 #: framework/premium/extensions/shortcuts/customizer.php:899
 msgid "Tooltip Visibility"
@@ -1451,7 +1451,7 @@ msgstr "Število elementov na stran"
 #. translators: %s is the product title
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-dashboard.php:180
 msgid "Waitlist for %s"
-msgstr "Seznam čakanja za %s"
+msgstr "Čakalna lista za %s"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-dashboard.php:256
 msgid "Invalid email"
@@ -1473,7 +1473,7 @@ msgstr "Odstranjeni ste bili s seznama čakanja"
 #. (user/users)
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:57
 msgid "%1$s %2$s joined the waitlist for this item."
-msgstr ""
+msgstr "%1$s %2$s se je pridružil seznamu čakanja za ta izdelek."
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:293
 msgid "Waitlist Form"
@@ -2843,7 +2843,7 @@ msgstr "Prekrij"
 #. translators: placeholder here means the actual URL.
 #: framework/premium/features/media-video/options.php:140
 msgid "Choose how the video will fill its container. More info about this can be found %1$shere%2$s."
-msgstr ""
+msgstr "Izberite, kako bo video zapolnil svoj prostor. Več informacij najdete %1$stukaj%2$s."
 
 #. translators: %s is the author's display name.
 #: framework/features/blocks/dynamic-data/views/avatar-field.php:31
@@ -3119,13 +3119,13 @@ msgstr "Prikaži preostalo zalogo izdelka za ustvarjanje občutka nujnosti in sp
 #: framework/views/theme-mismatch.php:36
 #: static/js/notifications/VersionMismatchNotice.js:37
 msgid "Action required - please update %s to the latest version!"
-msgstr ""
+msgstr "Potrebno ukrepanje – prosimo posodobite %s na najnovejšo različico!"
 
 #. translators: %s is the product name (theme or plugin)
 #: framework/views/theme-mismatch.php:42
 #: static/js/notifications/VersionMismatchNotice.js:48
 msgid "We detected that you are using an outdated version of %s."
-msgstr ""
+msgstr "Zaznali smo, da uporabljate zastarelo različico teme %s."
 
 #: static/js/notifications/VersionMismatchNotice.js:59
 msgid "In order to take full advantage of all features the core has to offer - please install and activate the latest version of Blocksy theme."
@@ -4145,7 +4145,7 @@ msgstr "Samodejno"
 
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:198
 msgid "Custom Height"
-msgstr "Prilagojena vi��ina"
+msgstr "Prilagojena višina"
 
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:216
 msgid "Panel Columns"
@@ -5612,7 +5612,7 @@ msgstr "Profil"
 
 #: framework/extensions/trending/customizer.php:561
 msgid "Display Location"
-msgstr "Ime"
+msgstr ""
 
 #: framework/extensions/trending/customizer.php:569
 msgid "Before Footer"
@@ -6042,10 +6042,10 @@ msgstr "Prijavljen"
 #: framework/premium/extensions/post-types-extra/features/read-time/estimated-read-time.php:128
 msgid "%s min"
 msgid_plural "%s mins"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%s min"
+msgstr[1] "%s min"
+msgstr[2] "%s min"
+msgstr[3] "%s min"
 
 #: framework/premium/features/content-blocks/options/archive.php:98
 msgid "Default Card Layout"
@@ -6208,7 +6208,7 @@ msgstr "Hvala, ker ste se naročili na naše novice!"
 #: framework/helpers/exts-configs.php:59
 msgctxt "Extension Brand Name"
 msgid "Adobe Fonts"
-msgstr ""
+msgstr "Adobe Fonts"
 
 #. translators: This is a brand name. Preferably to not be translated
 #: framework/helpers/exts-configs.php:70,
@@ -8931,7 +8931,7 @@ msgstr "Izberi ponudnika e-poštnih storitev"
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:503
 msgid "Save"
-msgstr ""
+msgstr "Shrani"
 
 #: framework/extensions/product-reviews/static/js/ProductReviews.js:24
 msgid "Product Reviews Settings"

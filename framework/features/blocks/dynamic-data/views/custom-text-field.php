@@ -25,6 +25,8 @@ $value_after = blocksy_akg('after', $attributes, '');
 $value_before = blocksy_akg('before', $attributes, '');
 
 $has_field_link = blocksy_akg('has_field_link', $attributes, 'no');
+$has_field_link_wrap_content = blocksy_akg('has_field_link_wrap_content', $attributes, 'no');
+
 $link_source = blocksy_akg('link_source', $attributes, '');
 
 $final_link = [
@@ -80,7 +82,7 @@ $block_type = WP_Block_Type_Registry::get_instance()->get_registered('blocksy/dy
 $block_type->supports['color'] = true;
 wp_apply_colors_support($block_type, $attributes);
 
-$wrapper_attr = get_block_wrapper_attributes($wrapper_attr);
+$link_attr = [];
 
 if ($has_field_link === 'yes') {
 	$link_attr = [
@@ -99,8 +101,12 @@ if ($has_field_link === 'yes') {
 		);
 	}
 
-	$value = blocksy_html_tag('a', $link_attr, $value);
+	if ($has_field_link_wrap_content === 'no') {
+		$value = blocksy_html_tag('a', $link_attr, $value);
+	}
 }
+
+$wrapper_attr = get_block_wrapper_attributes($wrapper_attr);
 
 if (! empty($value_after) && ! $has_fallback) {
 	$value .= $value_after;
@@ -108,6 +114,14 @@ if (! empty($value_after) && ! $has_fallback) {
 
 if (! empty($value_before) && ! $has_fallback) {
 	$value = $value_before . $value;
+}
+
+if (
+	$has_field_link_wrap_content === 'yes'
+	&&
+	$has_field_link === 'yes'
+) {
+	$value = blocksy_html_tag('a', $link_attr, $value);
 }
 
 blocksy_html_tag_e($tagName, $wrapper_attr, $value);

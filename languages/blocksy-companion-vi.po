@@ -4519,7 +4519,7 @@ msgstr "Sản phẩm Affiliate"
 
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:12
 msgid "Product Archive"
-msgstr "Lưu Trữ Sản Ph���m"
+msgstr "Lưu Trữ Sản Phẩm"
 
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:16,
 #: framework/premium/extensions/woocommerce-extra/features/affiliate/options.php:70
@@ -5907,7 +5907,7 @@ msgstr "Thanh điều hướng nhanh"
 
 #: framework/premium/extensions/shortcuts/customizer.php:314
 msgid "Set link to nofollow"
-msgstr "Đặt liên kết th��nh nofollow"
+msgstr "Đặt liên kết thành nofollow"
 
 #: framework/premium/extensions/shortcuts/customizer.php:320
 msgid "Custom class"
@@ -7455,7 +7455,7 @@ msgstr "Kết thúc hộp bật lên form đăng ký"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:548
 msgid "Lost password form modal start"
-msgstr "B���t đầu hộp bật lên form quên mật khẩu"
+msgstr "Bắt đầu hộp bật lên form quên mật khẩu"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:555
 msgid "Lost password form modal end"

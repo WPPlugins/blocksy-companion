@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Blocksy Companion Pro package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-11-03 23:01:00+0000\n"
+"PO-Revision-Date: 2025-12-12 15:41:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -53,7 +53,7 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:622
 msgid "Select all"
-msgstr ""
+msgstr "Tout sélectionner"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:623
 msgid "Select none"
@@ -61,31 +61,31 @@ msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:624
 msgid "Add new"
-msgstr ""
+msgstr "Ajouter"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:56
 msgid "Order number:"
-msgstr ""
+msgstr "Numéro de commande :"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:61
 msgid "Date:"
-msgstr ""
+msgstr "Date :"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:73
 msgid "Total:"
-msgstr ""
+msgstr "Total :"
 
 #: framework/premium/extensions/woocommerce-extra/features/custom-thank-you-page/order-details-block/order-view.php:79
 msgid "Payment method:"
-msgstr ""
+msgstr "Moyens de paiement :"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/price.php:106
 msgid "Minimum:"
-msgstr ""
+msgstr "Minimum :"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/price.php:138
 msgid "Maximum:"
-msgstr ""
+msgstr "Maximum :"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:125
 msgid "Regenerating Taxonomies Data"
@@ -115,45 +115,45 @@ msgstr ""
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:63
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "internaute"
+msgstr[1] "internautes"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:67
 msgid "View Subscribers"
-msgstr ""
+msgstr "Voir les abonnés/abonnées"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:87
 msgid "Edit this item"
-msgstr ""
+msgstr "Modifier cet élément"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:93,
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:94
 msgid "View Product"
-msgstr ""
+msgstr "Voir le produit"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:155
 msgid "Out of stock"
-msgstr ""
+msgstr "Rupture de stock"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:152
 msgid "In stock"
-msgstr ""
+msgstr "En stock"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:217
 msgid "Subscribers"
-msgstr ""
+msgstr "Abonnés/abonnées"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:224
 msgid "Pending entries"
-msgstr ""
+msgstr "Entrées en attente"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:232
 msgid "Failed entries"
-msgstr ""
+msgstr "Entrées en échec"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-table.php:245
 msgid "Stock"
-msgstr ""
+msgstr "Stock"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-users-table.php:188
 msgid "Failed to send"
@@ -173,11 +173,11 @@ msgstr ""
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:316
 msgid "More information on how to generate an API key for Klaviyo can be found %shere%s."
-msgstr ""
+msgstr "Plus d’informations pour savoir comment générer une clé de l’API pour Klaviyo %sici%s."
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:352
 msgid "More information on how to generate an API key for Kit (ConvertKit) can be found %shere%s."
-msgstr ""
+msgstr "Vous trouverez plus d’informations sur la génération d’une clé de l’API pour Kit (Convertkit) %sici%s."
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:149
 msgid "White Label Extension"
@@ -229,15 +229,15 @@ msgstr ""
 
 #: framework/premium/extensions/white-label/dashboard-static/js/SupportSectionModal.js:108
 msgid "Button Link"
-msgstr ""
+msgstr "Lien du bouton"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/SupportSectionModal.js:159
 msgid "Save Options"
-msgstr ""
+msgstr "Enregistrer les options"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/SupportSectionModal.js:34
 msgid "%s Content"
-msgstr ""
+msgstr "Contenu %s"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/price-filter/index.js:109
 msgid "Show Price Range Text"
@@ -249,375 +249,375 @@ msgstr ""
 
 #: static/js/dashboard/helpers/SubmitSupport.js:107
 msgid "Support"
-msgstr ""
+msgstr "Support"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:110
 msgid "If your questions have not been answered by documentation or video tutorials, drop us a line."
-msgstr ""
+msgstr "Si vous avez des questions auxquelles notre documentation ou nos tutoriels vidéo n’ont pas répondu, n’hésitez pas à nous contacter."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:115
 msgid "Submit a Ticket"
-msgstr ""
+msgstr "Envoyer un ticket"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:32
 msgid "Facebook Community"
-msgstr ""
+msgstr "Communauté Facebook"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:35
 msgid "Share ideas, help others, ask questions and discuss your next project in our friendly community."
-msgstr ""
+msgstr "Partagez vos idées, aidez les autres, posez des questions et discutez de votre prochain projet au sein de notre amicale communauté."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:43
 msgid "Join Our Community"
-msgstr ""
+msgstr "Rejoignez notre communauté"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:57
 msgid "Video Tutorials"
-msgstr ""
+msgstr "Tutoriels vidéo"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:60
 msgid "Learn how to do just about anything within Blocksy by following our byte-sized video tutorials."
-msgstr ""
+msgstr "Apprenez à faire à peu près tout avec Blocksy en suivant nos tutoriels vidéo �� l’octet près."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:68
 msgid "Watch Tutorials"
-msgstr ""
+msgstr "Regarder les tutoriels"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:82
 msgid "Knowledge Base"
-msgstr ""
+msgstr "Base de connaissances"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:85
 msgid "Dive in with our documentation and learn tips and tricks about Blocksy and its components."
-msgstr ""
+msgstr "Plongez plus profondément dans notre documentation et apprenez des trucs et astuces avancés sur Blocksy et ses composants."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:93
 msgid "View Documentation"
-msgstr ""
+msgstr "Voir la documentation"
 
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:401
 msgid "Enable field link"
-msgstr ""
+msgstr "Activer le champ de lien"
 
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:411
 msgid "Link Source"
-msgstr ""
+msgstr "Source du lien"
 
 #: framework/theme-integration.php:60
 msgid "Please enter a stronger password."
-msgstr ""
+msgstr "Veuillez saisir un mot de passe plus complexe."
 
 #: framework/theme-integration.php:71
 msgctxt "password strength"
 msgid "Password strength unknown"
-msgstr ""
+msgstr "Force du mot de passe inconnue."
 
 #: framework/theme-integration.php:72
 msgctxt "password strength"
 msgid "Very weak"
-msgstr ""
+msgstr "Très faible"
 
 #: framework/theme-integration.php:73
 msgctxt "password strength"
 msgid "Weak"
-msgstr ""
+msgstr "Faible"
 
 #: framework/theme-integration.php:74
 msgctxt "password strength"
 msgid "Medium"
-msgstr ""
+msgstr "Moyen"
 
 #: framework/theme-integration.php:75
 msgctxt "password strength"
 msgid "Strong"
-msgstr ""
+msgstr "Fort"
 
 #: framework/theme-integration.php:76
 msgctxt "password mismatch"
 msgid "Mismatch"
-msgstr ""
+msgstr "Non concordance"
 
 #: framework/theme-integration.php:89
 msgid "This field is required"
-msgstr ""
+msgstr "Ce champ est obligatoire"
 
 #: framework/theme-integration.php:90
 msgid "Please fix this field."
-msgstr ""
+msgstr "Veuillez corriger ce champ."
 
 #: framework/theme-integration.php:91
 msgid "Please enter a valid email address."
-msgstr ""
+msgstr "Veuillez saisir une adresse e-mail valide."
 
 #: framework/theme-integration.php:92
 msgid "Please enter a valid URL."
-msgstr ""
+msgstr "Veuillez saisir une URL valide."
 
 #: framework/theme-integration.php:93
 msgid "Please enter a valid date."
-msgstr ""
+msgstr "Veuillez saisir une date valide."
 
 #: framework/theme-integration.php:94
 msgid "Please enter a valid date (ISO)."
-msgstr ""
+msgstr "Veuillez saisir une date valide (ISO)."
 
 #: framework/theme-integration.php:95
 msgid "Please enter a valid number."
-msgstr ""
+msgstr "Veuillez saisir un numéro valide."
 
 #: framework/theme-integration.php:96
 msgid "Please enter only digits."
-msgstr ""
+msgstr "Veuillez saisir uniquement des chiffres."
 
 #: framework/theme-integration.php:97
 msgid "Please enter a valid credit card number."
-msgstr ""
+msgstr "Veuillez saisir un numéro de carte de crédit valide."
 
 #: framework/theme-integration.php:98
 msgid "Please enter the same value again."
-msgstr ""
+msgstr "Veuillez saisir à nouveau la même valeur."
 
 #: framework/theme-integration.php:99
 msgid "Please enter no more than {0} characters."
-msgstr ""
+msgstr "Veuillez ne pas saisir plus de {0} caractères."
 
 #: framework/theme-integration.php:100
 msgid "Please enter at least {0} characters."
-msgstr ""
+msgstr "Veuillez saisir au moins {0} caractères."
 
 #: framework/theme-integration.php:101
 msgid "Please enter a value between {0} and {1} characters long."
-msgstr ""
+msgstr "Veuillez saisir une valeur comprise entre {0} et {1} caractères."
 
 #: framework/theme-integration.php:102
 msgid "Please enter a value between {0} and {1}."
-msgstr ""
+msgstr "Veuillez saisir une valeur comprise entre {0} et {1}."
 
 #: framework/theme-integration.php:103
 msgid "Please enter a value less than or equal to {0}."
-msgstr ""
+msgstr "Veuillez saisir une valeur inférieure ou égale à {0}."
 
 #: framework/theme-integration.php:104
 msgid "Please enter a value greater than or equal to {0}."
-msgstr ""
+msgstr "Veuillez saisir une valeur supérieure ou égale à {0}."
 
 #. translators: %s is the error message.
 #: framework/features/account-auth.php:90
 msgid "<strong>Error</strong>: %s"
-msgstr ""
+msgstr "<strong>Erreur</strong> : %s"
 
 #: framework/features/opengraph-meta-data.php:40
 msgid "X (Twitter) Username"
-msgstr ""
+msgstr "Identifiant X (Twitter)"
 
 #: framework/features/svg.php:28
 msgid "This file does not appear to be a valid SVG file."
-msgstr ""
+msgstr "Ce fichier ne semble pas être un fichier SVG valide."
 
 #: framework/features/svg.php:37
 msgid "SVG files cannot contain PHP code."
-msgstr ""
+msgstr "Les fichiers SVG ne peuvent pas contenir de code PHP."
 
 #: framework/helpers/exts-configs.php:403,
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:4
 msgid "Cart Reserved Timer"
-msgstr ""
+msgstr "Compte à rebours de réservation de panier"
 
 #: framework/helpers/exts-configs.php:404
 msgid "Display a countdown timer for reserved cart items, encouraging users to complete their purchase before the timer expires."
-msgstr ""
+msgstr "Afficher un compte à rebours pour les articles réservés dans le panier, incitant les internautes à finaliser leur achat avant l’expiration du compte à rebours."
 
 #: framework/extensions/cookies-consent/config.php:6
 msgid "Display a simple consent banner to inform users about the use of cookies on the website."
-msgstr ""
+msgstr "Afficher une simple bannière de consentement pour informer les internautes de l’utilisation des cookies sur le site."
 
 #: framework/features/demo-install/parsers.php:55,
 #: framework/features/demo-install/parsers.php:99,
 #: framework/features/demo-install/parsers.php:107
 msgid "There was an error when reading this WXR file"
-msgstr ""
+msgstr "Une erreur s’est produite pendant la lecture du fichier WXR"
 
 #: framework/features/demo-install/parsers.php:56
 msgid "Details are shown above. The importer will now try again with a different parser..."
-msgstr ""
+msgstr "Les détails sont affichés ci-dessus. L’outil d’importation va maintenant essayer avec un autre outil d’analyse…"
 
 #: framework/features/demo-install/parsers.php:111,
 #: framework/features/demo-install/parsers.php:116,
 #: framework/features/demo-install/parsers.php:373,
 #: framework/features/demo-install/parsers.php:590
 msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
-msgstr ""
+msgstr "Il semble que ce ne soit pas un fichier WXR, le numéro de version WXR est absent/non valide"
 
 #: framework/features/demo-install/wp-importer.php:199,
 #: framework/features/demo-install/wp-importer.php:254,
 #: framework/features/demo-install/wp-importer.php:250,
 #: framework/features/demo-install/wp-importer.php:271
 msgid "Sorry, there has been an error."
-msgstr ""
+msgstr "Désolé, il y a eu une erreur."
 
 #: framework/features/demo-install/wp-importer.php:234
 msgid "All done."
-msgstr ""
+msgstr "Tout est fait."
 
 #: framework/features/demo-install/wp-importer.php:234
 msgid "Have fun!"
-msgstr ""
+msgstr "Amusez-vous !"
 
 #: framework/features/demo-install/wp-importer.php:235
 msgid "Remember to update the passwords and roles of imported users."
-msgstr ""
+msgstr "Pensez à mettre à jour les mots de passe et les rôles des comptes importés."
 
 #. translators: %s is the path to the WXR file.
 #: framework/features/demo-install/wp-importer.php:258
 msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
-msgstr ""
+msgstr "Le fichier d’exportation n’a pu être trouvé à <code>%s</code>. Ceci est peut-être dû à un problème de droits."
 
 #. translators: %s is the WXR version number.
 #: framework/features/demo-install/wp-importer.php:282
 msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
-msgstr ""
+msgstr "Ce fichier WXR (version %s) n’est peut-être pas pris en charge par cette version de l’outil d’importation. Veuillez procéder à une mise à jour."
 
 #. translators: %s is the author's display name.
 #: framework/features/demo-install/wp-importer.php:315
 msgid "Failed to import author %s. Their posts will be attributed to the current user."
-msgstr ""
+msgstr "L’importation de l’auteur/autrice %s a échoué. Ses articles seront attribués compte actuel."
 
 #: framework/features/demo-install/wp-importer.php:349
 msgid "Assign Authors"
-msgstr ""
+msgstr "Assigner des auteurs/autrices"
 
 #: framework/features/demo-install/wp-importer.php:350
 msgid "To make it simpler for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site, such as your primary administrator account."
-msgstr ""
+msgstr "Pour faciliter la modification et l’enregistrement du contenu importé, vous pouvez souhaiter réassigner l’auteur/autrice de l’élément importé à un compte existant sur ce site, par exemple votre compte administrateur/administratrice principal."
 
 #. translators: %s is the default user role.
 #: framework/features/demo-install/wp-importer.php:355
 msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
-msgstr ""
+msgstr "Si un nouveau compte est créé par WordPress, un nouveau mot de passe sera généré aléatoirement et le rôle du nouveau compte sera défini comme %s. Une modification manuelle des détails du nouveau compte sera nécessaire."
 
 #: framework/features/demo-install/wp-importer.php:371
 msgid "Import Attachments"
-msgstr ""
+msgstr "Importer des fichiers joints"
 
 #: framework/features/demo-install/wp-importer.php:374
 msgid "Download and import file attachments"
-msgstr ""
+msgstr "Télécharger et importer les fichiers joints"
 
 #: framework/features/demo-install/wp-importer.php:378
 msgid "Submit"
-msgstr ""
+msgstr "Envoyer"
 
 #: framework/features/demo-install/wp-importer.php:391
 msgid "Import author:"
-msgstr ""
+msgstr "Importer l’auteur/autrice :"
 
 #: framework/features/demo-install/wp-importer.php:405
 msgid "as a new user:"
-msgstr ""
+msgstr "comme nouveau compte :"
 
 #: framework/features/demo-install/wp-importer.php:402
 msgid "or create new user with login name:"
-msgstr ""
+msgstr "ou créer un nouveau compte avec l’identifiant :"
 
 #: framework/features/demo-install/wp-importer.php:415
 msgid "or assign posts to an existing user:"
-msgstr ""
+msgstr "ou attribuer les articles à un compte existant :"
 
 #: framework/features/demo-install/wp-importer.php:413
 msgid "assign posts to an existing user:"
-msgstr ""
+msgstr "assigner les articles à un compte existant :"
 
 #: framework/features/demo-install/wp-importer.php:421
 msgid "- Select -"
-msgstr ""
+msgstr "- Sélectionner -"
 
 #. translators: %s is the author's display name.
 #: framework/features/demo-install/wp-importer.php:476
 msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
-msgstr ""
+msgstr "Impossible de créer un nouveau compte pour %s. Les publications seront affectées au compte actuel."
 
 #. translators: %s is the category slug.
 #: framework/features/demo-install/wp-importer.php:540
 msgid "Failed to import category %s"
-msgstr ""
+msgstr "Impossible d’importer la catégorie %s"
 
 #. translators: %s is the tag name.
 #: framework/features/demo-install/wp-importer.php:593
 msgid "Failed to import post tag %s"
-msgstr ""
+msgstr "Impossible d’importer l’étiquette d’article %s"
 
 #. translators: %1$s is the term taxonomy, %2$s is the term name.
 #. translators: %1$s is the taxonomy name, %2$s is the term name.
 #: framework/features/demo-install/wp-importer.php:658,
 #: framework/features/demo-install/wp-importer.php:969
 msgid "Failed to import %1$s %2$s"
-msgstr ""
+msgstr "Échec de l’importation de %1$s %2$s"
 
 #. translators: %1$s is the post type name, %2$s is the post title.
 #: framework/features/demo-install/wp-importer.php:924
 msgid "Failed to import %1$s &#8220;%2$s&#8221;"
-msgstr ""
+msgstr "Échec de l’importation de %1$s « %2$s »"
 
 #: framework/features/demo-install/wp-importer.php:833
 msgid "%1$s &#8220;%1$s&#8221; already exists."
-msgstr ""
+msgstr "%1$s « %1$s » existe déjà."
 
 #: framework/features/demo-install/wp-importer.php:1117
 msgid "Menu item skipped due to missing menu slug"
-msgstr ""
+msgstr "Élément de menu ignoré car le slug de menu est manquant"
 
 #. translators: %s is the menu slug.
 #: framework/features/demo-install/wp-importer.php:1131
 msgid "Menu item skipped due to invalid menu slug: %s"
-msgstr ""
+msgstr "Élément de menu ignoré car le slug de menu est non valide : %s"
 
 #: framework/features/demo-install/wp-importer.php:1222
 msgid "Fetching attachments is not enabled"
-msgstr ""
+msgstr "La récupération des fichiers joints n’est pas activée"
 
 #: framework/features/demo-install/wp-importer.php:1236
 msgid "Invalid file type"
-msgstr ""
+msgstr "Type de fichier non valide"
 
 #: framework/features/demo-install/wp-importer.php:1288
 msgid "Remote server did not respond"
-msgstr ""
+msgstr "Le serveur distant n’a pas répondu"
 
 #. translators: %1$d is the HTTP response code, %2$s is the HTTP response
 #. message.
 #: framework/features/demo-install/wp-importer.php:1301
 msgid "Remote server returned error response %1$d %2$s"
-msgstr ""
+msgstr "Le serveur distant a renvoyé une erreur %1$d %2$s"
 
 #: framework/features/demo-install/wp-importer.php:1322
 msgid "Remote file is incorrect size"
-msgstr ""
+msgstr "La taille du fichier distant est incorrecte"
 
 #: framework/features/demo-install/wp-importer.php:1331
 msgid "Zero size file downloaded"
-msgstr ""
+msgstr "Fichier vide téléchargé"
 
 #. translators: %s is the maximum file size allowed.
 #: framework/features/demo-install/wp-importer.php:1344
 msgid "Remote file is too large, limit is %s"
-msgstr ""
+msgstr "Fichier distant trop important, la limite est de %s"
 
 #: framework/features/demo-install/wp-importer.php:1456
 msgid "Import WordPress"
-msgstr ""
+msgstr "Importation WordPress"
 
 #. translators: %s is the new version number.
 #: framework/features/demo-install/wp-importer.php:1468
 msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
-msgstr ""
+msgstr "Une nouvelle version de l’outil d’importation est disponible. Veuillez mettre à jour vers la version %s pour assurer la compatibilité avec les nouveaux fichiers d’exportation."
 
 #: framework/features/demo-install/wp-importer.php:1489
 msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
-msgstr ""
+msgstr "Bonjour ! Téléversez votre fichier WordPress eXtended RSS (WXR) et nous importerons les articles, pages, commentaires, champs personnalisés, catégories et étiquettes dans ce site."
 
 #: framework/features/demo-install/wp-importer.php:1490
 msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
-msgstr ""
+msgstr "Choisissez un fichier WXR (.xml) à téléverser, puis cliquez sur « Téléverser le fichier et l’importer »."
 
 #. translators: %1$s is the error message, %2$s is the line number
 #: framework/premium/features/code-editor.php:116
@@ -633,11 +633,11 @@ msgstr ""
 #. label of the taxonomy.
 #: framework/features/conditions/rules/cpt.php:47
 msgid "%1$s %2$s Taxonomy"
-msgstr ""
+msgstr "%1$s %2$s taxonomie"
 
 #: framework/premium/features/content-blocks/admin-ui.php:740
 msgid "Popups"
-msgstr ""
+msgstr "Fenêtres surgissantes"
 
 #: framework/premium/features/content-blocks/admin-ui.php:757
 msgid "Custom Templates"
@@ -720,15 +720,15 @@ msgstr "Mise en page"
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:143
 msgid "Inner blocks use content width"
-msgstr ""
+msgstr "Les blocs internes utilisent la largeur du contenu"
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:153
 msgid "Nested blocks use content width with options for full and wide widths."
-msgstr ""
+msgstr "Les blocs imbriqués utilisent la largeur du contenu avec des options de pleine largeur et de grande largeur."
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:156
 msgid "Nested blocks will fill the width of this container. Toggle to constrain."
-msgstr ""
+msgstr "Les blocs imbriqués rempliront la largeur de ce conteneur. Permuter pour contraindre."
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:165
 msgid "Content width"
@@ -740,11 +740,11 @@ msgstr "Grande largeur"
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:206
 msgid "Customize the width for all elements that are assigned to the center or wide columns."
-msgstr ""
+msgstr "Personnaliser la largeur de tous les éléments assignés aux colonnes centrales ou larges."
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:236
 msgid "Focal point"
-msgstr "Point focal"
+msgstr "Point central"
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:269
 msgid "Fixed background"
@@ -768,11 +768,11 @@ msgstr "Superposition"
 
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:462
 msgid "View Type"
-msgstr "Type d’affichage"
+msgstr "Voir le type"
 
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:811
 msgid "Overlay opacity"
-msgstr "Opacité de la superposition"
+msgstr "Opacité de superposition"
 
 #: static/js/editor/blocks/dynamic-data/index.js:113
 msgid "Dynamic Archive Image"
@@ -799,7 +799,7 @@ msgstr "Aucun résultat trouvé."
 #: static/js/editor/blocks/post-template/Edit.js:359
 #: static/js/editor/blocks/tax-template/Edit.js:296
 msgid "Desktop Columns"
-msgstr "Colonnes sur ordinateur"
+msgstr "Colonnes ordinateur"
 
 #: static/js/editor/blocks/query/Edit.js:192
 #: static/js/editor/blocks/tax-query/Edit.js:177
@@ -826,7 +826,7 @@ msgstr "Toutes les taxonomies"
 
 #: static/js/editor/blocks/tax-query/edit/TermsInspectorControls.js:269
 msgid "Only Parent Taxonomies"
-msgstr "Uniquement la taxonomie parent"
+msgstr "Uniquement les taxonomies parentes"
 
 #: static/js/editor/blocks/tax-query/edit/TermsInspectorControls.js:277
 msgid "Relevant Taxonomies"
@@ -838,11 +838,11 @@ msgstr "Visibilité des taxonomies"
 
 #: static/js/editor/blocks/tax-query/edit/TermsInspectorControls.js:311
 msgid "Hide Empty Taxonomies"
-msgstr "Cacher les taxonomies vides"
+msgstr "Masquer les taxonomies vides"
 
 #: static/js/notifications/VersionMismatchNotice.js:112
 msgid "Update %s Now"
-msgstr "Mettre %s à jour maintenant"
+msgstr "Mettre à jour %s maintenant"
 
 #: static/js/editor/blocks/dynamic-data/components/utils.js:482
 msgctxt "Indicates this palette comes from the theme."
@@ -852,30 +852,30 @@ msgstr "Thème"
 #: static/js/editor/blocks/dynamic-data/components/utils.js:495
 msgctxt "Indicates this palette comes from WordPress."
 msgid "Default"
-msgstr "Défaut"
+msgstr "Par défaut"
 
 #: static/js/editor/blocks/dynamic-data/components/utils.js:504
 msgctxt "Indicates this palette is created by the user."
 msgid "Custom"
-msgstr "Personnalisée"
+msgstr "Personnaliser"
 
 #: framework/helpers/exts-configs.php:286
 msgid "Advanced Product Brands"
-msgstr ""
+msgstr "Marques de produits avancées"
 
 #: framework/helpers/exts-configs.php:395
 msgid "Display a curated list of recommended products based on customer selection to enhance their experience and increase conversion rates."
-msgstr ""
+msgstr "Affichez une liste de produits recommandés en fonction de la sélection des clients/clientes pour améliorer leur expérience et augmenter les taux de conversion."
 
 #. translators: %s is the product name (theme or plugin)
 #: framework/views/theme-mismatch.php:48
 #: static/js/notifications/VersionMismatchNotice.js:65
 msgid "In order to take full advantage of all features the core has to offer - please install and activate the latest version of %s."
-msgstr ""
+msgstr "Afin de profiter pleinement de toutes les fonctionnalités offertes par le cœur, veuillez installer et activer la dernière version du thème %s."
 
 #: framework/features/header/account-modal.php:23
 msgid "Account modal"
-msgstr ""
+msgstr "Modale de compte"
 
 #: framework/premium/features/premium-header.php:306
 msgid "Icon Gap"
@@ -884,7 +884,7 @@ msgstr ""
 #. translators: %s is the email address
 #: framework/extensions/newsletter-subscribe/providers/mailchimp.php:186
 msgid "%s is already a list member."
-msgstr ""
+msgstr "%s est déjà membre de la liste."
 
 #: framework/features/blocks/dynamic-data/options.php:218
 msgid "Link to email"
@@ -929,15 +929,15 @@ msgstr ""
 #. translators: 1: the search query
 #: framework/features/blocks/dynamic-data/views/wp-field.php:33
 msgid "Search Results for %1$s"
-msgstr ""
+msgstr "Résultats de recherche pour %1$s"
 
 #: framework/features/blocks/tax-query/block-patterns/tax-layout-5.php:4
 msgid "Taxonomies - Layout 5"
-msgstr ""
+msgstr "Taxonomies - Mise en page 5"
 
 #: framework/features/header/items/account/options.php:7
 msgid "Logout Action"
-msgstr ""
+msgstr "Action de déconnexion"
 
 #: framework/features/header/items/account/options.php:15
 msgid "User Name"
@@ -945,20 +945,20 @@ msgstr "Nom de l’utilisateur/utilisatrice"
 
 #: framework/features/header/items/account/options.php:19
 msgid "Available fields: {first_name}, {last_name}, {user_name}"
-msgstr ""
+msgstr "Champs disponibles : {first_name}, {last_name}, {user_name}"
 
 #: framework/features/header/items/account/options.php:293
 msgid "Open Login Modal"
-msgstr ""
+msgstr "Ouvrir la fenêtre modale de connexion"
 
 #: framework/features/header/items/account/options.php:294
 msgid "Open Custom Link"
-msgstr ""
+msgstr "Ouvrir le lien personnalisé"
 
 #: framework/features/header/items/account/options.php:298,
 #: framework/features/header/items/account/options.php:299
 msgid "Open WooCommerce Account Page"
-msgstr ""
+msgstr "Ouvrez la page du compte WooCommerce"
 
 #: framework/features/header/items/account/options.php:532,
 #: framework/features/header/items/account/options.php:985,
@@ -973,7 +973,7 @@ msgstr "Lien vers la page"
 
 #: framework/features/header/items/account/options.php:757
 msgid "Top Offset (Sticky State)"
-msgstr ""
+msgstr "Décalage supérieur (État épinglé)"
 
 #: framework/features/header/items/account/options.php:785
 msgid "Page "
@@ -1258,7 +1258,7 @@ msgstr ""
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:442
 msgid "More information on how to create a list in fluentcrm can be found %shere%s."
-msgstr ""
+msgstr "Vous trouverez plus d’informations sur la façon de créer une liste dans FluentCrm %sici%s."
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/AllFonts.js:123
 msgid "Modern Font Stack"
@@ -1471,7 +1471,7 @@ msgstr "Vous avez été retiré·e de la liste d’attente"
 #. (user/users)
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:57
 msgid "%1$s %2$s joined the waitlist for this item."
-msgstr ""
+msgstr "%1$s %2$s a rejoint la liste d’attente pour cet article."
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-layer.php:293
 msgid "Waitlist Form"
@@ -3117,13 +3117,13 @@ msgstr "Afficher le stock restant d’un produit pour créer un sentiment d’ur
 #: framework/views/theme-mismatch.php:36
 #: static/js/notifications/VersionMismatchNotice.js:37
 msgid "Action required - please update %s to the latest version!"
-msgstr ""
+msgstr "Action nécessaire - Veuillez mettre à jour %s vers la dernière version !"
 
 #. translators: %s is the product name (theme or plugin)
 #: framework/views/theme-mismatch.php:42
 #: static/js/notifications/VersionMismatchNotice.js:48
 msgid "We detected that you are using an outdated version of %s."
-msgstr ""
+msgstr "Nous avons détecté que vous utilisiez une version obsolète de %s."
 
 #: static/js/notifications/VersionMismatchNotice.js:59
 msgid "In order to take full advantage of all features the core has to offer - please install and activate the latest version of Blocksy theme."
@@ -3939,7 +3939,7 @@ msgstr "Parcourir les produits"
 #: framework/features/blocks/contact-info/options.php:533,
 #: framework/premium/features/premium-header/items/contacts/options.php:417
 msgid "Link Icons"
-msgstr "Icônes de lien"
+msgstr "Lien sur les icônes"
 
 #: framework/premium/features/premium-header/items/contacts/view.php:59
 msgid "Download"
@@ -4414,7 +4414,7 @@ msgstr "Longueur"
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:263
 #: static/js/editor/blocks/dynamic-data/hooks/use-dynamic-data-descriptor.js:156
 msgid "Attributes"
-msgstr ""
+msgstr "Attributs"
 
 #: framework/premium/extensions/woocommerce-extra/features/compare/options.php:343,
 #: framework/premium/extensions/woocommerce-extra/features/compare/views/table.php:434
@@ -4960,11 +4960,11 @@ msgstr "UGS"
 #: framework/premium/features/content-blocks/options/nothing_found.php:102,
 #: framework/premium/features/content-blocks/options/single.php:93
 msgid "Wide"
-msgstr ""
+msgstr "Large"
 
 #: framework/premium/features/content-blocks/options/archive.php:10
 msgid "Replace Conditions"
-msgstr ""
+msgstr "Conditions de remplacement"
 
 #: framework/premium/features/content-blocks/options/archive.php:15
 msgid "Template Replace Conditions"
@@ -5788,11 +5788,11 @@ msgstr ""
 #: framework/premium/features/content-blocks/options/archive.php:31,
 #: framework/premium/features/content-blocks/options/single.php:30
 msgid "Replacement Behavior"
-msgstr ""
+msgstr "Comportement de remplacement"
 
 #: framework/premium/features/content-blocks/options/archive.php:38
 msgid "Only Card"
-msgstr ""
+msgstr "Carte uniquement"
 
 #: framework/premium/features/content-blocks/options/archive.php:39,
 #: framework/premium/features/content-blocks/options/single.php:38
@@ -5809,7 +5809,7 @@ msgstr "Structure de la page"
 
 #: framework/features/header/items/account/options.php:739
 msgid "Top Offset"
-msgstr "Décalage du haut"
+msgstr "Décalage supérieur"
 
 #: framework/premium/features/content-blocks/options/single.php:37
 msgid "Content Area"
@@ -6010,7 +6010,7 @@ msgstr ""
 #. translators: placeholder here means the actual URL.
 #: framework/features/blocks/socials/options.php:24
 msgid "Configure the social links in Customizer ➝ General ➝ %1$sSocial Network Accounts%2$s."
-msgstr ""
+msgstr "Configurer les liens sociaux dans Personnaliser ➝ Général ➝ %1$sComptes de réseaux sociaux%2$s."
 
 #: framework/features/header/items/account/options.php:320
 msgid "Customizing: Logged out State"
@@ -6214,7 +6214,7 @@ msgstr "Custom Code Snippets"
 #. translators: 1: link open 2: link close
 #: framework/features/account-auth.php:109
 msgid "Check your email for the confirmation link, then visit the %1$slogin page%2$s."
-msgstr ""
+msgstr "Vérifiez votre e-mail pour le lien de confirmation, puis rendez-vous sur la %1$spage de connexion%2$s."
 
 #: framework/features/account-auth.php:237
 msgid "Your account was created successfully. Your login details have been sent to your email address. Please visit the %1$slogin page%2$s."
@@ -8100,7 +8100,7 @@ msgstr "Sélectionner le menu…"
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/features/header/items/account/options.php:169
 msgid "Manage your menus in the %1$sMenus screen%2$s."
-msgstr ""
+msgstr "Gérez vos menus dans l’écran %1$sMenus%2$s."
 
 #: framework/features/header/items/account/options.php:801,
 #: framework/features/header/items/account/options.php:1096
@@ -8415,7 +8415,7 @@ msgstr "Largeur normale"
 #: framework/premium/features/content-blocks/options/nothing_found.php:94,
 #: framework/premium/features/content-blocks/options/single.php:85
 msgid "Content Area Style"
-msgstr ""
+msgstr "Style de la zone de contenu"
 
 #: framework/premium/features/content-blocks/options/404.php:90,
 #: framework/premium/features/content-blocks/options/archive.php:167,
@@ -8424,7 +8424,7 @@ msgstr ""
 #: framework/premium/features/content-blocks/options/maintenance.php:87,
 #: framework/premium/features/content-blocks/options/nothing_found.php:108
 msgid "Content Area Vertical Spacing"
-msgstr ""
+msgstr "Espacement vertical de la zone de contenu"
 
 #: framework/premium/features/content-blocks/options/404.php:102,
 #: framework/premium/features/content-blocks/options/archive.php:179,
@@ -8901,7 +8901,7 @@ msgstr "Plus d’informations sur comment générer une clé d’API pour Mailch
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:406
 msgid "More information on how to generate an API key for EmailOctopus can be found %shere%s."
-msgstr "Plus d’informations sur comment générer une clé de l’API pour EmailOctopus peuvent être trouvées %sici%s."
+msgstr "Plus d’informations sur comment générer une clé d’API pour EmailOctopus peuvent être trouvées %sici%s."
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:229
 msgid "API Key"
@@ -9604,11 +9604,11 @@ msgstr "Publications"
 #: framework/premium/features/content-blocks/hooks-manager.php:477,
 #: framework/premium/features/content-blocks/hooks-manager.php:485
 msgid "Single Post"
-msgstr "Publication unique"
+msgstr "Article unique"
 
 #: framework/features/conditions/rules/posts.php:15
 msgid "Post Categories"
-msgstr "Catégories de publication"
+msgstr "Catégories d’article"
 
 #: framework/features/conditions/rules/posts.php:20
 msgid "Post Tags"
@@ -9742,7 +9742,7 @@ msgstr "Google Analytics v4"
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/features/google-analytics.php:87
 msgid "Link your Google Analytics 4 tracking ID. More info and instructions can be found %1$shere%2$s."
-msgstr ""
+msgstr "Liez votre ID de suivi Google Analytics 4. Plus d’informations et d’instructions %1$sici%2$s."
 
 #: framework/features/opengraph-meta-data.php:13
 msgid "OpenGraph Meta Data"
@@ -9758,7 +9758,7 @@ msgstr "URL de la page Facebook"
 
 #: framework/features/opengraph-meta-data.php:33
 msgid "Facebook App ID"
-msgstr "ID d��app Facebook"
+msgstr "ID d’app Facebook"
 
 #: framework/extensions/cookies-consent/customizer.php:15,
 #: framework/extensions/newsletter-subscribe/customizer.php:12,
@@ -10251,7 +10251,7 @@ msgstr "Largeur maximale"
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/extensions/cookies-consent/customizer.php:120
 msgid "I accept the %1$sPrivacy Policy%2$s*"
-msgstr ""
+msgstr "J’accepte  la %1$spolitique de confidentialité%2$s*"
 
 #: framework/extensions/cookies-consent/customizer.php:124
 msgid "This text will appear under each comment form and subscribe form."
@@ -10260,7 +10260,7 @@ msgstr "Ce texte apparaîtra sous chaque formulaire de commentaire et formulaire
 #. translators: %1$s and %2$s are HTML tags for a link.
 #: framework/extensions/cookies-consent/helpers.php:56
 msgid "I accept the %1$sPrivacy Policy%2$s"
-msgstr ""
+msgstr "J’accepte  la %1$spolitique de confidentialité%2$s"
 
 #: framework/features/blocks/about-me/options.php:140
 msgid "Customizer"
@@ -11002,7 +11002,7 @@ msgstr "Organisation"
 #. translators: %1$s and %2$s are HTML tags.
 #: framework/extensions/product-reviews/metabox.php:39
 msgid "More info about review entity and how to choose the right one can be found %1$shere%2$s."
-msgstr ""
+msgstr "Plus d’informations sur les dispositifs d’avis et sur comment choisir le bon dispositif sont disponibles %1$sici%2$s."
 
 #: framework/extensions/product-reviews/metabox.php:70
 msgid "Product Price"
@@ -11138,7 +11138,7 @@ msgstr "ID des publications"
 #. translators: %1$s and %2$s are HTML tags
 #: framework/extensions/trending/customizer.php:367
 msgid "Separate posts ID by comma. How to find the %1$spost ID%2$s."
-msgstr ""
+msgstr "Séparer les ID de publications par une virgule. Comment trouver l’%1$sID de publication%2$s."
 
 #: framework/extensions/trending/customizer.php:392
 msgid "Trending From"
