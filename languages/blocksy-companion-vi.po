@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: GlotPress/4.1.0\n"
+"X-Generator: GlotPress/4.0.1\n"
 "Language: vi_VN\n"
 "Project-Id-Version: Blocksy Companion Pro\n"
 
@@ -354,7 +354,7 @@ msgstr "Vui lòng nhập URL hợp lệ."
 
 #: framework/theme-integration.php:93
 msgid "Please enter a valid date."
-msgstr "Vui lòng nhập ngày h��p lệ."
+msgstr "Vui lòng nhập ngày hợp lệ."
 
 #: framework/theme-integration.php:94
 msgid "Please enter a valid date (ISO)."
@@ -7527,7 +7527,7 @@ msgstr "Sau sản phẩm đơn"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:696
 msgid "Before single product excerpt"
-msgstr "Trư��c đoạn trích sản phẩm đơn"
+msgstr "Trước đoạn trích sản phẩm đơn"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:701
 msgid "After single product excerpt"

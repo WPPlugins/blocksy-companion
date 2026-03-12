@@ -40,10 +40,9 @@ class FileGetContentsRequest {
 		}
 
 		$context_options = [
-			'ssl' => [
-				'verify_peer' => true,
-				'verify_peer_name' => true,
-				'cafile' => ABSPATH . WPINC . '/certificates/ca-bundle.crt',
+			"ssl" => [
+				"verify_peer" => false,
+				"verify_peer_name" => false,
 			]
 		];
 
@@ -95,11 +94,9 @@ class CurlRequest {
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
-		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt
-		curl_setopt($curl, CURLOPT_CAINFO, ABSPATH . WPINC . '/certificates/ca-bundle.crt');
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_exec
 		$result = curl_exec($curl);

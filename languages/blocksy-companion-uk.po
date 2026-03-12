@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.1.0\n"
+"X-Generator: GlotPress/4.0.1\n"
 "Language: uk_UA\n"
 "Project-Id-Version: Blocksy Companion Pro\n"
 
@@ -182,7 +182,7 @@ msgstr "Детальну інформацію про те, як згенерув
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:149
 msgid "White Label Extension"
-msgstr "Роз��ирення White Label"
+msgstr "Розширення White Label"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:161
 msgid "Please note that disabling this option will hide the white-label extension. To restore it, press the SHIFT key while clicking the dashboard logo."
@@ -733,7 +733,7 @@ msgstr "Вкладені блоки займатимуть всю ширину �
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:165
 msgid "Content width"
-msgstr "Ш��рина вмісту"
+msgstr "Ширина вмісту"
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:186
 msgid "Wide width"
@@ -872,7 +872,7 @@ msgstr "Відображення списку товарів, засновано
 #: framework/views/theme-mismatch.php:48
 #: static/js/notifications/VersionMismatchNotice.js:65
 msgid "In order to take full advantage of all features the core has to offer - please install and activate the latest version of %s."
-msgstr "Щоб повною мірою скористатися всіма функціями, які може запропонувати ядро теми, встанов��ть і активуйте останню версію %s."
+msgstr "Щоб повною мірою скориста��ися всіма функціями, які може запропонувати ядро теми, встановіть і активуйте останню версію %s."
 
 #: framework/features/header/account-modal.php:23
 msgid "Account modal"
@@ -938,7 +938,7 @@ msgstr "Таксономії - макет 5"
 
 #: framework/features/header/items/account/options.php:7
 msgid "Logout Action"
-msgstr "Дія в��ходу з системи"
+msgstr "Дія виходу з системи"
 
 #: framework/features/header/items/account/options.php:15
 msgid "User Name"
@@ -970,7 +970,7 @@ msgstr "Видимість значка"
 
 #: framework/features/header/items/account/options.php:662
 msgid "Link to Page"
-msgstr "Посила��ня на сторінку"
+msgstr "Посилання на сторінку"
 
 #: framework/features/header/items/account/options.php:757
 msgid "Top Offset (Sticky State)"
@@ -1113,7 +1113,7 @@ msgstr "Ліміт архіву"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:575
 msgid "Limit the number of swatches shown on archive pages."
-msgstr "Обмеження кількості зразків, що відображаються на сторінках архіву."
+msgstr "Обмеження кількості зразків, що відображаються на сторінках а��хіву."
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:579
 msgid "Product Page Limit"
@@ -1371,7 +1371,7 @@ msgstr "Максимальна ширина форми"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/customizer-options.php:41
 msgid "Enable For Backorders"
-msgstr "Увімкнути для попередніх за��овлень"
+msgstr "Увімкнути для попередніх замовлень"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/customizer-options.php:42
 msgid "Allow users to join the waitlist even if the product is on backorder."
@@ -1466,7 +1466,7 @@ msgstr "Ви додані до списку очікування"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-dashboard.php:333
 msgid "You have been removed from the waitlist"
-msgstr "Ви видалені зі списку очікування"
+msgstr "Ви вида��ені зі списку очікування"
 
 #. translators: %1$s is the number of users, %2$s is the plural form
 #. (user/users)
@@ -1544,7 +1544,7 @@ msgstr "Товар, на який ви чекаєте, знову в наявн�
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/emails/back-in-stock.php:11
 msgid "Good news! The product you have been waiting for is now back in stock!"
-msgstr "Гарні новини! Товар, на який ви так довго чекали, знову в наявності!"
+msgstr "Гарні новини! Тов��р, на який ви так довго чекали, знову в наявності!"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/emails/confirm-subscription.php:8
 msgid "Waitlist - Confirm Subscription"
@@ -1601,7 +1601,7 @@ msgstr "Введіть свою електронну адресу, щоб отр
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/views/form.php:83
 msgid "Great! You have been added to the waitlist for this product. Please check your inbox and confirm the subscription to this waitlist."
-msgstr "Ви були додані до списку очікування цього товару. Перевірте свою поштову скриньку та підтвердіть своє включення до списку очікування."
+msgstr "Ви були додані до списку очікування цього товару. Перевірте свою поштову скриньку та підтвердіть своє вкл��чення до списку очікування."
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/views/form.php:111
 msgid "Great! You have been added to the waitlist for this product. You will receive an email as soon as the item is back in stock."
@@ -1759,7 +1759,7 @@ msgstr "Кнопка кошика"
 
 #: framework/premium/extensions/woocommerce-extra/features/added-to-cart-popup/customizer-options.php:125
 msgid "Checkout Button"
-msgstr "Кно��ка оформлення"
+msgstr "Кнопка оформлення"
 
 #: framework/premium/extensions/woocommerce-extra/features/added-to-cart-popup/customizer-options.php:134
 msgid "Continue Shopping Button"
@@ -1983,7 +1983,7 @@ msgstr "Колір межі контейнера"
 
 #: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:197
 msgid "Container Background Color"
-msgstr "Ко��ір фону контейнера"
+msgstr "Колір фону контейнера"
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:188
 msgid "API Version"
@@ -2536,7 +2536,7 @@ msgstr "Супутні"
 #: static/js/editor/blocks/query/index.js:13
 #: static/js/editor/blocks/tax-query/index.js:13
 msgid "Create advanced queries based on your specified criterias."
-msgstr "Створення розширених запитів на основі заданих критеріїв."
+msgstr "��творення розширених запитів на основі заданих критеріїв."
 
 #: static/js/editor/blocks/search/Edit.js:163
 msgid "Button Outside"
@@ -2648,7 +2648,7 @@ msgstr "Скинути всі"
 
 #: static/js/options/ConditionsManager/ExpireCondition.js:119
 msgid "The expiration date cannot be set earlier than the start date."
-msgstr "Дата закінчення терміну не може бути раніше дати початку дії."
+msgstr "Дата закінчення ��ерміну не може бути раніше дати початку дії."
 
 #: framework/features/blocks/about-me/options.php:207,
 #: framework/features/blocks/share-box/options.php:66,
@@ -3112,7 +3112,7 @@ msgstr "Нестача запасів"
 
 #: framework/helpers/exts-configs.php:370
 msgid "Show the remaining stock of a product to create a sense of urgency and encourage your visitors to make a purchase."
-msgstr "Відображення залишків товару, щоб створити відчуття терміновості та спонукати відвідувачів до покупки."
+msgstr "Відображення залишків товару, щоб створити відчуття терміновості та спонукати відвідувачів до ��окупки."
 
 #. translators: %s is the product name (theme or plugin)
 #: framework/views/theme-mismatch.php:36
@@ -3512,7 +3512,7 @@ msgstr "Кнопка скидання фільтрів."
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/tax-filters/index.js:10
 msgid "Shop Filters Controls"
-msgstr "Опції фільтрів товарів"
+msgstr "Опції фільтрів товарі��"
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/tax-filters/index.js:162
 msgid "Shop Filters"
@@ -3997,7 +3997,7 @@ msgstr "Умови відображення таблиці розмірів"
 
 #: framework/premium/extensions/woocommerce-extra/features/size-guide/options.php:30
 msgid "Choose where you want this size guide to be displayed."
-msgstr "Оберіть де потрібно розмістити дану таблицю розмірів."
+msgstr "О��еріть де потрібно розмістити дану таблицю розмірів."
 
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/feature.php:56,
 #: framework/premium/extensions/woocommerce-extra/features/swatches/feature.php:336
@@ -8045,7 +8045,7 @@ msgstr "Соціальні іконки"
 #. translators: %s is a link to the Customizer section.
 #: framework/features/blocks/about-me/options.php:136
 msgid "You can configure social URLs in %s."
-msgstr "Ви можете налаштувати соціал��ні URL-адреси у %s."
+msgstr "Ви можете налаштувати соціальні URL-адреси у %s."
 
 #: framework/features/blocks/about-me/options.php:168,
 #: framework/features/blocks/socials/options.php:62,

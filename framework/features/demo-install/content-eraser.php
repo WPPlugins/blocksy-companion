@@ -14,7 +14,6 @@ class DemoInstallContentEraser {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if (isset($_REQUEST['to_erase'])) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$args['to_erase'] = sanitize_text_field(wp_unslash($_REQUEST['to_erase']));
 		}
 

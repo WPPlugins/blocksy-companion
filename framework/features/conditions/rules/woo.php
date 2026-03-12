@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $options = [];
 
 $has_woo = class_exists('WooCommerce');
@@ -30,7 +26,7 @@ if ($filter === 'all') {
 		
 		$custom_taxonomies[] = [
 			'id' => 'post_type_product_taxonomy_' . $single_taxonomy,
-			'title' => blocksy_companion_safe_sprintf(
+			'title' => blc_safe_sprintf(
 				// translators: %1$s is the label of the taxonomy.
 				__('Product %1$s', 'blocksy-companion'),
 				$taxonomy->label

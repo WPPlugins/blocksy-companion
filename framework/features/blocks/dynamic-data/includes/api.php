@@ -2,96 +2,71 @@
 
 namespace Blocksy\Editor\Blocks;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 class DynamicDataAPI {
 	public function __construct() {
-		add_action(
-			'rest_api_init',
-			function () {
-				register_rest_field(
-					'attachment',
-					'has_video',
-					array(
-						'get_callback' => function ( $post ) {
-							if ( 'attachment' !== $post['type'] ) {
-								return null;
-							}
+		add_action('rest_api_init', function() {
+			register_rest_field('attachment', 'has_video', [
+				'get_callback' => function ($post, $field_name, $request) {
+					if ($post['type'] !== 'attachment') {
+						return null;
+					}
 
-							$maybe_new_video = blocksy_companion_theme_functions()->blocksy_get_post_options( $post['id'] );
+					$maybe_new_video = blocksy_get_post_options($post['id']);
 
-							$media_video_source = blocksy_companion_akg(
-								'media_video_source',
-								$maybe_new_video,
-								'upload'
-							);
+					$media_video_source = blocksy_akg(
+						'media_video_source',
+						$maybe_new_video,
+						'upload'
+					);
 
-							$video_url = '';
+					$video_url = '';
 
-							if ( 'upload' === $media_video_source ) {
-								$video_url = blocksy_companion_akg(
-									'media_video_upload',
-									$maybe_new_video,
-									''
-								);
-							}
+					if ($media_video_source === 'upload') {
+						$video_url = blocksy_akg(
+							'media_video_upload',
+							$maybe_new_video,
+							''
+						);
+					}
 
-							if ( 'youtube' === $media_video_source ) {
-								$video_url = blocksy_companion_akg(
-									'media_video_youtube_url',
-									$maybe_new_video,
-									''
-								);
-							}
+					if ($media_video_source === 'youtube') {
+						$video_url = blocksy_akg(
+							'media_video_youtube_url',
+							$maybe_new_video,
+							''
+						);
+					}
 
-							if ( 'vimeo' === $media_video_source ) {
-								$video_url = blocksy_companion_akg(
-									'media_video_vimeo_url',
-									$maybe_new_video,
-									''
-								);
-							}
+					if ($media_video_source === 'vimeo') {
+						$video_url = blocksy_akg(
+							'media_video_vimeo_url',
+							$maybe_new_video,
+							''
+						);
+					}
 
-							return ! empty( $video_url );
-						},
-					)
-				);
-			}
-		);
+					return ! empty($video_url);
+				}
+			]);
+		});
 
 		add_action(
 			'wp_ajax_blocksy_blocks_retrieve_dynamic_data_descriptor',
 			function () {
-				if ( ! current_user_can( 'manage_options' ) ) {
+				if (! current_user_can('manage_options')) {
 					wp_send_json_error();
 				}
 
-				$data = json_decode( file_get_contents( 'php://input' ), true );
+				$data = json_decode(file_get_contents('php://input'), true);
 
-				if ( ! array_key_exists( 'context', $data ) ) {
+				if (! array_key_exists('context', $data)) {
 					wp_send_json_error();
 				}
 
 				wp_send_json_success(
-					/**
-					 * Filters the dynamic data descriptor sent to the block editor.
-					 *
-					 * @since 2.0.49
-					 *
-					 * @param array $data {
-					 *     Dynamic data descriptor.
-					 *
-					 *     @type array $fields Custom fields available for the requested context.
-					 * }
-					 */
-					apply_filters(
-						'blocksy:general:blocks:dynamic-data:data',
-						array(
-							'fields' => $this->get_custom_fields_response( $data ),
-						)
-					)
+					apply_filters('blocksy:general:blocks:dynamic-data:data', [
+						'fields' => $this->get_custom_fields_response($data)
+					])
 				);
 			}
 		);
@@ -99,276 +74,237 @@ class DynamicDataAPI {
 		add_action(
 			'wp_ajax_blocksy_dynamic_data_block_custom_field_data',
 			function () {
-				if ( ! current_user_can( 'manage_options' ) ) {
+				if (! current_user_can('manage_options')) {
 					wp_send_json_error();
 				}
 
-				$data = json_decode( file_get_contents( 'php://input' ), true );
+				$data = json_decode(file_get_contents('php://input'), true);
 
 				if (
 					! $data
 					||
-					! isset( $data['context'] )
+					! isset($data['context'])
 					||
-					! isset( $data['field_provider'] )
+					! isset($data['field_provider'])
 					||
-					! isset( $data['field_id'] )
+					! isset($data['field_id'])
 				) {
 					wp_send_json_error();
 				}
 
-				$context_object = $this->compute_context_object( $data['context'] );
+				$object = $this->compute_context_object($data['context']);
 
-				if ( ! $context_object ) {
-					wp_send_json_success(
-						array(
-							'field_data' => '',
-						)
-					);
+				if (! $object) {
+					wp_send_json_success([
+						'field_data' => ''
+					]);
 				}
 
 				if (
-					'woo' === $data['field_provider']
+					$data['field_provider'] === 'woo'
 					&&
-					'brands' === $data['field_id']
+					$data['field_id'] === 'brands'
 				) {
-					wp_send_json_success(
-						array(
-							'field_data' => $this->render_woo_brands_field( $context_object ),
-						)
-					);
+					wp_send_json_success([
+						'field_data' => $this->render_woo_brands_field($object)
+					]);
 				}
 
 				if (
-					'woo' === $data['field_provider']
+					$data['field_provider'] === 'woo'
 					&&
-					'attributes' === $data['field_id']
+					$data['field_id'] === 'attributes'
 				) {
-					wp_send_json_success(
-						array(
-							'field_data' => $this->render_woo_attributes_field(
-								$context_object,
-								isset( $data['attributes']['attribute'] )
-									? $data['attributes']['attribute']
-									: ''
-							),
+					if (! isset($data['attributes']['attribute'])) {
+						wp_send_json_success([
+							'field_data' => []
+						]);
+					}
+
+					wp_send_json_success([
+						'field_data' => $this->render_woo_attributes_field(
+							$object,
+							$data['attributes']['attribute']
 						)
-					);
+					]);
 				}
 
-				wp_send_json_success(
-					array(
-						'field_data' => $this->render_custom_field(
-							$context_object,
-							$data['field_provider'],
-							$data['field_id'],
-							array(
-								'before' => blocksy_companion_akg( 'before', $data, '' ),
-								'after'  => blocksy_companion_akg( 'after', $data, '' ),
-							)
-						),
+				wp_send_json_success([
+					'field_data' => $this->render_custom_field(
+						$object,
+						$data['field_provider'],
+						$data['field_id']
 					)
-				);
+				]);
 			}
 		);
 	}
 
-	private function render_woo_brands_field( $context_object ) {
-		if ( ! is_a( $context_object, 'WP_Post' ) ) {
-			return array();
+	private function render_woo_brands_field($object) {
+		if (! is_a($object, 'WP_Post')) {
+			return [];
 		}
 
-		$brands = get_the_terms( $context_object->ID, 'product_brand' );
+		$brands = get_the_terms($object->ID, 'product_brand');
 
-		if ( ! $brands || is_wp_error( $brands ) ) {
-			return array();
+		if (! $brands || is_wp_error($brands)) {
+			return [];
 		}
 
-		$brands_result = array();
+		$brands_result = [];
 
-		foreach ( $brands as $term ) {
-			$term_atts = blocksy_companion_theme_functions()->blocksy_get_taxonomy_options( $term->term_id );
+		foreach ($brands as $term) {
+			$term_atts = blocksy_get_taxonomy_options($term->term_id);
 
-			$maybe_image_id = get_term_meta( $term->term_id, 'thumbnail_id', true );
+			$maybe_image_id = get_term_meta($term->term_id, 'thumbnail_id', true);
 
-			if ( ! empty( $maybe_image_id ) ) {
+			if (! empty($maybe_image_id)) {
 				$maybe_attachment_url = wp_get_attachment_image_url(
 					$maybe_image_id,
 					'full'
 				);
 
-				if ( $maybe_attachment_url ) {
-					$term_atts['icon_image'] = array(
+				if ($maybe_attachment_url) {
+					$term_atts['icon_image'] = [
 						'attachment_id' => $maybe_image_id,
-						'url'           => $maybe_attachment_url,
-					);
+						'url' => $maybe_attachment_url
+					];
 				}
 			}
 
-			$maybe_image = blocksy_companion_akg( 'icon_image', $term_atts, '' );
+			$maybe_image = blocksy_akg('icon_image', $term_atts, '');
 
-			if ( is_array( $maybe_image ) ) {
+			if (is_array($maybe_image)) {
 				$attachment = $maybe_image;
 			}
 
-			$brands_result[] = array(
+			$brands_result[] = [
 				'term_id' => $term->term_id,
-				'name'    => $term->name,
-				'slug'    => $term->slug,
-				'image'   => $attachment,
-			);
+				'name' => $term->name,
+				'slug' => $term->slug,
+				'image' => $attachment
+			];
 		}
 
 		return $brands_result;
 	}
 
-	private function render_woo_attributes_field( $context_object, $attribute ) {
-		if ( ! is_a( $context_object, 'WP_Post' ) ) {
-			return array();
+	private function render_woo_attributes_field($object, $attribute) {
+		if (! is_a($object, 'WP_Post')) {
+			return [];
 		}
 
-		$product = wc_get_product( $context_object->ID );
+		$product = wc_get_product($object->ID);
 
-		if ( ! $product ) {
-			return array();
+		if (! $product) {
+			return [];
 		}
 
-		if ( empty( $attribute ) ) {
-			$choices = DynamicData::get_product_attribute_choices();
-
-			if ( count( $choices ) > 0 ) {
-				$attribute = array_keys( $choices )[0];
-			}
-		}
-
-		$attributes    = $product->get_attributes();
-		$taxonomy_name = wc_attribute_taxonomy_name( $attribute );
+		$attributes = $product->get_attributes();
+		$taxonomy_name = wc_attribute_taxonomy_name($attribute);
 
 		if (
 			! $attributes
 			||
-			! isset( $attributes[ sanitize_title( $taxonomy_name ) ] )
+			! isset($attributes[sanitize_title($taxonomy_name)])
 		) {
-			return array();
+			return [];
 		}
 
-		$attribute = $attributes[ sanitize_title( $taxonomy_name ) ];
+		$attribute = $attributes[sanitize_title($taxonomy_name)];
 
-		if ( ! $attribute ) {
-			return array();
+		if (! $attribute) {
+			return [];
 		}
 
 		$terms = $attribute->get_terms();
 
-		if ( ! $terms ) {
-			return array();
+		if (! $terms) {
+			return [];
 		}
 
-		$terms_result = array();
+		$terms_result = [];
 
-		foreach ( $terms as $term ) {
-			$terms_result[] = array(
+		foreach ($terms as $term) {
+			$terms_result[] = [
 				'term_id' => $term->term_id,
-				'name'    => $term->name,
-				'slug'    => $term->slug,
-			);
+				'name' => $term->name,
+				'slug' => $term->slug,
+			];
 		}
 
 		return $terms_result;
 	}
 
-	private function render_custom_field( $context_object, $field_provider, $field_id, $args = array() ) {
-		$args = wp_parse_args(
-			$args,
-			array(
-				'before' => '',
-				'after'  => '',
-			)
-		);
-
+	private function render_custom_field($object, $field_provider, $field_id) {
 		if (
-			! blocksy_companion_get_ext( 'post-types-extra' )
+			! blc_get_ext('post-types-extra')
 			||
-			! blocksy_companion_get_ext( 'post-types-extra' )->dynamic_data
+			! blc_get_ext('post-types-extra')->dynamic_data
 			||
-			! blocksy_companion_get_ext( 'post-types-extra' )->dynamic_data->custom_fields_manager
+			! blc_get_ext('post-types-extra')->dynamic_data->custom_fields_manager
 		) {
 			return '';
 		}
 
-		$field_render = blocksy_companion_get_ext( 'post-types-extra' )
+		$field_render = blc_get_ext('post-types-extra')
 			->dynamic_data
 			->custom_fields_manager
 			->render_field(
 				$field_id,
-				array(
-					'provider'       => $field_provider,
+				[
+					'provider' => $field_provider,
 
-					'allow_images'   => true,
+					'allow_images' => true,
 
-					'context_object' => $context_object,
-				)
+					'context_object' => $object
+				]
 			);
 
-		if ( ! $field_render ) {
+		if (! $field_render) {
 			return '';
 		}
 
-		if ( ! is_string( $field_render['value'] ) ) {
-			return $field_render['value'];
-		}
-
-		if ( empty( trim( $field_render['value'] ) ) ) {
-			return '';
-		}
-
-		return blocksy_companion_sanitize_wrapped_html_for_display(
-			array(
-				'before'       => $args['before'],
-				'value'        => $field_render['value'],
-				'after'        => $args['after'],
-				'trusted_html' => ! empty( $field_render['trusted_html'] ),
-			)
-		);
+		return $field_render['value'];
 	}
 
-	private function get_custom_fields_response( $data ) {
+	private function get_custom_fields_response($data) {
 		if (
-			! blocksy_companion_get_ext( 'post-types-extra' )
+			! blc_get_ext('post-types-extra')
 			||
-			! blocksy_companion_get_ext( 'post-types-extra' )->dynamic_data
+			! blc_get_ext('post-types-extra')->dynamic_data
 			||
-			! blocksy_companion_get_ext( 'post-types-extra' )->dynamic_data->custom_fields_manager
+			! blc_get_ext('post-types-extra')->dynamic_data->custom_fields_manager
 		) {
-			return array();
+			return [];
 		}
 
-		$fields = blocksy_companion_get_ext( 'post-types-extra' )
+		$fields = blc_get_ext('post-types-extra')
 			->dynamic_data
 			->custom_fields_manager
 			->get_fields(
 				$data['context'],
-				array(
-					'provider'     => 'all',
+				[
+					'provider' => 'all',
 					'allow_images' => true,
-				)
+				]
 			);
 
-		$fields_response = array();
+		$fields_response = [];
 
-		foreach ( $fields as $fields_descriptor ) {
-			$provider_data = array(
-				'provider'       => $fields_descriptor['provider'],
+		foreach ($fields as $fields_descriptor) {
+			$provider_data = [
+				'provider' => $fields_descriptor['provider'],
 				'provider_label' => $fields_descriptor['label'],
-				'fields'         => array(),
-			);
+				'fields' => []
+			];
 
-			foreach ( $fields_descriptor['fields'] as $field ) {
-				$provider_data['fields'][] = array(
-					'id'    => $field->get_id(),
+			foreach ($fields_descriptor['fields'] as $field) {
+				$provider_data['fields'][] = [
+					'id' => $field->get_id(),
 					'label' => $field->get_label(),
-					'type'  => $field->get_type(),
-				);
+					'type' => $field->get_type()
+				];
 			}
 
 			$fields_response[] = $provider_data;
@@ -377,31 +313,32 @@ class DynamicDataAPI {
 		return $fields_response;
 	}
 
-	public function compute_context_object( $context ) {
-		if ( ! isset( $context['type'] ) ) {
+	public function compute_context_object($context) {
+		if (! isset($context['type'])) {
 			return null;
 		}
 
-		if ( 'post' === $context['type'] ) {
+		if ($context['type'] === 'post') {
 			if (
-				! isset( $context['post_id'] )
+				! isset($context['post_id'])
 				||
-				! isset( $context['post_type'] )
+				! isset($context['post_type'])
 			) {
 				return null;
 			}
 
-			return get_post( $context['post_id'] );
+			return get_post($context['post_id']);
 		}
 
-		if ( 'term' === $context['type'] ) {
-			if ( ! isset( $context['term_id'] ) ) {
+		if ($context['type'] === 'term') {
+			if (! isset($context['term_id'])) {
 				return null;
 			}
 
-			return get_term( $context['term_id'] );
+			return get_term($context['term_id']);
 		}
 
 		return null;
 	}
 }
+

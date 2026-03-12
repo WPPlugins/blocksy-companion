@@ -256,7 +256,6 @@ const DynamicDataInspectorControls = ({
 								{
 									colorValue: linkColor,
 									label: __('Link', 'blocksy-companion'),
-									isShownByDefault: false,
 									enableAlpha: true,
 									onColorChange: setLinkColor,
 								},
@@ -267,7 +266,6 @@ const DynamicDataInspectorControls = ({
 										'Link Hover',
 										'blocksy-companion'
 									),
-									isShownByDefault: false,
 									enableAlpha: true,
 									onColorChange: setHoverLinkColor,
 								},
@@ -276,7 +274,6 @@ const DynamicDataInspectorControls = ({
 								{
 									colorValue: textColor,
 									label: __('Text', 'blocksy-companion'),
-									isShownByDefault: false,
 									enableAlpha: true,
 									onColorChange: setTextColor,
 								},
@@ -292,7 +289,7 @@ const DynamicDataInspectorControls = ({
 						onGradientChange: (newValue) => {
 							setOverlayGradient(newValue)
 						},
-						isShownByDefault: false,
+						isShownByDefault: true,
 						clearable: true,
 					},
 			  ]
@@ -597,15 +594,6 @@ const DynamicDataInspectorControls = ({
 												},
 										  }
 										: {}),
-
-									has_image_caption: {
-										type: 'ct-switch',
-										label: __(
-											'Show Caption',
-											'blocksy-companion'
-										),
-										value: 'no',
-									},
 
 									image_hover_effect: {
 										label: __(

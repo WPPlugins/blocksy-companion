@@ -160,7 +160,7 @@ const ConditionsManager = ({
 				<div className="ct-conditions-actions">
 					<button
 						type="button"
-						className="ct-ui-button add-condition"
+						className="button add-condition"
 						onClick={(e) => {
 							e.preventDefault()
 

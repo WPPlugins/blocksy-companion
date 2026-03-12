@@ -6,13 +6,12 @@ import { registerBlockType } from '@wordpress/blocks'
 import { getAttributesFromOptions, getOptionsForBlock } from 'blocksy-options'
 import Edit from './Edit'
 import { colorsDefaults } from './colors'
-import metadata from './block.json'
 
 export const options = getOptionsForBlock('contact_info')
 export const defaultAttributes = getAttributesFromOptions(options)
 
 registerBlockType('blocksy/contact-info', {
-	...metadata,
+	apiVersion: 3,
 	title: __('Contact Info Controls', 'blocksy-companion'),
 	icon: {
 		src: (
@@ -27,6 +26,14 @@ registerBlockType('blocksy/contact-info', {
 				/>
 			</svg>
 		),
+	},
+	supports: {
+		html: false,
+		inserter: false,
+		lock: false,
+		typography: {
+			fontSize: true,
+		},
 	},
 	parent: ['blocksy/widgets-wrapper'],
 	attributes: {

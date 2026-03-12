@@ -188,16 +188,7 @@ const Edit = ({
 											has_slideshow_arrows: {
 												type: 'ct-switch',
 												label: __(
-													'Navigation Arrows',
-													'blocksy-companion'
-												),
-												value: '',
-											},
-
-											has_slideshow_pills: {
-												type: 'ct-switch',
-												label: __(
-													'Navigation Pills',
+													'Arrows',
 													'blocksy-companion'
 												),
 												value: '',

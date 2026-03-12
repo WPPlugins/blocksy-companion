@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 class BlocksyExtensionProductReviewsPreBoot {
 	public function __construct() {
 		add_action('admin_enqueue_scripts', function () {

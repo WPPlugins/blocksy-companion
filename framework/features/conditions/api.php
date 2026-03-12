@@ -2,14 +2,10 @@
 
 namespace Blocksy;
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 class ConditionsManagerAPI {
 	public function __construct() {
 		add_action('wp_ajax_blc_retrieve_conditions_data', function () {
-			$capability = blocksy_companion_get_capabilities()->get_wp_capability_by('conditions');
+			$capability = blc_get_capabilities()->get_wp_capability_by('conditions');
 
 			if (! current_user_can($capability)) {
 				wp_send_json_error();
@@ -35,7 +31,7 @@ class ConditionsManagerAPI {
 
 			$languages = [];
 
-			if (function_exists('blocksy_get_all_i18n_languages')) {
+			if (function_exists('blocksy_get_current_language')) {
 				$languages = blocksy_get_all_i18n_languages();
 			}
 
@@ -50,3 +46,4 @@ class ConditionsManagerAPI {
 		});
 	}
 }
+

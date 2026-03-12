@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $everywhere_title = __('Entire Website', 'blocksy-companion');
 
 if (

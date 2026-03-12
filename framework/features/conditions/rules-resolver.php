@@ -252,9 +252,9 @@ class ConditionsRulesResolver {
 		if (
 			$rule['rule'] === 'single_product'
 			&&
-			blocksy_companion_theme_functions()->blocksy_manager()
+			blc_theme_functions()->blocksy_manager()
 		) {
-			return blocksy_companion_theme_functions()->blocksy_manager()->screen->is_product();
+			return blc_theme_functions()->blocksy_manager()->screen->is_product();
 		}
 
 		if ($rule['rule'] === 'all_product_archives') {
@@ -381,11 +381,11 @@ class ConditionsRulesResolver {
 				return false;
 			}
 
-			if (! blocksy_companion_theme_functions()->blocksy_manager()) {
+			if (! blc_theme_functions()->blocksy_manager()) {
 				return false;
 			}
 
-			$manager = blocksy_companion_theme_functions()->blocksy_manager();
+			$manager = blc_theme_functions()->blocksy_manager();
 
 			if (! isset($manager->archive) || ! $manager->archive) {
 				return false;
@@ -590,18 +590,6 @@ class ConditionsRulesResolver {
 			}
 		}
 
-		/**
-		 * Filters the result of resolving a display condition rule.
-		 *
-		 * Runs for the rules the built-in resolver doesn't handle, which lets custom rules
-		 * declared through `blocksy:conditions:rules:custom` be matched.
-		 *
-		 * @since 2.0.69
-		 *
-		 * @param bool  $result Whether the rule matches the current request. Default false.
-		 * @param array $rule   The rule being resolved. Has a `rule` key with the rule id and,
-		 *                      optionally, a `payload` key with the rule's stored value.
-		 */
 		return apply_filters(
 			'blocksy:conditions:rules:resolve',
 			false,

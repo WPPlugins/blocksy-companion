@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $all_post_types = [
 	'post' => __('Posts', 'blocksy-companion')
 ];
@@ -12,8 +8,8 @@ if (class_exists('WooCommerce')) {
 	$all_post_types['product'] = __('Products', 'blocksy-companion');
 }
 
-if (blocksy_companion_theme_functions()->blocksy_manager()) {
-	$post_types = blocksy_companion_theme_functions()->blocksy_manager()->post_types->get_supported_post_types();
+if (blc_theme_functions()->blocksy_manager()) {
+	$post_types = blc_theme_functions()->blocksy_manager()->post_types->get_supported_post_types();
 
 	foreach ($post_types as $single_post_type) {
 		$post_type_object = get_post_type_object($single_post_type);
@@ -90,7 +86,7 @@ foreach ($all_post_types as $custom_post_type => $label) {
 					'selector' => '.ct-trending-block',
 					'render' => function () {
 						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo blocksy_companion_get_trending_block();
+						echo blc_get_trending_block();
 					}
 				],
 			],
@@ -152,7 +148,7 @@ foreach ($all_post_types as $custom_post_type => $label) {
 						'selector' => '.ct-trending-block',
 						'render' => function () {
 							// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							echo blocksy_companion_get_trending_block();
+							echo blc_get_trending_block();
 						}
 					],
 				]
@@ -211,13 +207,13 @@ $options = [
 										'selector' => '.ct-trending-block',
 										'render' => function () {
 											// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-											echo blocksy_companion_get_trending_block();
+											echo blc_get_trending_block();
 										}
 									]
 								],
 							],
 
-							blocksy_companion_site_has_feature()
+							blc_site_has_feature()
 								? [
 									'trending_block_icon_source' => [
 										'label' => __(
@@ -233,7 +229,7 @@ $options = [
 											'selector' => '.ct-trending-block',
 											'render' => function () {
 												// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-												echo blocksy_companion_get_trending_block();
+												echo blc_get_trending_block();
 											}
 										],
 										'choices' => [
@@ -269,7 +265,7 @@ $options = [
 													'selector' => '.ct-trending-block',
 													'render' => function () {
 														// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-														echo blocksy_companion_get_trending_block();
+														echo blc_get_trending_block();
 													}
 												]
 											],
@@ -290,7 +286,7 @@ $options = [
 									'selector' => '.ct-trending-block',
 									'render' => function () {
 										// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-										echo blocksy_companion_get_trending_block();
+										echo blc_get_trending_block();
 									}
 								],
 							] : [
@@ -323,7 +319,7 @@ $options = [
 											'selector' => '.ct-trending-block',
 											'render' => function () {
 												// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-												echo blocksy_companion_get_trending_block();
+												echo blc_get_trending_block();
 											}
 										],
 									]
@@ -345,7 +341,7 @@ $options = [
 									'selector' => '.ct-trending-block',
 									'render' => function () {
 										// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-										echo blocksy_companion_get_trending_block();
+										echo blc_get_trending_block();
 									}
 								],
 							],
@@ -366,7 +362,7 @@ $options = [
 											'label' => __( 'Posts ID', 'blocksy-companion' ),
 											'type' => 'text',
 											'design' => 'inline',
-											'desc' => blocksy_companion_safe_sprintf(
+											'desc' => blc_safe_sprintf(
 												// translators: %1$s and %2$s are HTML tags
 												__(
 												  'Separate posts ID by comma. How to find the %1$spost ID%2$s.',
@@ -379,7 +375,7 @@ $options = [
 												'selector' => '.ct-trending-block',
 												'render' => function () {
 													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-													echo blocksy_companion_get_trending_block();
+													echo blc_get_trending_block();
 												}
 											],
 										],
@@ -412,7 +408,7 @@ $options = [
 													'selector' => '.ct-trending-block',
 													'render' => function () {
 														// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-														echo blocksy_companion_get_trending_block();
+														echo blc_get_trending_block();
 													}
 												],
 											],
@@ -436,7 +432,7 @@ $options = [
 												'selector' => '.ct-trending-block',
 												'render' => function () {
 													// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-													echo blocksy_companion_get_trending_block();
+													echo blc_get_trending_block();
 												}
 											]
 										],
@@ -451,7 +447,7 @@ $options = [
 										'selector' => '.ct-trending-block',
 										'render' => function () {
 											// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-											echo blocksy_companion_get_trending_block();
+											echo blc_get_trending_block();
 										}
 									]
 								],
@@ -481,7 +477,7 @@ $options = [
 											'loader_selector' => '.entry-meta',
 											'render' => function () {
 												// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-												echo blocksy_companion_get_trending_block();
+												echo blc_get_trending_block();
 											}
 										],
 									],
@@ -514,7 +510,7 @@ $options = [
 									'selector' => '.ct-trending-block',
 									'render' => function () {
 										// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-										echo blocksy_companion_get_trending_block();
+										echo blc_get_trending_block();
 									}
 								],
 							],
@@ -560,7 +556,7 @@ $options = [
 							],
 						],
 
-						blocksy_companion_site_has_feature() ? [
+						blc_site_has_feature() ? [
 							'trending_block_location' => [
 								'label' => __('Display Location', 'blocksy-companion'),
 								'type' => 'ct-select',

@@ -7,14 +7,8 @@ import cachedFetch from '@creative-themes/wordpress-helpers/cached-fetch'
 // other than custom fields.
 //
 // Potentially, termId can also be provided to get term data.
-const useCustomFieldData = ({
-	fieldsContext,
-	fieldDescriptor,
-	before = '',
-	after = ''
-}) => {
+const useCustomFieldData = ({ fieldsContext, fieldDescriptor }) => {
 	const [fieldData, setFieldData] = useState({})
-	const [lastCacheKey, setLastCacheKey] = useState(null)
 
 	const { type, post_type, post_id } = fieldsContext
 	const { provider, id, attributes, ...rest } = fieldDescriptor
@@ -30,17 +24,14 @@ const useCustomFieldData = ({
 
 			// optional attributes
 			attributes,
-
-			before,
-			after
 		}
 
 		return {
 			url,
 			body,
-			cacheKey: getStableJsonKey({ ...body, url })
+			cacheKey: getStableJsonKey({ ...body, url }),
 		}
-	}, [type, post_type, post_id, provider, id, attributes, before, after])
+	}, [type, post_type, post_id, provider, id, attributes])
 
 	useEffect(() => {
 		cachedFetch(requestDescriptor.url, requestDescriptor.body)
@@ -52,27 +43,19 @@ const useCustomFieldData = ({
 
 				setFieldData((prev) => ({
 					...prev,
-					[requestDescriptor.cacheKey]: data.field_data
+					[requestDescriptor.cacheKey]: data.field_data,
 				}))
-
-				setLastCacheKey(requestDescriptor.cacheKey)
 			})
 	}, [requestDescriptor])
 
 	let fieldDataResult = null
 
-	let resultCacheKey = requestDescriptor.cacheKey
-
-	if (!(resultCacheKey in fieldData)) {
-		resultCacheKey = lastCacheKey
-	}
-
-	if (resultCacheKey && resultCacheKey in fieldData) {
-		fieldDataResult = fieldData[resultCacheKey]
+	if (fieldData[requestDescriptor.cacheKey]) {
+		fieldDataResult = fieldData[requestDescriptor.cacheKey]
 	}
 
 	return {
-		fieldData: fieldDataResult
+		fieldData: fieldDataResult,
 	}
 }
 

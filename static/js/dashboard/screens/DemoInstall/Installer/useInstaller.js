@@ -14,7 +14,7 @@ import DashboardContext from '../../../DashboardContext'
 import { DemosContext } from '../../DemoInstall'
 
 import { sprintf, __ } from 'ct-i18n'
-import { getNameForPlugin, getPluginsMap } from '../Wizzard/Plugins'
+import { getNameForPlugin } from '../Wizzard/Plugins'
 import {
 	prepareUrl,
 	performRequestWithExponentialBackoff,
@@ -121,7 +121,6 @@ const getInitialStepsDescriptors = (params) => {
 				params: {
 					action: 'blocksy_demo_activate_plugins',
 					plugins: plugin,
-					plugin_name: getPluginsMap()[plugin] || plugin,
 				},
 			})),
 		},

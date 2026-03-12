@@ -1,23 +1,17 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $login_label = do_shortcode(
-	blocksy_companion_sanitize_html_for_display(
-		blocksy_translate_dynamic(
-			blocksy_companion_akg(
-				'login_label',
-				$atts,
-				__('Login', 'blocksy-companion')
-			),
-			$panel_type . ':' . $section_id . ':' . $item_id . ':login_label'
-		)
+	blocksy_translate_dynamic(
+		blocksy_default_akg(
+			'login_label',
+			$atts,
+			__('Login', 'blocksy-companion')
+		),
+		$panel_type . ':' . $section_id . ':' . $item_id . ':login_label'
 	)
 );
 
-$loggedout_account_label_visibility = blocksy_companion_akg(
+$loggedout_account_label_visibility = blocksy_akg(
 	'loggedout_account_label_visibility',
 	$atts,
 	[
@@ -27,7 +21,7 @@ $loggedout_account_label_visibility = blocksy_companion_akg(
 	]
 );
 
-$loggedout_icon_visibility = blocksy_companion_akg(
+$loggedout_icon_visibility = blocksy_akg(
 	'loggedout_icon_visibility',
 	$atts,
 	[
@@ -42,10 +36,10 @@ $aria_controls = [
 	// 'aria-controls' => 'account-modal'
 ];
 
-$login_account_action = blocksy_companion_akg('login_account_action', $atts, 'modal');
+$login_account_action = blocksy_akg('login_account_action', $atts, 'modal');
 
 if ($login_account_action === 'custom') {
-	$link = esc_url(do_shortcode(blocksy_companion_akg('loggedout_account_custom_page', $atts, '')));
+	$link = do_shortcode(blocksy_akg('loggedout_account_custom_page', $atts, ''));
 	$aria_controls = [];
 }
 
@@ -55,7 +49,7 @@ if ($login_account_action === 'woocommerce_account') {
 }
 
 $loggedout_label_position = blocksy_expand_responsive_value(
-	blocksy_companion_akg('loggedout_label_position', $atts, 'left')
+	blocksy_akg('loggedout_label_position', $atts, 'left')
 );
 
 $attr['data-state'] = 'out';
@@ -65,15 +59,15 @@ $link_attr = array_merge([
 	'aria-label' => $login_label
 ], $aria_controls);
 
-if (blocksy_companion_akg('logged_out_style', $atts, 'icon') !== 'none') {
+if (blocksy_akg('logged_out_style', $atts, 'icon') !== 'none') {
 	$link_attr['data-label'] = $loggedout_label_position[$device];
 }
 
-blocksy_companion_html_tag_e('div', $attr, false);
-blocksy_companion_html_tag_e('a', $link_attr, false);
+blocksy_html_tag_e('div', $attr, false);
+blocksy_html_tag_e('a', $link_attr, false);
 
 if (! empty($login_label)) {
-	blocksy_companion_html_tag_e(
+	blocksy_html_tag_e(
 		'span',
 		[
 			'class' => trim('ct-label ' . blocksy_visibility_classes($loggedout_account_label_visibility)),
@@ -83,15 +77,15 @@ if (! empty($login_label)) {
 	);
 }
 
-if (blocksy_companion_akg('logged_out_style', $atts, 'icon') === 'icon') {
-	$media_html = $icon[blocksy_companion_akg('accountHeaderIcon', $atts, 'type-1')];
+if (blocksy_akg('logged_out_style', $atts, 'icon') === 'icon') {
+	$media_html = $icon[blocksy_default_akg('accountHeaderIcon', $atts, 'type-1')];
 
-	if (function_exists('blocksy_companion_get_icon')) {
-		$icon_source = blocksy_companion_akg('logged_out_icon_source', $atts, 'default');
+	if (function_exists('blc_get_icon')) {
+		$icon_source = blocksy_default_akg('logged_out_icon_source', $atts, 'default');
 
 		if ( $icon_source === 'custom' ) {
-			$media_html = blocksy_companion_get_icon([
-				'icon_descriptor' => blocksy_companion_akg(
+			$media_html = blc_get_icon([
+				'icon_descriptor' => blocksy_akg(
 					'logged_out_custom_icon',
 					$atts,
 					['icon' => 'blc blc-user']

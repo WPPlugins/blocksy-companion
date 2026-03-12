@@ -1,9 +1,5 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 $has_username = true;
 $has_password = false;
 
@@ -33,7 +29,7 @@ if (
 ?>
 
 <form <?php
-	blocksy_companion_attr_to_html_e([
+	blocksy_attr_to_html_e([
 		'name' => 'registerform',
 		'id' => 'registerform',
 		'class' => $class,
@@ -47,13 +43,7 @@ if (
 			do_action('woocommerce_register_form_start');
 		}
 	?>
-	<?php
-	/**
-	 * Fires at the start of the account modal registration form.
-	 *
-	 * @since 1.7.43
-	 */
-	do_action('blocksy:account:modal:register:start'); ?>
+	<?php do_action('blocksy:account:modal:register:start'); ?>
 
 	<?php if ($has_username) { ?>
 		<p>
@@ -72,15 +62,8 @@ if (
 			<label for="user_pass_register"><?php echo esc_html__('Password', 'blocksy-companion') ?></label>
 			<span class="<?php echo esc_attr($password_class) ?>">
 				<?php
-					blocksy_companion_html_tag_e(
+					blocksy_html_tag_e(
 						'input',
-						/**
-						 * Filters the HTML attributes of the account modal registration password input.
-						 *
-						 * @since 2.0.46
-						 *
-						 * @param array $attr HTML attributes, keyed by attribute name.
-						 */
 						apply_filters('blocksy:account:modal:register:password:attr', [
 							'type' => 'password',
 							'name' => 'user_pass',
@@ -104,7 +87,7 @@ if (
 	<?php } ?>
 
 	<?php
-	if (blocksy_companion_site_has_feature()) {
+	if (blc_site_has_feature()) {
 		if (
 			class_exists('NextendSocialLogin')
 			&&
@@ -166,7 +149,7 @@ if (
 				&&
 				function_exists('dokan')
 			) {
-				blocksy_companion_html_tag_e(
+				blocksy_html_tag_e(
 					'input',
 					[
 						'type' => 'hidden',
@@ -181,16 +164,11 @@ if (
 		?>
 	</p>
 
-	<?php
-	/**
-	 * Fires at the end of the account modal registration form.
-	 *
-	 * @since 1.7.43
-	 */
-	do_action('blocksy:account:modal:register:end'); ?>
+	<?php do_action('blocksy:account:modal:register:end'); ?>
 	<?php
 		if ($registration_strategy === 'woocommerce') {
 			do_action('woocommerce_register_form_end');
 		}
 	?>
+	<?php wp_nonce_field('blocksy-register', 'blocksy-register-nonce'); ?>
 </form>

@@ -9,29 +9,11 @@ const CustomFieldPreview = ({
 
 	fieldsContext,
 
-	attributes
+	attributes,
 }) => {
-	let before = ''
-	let after = ''
-
-	if (fieldDescriptor.type !== 'image') {
-		before = attributes.before
-		after = attributes.after
-
-		if (
-			attributes.has_field_link === 'yes' &&
-			attributes.has_field_link_wrap_content === 'no'
-		) {
-			before = `${before}<a href="#" rel="noopener noreferrer">`
-			after = `</a>${after}`
-		}
-	}
-
 	const { fieldData } = useCustomFieldData({
 		fieldDescriptor,
 		fieldsContext,
-		before,
-		after
 	})
 
 	if (fieldDescriptor.type === 'image') {

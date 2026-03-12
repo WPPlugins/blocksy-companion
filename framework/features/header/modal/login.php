@@ -1,18 +1,7 @@
 <?php
 
-if (! defined('ABSPATH')) {
-	exit;
-}
-
 // wp_login_form([]);
 
-/**
- * Filters whether the forgot password link is rendered inline with the password field.
- *
- * @since 1.8.11
- *
- * @param bool $forgot_password_inline Whether to render the link inline. Default true.
- */
 $forgot_password_inline = apply_filters(
 	'blocksy:account:modal:login:forgot-password-inline',
 	true
@@ -34,13 +23,7 @@ if (function_exists('is_account_page') && is_account_page()) {
 
 <form name="loginform" id="loginform" class="login" action="#" method="post">
 	<?php do_action('woocommerce_login_form_start'); ?>
-	<?php
-	/**
-	 * Fires at the start of the account modal login form.
-	 *
-	 * @since 1.7.43
-	 */
-	do_action('blocksy:account:modal:login:start'); ?>
+	<?php do_action('blocksy:account:modal:login:start'); ?>
 
 	<p>
 		<label for="user_login"><?php echo esc_html__('Username or Email Address', 'blocksy-companion') ?></label>
@@ -51,15 +34,8 @@ if (function_exists('is_account_page') && is_account_page()) {
 		<label for="user_pass"><?php echo esc_html__('Password', 'blocksy-companion') ?></label>
 		<span class="account-password-input">
 			<?php
-				blocksy_companion_html_tag_e(
+				blocksy_html_tag_e(
 					'input',
-					/**
-					 * Filters the HTML attributes of the account modal login password input.
-					 *
-					 * @since 2.0.46
-					 *
-					 * @param array $attr HTML attributes, keyed by attribute name.
-					 */
 					apply_filters('blocksy:account:modal:login:password:attr', [
 						'type' => 'password',
 						'name' => 'pwd',
@@ -97,7 +73,7 @@ if (function_exists('is_account_page') && is_account_page()) {
 	</p>
 
 	<?php
-		if (blocksy_companion_site_has_feature()) {
+		if (blc_site_has_feature()) {
 			if (
 				class_exists('NextendSocialLogin', false)
 				&&
@@ -134,13 +110,7 @@ if (function_exists('is_account_page') && is_account_page()) {
 		</button>
 	</p>
 
-	<?php
-	/**
-	 * Fires at the end of the account modal login form.
-	 *
-	 * @since 1.7.43
-	 */
-	do_action('blocksy:account:modal:login:end'); ?>
+	<?php do_action('blocksy:account:modal:login:end'); ?>
 	<?php do_action('woocommerce_login_form_end'); ?>
 </form>
 

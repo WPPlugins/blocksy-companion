@@ -1,8 +1,9 @@
 import {
 	createElement,
+	Component,
 	useState,
 	useEffect,
-	Fragment
+	Fragment,
 } from '@wordpress/element'
 import Downshift from 'downshift'
 import { __ } from 'ct-i18n'
@@ -14,103 +15,72 @@ const ListPickerImplementation = ({ value, onChange }) => {
 	const [lists, setLists] = useState(listsCache || [])
 	const [isLoadingLists, setListsLoading] = useState(!listsCache)
 
-	const [error, setError] = useState('')
+	const maybeFetchLists = async (verbose = true) => {
+		if (verbose) {
+			setListsLoading(true)
+		}
+
+		const body = new FormData()
+		body.append(
+			'action',
+			'blocksy_ext_newsletter_subscribe_get_actual_lists'
+		)
+
+		body.append(
+			'nonce',
+			(
+				window.ctDashboardLocalizations ||
+				window.ct_localizations ||
+				window.ct_customizer_localizations
+			).dashboard_actions_nonce
+		)
+
+		try {
+			const response = await fetch(ajaxurl, {
+				method: 'POST',
+				body,
+			})
+
+			if (response.status === 200) {
+				const body = await response.json()
+
+				if (body.success) {
+					if (body.data.result !== 'api_key_invalid') {
+						setListsLoading(false)
+						setLists(body.data.result)
+						listsCache = body.data.result
+
+						return
+					}
+				}
+			}
+		} catch (e) {}
+
+		setListsLoading(false)
+	}
 
 	useEffect(() => {
-		let active = true
-
-		const fetchLists = async () => {
-			const body = new FormData()
-			body.append(
-				'action',
-				'blocksy_ext_newsletter_subscribe_get_actual_lists'
-			)
-			body.append(
-				'nonce',
-				(
-					window.ctDashboardLocalizations ||
-					window.ct_localizations ||
-					window.ct_customizer_localizations
-				).dashboard_actions_nonce
-			)
-
-			let error = __(
-				'Unable to fetch lists. Please try again.',
-				'blocksy-companion'
-			)
-
-			try {
-				const response = await fetch(ajaxurl, { method: 'POST', body })
-				const result = await response.json()
-
-				if (!active) {
-					return
-				}
-
-				if (
-					response.ok &&
-					result.success &&
-					Array.isArray(result.data?.result)
-				) {
-					setLists(result.data.result)
-					listsCache = result.data.result
-					return
-				}
-
-				if (
-					typeof result.data?.message === 'string' &&
-					result.data.message
-				) {
-					error = result.data.message
-				}
-			} catch (e) {
-			} finally {
-				if (active) {
-					setListsLoading(false)
-				}
-			}
-
-			if (active) {
-				setLists([])
-				listsCache = null
-				setError(error)
-			}
-		}
-
-		fetchLists()
-
-		return () => {
-			active = false
-		}
+		maybeFetchLists(!listsCache)
 	}, [])
 
 	return lists.length === 0 ? (
-		<Fragment>
-			<div className="ct-select-input">
-				<input
-					disabled
-					placeholder={
-						isLoadingLists
-							? __('Loading...', 'blocksy-companion')
-							: error
-								? __(
-										'Unable to load lists',
-										'blocksy-companion'
-									)
-								: __('No lists found', 'blocksy-companion')
-					}
-				/>
-			</div>
-			{error && <p role="alert">{error}</p>}
-		</Fragment>
+		<div className="ct-select-input">
+			<input
+				disabled
+				placeholder={
+					isLoadingLists
+						? __('Loading...', 'blocksy-companion')
+						: __('Invalid API Key...', 'blocksy-companion')
+				}
+			/>
+		</div>
 	) : (
 		<Downshift
 			selectedItem={value || lists[0].id}
 			onChange={(selection) => onChange(selection)}
 			itemToString={(item) =>
 				item ? (lists.find(({ id }) => id === item) || {}).name : ''
-			}
-		>
+			}>
 			{({
 				getInputProps,
 				getItemProps,
@@ -120,13 +90,13 @@ const ListPickerImplementation = ({ value, onChange }) => {
 				inputValue,
 				highlightedIndex,
 				selectedItem,
-				openMenu
+				openMenu,
 			}) => (
 				<div className="ct-select-input">
 					<input
 						{...getInputProps({
 							onFocus: () => openMenu(),
-							onClick: () => openMenu()
+							onClick: () => openMenu(),
 						})}
 						placeholder={__('Select list...', 'blocksy-companion')}
 						readOnly
@@ -135,9 +105,8 @@ const ListPickerImplementation = ({ value, onChange }) => {
 					{isOpen && (
 						<div
 							{...getMenuProps({
-								className: 'ct-select-dropdown'
-							})}
-						>
+								className: 'ct-select-dropdown',
+							})}>
 							{lists.map((item, index) => (
 								<div
 									{...getItemProps({
@@ -150,11 +119,10 @@ const ListPickerImplementation = ({ value, onChange }) => {
 												active:
 													highlightedIndex === index,
 												selected:
-													selectedItem === item.id
+													selectedItem === item.id,
 											}
-										)
-									})}
-								>
+										),
+									})}>
 									{item.name}
 								</div>
 							))}
