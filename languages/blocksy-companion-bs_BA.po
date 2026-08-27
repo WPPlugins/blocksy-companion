@@ -40,7 +40,7 @@ msgid "Determine for how long items in the cart are reserved before being remove
 msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:40
-msgid "<p><strong>🔥 Hurry up! Your selected items are in high demand!</strong><br>Your cart will be reserved for {time} minutes.</p>"
+msgid "<p><strong>���� Hurry up! Your selected items are in high demand!</strong><br>Your cart will be reserved for {time} minutes.</p>"
 msgstr ""
 
 #: framework/premium/extensions/woocommerce-extra/features/cart-reserved-timer/options.php:48
@@ -5203,7 +5203,7 @@ msgstr "Pohrani Gravatar slike lokalno"
 
 #: framework/premium/features/local-gravatars.php:41
 msgid "Store and load Gravatars locally for increased privacy and performance."
-msgstr "Pohrani i u��itaj Gravatar slike lokalno radi poboljšane privatnosti i performansi."
+msgstr "Pohrani i učitaj Gravatar slike lokalno radi poboljšane privatnosti i performansi."
 
 #: framework/premium/features/premium-header.php:350,
 #: framework/premium/features/socials.php:13,

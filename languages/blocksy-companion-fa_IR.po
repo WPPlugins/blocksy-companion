@@ -3300,7 +3300,7 @@ msgstr ""
 
 #: static/js/options/ConditionsManager/SingleCondition.js:423
 msgid "Display if query string is present in URL"
-msgstr "اگر عبارت کوئری در نشانی اینترنتی بود نمایش بده"
+msgstr "اگر عبارت ک��ئری در نشانی اینترنتی بود نمایش بده"
 
 #: static/js/options/DisplayCondition.js:62
 msgid "Add Conditions"
@@ -3531,7 +3531,7 @@ msgstr "قالب «هیچ‌چیز یافت نشد»"
 
 #: framework/premium/static/js/hooks/CreateHook.js:164
 msgid "Maintenance Template"
-msgstr "قالب «تعمیر و نگهداری»"
+msgstr "قالب «تعمیر و نگهداری��"
 
 #: framework/premium/static/js/media-video/components/EditVideoMeta.js:44
 msgid "Video Options"
@@ -4930,7 +4930,7 @@ msgstr "پیشخوان Tutor LMS"
 #: framework/features/header/items/account/options.php:249,
 #: framework/features/header/items/account/views/login.php:719
 msgid "bbPress Dashboard"
-msgstr "پیشخوان بی‌بی‌پرس"
+msgstr "پی��خوان بی‌بی‌پرس"
 
 #: framework/premium/extensions/woocommerce-extra/features/quick-view/options.php:32
 #: static/js/editor/blocks/dynamic-data/components/InspectorControls.js:258
@@ -10849,7 +10849,7 @@ msgstr "مشاهده‌ی نقد و بررسی محصول"
 
 #: framework/extensions/product-reviews/extension.php:551
 msgid "Add New Product Review"
-msgstr "افزودن نقد و بررسی محصول ��دید"
+msgstr "افزودن نقد و بررسی محصول جدید"
 
 #: framework/extensions/product-reviews/extension.php:552
 msgid "Add New Review"
