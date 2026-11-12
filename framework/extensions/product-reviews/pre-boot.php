@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 class BlocksyExtensionProductReviewsPreBoot {
 	public function __construct() {
 		add_action('admin_enqueue_scripts', function () {
@@ -15,13 +19,14 @@ class BlocksyExtensionProductReviewsPreBoot {
 			wp_enqueue_script(
 				'blocksy-ext-product-reviews-admin-dashboard-scripts',
 				BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/dashboard.js',
-				['ct-options-scripts'],
-				$data['Version']
+				['ct-options-scripts', 'ct-dashboard-scripts'],
+				$data['Version'],
+				false
 			);
 
 			wp_enqueue_style(
 				'blocksy-ext-product-reviews-admin-dashboard-styles',
-				BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/main-admin.css',
+				BLOCKSY_URL . 'framework/extensions/product-reviews/static/bundle/main-admin.min.css',
 				[],
 				$data['Version']
 			);

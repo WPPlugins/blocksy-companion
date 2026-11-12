@@ -1,8 +1,12 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 // Content color
-blc_call_fn(['fn' => 'blocksy_output_colors'], [
-	'value' => get_theme_mod('cookieContentColor'),
+blocksy_output_colors([
+	'value' => blocksy_companion_theme_functions()->blocksy_get_theme_mod('cookieContentColor'),
 	'default' => [
 		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
@@ -11,56 +15,117 @@ blc_call_fn(['fn' => 'blocksy_output_colors'], [
 	'variables' => [
 		'default' => [
 			'selector' => '.cookie-notification',
-			'variable' => 'color'
+			'variable' => 'theme-text-color'
 		],
 
 		'hover' => [
 			'selector' => '.cookie-notification',
-			'variable' => 'colorHover'
+			'variable' => 'theme-link-hover-color'
 		],
 	],
 ]);
 
-// Button color
-blc_call_fn(['fn' => 'blocksy_output_colors'], [
-	'value' => get_theme_mod('cookieButtonBackground'),
+// Accept button color
+blocksy_output_colors([
+	'value' => blocksy_companion_theme_functions()->blocksy_get_theme_mod('cookieButtonText'),
 	'default' => [
-		'default' => [ 'color' => 'var(--paletteColor1)' ],
-		'hover' => [ 'color' => 'var(--paletteColor2)' ],
+		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 	],
 	'css' => $css,
 	'variables' => [
 		'default' => [
-			'selector' => '.cookie-notification',
-			'variable' => 'buttonInitialColor'
+			'selector' => '.cookie-notification .ct-cookies-accept-button',
+			'variable' => 'theme-button-text-initial-color'
 		],
 
 		'hover' => [
-			'selector' => '.cookie-notification',
-			'variable' => 'buttonHoverColor'
+			'selector' => '.cookie-notification .ct-cookies-accept-button',
+			'variable' => 'theme-button-text-hover-color'
+		]
+	],
+]);
+
+blocksy_output_colors([
+	'value' => blocksy_companion_theme_functions()->blocksy_get_theme_mod('cookieButtonBackground'),
+	'default' => [
+		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+	],
+	'css' => $css,
+	'variables' => [
+		'default' => [
+			'selector' => '.cookie-notification .ct-cookies-accept-button',
+			'variable' => 'theme-button-background-initial-color'
+		],
+
+		'hover' => [
+			'selector' => '.cookie-notification .ct-cookies-accept-button',
+			'variable' => 'theme-button-background-hover-color'
+		]
+	],
+]);
+
+// Decline button color
+blocksy_output_colors([
+	'value' => blocksy_companion_theme_functions()->blocksy_get_theme_mod('cookieDeclineButtonText'),
+	'default' => [
+		'default' => [ 'color' => 'var(--theme-palette-color-3)' ],
+		'hover' => [ 'color' => 'var(--theme-palette-color-3)' ],
+	],
+	'css' => $css,
+	'variables' => [
+		'default' => [
+			'selector' => '.cookie-notification .ct-cookies-decline-button',
+			'variable' => 'theme-button-text-initial-color'
+		],
+
+		'hover' => [
+			'selector' => '.cookie-notification .ct-cookies-decline-button',
+			'variable' => 'theme-button-text-hover-color'
+		]
+	],
+]);
+
+blocksy_output_colors([
+	'value' => blocksy_companion_theme_functions()->blocksy_get_theme_mod('cookieDeclineButtonBackground'),
+	'default' => [
+		'default' => [ 'color' => 'rgba(224, 229, 235, 0.6)' ],
+		'hover' => [ 'color' => 'rgba(224, 229, 235, 1)' ],
+	],
+	'css' => $css,
+	'variables' => [
+		'default' => [
+			'selector' => '.cookie-notification .ct-cookies-decline-button',
+			'variable' => 'theme-button-background-initial-color'
+		],
+
+		'hover' => [
+			'selector' => '.cookie-notification .ct-cookies-decline-button',
+			'variable' => 'theme-button-background-hover-color'
 		]
 	],
 ]);
 
 
 // Background color
-blc_call_fn(['fn' => 'blocksy_output_colors'], [
-	'value' => get_theme_mod('cookieBackground'),
+blocksy_output_colors([
+	'value' => blocksy_companion_theme_functions()->blocksy_get_theme_mod('cookieBackground'),
 	'default' => [
-		'default' => [ 'color' => '#ffffff' ],
+		'default' => [ 'color' => 'var(--theme-palette-color-8)' ],
 	],
 	'css' => $css,
 	'variables' => [
 		'default' => [
 			'selector' => '.cookie-notification',
-			'variable' => 'backgroundColor'
+			'variable' => 'notice-background-color'
 		],
 	],
 ]);
 
-$cookieMaxWidth = get_theme_mod( 'cookieMaxWidth', 400 );
+$cookieMaxWidth = blocksy_companion_theme_functions()->blocksy_get_theme_mod( 'cookieMaxWidth', 400 );
 $css->put(
 	'.cookie-notification',
-	'--maxWidth: ' . $cookieMaxWidth . 'px'
+	'--notice-max-width: ' . $cookieMaxWidth . 'px'
 );
 

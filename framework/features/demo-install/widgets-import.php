@@ -3,48 +3,47 @@
 namespace Blocksy;
 
 class DemoInstallWidgetsInstaller {
-	protected $has_streaming = true;
 	protected $demo_name = null;
+	protected $is_ajax_request = true;
 
 	public function __construct($args = []) {
 		$args = wp_parse_args($args, [
-			'has_streaming' => true,
-			'demo_name' => null
+			'demo_name' => null,
+			'is_ajax_request' => true,
 		]);
 
-		if (
-			!$args['demo_name']
-			&&
-			isset($_REQUEST['demo_name'])
-			&&
-			$_REQUEST['demo_name']
-		) {
-			$args['demo_name'] = $_REQUEST['demo_name'];
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$request_demo_name = isset($_REQUEST['demo_name']) ? sanitize_text_field(wp_unslash($_REQUEST['demo_name'])) : '';
+
+		if (! $args['demo_name'] && $request_demo_name !== '') {
+			$args['demo_name'] = $request_demo_name;
 		}
 
-		$this->has_streaming = $args['has_streaming'];
 		$this->demo_name = $args['demo_name'];
+		$this->is_ajax_request = $args['is_ajax_request'];
 	}
 
 	public function import() {
-		if ($this->has_streaming) {
-			Plugin::instance()->demo->start_streaming();
+		if (
+			! current_user_can('edit_theme_options')
+			&&
+			$this->is_ajax_request
+		) {
+			wp_send_json_error([
+				'message' => __("Sorry, you don't have permission to install widgets.", 'blocksy-companion')
+			]);
+		}
 
-			if (! current_user_can('edit_theme_options')) {
-				Plugin::instance()->demo->emit_sse_message([
-					'action' => 'complete',
-					'error' => 'No permission.',
+		if (! $this->demo_name) {
+			if ($this->is_ajax_request) {
+				wp_send_json_error([
+					'message' => __("No demo to install", 'blocksy-companion')
 				]);
-
-				exit;
-			}
-
-			if (! $this->demo_name) {
-				Plugin::instance()->demo->emit_sse_message([
-					'action' => 'complete',
-					'error' => 'No demo name passed.',
-				]);
-				exit;
+			} else {
+				return new \WP_Error(
+					'blocksy_demo_install_widgets_no_demo',
+					__("No demo to install", 'blocksy-companion')
+				);
 			}
 		}
 
@@ -57,53 +56,43 @@ class DemoInstallWidgetsInstaller {
 		$demo = $demo_name[0];
 		$builder = $demo_name[1];
 
-		if ($this->has_streaming) {
-			Plugin::instance()->demo->emit_sse_message([
-				'action' => 'download_demo_widgets',
-				'error' => false,
-			]);
-		}
+		$demo_to_install = Plugin::instance()->demo->get_currently_installing_demo();
 
-		$demo_content = Plugin::instance()->demo->fetch_single_demo([
-			'demo' => $demo,
-			'builder' => $builder,
-			'field' => 'widgets'
-		]);
-
-		if ($this->has_streaming) {
-			if (! isset($demo_content['widgets'])) {
-				Plugin::instance()->demo->emit_sse_message([
-					'action' => 'complete',
-					'demo' => $demo,
-					'error' => __('Downloaded demo is corrupted.'),
+		if (
+			empty($demo_to_install)
+			||
+			! isset($demo_to_install['demo'])
+			||
+			! isset($demo_to_install['demo']['widgets'])
+		) {
+			if ($this->is_ajax_request) {
+				wp_send_json_error([
+					'message' => __("No widgets to install.", 'blocksy-companion'),
+					'demo' => $demo_to_install
 				]);
-
-				exit;
+			} else {
+				return new \WP_Error(
+					'blocksy_demo_install_widgets_no_widgets',
+					__("No widgets to install.", 'blocksy-companion')
+				);
 			}
-
-			Plugin::instance()->demo->emit_sse_message([
-				'action' => 'apply_demo_widgets',
-				'error' => false,
-			]);
 		}
 
-		$data = json_decode(json_encode($demo_content['widgets']));
+		$data = json_decode(json_encode($demo_to_install['demo']['widgets']));
 
 		$result = $this->import_data($data);
 
-		if ($this->has_streaming) {
-			Plugin::instance()->demo->emit_sse_message([
-				'action' => 'complete',
-				'data' => $result,
-				'error' => false,
-			]);
-
-			exit;
+		if ($this->is_ajax_request) {
+			wp_send_json_success();
 		}
 	}
 
 	public function import_data($data) {
-		if (empty($data) || !is_object($data)) {
+		if (empty($data)) {
+			return false;
+		}
+
+		if (! is_object($data) && ! is_array($data)) {
 			return false;
 		}
 
@@ -210,14 +199,19 @@ class DemoInstallWidgetsInstaller {
 			// All instances for that widget ID base, get fresh every time.
 			global $wpdb;
 
-			$single_widget_instances = maybe_unserialize(
-				$wpdb->get_row(
-					$wpdb->prepare(
-						"SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1",
-						'widget_' . $id_base
-					)
-				)->option_value
+			$single_widget_instances = [];
+
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$row = $wpdb->get_row(
+				$wpdb->prepare(
+					"SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1",
+					'widget_' . $id_base
+				)
 			);
+
+			if (! is_null($row)) {
+				$single_widget_instances = maybe_unserialize($row->option_value);
+			}
 
 			if (empty($single_widget_instances)) {
 				$single_widget_instances = [
@@ -274,4 +268,3 @@ class DemoInstallWidgetsInstaller {
 		return $available_widgets;
 	}
 }
-

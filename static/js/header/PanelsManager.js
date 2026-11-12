@@ -1,6 +1,5 @@
 import {
 	createElement,
-	Component,
 	useState,
 	useContext,
 	Fragment,
@@ -19,7 +18,11 @@ import { Slot } from '@wordpress/components'
 import { __ } from 'ct-i18n'
 import EditConditions from './EditConditions'
 
+import { Overlay } from 'blocksy-options'
+
 const PanelsManager = () => {
+	const [isRemovingSection, setIsRemovingSection] = useState(false)
+
 	const secondaryItems =
 		ct_customizer_localizations.header_builder_data.secondary_items.header
 	const allItems = ct_customizer_localizations.header_builder_data.header
@@ -52,7 +55,7 @@ const PanelsManager = () => {
 					let panelLabel =
 						name ||
 						{
-							'type-1': __('Global Header', 'blocksy'),
+							'type-1': __('Global Header', 'blocksy-companion'),
 						}[id] ||
 						id
 
@@ -68,13 +71,18 @@ const PanelsManager = () => {
 							...(id.indexOf('ct-custom') > -1
 								? {
 										conditions_button: {
-											label: __('Edit Conditions', 'blc'),
+											label: __(
+												'Edit Conditions',
+												'blocksy-companion'
+											),
 											type: 'jsx',
 											design: 'block',
 											render: () => (
 												<EditConditions headerId={id} />
 											),
 										},
+
+										divider: { type: 'ct-divider' },
 								  }
 								: {}),
 
@@ -104,8 +112,7 @@ const PanelsManager = () => {
 												optionValue
 											) => {
 												builderValueDispatch({
-													type:
-														'BUILDER_GLOBAL_SETTING_ON_CHANGE',
+													type: 'BUILDER_GLOBAL_SETTING_ON_CHANGE',
 													payload: {
 														optionId,
 														optionValue,
@@ -135,8 +142,7 @@ const PanelsManager = () => {
 												open()
 											} else {
 												builderValueDispatch({
-													type:
-														'PICK_BUILDER_SECTION',
+													type: 'PICK_BUILDER_SECTION',
 													payload: {
 														id,
 													},
@@ -151,30 +157,25 @@ const PanelsManager = () => {
 											id !== builderValue.id && (
 												<span
 													className="ct-remove-instance"
+													data-tooltip-reveal="top"
 													onClick={(e) => {
 														e.preventDefault()
 														e.stopPropagation()
 
-														builderValueDispatch({
-															type:
-																'REMOVE_BUILDER_SECTION',
-															payload: {
-																id,
-															},
-														})
+														setIsRemovingSection(id)
 													}}>
-													<i className="ct-tooltip-top">
-														{__(
-															'Remove header',
-															'blc'
-														)}
-													</i>
 													<svg
 														width="11px"
 														height="11px"
 														viewBox="0 0 24 24">
 														<path d="M9.6,0l0,1.2H1.2v2.4h21.6V1.2h-8.4l0-1.2H9.6z M2.8,6l1.8,15.9C4.8,23.1,5.9,24,7.1,24h9.9c1.2,0,2.2-0.9,2.4-2.1L21.2,6H2.8z"></path>
 													</svg>
+													<i className="ct-tooltip">
+														{__(
+															'Remove header',
+															'blocksy-companion'
+														)}
+													</i>
 												</span>
 											)}
 									</li>
@@ -186,6 +187,55 @@ const PanelsManager = () => {
 			<Slot name="PlacementsBuilderPanelsManagerAfter">
 				{(fills) => (fills.length === 0 ? null : fills)}
 			</Slot>
+
+			<Overlay
+				items={isRemovingSection}
+				className="ct-admin-modal ct-reset-options"
+				onDismiss={() => setIsRemovingSection(false)}
+				render={() => (
+					<div className="ct-modal-content">
+						<h2 className="ct-modal-title">
+							{__('Remove Header', 'blocksy-companion')}
+						</h2>
+						<p>
+							{__(
+								'You are about to remove a custom header, are you sure you want to continue?',
+								'blocksy-companion'
+							)}
+						</p>
+
+						<div
+							className="ct-modal-actions has-divider"
+							data-buttons="2">
+							<button
+								onClick={(e) => {
+									e.preventDefault()
+									e.stopPropagation()
+									setIsRemovingSection(false)
+								}}
+								className="button">
+								{__('Cancel', 'blocksy-companion')}
+							</button>
+
+							<button
+								className="button button-primary"
+								onClick={(e) => {
+									e.preventDefault()
+									builderValueDispatch({
+										type: 'REMOVE_BUILDER_SECTION',
+										payload: {
+											id: isRemovingSection,
+										},
+									})
+
+									setIsRemovingSection(false)
+								}}>
+								{__('Confirm', 'blocksy-companion')}
+							</button>
+						</div>
+					</div>
+				)}
+			/>
 		</Fragment>
 	)
 }

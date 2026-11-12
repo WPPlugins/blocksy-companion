@@ -1,39 +1,67 @@
 import ctEvents from 'ct-events'
+import {
+	withKeys,
+	handleBackgroundOptionFor,
+	assembleSelector,
+	mutateSelector,
+	getRootSelectorFor,
+} from 'blocksy-customizer-sync'
 
 ctEvents.on(
 	'ct:header:sync:collect-variable-descriptors',
 	(variableDescriptors) => {
-		/*
-		const handleBackgroundOptionForSpecific = id =>
-			handleBackgroundOptionFor({
-				id,
-				selector: 'header',
-				addToDescriptors: {
-					fullValue: true
-				},
+		variableDescriptors['global'] = () => ({
+			transparent_behaviour: {
+				selector: assembleSelector(getRootSelectorFor()),
+				variable: 'has-transparent-header',
 				responsive: true,
-				valueExtractor: ({
-					is_absolute,
-					headerBackground,
-					absoluteHeaderBackground
-				}) =>
-					is_absolute === 'yes'
-						? absoluteHeaderBackground
-						: headerBackground
-			})
+				extractValue: (value) => ({
+					desktop: value.desktop ? 'var(--true)' : 'var(--false)',
+					tablet: value.mobile ? 'var(--true)' : 'var(--false)',
+					mobile: value.mobile ? 'var(--true)' : 'var(--false)',
+				}),
+				unit: '',
+			},
 
-		variableDescriptors['global'] = {
-			...handleBackgroundOptionForSpecific('is_absolute'),
-			...handleBackgroundOptionForSpecific('headerBackground'),
-			...handleBackgroundOptionForSpecific('absoluteHeaderBackground')
-		}
+			...handleBackgroundOptionFor({
+				id: 'headerBackground',
+				selector: assembleSelector(
+					mutateSelector({
+						selector: getRootSelectorFor(),
+						operation: 'suffix',
+						to_add: '.ct-header',
+					})
+				),
+				responsive: true,
+				forced_background_image: true,
+			}),
 
-		variableDescriptors['global'] = {
-			...handleBackgroundOptionForSpecific('is_absolute'),
-			...handleBackgroundOptionForSpecific('headerBackground'),
-			...handleBackgroundOptionForSpecific('absoluteHeaderBackground')
-		}
-        */
+			...handleBackgroundOptionFor({
+				id: 'transparentHeaderBackground',
+				selector: assembleSelector(
+					mutateSelector({
+						selector: getRootSelectorFor(),
+						operation: 'suffix',
+						to_add: '[data-transparent]',
+					})
+				),
+				responsive: true,
+				forced_background_image: true,
+			}),
+
+			...handleBackgroundOptionFor({
+				id: 'stickyHeaderBackground',
+				selector: assembleSelector(
+					mutateSelector({
+						selector: getRootSelectorFor(),
+						operation: 'suffix',
+						to_add: '[data-sticky*="yes"]',
+					})
+				),
+				responsive: true,
+				forced_background_image: true,
+			}),
+		})
 	}
 )
 
@@ -88,9 +116,9 @@ ctEvents.on(
 			Array.from(document.querySelectorAll('[data-device]')).map(
 				(device) => {
 					device.removeAttribute('data-transparent')
-					Array.from(
-						device.querySelectorAll('[data-row]')
-					).map((el) => el.removeAttribute('data-transparent-row'))
+					Array.from(device.querySelectorAll('[data-row]')).map(
+						(el) => el.removeAttribute('data-transparent-row')
+					)
 
 					if (optionValue[device.dataset.device]) {
 						device.dataset.transparent = ''
