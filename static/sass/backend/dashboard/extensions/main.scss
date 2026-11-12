@@ -164,7 +164,10 @@
 		p {
 			opacity: 0.8;
 			font-size: 14px !important;
-			margin-bottom: 20px !important;
+
+			&:not(:last-child) {
+				margin-bottom: 20px !important;
+			}
 		}
 	}
 

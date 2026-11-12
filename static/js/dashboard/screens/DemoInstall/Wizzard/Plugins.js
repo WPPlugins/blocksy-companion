@@ -12,25 +12,31 @@ import classnames from 'classnames'
 import { DemosContext } from '../../DemoInstall'
 import Checkbox from '../../../../helpers/Checkbox'
 
+import { animated } from 'blocksy-options'
+
 export const getPluginsMap = (plugins) => ({
+	gutenberg: 'Gutenberg',
 	'stackable-ultimate-gutenberg-blocks': 'Stackable - Gutenberg Blocks',
 	'wpforms-lite': 'WPForms - Contact Form',
-	'woocommerce': 'WooCommerce',
-	'elementor': 'Elementor',
-	'brizy': 'Brizy',
-	'getwid': 'Getwid',
+	woocommerce: 'WooCommerce',
+	elementor: 'Elementor',
+	brizy: 'Brizy',
+	getwid: 'Getwid',
 	'simply-gallery-block': 'SimpLy Gallery Block & Lightbox',
 	'recipe-card-blocks-by-wpzoom': 'Recipe Card Blocks by WPZOOM',
 	'map-block-gutenberg': 'Map Block for Google Maps',
 	'mb-custom-post-type': 'MB Custom Post Types & Custom Taxonomies',
-	'leadin': 'HubSpot',
+	leadin: 'HubSpot',
 	'block-slider': 'Block Slider',
 	'ht-slider-for-elementor': 'HT Slider For Elementor',
 	'modula-best-grid-gallery': 'Modula - Image Gallery',
 	'advanced-custom-fields': 'Advanced Custom Fields (ACF)',
-	'greenshift-animation-and-page-builder-blocks': 'Greenshift – Gutenberg Blocks',
-	'fluentform': 'Fluent Forms',
+	'greenshift-animation-and-page-builder-blocks':
+		'Greenshift – Gutenberg Blocks',
+	fluentform: 'Fluent Forms',
 	'translatepress-multilingual': 'TranslatePress',
+	'fluent-booking': 'Fluent Booking',
+	'easy-code-manager': 'Fluent Snippets',
 })
 
 export const getNameForPlugin = (plugin) => {
@@ -50,7 +56,7 @@ const Plugins = ({ demoConfiguration, setDemoConfiguration, style }) => {
 	)
 
 	return (
-		<div style={style}>
+		<animated.div style={style}>
 			<div className="ct-demo-plugins">
 				<i className="ct-demo-icon">
 					<svg width="40" height="40" viewBox="0 0 40 40">
@@ -109,7 +115,7 @@ const Plugins = ({ demoConfiguration, setDemoConfiguration, style }) => {
 					))}
 				</div>
 			</div>
-		</div>
+		</animated.div>
 	)
 }
 

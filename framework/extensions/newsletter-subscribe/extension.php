@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 require_once dirname(__FILE__) . '/helpers.php';
 
 class BlocksyExtensionNewsletterSubscribe {
@@ -16,7 +20,8 @@ class BlocksyExtensionNewsletterSubscribe {
 				BLOCKSY_URL .
 					'framework/extensions/newsletter-subscribe/admin-static/bundle/main.js',
 				['ct-options-scripts'],
-				$data['Version']
+				$data['Version'],
+				false
 			);
 
 			wp_localize_script(
@@ -54,6 +59,14 @@ class BlocksyExtensionNewsletterSubscribe {
 			);
 		});
 
+		add_filter('do_shortcode_tag', function($output, $tag, $attr) {
+			if ('blocksy_newsletter_subscribe' === $tag) {
+				wp_enqueue_style('blocksy-block-newsletter-styles');
+			}
+
+			return $output;
+		}, 10, 3);
+
 		add_filter(
 			'render_block',
 			function ($block_content, $block) {
@@ -87,23 +100,11 @@ class BlocksyExtensionNewsletterSubscribe {
 					$data['Version']
 				);
 
-				$obj = get_queried_object();
-
 				if (
-					$obj
-					&&
-					! empty($obj->post_content)
-					&&
-					has_shortcode(
-						$obj->post_content,
-						'blocksy_newsletter_subscribe'
-					)
-				) {
-					wp_enqueue_style('blocksy-block-newsletter-styles');
-				}
-
-				if (
-					blocksy_get_theme_mod('newsletter_subscribe_single_post_enabled', 'yes') === 'yes'
+					blocksy_companion_theme_functions()->blocksy_get_theme_mod(
+						'newsletter_subscribe_single_post_enabled',
+						'yes'
+					) === 'yes'
 					&&
 					get_post_type() === 'post'
 				) {
@@ -116,14 +117,13 @@ class BlocksyExtensionNewsletterSubscribe {
 		add_filter('blocksy:frontend:dynamic-js-chunks', function ($chunks) {
 			$chunks[] = [
 				'id' => 'blocksy_ext_newsletter_subscribe',
-				'selector' => implode(', ', [
-					'.ct-newsletter-subscribe-form:not([data-skip-submit])',
-				]),
+				'selector' => '.ct-newsletter-subscribe-form',
 				'url' => blocksy_cdn_url(
 					BLOCKSY_URL .
 						'framework/extensions/newsletter-subscribe/static/bundle/main.js'
 				),
 				'trigger' => 'submit',
+				'version' => blocksy_companion_get_version()
 			];
 
 			return $chunks;
@@ -136,7 +136,7 @@ class BlocksyExtensionNewsletterSubscribe {
 					return $opts;
 				}
 
-				$opts['newsletter_subscribe_single_post_enabled'] = blocksy_get_options(
+				$opts['newsletter_subscribe_single_post_enabled'] = blocksy_companion_get_options(
 					dirname(__FILE__) . '/customizer.php',
 					[],
 					false
@@ -209,12 +209,17 @@ class BlocksyExtensionNewsletterSubscribe {
 				'email_label' => __('Your email', 'blocksy-companion'),
 				'list_id' => '',
 				'class' => '',
+
+				'container_style' => 'default',
+				'form_style' => 'inline',
 			]);
 
-			$args['class'] =
-				'ct-newsletter-subscribe-shortcode ' . $args['class'];
+			$args['class'] = implode(' ', [
+				'ct-newsletter-subscribe-shortcode',
+				$args['class']
+			]);
 
-			return blc_ext_newsletter_subscribe_output_form($args);
+			return blocksy_companion_ext_newsletter_subscribe_output_form($args);
 		});
 
 		add_action(
@@ -227,23 +232,36 @@ class BlocksyExtensionNewsletterSubscribe {
 		add_action('init', [$this, 'blocksy_newsletter_block']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_admin']);
 
+		add_filter(
+			'blocksy:block-editor:localized_data',
+			function ($data) {
+				$options_file =
+					BLOCKSY_PATH .
+					'framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php';
 
-		add_filter('blocksy:gutenberg-blocks-data', function ($data) {
-			$options_file =
-				BLOCKSY_PATH .
-				'framework/extensions/newsletter-subscribe/ct-newsletter-subscribe/options.php';
+				$options = blocksy_companion_akg(
+					'options',
+					blocksy_companion_get_variables_from_file(
+						$options_file,
+						['options' => []]
+					)
+				);
 
-			$options = blocksy_akg(
-				'options',
-				blocksy_get_variables_from_file(
-					$options_file,
-					['options' => []]
-				)
-			);
+				$data['newsletter'] = $options;
 
-			$data['newsletter'] = $options;
+				return $data;
+			}
+		);
 
-			return $data;
+		add_action('blocksy:single:page-elements:contained:before', function () {
+			if (get_post_type() === 'post') {
+				/**
+				 * Note to code reviewers: This line doesn't need to be escaped.
+				 * Function blocksy_companion_ext_newsletter_subscribe_form() used here escapes the value properly.
+				 */
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo blocksy_companion_ext_newsletter_subscribe_form();
+			}
 		});
 	}
 
@@ -254,14 +272,17 @@ class BlocksyExtensionNewsletterSubscribe {
 			return '<p>Default widget view. Please create a <i>view.php</i> file.</p>';
 		}
 
-		return blocksy_render_view($file_path, [
+		return blocksy_companion_render_view($file_path, [
 			'atts' => $attributes,
 		]);
 	}
 
 	public function blocksy_newsletter_block() {
-		register_block_type('blocksy/newsletter', [
+		register_block_type(BLOCKSY_PATH . '/framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/block.json', [
 			'render_callback' => [$this, 'render_block'],
+			'editor_style_handles' => [
+				'blocksy/newsletter',
+			]
 		]);
 	}
 
@@ -280,15 +301,23 @@ class BlocksyExtensionNewsletterSubscribe {
 			$deps[] = 'ct-options-scripts';
 		}
 
+		if (! function_exists('get_plugin_data')) {
+			require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+		}
+
+		$plugin_data = get_plugin_data(BLOCKSY__FILE__);
+
 		wp_enqueue_script(
 			'blocksy/newsletter',
 			BLOCKSY_URL .
 				'framework/extensions/newsletter-subscribe/admin-static/bundle/newsletter-block.js',
-				$deps
+			$deps,
+			$plugin_data['Version'],
+			false
 		);
 
 		$data = [
-			'has_cookies_checkbox' => function_exists('blocksy_ext_cookies_checkbox'),
+			'has_cookies_checkbox' => function_exists('blocksy_companion_ext_cookies_checkbox'),
 		];
 
 		wp_localize_script(
@@ -297,15 +326,17 @@ class BlocksyExtensionNewsletterSubscribe {
 			$data
 		);
 
-		wp_enqueue_style(
+		wp_register_style(
 			'blocksy/newsletter',
 			BLOCKSY_URL .
-				'framework/extensions/newsletter-subscribe/admin-static/bundle/admin.min.css'
+				'framework/extensions/newsletter-subscribe/admin-static/bundle/admin.min.css',
+			[],
+			$plugin_data['Version']
 		);
 	}
 
 	public static function add_global_styles($args) {
-		blocksy_theme_get_dynamic_styles(
+		blocksy_companion_theme_functions()->blocksy_theme_get_dynamic_styles(
 			array_merge(
 				[
 					'path' => dirname(__FILE__) . '/global.php',
@@ -326,30 +357,76 @@ class BlocksyExtensionNewsletterSubscribe {
 	}
 
 	public function newsletter_subscribe_process_ajax_subscribe() {
-		if (!isset($_POST['EMAIL'])) {
-			wp_send_json_error();
-		}
+		$error_response = [
+			'result' => 'no',
+			'message' => \Blocksy\Extensions\NewsletterSubscribe\NewsletterMessages::unable_to_subscribe(),
+		];
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if (!isset($_POST['GROUP'])) {
-			wp_send_json_error();
+			wp_send_json_error($error_response);
 		}
 
-		$email = $_POST['EMAIL'];
-		$name = '';
-		$group = $_POST['GROUP'];
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$group = sanitize_text_field(wp_unslash($_POST['GROUP']));
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if (!isset($_POST['EMAIL'])) {
+			wp_send_json_error($error_response);
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$email = sanitize_email(wp_unslash($_POST['EMAIL']));
+		$name = '';
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if (isset($_POST['FNAME'])) {
-			$name = $_POST['FNAME'];
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$name = sanitize_text_field(wp_unslash($_POST['FNAME']));
 		}
 
 		$manager = \Blocksy\Extensions\NewsletterSubscribe\Provider::get_for_settings();
+		$list = $manager->get_list($group);
+
+		if (! $list) {
+			wp_send_json_error($error_response);
+		}
+
+		if (! empty($list['has_gdpr_fields'])) {
+			$form_url = isset($list['subscribe_url_long']) ? esc_url_raw($list['subscribe_url_long']) : '';
+
+			if (! $form_url) {
+				wp_send_json_error($error_response);
+			}
+
+			wp_send_json_success([
+				'form_url' => $form_url,
+			]);
+		}
 
 		$result = $manager->subscribe_form([
 			'email' => $email,
 			'name' => $name,
 			'group' => $group,
+			'double_optin' => ! empty($list['double_optin']),
 		]);
 
-		wp_send_json_success($result);
+		$messages = [
+			\Blocksy\Extensions\NewsletterSubscribe\NewsletterMessages::unable_to_subscribe(),
+			\Blocksy\Extensions\NewsletterSubscribe\NewsletterMessages::confirm_subscription(),
+			\Blocksy\Extensions\NewsletterSubscribe\NewsletterMessages::subscribed_successfully(),
+			\Blocksy\Extensions\NewsletterSubscribe\NewsletterMessages::already_subscribed($email),
+		];
+
+		$message = $result['message'] ?? $messages[0];
+
+		if (! in_array($message, $messages, true)) {
+			$message = $messages[0];
+		}
+
+		wp_send_json_success([
+			'result' => $result['result'] ?? 'no',
+			'message' => $message,
+		]);
 	}
 }

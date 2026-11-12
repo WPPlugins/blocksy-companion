@@ -5,7 +5,7 @@ import { colors } from './colors'
 import {
 	InspectorControls,
 	useBlockProps,
-	withColors,
+	withColors
 } from '@wordpress/block-editor'
 import { PanelBody } from '@wordpress/components'
 
@@ -38,7 +38,7 @@ const Edit = ({
 	buttonBackgroundColor,
 	setButtonBackgroundColor,
 	buttonBackgroundColorHover,
-	setButtonBackgroundColorHover,
+	setButtonBackgroundColorHover
 }) => {
 	const radius = attributes?.style?.border?.radius
 
@@ -55,26 +55,27 @@ const Edit = ({
 				inputBackgroundColor?.color,
 			'--theme-form-field-background-focus-color':
 				inputBackgroundColorFocus?.color,
+
 			...(attributes?.newsletter_subscribe_height
 				? {
-						'--theme-form-field-height': `${attributes.newsletter_subscribe_height}px`,
-				  }
+						'--theme-form-field-height': `${attributes.newsletter_subscribe_height}px`
+					}
 				: {}),
 			...(radius
 				? {
 						'--theme-form-field-border-radius': `${
 							typeof radius === 'string'
 								? radius
-								: `${radius.topLeft} ${radius.topRight} ${radius.bottomLeft} ${radius.bottomRight}`
-						}`,
-				  }
+								: radius.topLeft || '0px'
+						}`
+					}
 				: {}),
 			...(attributes?.newsletter_subscribe_gap
 				? {
-						'--theme-form-field-gap': `${attributes.newsletter_subscribe_gap}px`,
-				  }
-				: {}),
-		},
+						'--theme-form-field-gap': `${attributes.newsletter_subscribe_gap}px`
+					}
+				: {})
+		}
 	})
 
 	return (
@@ -86,37 +87,42 @@ const Edit = ({
 					...(inputIconColor?.color
 						? {
 								'--theme-button-text-initial-color':
-									inputIconColor.color,
-						  }
+									inputIconColor.color
+							}
 						: {}),
 					...(inputIconColorFocus?.color
 						? {
 								'--theme-button-text-hover-color':
-									inputIconColorFocus.color,
-						  }
+									inputIconColorFocus.color
+							}
 						: {}),
 					...(buttonBackgroundColor?.color
 						? {
 								'--theme-button-background-initial-color':
-									buttonBackgroundColor.color,
-						  }
+									buttonBackgroundColor.color
+							}
 						: {}),
 					...(buttonBackgroundColorHover?.color
 						? {
 								'--theme-button-background-hover-color':
-									buttonBackgroundColorHover.color,
-						  }
-						: {}),
+									buttonBackgroundColorHover.color
+							}
+						: {})
 				}}
 			/>
 			<InspectorControls>
 				<PanelBody>
 					<OptionsPanel
-						purpose={'gutenberg'}
+						purpose="gutenberg"
 						onChange={(optionId, optionValue) => {
-							setAttributes({
-								[optionId]: optionValue,
-							})
+							if (optionId === 'newsletter_subscribe_list_id') {
+								setAttributes({
+									[optionId]: `${optionValue}`
+								})
+								return
+							}
+
+							setAttributes({ [optionId]: optionValue })
 						}}
 						options={options}
 						value={attributes}
@@ -126,8 +132,9 @@ const Edit = ({
 			</InspectorControls>
 
 			<InspectorControls group="styles">
+				<div className="blocksy-options-hide-border-unlink" />
 				<ColorsPanel
-					label={__('Input Font Color', 'blocksy')}
+					label={__('Input Font Color', 'blocksy-companion')}
 					resetAll={() => {
 						setInputFontColor(colors.inputFontColor)
 						setInputFontColorFocus(colors.inputFontColorFocus)
@@ -136,25 +143,32 @@ const Edit = ({
 					settings={[
 						{
 							colorValue: inputFontColor.color,
-							label: __('Initial', 'blocksy'),
+							label: __('Initial', 'blocksy-companion'),
+							enableAlpha: true,
 							onColorChange: (value) =>
 								setInputFontColor(
 									value || colors.inputFontColor
-								),
+								)
 						},
 						{
 							colorValue: inputFontColorFocus.color,
-							label: __('Focus', 'blocksy'),
+							label: __('Focus', 'blocksy-companion'),
+							enableAlpha: true,
 							onColorChange: (value) =>
 								setInputFontColorFocus(
 									value || colors.inputFontColorFocus
-								),
-						},
+								)
+						}
 					]}
 				/>
 
 				<ColorsPanel
-					label={__('Input Border Color', 'blocksy')}
+					label={
+						attributes.newsletter_subscribe_container_type ===
+						'boxed'
+							? __('Container Border Color', 'blocksy-companion')
+							: __('Input Border Color', 'blocksy-companion')
+					}
 					resetAll={() => {
 						setInputBorderColor(colors.inputBorderColor)
 						setInputBorderColorFocus(colors.inputBorderColorFocus)
@@ -163,25 +177,35 @@ const Edit = ({
 					settings={[
 						{
 							colorValue: inputBorderColor.color,
-							label: __('Initial', 'blocksy'),
+							label: __('Initial', 'blocksy-companion'),
+							enableAlpha: true,
 							onColorChange: (value) =>
 								setInputBorderColor(
 									value || colors.inputBorderColor
-								),
+								)
 						},
 						{
 							colorValue: inputBorderColorFocus.color,
-							label: __('Focus', 'blocksy'),
+							label: __('Focus', 'blocksy-companion'),
+							enableAlpha: true,
 							onColorChange: (value) =>
 								setInputBorderColorFocus(
 									value || colors.inputBorderColorFocus
-								),
-						},
+								)
+						}
 					]}
 				/>
 
 				<ColorsPanel
-					label={__('Input Background Color', 'blocksy')}
+					label={
+						attributes.newsletter_subscribe_container_type ===
+						'boxed'
+							? __(
+									'Container Background Color',
+									'blocksy-companion'
+								)
+							: __('Input Background Color', 'blocksy-companion')
+					}
 					resetAll={() => {
 						setInputBackgroundColor(colors.inputBackgroundColor)
 						setInputBackgroundColorFocus(
@@ -192,25 +216,27 @@ const Edit = ({
 					settings={[
 						{
 							colorValue: inputBackgroundColor.color,
-							label: __('Initial', 'blocksy'),
+							label: __('Initial', 'blocksy-companion'),
+							enableAlpha: true,
 							onColorChange: (value) =>
 								setInputBackgroundColor(
 									value || colors.inputBackgroundColor
-								),
+								)
 						},
 						{
 							colorValue: inputBackgroundColorFocus.color,
-							label: __('Focus', 'blocksy'),
+							label: __('Focus', 'blocksy-companion'),
+							enableAlpha: true,
 							onColorChange: (value) =>
 								setInputBackgroundColorFocus(
 									value || colors.inputBackgroundColorFocus
-								),
-						},
+								)
+						}
 					]}
 				/>
 
 				<ColorsPanel
-					label={__('Button Text Color', 'blocksy')}
+					label={__('Button Text Color', 'blocksy-companion')}
 					resetAll={() => {
 						setInputIconColor(colors.inputIconColor)
 						setInputIconColorFocus(colors.inputIconColorFocus)
@@ -219,25 +245,27 @@ const Edit = ({
 					settings={[
 						{
 							colorValue: inputIconColor.color,
-							label: __('Initial', 'blocksy'),
+							label: __('Initial', 'blocksy-companion'),
+							enableAlpha: true,
 							onColorChange: (value) =>
 								setInputIconColor(
 									value || colors.inputIconColor
-								),
+								)
 						},
 						{
 							colorValue: inputIconColorFocus.color,
-							label: __('Hover', 'blocksy'),
+							label: __('Hover', 'blocksy-companion'),
+							enableAlpha: true,
 							onColorChange: (value) =>
 								setInputIconColorFocus(
 									value || colors.inputIconColorFocus
-								),
-						},
+								)
+						}
 					]}
 				/>
 
 				<ColorsPanel
-					label={__('Button Background Color', 'blocksy')}
+					label={__('Button Background Color', 'blocksy-companion')}
 					resetAll={() => {
 						setButtonBackgroundColor(colors.buttonBackgroundColor)
 						setButtonBackgroundColorHover(
@@ -248,20 +276,22 @@ const Edit = ({
 					settings={[
 						{
 							colorValue: buttonBackgroundColor.color,
-							label: __('Initial', 'blocksy'),
+							label: __('Initial', 'blocksy-companion'),
+							enableAlpha: true,
 							onColorChange: (value) =>
 								setButtonBackgroundColor(
 									value || colors.buttonBackgroundColor
-								),
+								)
 						},
 						{
 							colorValue: buttonBackgroundColorHover.color,
-							label: __('Hover', 'blocksy'),
+							label: __('Hover', 'blocksy-companion'),
+							enableAlpha: true,
 							onColorChange: (value) =>
 								setButtonBackgroundColorHover(
 									value || colors.buttonBackgroundColorHover
-								),
-						},
+								)
+						}
 					]}
 				/>
 			</InspectorControls>

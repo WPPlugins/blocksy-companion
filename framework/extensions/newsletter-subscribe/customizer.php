@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 $options = [
 	'label' => __( 'Subscribe Form', 'blocksy-companion' ),
 	'type' => 'ct-panel',
@@ -89,6 +93,29 @@ $options = [
 					'condition' => [ 'has_newsletter_subscribe_name' => 'yes' ],
 					'options' => [
 
+						'newsletter_subscribe_name_required' => [
+							'type' => 'ct-switch',
+							'label' => __('Make Name Field Required', 'blocksy-companion'),
+							'value' => 'no',
+							'disableRevertButton' => true,
+							'sync' => blocksy_sync_single_post_container([
+								'loader_selector' => '.ct-newsletter-subscribe-container'
+							]),
+						],
+
+					],
+				],
+
+				blocksy_rand_md5() => [
+					'type' => 'ct-divider',
+					'attr' => [ 'data-type' => 'small' ],
+				],
+
+				blocksy_rand_md5() => [
+					'type' => 'ct-condition',
+					'condition' => [ 'has_newsletter_subscribe_name' => 'yes' ],
+					'options' => [
+
 						'newsletter_subscribe_name_label' => [
 							'type' => 'text',
 							'label' => __( 'Name Label', 'blocksy-companion' ),
@@ -97,7 +124,6 @@ $options = [
 							'disableRevertButton' => true,
 							'setting' => [ 'transport' => 'postMessage' ],
 						],
-
 					],
 				],
 
@@ -128,11 +154,11 @@ $options = [
 					'type' => 'ct-visibility',
 					'design' => 'block',
 					'setting' => [ 'transport' => 'postMessage' ],
-					'value' => [
+					'value' => blocksy_default_responsive_value([
 						'desktop' => true,
 						'tablet' => true,
 						'mobile' => false,
-					],
+					]),
 
 					'choices' => blocksy_ordered_keys([
 						'desktop' => __( 'Desktop', 'blocksy-companion' ),
@@ -387,12 +413,11 @@ $options = [
 					'type' => 'ct-spacing',
 					'divider' => 'top',
 					'setting' => [ 'transport' => 'postMessage' ],
-					'value' => blocksy_spacing_value([
-						'top' => '30px',
-						'left' => '30px',
-						'right' => '30px',
-						'bottom' => '30px',
-					]),
+					'value' => blocksy_spacing_value(),
+					'inputAttr' => [
+						'placeholder' => '30'
+					],
+					'min' => 0,
 					'responsive' => true
 				],
 
@@ -402,6 +427,7 @@ $options = [
 					'divider' => 'top',
 					'setting' => [ 'transport' => 'postMessage' ],
 					'value' => blocksy_spacing_value(),
+					'min' => 0,
 					'responsive' => true
 				],
 

@@ -3,13 +3,15 @@ import {
 	maybeCleanupLoadingState,
 	maybeAddErrors,
 	actuallyInsertMessage,
-	actuallyInsertError,
+	actuallyInsertError
 } from '../../account'
 
 import { formPreSubmitHook } from '../hooks'
 import { resetCaptchaFor } from '../captcha'
 
 import { maybeMountTwoFactorForm } from '../integrations/two-factor'
+import { maybeHandleJetpackProtect } from '../integrations/jetpack'
+import { maybeMountKadenceInterstitialForm } from '../integrations/kadence-security'
 
 import $ from 'jquery'
 
@@ -30,6 +32,13 @@ export const maybeHandleLoginForm = (el) => {
 		maybeAddLoadingState(maybeLogin)
 
 		let body = new FormData(maybeLogin)
+		body.append('redirect_to', location.href)
+		if (maybeLogin.querySelector('[name="username"]')) {
+			body.append(
+				'log',
+				maybeLogin.querySelector('[name="username"]').value
+			)
+		}
 
 		// let url = maybeLogin.action
 
@@ -42,7 +51,7 @@ export const maybeHandleLoginForm = (el) => {
 			formPreSubmitHook(maybeLogin).then(() => {
 				fetch(url, {
 					method: maybeLogin.method,
-					body,
+					body
 				})
 					.then((response) => response.json())
 					.then((res) => {
@@ -64,7 +73,11 @@ export const maybeHandleLoginForm = (el) => {
 
 						if (res.login) {
 							if (res.two_factor_required) {
-								if ($('#wfls-prompt-overlay').length === 0) {
+								const wfltOverlay = maybeLogin.querySelector(
+									'#wfls-prompt-overlay'
+								)
+
+								if (!wfltOverlay) {
 									var overlay = $(
 										'<div id="wfls-prompt-overlay"></div>'
 									)
@@ -111,18 +124,24 @@ export const maybeHandleLoginForm = (el) => {
 									)
 								}
 							} else {
+								const body = new FormData(maybeLogin)
+
+								body.append('redirect_to', location.href)
+
 								fetch(
 									`${ct_localizations.ajax_url}?action=blc_implement_user_login`,
 									{
 										method: maybeLogin.method,
-										body: new FormData(maybeLogin),
+										body
 									}
 								)
-									.then((response) => response.text())
-									.then((html) => {
-										location = maybeLogin.querySelector(
-											'[name="redirect_to"]'
-										).value
+									.then((response) => response.json())
+									.then(({ data: { html, redirect_to } }) => {
+										if (redirect_to === location.href) {
+											location.reload()
+										} else {
+											location = redirect_to
+										}
 									})
 							}
 
@@ -152,10 +171,92 @@ export const maybeHandleLoginForm = (el) => {
 		formPreSubmitHook(maybeLogin).then(() => {
 			fetch(url, {
 				method: maybeLogin.method,
-				body,
+				body
 			})
-				.then((response) => response.text())
-				.then((html) => {
+				.then((response) => {
+					if (response.status !== 200) {
+						response.text().then((text) => {
+							maybeCleanupLoadingState(maybeLogin)
+
+							const jetpackMathResult = maybeHandleJetpackProtect(
+								maybeLogin,
+								text
+							)
+
+							if (!jetpackMathResult) {
+								return
+							}
+
+							actuallyInsertError(
+								maybeLogin.closest('.ct-login-form'),
+								ct_localizations.login_generic_error_msg
+							)
+						})
+
+						return
+					}
+
+					if (response.redirected && response.url) {
+						return {
+							data: {
+								html: '',
+								redirect_to: response.url
+							}
+						}
+					}
+
+					// Check content-type BEFORE reading the body. A security plugin
+					// (e.g. Kadence Security / iThemes Security) may hook wp_login at
+					// priority -1000, render its interstitial HTML and call die() before
+					// our login_redirect filter can fire — leaving the response as HTML,
+					// not JSON. Reading content-type first lets us branch without
+					// consuming the body stream (which would prevent a subsequent .text()
+					// call if .json() threw a SyntaxError).
+					const contentType =
+						response.headers.get('content-type') || ''
+
+					if (!contentType.includes('application/json')) {
+						return response.text().then((html) => ({
+							__intercepted: true,
+							html
+						}))
+					}
+
+					return response.json()
+				})
+				.then((result) => {
+					// Non-200 path returned early without a value; nothing to do.
+					if (result === undefined) {
+						return
+					}
+
+					// Non-JSON response: a security plugin intercepted the login flow.
+					// Try to mount a recognised interstitial form (e.g. Kadence Security)
+					// inside the modal; fall back to a page reload so the user lands
+					// logged-in (the auth cookie is set before wp_login fires).
+					if (result && result.__intercepted) {
+						const parser = new DOMParser()
+						const doc = parser.parseFromString(
+							result.html,
+							'text/html'
+						)
+
+						if (
+							!maybeMountTwoFactorForm(maybeLogin, doc) &&
+							!maybeMountKadenceInterstitialForm(maybeLogin, doc)
+						) {
+							location.reload()
+						}
+
+						maybeCleanupLoadingState(maybeLogin)
+
+						return
+					}
+
+					const {
+						data: { html, redirect_to }
+					} = result
+
 					const { doc, hasError } = maybeAddErrors(
 						maybeLogin.closest('.ct-login-form'),
 						html
@@ -164,9 +265,11 @@ export const maybeHandleLoginForm = (el) => {
 					if (!hasError) {
 						if (!maybeMountTwoFactorForm(maybeLogin, doc)) {
 							setTimeout(() => {
-								location = maybeLogin.querySelector(
-									'[name="redirect_to"]'
-								).value
+								if (redirect_to === location.href) {
+									location.reload()
+								} else {
+									location = redirect_to
+								}
 							}, 2000)
 						}
 					} else {

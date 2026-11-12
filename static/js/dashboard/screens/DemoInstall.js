@@ -14,29 +14,44 @@ import { Transition, animated } from 'blocksy-options'
 import DemosList from './DemoInstall/DemosList'
 import DemoToInstall from './DemoInstall/DemoToInstall'
 
-import SiteExport from './SiteExport'
+import useDemoListFilters from './DemoInstall/filters/useDemoListFilters'
+
+import SubmitSupport from '../helpers/SubmitSupport'
+
+import NoLicense from '../NoLicense'
+
+import { getStarterSitesStatus } from '../helpers/starter-sites'
 
 export const DemosContext = createContext({
 	demos: [],
 })
 
-import SubmitSupport from '../helpers/SubmitSupport'
-
 let demos_cache = null
-let plugins_cache = null
-let currently_installed_demo_cache = null
 let demos_error_cache = null
 
 const DemoInstall = ({ children, path, location }) => {
 	const [isLoading, setIsLoading] = useState(!demos_cache)
 	const [demos_list, setDemosList] = useState(demos_cache || [])
-	const [pluginsStatus, setPluginsStatus] = useState(plugins_cache || {})
+	const [pluginsStatus, setPluginsStatus] = useState(
+		ctDashboardLocalizations.plugin_data.active_plugins
+	)
 	const [currentDemo, setCurrentDemo] = useState(null)
 	const [currentlyInstalledDemo, setCurrentlyInstalledDemo] = useState(
-		currently_installed_demo_cache
+		ctDashboardLocalizations.plugin_data.current_installed_demo
 	)
 
-	const [demo_error, setDemoError] = useState(false)
+	const filtersPayload = useDemoListFilters({
+		demos_list,
+	})
+
+	const [forceEmptyDemos, setForceEmptyDemos] = useState(false)
+
+	const [demo_error, setDemoError] = useState({
+		isError: false,
+		message: '',
+		// generic | remote_fetch_failed | ajax_request_failed
+		reason: 'generic',
+	})
 
 	const [demoConfiguration, setDemoConfiguration] = useState({
 		builder: '',
@@ -50,65 +65,70 @@ const DemoInstall = ({ children, path, location }) => {
 			setIsLoading(true)
 		}
 
-		const body = new FormData()
-		body.append('action', 'blocksy_demo_list')
-
 		try {
-			const response = await fetch(ctDashboardLocalizations.ajax_url, {
-				method: 'POST',
-				body,
-			})
+			let demosResponse = await getStarterSitesStatus()
 
-			if (response.status === 200) {
-				const { success, data } = await response.json()
-
-				if (success) {
-					setDemosList(data.demos)
-					setPluginsStatus(data.active_plugins)
-					setCurrentlyInstalledDemo(data.current_installed_demo)
-					setDemoError(data.demo_error)
-					plugins_cache = data.active_plugins
-					demos_cache = data.demos
-					demos_error_cache = data.demo_error
-				}
+			if (demosResponse.status && demosResponse.status === 511) {
+				// This is a special case where the license is invalid
+				setForceEmptyDemos(true)
+				return
 			}
-		} catch (e) {}
+
+			const data = await demosResponse.json()
+
+			setDemosList(data)
+			demos_cache = data
+		} catch (response) {
+			// Usually this is a network error or some policty blocking
+			// external frontend requests
+			console.error('Blocksy:Dashboard:DemoInstall:demos_list', {
+				response,
+				reason: 'frontend_starter_sites_fetch_failed',
+			})
+		}
 
 		setIsLoading(false)
 	}
 
 	useEffect(() => {
-		syncDemos(!demos_cache)
+		if (ctDashboardLocalizations.plugin_data.demo_install_error) {
+			setIsLoading(false)
+
+			setDemoError({
+				isError: true,
+				message:
+					ctDashboardLocalizations.plugin_data.demo_install_error,
+				reason: 'generic',
+			})
+		} else {
+			syncDemos(!demos_cache)
+		}
 	}, [])
+
+	if (forceEmptyDemos) {
+		return <NoLicense />
+	}
 
 	return (
 		<div className="ct-demos-list-container">
-			{demo_error && (
-				<div
-					className="ct-demo-notification"
-					dangerouslySetInnerHTML={{
-						__html: demo_error,
-					}}
-				/>
-			)}
 			<Transition
 				items={isLoading}
 				from={{ opacity: 0 }}
 				enter={[{ opacity: 1 }]}
 				leave={[{ opacity: 0 }]}
+				initial={null}
 				config={(key, phase) => {
 					return phase === 'leave'
 						? {
 								duration: 300,
 						  }
 						: {
-								delay: 300,
 								duration: 300,
 						  }
 				}}>
-				{(isLoading) => {
+				{(props, isLoading) => {
 					if (isLoading) {
-						return (props) => (
+						return (
 							<animated.p
 								style={props}
 								className="ct-loading-text">
@@ -151,45 +171,86 @@ const DemoInstall = ({ children, path, location }) => {
 						)
 					}
 
-					if (demos_list.length === 0) {
-						return (props) => (
+					if (demo_error.isError) {
+						return (
 							<animated.div style={props}>
-								<div
-									className="ct-demo-notification"
-									dangerouslySetInnerHTML={{
-										__html: __(
-											"The connection to our <b>demo.creativethemes.com</b> server didn't worked. This connection is required for importing the starter sites from our demo content server. All you have to do is to contact your hosting provider and ask them to white list our demo server address.",
-											'blocksy-companion'
-										),
-									}}
-								/>
+								{demo_error.reason ===
+									'ajax_request_failed' && (
+									<div
+										className="ct-demo-notification"
+										dangerouslySetInnerHTML={{
+											__html: sprintf(
+												__(
+													'Your site is misconfigured and AJAX requests are not reaching your backend. Please click %shere%s to find the common causes and possible solutions to this.<br> Error code - %s',
+													'blocksy-companion'
+												),
+												'<a href="https://creativethemes.com/blocksy/docs/troubleshooting/starter-site-common-issues-possible-solutions/" target="_blank">',
+												'</a>',
+												demo_error.message
+											),
+										}}
+									/>
+								)}
+
+								{demo_error.reason ===
+									'remote_fetch_failed' && (
+									<div
+										className="ct-demo-notification"
+										dangerouslySetInnerHTML={{
+											__html: sprintf(
+												__(
+													'Failed to retrieve starter sites list.<br> Error code - %s',
+													'blocksy-companion'
+												),
+												demo_error.message
+											),
+										}}
+									/>
+								)}
+
+								{demo_error.reason === 'generic' && (
+									<div
+										className="ct-demo-notification"
+										dangerouslySetInnerHTML={{
+											__html: demo_error.message,
+										}}
+									/>
+								)}
+
 								<SubmitSupport />
 							</animated.div>
 						)
 					}
 
-					return (props) => (
+					return (
 						<animated.div style={props}>
 							<Fragment>
 								<DemosContext.Provider
 									value={{
-										demo_error,
-										demos_list: demos_list.filter(
-											(ext) =>
-												!ext.dev_v2 ||
-												ct_localizations.is_dev_mode
-										),
 										currentDemo,
+
 										pluginsStatus,
+										setPluginsStatus,
+
 										installerBlockingReleased,
 										setInstallerBlockingReleased,
 										setCurrentDemo,
 										currentlyInstalledDemo,
 										setCurrentlyInstalledDemo,
+
+										unfiltered_demos_list:
+											filtersPayload.unfiltered_demos_list,
+										demos_list: filtersPayload.demos_list,
+										filters: filtersPayload.filters,
+										setFilters: filtersPayload.setFilters,
+
+										allPlans: filtersPayload.allPlans,
+										allCategories:
+											filtersPayload.allCategories,
 									}}>
+									{filtersPayload.display()}
 									<DemosList />
 									<DemoToInstall />
-									<SiteExport />
 								</DemosContext.Provider>
 								<SubmitSupport />
 							</Fragment>

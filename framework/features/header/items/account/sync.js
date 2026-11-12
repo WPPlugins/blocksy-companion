@@ -409,13 +409,52 @@ ctEvents.on(
 				],
 
 				// interation type dropdown
+				account_dropdown_top_offset: {
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '.ct-header-account-dropdown',
+						})
+					),
+					variable: 'dropdown-top-offset',
+					unit: 'px',
+				},
+
+				sticky_state_account_dropdown_top_offset: {
+					selector: assembleSelector(
+						mutateSelector({
+							selector: mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-header-account-dropdown',
+							}),
+							operation: 'between',
+							to_add: '[data-sticky*="yes"]',
+						})
+					),
+					variable: 'sticky-state-dropdown-top-offset',
+					unit: 'px',
+				},
+				
+				...typographyOption({
+					id: 'header_account_dropdown_font',
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '.ct-header-account-dropdown',
+						})
+					),
+				}),
+
 				header_account_dropdown_font_color: [
 					{
 						selector: assembleSelector(
 							mutateSelector({
 								selector: getRootSelectorFor({ itemId }),
 								operation: 'suffix',
-								to_add: '> ul',
+								to_add: '.ct-header-account-dropdown',
 							})
 						),
 						variable: 'theme-text-color',
@@ -427,7 +466,7 @@ ctEvents.on(
 							mutateSelector({
 								selector: getRootSelectorFor({ itemId }),
 								operation: 'suffix',
-								to_add: '> ul',
+								to_add: '.ct-header-account-dropdown',
 							})
 						),
 						variable: 'theme-link-initial-color',
@@ -439,32 +478,70 @@ ctEvents.on(
 							mutateSelector({
 								selector: getRootSelectorFor({ itemId }),
 								operation: 'suffix',
-								to_add: '> ul',
+								to_add: '.ct-header-account-dropdown',
 							})
 						),
 						variable: 'theme-link-hover-color',
 						type: 'color:link_hover',
 					},
+
+					{
+						selector: assembleSelector(
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-header-account-dropdown',
+							})
+						),
+						variable: 'theme-link-active-color',
+						type: 'color:link_active',
+					},
 				],
 
-				header_account_dropdown_color: {
-					selector: assembleSelector(
-						mutateSelector({
-							selector: getRootSelectorFor({ itemId }),
-							operation: 'suffix',
-							to_add: '> ul',
-						})
-					),
-					variable: 'background-color',
-					type: 'color:default',
-				},
+				header_account_dropdown_color: [
+					{
+						selector: assembleSelector(
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-header-account-dropdown',
+							})
+						),
+						variable: 'dropdown-background-color',
+						type: 'color:default',
+					},
+
+					{
+						selector: assembleSelector(
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-header-account-dropdown',
+							})
+						),
+						variable: 'dropdown-items-background-hover-color',
+						type: 'color:hover',
+					},
+
+					{
+						selector: assembleSelector(
+							mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-header-account-dropdown',
+							})
+						),
+						variable: 'dropdown-items-background-active-color',
+						type: 'color:active',
+					},
+				],
 
 				header_account_dropdown_divider: {
 					selector: assembleSelector(
 						mutateSelector({
 							selector: getRootSelectorFor({ itemId }),
 							operation: 'suffix',
-							to_add: '> ul',
+							to_add: '.ct-header-account-dropdown',
 						})
 					),
 					variable: 'theme-border',
@@ -476,7 +553,7 @@ ctEvents.on(
 						mutateSelector({
 							selector: getRootSelectorFor({ itemId }),
 							operation: 'suffix',
-							to_add: '> ul',
+							to_add: '.ct-header-account-dropdown',
 						})
 					),
 					type: 'box-shadow',
@@ -489,11 +566,12 @@ ctEvents.on(
 						mutateSelector({
 							selector: getRootSelectorFor({ itemId }),
 							operation: 'suffix',
-							to_add: '> ul',
+							to_add: '.ct-header-account-dropdown',
 						})
 					),
 					type: 'spacing',
 					variable: 'theme-border-radius',
+					emptyValue: 2,
 					responsive: true,
 				},
 			}
@@ -507,15 +585,25 @@ ctEvents.on('ct:header:sync:item:account', ({ optionId, optionValue }) => {
 	if (optionId === 'dropdown_items') {
 		let accountContainer = document.querySelector(selector)
 
-		optionValue
-			.filter(({ enabled }) => !!enabled)
-			.map((layer, index) => {
+		updateAndSaveEl(selector, (el) => {
+			if (!el.querySelector('.ct-header-account-dropdown')) {
+				return
+			}
+
+			const elements = el.querySelectorAll(
+				'.ct-header-account-dropdown > *:not([id*="menu-item-"])'
+			)
+
+			const nonMenuLayers = optionValue.filter(
+				({ enabled, id }) => !!enabled && id !== 'menu'
+			)
+
+			nonMenuLayers.map((layer, index) => {
 				if (!accountContainer) {
 					return
 				}
 
-				const maybeLayer =
-					accountContainer.querySelector('ul').children[index]
+				const maybeLayer = elements[index]
 
 				if (!maybeLayer) {
 					return
@@ -523,18 +611,27 @@ ctEvents.on('ct:header:sync:item:account', ({ optionId, optionValue }) => {
 
 				const linkContainer = maybeLayer.querySelector('a')
 
-				if (!linkContainer) {
-					return
+				if (layer.id === 'user_info') {
+					const additionalFieldsContainer =
+						maybeLayer.querySelector('small')
+
+					if (additionalFieldsContainer) {
+						const { email, name, role } =
+							additionalFieldsContainer.dataset
+
+						additionalFieldsContainer.innerText =
+							layer.account_user_info_additional_fields
+								.replace('{user_email}', email)
+								.replace('{user_name}', name)
+								.replace('{user_role}', role)
+					}
 				}
 
-				if (layer.id === 'custom_link') {
-					linkContainer.setAttribute('href', layer.link)
-				}
-
-				if (layer.label) {
+				if (layer.id !== 'user_info' && linkContainer && layer.label) {
 					linkContainer.innerHTML = layer.label
 				}
 			})
+		})
 	}
 
 	if (optionId === 'header_account_visibility') {
@@ -550,6 +647,17 @@ ctEvents.on('ct:header:sync:item:account', ({ optionId, optionValue }) => {
 		updateAndSaveEl(selector, (el) => {
 			;[...el.querySelectorAll('.ct-label')].map((label) => {
 				responsiveClassesFor(optionValue, label)
+			})
+		})
+	}
+
+	if (
+		optionId === 'loggedin_icon_visibility' ||
+		optionId === 'loggedout_icon_visibility'
+	) {
+		updateAndSaveEl(selector, (el) => {
+			;[...el.querySelectorAll('.ct-icon')].map((icon) => {
+				responsiveClassesFor(optionValue, icon)
 			})
 		})
 	}
@@ -659,5 +767,22 @@ ctEvents.on('ct:header:sync:item:account', ({ optionId, optionValue }) => {
 				})
 			})
 		}, 300)
+	}
+
+	if (optionId === 'dropdown_items_type') {
+		let accountContainer = document.querySelector(selector)
+
+		if (accountContainer) {
+			const listContainer =
+				accountContainer.querySelector('ul[data-dropdown]')
+
+			if (listContainer) {
+				if (optionValue === 'boxed') {
+					listContainer.dataset.dropdown = 'type-1:boxed'
+				} else {
+					listContainer.dataset.dropdown = 'type-1'
+				}
+			}
+		}
 	}
 })

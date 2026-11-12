@@ -2,9 +2,6 @@
 
 namespace Blocksy;
 
-/*
- */
-
 class Capabilities {
 	private $accounts_cache = null;
 	private $plans = [];
@@ -12,13 +9,53 @@ class Capabilities {
 
 	private $module_slug = 'blocksy-companion';
 
+	private $wp_capabilities = [
+		'dashboard' => 'manage_options',
+		'custom_post_type' => 'manage_options',
+		'conditions' => 'manage_options',
+
+		'ext_code_snippets_fields' => 'unfiltered_html'
+	];
+
 	public function __construct() {
-		$this->accounts_cache = get_option('fs_accounts');
+		// Drop current cache if it is broken.
+		$option_cache = wp_cache_get('fs_accounts', 'options');
+
+		if (
+			$option_cache
+			&&
+			strpos(
+				json_encode($option_cache),
+				'__PHP_Incomplete_Class'
+			) !== false
+		) {
+			wp_cache_delete('fs_accounts', 'options');
+		}
+
+		$this->accounts_cache = blocksy_companion_get_option_from_db('fs_accounts');
 
 		$for_plans = $this->accounts_cache;
 
 		if (is_multisite()) {
-			$for_plans = get_network_option(null, 'fs_accounts');
+			// Drop current cache if it is broken.
+			$network_id = get_current_network_id();
+
+			$cache_key = "$network_id:fs_accounts";
+
+			$network_option_cache = wp_cache_get($cache_key, 'site-options');
+
+			if (
+				$network_option_cache
+				&&
+				strpos(
+					json_encode($network_option_cache),
+					'__PHP_Incomplete_Class'
+				) !== false
+			) {
+				wp_cache_delete($cache_key, 'site-options');
+			}
+
+			$for_plans = blocksy_companion_get_network_option_from_db(null, 'fs_accounts');
 		}
 
 		if (
@@ -113,7 +150,7 @@ class Capabilities {
 			return $this->plan;
 		}
 
-		if (! blc_can_use_premium_code()) {
+		if (! blocksy_companion_can_use_premium_code()) {
 			$this->plan = 'free';
 			return 'free';
 		}
@@ -134,6 +171,10 @@ class Capabilities {
 
 		foreach ($this->plans as $incomplete_plan) {
 			$plan = $this->casttoclass('stdClass', $incomplete_plan);
+
+			if (! isset($plan->id) || empty($plan->id)) {
+				continue;
+			}
 
 			$id = base64_decode($plan->id);
 
@@ -166,6 +207,28 @@ class Capabilities {
 
 		$this->plan = 'free';
 		return 'free';
+	}
+
+	public function get_wp_capability_by($scope, $scope_details = []) {
+		if (! isset($this->wp_capabilities[$scope])) {
+			return false;
+		}
+
+		/**
+		 * Filters the WordPress capability required by a Blocksy capability scope.
+		 *
+		 * @since 2.0.62
+		 *
+		 * @param string $capability    The WordPress capability mapped to the scope.
+		 * @param string $scope         The Blocksy capability scope being resolved.
+		 * @param array  $scope_details Additional context for the scope. Default empty array.
+		 */
+		return apply_filters(
+			'blocksy:capabilities:wp_capability',
+			$this->wp_capabilities[$scope],
+			$scope,
+			$scope_details
+		);
 	}
 
 	private function get_site() {

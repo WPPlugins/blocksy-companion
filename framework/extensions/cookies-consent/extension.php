@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 require_once dirname(__FILE__) . '/helpers.php';
 
 class BlocksyExtensionCookiesConsent {
@@ -16,19 +20,6 @@ class BlocksyExtensionCookiesConsent {
 	}
 
 	public function __construct() {
-		add_filter(
-			'blocksy:footer:offcanvas-drawer',
-			function ($els, $payload) {
-				if ($payload['location'] === 'start') {
-					$els[] = blocksy_ext_cookies_consent_output();
-				}
-
-				return $els;
-			},
-			10,
-			2
-		);
-
 		add_filter('blocksy-async-scripts-handles', function ($d) {
 			$d[] = 'blocksy-ext-cookies-consent-scripts';
 			return $d;
@@ -69,21 +60,22 @@ class BlocksyExtensionCookiesConsent {
 				return;
 			}
 
-			wp_enqueue_style(
-				'blocksy-ext-cookies-consent-styles',
-				BLOCKSY_URL . 'framework/extensions/cookies-consent/static/bundle/main.min.css',
-				['ct-main-styles'],
-				$data['Version']
-			);
-
 			wp_enqueue_script(
 				'blocksy-ext-cookies-consent-scripts',
 				BLOCKSY_URL . 'framework/extensions/cookies-consent/static/bundle/main.js',
-				[],
+				['ct-scripts'],
 				$data['Version'],
 				true
 			);
 		}, 50);
+
+		add_filter('blocksy:general:ct-scripts-localizations', function ($data) {
+			$data['dynamic_styles']['cookie_notification'] = blocksy_cdn_url(
+				BLOCKSY_URL . 'framework/extensions/cookies-consent/static/bundle/main.min.css'
+			);
+
+			return $data;
+		});
 
 		add_action(
 			'blocksy:global-dynamic-css:enqueue',
@@ -94,6 +86,7 @@ class BlocksyExtensionCookiesConsent {
 		add_action(
 			'pre_comment_on_post',
 			function ($post_id) {
+				// phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$data = wp_unslash($_POST);
 
 				if (! isset($data['comment_post_ID'])) {
@@ -114,10 +107,10 @@ class BlocksyExtensionCookiesConsent {
 					$data['gdprconfirm'] !== 'on'
 				) {
 					wp_die(
-						'<p>' . __('Please accept the Privacy Policy in order to comment.', 'blocksy-companion') . '</p>',
-						__('Comment Submission Failure', 'blocksy-companion'),
+						'<p>' . esc_html__('Please accept the Privacy Policy in order to comment.', 'blocksy-companion') . '</p>',
+						esc_html__('Comment Submission Failure', 'blocksy-companion'),
 						array(
-							'response' => $data,
+							'response' => 403,
 							'back_link' => true,
 						)
 					);
@@ -129,31 +122,70 @@ class BlocksyExtensionCookiesConsent {
 			add_filter('woocommerce_product_review_comment_form_args', [$this, 'change_comment_form']);
 		}, 999);
 
-		add_action('wp_ajax_blc_load_blocked_scripts', [
+		// Append the cookies consent checkbox to the blog comment form. The theme used
+		// to call the companion directly here; now the companion owns it through the
+		// native comment_form_defaults filter. Priority 6 — one above the theme's own
+		// priority-5 comment_form_defaults hook — guarantees this runs AFTER the theme,
+		// so the consent checkbox is appended after the theme's comment-form markup,
+		// preserving the original order (theme's notes/cookies first, then this).
+		add_filter('comment_form_defaults', function ($defaults) {
+			$defaults['comment_notes_after'] .= blocksy_companion_ext_cookies_checkbox('comment');
+
+			return $defaults;
+		}, 6);
+
+		add_filter(
+			'blocksy:footer:offcanvas-drawer',
+			function ($els, $payload) {
+				if ($payload['location'] !== 'start') {
+					return $els;
+				}
+
+				$els[] = '<template id="ct-cookies-consent-template">'
+					. blocksy_companion_ext_cookies_consent_output()
+					. '</template>';
+
+				return $els;
+			},
+			10,
+			2
+		);
+
+		add_action('wp_ajax_blocksy_companion_load_cookies_consent_scripts', [
 			$this,
-			'blc_load_blocked_scripts',
+			'load_cookies_consent_scripts',
 		]);
 
 		add_action(
-			'wp_ajax_nopriv_blc_load_blocked_scripts',
-			[$this, 'blc_load_blocked_scripts']
+			'wp_ajax_nopriv_blocksy_companion_load_cookies_consent_scripts',
+			[$this, 'load_cookies_consent_scripts']
 		);
 	}
 
-	public function blc_load_blocked_scripts() {
+	public function load_cookies_consent_scripts() {
+		/**
+		 * Filters the scripts loaded over AJAX once the cookies consent is given.
+		 *
+		 * @since 2.0.1
+		 *
+		 * @param array $scripts Scripts to load. Default empty array.
+		 * @param int   $unused  Second argument, always PHP_INT_MAX.
+		 */
 		$scripts = apply_filters('blocksy:cookies-consent:scripts-to-load', [], PHP_INT_MAX);
 
-		wp_send_json_success($scripts);
+		wp_send_json_success([
+			'scripts' => $scripts,
+		]);
 	}
 
 	public function change_comment_form($comment_form) {
-		$comment_form['comment_field'] .= blocksy_ext_cookies_checkbox('reviews');
+		$comment_form['comment_field'] .= blocksy_companion_ext_cookies_checkbox('reviews');
 
 		return $comment_form;
 	}
 
 	static public function add_global_styles($args) {
-		blocksy_theme_get_dynamic_styles(array_merge([
+		blocksy_companion_theme_functions()->blocksy_theme_get_dynamic_styles(array_merge([
 			'path' => dirname(__FILE__) . '/global.php',
 			'chunk' => 'global',
 		], $args));
@@ -168,7 +200,7 @@ class BlocksyExtensionCookiesConsent {
 	}
 
 	public function add_options_panel($options) {
-		$options['cookie_consent_ext'] = blocksy_get_options(
+		$options['cookie_consent_ext'] = blocksy_companion_get_options(
 			dirname(__FILE__) . '/customizer.php',
 			[],
 			false

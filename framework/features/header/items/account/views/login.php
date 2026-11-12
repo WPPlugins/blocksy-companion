@@ -1,10 +1,14 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 if (! isset($device)) {
 	$device = 'desktop';
 }
 
-$loggedin_account_label_visibility = blocksy_akg(
+$loggedin_account_label_visibility = blocksy_companion_akg(
 	'loggedin_account_label_visibility',
 	$atts,
 	[
@@ -14,9 +18,30 @@ $loggedin_account_label_visibility = blocksy_akg(
 	]
 );
 
+$loggedin_icon_visibility = blocksy_companion_akg(
+	'loggedin_icon_visibility',
+	$atts,
+	[
+		'desktop' => true,
+		'tablet' => true,
+		'mobile' => true,
+	]
+);
+
 // Logged in
-$loggedin_interaction_type = blocksy_akg('loggedin_interaction_type', $atts, 'dropdown');
-$account_link = blocksy_akg('account_link', $atts, 'profile');
+$loggedin_interaction_type = blocksy_companion_akg('loggedin_interaction_type', $atts, 'dropdown');
+
+if (
+	isset($row_id)
+	&&
+	$row_id === 'offcanvas'
+	// ||
+	// $device !== 'desktop'
+) {
+	$loggedin_interaction_type = 'link';
+}
+
+$account_link = blocksy_companion_akg('account_link', $atts, 'profile');
 $dropdown_html = '';
 
 $link = '#';
@@ -29,7 +54,7 @@ if ($loggedin_interaction_type !== 'dropdown') {
 	}
 
 	if ($account_link === 'custom') {
-		$link = do_shortcode(blocksy_akg('account_custom_page', $atts, ''));
+		$link = esc_url(do_shortcode(blocksy_companion_akg('account_custom_page', $atts, '')));
 	}
 
 	if ($account_link === 'woocommerce_account' && class_exists('WooCommerce')) {
@@ -45,11 +70,11 @@ if ($loggedin_interaction_type !== 'dropdown') {
 
 // Media
 $media_html = '';
-$loggedin_media = blocksy_akg('loggedin_media', $atts, 'avatar');
+$loggedin_media = blocksy_companion_akg('loggedin_media', $atts, 'avatar');
 
 $avatar_size = intval(
 	blocksy_expand_responsive_value(
-		blocksy_akg('accountHeaderAvatarSize', $atts, 18)
+		blocksy_companion_akg('accountHeaderAvatarSize', $atts, 18)
 	)['desktop']
 );
 
@@ -70,25 +95,25 @@ if ($loggedin_media === 'avatar') {
 }
 
 if ($loggedin_media === 'icon') {
-	$media_html = $icon[blocksy_akg('account_loggedin_icon', $atts, 'type-1')];
+	$media_html = $icon[blocksy_companion_akg('account_loggedin_icon', $atts, 'type-1')];
 
-	if (function_exists('blc_get_icon')) {
-		$icon_source = blocksy_default_akg(
+	if (function_exists('blocksy_companion_get_icon')) {
+		$icon_source = blocksy_companion_akg(
 			'loggedin_icon_source',
 			$atts,
 			'default'
 		);
 
 		if ($icon_source === 'custom') {
-			$media_html = blc_get_icon([
-				'icon_descriptor' => blocksy_akg(
+			$media_html = blocksy_companion_get_icon([
+				'icon_descriptor' => blocksy_companion_akg(
 					'loggedin_custom_icon',
 					$atts,
 					['icon' => 'blc blc-user']
 				),
 				'icon_container' => false,
 				'icon_html_atts' => [
-					'class' => 'ct-icon',
+					'class' => trim('ct-icon ' . blocksy_visibility_classes($loggedin_icon_visibility))
 				]
 			]);
 		}
@@ -97,24 +122,26 @@ if ($loggedin_media === 'icon') {
 
 // Label
 $loggedin_label = blocksy_expand_responsive_value(
-	blocksy_default_akg('loggedin_label', $atts, __('My Account', 'blocksy-companion'))
+	blocksy_companion_akg('loggedin_label', $atts, __('My Account', 'blocksy-companion'))
 )[$device];
 
 
 $loggedin_label = do_shortcode(
-	blocksy_translate_dynamic(
-		$loggedin_label,
-		'header:' . $section_id . ':' . $item_id . ':loggedin_label'
+	blocksy_companion_sanitize_html_for_display(
+		blocksy_translate_dynamic(
+			$loggedin_label,
+			$panel_type . ':' . $section_id . ':' . $item_id . ':loggedin_label'
+		)
 	)
 );
 
-if (blocksy_akg('loggedin_text', $atts, 'label') === 'username') {
+if (blocksy_companion_akg('loggedin_text', $atts, 'label') === 'username') {
 	$user = wp_get_current_user();
-	$loggedin_label = $user->display_name;
+	$loggedin_label = esc_html($user->display_name);
 }
 
 $loggedin_label_position = blocksy_expand_responsive_value(
-	blocksy_akg('loggedin_label_position', $atts, 'left')
+	blocksy_companion_akg('loggedin_label_position', $atts, 'left')
 );
 
 $attr['data-state'] = 'in';
@@ -141,11 +168,10 @@ if ($loggedin_interaction_type === 'dropdown') {
 	unset($link_attr['href'], $link_attr['aria-label']);
 
 	$dropdown_html = '';
-	$dropdown_items = blocksy_akg('dropdown_items', $atts, [
+	$dropdown_items = blocksy_companion_akg('dropdown_items', $atts, [
 		[
 			'id' => 'user_info',
 			'enabled' => true,
-			'label' => __('User Info', 'blocksy-companion'),
 		],
 
 		[
@@ -172,7 +198,25 @@ if ($loggedin_interaction_type === 'dropdown') {
 		],
 	]);
 
-	$dropdown_items_html = [];
+	// attr
+	//
+	// link => false | href
+	// link_attr
+	//
+	// html
+	$dropdown_items_descriptors = [
+		// [
+		// 	'tag_name' => 'div',
+		// 	'attr' => [
+		// 		'class' => 'ct-account-dropdown-item',
+		// 	],
+
+		// 	'link' => false,
+		// 	'link_attr' => [],
+
+		// 	'html' => ''
+		// ],
+	];
 
 	foreach ($dropdown_items as $dropdown_row) {
 		if (
@@ -181,6 +225,15 @@ if ($loggedin_interaction_type === 'dropdown') {
 			! $dropdown_row['enabled']
 		) {
 			continue;
+		}
+
+		if (isset($dropdown_row['label'])) {
+			$dropdown_row['label'] = blocksy_companion_sanitize_html_for_display(
+				blocksy_translate_dynamic(
+					$dropdown_row['label'],
+					$panel_type . ':' . $section_id . ':account:dropdown_items:' . $dropdown_row['id'] . ':label'
+				)
+			);
 		}
 
 		if ($dropdown_row['id'] === 'user_info') {
@@ -198,14 +251,21 @@ if ($loggedin_interaction_type === 'dropdown') {
 
 			$user_display_name =
 				!empty($user_firstname) || !empty($user_lastname)
-				? $user_firstname . ' ' . $user_lastname
-				: $user->display_name;
+				? str_replace(
+					['{first_name}', '{last_name}', '{user_name}'],
+					[esc_html($user_firstname), esc_html($user_lastname), esc_html($user->display_name)],
+					blocksy_companion_sanitize_html_for_display(
+						blocksy_companion_akg('account_user_info_display_name', $dropdown_row, '{first_name} {last_name}')
+					)
+				)
+				: esc_html($user->display_name);
 
 			$image_html = '';
 
-			if (blocksy_akg('has_account_dropdown_avatar', $dropdown_row, 'yes') === 'yes') {
+			if (blocksy_companion_akg('has_account_dropdown_avatar', $dropdown_row, 'yes') === 'yes') {
 				$image_html = blocksy_simple_image(
-					get_avatar_url($current_user_id, [
+					blocksy_get_avatar_url([
+						'avatar_entity' => $current_user_id,
 						'size' => $avatar_size * 2,
 					]),
 					[
@@ -218,158 +278,272 @@ if ($loggedin_interaction_type === 'dropdown') {
 				);
 			}
 
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[
-					'class' => 'ct-header-account-user-info'
-				],
-				$image_html . blocksy_html_tag(
-					'span',
-					[],
-					'<b>' . $user_display_name . '</b><small>' . $user->user_email . '</small>'
-				)
+			$additional_fields_html = '';
+
+			if (
+				! empty(blocksy_companion_akg('account_user_info_additional_fields', $dropdown_row, '{user_email}'))
+				||
+				is_customize_preview()
+			) {
+				$message = blocksy_companion_sanitize_html_for_display(
+					blocksy_companion_akg('account_user_info_additional_fields', $dropdown_row, '{user_email}')
+				);
+				$message = str_replace('{user_email}', esc_html($user->user_email), $message);
+				$message = str_replace('{user_name}', esc_html($user->display_name), $message);
+
+				$user_role = '';
+
+				if (! empty($user->roles)) {
+					$user_role = reset($user->roles);
+
+					global $wp_roles;
+					$all_roles = $wp_roles->roles;
+
+					if (isset($all_roles[$user_role])) {
+						$user_role = $all_roles[$user_role]['name'];
+					}
+				}
+
+				$message = str_replace('{user_role}', esc_html($user_role), $message);
+
+				$additional_fields_html = blocksy_companion_html_tag(
+					'small',
+					(
+						is_customize_preview() ? [
+							'data-email' => $user->user_email,
+							'data-name' => $user->display_name,
+							'data-role' => $user_role
+						] : []
+					),
+					$message
+				);
+			}
+
+			$link_source = blocksy_companion_akg('account_user_info_link', $dropdown_row, 'none');
+			$custom_link = esc_url(blocksy_companion_akg('account_user_info_custom_link', $dropdown_row, '#'));
+
+			if ($link_source === 'dashboard') {
+				$custom_link = get_dashboard_url();
+			}
+
+			if ($link_source === 'profile') {
+				$custom_link = get_edit_profile_url();
+			}
+
+			$profile_html = $image_html . blocksy_companion_html_tag(
+				'span',
+				[],
+				'<b>' . $user_display_name . '</b>' . $additional_fields_html
 			);
+
+			$dropdown_item_descriptor = [
+				'attr' => [
+					'class' => 'menu-item ct-header-account-user-info'
+				],
+
+				'html' => $profile_html,
+
+				'link' => false,
+				'link_attr' => [
+					'class' => 'ct-menu-link'
+				],
+			];
+
+			if ($link_source !== 'none' && ! empty($custom_link)) {
+				$dropdown_item_descriptor['link'] = $custom_link;
+			}
+
+			$dropdown_items_descriptors[] = $dropdown_item_descriptor;
 		}
 
 		if ($dropdown_row['id'] === 'dashboard') {
 			$user = wp_get_current_user();
 
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[],
-				blocksy_html_tag(
-					'a',
-					[
-						'href' => get_dashboard_url(
-							isset($user->ID) ? (int) $user->ID : 0
-						)
-					],
-					do_shortcode(
-						blocksy_default_akg(
-							'label',
-							$dropdown_row,
-							__('Dashboard', 'blocksy-companion')
-						)
+			$dropdown_items_descriptors[] = [
+				'attr' => [
+					'class' => 'menu-item'
+				],
+
+				'link' => get_dashboard_url(
+					isset($user->ID) ? (int) $user->ID : 0
+				),
+
+				'link_attr' => [
+					'class' => 'ct-menu-link'
+				],
+
+				'html' => do_shortcode(
+					blocksy_companion_akg(
+						'label',
+						$dropdown_row,
+						__('Dashboard', 'blocksy-companion')
 					)
 				)
-			);
+			];
 		}
 
 		if ($dropdown_row['id'] === 'divider') {
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[
-					'class' => 'ct-dropdown-divider'
+			$dropdown_items_descriptors[] = [
+				'attr' => [
+					'class' => 'ct-header-account-divider'
 				],
-				true
-			);
+			];
 		}
 
 		if ($dropdown_row['id'] === 'profile') {
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[],
-				blocksy_html_tag(
-					'a',
-					[
-						'href' => get_edit_profile_url()
-					],
-					do_shortcode(
-						blocksy_default_akg(
-							'label',
-							$dropdown_row,
-							__('Edit Profile', 'blocksy-companion')
-						)
+			$dropdown_items_descriptors[] = [
+				'attr' => [
+					'class' => 'menu-item'
+				],
+
+				'link' => get_edit_profile_url(),
+				'link_attr' => [
+					'class' => 'ct-menu-link'
+				],
+
+				'html' => do_shortcode(
+					blocksy_companion_akg(
+						'label',
+						$dropdown_row,
+						__('Edit Profile', 'blocksy-companion')
 					)
 				)
-			);
+			];
 		}
 
 		if ($dropdown_row['id'] === 'logout') {
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[
-					'class' => 'ct-header-account-logout'
+			$dropdown_items_descriptors[] = [
+				'attr' => [
+					'class' => 'menu-item'
 				],
-				blocksy_html_tag(
-					'a',
-					[
-						'href' => wp_logout_url(get_permalink())
-					],
-					do_shortcode(
-						blocksy_default_akg(
-							'label',
-							$dropdown_row,
-							__('Log Out', 'blocksy-companion')
-						)
+
+				'link' => wp_logout_url(blocksy_current_url()),
+				'link_attr' => [
+					'class' => 'ct-menu-link'
+				],
+
+				'html' => do_shortcode(
+					blocksy_companion_akg(
+						'label',
+						$dropdown_row,
+						__('Log Out', 'blocksy-companion')
 					)
 				)
-			);
+			];
 		}
 
 		if ($dropdown_row['id'] === 'custom_link') {
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[],
-				blocksy_html_tag(
-					'a',
-					[
-						'href' => do_shortcode(
-							blocksy_default_akg(
-								'link',
-								$dropdown_row,
-								'#'
-							)
-						)
-					],
+
+			$custom_label = blocksy_companion_akg(
+				'label',
+				$dropdown_row,
+				__('Custom Link', 'blocksy-companion')
+			);
+
+			$custom_label = blocksy_translate_dynamic(
+				$custom_label,
+				'header:' . $section_id . ':' . $dropdown_row['__id'] . ':custom_link'
+			);
+
+			$dropdown_items_descriptors[] = [
+				'attr' => [
+					'class' => 'menu-item'
+				],
+
+				'link' => esc_url(
 					do_shortcode(
-						blocksy_default_akg(
-							'label',
+						blocksy_companion_akg(
+							'link',
 							$dropdown_row,
-							__('Custom Link', 'blocksy-companion')
+							'#'
 						)
 					)
-				)
+				),
+				'link_attr' => [
+					'class' => 'ct-menu-link'
+				],
+
+				'html' => do_shortcode($custom_label)
+			];
+		}
+
+		if ($dropdown_row['id'] === 'menu') {
+			ob_start();
+
+			$menu_to_render = blocksy_expand_responsive_value($dropdown_row['menu']);
+			$menu_to_render = $menu_to_render[$device];
+
+			add_filter(
+				'nav_menu_item_title',
+				'blocksy_handle_nav_menu_item_title',
+				10, 4
 			);
+
+			wp_nav_menu([
+				'container' => false,
+				'blocksy_advanced_item' => true,
+				'blocksy_mega_menu' => true,
+				'blocksy_always_inline' => true,
+				'menu' => $menu_to_render,
+				'items_wrap' => '%3$s',
+			]);
+
+			remove_filter(
+				'nav_menu_item_title',
+				'blocksy_handle_nav_menu_item_title',
+				10, 4
+			);
+
+			$menu_content = ob_get_clean();
+
+			$dropdown_items_descriptors[] = [
+				'html' => $menu_content
+			];
 		}
 
 		if ($dropdown_row['id'] === 'woo_account') {
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[],
-				blocksy_html_tag(
-					'a',
-					[
-						'href' => get_permalink(get_option('woocommerce_myaccount_page_id'))
-					],
-					do_shortcode(
-						blocksy_default_akg(
-							'label',
-							$dropdown_row,
-							__('My Account', 'blocksy-companion')
-						)
+			$dropdown_items_descriptors[] = [
+				'attr' => [
+					'class' => 'menu-item'
+				],
+
+				'link' => get_permalink(
+					get_option('woocommerce_myaccount_page_id')
+				),
+				'link_attr' => [
+					'class' => 'ct-menu-link'
+				],
+
+				'html' => do_shortcode(
+					blocksy_companion_akg(
+						'label',
+						$dropdown_row,
+						__('My Account', 'blocksy-companion')
 					)
 				)
-			);
+			];
 		}
 
 		if (
 			$dropdown_row['id'] === 'wishlist'
 			&&
 			function_exists('wc_get_endpoint_url')
+			&&
+			function_exists('blocksy_companion_get_wish_list_slug')
 		) {
 			$url = wc_get_endpoint_url(
-				apply_filters(
-					'blocksy:pro:woocommerce-extra:wish-list:slug',
-					'woo-wish-list'
-				),
+				blocksy_companion_get_wish_list_slug(),
 				'',
 				get_permalink(get_option('woocommerce_myaccount_page_id'))
 			);
 
-			$maybe_page_id = blocksy_get_theme_mod('woocommerce_wish_list_page');
+			$maybe_page_id = blocksy_companion_theme_functions()->blocksy_get_theme_mod('woocommerce_wish_list_page');
 
-			if (!empty($maybe_page_id)) {
+			if (
+				! empty($maybe_page_id)
+				&&
+				blocksy_companion_theme_functions()->blocksy_get_theme_mod('product_wishlist_display_for', 'logged_users') === 'all_users'
+			) {
 				$maybe_permalink = get_permalink($maybe_page_id);
 
 				if ($maybe_permalink) {
@@ -377,21 +551,57 @@ if ($loggedin_interaction_type === 'dropdown') {
 				}
 			}
 
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[],
-				blocksy_html_tag(
-					'a',
-					['href' => $url],
-					do_shortcode(
-						blocksy_default_akg(
-							'label',
-							$dropdown_row,
-							__('Wishlist', 'blocksy-companion')
-						)
+			$dropdown_items_descriptors[] = [
+				'attr' => [
+					'class' => 'menu-item'
+				],
+
+				'link' => $url,
+				'link_attr' => [
+					'class' => 'ct-menu-link'
+				],
+
+				'html' => do_shortcode(
+					blocksy_companion_akg(
+						'label',
+						$dropdown_row,
+						__('Wishlist', 'blocksy-companion')
 					)
 				)
+			];
+		}
+
+		if (
+			$dropdown_row['id'] === 'waitlist'
+			&&
+			function_exists('wc_get_endpoint_url')
+			&&
+			function_exists('blocksy_companion_get_waitlist_slug')
+		) {
+			$url = wc_get_endpoint_url(
+				blocksy_companion_get_waitlist_slug(),
+				'',
+				get_permalink(get_option('woocommerce_myaccount_page_id'))
 			);
+
+			$dropdown_items_descriptors[] = [
+				'attr' => [
+					'class' => 'menu-item'
+				],
+
+				'link' => $url,
+				'link_attr' => [
+					'class' => 'ct-menu-link'
+				],
+
+				'html' => do_shortcode(
+					blocksy_companion_akg(
+						'label',
+						$dropdown_row,
+						__('Waitlist', 'blocksy-companion')
+					)
+				)
+			];
 		}
 
 		if (
@@ -406,21 +616,30 @@ if ($loggedin_interaction_type === 'dropdown') {
 				$vendor = dokan()->vendor->get($user->ID);
 				$url = $vendor->get_dashboard_url();
 
-				$dropdown_items_html[] = blocksy_html_tag(
-					'li',
-					[],
-					blocksy_html_tag(
-						'a',
-						['href' => $url],
-						do_shortcode(
-							blocksy_default_akg(
+				if (function_exists('dokan_get_navigation_url')) {
+					$url = dokan_get_navigation_url();
+				}
+
+				if (! empty($url)) {
+					$dropdown_items_descriptors[] = [
+						'attr' => [
+							'class' => 'menu-item'
+						],
+
+						'link' => $url,
+						'link_attr' => [
+							'class' => 'ct-menu-link'
+						],
+
+						'html' => do_shortcode(
+							blocksy_companion_akg(
 								'label',
 								$dropdown_row,
 								__('Dokan Dashboard', 'blocksy-companion')
 							)
 						)
-					)
-				);
+					];
+				}
 			}
 		}
 
@@ -436,21 +655,24 @@ if ($loggedin_interaction_type === 'dropdown') {
 				$vendor = dokan()->vendor->get($user->ID);
 				$url = $vendor->get_shop_url();
 
-				$dropdown_items_html[] = blocksy_html_tag(
-					'li',
-					[],
-					blocksy_html_tag(
-						'a',
-						['href' => $url],
-						do_shortcode(
-							blocksy_default_akg(
-								'label',
-								$dropdown_row,
-								__('Dokan Shop', 'blocksy-companion')
-							)
+				$dropdown_items_descriptors[] = [
+					'attr' => [
+						'class' => 'menu-item'
+					],
+
+					'link' => $url,
+					'link_attr' => [
+						'class' => 'ct-menu-link'
+					],
+
+					'html' => do_shortcode(
+						blocksy_companion_akg(
+							'label',
+							$dropdown_row,
+							__('Dokan Shop', 'blocksy-companion')
 						)
 					)
-				);
+				];
 			}
 		}
 
@@ -465,21 +687,24 @@ if ($loggedin_interaction_type === 'dropdown') {
 
 			$url = get_permalink($dashboard_page_id);
 
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[],
-				blocksy_html_tag(
-					'a',
-					['href' => $url],
-					do_shortcode(
-						blocksy_default_akg(
-							'label',
-							$dropdown_row,
-							__('Tutor LMS Dashboard', 'blocksy-companion')
-						)
+			$dropdown_items_descriptors[] = [
+				'attr' => [
+					'class' => 'menu-item'
+				],
+
+				'link' => $url,
+				'link_attr' => [
+					'class' => 'ct-menu-link'
+				],
+
+				'html' => do_shortcode(
+					blocksy_companion_akg(
+						'label',
+						$dropdown_row,
+						__('Tutor LMS Dashboard', 'blocksy-companion')
 					)
 				)
-			);
+			];
 		}
 
 		if (
@@ -487,23 +712,26 @@ if ($loggedin_interaction_type === 'dropdown') {
 			&&
 			class_exists('bbPress')
 		) {
-			$url = bbp_get_user_profile_url( bbp_get_current_user_id() ) ;
+			$url = bbp_get_user_profile_url(bbp_get_current_user_id()) ;
 
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[],
-				blocksy_html_tag(
-					'a',
-					['href' => $url],
-					do_shortcode(
-						blocksy_default_akg(
-							'label',
-							$dropdown_row,
-							__('bbPress Dashboard', 'blocksy-companion')
-						)
+			$dropdown_items_descriptors[] = [
+				'attr' => [
+					'class' => 'menu-item'
+				],
+
+				'link' => $url,
+				'link_attr' => [
+					'class' => 'ct-menu-link'
+				],
+
+				'html' => do_shortcode(
+					blocksy_companion_akg(
+						'label',
+						$dropdown_row,
+						__('bbPress Dashboard', 'blocksy-companion')
 					)
 				)
-			);
+			];
 		}
 
 		if (
@@ -527,39 +755,128 @@ if ($loggedin_interaction_type === 'dropdown') {
 					'layout' => false
 				]);
 
-			$dropdown_items_html[] = blocksy_html_tag(
-				'li',
-				[
+			$dropdown_items_descriptors[] = [
+				'attr' => [
 					'class' => $classes,
 					'data-id' => $dropdown_row['__id'],
 				],
-				$content
-			);
+
+				'html' => $content
+			];
 		}
 	}
 
-	if (count($dropdown_items_html) > 0) {
-		$dropdown_html = blocksy_html_tag(
+	if (count($dropdown_items_descriptors) > 0) {
+		$dropdown_html = [];
+
+		foreach ($dropdown_items_descriptors as $item_descriptor) {
+			if (
+				! isset($item_descriptor['attr'])
+				&&
+				isset($item_descriptor['html'])
+			) {
+				$dropdown_html[] = $item_descriptor['html'];
+				continue;
+			}
+
+			$li_content = true;
+
+			if (! isset($item_descriptor['attr'])) {
+				$item_descriptor['attr'] = [];
+			}
+
+			if (isset($item_descriptor['html'])) {
+				$li_content = $item_descriptor['html'];
+			}
+
+			if (isset($item_descriptor['link'])) {
+				if ($item_descriptor['link']) {
+					$li_content = blocksy_companion_html_tag(
+						'a',
+						array_merge(
+							[
+								'href' => $item_descriptor['link']
+							],
+							isset($item_descriptor['link_attr'])
+							? $item_descriptor['link_attr']
+							: []
+						),
+						$li_content
+					);
+
+					$parsed_site_url = wp_parse_url(get_site_url());
+					$parsed_url = array_merge(
+						$parsed_site_url,
+						wp_parse_url($item_descriptor['link'])
+					);
+
+					if (rtrim(blocksy_companion_stringify_url($parsed_url), '/') === rtrim(blocksy_current_url(), '/')) {
+						if (! isset($item_descriptor['attr']['class'])) {
+							$item_descriptor['attr']['class'] = '';
+						}
+
+						$item_descriptor['attr']['class'] = trim(
+							$item_descriptor['attr']['class'] . ' current-menu-item'
+						);
+					}
+				} else {
+					$li_content = blocksy_companion_html_tag(
+						'div',
+						isset($item_descriptor['link_attr'])
+							? $item_descriptor['link_attr']
+							: [],
+						$li_content
+					);
+				}
+			}
+
+			$dropdown_html[] = blocksy_companion_html_tag(
+				'li',
+				$item_descriptor['attr'],
+				$li_content
+			);
+		}
+
+		$dropdown_items_type = blocksy_companion_akg('dropdown_items_type', $atts, 'simple');
+
+		$dropdown_html = blocksy_companion_html_tag(
 			'ul',
-			[],
+			[
+				'class' => 'ct-header-account-dropdown',
+				'data-dropdown' => 'type-1:' . $dropdown_items_type
+			],
+			implode('', $dropdown_html)
+		);
+	}
+
+	/*
+	if (count($dropdown_items_html) > 0) {
+		$dropdown_html = blocksy_companion_html_tag(
+			'ul',
+			[
+				'class' => 'ct-header-account-dropdown',
+				'data-dropdown' => 'type-1'
+			],
 			implode('', $dropdown_items_html)
 		);
 	}
+	 */
 }
 
 ?>
 
-<div <?php echo blocksy_attr_to_html($attr); ?>>
+<div <?php blocksy_companion_attr_to_html_e($attr); ?>>
 	<?php
-		echo blocksy_html_tag(
+		blocksy_companion_html_tag_e(
 			$link_tag_name,
 			$link_attr,
 			(
 				!empty($loggedin_label) ?
-				blocksy_html_tag(
+				blocksy_companion_html_tag(
 					'span',
 					[
-						'class' => trim('ct-label ' . blocksy_visibility_classes($loggedin_account_label_visibility))
+						'class' => trim('ct-label ' . blocksy_visibility_classes($loggedin_account_label_visibility)),
+						'aria-hidden' => 'true',
 					],
 					$loggedin_label
 				) : ''
@@ -570,7 +887,8 @@ if ($loggedin_interaction_type === 'dropdown') {
 
 	<?php
 		if (!empty($dropdown_html)) {
- 			echo $dropdown_html;
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $dropdown_html;
  		}
 	?>
 

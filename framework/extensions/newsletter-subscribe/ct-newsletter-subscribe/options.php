@@ -1,4 +1,9 @@
 <?php
+
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 /**
  * Newsletter Subscribe widget
  *
@@ -69,8 +74,22 @@ $options = [
 		],
 	],
 
+	'newsletter_subscribe_container_type' => [
+		'type' => 'ct-radio',
+		'label' => __('Container Style', 'blocksy-companion'),
+		'value' => 'default',
+		'view' => 'radio',
+		'inline' => true,
+		'divider' => 'top:full',
+		'disableRevertButton' => true,
+		'choices' => [
+			'default' => __('Default', 'blocksy-companion'),
+			'boxed' => __('Boxed', 'blocksy-companion'),
+		],
+	],
+
 	'newsletter_subscribe_height' => [
-		'label' => __( 'Input Height', 'blocksy' ),
+		'label' => __( 'Input Height', 'blocksy-companion' ),
 		'type' => 'ct-slider',
 		'min' => 40,
 		'max' => 80,
@@ -81,7 +100,7 @@ $options = [
 	],
 
 	'newsletter_subscribe_gap' => [
-		'label' => __( 'Fields Gap', 'blocksy' ),
+		'label' => __( 'Fields Gap', 'blocksy-companion' ),
 		'type' => 'ct-slider',
 		'min' => 0,
 		'max' => 50,
@@ -106,6 +125,13 @@ $options = [
 				'type' => 'hidden',
 				'label' => __('Name Label', 'blocksy-companion'),
 				'value' => __('Your name', 'blocksy-companion'),
+			],
+
+			'newsletter_subscribe_name_required' => [
+				'type' => 'ct-switch',
+				'label' => __('Make Name Field Required', 'blocksy-companion'),
+				'value' => 'no',
+				'disableRevertButton' => true,
 			],
 		],
 	],
