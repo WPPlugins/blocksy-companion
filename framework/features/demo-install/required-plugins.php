@@ -4,61 +4,65 @@ namespace Blocksy;
 
 
 class DemoInstallPluginsInstaller {
-	protected $has_streaming = true;
 	protected $plugins = null;
+	protected $plugin_name = null;
+	protected $is_ajax_request = true;
 
 	public function __construct($args = []) {
 		$args = wp_parse_args($args, [
-			'has_streaming' => true,
-			'plugins' => null
+			'plugins' => null,
+			'is_ajax_request' => true,
 		]);
 
-		if (
-			!$args['plugins']
-			&&
-			isset($_REQUEST['plugins'])
-			&&
-			$_REQUEST['plugins']
-		) {
-			$args['plugins'] = $_REQUEST['plugins'];
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$request_plugins = isset($_REQUEST['plugins']) ? sanitize_text_field(wp_unslash($_REQUEST['plugins'])) : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$request_plugin_name = isset($_REQUEST['plugin_name']) ? sanitize_text_field(wp_unslash($_REQUEST['plugin_name'])) : '';
+
+		if (! $args['plugins'] && $request_plugins !== '') {
+			$args['plugins'] = $request_plugins;
 		}
 
-		$this->has_streaming = $args['has_streaming'];
 		$this->plugins = $args['plugins'];
+		$this->plugin_name = $request_plugin_name;
+		$this->is_ajax_request = $args['is_ajax_request'];
 	}
 
 	public function import() {
-		if ($this->has_streaming) {
-			Plugin::instance()->demo->start_streaming();
+		if (
+			! current_user_can('edit_theme_options')
+			&&
+			$this->is_ajax_request
+		) {
+			wp_send_json_error([
+				'message' => __("Sorry, you don't have permission to install plugins.", 'blocksy-companion')
+			]);
+		}
 
-			if (! current_user_can('edit_theme_options')) {
-				Plugin::instance()->demo->emit_sse_message([
-					'action' => 'complete',
-					'error' => false,
+		if (empty($this->plugins)) {
+			if ($this->is_ajax_request) {
+				wp_send_json_error([
+					'message' => __("No plugins to install.", 'blocksy-companion')
 				]);
-				exit;
-			}
-
-			if (! isset($_REQUEST['plugins']) || !$_REQUEST['plugins']) {
-				Plugin::instance()->demo->emit_sse_message([
-					'action' => 'complete',
-					'error' => false,
-				]);
-				exit;
+			} else {
+				return new \WP_Error(
+					'blocksy_demo_install_plugins_no_plugins',
+					__("No plugins to install.", 'blocksy-companion')
+				);
 			}
 		}
 
 		$plugins = explode(':', $this->plugins);
 
+		ob_start();
+
+		remove_action(
+			'upgrader_process_complete',
+			['Language_Pack_Upgrader', 'async_upgrade'],
+			20
+		);
+
 		foreach ($plugins as $single_plugin) {
-			if ($single_plugin === 'woocommerce') {
-				if (empty(get_option('woocommerce_db_version'))) {
-					update_option('woocommerce_db_version', '0.0.0');
-				}
-
-				$this->maybe_fix_woo_db_tables();
-			}
-
 			if ($single_plugin === 'stackable-ultimate-gutenberg-blocks') {
 				$stackable_pro_status = $this->get_plugin_status(
 					'stackable-ultimate-gutenberg-blocks-premium'
@@ -69,44 +73,56 @@ class DemoInstallPluginsInstaller {
 				}
 			}
 
-			if ($this->has_streaming) {
-				Plugin::instance()->demo->emit_sse_message([
-					'action' => 'install_plugin',
-					'name' => $single_plugin
-				]);
+			$prepare_install_result = $this->prepare_install($single_plugin);
+
+			if (is_wp_error($prepare_install_result) || $prepare_install_result === false) {
+				$error = is_wp_error($prepare_install_result) ? $prepare_install_result : new \WP_Error(
+					'blocksy_demo_install_plugins_prepare_install_failed',
+					__('Could not prepare plugin installation.', 'blocksy-companion')
+				);
+
+				if ($this->is_ajax_request) {
+					wp_send_json_error([
+						'message' => $error->get_error_message(),
+						'code' => $error->get_error_code(),
+					]);
+				}
+
+				return $error;
 			}
 
-			$this->prepare_install($single_plugin);
+			$plugin_activation_result = $this->plugin_activation($single_plugin);
 
-			echo $single_plugin;
+			if (is_wp_error($plugin_activation_result)) {
+				if ($this->is_ajax_request) {
+					wp_send_json_error([
+						'message' => blocksy_companion_safe_sprintf(
+							/* translators: %s: Plugin name */
+							__('Can\'t install and activate %s plugin.', 'blocksy-companion'),
+							'<b>' . ($this->plugin_name ? $this->plugin_name : $single_plugin) . '</b>'
+						),
+						'code' => $plugin_activation_result->get_error_code(),
+					]);
+				}
 
-			if ($this->has_streaming) {
-				Plugin::instance()->demo->emit_sse_message([
-					'action' => 'activate_plugin',
-					'name' => $single_plugin
-				]);
+				return $plugin_activation_result;
 			}
 
-			$this->plugin_activation($single_plugin);
-		}
-			
-		if ($this->has_streaming) {
-			Plugin::instance()->demo->emit_sse_message([
-				'action' => 'complete',
-				'error' => false,
-			]);
+			if ($single_plugin === 'woocommerce') {
+				if (empty(get_option('woocommerce_db_version'))) {
+					update_option('woocommerce_db_version', '0.0.0');
+				}
 
-			exit;
+				if (class_exists('WC_Install')) {
+					\WC_Install::install();
+				}
+			}
 		}
-	}
 
-	public function maybe_fix_woo_db_tables() {
-		if (
-			class_exists('WC_Install')
-			&&
-			method_exists('WC_Install', 'verify_base_tables')
-		) {
-			$missing_tables = \WC_Install::verify_base_tables( true, true );
+		ob_get_clean();
+
+		if ($this->is_ajax_request) {
+			wp_send_json_success();
 		}
 	}
 
@@ -176,7 +192,7 @@ class DemoInstallPluginsInstaller {
 
 		if (is_multisite()) {
 			// Only network admin can change files that affects the entire network.
-			$can = current_user_can_for_blog(get_current_blog_id(), $capability);
+			$can = current_user_can_for_site(get_current_blog_id(), $capability);
 		} else {
 			$can = current_user_can($capability);
 		}
@@ -256,9 +272,14 @@ class DemoInstallPluginsInstaller {
 			if (! $this->is_plugin_active($full_name)) {
 				return activate_plugin($full_name, '', false, true);
 			}
+
+			return true;
 		}
 
-		return new \WP_Error();
+		return new \WP_Error(
+			'blocksy_demo_install_plugins_not_installed',
+			__('Plugin is not installed.', 'blocksy-companion')
+		);
 	}
 
     public function get_plugin_status($slug) {
@@ -314,4 +335,3 @@ class DemoInstallPluginsInstaller {
 		WP_Filesystem();
 	}
 }
-

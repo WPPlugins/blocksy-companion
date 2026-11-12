@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 $options = [];
 
 $posts_options = [];
@@ -7,7 +11,7 @@ $posts_options = [];
 if ($filter === 'all' || $filter === 'archive') {
 	$posts_options[] = [
 		'id' => 'all_post_archives',
-		'title' => __('All Post Archives', 'blocksy-companion')
+		'title' => __('Post Archives', 'blocksy-companion')
 	];
 
 	$posts_options[] = [
@@ -19,6 +23,30 @@ if ($filter === 'all' || $filter === 'archive') {
 		'id' => 'post_tags',
 		'title' => __('Post Tags', 'blocksy-companion')
 	];
+
+	$taxonomies = get_object_taxonomies('post');
+	$taxonomies = array_diff($taxonomies, ['category', 'post_tag', 'post_format']);
+
+	foreach ($taxonomies as $single_taxonomy) {
+		$taxonomy = get_taxonomy($single_taxonomy);
+
+		if (!$taxonomy) {
+			continue;
+		}
+
+		if (!$taxonomy->publicly_queryable) {
+			continue;
+		}
+
+		$posts_options[] = [
+			'id' => 'post_type_post_taxonomy_' . $single_taxonomy,
+			'title' => blocksy_companion_safe_sprintf(
+				// translators: %1$s is the label of the taxonomy.
+				__('Post %1$s', 'blocksy-companion'),
+				$taxonomy->label
+			)
+		];
+	}
 }
 
 if ($filter === 'all' || $filter === 'singular') {

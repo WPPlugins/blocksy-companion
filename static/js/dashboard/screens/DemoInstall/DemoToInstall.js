@@ -7,15 +7,8 @@ import {
 	createContext,
 	Fragment,
 } from '@wordpress/element'
-import {
-	Dialog,
-	DialogOverlay,
-	DialogContent,
-} from '../../../helpers/reach/dialog'
 
-import Overlay from '../../../helpers/Overlay'
-
-import { Transition } from 'blocksy-options'
+import { Transition, Overlay } from 'blocksy-options'
 import { __ } from 'ct-i18n'
 import cn from 'classnames'
 import DashboardContext from '../../DashboardContext'
@@ -39,6 +32,7 @@ const DemoToInstall = ({ location, navigate }) => {
 		pluginsStatus,
 		currentlyInstalledDemo: globalCurrentlyInstalledDemo,
 		setCurrentDemo,
+		filters,
 	} = useContext(DemosContext)
 
 	const { is_child_theme } = useContext(DashboardContext)
@@ -65,10 +59,10 @@ const DemoToInstall = ({ location, navigate }) => {
 
 	const configurationSteps = [
 		'modify_demo',
-		'child_theme',
+		// 'child_theme',
 		'builder',
-		'plugins',
 		'content',
+		'plugins',
 		'installer',
 	].filter((step) => {
 		if (!currentDemo) {
@@ -129,6 +123,8 @@ const DemoToInstall = ({ location, navigate }) => {
 	})
 
 	const stepName = configurationSteps[currentConfigurationStep]
+	const isLastConfigStep =
+		currentConfigurationStep === configurationSteps.indexOf('installer') - 1
 
 	useEffect(() => {
 		if (!properDemoName) return
@@ -151,13 +147,24 @@ const DemoToInstall = ({ location, navigate }) => {
 		setCurrentConfigurationStep(0)
 		setCurrentlyInstalledDemo(globalCurrentlyInstalledDemo)
 
+		let demoVariationToUse = demoVariations[0]
+
+		if (filters.builder !== 'all') {
+			const maybeDemoVariation = demoVariations.find(
+				({ builder }) => builder === filters.builder
+			)
+
+			if (maybeDemoVariation) {
+				demoVariationToUse = maybeDemoVariation
+			}
+		}
+
 		setDemoConfiguration({
-			builder:
-				demoVariations.length === 1 ? demoVariations[0].builder : null,
+			builder: demoVariationToUse.builder,
 
 			child_theme: false,
 
-			plugins: demoVariations[0].plugins.map((plugin) => ({
+			plugins: demoVariationToUse.plugins.map((plugin) => ({
 				plugin,
 				enabled: true,
 			})),
@@ -188,6 +195,13 @@ const DemoToInstall = ({ location, navigate }) => {
 
 				setCurrentDemo(`${properDemoName}:hide`)
 			}}
+			onDismissed={() => {
+				// Ideally, we should unmount this component fully when installer is done
+				// and have the state reset on mount.
+				//
+				// But, due to animation limitations in Overlay component, this will do.
+				setCurrentConfigurationStep(0)
+			}}
 			render={() => (
 				<div className="ct-modal-content ct-demo-step-container">
 					<div className="ct-current-step">
@@ -207,86 +221,85 @@ const DemoToInstall = ({ location, navigate }) => {
 											duration: 150,
 									  }
 							}}>
-							{(stepName) => (props) =>
-								(
-									<Fragment>
-										{stepName === 'modify_demo' && (
-											<ModifyDemo
-												demoConfiguration={
-													demoConfiguration
-												}
-												nextStep={() => {
-													setCurrentConfigurationStep(
-														Math.min(
-															currentConfigurationStep +
-																1,
-															configurationSteps.length -
-																1
-														)
+							{(props, stepName) => (
+								<Fragment>
+									{stepName === 'modify_demo' && (
+										<ModifyDemo
+											demoConfiguration={
+												demoConfiguration
+											}
+											nextStep={() => {
+												setCurrentConfigurationStep(
+													Math.min(
+														currentConfigurationStep +
+															1,
+														configurationSteps.length -
+															1
 													)
-												}}
-												style={props}
-											/>
-										)}
+												)
+											}}
+											style={props}
+										/>
+									)}
 
-										{stepName === 'child_theme' && (
-											<ChildTheme
-												style={props}
-												demoConfiguration={
-													demoConfiguration
-												}
-												setDemoConfiguration={
-													setDemoConfiguration
-												}
-											/>
-										)}
+									{stepName === 'child_theme' && (
+										<ChildTheme
+											style={props}
+											demoConfiguration={
+												demoConfiguration
+											}
+											setDemoConfiguration={
+												setDemoConfiguration
+											}
+										/>
+									)}
 
-										{stepName === 'plugins' && (
-											<Plugins
-												demoConfiguration={
-													demoConfiguration
-												}
-												style={props}
-												setDemoConfiguration={
-													setDemoConfiguration
-												}
-											/>
-										)}
+									{stepName === 'plugins' && (
+										<Plugins
+											demoConfiguration={
+												demoConfiguration
+											}
+											style={props}
+											setDemoConfiguration={
+												setDemoConfiguration
+											}
+										/>
+									)}
 
-										{stepName === 'builder' && (
-											<PickBuilder
-												style={props}
-												demoConfiguration={
-													demoConfiguration
-												}
-												setDemoConfiguration={
-													setDemoConfiguration
-												}
-											/>
-										)}
+									{stepName === 'builder' && (
+										<PickBuilder
+											style={props}
+											demoConfiguration={
+												demoConfiguration
+											}
+											setDemoConfiguration={
+												setDemoConfiguration
+											}
+										/>
+									)}
 
-										{stepName === 'content' && (
-											<Content
-												style={props}
-												demoConfiguration={
-													demoConfiguration
-												}
-												setDemoConfiguration={
-													setDemoConfiguration
-												}
-											/>
-										)}
+									{stepName === 'content' && (
+										<Content
+											style={props}
+											demoConfiguration={
+												demoConfiguration
+											}
+											setDemoConfiguration={
+												setDemoConfiguration
+											}
+										/>
+									)}
 
-										{stepName === 'installer' && (
-											<DemoInstaller
-												style={props}
-												demoConfiguration={
-													demoConfiguration
-												}
-											/>
-										)}
-									</Fragment>
-								)}
+									{stepName === 'installer' && (
+										<DemoInstaller
+											style={props}
+											demoConfiguration={
+												demoConfiguration
+											}
+										/>
+									)}
+								</Fragment>
+							)}
 						</Transition>
 					</div>
 
@@ -327,7 +340,7 @@ const DemoToInstall = ({ location, navigate }) => {
 							<button
 								className="ct-demo-btn demo-main-btn"
 								disabled={
-									stepName === 'content' &&
+									isLastConfigStep &&
 									getStepsForDemoConfiguration({
 										demoConfiguration,
 										pluginsStatus,
@@ -342,7 +355,7 @@ const DemoToInstall = ({ location, navigate }) => {
 										)
 									)
 								}}>
-								{stepName === 'content'
+								{isLastConfigStep
 									? __('Install', 'blocksy-companion')
 									: __('Next', 'blocksy-companion')}
 							</button>

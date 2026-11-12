@@ -1,27 +1,12 @@
-import { useContext } from '@wordpress/element'
+import { useContext, useState, useEffect } from '@wordpress/element'
 import { ConditionsDataContext } from '../ConditionsManager'
 
 const useConditionsData = (condition = null) => {
-	const { isAdvancedMode, filter, allTaxonomies, allLanguages, allUsers } =
-		useContext(ConditionsDataContext)
+	const { isAdvancedMode, remoteConditions, allLanguages } = useContext(
+		ConditionsDataContext
+	)
 
-	let rulesToUse = blocksy_admin.all_condition_rules
-
-	if (filter === 'singular') {
-		rulesToUse = blocksy_admin.singular_condition_rules
-	}
-
-	if (filter === 'archive') {
-		rulesToUse = blocksy_admin.archive_condition_rules
-	}
-
-	if (filter === 'product_tabs') {
-		rulesToUse = blocksy_admin.product_tabs_rules
-	}
-
-	if (filter === 'maintenance-mode') {
-		rulesToUse = blocksy_admin.maintenance_mode_rules
-	}
+	let rulesToUse = remoteConditions
 
 	const allRules = rulesToUse
 		.reduce(
@@ -56,9 +41,7 @@ const useConditionsData = (condition = null) => {
 		isAdvancedMode,
 		allRules,
 		rulesToUse,
-		allTaxonomies,
 		allLanguages,
-		allUsers,
 	}
 }
 

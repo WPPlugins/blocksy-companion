@@ -9,18 +9,13 @@ import { Switch } from 'blocksy-options'
 
 import ConditionsWithRelation from './ConditionsManager/ConditionsWithRelation'
 
-import useConditionsData from './ConditionsManager/useConditionsData'
-
 export const ConditionsDataContext = createContext({
-	filter: 'all',
-	allTaxonomies: [],
 	allLanguages: [],
-	allUsers: [],
+	remoteConditions: [],
 })
 
-let allTaxonomiesCache = []
 let allLanguagesCache = []
-let allUsersCache = []
+let remoteConditionsCache = []
 
 const ConditionsManager = ({
 	value,
@@ -28,16 +23,16 @@ const ConditionsManager = ({
 	filter = 'all',
 	addConditionButtonLabel,
 }) => {
-	const { rulesToUse } = useConditionsData()
-
-	const [allTaxonomies, setAllTaxonomies] = useState(allTaxonomiesCache)
 	const [allLanguages, setAllLanguages] = useState(allLanguagesCache)
-	const [allUsers, setAllUsers] = useState(allUsersCache)
+	const [remoteConditions, setRemoteConditions] = useState(
+		remoteConditionsCache
+	)
+
 	const [isAdvancedModeInternal, setIsAdvancedMode] = useState('__EMPTY__')
 
 	useEffect(() => {
 		fetch(
-			`${wp.ajax.settings.url}?action=blocksy_conditions_get_all_taxonomies`,
+			`${wp.ajax.settings.url}?action=blc_retrieve_conditions_data&filter=${filter}`,
 			{
 				headers: {
 					Accept: 'application/json',
@@ -47,15 +42,12 @@ const ConditionsManager = ({
 			}
 		)
 			.then((r) => r.json())
-			.then(({ data: { taxonomies, languages, users } }) => {
-				setAllTaxonomies(taxonomies)
-				allTaxonomiesCache = taxonomies
-
+			.then(({ data: { languages, conditions } }) => {
 				setAllLanguages(languages)
 				allLanguagesCache = languages
 
-				setAllUsers(users)
-				allUsersCache = users
+				setRemoteConditions(conditions)
+				remoteConditionsCache = conditions
 			})
 	}, [])
 
@@ -150,10 +142,8 @@ const ConditionsManager = ({
 	return (
 		<ConditionsDataContext.Provider
 			value={{
-				allTaxonomies,
 				allLanguages,
-				allUsers,
-				filter,
+				remoteConditions,
 				isAdvancedMode,
 			}}>
 			<div className="ct-display-conditions">
@@ -170,9 +160,13 @@ const ConditionsManager = ({
 				<div className="ct-conditions-actions">
 					<button
 						type="button"
-						className="button add-condition"
+						className="ct-ui-button add-condition"
 						onClick={(e) => {
 							e.preventDefault()
+
+							if (remoteConditions.length === 0) {
+								return
+							}
 
 							onChange({
 								...conditionsListDescriptor,
@@ -180,7 +174,7 @@ const ConditionsManager = ({
 									...conditionsListDescriptor.conditions,
 									{
 										type: 'include',
-										rule: rulesToUse[0].rules[0].id,
+										rule: remoteConditions[0].rules[0].id,
 										payload: {},
 									},
 								],

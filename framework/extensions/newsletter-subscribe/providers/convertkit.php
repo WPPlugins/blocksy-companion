@@ -3,8 +3,8 @@
 namespace Blocksy\Extensions\NewsletterSubscribe;
 
 class ConvertKitProvider extends Provider {
-	public function fetch_lists($api_key) {
-		
+	public function fetch_lists($api_key, $api_url = '') {
+
 		if (! $api_key) {
 			return 'api_key_invalid';
 		}
@@ -13,7 +13,7 @@ class ConvertKitProvider extends Provider {
 			'https://api.convertkit.com/v3/forms/?api_key=' . $api_key,
 			[]
 		);
-		
+
 		if (! is_wp_error($response)) {
 			if (200 !== wp_remote_retrieve_response_code($response)) {
 				return 'api_key_invalid';
@@ -36,26 +36,21 @@ class ConvertKitProvider extends Provider {
 		}
 	}
 
-	public function get_form_url_and_gdpr_for($maybe_custom_list = null) {
-		return [
-			'form_url' => '#',
-			'has_gdpr_fields' => false,
-			'provider' => 'convertkit'
-		];
-	}
-
 	public function subscribe_form($args = []) {
 		$args = wp_parse_args($args, [
 			'email' => '',
 			'name' => '',
+			'group' => '',
 		]);
 
 		$settings = $this->get_settings();
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_init
 		$curl = curl_init();
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_setopt_array
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://api.convertkit.com/v3/forms/' . $settings['list_id'] . '/subscribe',
+			CURLOPT_URL => 'https://api.convertkit.com/v3/forms/' . rawurlencode($args['group']) . '/subscribe',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
 			CURLOPT_MAXREDIRS => 10,
@@ -72,9 +67,12 @@ class ConvertKitProvider extends Provider {
 			),
 		));
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_exec
 		$response = curl_exec($curl);
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_error
 		$err = curl_error($curl);
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.curl_curl_close
 		curl_close($curl);
 
 		if ($err) {
@@ -94,9 +92,8 @@ class ConvertKitProvider extends Provider {
 
 			return [
 				'result' => 'yes',
-				'message' => __('Thank you for subscribing to our newsletter!', 'blocksy-companion')
+				'message' => NewsletterMessages::subscribed_successfully()
 			];
 		}
 	}
 }
-

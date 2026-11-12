@@ -33,15 +33,67 @@ class Provider {
 			return new ConvertKitProvider();
 		}
 
+		if ($provider === 'convertkit-new') {
+			return new ConvertKitNewProvider();
+		}
+
 		if ($provider === 'demo') {
 			return new DemoProvider();
+		}
+
+		if ($provider === 'mailpoet') {
+			return new MailPoetProvider();
+		}
+
+		if ($provider === 'activecampaign') {
+			return new ActiveCampaignProvider();
+		}
+
+		if ($provider === 'fluentcrm') {
+			return new FluentCRMProvider();
+		}
+
+		if ($provider === 'emailoctopus') {
+			return new EmailOctopusProvider();
+		}
+
+		if ($provider === 'klaviyo') {
+			return new KlaviyoProvider();
+		}
+
+		if ($provider === 'sendy') {
+			return new SendyProvider();
 		}
 
 		return new MailerliteClassicProvider();
 	}
 
-	public function fetch_lists($api_key) {
+	public function fetch_lists($api_key, $api_url) {
 		return [];
+	}
+
+	public function get_list($list_id) {
+		$settings = $this->get_settings();
+		$lists = $this->fetch_lists(
+			$settings['api_key'],
+			$settings['api_url'] ?? ''
+		);
+
+		if (! is_array($lists)) {
+			return null;
+		}
+
+		foreach ($lists as $list) {
+			if (
+				isset($list['id'])
+				&&
+				(string) $list['id'] === (string) $list_id
+			) {
+				return $list;
+			}
+		}
+
+		return null;
 	}
 
 	public function get_settings() {
@@ -58,7 +110,7 @@ class Provider {
 			&&
 			! in_array($option['provider'], $free_providers)
 			&&
-			blc_get_capabilities()->get_plan() === 'free'
+			blocksy_companion_get_capabilities()->get_plan() === 'free'
 		) {
 			$option['provider'] = $free_providers[0];
 		}
@@ -81,7 +133,7 @@ class Provider {
 	public function can($capability = 'manage_options') {
 		if (is_multisite()) {
 			// Only network admin can change files that affects the entire network.
-			$can = current_user_can_for_blog( get_current_blog_id(), $capability );
+			$can = current_user_can_for_site( get_current_blog_id(), $capability );
 		} else {
 			$can = current_user_can( $capability );
 		}
@@ -93,5 +145,25 @@ class Provider {
 
 		return $can;
 	}
-}
 
+	public function maybe_split_name($full_name) {
+		$lname = '';
+		$fname = '';
+
+		if (! empty($full_name)) {
+			$parts = explode(' ', $full_name);
+
+			if (count($parts) > 1) {
+				$lname = array_pop($parts);
+				$fname = implode(' ', $parts);
+			} else {
+				$fname = $full_name;
+			}
+		}
+
+		return [
+			'first_name' => $fname,
+			'last_name' => $lname,
+		];
+	}
+}
