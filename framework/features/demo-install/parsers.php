@@ -1,5 +1,11 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
+// phpcs:ignoreFile
+
 /**
  * WordPress eXtended RSS file parser implementations
  *
@@ -13,7 +19,7 @@
 class Blocksy_WXR_Parser {
 	function parse( $file ) {
 		// Attempt to use proper XML parsers first
-		if (extension_loaded('simplexml')) {
+		if (extension_loaded('simplexml') && class_exists('DOMDocument')) {
 			$parser = new Blocksy_WXR_Parser_SimpleXML;
 			$result = $parser->parse($file);
 
@@ -50,8 +56,8 @@ class Blocksy_WXR_Parser {
 				echo $error[0] . ':' . $error[1] . ' ' . esc_html( $error[2] );
 			}
 			echo '</pre>';
-			echo '<p><strong>' . __( 'There was an error when reading this WXR file', 'wordpress-importer' ) . '</strong><br />';
-			echo __( 'Details are shown above. The importer will now try again with a different parser...', 'wordpress-importer' ) . '</p>';
+			echo '<p><strong>' . __( 'There was an error when reading this WXR file', 'blocksy-companion' ) . '</strong><br />';
+			echo __( 'Details are shown above. The importer will now try again with a different parser...', 'blocksy-companion' ) . '</p>';
 		}
 
 		// use regular expressions if nothing else available or this is bad XML
@@ -78,14 +84,23 @@ class Blocksy_WXR_Parser_SimpleXML {
 		) {
 			$old_value = libxml_disable_entity_loader(true);
 		}
-		$success = $dom->loadXML(blc_load_xml_file($file));
+
+		$content = '';
+
+		if (strpos($file, '<?xml') === false) {
+			$content = blocksy_companion_request_remote_url($file);
+		} else {
+			$content = $file;
+		}
+
+		$success = $dom->loadXML($content);
 
 		if (! is_null($old_value)) {
 			libxml_disable_entity_loader($old_value);
 		}
 
 		if ( ! $success || isset( $dom->doctype ) ) {
-			return new WP_Error( 'SimpleXML_parse_error', __( 'There was an error when reading this WXR file', 'wordpress-importer' ), libxml_get_errors() );
+			return new WP_Error( 'SimpleXML_parse_error', __( 'There was an error when reading this WXR file', 'blocksy-companion' ), libxml_get_errors() );
 		}
 
 		$xml = simplexml_import_dom( $dom );
@@ -93,16 +108,16 @@ class Blocksy_WXR_Parser_SimpleXML {
 
 		// halt if loading produces an error
 		if ( ! $xml )
-			return new WP_Error( 'SimpleXML_parse_error', __( 'There was an error when reading this WXR file', 'wordpress-importer' ), libxml_get_errors() );
+			return new WP_Error( 'SimpleXML_parse_error', __( 'There was an error when reading this WXR file', 'blocksy-companion' ), libxml_get_errors() );
 
 		$wxr_version = $xml->xpath('/rss/channel/wp:wxr_version');
 		if ( ! $wxr_version )
-			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'wordpress-importer' ) );
+			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'blocksy-companion' ) );
 
 		$wxr_version = (string) trim( $wxr_version[0] );
 		// confirm that we are dealing with the correct file format
 		if ( ! preg_match( '/^\d+\.\d+$/', $wxr_version ) )
-			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'wordpress-importer' ) );
+			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'blocksy-companion' ) );
 
 		$base_url = $xml->xpath('/rss/channel/wp:base_site_url');
 		$base_url = (string) trim( $base_url[0] );
@@ -334,7 +349,15 @@ class Blocksy_WXR_Parser_XML {
 		xml_set_character_data_handler($xml, 'cdata');
 		xml_set_element_handler($xml, 'tag_open', 'tag_close');
 
-		if (! xml_parse($xml, blc_load_xml_file($file), true)) {
+		$content = '';
+
+		if (strpos($file, '<?xml') === false) {
+			$content = blocksy_companion_request_remote_url($file);
+		} else {
+			$content = $file;
+		}
+
+		if (! xml_parse($xml, $content, true)) {
 			$current_line = xml_get_current_line_number($xml);
 			$current_column = xml_get_current_column_number($xml);
 			$error_code = xml_get_error_code($xml);
@@ -353,7 +376,7 @@ class Blocksy_WXR_Parser_XML {
 				'WXR_parse_error',
 				__(
 					'This does not appear to be a WXR file, missing/invalid WXR version number',
-					'wordpress-importer'
+					'blocksy-companion'
 				)
 			);
 		}
@@ -485,8 +508,11 @@ class Blocksy_WXR_Parser_Regex {
 	var $terms = [];
 	var $base_url = '';
 
+	private $has_gzip = false;
+
 	function __construct() {
-		$this->has_gzip = is_callable('gzopen');
+		// $this->has_gzip = is_callable('gzopen');
+		$this->has_gzip = false;
 	}
 
 	function parse($file) {
@@ -567,7 +593,7 @@ class Blocksy_WXR_Parser_Regex {
 				'WXR_parse_error',
 				__(
 					'This does not appear to be a WXR file, missing/invalid WXR version number',
-					'wordpress-importer'
+					'blocksy-companion'
 				)
 			);
 		}

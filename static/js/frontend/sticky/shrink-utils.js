@@ -8,6 +8,11 @@ export const getRowInitialMinHeight = (el) => {
 	const elComp = getComputedStyle(el)
 	let containerStyles = getComputedStyle(el.firstElementChild)
 
+	// If row is not visible, return 0
+	if (elComp.display === 'none') {
+		return 0
+	}
+
 	let borderHeight =
 		parseFloat(elComp.borderTopWidth) +
 		parseFloat(elComp.borderBottomWidth) +
@@ -52,16 +57,32 @@ export const getRowInitialMinHeight = (el) => {
 		}
 	}
 
-	if (el.querySelector('[data-items] > [data-id*="widget-area"]')) {
-		const widgetAreaComp = getComputedStyle(
-			el.querySelector('[data-items] > [data-id*="widget-area"]')
-		)
+	const selectorsWithExpandedHeight = ['[data-items] > [data-id*="menu"]']
 
-		let widgetAreaHeight = parseFloat(widgetAreaComp.height)
+	const selectors = [
+		'[data-items] > [data-id*="widget-area"]',
+		'[data-items] > [data-id*="content-block"]',
+		'[data-items] > [data-id*="text"]',
 
-		if (widgetAreaHeight > rowHeight) {
-			rowHeight = widgetAreaHeight
+		...selectorsWithExpandedHeight,
+	]
+
+	let maxHeight = selectors.reduce((acc, selector) => {
+		if (el.querySelector(selector)) {
+			const comp = getComputedStyle(el.querySelector(selector))
+
+			let height = parseFloat(comp.height)
+
+			if (height > acc) {
+				return height
+			}
 		}
+
+		return acc
+	}, 0)
+
+	if (maxHeight > rowHeight) {
+		rowHeight = maxHeight
 	}
 
 	return rowHeight + borderHeight
@@ -108,13 +129,25 @@ export const getRowStickyHeight = (el, hasBorder = true) => {
 
 		let stickyHeight = el.getBoundingClientRect().height - borderHeight
 
-		if (
-			stickyHeight !== rowStickyHeight ||
-			// case when content is forcing the initial height to be bigger
-			rowStickyHeight > getRowInitialMinHeight(el)
-		) {
-			el.blcStickyHeight = el.getBoundingClientRect().height
-			return stickyHeight
+		const rowInitialMinHeight = getRowInitialMinHeight(el)
+
+		const hasLogoWithShrink =
+			el.querySelector('.site-logo-container') &&
+			parseFloat(
+				getComputedStyle(
+					el.querySelector('.site-logo-container')
+				).getPropertyValue('--logo-sticky-shrink') || 1
+			) < 1
+
+		if (!hasLogoWithShrink) {
+			if (
+				Math.round(stickyHeight) !== Math.round(rowStickyHeight) ||
+				// case when content is forcing the initial height to be bigger
+				Math.round(rowStickyHeight) > Math.round(rowInitialMinHeight)
+			) {
+				el.blcStickyHeight = el.getBoundingClientRect().height
+				return stickyHeight
+			}
 		}
 	}
 
@@ -163,11 +196,18 @@ export const getRowStickyHeight = (el, hasBorder = true) => {
 }
 
 export const maybeSetStickyHeightAnimated = (cb = () => 0) => {
-	const maybeFloatingCart = document.querySelector('.ct-floating-bar')
+	const value = cb()
 
-	if (!maybeFloatingCart) {
-		return
-	}
-
-	maybeFloatingCart.style.setProperty('--header-sticky-height-animated', cb())
+	document
+		.querySelectorAll(
+			[
+				'.ct-floating-bar',
+				'.ct-order-review',
+				'.sticky-summary .entry-summary',
+				'.sticky-gallery .woocommerce-product-gallery',
+			].join(',')
+		)
+		.forEach((el) => {
+			el.style.setProperty('--header-sticky-height-animated', value)
+		})
 }
