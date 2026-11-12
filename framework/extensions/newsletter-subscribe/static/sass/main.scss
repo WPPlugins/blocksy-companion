@@ -1,4 +1,2 @@
-@import '../../../../../static/sass/common-frontend';
-@import 'common';
-@import 'widget';
-@import 'single-block';
+@use 'common';
+@use 'single-block';
