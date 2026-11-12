@@ -1,4 +1,5 @@
 import { setTransparencyFor } from '../sticky'
+import { whenTransitionEnds } from '../../helpers/when-transition-ends'
 
 export const computeFadeSlide = ({
 	stickyContainer,
@@ -6,10 +7,6 @@ export const computeFadeSlide = ({
 	startPosition,
 	stickyComponents,
 }) => {
-	let containerInitialHeight = Array.from(
-		stickyContainer.querySelectorAll('[data-row]')
-	).reduce((sum, el) => sum + el.getBoundingClientRect().height, 0)
-
 	if (isSticky) {
 		if (stickyContainer.dataset.sticky.indexOf('yes') === -1) {
 			stickyContainer.dataset.sticky = [
@@ -17,27 +14,21 @@ export const computeFadeSlide = ({
 				...stickyComponents,
 			].join(':')
 
-			requestAnimationFrame(() => {
-				stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
-					'yes-start',
-					'yes-end'
-				)
-
-				setTimeout(() => {
-					stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
-						'yes-end',
-						'yes'
+			setTimeout(() => {
+				stickyContainer.dataset.sticky =
+					stickyContainer.dataset.sticky.replace(
+						'yes-start',
+						'yes-end'
 					)
-				}, 200)
-			})
+
+				whenTransitionEnds(stickyContainer, () => {
+					stickyContainer.dataset.sticky =
+						stickyContainer.dataset.sticky.replace('yes-end', 'yes')
+				})
+			}, 1)
 		}
 
 		setTransparencyFor(stickyContainer, 'no')
-
-		stickyContainer.parentNode.style.setProperty(
-			'--minHeight',
-			`${containerInitialHeight}px`
-		)
 	} else {
 		if (
 			stickyContainer.dataset.sticky.indexOf('yes-hide') === -1 &&
@@ -47,8 +38,6 @@ export const computeFadeSlide = ({
 				stickyContainer.dataset.sticky = stickyComponents.join(':')
 
 				setTimeout(() => {
-					stickyContainer.parentNode.removeAttribute('style')
-
 					Array.from(
 						stickyContainer.querySelectorAll('[data-row]')
 					).map((row) => row.removeAttribute('style'))
@@ -62,26 +51,24 @@ export const computeFadeSlide = ({
 				].join(':')
 
 				requestAnimationFrame(() => {
-					stickyContainer.dataset.sticky = stickyContainer.dataset.sticky.replace(
-						'yes-hide-start',
-						'yes-hide-end'
-					)
-
-					setTimeout(() => {
-						stickyContainer.dataset.sticky = stickyComponents.join(
-							':'
+					stickyContainer.dataset.sticky =
+						stickyContainer.dataset.sticky.replace(
+							'yes-hide-start',
+							'yes-hide-end'
 						)
 
-						setTimeout(() => {
-							stickyContainer.parentNode.removeAttribute('style')
+					whenTransitionEnds(stickyContainer, () => {
+						stickyContainer.dataset.sticky =
+							stickyComponents.join(':')
 
+						setTimeout(() => {
 							Array.from(
 								stickyContainer.querySelectorAll('[data-row]')
 							).map((row) => row.removeAttribute('style'))
 						}, 300)
 
 						setTransparencyFor(stickyContainer, 'yes')
-					}, 200)
+					})
 				})
 			}
 		}

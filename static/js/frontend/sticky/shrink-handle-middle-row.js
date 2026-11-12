@@ -5,30 +5,45 @@ import {
 	clamp,
 } from './shrink-utils'
 
+let shrinkCache = null
+
+export const clearShrinkCache = () => {
+	shrinkCache = null
+}
+
+const getShrinkData = ({ row }) => {
+	if (shrinkCache) {
+		return shrinkCache
+	}
+
+	let rowInitialHeight = getRowInitialHeight(row)
+	let rowStickyHeight = getRowStickyHeight(row)
+
+	shrinkCache = { rowInitialHeight, rowStickyHeight }
+
+	return shrinkCache
+}
+
 export const shrinkHandleMiddleRow = ({
 	stickyContainer,
 	containerInitialHeight,
 	startPosition,
 }) => {
-	let containerStickyHeight = Array.from(
-		stickyContainer.querySelectorAll('[data-row]')
-	).reduce((sum, el, index) => sum + getRowStickyHeight(el), 0)
-
-	if (
-		containerStickyHeight === containerInitialHeight ||
-		!stickyContainer.querySelector('[data-row*="middle"]')
-	) {
+	if (!stickyContainer.querySelector('[data-row*="middle"]')) {
 		return
 	}
 
 	;[stickyContainer.querySelector('[data-row*="middle"]')].map((row) => {
-		let rowInitialHeight = getRowInitialHeight(row)
-		let rowStickyHeight = getRowStickyHeight(row)
+		let { rowInitialHeight, rowStickyHeight } = getShrinkData({ row })
 
 		if (rowInitialHeight !== rowStickyHeight) {
-			row.style.setProperty(
-				'--shrinkHeight',
-				`${computeLinearScale(
+			let shrinkHeight = rowStickyHeight
+
+			if (
+				true ||
+				stickyContainer.dataset.sticky.indexOf('auto-hide') === -1
+			) {
+				shrinkHeight = computeLinearScale(
 					[
 						startPosition,
 						startPosition +
@@ -43,7 +58,12 @@ export const shrinkHandleMiddleRow = ({
 
 						scrollY
 					)
-				)}px`
+				)
+			}
+
+			row.style.setProperty(
+				'--shrink-height',
+				`${Math.round(shrinkHeight)}px`
 			)
 		}
 	})

@@ -1,51 +1,123 @@
-import { handleVariablesFor } from 'customizer-sync-helpers'
+import { handleBackgroundOptionFor } from 'blocksy-customizer-sync'
+import ctEvents from 'ct-events'
 
-handleVariablesFor({
-	newsletter_subscribe_content: [
-		{
-			selector: '.ct-newsletter-subscribe-block',
-			variable: 'color',
-			type: 'color:default',
-		},
+ctEvents.on(
+	'ct:customizer:sync:collect-variable-descriptors',
+	(allVariables) => {
+		allVariables.result = {
+			...allVariables.result,
+			newsletter_subscribe_title_color: {
+				selector: '.ct-newsletter-subscribe-container',
+				variable: 'theme-heading-color',
+				type: 'color:default',
+				responsive: true,
+			},
 
-		{
-			selector: '.ct-newsletter-subscribe-block',
-			variable: 'linkHoverColor',
-			type: 'color:hover',
-		},
-	],
+			newsletter_subscribe_content: [
+				{
+					selector: '.ct-newsletter-subscribe-container',
+					variable: 'text-color',
+					type: 'color:default',
+				},
 
-	newsletter_subscribe_button: [
-		{
-			selector: '.ct-newsletter-subscribe-block',
-			variable: 'buttonInitialColor',
-			type: 'color:default',
-		},
+				{
+					selector: '.ct-newsletter-subscribe-container',
+					variable: 'theme-link-hover-color',
+					type: 'color:hover',
+				},
+			],
 
-		{
-			selector: '.ct-newsletter-subscribe-block',
-			variable: 'buttonHoverColor',
-			type: 'color:hover',
-		},
-	],
+			newsletter_subscribe_button: [
+				{
+					selector: '.ct-newsletter-subscribe-container',
+					variable: 'theme-button-background-initial-color',
+					type: 'color:default',
+				},
 
-	newsletter_subscribe_background: {
-		selector: '.ct-newsletter-subscribe-block',
-		variable: 'mailchimpBackground',
-		type: 'color',
-	},
+				{
+					selector: '.ct-newsletter-subscribe-container',
+					variable: 'theme-button-background-hover-color',
+					type: 'color:hover',
+				},
+			],
 
-	newsletter_subscribe_shadow: {
-		selector: '.ct-newsletter-subscribe-block',
-		type: 'box-shadow',
-		variable: 'box-shadow',
-		responsive: true,
-	},
+			newsletter_subscribe_input_font_color: [
+				{
+					selector: '.ct-newsletter-subscribe-container',
+					variable: 'theme-form-text-initial-color',
+					type: 'color:default',
+				},
 
-	newsletter_subscribe_spacing: {
-		selector: '.ct-newsletter-subscribe-block',
-		variable: 'padding',
-		responsive: true,
-		unit: 'px',
-	},
-})
+				{
+					selector: '.ct-newsletter-subscribe-container',
+					variable: 'theme-form-text-focus-color',
+					type: 'color:focus',
+				},
+			],
+
+			newsletter_subscribe_border_color: [
+				{
+					selector: '.ct-newsletter-subscribe-container',
+					variable: 'theme-form-field-border-initial-color',
+					type: 'color:default',
+				},
+
+				{
+					selector: '.ct-newsletter-subscribe-container',
+					variable: 'theme-form-field-border-focus-color',
+					type: 'color:focus',
+				},
+			],
+
+			newsletter_subscribe_input_background: [
+				{
+					selector: '.ct-newsletter-subscribe-container',
+					variable: 'theme-form-field-background-initial-color',
+					type: 'color:default',
+				},
+
+				{
+					selector: '.ct-newsletter-subscribe-container',
+					variable: 'theme-form-field-background-focus-color',
+					type: 'color:focus',
+				},
+			],
+
+			...handleBackgroundOptionFor({
+				id: 'newsletter_subscribe_container_background',
+				selector: '.ct-newsletter-subscribe-container',
+				responsive: true,
+			}),
+
+			newsletter_subscribe_container_border: {
+				selector: '.ct-newsletter-subscribe-container',
+				variable: 'newsletter-container-border',
+				type: 'border',
+				responsive: true,
+				skip_none: true,
+			},
+
+			newsletter_subscribe_shadow: {
+				selector: '.ct-newsletter-subscribe-container',
+				type: 'box-shadow',
+				variable: 'theme-box-shadow',
+				responsive: true,
+			},
+
+			newsletter_subscribe_container_spacing: {
+				selector: '.ct-newsletter-subscribe-container',
+				type: 'spacing',
+				variable: 'padding',
+				responsive: true,
+				emptyValue: 30,
+			},
+
+			newsletter_subscribe_container_border_radius: {
+				selector: '.ct-newsletter-subscribe-container',
+				type: 'spacing',
+				variable: 'theme-border-radius',
+				responsive: true,
+			},
+		}
+	}
+)

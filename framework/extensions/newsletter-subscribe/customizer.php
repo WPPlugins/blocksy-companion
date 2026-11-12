@@ -1,32 +1,35 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 $options = [
-	'label' => __( 'Subscribe Form', 'blc' ),
+	'label' => __( 'Subscribe Form', 'blocksy-companion' ),
 	'type' => 'ct-panel',
 	'switch' => true,
 	'value' => 'yes',
-	'setting' => [ 'transport' => 'postMessage' ],
+	'sync' => blocksy_sync_single_post_container(),
 	'inner-options' => [
 
 		blocksy_rand_md5() => [
-			'title' => __( 'General', 'blc' ),
+			'title' => __( 'General', 'blocksy-companion' ),
 			'type' => 'tab',
 			'options' => [
 
 				'newsletter_subscribe_title' => [
 					'type' => 'text',
-					'label' => __( 'Title', 'blc' ),
-					'field_attr' => [ 'id' => 'widget-title' ],
+					'label' => __( 'Title', 'blocksy-companion' ),
 					'design' => 'block',
-					'value' => __( 'Newsletter Updates', 'blc' ),
+					'value' => __( 'Newsletter Updates', 'blocksy-companion' ),
 					'disableRevertButton' => true,
 					'setting' => [ 'transport' => 'postMessage' ],
 				],
 
 				'newsletter_subscribe_text' => [
-					'label' => __( 'Message', 'blc' ),
+					'label' => __( 'Description', 'blocksy-companion' ),
 					'type' => 'textarea',
-					'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blc' ),
+					'value' => __( 'Enter your email address below and subscribe to our newsletter', 'blocksy-companion' ),
 					'design' => 'block',
 					'disableRevertButton' => true,
 					'setting' => [ 'transport' => 'postMessage' ],
@@ -39,15 +42,15 @@ $options = [
 
 				'newsletter_subscribe_list_id_source' => [
 					'type' => 'ct-radio',
-					'label' => __( 'List Source', 'blc' ),
+					'label' => __( 'List Source', 'blocksy-companion' ),
 					'value' => 'default',
 					'view' => 'radio',
 					'inline' => true,
 					'design' => 'inline',
 					'disableRevertButton' => true,
 					'choices' => [
-						'default' => __('Default', 'blc'),
-						'custom' => __('Custom', 'blc'),
+						'default' => __('Default', 'blocksy-companion'),
+						'custom' => __('Custom', 'blocksy-companion'),
 					],
 
 					'setting' => [ 'transport' => 'postMessage' ],
@@ -59,7 +62,7 @@ $options = [
 					'options' => [
 
 						'newsletter_subscribe_list_id' => [
-							'label' => __( 'List ID', 'blc' ),
+							'label' => __( 'List ID', 'blocksy-companion' ),
 							'type' => 'blocksy-newsletter-subscribe',
 							'value' => '',
 							'design' => 'inline',
@@ -77,10 +80,35 @@ $options = [
 
 				'has_newsletter_subscribe_name' => [
 					'type'  => 'ct-switch',
-					'label' => __( 'Name Field', 'blc' ),
+					'label' => __( 'Name Field', 'blocksy-companion' ),
 					'value' => 'no',
 					'disableRevertButton' => true,
-					'setting' => [ 'transport' => 'postMessage' ],
+					'sync' => blocksy_sync_single_post_container([
+						'loader_selector' => '.ct-newsletter-subscribe-container'
+					]),
+				],
+
+				blocksy_rand_md5() => [
+					'type' => 'ct-condition',
+					'condition' => [ 'has_newsletter_subscribe_name' => 'yes' ],
+					'options' => [
+
+						'newsletter_subscribe_name_required' => [
+							'type' => 'ct-switch',
+							'label' => __('Make Name Field Required', 'blocksy-companion'),
+							'value' => 'no',
+							'disableRevertButton' => true,
+							'sync' => blocksy_sync_single_post_container([
+								'loader_selector' => '.ct-newsletter-subscribe-container'
+							]),
+						],
+
+					],
+				],
+
+				blocksy_rand_md5() => [
+					'type' => 'ct-divider',
+					'attr' => [ 'data-type' => 'small' ],
 				],
 
 				blocksy_rand_md5() => [
@@ -90,30 +118,29 @@ $options = [
 
 						'newsletter_subscribe_name_label' => [
 							'type' => 'text',
-							'label' => __( 'Name Label', 'blc' ),
+							'label' => __( 'Name Label', 'blocksy-companion' ),
 							'design' => 'inline',
-							'value' => __( 'Your name', 'blc' ),
+							'value' => __( 'Your name', 'blocksy-companion' ),
 							'disableRevertButton' => true,
 							'setting' => [ 'transport' => 'postMessage' ],
 						],
-
 					],
 				],
 
 				'newsletter_subscribe_mail_label' => [
 					'type' => 'text',
-					'label' => __( 'Mail Label', 'blc' ),
+					'label' => __( 'Mail Label', 'blocksy-companion' ),
 					'design' => 'inline',
-					'value' => __( 'Your email', 'blc' ),
+					'value' => __( 'Your email', 'blocksy-companion' ),
 					'disableRevertButton' => true,
 					'setting' => [ 'transport' => 'postMessage' ],
 				],
 
 				'newsletter_subscribe_button_text' => [
 					'type' => 'text',
-					'label' => __( 'Button Label', 'blc' ),
+					'label' => __( 'Button Label', 'blocksy-companion' ),
 					'design' => 'inline',
-					'value' => __( 'Subscribe', 'blc' ),
+					'value' => __( 'Subscribe', 'blocksy-companion' ),
 					'disableRevertButton' => true,
 					'setting' => [ 'transport' => 'postMessage' ],
 				],
@@ -123,20 +150,20 @@ $options = [
 				],
 
 				'newsletter_subscribe_subscribe_visibility' => [
-					'label' => __( 'Visibility', 'blc' ),
+					'label' => __( 'Visibility', 'blocksy-companion' ),
 					'type' => 'ct-visibility',
 					'design' => 'block',
 					'setting' => [ 'transport' => 'postMessage' ],
-					'value' => [
+					'value' => blocksy_default_responsive_value([
 						'desktop' => true,
 						'tablet' => true,
 						'mobile' => false,
-					],
+					]),
 
 					'choices' => blocksy_ordered_keys([
-						'desktop' => __( 'Desktop', 'blc' ),
-						'tablet' => __( 'Tablet', 'blc' ),
-						'mobile' => __( 'Mobile', 'blc' ),
+						'desktop' => __( 'Desktop', 'blocksy-companion' ),
+						'tablet' => __( 'Tablet', 'blocksy-companion' ),
+						'mobile' => __( 'Mobile', 'blocksy-companion' ),
 					]),
 				],
 
@@ -144,12 +171,33 @@ $options = [
 		],
 
 		blocksy_rand_md5() => [
-			'title' => __( 'Design', 'blc' ),
+			'title' => __( 'Design', 'blocksy-companion' ),
 			'type' => 'tab',
 			'options' => [
 
+				'newsletter_subscribe_title_color' => [
+					'label' => __( 'Title Color', 'blocksy-companion' ),
+					'type'  => 'ct-color-picker',
+					'design' => 'inline',
+					'setting' => [ 'transport' => 'postMessage' ],
+
+					'value' => [
+						'default' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+					],
+
+					'pickers' => [
+						[
+							'title' => __( 'Initial', 'blocksy-companion' ),
+							'id' => 'default',
+							'inherit' => 'var(--theme-heading-color, var(--theme-heading-3-color, var(--theme-headings-color)))'
+						],
+					],
+				],
+
 				'newsletter_subscribe_content' => [
-					'label' => __( 'Content Color', 'blc' ),
+					'label' => __( 'Text Color', 'blocksy-companion' ),
 					'type'  => 'ct-color-picker',
 					'design' => 'inline',
 					'setting' => [ 'transport' => 'postMessage' ],
@@ -166,82 +214,183 @@ $options = [
 
 					'pickers' => [
 						[
-							'title' => __( 'Initial', 'blc' ),
+							'title' => __( 'Initial', 'blocksy-companion' ),
 							'id' => 'default',
-							'inherit' => 'var(--color)'
+							'inherit' => 'var(--theme-text-color)'
 						],
 
 						[
-							'title' => __( 'Hover', 'blc' ),
+							'title' => __( 'Hover', 'blocksy-companion' ),
 							'id' => 'hover',
-							'inherit' => 'var(--linkHoverColor)'
+							'inherit' => 'var(--theme-link-hover-color)'
 						],
+					],
+				],
+
+				'newsletter_subscribe_input_font_color' => [
+					'label' => __( 'Input Font Color', 'blocksy-companion' ),
+					'type'  => 'ct-color-picker',
+					'design' => 'inline',
+					'divider' => 'top',
+					'setting' => [ 'transport' => 'postMessage' ],
+
+					'value' => [
+						'default' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+
+						'focus' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+					],
+
+					'pickers' => [
+						[
+							'title' => __( 'Initial', 'blocksy-companion' ),
+							'id' => 'default',
+							'inherit' => 'var(--theme-form-text-initial-color, var(--theme-text-color))'
+						],
+
+						[
+							'title' => __( 'Focus', 'blocksy-companion' ),
+							'id' => 'focus',
+							'inherit' => 'var(--theme-form-text-focus-color, var(--theme-text-color))'
+						],
+					],
+				],
+
+				'newsletter_subscribe_border_color' => [
+					'label' => __( 'Input Border Color', 'blocksy-companion' ),
+					'type'  => 'ct-color-picker',
+					'design' => 'inline',
+					'setting' => [ 'transport' => 'postMessage' ],
+
+					'value' => [
+						'default' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+
+						'focus' => [
+							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+						],
+					],
+
+					'pickers' => [
+						[
+							'title' => __( 'Initial', 'blocksy-companion' ),
+							'id' => 'default',
+							'inherit' => 'var(--theme-form-field-border-initial-color)'
+						],
+
+						[
+							'title' => __( 'Focus', 'blocksy-companion' ),
+							'id' => 'focus',
+							'inherit' => 'var(--theme-form-field-border-focus-color)'
+						],
+					],
+				],
+
+				blocksy_rand_md5() => [
+					'type' => 'ct-condition',
+					'condition' => ['forms_type' => 'classic-forms'],
+					'values_source' => 'global',
+					'options' => [
+
+						'newsletter_subscribe_input_background' => [
+							'label' => __( 'Input Background Color', 'blocksy-companion' ),
+							'type'  => 'ct-color-picker',
+							'design' => 'inline',
+							'setting' => [ 'transport' => 'postMessage' ],
+
+							'value' => [
+								'default' => [
+									'color' => Blocksy_Css_Injector::get_skip_rule_keyword(),
+								],
+
+								'focus' => [
+									'color' => Blocksy_Css_Injector::get_skip_rule_keyword(),
+								],
+							],
+
+							'pickers' => [
+								[
+									'title' => __( 'Initial', 'blocksy-companion' ),
+									'id' => 'default',
+								],
+
+								[
+									'title' => __( 'Focus', 'blocksy-companion' ),
+									'id' => 'focus',
+								],
+							],
+						],
+
 					],
 				],
 
 				'newsletter_subscribe_button' => [
-					'label' => __( 'Button Color', 'blc' ),
+					'label' => __( 'Button Color', 'blocksy-companion' ),
 					'type'  => 'ct-color-picker',
 					'design' => 'inline',
 					'setting' => [ 'transport' => 'postMessage' ],
 
 					'value' => [
 						'default' => [
-							'color' => 'var(--paletteColor1)',
+							'color' => 'var(--theme-palette-color-1)',
 						],
 
 						'hover' => [
-							'color' => 'var(--paletteColor2)',
+							'color' => 'var(--theme-palette-color-2)',
 						],
 					],
 
 					'pickers' => [
 						[
-							'title' => __( 'Initial', 'blc' ),
+							'title' => __( 'Initial', 'blocksy-companion' ),
 							'id' => 'default',
 						],
 
 						[
-							'title' => __( 'Hover', 'blc' ),
+							'title' => __( 'Hover', 'blocksy-companion' ),
 							'id' => 'hover',
 						],
 					],
 				],
 
-				'newsletter_subscribe_background' => [
-					'label' => __( 'Background Color', 'blc' ),
-					'type'  => 'ct-color-picker',
-					'design' => 'inline',
-					'setting' => [ 'transport' => 'postMessage' ],
-
-					'value' => [
-						'default' => [
-							'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+				'newsletter_subscribe_container_background' => [
+					'label' => __( 'Container Background', 'blocksy-companion' ),
+					'type' => 'ct-background',
+					'design' => 'block:right',
+					'responsive' => true,
+					'divider' => 'top:full',
+					'sync' => 'live',
+					'value' => blocksy_background_default_value([
+						'backgroundColor' => [
+							'default' => [
+								'color' => 'var(--theme-palette-color-8)',
+							],
 						],
-					],
-
-					'pickers' => [
-						[
-							'title' => __( 'Initial', 'blc' ),
-							'id' => 'default',
-							'inherit' => '#ffffff'
-						],
-					],
+					])
 				],
 
-				'newsletter_subscribe_spacing' => [
-					'label' => __( 'Container Inner Spacing', 'blc' ),
-					'type' => 'ct-slider',
-					'value' => 30,
-					'min' => 0,
-					'max' => 300,
-					'responsive' => true,
+				'newsletter_subscribe_container_border' => [
+					'label' => __( 'Container Border', 'blocksy-companion' ),
+					'type' => 'ct-border',
+					'sync' => 'live',
+					'design' => 'block',
 					'divider' => 'top',
-					'setting' => [ 'transport' => 'postMessage' ],
+					'value' => [
+						'width' => 1,
+						'style' => 'none',
+						'color' => [
+							'color' => 'var(--theme-palette-color-5)',
+						],
+					],
+					'responsive' => true,
 				],
 
 				'newsletter_subscribe_shadow' => [
-					'label' => __( 'Shadow', 'blocksy' ),
+					'label' => __( 'Container Shadow', 'blocksy-companion' ),
 					'type' => 'ct-box-shadow',
 					'responsive' => true,
 					'divider' => 'top',
@@ -258,6 +407,30 @@ $options = [
 						],
 					])
 				],
+
+				'newsletter_subscribe_container_spacing' => [
+					'label' => __( 'Container Inner Spacing', 'blocksy-companion' ),
+					'type' => 'ct-spacing',
+					'divider' => 'top',
+					'setting' => [ 'transport' => 'postMessage' ],
+					'value' => blocksy_spacing_value(),
+					'inputAttr' => [
+						'placeholder' => '30'
+					],
+					'min' => 0,
+					'responsive' => true
+				],
+
+				'newsletter_subscribe_container_border_radius' => [
+					'label' => __( 'Container Border Radius', 'blocksy-companion' ),
+					'type' => 'ct-spacing',
+					'divider' => 'top',
+					'setting' => [ 'transport' => 'postMessage' ],
+					'value' => blocksy_spacing_value(),
+					'min' => 0,
+					'responsive' => true
+				],
+
 			],
 		],
 	],

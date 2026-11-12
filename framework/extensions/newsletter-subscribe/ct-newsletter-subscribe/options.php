@@ -1,4 +1,9 @@
 <?php
+
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 /**
  * Newsletter Subscribe widget
  *
@@ -7,119 +12,139 @@
  * @package   Blocksy
  */
 
-
 $options = [
-	'title' => [
-		'type' => 'text',
-		'label' => __( 'Title', 'blc' ),
-		'field_attr' => [ 'id' => 'widget-title' ],
-		'design' => 'inline',
-		'value' => __( 'Newsletter', 'blc' ),
-		'disableRevertButton' => true,
-	],
 
 	'newsletter_subscribe_text' => [
-		'label' => __( 'Message', 'blc' ),
-		'type' => 'textarea',
-		'value' => __( 'Enter your email address below to subscribe to our newsletter', 'blc' ),
-		'design' => 'inline',
+		'label' => __('Text', 'blocksy-companion'),
+		'type' => 'hidden',
+		'value' => __(
+			'Enter your email address below and subscribe to our newsletter',
+			'blocksy-companion'
+		),
+		'desc' => __(
+			'You can add here some arbitrary HTML code.',
+			'blocksy-companion'
+		),
 		'disableRevertButton' => true,
+		'setting' => ['transport' => 'postMessage'],
+
+		'mediaButtons' => false,
+		'tinymce' => [
+			'toolbar1' => 'bold,italic,link,undo,redo',
+		],
 	],
 
 	'newsletter_subscribe_list_id_source' => [
 		'type' => 'ct-radio',
-		'label' => __( 'List Source', 'blc' ),
+		'label' => __('List Source', 'blocksy-companion'),
 		'value' => 'default',
 		'view' => 'radio',
 		'inline' => true,
-		'design' => 'inline',
 		'disableRevertButton' => true,
 		'choices' => [
-			'default' => __('Default', 'blc'),
-			'custom' => __('Custom', 'blc'),
+			'default' => __('Default', 'blocksy-companion'),
+			'custom' => __('Custom', 'blocksy-companion'),
 		],
 	],
 
 	blocksy_rand_md5() => [
 		'type' => 'ct-condition',
-		'condition' => [ 'newsletter_subscribe_list_id_source' => 'custom' ],
+		'condition' => ['newsletter_subscribe_list_id_source' => 'custom'],
 		'options' => [
-
 			'newsletter_subscribe_list_id' => [
-				'label' => __( 'List ID', 'blc' ),
+				'label' => __('List ID', 'blocksy-companion'),
 				'type' => 'blocksy-newsletter-subscribe',
 				'value' => '',
-				'design' => 'inline',
 				'disableRevertButton' => true,
 			],
-
 		],
+	],
+
+	'newsletter_subscribe_view_type' => [
+		'type' => 'ct-radio',
+		'label' => __('Form Style', 'blocksy-companion'),
+		'value' => 'inline',
+		'view' => 'radio',
+		'inline' => true,
+		'divider' => 'top:full',
+		'disableRevertButton' => true,
+		'choices' => [
+			'inline' => __('Inline', 'blocksy-companion'),
+			'stacked' => __('Stacked', 'blocksy-companion'),
+		],
+	],
+
+	'newsletter_subscribe_container_type' => [
+		'type' => 'ct-radio',
+		'label' => __('Container Style', 'blocksy-companion'),
+		'value' => 'default',
+		'view' => 'radio',
+		'inline' => true,
+		'divider' => 'top:full',
+		'disableRevertButton' => true,
+		'choices' => [
+			'default' => __('Default', 'blocksy-companion'),
+			'boxed' => __('Boxed', 'blocksy-companion'),
+		],
+	],
+
+	'newsletter_subscribe_height' => [
+		'label' => __( 'Input Height', 'blocksy-companion' ),
+		'type' => 'ct-slider',
+		'min' => 40,
+		'max' => 80,
+		'value' => '',
+		'responsive' => false,
+		'divider' => 'top:full',
+		'setting' => [ 'transport' => 'postMessage' ],
+	],
+
+	'newsletter_subscribe_gap' => [
+		'label' => __( 'Fields Gap', 'blocksy-companion' ),
+		'type' => 'ct-slider',
+		'min' => 0,
+		'max' => 50,
+		'value' => '',
+		'responsive' => false,
+		'setting' => [ 'transport' => 'postMessage' ],
 	],
 
 	'has_newsletter_subscribe_name' => [
-		'type'  => 'ct-switch',
-		'label' => __( 'Name Field', 'blc' ),
+		'type' => 'ct-switch',
+		'label' => __('Name Field', 'blocksy-companion'),
 		'value' => 'no',
+		'divider' => 'top:full',
 		'disableRevertButton' => true,
 	],
 
 	blocksy_rand_md5() => [
 		'type' => 'ct-condition',
-		'condition' => [ 'has_newsletter_subscribe_name' => 'yes' ],
+		'condition' => ['has_newsletter_subscribe_name' => 'yes'],
 		'options' => [
-
 			'newsletter_subscribe_name_label' => [
-				'type' => 'text',
-				'label' => __( 'Name Label', 'blc' ),
-				'design' => 'inline',
-				'value' => __( 'Your name', 'blc' ),
-				'disableRevertButton' => true,
+				'type' => 'hidden',
+				'label' => __('Name Label', 'blocksy-companion'),
+				'value' => __('Your name', 'blocksy-companion'),
 			],
 
+			'newsletter_subscribe_name_required' => [
+				'type' => 'ct-switch',
+				'label' => __('Make Name Field Required', 'blocksy-companion'),
+				'value' => 'no',
+				'disableRevertButton' => true,
+			],
 		],
 	],
 
 	'newsletter_subscribe_mail_label' => [
-		'type' => 'text',
-		'label' => __( 'Mail Label', 'blc' ),
-		'design' => 'inline',
-		'value' => __( 'Your email', 'blc' ),
-		'disableRevertButton' => true,
+		'type' => 'hidden',
+		'label' => __('Mail Label', 'blocksy-companion'),
+		'value' => __('Your email *', 'blocksy-companion'),
 	],
 
 	'newsletter_subscribe_button_text' => [
-		'type' => 'text',
-		'label' => __( 'Button Label', 'blc' ),
-		'design' => 'inline',
-		'value' => __( 'Subscribe', 'blc' ),
-		'disableRevertButton' => true,
+		'type' => 'hidden',
+		'label' => __('Button Label', 'blocksy-companion'),
+		'value' => __('Subscribe', 'blocksy-companion'),
 	],
-
-	'newsletter_subscribe_container' => [
-		'label' => __( 'Container Type', 'blc' ),
-		'type' => 'ct-select',
-		'value' => 'default',
-		'design' => 'inline',
-		'disableRevertButton' => true,
-		'choices' => [
-			'default' => __( 'Default', 'blc' ),
-			'boxed' => __( 'Boxed', 'blc' ),
-		],
-	],
-
-	'newsletter_subscribe_alignment' => [
-		'type' => 'ct-radio',
-		'label' => __( 'Content Alignment', 'blc' ),
-		'value' => 'left',
-		'view' => 'text',
-		'design' => 'inline',
-		'attr' => [ 'data-type' => 'alignment' ],
-		'disableRevertButton' => true,
-		'choices' => [
-			'left' => '',
-			'center' => '',
-			'right' => '',
-		],
-	],
-
 ];
