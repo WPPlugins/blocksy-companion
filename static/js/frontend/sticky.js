@@ -5,7 +5,16 @@ import { computeShrink } from './sticky/shrink'
 import { computeAutoHide } from './sticky/auto-hide'
 import { computeFadeSlide } from './sticky/fade-slide'
 
-import { getRowStickyHeight } from './sticky/shrink-utils'
+import {
+	getRowStickyHeight,
+	getRowInitialMinHeight,
+	maybeSetStickyHeightAnimated,
+} from './sticky/shrink-utils'
+
+import { clearShrinkCache } from './sticky/shrink-handle-middle-row'
+import { clearLogoShrinkCache } from './sticky/shrink-handle-logo'
+
+import { computeStartPositionForRowConfiguration } from './sticky/start-position'
 
 export const setTransparencyFor = (deviceContainer, value = 'yes') => {
 	Array.from(
@@ -26,28 +35,66 @@ var getParents = function (elem) {
 }
 
 let cachedStartPosition = null
-let cachedContainerInitialHeight = null
+let cachedContainerInitialHeight = {}
+let cachedHeaderInitialHeight = null
 let cachedStickyContainerHeight = null
+let forcedHeightSetForStickyContainer = false
 
-ctEvents.on('ct:header:update', () => {
+const clearCache = () => {
+	clearShrinkCache()
+	clearLogoShrinkCache()
+
 	cachedStartPosition = null
-	cachedContainerInitialHeight = null
+	cachedHeaderInitialHeight = null
 	cachedStickyContainerHeight = null
+	prevScrollY = null
+	forcedHeightSetForStickyContainer = false
+}
 
-	compute()
+ctEvents.on('blocksy:sticky:compute', () => {
+	setTimeout(() => {
+		clearCache()
+		compute()
+	}, 100)
 })
 
+if (window.wp && wp.customize && wp.customize.selectiveRefresh) {
+	let shouldSkipNext = false
+	wp.customize.selectiveRefresh.bind(
+		'partial-content-rendered',
+		(placement) => {
+			if (shouldSkipNext) {
+				return
+			}
+
+			shouldSkipNext = true
+			setTimeout(() => {
+				clearCache()
+				forcedHeightSetForStickyContainer = true
+				compute()
+				shouldSkipNext = false
+			}, 500)
+		}
+	)
+}
+
 const getStartPositionFor = (stickyContainer) => {
+	if (cachedStartPosition) {
+		return cachedStartPosition
+	}
+
 	if (
 		stickyContainer.dataset.sticky.indexOf('shrink') === -1 &&
 		stickyContainer.dataset.sticky.indexOf('auto-hide') === -1
 	) {
-		return stickyContainer.parentNode.getBoundingClientRect().height + 200
+		// return stickyContainer.parentNode.getBoundingClientRect().height + 200
 	}
 
 	const headerRect = stickyContainer.closest('header').getBoundingClientRect()
 
-	let stickyOffset = headerRect.top + scrollY
+	// Round to avoid floating point dust (e.g. -0.00006) at fractional DPRs
+	// like 1.25 where headerRect.top + scrollY doesn't cancel out to exactly 0.
+	let stickyOffset = Math.round(headerRect.top + scrollY)
 
 	if (stickyOffset > 0) {
 		let element = document.elementFromPoint(0, 3)
@@ -66,30 +113,70 @@ const getStartPositionFor = (stickyContainer) => {
 		}
 	}
 
-	const row = stickyContainer.parentNode
-
 	if (
-		row.parentNode.children.length === 1 ||
-		row.parentNode.children[0].classList.contains('ct-sticky-container')
+		stickyContainer.dataset.sticky.indexOf('shrink') === -1 &&
+		stickyContainer.dataset.sticky.indexOf('auto-hide') === -1
 	) {
-		return stickyOffset
+		stickyOffset += 200
 	}
 
-	return Array.from(row.parentNode.children)
-		.reduce((result, el, index) => {
-			if (result.indexOf(0) > -1 || !el.dataset.row) {
-				return [...result, 0]
-			} else {
-				return [
-					...result,
+	const row = stickyContainer.parentNode
 
-					el.classList.contains('ct-sticky-container')
-						? 0
-						: el.getBoundingClientRect().height,
-				]
+	const bodyComp = getComputedStyle(document.body)
+	let maybeDynamicOffset = parseFloat(
+		bodyComp.getPropertyValue('--header-sticky-offset') || 0
+	)
+
+	maybeDynamicOffset =
+		maybeDynamicOffset +
+		(parseFloat(bodyComp.getPropertyValue('--theme-frame-size')) || 0)
+
+	const rowConfiguration = Array.from(row.parentNode.children)
+		.filter(
+			(el) =>
+				el.dataset.row || el.classList.contains('ct-sticky-container')
+		)
+		.map((el) => {
+			if (el.classList.contains('ct-sticky-container')) {
+				return {
+					sticky: true,
+				}
 			}
-		}, [])
-		.reduce((sum, height) => sum + height, stickyOffset)
+
+			return {
+				height: el.getBoundingClientRect().height,
+			}
+		})
+
+	const actualStartPositionForRows =
+		computeStartPositionForRowConfiguration(rowConfiguration)
+
+	let finalResult = actualStartPositionForRows + stickyOffset
+
+	finalResult =
+		finalResult > 0 ? finalResult - maybeDynamicOffset : finalResult
+
+	let shouldWriteCache = true
+
+	// Dont write cache until store notice is visible. Sometimes the store notice
+	// appears too late and the sticky header is not positioned correctly.
+	//
+	// https://github.com/Creative-Themes/blocksy/issues/4617
+	const maybeStoreNotice = document.querySelector('.woocommerce-store-notice')
+
+	if (maybeStoreNotice) {
+		shouldWriteCache = false
+
+		if (maybeStoreNotice.offsetHeight > 0) {
+			shouldWriteCache = true
+		}
+	}
+
+	if (shouldWriteCache) {
+		cachedStartPosition = finalResult
+	}
+
+	return finalResult
 }
 
 let prevScrollY = null
@@ -105,8 +192,6 @@ const compute = () => {
 		return
 	}
 
-	prevScrollY = scrollY
-
 	const stickyContainer = document.querySelector(
 		`[data-device="${getCurrentScreen()}"] [data-sticky]`
 	)
@@ -115,33 +200,73 @@ const compute = () => {
 		return
 	}
 
-	let startPosition = cachedStartPosition
+	const currentScreenWithTablet = getCurrentScreen({ withTablet: true })
 
-	if (startPosition === null) {
-		startPosition = getStartPositionFor(stickyContainer)
-		cachedStartPosition = startPosition
+	let containerInitialHeight =
+		cachedContainerInitialHeight[currentScreenWithTablet]
+
+	const shouldSetHeight =
+		!containerInitialHeight || forcedHeightSetForStickyContainer
+
+	if (!containerInitialHeight || forcedHeightSetForStickyContainer) {
+		cachedContainerInitialHeight[currentScreenWithTablet] = [
+			...stickyContainer.querySelectorAll('[data-row]'),
+		].reduce((res, row) => {
+			return res + getRowInitialMinHeight(row)
+		}, 0)
+
+		containerInitialHeight =
+			cachedContainerInitialHeight[currentScreenWithTablet]
+	}
+
+	if (shouldSetHeight) {
+		forcedHeightSetForStickyContainer = false
+		stickyContainer.parentNode.style.height = `${containerInitialHeight}px`
+	}
+
+	let startPosition = getStartPositionFor(stickyContainer, {})
+
+	let headerInitialHeight = cachedHeaderInitialHeight
+
+	if (headerInitialHeight === null) {
+		const headerRect = stickyContainer
+			.closest('[data-device]')
+			.getBoundingClientRect()
+
+		headerInitialHeight = headerRect.height
+		cachedHeaderInitialHeight = headerInitialHeight
 	}
 
 	let stickyContainerHeight = cachedStickyContainerHeight
 
-	if (!stickyContainerHeight) {
-		stickyContainerHeight = parseInt(
-			stickyContainer.getBoundingClientRect().height
-		)
-		cachedStickyContainerHeight = parseInt(stickyContainerHeight)
-
-		document.body.style.setProperty(
-			'--header-sticky-height-animated',
-			`${[...stickyContainer.querySelectorAll('[data-row]')].reduce(
-				(res, row) => res + getRowStickyHeight(row),
-				0
-			)}px`
-		)
-	}
-
 	const stickyComponents = stickyContainer.dataset.sticky
 		.split(':')
 		.filter((c) => c !== 'yes' && c !== 'no' && c !== 'fixed')
+
+	if (!stickyContainerHeight) {
+		stickyContainerHeight = [
+			...stickyContainer.querySelectorAll('[data-row]'),
+		].reduce((res, row) => res + getRowStickyHeight(row), 0)
+		cachedStickyContainerHeight = parseInt(stickyContainerHeight)
+
+		maybeSetStickyHeightAnimated(() => {
+			return stickyComponents.indexOf('auto-hide') === -1
+				? // case when content is forcing the initial height to be bigger
+				  stickyContainerHeight >
+				  [...stickyContainer.querySelectorAll('[data-row]')].reduce(
+						(res, row) => res + getRowInitialMinHeight(row),
+						0
+				  )
+					? `${stickyContainerHeight}px`
+					: `${[
+							...stickyContainer.querySelectorAll('[data-row]'),
+					  ].reduce(
+							(res, row) => res + getRowStickyHeight(row),
+							0
+					  )}px`
+				: '0px'
+		})
+	}
 
 	let isSticky =
 		(startPosition > 0 && Math.abs(window.scrollY - startPosition) < 5) ||
@@ -167,17 +292,7 @@ const compute = () => {
 		}
 	}, 300)
 
-	let containerInitialHeight = cachedContainerInitialHeight
-
-	if (!containerInitialHeight) {
-		cachedContainerInitialHeight = Array.from(
-			stickyContainer.querySelectorAll('[data-row]')
-		).reduce((sum, el) => sum + el.getBoundingClientRect().height, 0)
-
-		containerInitialHeight = cachedContainerInitialHeight
-
-		stickyContainer.parentNode.style.height = `${containerInitialHeight}px`
-	}
+	let currentScrollY = scrollY
 
 	if (stickyComponents.indexOf('shrink') > -1) {
 		computeShrink({
@@ -197,6 +312,14 @@ const compute = () => {
 			isSticky,
 			startPosition,
 			stickyComponents,
+
+			containerInitialHeight,
+			stickyContainerHeight,
+
+			headerInitialHeight,
+
+			currentScrollY,
+			prevScrollY,
 		})
 	}
 
@@ -211,6 +334,8 @@ const compute = () => {
 			stickyComponents,
 		})
 	}
+
+	prevScrollY = currentScrollY
 }
 
 export const mountStickyHeader = () => {
@@ -218,9 +343,18 @@ export const mountStickyHeader = () => {
 		return
 	}
 
+	var prevWidth = window.width
+
 	window.addEventListener(
 		'resize',
 		(event) => {
+			if (window.width === prevWidth) {
+				return
+			}
+
+			prevWidth = window.width
+
+			clearCache()
 			compute(event)
 			ctEvents.trigger('ct:header:update')
 		},
@@ -228,6 +362,7 @@ export const mountStickyHeader = () => {
 	)
 
 	window.addEventListener('orientationchange', (event) => {
+		clearCache()
 		compute(event)
 		ctEvents.trigger('ct:header:update')
 	})

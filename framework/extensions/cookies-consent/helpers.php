@@ -1,38 +1,20 @@
 <?php
 
-function blc_ext_cookies_consent_cache() {
-	if (! is_customize_preview()) return;
-
-	blocksy_add_customizer_preview_cache(
-		blocksy_html_tag(
-			'div',
-			[ 'data-id' => 'blocksy-cookies-consent-section' ],
-			blocksy_ext_cookies_consent_output(true)
-		)
-	);
+if (! defined('ABSPATH')) {
+	exit;
 }
 
-function blocksy_ext_cookies_consent_output($forced = false) {
-	if (! $forced) {
-		blc_ext_cookies_consent_cache();
-	}
-
-	/*
-	if (! BlocksyExtensionCookiesConsent::should_display_notification()) {
-		if (! $forced) {
-			return;
-		}
-	}
-	 */
-
-	$content = get_theme_mod(
+function blocksy_companion_ext_cookies_consent_output() {
+	$content = blocksy_companion_theme_functions()->blocksy_get_theme_mod(
 		'cookie_consent_content',
 		__('We use cookies to ensure that we give you the best experience on our website.', 'blocksy-companion')
 	);
 
-	$button_text = get_theme_mod('cookie_consent_button_text', __('Accept', 'blocksy-companion'));
-	$period = get_theme_mod('cookie_consent_period', 'forever');
-	$type = get_theme_mod('cookie_consent_type', 'type-1');
+	$accept_button_text = blocksy_companion_theme_functions()->blocksy_get_theme_mod('cookie_consent_button_text', __('Accept', 'blocksy-companion'));
+	$decline_button_text = blocksy_companion_theme_functions()->blocksy_get_theme_mod('cookie_consent_decline_button_text', __('Decline', 'blocksy-companion'));
+
+	$period = blocksy_companion_theme_functions()->blocksy_get_theme_mod('cookie_consent_period', 'forever');
+	$type = blocksy_companion_theme_functions()->blocksy_get_theme_mod('cookie_consent_type', 'type-1');
 
 	$class = 'container';
 
@@ -44,7 +26,6 @@ function blocksy_ext_cookies_consent_output($forced = false) {
 
 	?>
 
-
 	<div class="cookie-notification ct-fade-in-start" data-period="<?php echo esc_attr($period) ?>" data-type="<?php echo esc_attr($type) ?>">
 
 		<div class="<?php echo esc_attr($class) ?>">
@@ -52,12 +33,11 @@ function blocksy_ext_cookies_consent_output($forced = false) {
 				<div class="ct-cookies-content"><?php echo wp_kses_post($content) ?></div>
 			<?php } ?>
 
-			<button type="submit" class="ct-button ct-accept"><?php echo esc_html($button_text) ?></button>
+			<div class="ct-button-group">
+				<button type="button" class="ct-button ct-cookies-accept-button"><?php echo esc_html($accept_button_text) ?></button>
 
-			<?php if ($type === 'type-1' || is_customize_preview()) { ?>
-				<button class="ct-close">×</button>
-			<?php } ?>
-
+				<button type="button" class="ct-button ct-cookies-decline-button"><?php echo esc_html($decline_button_text) ?></button>
+			</div>
 		</div>
 	</div>
 	<?php
@@ -65,18 +45,23 @@ function blocksy_ext_cookies_consent_output($forced = false) {
 	return ob_get_clean();
 }
 
-function blocksy_ext_cookies_checkbox($prefix = '') {
+function blocksy_companion_ext_cookies_checkbox($prefix = '', $unique_suffix = '') {
 	ob_start();
 
 	if (! empty($prefix)) {
 		$prefix = '_' . $prefix;
 	}
 
-	$message = get_theme_mod(
+	$input_id = ! empty($unique_suffix)
+		? 'gdprconfirm_newsletter-' . sanitize_html_class($unique_suffix)
+		: 'gdprconfirm' . $prefix;
+
+	$message = blocksy_companion_theme_functions()->blocksy_get_theme_mod(
 		'forms_cookie_consent_content',
-		sprintf(
-			__('I accept the %sPrivacy Policy%s', 'blocksy-companion'),
-			'<a href="/privacy-policy">',
+		blocksy_companion_safe_sprintf(
+			// translators: %1$s and %2$s are HTML tags for a link.
+			__('I accept the %1$sPrivacy Policy%2$s', 'blocksy-companion'),
+			'<a href="' . get_privacy_policy_url() . '">',
 			'</a>'
 		)
 	);
@@ -84,7 +69,19 @@ function blocksy_ext_cookies_checkbox($prefix = '') {
 	?>
 
 	<p class="gdpr-confirm-policy">
-		<input id="gdprconfirm<?php echo $prefix ?>" class="ct-checkbox" name="gdprconfirm" type="checkbox" required /><label for="gdprconfirm<?php echo $prefix ?>"><?php echo $message ?></label>
+		<input name="ct_has_gdprconfirm" type="hidden" value="yes">
+		<?php
+			blocksy_companion_html_tag_e(
+				'input',
+				[
+					'id' => $input_id,
+					'class' => 'ct-checkbox',
+					'name' => 'gdprconfirm',
+					'type' => 'checkbox',
+					'required' => true
+				]
+			);
+		?><label for="<?php echo esc_attr($input_id) ?>"><?php echo wp_kses_post($message) ?></label>
 	</p>
 
 	<?php

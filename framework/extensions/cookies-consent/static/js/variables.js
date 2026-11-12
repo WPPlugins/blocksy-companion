@@ -8,40 +8,82 @@ ctEvents.on(
 			cookieContentColor: [
 				{
 					selector: '.cookie-notification',
-					variable: 'color',
+					variable: 'theme-text-color',
 					type: 'color:default',
 				},
 
 				{
 					selector: '.cookie-notification',
-					variable: 'colorHover',
+					variable: 'theme-link-hover-color',
 					type: 'color:hover',
 				},
 			],
 
 			cookieBackground: {
 				selector: '.cookie-notification',
-				variable: 'backgroundColor',
+				variable: 'notice-background-color',
 				type: 'color',
 			},
 
-			cookieButtonBackground: [
+			cookieButtonText: [
 				{
-					selector: '.cookie-notification',
-					variable: 'buttonInitialColor',
+					selector: '.cookie-notification .ct-cookies-accept-button',
+					variable: 'theme-button-text-initial-color',
 					type: 'color:default',
 				},
 
 				{
-					selector: '.cookie-notification',
-					variable: 'buttonHoverColor',
+					selector: '.cookie-notification .ct-cookies-accept-button',
+					variable: 'theme-button-text-hover-color',
+					type: 'color:hover',
+				},
+			],
+
+			cookieButtonBackground: [
+				{
+					selector: '.cookie-notification .ct-cookies-accept-button',
+					variable: 'theme-button-background-initial-color',
+					type: 'color:default',
+				},
+
+				{
+					selector: '.cookie-notification .ct-cookies-accept-button',
+					variable: 'theme-button-background-hover-color',
+					type: 'color:hover',
+				},
+			],
+
+			cookieDeclineButtonText: [
+				{
+					selector: '.cookie-notification .ct-cookies-decline-button',
+					variable: 'theme-button-text-initial-color',
+					type: 'color:default',
+				},
+
+				{
+					selector: '.cookie-notification .ct-cookies-decline-button',
+					variable: 'theme-button-text-hover-color',
+					type: 'color:hover',
+				},
+			],
+
+			cookieDeclineButtonBackground: [
+				{
+					selector: '.cookie-notification .ct-cookies-decline-button',
+					variable: 'theme-button-background-initial-color',
+					type: 'color:default',
+				},
+
+				{
+					selector: '.cookie-notification .ct-cookies-decline-button',
+					variable: 'theme-button-background-hover-color',
 					type: 'color:hover',
 				},
 			],
 
 			cookieMaxWidth: {
 				selector: '.cookie-notification',
-				variable: 'maxWidth',
+				variable: 'notice-max-width',
 				unit: 'px',
 			},
 		}
