@@ -2,7 +2,13 @@
 
 namespace Blocksy;
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 class DynamicCss {
+	private $wp_filesystem = null;
+
 	public function __construct() {
 		add_filter(
 			'blocksy:dynamic-css:has_files_cache',
@@ -62,21 +68,55 @@ class DynamicCss {
 			}
 		);
 
-		add_action('updated_option', function($option_name, $old_value, $value) {
-			if ('active_plugins' === $option_name) {
-				$this->generate_css_files();
+		add_action('current_screen', function () {
+			$screen = get_current_screen();
+
+			if ($screen->base === 'plugins') {
+				if (
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					isset($_GET['activate-multi'])
+					||
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					isset($_GET['activate'])
+					||
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					isset($_GET['deactivate'])
+					||
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					isset($_GET['deactivate-multi'])
+				) {
+					$this->generate_css_files();
+				}
 			}
-		}, 10, 3);
+		});
 
 		add_action('blocksy:dynamic-css:refresh-caches', function () {
 			$this->generate_css_files();
 		});
 
-		$this->enqueue_dynamic_css();
+		add_action('init', function () {
+			$this->enqueue_dynamic_css();
+		});
+
+		// Needs to run very early.
+		// Will catch when the import is done and will refresh the dynamic CSS.
+		// All in One WP Migration compatibility.
+		add_action('ai1wm_status_import_done', function () {
+			/**
+			 * Fires when the dynamic CSS caches should be invalidated.
+			 *
+			 * Listeners drop their generated CSS files/transients so the
+			 * next request regenerates them.
+			 *
+			 * @since 1.6.2
+			 * @since 1.8.0 Renamed from `blocksy:dynamic-css:regenere_css_files`.
+			 */
+			do_action('blocksy:dynamic-css:refresh-caches');
+		});
 	}
 
 	public function should_use_files() {
-		return get_theme_mod('dynamic_css_file', 'file') === 'file';
+		return blocksy_companion_theme_functions()->blocksy_get_theme_mod('dynamic_css_file', 'file') === 'file';
 	}
 
 	public function get_chunks() {
@@ -90,7 +130,15 @@ class DynamicCss {
 	}
 
 	public function enqueue_dynamic_css() {
-		if (is_admin()) {
+		if (
+			is_admin()
+			||
+			is_login()
+		) {
+			return;
+		}
+
+		if (! blocksy_companion_theme_functions()->blocksy_has_dynamic_css_in_frontend()) {
 			return;
 		}
 
@@ -146,9 +194,12 @@ class DynamicCss {
 			}
 
 			$file = $theme_paths['css_path'] . '/' . $chunk['filename'];
-			$url = $theme_paths['css_url'] . '/' . $chunk['filename'];
 
-			if (function_exists('blocksy_get_dynamic_css_file_content')) {
+			if (
+				function_exists('blocksy_get_dynamic_css_file_content')
+				&&
+				$this->wp_filesystem
+			) {
 				$this->wp_filesystem->put_contents(
 					$file,
 					blocksy_get_dynamic_css_file_content(['context' => $chunk['context']])
@@ -157,7 +208,7 @@ class DynamicCss {
 		}
 	}
 
-	private function maybe_prepare_theme_uploads_path($args = []) {
+	public function maybe_prepare_theme_uploads_path($args = []) {
 		$args = wp_parse_args($args, [
 			'should_generate' => false,
 		]);
@@ -176,6 +227,8 @@ class DynamicCss {
 			'css'   => 'blocksy/css'
 		);
 
+		$theme_paths = [];
+
 		foreach($folders_in_uploads as $folder => $path) {
 			// Server path.
 			$theme_paths[
@@ -190,7 +243,7 @@ class DynamicCss {
 
 		// Custom css file.
 
-		if (! $this->has_direct_access()) {
+		if (! $this->has_direct_access($theme_paths['css_path'])) {
 			return false;
 		}
 
@@ -214,7 +267,7 @@ class DynamicCss {
 		return $theme_paths;
 	}
 
-	public function has_direct_access( $context = null ) {
+	public function has_direct_access($context = null) {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		WP_Filesystem();
 
@@ -223,31 +276,35 @@ class DynamicCss {
 
 		if ($wp_filesystem) {
 			if ($wp_filesystem->method !== 'direct') {
-				if ( is_wp_error( $wp_filesystem->errors ) && $wp_filesystem->errors->get_error_code() ) {
-					return true;
-				} else {
-					return $wp_filesystem->method === 'direct';
-				}
+				return false;
 			} else {
 				return true;
 			}
 		}
 
-		if ( get_filesystem_method( [], $context ) === 'direct' ) {
+		if (get_filesystem_method([], $context) === 'direct') {
 			ob_start();
 
-			{
-				$creds = request_filesystem_credentials( admin_url(), '', false, $context, null );
-			}
+			$creds = request_filesystem_credentials(
+				admin_url(),
+				'',
+				false,
+				$context,
+				null
+			);
 
 			ob_end_clean();
 
-			if ( WP_Filesystem( $creds ) ) {
+			if (WP_Filesystem($creds)) {
 				return true;
 			}
 		}
 
 		return false;
+	}
+
+	public function get_wp_filesystem() {
+		return $this->wp_filesystem;
 	}
 }
 

@@ -1,6 +1,8 @@
 import ctEvents from 'ct-events'
 import cookie from 'js-cookie'
 
+import { loadStyle } from 'blocksy-frontend'
+
 const onKeydown = (event) => {
 	if (event.keyCode !== 27) return
 	hideCookieConsent(document.querySelector('.cookie-notification'))
@@ -13,9 +15,9 @@ const showCookieConsent = (node) => {
 		node.classList.remove('ct-fade-in-start')
 		node.classList.add('ct-fade-in-end')
 
-		whenTransitionEnds(node, () => {
+		setTimeout(() => {
 			node.classList.remove('ct-fade-in-end')
-		})
+		}, 300)
 	})
 }
 
@@ -28,9 +30,9 @@ const hideCookieConsent = (node) => {
 		node.classList.remove('ct-fade-start')
 		node.classList.add('ct-fade-end')
 
-		whenTransitionEnds(node, () => {
+		setTimeout(() => {
 			node.parentNode.removeChild(node)
-		})
+		}, 300)
 	})
 }
 
@@ -42,15 +44,55 @@ export const onDocumentLoaded = (cb) => {
 	}
 }
 
-const initCookies = () => {
+const periods = {
+	onehour: 36e5,
+	oneday: 864e5,
+	oneweek: 7 * 864e5,
+	onemonth: 31 * 864e5,
+	threemonths: 3 * 31 * 864e5,
+	sixmonths: 6 * 31 * 864e5,
+	oneyear: 365 * 864e5,
+	forever: 10000 * 864e5,
+}
+
+const loadConsentScripts = () => {
+	const body = new FormData()
+	body.append('action', 'blocksy_companion_load_cookies_consent_scripts')
+
+	fetch(ct_localizations.ajax_url, {
+		method: 'POST',
+		body,
+	})
+		.then((r) => r.json())
+		.then(({ data }) => {
+			if (data && data.scripts) {
+				data.scripts.map((scriptTag) => {
+					const parser = new DOMParser()
+					const html = parser.parseFromString(scriptTag, 'text/html')
+
+					const scriptsToLoad = html.querySelectorAll('script')
+
+					if (!scriptsToLoad) return
+					;[...scriptsToLoad].map((script) => {
+						const newTag = document.createElement('script')
+
+						if (script.innerHTML) {
+							newTag.innerHTML = script.innerHTML
+						}
+
+						;[...script.attributes].map(({ name, value }) => {
+							newTag.setAttribute(name, value)
+						})
+
+						document.head.appendChild(newTag)
+					})
+				})
+			}
+		})
+}
+
+const mountCookieNotification = () => {
 	const notification = document.querySelector('.cookie-notification')
-
-	if (!notification) return
-
-	if (cookie.get('blocksy_cookies_consent_accepted')) {
-		notification.remove()
-		return
-	}
 
 	showCookieConsent(notification)
 	;[...notification.querySelectorAll('button')].map((el) => {
@@ -58,17 +100,6 @@ const initCookies = () => {
 			e.preventDefault()
 
 			if (el.classList.contains('ct-cookies-accept-button')) {
-				const periods = {
-					onehour: 36e5,
-					oneday: 864e5,
-					oneweek: 7 * 864e5,
-					onemonth: 31 * 864e5,
-					threemonths: 3 * 31 * 864e5,
-					sixmonths: 6 * 31 * 864e5,
-					oneyear: 365 * 864e5,
-					forever: 10000 * 864e5,
-				}
-
 				cookie.set('blocksy_cookies_consent_accepted', 'true', {
 					expires: new Date(
 						new Date() * 1 +
@@ -76,20 +107,11 @@ const initCookies = () => {
 					),
 					sameSite: 'lax',
 				})
+
+				loadConsentScripts()
 			}
 
 			if (el.classList.contains('ct-cookies-decline-button')) {
-				const periods = {
-					onehour: 36e5,
-					oneday: 864e5,
-					oneweek: 7 * 864e5,
-					onemonth: 31 * 864e5,
-					threemonths: 3 * 31 * 864e5,
-					sixmonths: 6 * 31 * 864e5,
-					oneyear: 365 * 864e5,
-					forever: 10000 * 864e5,
-				}
-
 				cookie.set('blocksy_cookies_consent_accepted', 'no', {
 					expires: new Date(
 						new Date() * 1 +
@@ -104,6 +126,38 @@ const initCookies = () => {
 	})
 }
 
+const initCookies = () => {
+	if (cookie.get('blocksy_cookies_consent_accepted')) {
+		return
+	}
+
+	const template = document.getElementById('ct-cookies-consent-template')
+
+	if (!template) {
+		return
+	}
+
+	let drawerCanvas = document.querySelector(
+		'.ct-drawer-canvas[data-location="start"]'
+	)
+
+	if (!drawerCanvas) {
+		const newCanvas = document.createElement('div')
+		newCanvas.classList.add('ct-drawer-canvas')
+		newCanvas.setAttribute('data-location', 'start')
+
+		document
+			.querySelector('#main-container')
+			.insertAdjacentElement('beforebegin', newCanvas)
+		drawerCanvas = newCanvas
+	}
+
+	loadStyle(ct_localizations.dynamic_styles.cookie_notification).then(() => {
+		drawerCanvas.appendChild(template.content.cloneNode(true))
+		mountCookieNotification()
+	})
+}
+
 onDocumentLoaded(() => {
 	initCookies()
 
@@ -113,23 +167,3 @@ onDocumentLoaded(() => {
 		})
 	}
 })
-
-function whenTransitionEnds(el, cb) {
-	setTimeout(() => {
-		cb()
-	}, 300)
-	return
-
-	const end = () => {
-		el.removeEventListener('transitionend', onEnd)
-		cb()
-	}
-
-	const onEnd = (e) => {
-		if (e.target === el) {
-			end()
-		}
-	}
-
-	el.addEventListener('transitionend', onEnd)
-}

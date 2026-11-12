@@ -1,12 +1,18 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 $config = [
-	'name' => __('Account', 'blocksy'),
+	'name' => __('Account', 'blocksy-companion'),
 
     'typography_keys' => ['account_label_font'],
 
 	'selective_refresh' => [
 		'account_state',
+		'loggedin_interaction_type',
+		'dropdown_items',
 		'account_link',
 		'loggedin_media',
 		'account_loggedin_icon',
@@ -20,12 +26,21 @@ $config = [
 		'loggedin_icon_source',
 		'loggedin_custom_icon',
 		'logged_out_icon_source',
-		'logged_out_custom_icon'
+		'logged_out_custom_icon',
 	],
 
 	'translation_keys' => [
 		['key' => 'login_label'],
-		['key' => 'account_custom_page']
+		['key' => 'loggedin_label'],
+		['key' => 'account_custom_page'],
+		[
+			'key' => 'dropdown_items',
+			'all_layers' => [
+				'label',
+				'link'
+			]
+		]
+
 	]
 ];
 
