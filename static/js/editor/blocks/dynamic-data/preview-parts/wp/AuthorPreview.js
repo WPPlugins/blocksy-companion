@@ -12,13 +12,15 @@ const getAuthorFiledValue = (author, author_field) => {
 		case 'nicename':
 			return author?.nickname || ''
 		case 'display_name':
-			return author?.nickname || ''
+			return author?.name || ''
 		case 'first_name':
 			return author?.first_name || ''
 		case 'last_name':
 			return author?.last_name || ''
 		case 'description':
 			return author?.description || ''
+		case 'user_url':
+			return author?.url || ''
 		default:
 			break
 	}

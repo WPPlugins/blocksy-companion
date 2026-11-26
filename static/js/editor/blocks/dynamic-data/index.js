@@ -5,8 +5,11 @@ import { registerBlockType } from '@wordpress/blocks'
 import Edit from './Edit'
 
 import metadata from './block.json'
+import coverMetadata from './cover.json'
 
 import { getAttributesFromOptions, getOptionsForBlock } from 'blocksy-options'
+import { InnerBlocks } from '@wordpress/block-editor'
+import { colorsDefaults } from './colors'
 
 export const options = getOptionsForBlock('dynamic-data')
 export const defaultAttributes = getAttributesFromOptions(options)
@@ -14,10 +17,15 @@ export const defaultAttributes = getAttributesFromOptions(options)
 registerBlockType('blocksy/dynamic-data', {
 	...metadata,
 	title: __('Dynamic Data', 'blocksy-companion'),
-	description: __('Fetch and display content from various sources.', 'blocksy-companion'),
+	description: __(
+		'Fetch and display content from various sources.',
+		'blocksy-companion'
+	),
 	attributes: {
 		...metadata.attributes,
+		...coverMetadata.attributes,
 		...defaultAttributes,
+		...colorsDefaults,
 	},
 	icon: {
 		src: (
@@ -27,7 +35,7 @@ registerBlockType('blocksy/dynamic-data', {
 		),
 	},
 	edit: (props) => <Edit {...props} />,
-	save: () => null,
+	save: () => <InnerBlocks.Content />,
 	__experimentalLabel: (attributes) => {
 		if (attributes.field === 'wp:title') {
 			return __('Dynamic Title', 'blocksy-companion')
@@ -69,6 +77,10 @@ registerBlockType('blocksy/dynamic-data', {
 			return __('Dynamic Stock Status', 'blocksy-companion')
 		}
 
+		if (attributes.field === 'woo:attributes') {
+			return __('Dynamic Attributes', 'blocksy-companion')
+		}
+
 		if (attributes.field === 'woo:brands') {
 			return __('Dynamic Brands', 'blocksy-companion')
 		}
@@ -95,6 +107,18 @@ registerBlockType('blocksy/dynamic-data', {
 
 		if (attributes.field === 'wp:term_image') {
 			return __('Dynamic Term Image', 'blocksy-companion')
+		}
+
+		if (attributes.field === 'wp:archive_image') {
+			return __('Dynamic Archive Image', 'blocksy-companion')
+		}
+
+		if (attributes.field === 'wp:archive_title') {
+			return __('Dynamic Archive Title', 'blocksy-companion')
+		}
+
+		if (attributes.field === 'wp:archive_description') {
+			return __('Dynamic Archive Description', 'blocksy-companion')
 		}
 
 		return __('Dynamic Data', 'blocksy-companion')

@@ -5,7 +5,7 @@ import { colors } from './colors'
 import {
 	InspectorControls,
 	useBlockProps,
-	withColors,
+	withColors
 } from '@wordpress/block-editor'
 import { PanelBody } from '@wordpress/components'
 
@@ -38,7 +38,7 @@ const Edit = ({
 	buttonBackgroundColor,
 	setButtonBackgroundColor,
 	buttonBackgroundColorHover,
-	setButtonBackgroundColorHover,
+	setButtonBackgroundColorHover
 }) => {
 	const radius = attributes?.style?.border?.radius
 
@@ -48,31 +48,34 @@ const Edit = ({
 			'--theme-form-text-focus-color': inputFontColorFocus?.color,
 
 			'--theme-form-field-border-initial-color': inputBorderColor?.color,
-			'--theme-form-field-border-focus-color': inputBorderColorFocus?.color,
+			'--theme-form-field-border-focus-color':
+				inputBorderColorFocus?.color,
 
-			'--theme-form-field-background-initial-color': inputBackgroundColor?.color,
-			'--theme-form-field-background-focus-color': inputBackgroundColorFocus?.color,
+			'--theme-form-field-background-initial-color':
+				inputBackgroundColor?.color,
+			'--theme-form-field-background-focus-color':
+				inputBackgroundColorFocus?.color,
 
 			...(attributes?.newsletter_subscribe_height
 				? {
-						'--theme-form-field-height': `${attributes.newsletter_subscribe_height}px`,
-				  }
+						'--theme-form-field-height': `${attributes.newsletter_subscribe_height}px`
+					}
 				: {}),
 			...(radius
 				? {
 						'--theme-form-field-border-radius': `${
 							typeof radius === 'string'
 								? radius
-								: `${radius.topLeft} ${radius.topRight} ${radius.bottomLeft} ${radius.bottomRight}`
-						}`,
-				  }
+								: radius.topLeft || '0px'
+						}`
+					}
 				: {}),
 			...(attributes?.newsletter_subscribe_gap
 				? {
-						'--theme-form-field-gap': `${attributes.newsletter_subscribe_gap}px`,
-				  }
-				: {}),
-		},
+						'--theme-form-field-gap': `${attributes.newsletter_subscribe_gap}px`
+					}
+				: {})
+		}
 	})
 
 	return (
@@ -84,37 +87,42 @@ const Edit = ({
 					...(inputIconColor?.color
 						? {
 								'--theme-button-text-initial-color':
-									inputIconColor.color,
-						  }
+									inputIconColor.color
+							}
 						: {}),
 					...(inputIconColorFocus?.color
 						? {
 								'--theme-button-text-hover-color':
-									inputIconColorFocus.color,
-						  }
+									inputIconColorFocus.color
+							}
 						: {}),
 					...(buttonBackgroundColor?.color
 						? {
 								'--theme-button-background-initial-color':
-									buttonBackgroundColor.color,
-						  }
+									buttonBackgroundColor.color
+							}
 						: {}),
 					...(buttonBackgroundColorHover?.color
 						? {
 								'--theme-button-background-hover-color':
-									buttonBackgroundColorHover.color,
-						  }
-						: {}),
+									buttonBackgroundColorHover.color
+							}
+						: {})
 				}}
 			/>
 			<InspectorControls>
 				<PanelBody>
 					<OptionsPanel
-						purpose={'gutenberg'}
+						purpose="gutenberg"
 						onChange={(optionId, optionValue) => {
-							setAttributes({
-								[optionId]: optionValue,
-							})
+							if (optionId === 'newsletter_subscribe_list_id') {
+								setAttributes({
+									[optionId]: `${optionValue}`
+								})
+								return
+							}
+
+							setAttributes({ [optionId]: optionValue })
 						}}
 						options={options}
 						value={attributes}
@@ -124,6 +132,7 @@ const Edit = ({
 			</InspectorControls>
 
 			<InspectorControls group="styles">
+				<div className="blocksy-options-hide-border-unlink" />
 				<ColorsPanel
 					label={__('Input Font Color', 'blocksy-companion')}
 					resetAll={() => {
@@ -139,7 +148,7 @@ const Edit = ({
 							onColorChange: (value) =>
 								setInputFontColor(
 									value || colors.inputFontColor
-								),
+								)
 						},
 						{
 							colorValue: inputFontColorFocus.color,
@@ -148,15 +157,18 @@ const Edit = ({
 							onColorChange: (value) =>
 								setInputFontColorFocus(
 									value || colors.inputFontColorFocus
-								),
-						},
+								)
+						}
 					]}
 				/>
 
 				<ColorsPanel
-					label={attributes.newsletter_subscribe_container_type === 'boxed'
-						? __('Container Border Color', 'blocksy-companion')
-						: __('Input Border Color', 'blocksy-companion')}
+					label={
+						attributes.newsletter_subscribe_container_type ===
+						'boxed'
+							? __('Container Border Color', 'blocksy-companion')
+							: __('Input Border Color', 'blocksy-companion')
+					}
 					resetAll={() => {
 						setInputBorderColor(colors.inputBorderColor)
 						setInputBorderColorFocus(colors.inputBorderColorFocus)
@@ -170,7 +182,7 @@ const Edit = ({
 							onColorChange: (value) =>
 								setInputBorderColor(
 									value || colors.inputBorderColor
-								),
+								)
 						},
 						{
 							colorValue: inputBorderColorFocus.color,
@@ -179,15 +191,21 @@ const Edit = ({
 							onColorChange: (value) =>
 								setInputBorderColorFocus(
 									value || colors.inputBorderColorFocus
-								),
-						},
+								)
+						}
 					]}
 				/>
 
 				<ColorsPanel
-					label={attributes.newsletter_subscribe_container_type === 'boxed'
-						? __('Container Background Color', 'blocksy-companion')
-						: __('Input Background Color', 'blocksy-companion')}
+					label={
+						attributes.newsletter_subscribe_container_type ===
+						'boxed'
+							? __(
+									'Container Background Color',
+									'blocksy-companion'
+								)
+							: __('Input Background Color', 'blocksy-companion')
+					}
 					resetAll={() => {
 						setInputBackgroundColor(colors.inputBackgroundColor)
 						setInputBackgroundColorFocus(
@@ -203,7 +221,7 @@ const Edit = ({
 							onColorChange: (value) =>
 								setInputBackgroundColor(
 									value || colors.inputBackgroundColor
-								),
+								)
 						},
 						{
 							colorValue: inputBackgroundColorFocus.color,
@@ -212,8 +230,8 @@ const Edit = ({
 							onColorChange: (value) =>
 								setInputBackgroundColorFocus(
 									value || colors.inputBackgroundColorFocus
-								),
-						},
+								)
+						}
 					]}
 				/>
 
@@ -232,7 +250,7 @@ const Edit = ({
 							onColorChange: (value) =>
 								setInputIconColor(
 									value || colors.inputIconColor
-								),
+								)
 						},
 						{
 							colorValue: inputIconColorFocus.color,
@@ -241,8 +259,8 @@ const Edit = ({
 							onColorChange: (value) =>
 								setInputIconColorFocus(
 									value || colors.inputIconColorFocus
-								),
-						},
+								)
+						}
 					]}
 				/>
 
@@ -263,7 +281,7 @@ const Edit = ({
 							onColorChange: (value) =>
 								setButtonBackgroundColor(
 									value || colors.buttonBackgroundColor
-								),
+								)
 						},
 						{
 							colorValue: buttonBackgroundColorHover.color,
@@ -272,8 +290,8 @@ const Edit = ({
 							onColorChange: (value) =>
 								setButtonBackgroundColorHover(
 									value || colors.buttonBackgroundColorHover
-								),
-						},
+								)
+						}
 					]}
 				/>
 			</InspectorControls>

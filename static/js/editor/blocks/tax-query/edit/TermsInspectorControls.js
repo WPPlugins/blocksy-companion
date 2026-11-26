@@ -6,6 +6,11 @@ import { OptionsPanel } from 'blocksy-options'
 import BlocksyToolsPanel from '../../../components/ToolsPanel'
 import { useTaxonomyLayers } from '../../query/edit/layers/useTaxonomiesLayers'
 
+import {
+	__experimentalToggleGroupControl as ToggleGroupControl,
+	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
+} from '@wordpress/components'
+
 const TermsInspectorControls = ({
 	context,
 	attributes,
@@ -15,7 +20,6 @@ const TermsInspectorControls = ({
 	const { taxonomiesGroup } = useTaxonomyLayers({
 		attributes,
 		setAttributes,
-		previewedPostMatchesType: true,
 	})
 
 	return (
@@ -26,6 +30,8 @@ const TermsInspectorControls = ({
 				setAttributes={setAttributes}
 				resetAll={() => {
 					setAttributes({
+						level: 'all',
+						hide_empty: 'yes',
 						offset: 0,
 						orderby: 'none',
 						order: 'desc',
@@ -212,6 +218,122 @@ const TermsInspectorControls = ({
 											value={attributes}
 											hasRevertButton={false}
 										/>
+									)
+								},
+							},
+
+							{
+								label: __('Level', 'blocksy-companion'),
+
+								hasValue: () => {
+									return attributes.level !== 'all'
+								},
+
+								reset: () => {
+									setAttributes({
+										level: 'all',
+									})
+								},
+
+								render: () => {
+									return (
+										<OptionsPanel
+											purpose="gutenberg"
+											onChange={(
+												optionId,
+												optionValue
+											) => {
+												setAttributes({
+													[optionId]: optionValue,
+												})
+											}}
+											options={{
+												level: {
+													type: 'ct-select',
+													label: __(
+														'Level',
+														'blocksy-companion'
+													),
+													value: '',
+													choices: [
+														{
+															key: 'all',
+															value: __(
+																'All Taxonomies',
+																'blocksy-companion'
+															),
+														},
+
+														{
+															key: 'parent',
+															value: __(
+																'Only Parent Taxonomies',
+																'blocksy-companion'
+															),
+														},
+
+														{
+															key: 'relevant',
+															value: __(
+																'Relevant Taxonomies',
+																'blocksy-companion'
+															),
+														},
+													],
+												},
+											}}
+											value={attributes}
+											hasRevertButton={false}
+										/>
+									)
+								},
+							},
+
+							{
+								label: __(
+									'Taxonomies Visibility',
+									'blocksy-companion'
+								),
+
+								hasValue: () => {
+									return attributes.hide_empty === 'no'
+								},
+
+								reset: () => {
+									setAttributes({
+										hide_empty: 'yes',
+									})
+								},
+
+								render: () => {
+									return (
+										<ToggleGroupControl
+											label={__(
+												'Hide Empty Taxonomies',
+												'blocksy-companion'
+											)}
+											value={attributes.hide_empty}
+											isBlock
+											onChange={(newValue) => {
+												setAttributes({
+													hide_empty: newValue,
+												})
+											}}>
+											<ToggleGroupControlOption
+												value="no"
+												label={__(
+													'No',
+													'blocksy-companion'
+												)}
+											/>
+											<ToggleGroupControlOption
+												value="yes"
+												label={__(
+													'Yes',
+													'blocksy-companion'
+												)}
+											/>
+										</ToggleGroupControl>
 									)
 								},
 							},

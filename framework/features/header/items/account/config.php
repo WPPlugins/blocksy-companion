@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 $config = [
 	'name' => __('Account', 'blocksy-companion'),
 
@@ -22,13 +26,21 @@ $config = [
 		'loggedin_icon_source',
 		'loggedin_custom_icon',
 		'logged_out_icon_source',
-		'logged_out_custom_icon'
+		'logged_out_custom_icon',
 	],
 
 	'translation_keys' => [
 		['key' => 'login_label'],
 		['key' => 'loggedin_label'],
-		['key' => 'account_custom_page']
+		['key' => 'account_custom_page'],
+		[
+			'key' => 'dropdown_items',
+			'all_layers' => [
+				'label',
+				'link'
+			]
+		]
+
 	]
 ];
 

@@ -4,9 +4,14 @@ import { __ } from 'ct-i18n'
 
 import useCustomFieldData from '../../hooks/use-custom-field-data'
 
-const BrandsPreview = ({ product, attributes }) => {
+const BrandsPreview = ({ postId, attributes }) => {
 	const { fieldData } = useCustomFieldData({
-		postId: product.id,
+		fieldsContext: {
+			type: 'post',
+			post_type: 'product',
+			post_id: postId,
+		},
+
 		fieldDescriptor: {
 			provider: 'woo',
 			id: 'brands',
@@ -26,7 +31,7 @@ const BrandsPreview = ({ product, attributes }) => {
 						return (
 							<span
 								key={brand.slug}
-								className="ct-media-container ct-product-brand">
+								className="ct-media-container">
 								<img src={brand.image.url} alt={brand.name} />
 							</span>
 						)
@@ -35,7 +40,7 @@ const BrandsPreview = ({ product, attributes }) => {
 					return (
 						<span
 							key={brand.slug}
-							dangerouslySetInnerHTML={{ __html: t.name }}
+							dangerouslySetInnerHTML={{ __html: brand.name }}
 						/>
 					)
 				})}

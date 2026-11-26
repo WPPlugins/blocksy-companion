@@ -1,4 +1,9 @@
 <?php
+
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 /**
  * Contact Info widget
  *
@@ -6,7 +11,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU General Public License
  * @package   Blocksy
  */
-$is_pro = function_exists('blc_fs') && blc_fs()->can_use_premium_code();
+$is_pro = function_exists('blocksy_companion_fs') && blocksy_companion_fs()->can_use_premium_code();
 
 $visibility_option = [
 	'visibility' => [
@@ -14,11 +19,11 @@ $visibility_option = [
 		'type' => 'ct-visibility',
 		'design' => 'block',
 		// 'allow_empty' => true,
-		'value' => [
+		'value' => blocksy_default_responsive_value([
 			'desktop' => true,
 			'tablet' => true,
 			'mobile' => true,
-		],
+		]),
 
 		'choices' => blocksy_ordered_keys([
 			'desktop' => __( 'Desktop', 'blocksy-companion' ),
@@ -269,7 +274,7 @@ $options = [
 						'title' => [
 							'type' => 'text',
 							'label' => __('Title', 'blocksy-companion'),
-							'value' => __('Opening hours', 'blocksy-companion'),
+							'value' => __('Opening hours:', 'blocksy-companion'),
 							'design' => 'block',
 						],
 

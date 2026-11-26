@@ -6,40 +6,34 @@ class DemoProvider extends Provider {
 	public function __construct() {
 	}
 
-	public function fetch_lists($api_key) {
-		if (! $api_key) {
-			return 'api_key_invalid';
+	// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+	public function fetch_lists( $api_key, $api_url = '' ) {
+		if ( ! $api_key ) {
+			return new \WP_Error( 'api_key_missing', __( 'Please enter an API key.', 'blocksy-companion' ) );
 		}
 
-		return [
-			[
-				'name' => __('Demo List', 'blocksy-companion'),
-				'id' => 'demolist'
-			]
-		];
+		return array(
+			array(
+				'name' => __( 'Demo List', 'blocksy-companion' ),
+				'id'   => 'demolist',
+			),
+		);
 	}
 
-	public function get_form_url_and_gdpr_for($maybe_custom_list = null) {
-		return [
-			'form_url' => '#',
-			'has_gdpr_fields' => false,
-			'provider' => 'demo'
-		];
-	}
+	public function subscribe_form( $args = array() ) {
+		$args = wp_parse_args(
+			$args,
+			array(
+				'email' => '',
+				'name'  => '',
+				'group' => '',
+			)
+		);
 
-	public function subscribe_form($args = []) {
-		$args = wp_parse_args($args, [
-			'email' => '',
-			'name' => '',
-			'group' => ''
-		]);
-
-		return [
+		return array(
 			// 'response' => $response,
-			'result' => 'yes',
-			'message' => __('Thank you for subscribing to our newsletter!', 'blocksy-companion')
-		];
+			'result'  => 'yes',
+			'message' => NewsletterMessages::subscribed_successfully(),
+		);
 	}
 }
-
-

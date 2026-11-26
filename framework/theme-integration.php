@@ -2,22 +2,33 @@
 
 namespace Blocksy;
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 class ThemeIntegration {
 	public function __construct() {
-		add_action('wp_enqueue_scripts', function () {
-			if (! function_exists('get_plugin_data')){
-				require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-			}
+		add_action(
+			'wp_enqueue_scripts',
+			function () {
+				if (! function_exists('get_plugin_data')){
+					require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+				}
 
-			$data = get_plugin_data(BLOCKSY__FILE__);
+				$data = get_plugin_data(BLOCKSY__FILE__);
 
-			if (is_admin()) return;
+				if (is_admin()) return;
 
-			wp_register_script(
-				'blocksy-zxcvbn',
-				includes_url('/js/zxcvbn.min.js')
-			);
-		});
+				wp_register_script(
+					'blocksy-zxcvbn',
+					includes_url('/js/zxcvbn.min.js'),
+					[],
+					$data['Version'],
+					false
+				);
+			},
+			5
+		);
 
 		add_filter('blocksy:frontend:dynamic-js-chunks', function ($chunks) {
 			$render = new \Blocksy_Header_Builder_Render();
@@ -52,7 +63,7 @@ class ThemeIntegration {
 								),
 								'i18n_password_error'=> esc_attr__(
 									'Please enter a stronger password.',
-									'woocommerce'
+									'blocksy-companion'
 								),
 								'i18n_password_hint' => addslashes(wp_get_password_hint()),
 							]
@@ -61,12 +72,12 @@ class ThemeIntegration {
 						[
 							'var' => 'pwsL10n',
 							'data' => [
-								'unknown'  => _x( 'Password strength unknown', 'password strength' ),
-								'short'    => _x( 'Very weak', 'password strength' ),
-								'bad'      => _x( 'Weak', 'password strength' ),
-								'good'     => _x( 'Medium', 'password strength' ),
-								'strong'   => _x( 'Strong', 'password strength' ),
-								'mismatch' => _x( 'Mismatch', 'password mismatch' ),
+								'unknown'  => _x( 'Password strength unknown', 'password strength', 'blocksy-companion' ),
+								'short'    => _x( 'Very weak', 'password strength', 'blocksy-companion' ),
+								'bad'      => _x( 'Weak', 'password strength', 'blocksy-companion' ),
+								'good'     => _x( 'Medium', 'password strength', 'blocksy-companion' ),
+								'strong'   => _x( 'Strong', 'password strength', 'blocksy-companion' ),
+								'mismatch' => _x( 'Mismatch', 'password mismatch', 'blocksy-companion' ),
 							]
 						]
 					];
@@ -79,22 +90,22 @@ class ThemeIntegration {
 					$global_data[] = [
 						'var' => 'DokanValidateMsg',
 						'data' => apply_filters('DokanValidateMsg_args', [
-							'required'        => __( 'This field is required', 'dokan-lite' ),
-							'remote'          => __( 'Please fix this field.', 'dokan-lite' ),
-							'email'           => __( 'Please enter a valid email address.', 'dokan-lite' ),
-							'url'             => __( 'Please enter a valid URL.', 'dokan-lite' ),
-							'date'            => __( 'Please enter a valid date.', 'dokan-lite' ),
-							'dateISO'         => __( 'Please enter a valid date (ISO).', 'dokan-lite' ),
-							'number'          => __( 'Please enter a valid number.', 'dokan-lite' ),
-							'digits'          => __( 'Please enter only digits.', 'dokan-lite' ),
-							'creditcard'      => __( 'Please enter a valid credit card number.', 'dokan-lite' ),
-							'equalTo'         => __( 'Please enter the same value again.', 'dokan-lite' ),
-							'maxlength_msg'   => __( 'Please enter no more than {0} characters.', 'dokan-lite' ),
-							'minlength_msg'   => __( 'Please enter at least {0} characters.', 'dokan-lite' ),
-							'rangelength_msg' => __( 'Please enter a value between {0} and {1} characters long.', 'dokan-lite' ),
-							'range_msg'       => __( 'Please enter a value between {0} and {1}.', 'dokan-lite' ),
-							'max_msg'         => __( 'Please enter a value less than or equal to {0}.', 'dokan-lite' ),
-							'min_msg'         => __( 'Please enter a value greater than or equal to {0}.', 'dokan-lite' ),
+							'required' => __( 'This field is required', 'blocksy-companion' ),
+							'remote' => __( 'Please fix this field.', 'blocksy-companion' ),
+							'email' => __( 'Please enter a valid email address.', 'blocksy-companion' ),
+							'url' => __( 'Please enter a valid URL.', 'blocksy-companion' ),
+							'date' => __( 'Please enter a valid date.', 'blocksy-companion' ),
+							'dateISO' => __( 'Please enter a valid date (ISO).', 'blocksy-companion' ),
+							'number' => __( 'Please enter a valid number.', 'blocksy-companion' ),
+							'digits' => __( 'Please enter only digits.', 'blocksy-companion' ),
+							'creditcard' => __( 'Please enter a valid credit card number.', 'blocksy-companion' ),
+							'equalTo' => __( 'Please enter the same value again.', 'blocksy-companion' ),
+							'maxlength_msg' => __( 'Please enter no more than {0} characters.', 'blocksy-companion' ),
+							'minlength_msg' => __( 'Please enter at least {0} characters.', 'blocksy-companion' ),
+							'rangelength_msg' => __( 'Please enter a value between {0} and {1} characters long.', 'blocksy-companion' ),
+							'range_msg' => __( 'Please enter a value between {0} and {1}.', 'blocksy-companion' ),
+							'max_msg' => __( 'Please enter a value less than or equal to {0}.', 'blocksy-companion' ),
+							'min_msg' => __( 'Please enter a value greater than or equal to {0}.', 'blocksy-companion' ),
 						])
 					];
 
@@ -119,6 +130,7 @@ class ThemeIntegration {
 					'global_data' => $global_data,
 
 					'trigger' => 'click',
+					'version' => blocksy_companion_get_version()
 				];
 			}
 
@@ -128,6 +140,7 @@ class ThemeIntegration {
 				'url' => blocksy_cdn_url(
 					BLOCKSY_URL . 'static/bundle/sticky.js'
 				),
+				'version' => blocksy_companion_get_version()
 			];
 
 			return $chunks;
@@ -143,8 +156,16 @@ class ThemeIntegration {
 					// post_date | comment_count
 					'orderby' => 'post_date',
 					'order' => 'DESC',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 					'meta_value' => '',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 					'meta_key' => '',
+
+					// yes | no
+					'has_slideshow' => 'no',
+					'has_slideshow_arrows' => 'yes',
+					'has_slideshow_autoplay' => 'no',
+					'has_slideshow_autoplay_speed' => 3,
 
 					// yes | no
 					'has_pagination' => 'yes',
@@ -173,7 +194,7 @@ class ThemeIntegration {
 
 			$file_path = dirname(__FILE__) . '/views/blocksy-posts.php';
 
-			return blocksy_render_view(
+			return blocksy_companion_render_view(
 				$file_path,
 				[
 					'args' => $args,
@@ -233,6 +254,20 @@ class ThemeIntegration {
 				$fields['tiktok'] = __( 'TikTok', 'blocksy-companion' );
 				$fields['mastodon'] = __( 'Mastodon', 'blocksy-companion' );
 
+				/**
+				 * Filters the additional social networks available on the user profile screen.
+				 *
+				 * @since 2.0.1
+				 *
+				 * @param array $additional_fields {
+				 *     Additional social network fields. Entries without an `id` and a `name` are skipped.
+				 *
+				 *     @type array $field {
+				 *         @type string $id   Key the field is stored under in the user meta.
+				 *         @type string $name Field label shown on the profile screen.
+				 *     }
+				 * }
+				 */
 				$additional_fields = apply_filters(
 					'blocksy:author-profile:custom-social-network',
 					[]
@@ -282,7 +317,7 @@ class ThemeIntegration {
 					}
 
 					if (
-						blc_can_use_premium_code()
+						blocksy_companion_can_use_premium_code()
 						&&
 						file_exists(
 							BLOCKSY_PATH . '/framework/premium/changelog.txt'

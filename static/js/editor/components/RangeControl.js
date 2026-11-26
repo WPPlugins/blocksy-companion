@@ -9,17 +9,14 @@ import {
 	RangeControl as NativeRangeControl,
 } from '@wordpress/components'
 
-const RangeControl = ({ label, onChange, initialPosition, value }) => {
+const RangeControl = ({ label, onChange, value }) => {
 	return (
-		<fieldset>
-			<BaseControl.VisualLabel as="legend">
-				{label}
-			</BaseControl.VisualLabel>
+		<BaseControl label={label}>
 			<Flex gap={4}>
 				<FlexItem isBlock>
 					<NumberControl
 						size="__unstable-large"
-						onChange={onChange}
+						onChange={(value) => onChange(+value)}
 						value={value}
 						min={1}
 						label={label}
@@ -29,7 +26,7 @@ const RangeControl = ({ label, onChange, initialPosition, value }) => {
 				<FlexItem isBlock>
 					<NativeRangeControl
 						value={parseInt(value, 10)} // RangeControl can't deal with strings.
-						onChange={onChange}
+						onChange={(value) => onChange(+value)}
 						min={1}
 						max={6}
 						withInputField={false}
@@ -38,7 +35,7 @@ const RangeControl = ({ label, onChange, initialPosition, value }) => {
 					/>
 				</FlexItem>
 			</Flex>
-		</fieldset>
+		</BaseControl>
 	)
 }
 

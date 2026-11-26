@@ -3,15 +3,18 @@ import { createElement } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import { registerBlockType } from '@wordpress/blocks'
 
-import { getAttributesFromOptions, getOptionsForBlock } from '../../utils'
+import { getAttributesFromOptions, getOptionsForBlock } from 'blocksy-options'
 import Edit from './Edit'
 import { colorsDefaults } from './colors'
+
+import deprecated from './deprecated'
+import metadata from './block.json'
 
 export const options = getOptionsForBlock('share_box')
 export const defaultAttributes = getAttributesFromOptions(options)
 
 registerBlockType('blocksy/share-box', {
-	apiVersion: 3,
+	...metadata,
 	title: __('Share Box Controls', 'blocksy-companion'),
 	icon: {
 		src: (
@@ -23,26 +26,27 @@ registerBlockType('blocksy/share-box', {
 			</svg>
 		),
 	},
-	supports: {
-		html: false,
-		inserter: false,
-		lock: false,
-	},
 	parent: ['blocksy/widgets-wrapper'],
 	attributes: {
 		...defaultAttributes,
 		...colorsDefaults,
 	},
 	edit: (props) => <Edit {...props} />,
+
 	save: function () {
 		return <div>Blocksy: Share Box</div>
 	},
+
+	deprecated,
 })
 
 wp.blocks.registerBlockVariation('blocksy/widgets-wrapper', {
 	name: 'blocksy-share-box',
 	title: __('Share Box', 'blocksy-companion'),
-	description: __('Share content on social media, boosting visibility & engagement.', 'blocksy-companion'),
+	description: __(
+		'Share content on social media, boosting visibility & engagement.',
+		'blocksy-companion'
+	),
 	attributes: {
 		heading: __('Share Box', 'blocksy-companion'),
 		block: 'blocksy/share-box',

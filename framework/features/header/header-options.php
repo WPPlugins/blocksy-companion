@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 $options = [
 
 	blocksy_rand_md5() => [
@@ -80,6 +84,25 @@ $options = [
 						]),
 					],
 
+					blocksy_rand_md5() => [
+						'type' => 'ct-condition',
+						'condition' => [
+							'sticky_effect' => 'slide|fade',
+						],
+						'options' => [
+							'sticky_animation_speed' => [
+								'label' => __( 'Animation Speed', 'blocksy-companion' ),
+								'type' => 'ct-number',
+								'design' => 'inline',
+								'value' => 0.2,
+								'min' => 0.1,
+								'max' => 10,
+								'step' => 0.1,
+								'sync' => 'live'
+							],
+						]
+					],
+
 					'sticky_offset' => [
 						'label' => __( 'Offset', 'blocksy-companion' ),
 						'type' => 'ct-slider',
@@ -98,11 +121,11 @@ $options = [
 						'type' => 'ct-visibility',
 						'design' => 'block',
 						'divider' => 'top',
-						'value' => [
+						'value' => blocksy_default_responsive_value([
 							'desktop' => true,
 							// 'tablet' => true,
 							'mobile' => true,
-						],
+						]),
 
 						'choices' => blocksy_ordered_keys([
 							'desktop' => __('Desktop', 'blocksy-companion'),
@@ -180,11 +203,11 @@ $options = [
 						'type' => 'ct-visibility',
 						'design' => 'block',
 						'sync' => 'live',
-						'value' => [
+						'value' => blocksy_default_responsive_value([
 							'desktop' => true,
 							// 'tablet' => true,
 							'mobile' => true,
-						],
+						]),
 
 						'choices' => blocksy_ordered_keys([
 							'desktop' => __('Desktop', 'blocksy-companion'),

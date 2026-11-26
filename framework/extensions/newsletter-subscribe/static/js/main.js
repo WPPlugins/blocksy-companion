@@ -1,64 +1,5 @@
 import { registerDynamicChunk } from 'blocksy-frontend'
 
-const submitMailchimp = (form) => {
-	if (!form.querySelector('[type="email"]').value.trim()) {
-		return
-	}
-
-	// Check for spam
-	if (
-		document.getElementById('js-validate-robot') &&
-		document.getElementById('js-validate-robot').value !== ''
-	) {
-		return false
-	}
-
-	// Get url for mailchimp
-	var url = form.action.replace('subscribe', 'subscribe/post-json')
-
-	// Add form data to object
-	var data = ''
-
-	var callback = 'mailchimpCallback'
-
-	var inputs = form.querySelectorAll('input')
-
-	for (var i = 0; i < inputs.length; i++) {
-		data += '&' + inputs[i].name + '=' + encodeURIComponent(inputs[i].value)
-	}
-
-	data += `&c=${callback}`
-
-	// Create & add post script to the DOM
-	var script = document.createElement('script')
-	script.src = url + data
-
-	document.body.appendChild(script)
-
-	form.classList.remove('subscribe-error', 'subscribe-success')
-	form.classList.add('subscribe-loading')
-
-	// Callback function
-	window[callback] = function (data) {
-		// Remove post script from the DOM
-		delete window[callback]
-		document.body.removeChild(script)
-
-		form.classList.remove('subscribe-loading')
-
-		if (!data) {
-			return
-		}
-
-		form.classList.add(
-			data.result === 'error' ? 'subscribe-error' : 'subscribe-success'
-		)
-
-		form.querySelector('.ct-newsletter-subscribe-message').innerHTML =
-			data.msg.replace('0 - ', '')
-	}
-}
-
 const submitAjax = (form) => {
 	const body = new FormData(form)
 
@@ -69,13 +10,36 @@ const submitAjax = (form) => {
 	form.classList.remove('subscribe-error', 'subscribe-success')
 	form.classList.add('subscribe-loading')
 
+	const showError = () => {
+		form.classList.remove('subscribe-loading', 'subscribe-success')
+		form.classList.add('subscribe-error')
+		form.querySelector('.ct-newsletter-subscribe-message').textContent =
+			blocksy_newsletter_subscribe.errorMessage
+	}
+
 	fetch(ct_localizations.ajax_url, {
 		method: 'POST',
-		body,
+		body
 	})
 		.then((r) => r.json())
-		.then(({ success, data }) => {
+		.then(({ data }) => {
 			form.classList.remove('subscribe-loading')
+
+			if (data && data.form_url) {
+				form.action = data.form_url
+				form.dynamicJsChunkStop()
+				form.requestSubmit()
+				return
+			}
+
+			if (
+				!data ||
+				!data.message ||
+				!['yes', 'no'].includes(data.result)
+			) {
+				showError()
+				return
+			}
 
 			form.classList.add(
 				data.result === 'no' ? 'subscribe-error' : 'subscribe-success'
@@ -84,18 +48,13 @@ const submitAjax = (form) => {
 			form.querySelector('.ct-newsletter-subscribe-message').innerHTML =
 				data.message
 		})
+		.catch(showError)
 }
 
 registerDynamicChunk('blocksy_ext_newsletter_subscribe', {
 	mount: (el, { event }) => {
 		const form = event.target
 
-		if (form.dataset.provider === 'mailchimp') {
-			submitMailchimp(form)
-		}
-
-		if (form.dataset.provider.indexOf('mailchimp') === -1) {
-			submitAjax(form)
-		}
-	},
+		submitAjax(form)
+	}
 })

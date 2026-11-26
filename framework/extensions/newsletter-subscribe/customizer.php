@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 $options = [
 	'label' => __( 'Subscribe Form', 'blocksy-companion' ),
 	'type' => 'ct-panel',
@@ -150,11 +154,11 @@ $options = [
 					'type' => 'ct-visibility',
 					'design' => 'block',
 					'setting' => [ 'transport' => 'postMessage' ],
-					'value' => [
+					'value' => blocksy_default_responsive_value([
 						'desktop' => true,
 						'tablet' => true,
 						'mobile' => false,
-					],
+					]),
 
 					'choices' => blocksy_ordered_keys([
 						'desktop' => __( 'Desktop', 'blocksy-companion' ),
@@ -409,12 +413,11 @@ $options = [
 					'type' => 'ct-spacing',
 					'divider' => 'top',
 					'setting' => [ 'transport' => 'postMessage' ],
-					'value' => blocksy_spacing_value([
-						'top' => '30px',
-						'left' => '30px',
-						'right' => '30px',
-						'bottom' => '30px',
-					]),
+					'value' => blocksy_spacing_value(),
+					'inputAttr' => [
+						'placeholder' => '30'
+					],
+					'min' => 0,
 					'responsive' => true
 				],
 
@@ -424,6 +427,7 @@ $options = [
 					'divider' => 'top',
 					'setting' => [ 'transport' => 'postMessage' ],
 					'value' => blocksy_spacing_value(),
+					'min' => 0,
 					'responsive' => true
 				],
 

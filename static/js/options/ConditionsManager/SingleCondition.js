@@ -2,9 +2,8 @@ import { createElement } from '@wordpress/element'
 import cls from 'classnames'
 
 import { __ } from 'ct-i18n'
-import { Select } from 'blocksy-options'
+import { Select, EntityIdPicker } from 'blocksy-options'
 import useConditionsData from './useConditionsData'
-import PostIdPicker from './PostIdPicker'
 
 import ExpireCondition from './ExpireCondition'
 import ScheduleDate from './ScheduleDate'
@@ -17,8 +16,7 @@ const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
 		},
 	}
 
-	const { allRules, allTaxonomies, allLanguages, allUsers } =
-		useConditionsData(condition)
+	const { allRules, allLanguages } = useConditionsData(condition)
 
 	const ruleDescriptor = allRules.find(({ key }) => key === condition.rule)
 
@@ -43,7 +41,13 @@ const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
 		condition.rule === 'request_url' ||
 		(ruleDescriptor &&
 			ruleDescriptor.sub_ids &&
-			ruleDescriptor.sub_ids.length > 0)
+			ruleDescriptor.sub_ids.length > 0) ||
+		(ruleDescriptor &&
+			ruleDescriptor.is_custom_rule &&
+			ruleDescriptor.has_text_field) ||
+		(ruleDescriptor &&
+			ruleDescriptor.is_custom_rule &&
+			ruleDescriptor.choices)
 
 	return (
 		<div
@@ -137,14 +141,34 @@ const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
 				condition.rule === 'custom_post_type_ids' ||
 				condition.rule === 'product_ids' ||
 				condition.rule === 'page_ids') && (
-				<PostIdPicker
-					condition={condition}
-					onChange={(post_id) => {
+				<EntityIdPicker
+					option={{
+						placeholder:
+							condition.rule === 'post_ids'
+								? __('Select post', 'blocksy-companion')
+								: condition.rule === 'page_ids'
+								? __('Select page', 'blocksy-companion')
+								: condition.rule === 'product_ids'
+								? __('Select product', 'blocksy-companion')
+								: __(
+										'Custom Post Type ID',
+										'blocksy-companion'
+								  ),
+						entity: 'posts',
+						post_type: {
+							post_ids: 'post',
+							page_ids: 'page',
+							product_ids: 'product',
+							custom_post_type_ids: 'ct_cpt',
+						}[condition.rule],
+					}}
+					value={(condition.payload || {}).post_id || ''}
+					onChange={(id) => {
 						onChange({
 							...condition,
 							payload: {
 								...condition.payload,
-								post_id,
+								post_id: id,
 							},
 						})
 					}}
@@ -154,34 +178,18 @@ const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
 			{(condition.rule === 'taxonomy_ids' ||
 				condition.rule === 'post_with_taxonomy_ids' ||
 				condition.rule === 'card_post_with_taxonomy_ids') && (
-				<Select
+				<EntityIdPicker
 					option={{
-						appendToBody: true,
-						defaultToFirstItem: false,
 						placeholder: __('Select taxonomy', 'blocksy-companion'),
-						choices: allTaxonomies
-							.filter(
-								(taxonomy) =>
-									!Object.values(
-										taxonomy?.post_types || []
-									).includes('product')
-							)
-							.map((taxonomy) => ({
-								key: taxonomy.id,
-								value: taxonomy.name,
-								...(taxonomy.group
-									? { group: taxonomy.group }
-									: {}),
-							})),
-						search: true,
+						entity: 'taxonomies',
 					}}
 					value={(condition.payload || {}).taxonomy_id || ''}
-					onChange={(taxonomy_id) => {
+					onChange={(id) => {
 						onChange({
 							...condition,
 							payload: {
 								...condition.payload,
-								taxonomy_id,
+								taxonomy_id: id,
 							},
 						})
 					}}
@@ -191,31 +199,19 @@ const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
 			{(condition.rule === 'product_with_taxonomy_ids' ||
 				condition.rule === 'product_taxonomy_ids' ||
 				condition.rule === 'card_product_with_taxonomy_ids') && (
-				<Select
+				<EntityIdPicker
 					option={{
-						appendToBody: true,
-						defaultToFirstItem: false,
 						placeholder: __('Select taxonomy', 'blocksy-companion'),
-						choices: allTaxonomies
-							.filter((taxonomy) =>
-								(taxonomy?.post_types || []).includes('product')
-							)
-							.map((taxonomy) => ({
-								key: taxonomy.id,
-								value: taxonomy.name,
-								...(taxonomy.group
-									? { group: taxonomy.group }
-									: {}),
-							})),
-						search: true,
+						entity: 'taxonomies',
+						post_type: 'product',
 					}}
 					value={(condition.payload || {}).taxonomy_id || ''}
-					onChange={(taxonomy_id) => {
+					onChange={(id) => {
 						onChange({
 							...condition,
 							payload: {
 								...condition.payload,
-								taxonomy_id,
+								taxonomy_id: id,
 							},
 						})
 					}}
@@ -248,31 +244,24 @@ const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
 			)}
 
 			{condition.rule === 'user_post_author_id' && (
-				<Select
+				<EntityIdPicker
 					option={{
-						appendToBody: true,
-						defaultToFirstItem: false,
 						placeholder: __('Select user', 'blocksy-companion'),
-						choices: [
+						entity: 'users',
+						additionOptions: [
 							{
 								key: 'current_user',
 								value: __('Current user', 'blocksy-companion'),
 							},
-
-							...allUsers.map((user) => ({
-								key: user.id,
-								value: user.name,
-							})),
 						],
-						search: true,
 					}}
 					value={(condition.payload || {}).user_id || ''}
-					onChange={(user_id) => {
+					onChange={(id) => {
 						onChange({
 							...condition,
 							payload: {
 								...condition.payload,
-								user_id,
+								user_id: id,
 							},
 						})
 					}}
@@ -280,30 +269,24 @@ const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
 			)}
 
 			{condition.rule === 'author' && (
-				<Select
+				<EntityIdPicker
 					option={{
-						appendToBody: true,
 						placeholder: __('Select user', 'blocksy-companion'),
-						choices: [
+						entity: 'users',
+						additionOptions: [
 							{
 								key: 'all_users',
 								value: __('All authors', 'blocksy-companion'),
 							},
-
-							...allUsers.map((user) => ({
-								key: user.id,
-								value: user.name,
-							})),
 						],
-						search: true,
 					}}
 					value={(condition.payload || {}).user_id || 'all_users'}
-					onChange={(user_id) => {
+					onChange={(id) => {
 						onChange({
 							...condition,
 							payload: {
 								...condition.payload,
-								user_id,
+								user_id: id,
 							},
 						})
 					}}
@@ -445,6 +428,58 @@ const SingleCondition = ({ className = '', condition, onRemove, onChange }) => {
 					</span>
 				</div>
 			)}
+
+			{ruleDescriptor &&
+				ruleDescriptor.is_custom_rule &&
+				ruleDescriptor.has_text_field && (
+					<div className="ct-option-input">
+						<input
+							type="text"
+							placeholder=""
+							value={condition.payload.value || ''}
+							onChange={(e) => {
+								onChange({
+									...condition,
+									payload: {
+										...condition.payload,
+										value: e.target.value,
+									},
+								})
+							}}
+						/>
+					</div>
+				)}
+
+			{ruleDescriptor &&
+				ruleDescriptor.is_custom_rule &&
+				ruleDescriptor.choices && (
+					<Select
+						option={{
+							appendToBody: true,
+							placeholder: __(
+								'Select value',
+								'blocksy-companion'
+							),
+							choices: ruleDescriptor.choices,
+
+							search: true,
+							inputClassName: 'ct-dropdown-normal-width',
+						}}
+						value={
+							condition.payload.value ||
+							ruleDescriptor.choices[0].key
+						}
+						onChange={(value) => {
+							onChange({
+								...condition,
+								payload: {
+									...condition.payload,
+									value,
+								},
+							})
+						}}
+					/>
+				)}
 
 			<button
 				type="button"

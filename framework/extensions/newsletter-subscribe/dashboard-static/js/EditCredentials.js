@@ -1,17 +1,13 @@
 import {
 	createElement,
-	Component,
 	useEffect,
 	useState,
-	useMemo,
-	useReducer,
-	Fragment,
+	Fragment
 } from '@wordpress/element'
 
 import classnames from 'classnames'
 import { __, sprintf } from 'ct-i18n'
 import ListPicker from './ListPicker'
-import Overlay from '../../../../../static/js/helpers/Overlay'
 import { Select } from 'blocksy-options'
 
 import useProExtensionInFree from '../../../../../static/js/dashboard/helpers/useProExtensionInFree'
@@ -22,11 +18,19 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 	const [provider, setProvider] = useState(extension.data.provider)
 
 	const [apiKey, setApiKey] = useState(extension.data.api_key)
+	const [apiUrl, setApiUrl] = useState(extension.data.api_url)
 	const [listId, setListId] = useState(extension.data.list_id)
+	const [hasList, setHasList] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
+	const [listError, setListError] = useState('')
+	const [saveError, setSaveError] = useState('')
+
+	useEffect(() => {
+		setSaveError('')
+	}, [provider, apiKey, apiUrl, listId])
 
 	const { isPro, showNotice, content } = useProExtensionInFree(extension, {
-		strategy: 'pro',
+		strategy: 'pro'
 	})
 
 	useEffect(() => {
@@ -44,6 +48,7 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 
 		body.append('provider', provider)
 		body.append('api_key', apiKey)
+		body.append('api_url', apiUrl || '')
 		body.append('list_id', listId)
 
 		body.append(
@@ -54,39 +59,81 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 		body.append('nonce', ctDashboardLocalizations.dashboard_actions_nonce)
 
 		setIsLoading(true)
+		setSaveError('')
+		let error = __(
+			'Unable to save newsletter settings. Please try again.',
+			'blocksy-companion'
+		)
 
 		try {
 			const response = await fetch(ctDashboardLocalizations.ajax_url, {
 				method: 'POST',
-				body,
+				body
 			})
 
-			if (response.status === 200) {
-				const body = await response.json()
+			const result = await response.json()
 
-				if (body.success) {
-					if (body.data.result !== 'api_key_invalid') {
-						onCredentialsValidated()
-					}
-				}
+			if (
+				response.ok &&
+				result.success &&
+				Array.isArray(result.data?.result)
+			) {
+				onCredentialsValidated()
+				return
 			}
-		} catch (e) {}
 
-		await new Promise((r) => setTimeout(() => r(), 1000))
+			if (
+				typeof result.data?.message === 'string' &&
+				result.data.message
+			) {
+				error = result.data.message
+			}
+		} catch (e) {
+		} finally {
+			setIsLoading(false)
+		}
 
-		setIsLoading(false)
+		setSaveError(error)
 	}
+
+	const providerMap = {
+		mailerlite: 'mailerlite-new',
+		convertkit: 'convertkit-new'
+	}
+
+	const transformedProvider =
+		Object.keys(providerMap).find((p) => provider.includes(p)) || provider
+
+	const value = providerMap[transformedProvider] || provider
+
+	const withApiUrl =
+		provider.indexOf('activecampaign') > -1 ||
+		provider.indexOf('sendy') > -1
+
+	const fourColumnsLayout =
+		provider.indexOf('mailerlite') > -1 ||
+		provider === 'activecampaign' ||
+		provider.indexOf('convertkit') > -1 ||
+		provider.indexOf('sendy') > -1
 
 	return (
 		<div
 			className={classnames(
 				'ct-extension-options ct-newsletter-subscribe-options'
-			)}>
+			)}
+		>
 			<h4>{__('Connect Newsletter Provider', 'blocksy-companion')}</h4>
 
 			<div
 				className="ct-newsletter-credentials"
-				data-columns={provider.indexOf('mailerlite') > -1 ? 4 : 3}>
+				data-columns={
+					fourColumnsLayout
+						? 4
+						: ['mailpoet', 'fluentcrm'].includes(provider)
+							? 2
+							: 3
+				}
+			>
 				<section>
 					<label>{__('Provider', 'blocksy-companion')}</label>
 					<Select
@@ -107,45 +154,27 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 								'Pick Mailing Service',
 								'blocksy-companion'
 							),
-							choices: [
-								{
-									key: 'mailchimp',
-									value: 'Mailchimp',
-								},
-
-								{
-									key: 'mailerlite-new',
-									value: 'Mailerlite',
-								},
-
-								{
-									key: 'brevo',
-									value: 'Brevo (Sendinblue)',
-								},
-
-								{
-									key: 'campaignmonitor',
-									value: 'Campaign Monitor',
-								},
-
-								{
-									key: 'convertkit',
-									value: 'ConvertKit',
-								},
-
-								{
-									key: 'demo',
-									value: 'Demo',
-								},
-							],
+							choices: extension.data.providers
 						}}
-						value={
-							provider.indexOf('mailerlite') > -1
-								? 'mailerlite-new'
-								: provider
-						}
+						value={value}
 					/>
 				</section>
+
+				{withApiUrl && (
+					<section>
+						<label>{__('API URL', 'blocksy-companion')}</label>
+
+						<div className="ct-option-input">
+							<input
+								type="text"
+								onChange={({ target: { value } }) =>
+									setApiUrl(value)
+								}
+								value={apiUrl || ''}
+							/>
+						</div>
+					</section>
+				)}
 
 				{provider.indexOf('mailerlite') > -1 && (
 					<section>
@@ -166,14 +195,14 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 								choices: [
 									{
 										key: 'new',
-										value: 'New',
+										value: 'New'
 									},
 
 									{
 										key: 'classic',
-										value: 'Classic',
-									},
-								],
+										value: 'Classic'
+									}
+								]
 							}}
 							value={
 								provider === 'mailerlite-new'
@@ -184,22 +213,63 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 					</section>
 				)}
 
+				{provider.indexOf('convertkit') > -1 && (
+					<section>
+						<label>{__('API Version', 'blocksy-companion')}</label>
+						<Select
+							onChange={(copy) => {
+								setProvider(
+									copy === 'new'
+										? 'convertkit-new'
+										: 'convertkit'
+								)
+							}}
+							option={{
+								placeholder: __(
+									'Pick Mailing Service',
+									'blocksy-companion'
+								),
+								choices: [
+									{
+										key: 'new',
+										value: 'New (v4)'
+									},
+
+									{
+										key: 'classic',
+										value: 'Classic (v3)'
+									}
+								]
+							}}
+							value={
+								provider === 'convertkit-new'
+									? 'new'
+									: 'classic'
+							}
+						/>
+					</section>
+				)}
+
 				{(freeProviders.includes(provider) ||
 					ctDashboardLocalizations.plugin_data.is_pro) && (
 					<Fragment>
-						<section>
-							<label>{__('API Key', 'blocksy-companion')}</label>
+						{!['mailpoet', 'fluentcrm'].includes(provider) ? (
+							<section>
+								<label>
+									{__('API Key', 'blocksy-companion')}
+								</label>
 
-							<div className="ct-option-input">
-								<input
-									type="text"
-									onChange={({ target: { value } }) =>
-										setApiKey(value)
-									}
-									value={apiKey || ''}
-								/>
-							</div>
-						</section>
+								<div className="ct-option-input">
+									<input
+										type="text"
+										onChange={({ target: { value } }) =>
+											setApiKey(value)
+										}
+										value={apiKey || ''}
+									/>
+								</div>
+							</section>
+						) : null}
 						<section>
 							<label>{__('List ID', 'blocksy-companion')}</label>
 
@@ -207,12 +277,23 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 								listId={listId}
 								onChange={(id) => setListId(id)}
 								provider={provider}
+								apiUrl={apiUrl}
 								apiKey={apiKey}
+								onListsLoading={(listsLength, error) => {
+									setHasList(!!listsLength)
+									setListError(error)
+								}}
 							/>
 						</section>
 					</Fragment>
 				)}
 			</div>
+
+			{(listError || saveError) && (
+				<p className="ct-newsletter-error" role="alert">
+					{listError || saveError}
+				</p>
+			)}
 
 			{provider === 'mailchimp' && (
 				<span
@@ -226,7 +307,7 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 
 							'<a target="_blank" href="https://mailchimp.com/help/about-api-keys/">',
 							'</a>'
-						),
+						)
 					}}
 				/>
 			)}
@@ -246,7 +327,25 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 								'</a>',
 								'<a target="_blank" href="https://www.mailerlite.com/help/how-to-create-and-use-groups">',
 								'</a>'
-							),
+							)
+						}}
+					/>
+				)}
+
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider === 'moosend' && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to generate an API key for Moosend can be found %shere%s. Create an email list before connecting.',
+									'blocksy-companion'
+								),
+
+								'<a target="_blank" rel="noopener noreferrer" href="https://docs.moosend.com/user-guide/articles/KnowledgeBase/54498-use-the-api-key-to-connect-to-the-moosend-web-api?lang=en_US">',
+								'</a>'
+							)
 						}}
 					/>
 				)}
@@ -258,10 +357,28 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 						__html: __(
 							'This provider is used only for testing purposes. It doesnt register any real subscribers.',
 							'blocksy-companion'
-						),
+						)
 					}}
 				/>
 			)}
+
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider === 'klaviyo' && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to generate an API key for Klaviyo can be found %shere%s.',
+									'blocksy-companion'
+								),
+
+								'<a target="_blank" href="https://developers.klaviyo.com/en/reference/api_overview">',
+								'</a>'
+							)
+						}}
+					/>
+				)}
 
 			{ctDashboardLocalizations.plugin_data.is_pro &&
 				provider === 'brevo' && (
@@ -276,25 +393,43 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 
 								'<a target="_blank" href="https://help.brevo.com/hc/en-us/articles/209467485-Create-and-manage-your-API-keys">',
 								'</a>'
-							),
+							)
 						}}
 					/>
 				)}
 
 			{ctDashboardLocalizations.plugin_data.is_pro &&
-				provider === 'convertkit' && (
+				provider.indexOf('convertkit') > -1 && (
 					<span
 						className="ct-option-description"
 						dangerouslySetInnerHTML={{
 							__html: sprintf(
 								__(
-									'More information on how to generate an API key for ConvertKit can be found %shere%s.',
+									'More information on how to generate an API key for Kit (ConvertKit) can be found %shere%s.',
 									'blocksy-companion'
 								),
 
-								'<a target="_blank" href="https://developers.convertkit.com/#api-basics">',
+								'<a target="_blank" href="https://developers.kit.com/welcome#api-basics">',
 								'</a>'
-							),
+							)
+						}}
+					/>
+				)}
+
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider === 'activecampaign' && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to generate an API key for ActiveCampaign can be found %shere%s.',
+									'blocksy-companion'
+								),
+
+								'<a target="_blank" href="https://developers.activecampaign.com/reference/overview">',
+								'</a>'
+							)
 						}}
 					/>
 				)}
@@ -312,15 +447,77 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 
 								'<a target="_blank" href="https://help.campaignmonitor.com/api-keys">',
 								'</a>'
-							),
+							)
+						}}
+					/>
+				)}
+
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider === 'emailoctopus' && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to generate an API key for EmailOctopus can be found %shere%s.',
+									'blocksy-companion'
+								),
+
+								'<a target="_blank" href="https://emailoctopus.com/api-documentation/v2">',
+								'</a>'
+							)
+						}}
+					/>
+				)}
+
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider === 'mailpoet' && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to create a list in MailPoet can be found %shere%s.',
+									'blocksy-companion'
+								),
+
+								'<a target="_blank" href="https://kb.mailpoet.com/article/282-create-a-list">',
+								'</a>'
+							)
+						}}
+					/>
+				)}
+
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider === 'fluentcrm' && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to create a list in fluentcrm can be found %shere%s.',
+									'blocksy-companion'
+								),
+
+								'<a target="_blank" href="https://kb.fluentcrm.com/article/282-create-a-list">',
+								'</a>'
+							)
 						}}
 					/>
 				)}
 
 			<button
 				className="ct-button-primary"
-				disabled={!apiKey || !listId || isLoading}
-				onClick={() => attemptToSaveCredentials()}>
+				disabled={
+					(!apiKey &&
+						!['mailpoet', 'fluentcrm'].includes(provider)) ||
+					!listId ||
+					!hasList ||
+					isLoading ||
+					(!apiUrl && withApiUrl)
+				}
+				onClick={() => attemptToSaveCredentials()}
+			>
 				{isLoading
 					? __('Loading...', 'blocksy-companion')
 					: __('Save Settings', 'blocksy-companion')}
