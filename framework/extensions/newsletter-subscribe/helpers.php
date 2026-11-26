@@ -1,14 +1,18 @@
 <?php
 
-function blc_ext_newsletter_subscribe_form() {
-	if (blc_theme_functions()->blocksy_get_theme_mod('newsletter_subscribe_single_post_enabled', 'yes') !== 'yes') {
+if (! defined('ABSPATH')) {
+	exit;
+}
+
+function blocksy_companion_ext_newsletter_subscribe_form() {
+	if (blocksy_companion_theme_functions()->blocksy_get_theme_mod('newsletter_subscribe_single_post_enabled', 'yes') !== 'yes') {
 		return '';
 	}
 
 	if (
-		blocksy_default_akg(
+		blocksy_companion_akg(
 			'disable_subscribe_form',
-			blocksy_get_post_options(),
+			blocksy_companion_theme_functions()->blocksy_get_post_options(),
 			'no'
 		) === 'yes'
 	) {
@@ -16,27 +20,27 @@ function blc_ext_newsletter_subscribe_form() {
 	}
 
 	$args = [
-		'title' => blc_theme_functions()->blocksy_get_theme_mod(
+		'title' => blocksy_companion_theme_functions()->blocksy_get_theme_mod(
 			'newsletter_subscribe_title',
 			__('Newsletter Updates', 'blocksy-companion')
 		),
 
-		'description' => blc_theme_functions()->blocksy_get_theme_mod('newsletter_subscribe_text', __(
+		'description' => blocksy_companion_theme_functions()->blocksy_get_theme_mod('newsletter_subscribe_text', __(
 			'Enter your email address below and subscribe to our newsletter',
 			'blocksy-companion'
 		)),
 
-		'button_text' => blc_theme_functions()->blocksy_get_theme_mod(
+		'button_text' => blocksy_companion_theme_functions()->blocksy_get_theme_mod(
 			'newsletter_subscribe_button_text',
 			__('Subscribe', 'blocksy-companion')
 		),
-		'has_name' => blc_theme_functions()->blocksy_get_theme_mod('has_newsletter_subscribe_name', 'no'),
-		'name_required' => blc_theme_functions()->blocksy_get_theme_mod('newsletter_subscribe_name_required', 'no'),
-		'name_label' => blc_theme_functions()->blocksy_get_theme_mod(
+		'has_name' => blocksy_companion_theme_functions()->blocksy_get_theme_mod('has_newsletter_subscribe_name', 'no'),
+		'name_required' => blocksy_companion_theme_functions()->blocksy_get_theme_mod('newsletter_subscribe_name_required', 'no'),
+		'name_label' => blocksy_companion_theme_functions()->blocksy_get_theme_mod(
 			'newsletter_subscribe_name_label',
 			__('Your name', 'blocksy-companion')
 		),
-		'email_label' => blc_theme_functions()->blocksy_get_theme_mod(
+		'email_label' => blocksy_companion_theme_functions()->blocksy_get_theme_mod(
 			'newsletter_subscribe_mail_label',
 			__('Your email', 'blocksy-companion')
 		)
@@ -44,25 +48,25 @@ function blc_ext_newsletter_subscribe_form() {
 
 	$list_id = null;
 
-	if (blc_theme_functions()->blocksy_get_theme_mod(
+	if (blocksy_companion_theme_functions()->blocksy_get_theme_mod(
 		'newsletter_subscribe_list_id_source',
 		'default'
 	) === 'custom') {
-		$args['list_id'] = blc_theme_functions()->blocksy_get_theme_mod('newsletter_subscribe_list_id', '');
+		$args['list_id'] = blocksy_companion_theme_functions()->blocksy_get_theme_mod('newsletter_subscribe_list_id', '');
 	}
 
 	$args['class'] = 'ct-newsletter-subscribe-container is-width-constrained ' . blocksy_visibility_classes(
-		blc_theme_functions()->blocksy_get_theme_mod('newsletter_subscribe_subscribe_visibility', [
+		blocksy_companion_theme_functions()->blocksy_get_theme_mod('newsletter_subscribe_subscribe_visibility', [
 			'desktop' => true,
 			'tablet' => true,
 			'mobile' => false,
 		])
 	);
 
-	return blc_ext_newsletter_subscribe_output_form($args);
+	return blocksy_companion_ext_newsletter_subscribe_output_form($args);
 }
 
-function blc_ext_newsletter_subscribe_output_form($args = []) {
+function blocksy_companion_ext_newsletter_subscribe_output_form($args = []) {
 	$args = wp_parse_args($args, [
 		'has_title' => true,
 		'has_description' => true,
@@ -90,12 +94,6 @@ function blc_ext_newsletter_subscribe_output_form($args = []) {
 	$has_name = $args['has_name'] === 'yes';
 
 	$manager = \Blocksy\Extensions\NewsletterSubscribe\Provider::get_for_settings();
-	$provider_data = $manager->get_form_url_and_gdpr_for($args['list_id']);
-
-	if (! $provider_data) {
-		return '';
-	}
-
 	$settings = $manager->get_settings();
 
 	$list_id = $settings['list_id'];
@@ -104,23 +102,10 @@ function blc_ext_newsletter_subscribe_output_form($args = []) {
 		$list_id = $args['list_id'];
 	}
 
-	$provider_data['provider'] .= ':' . $list_id;
-
-	$form_url = $provider_data['form_url'];
-	$has_gdpr_fields = $provider_data['has_gdpr_fields'];
-	$has_double_optin = isset($provider_data['double_optin']) ? $provider_data['double_optin'] : false;
-
-	$additional_output = '';
-
-	if ($has_gdpr_fields) {
-		$additional_output = 'data-skip-submit';
-	}
-
-	if ($has_double_optin) {
-		$additional_output .= ' data-double-optin';
-	}
+	$provider = $settings['provider'] . ':' . $list_id;
 
 	$fields_number = '2';
+	$gdpr_checkbox_id_suffix = substr(blocksy_rand_md5(), 0, 3);
 
 	if ($has_name) {
 		$fields_number = '3';
@@ -140,7 +125,7 @@ function blc_ext_newsletter_subscribe_output_form($args = []) {
 
 	?>
 
-	<div <?php blocksy_attr_to_html_e($html_args) ?>>
+	<div <?php blocksy_companion_attr_to_html_e($html_args) ?>>
 		<?php if ($args['has_title']) { ?>
 			<h3><?php echo esc_html($args['title']) ?></h3>
 		<?php } ?>
@@ -151,21 +136,24 @@ function blc_ext_newsletter_subscribe_output_form($args = []) {
 			</p>
 		<?php } ?>
 
-		<form target="_blank" action="<?php echo esc_attr($form_url) ?>" method="post"
-			data-provider="<?php echo esc_attr($provider_data['provider']) ?>"
-			class="ct-newsletter-subscribe-form"
-			<?php echo wp_kses_post($additional_output) ?>>
+		<form action="#" method="post"
+			data-provider="<?php echo esc_attr($provider) ?>"
+			class="ct-newsletter-subscribe-form">
 
 			<div
 				<?php
-					blocksy_attr_to_html_e(
+					blocksy_companion_attr_to_html_e(
 						array_merge(
 							[
-								'class' => 'ct-newsletter-subscribe-form-elements',
+								'class' => trim(
+									'ct-newsletter-subscribe-form-elements' . (
+										$args['container_style'] === 'boxed'
+											? ' ct-pseudo-input'
+											: ''
+									)
+								),
+								'data-container' => $args['container_style'],
 							],
-							$args['container_style'] !== 'default' ? [
-								'data-container' => $args['container_style']
-							] : [],
 							$args['form_style'] === 'inline' ? [
 								'data-columns' => $fields_number
 							] : []
@@ -189,9 +177,12 @@ function blc_ext_newsletter_subscribe_output_form($args = []) {
 				</button>
 			</div>
 
-			<?php if (function_exists('blocksy_ext_cookies_checkbox')) {
+			<?php if (function_exists('blocksy_companion_ext_cookies_checkbox')) {
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo blocksy_ext_cookies_checkbox('subscribe');
+				echo blocksy_companion_ext_cookies_checkbox(
+					'subscribe',
+					$gdpr_checkbox_id_suffix
+				);
 			} ?>
 
 			<div class="ct-newsletter-subscribe-message"></div>

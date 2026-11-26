@@ -2,7 +2,7 @@ import { createElement, Fragment } from '@wordpress/element'
 
 import {
 	useBlockProps,
-	__experimentalUseBorderProps as useBorderProps,
+	__experimentalUseBorderProps as useBorderProps
 } from '@wordpress/block-editor'
 
 import classnames from 'classnames'
@@ -15,18 +15,16 @@ const CustomTextField = ({
 	attributes: {
 		align,
 		tagName: TagName,
-		before,
-		after,
 		fallback,
 		has_field_link,
-		has_field_link_wrap_content,
+		has_field_link_wrap_content
 	},
-	fieldData,
+	fieldData
 }) => {
 	const blockProps = useBlockProps({
 		className: classnames('ct-dynamic-data', {
-			[`has-text-align-${align}`]: align,
-		}),
+			[`has-text-align-${align}`]: align
+		})
 	})
 
 	const uniqueClass = blockProps.className
@@ -36,26 +34,15 @@ const CustomTextField = ({
 	const previewData = useBlockSupportsCustom({
 		fieldType: 'text',
 		attributes,
-		uniqueClass,
+		uniqueClass
 	})
 
 	const borderProps = useBorderProps(attributes)
 
-	let isFallback = false
-
 	let valueToRender = fieldData || ''
 
-	if (has_field_link === 'yes' && has_field_link_wrap_content === 'no') {
-		valueToRender = `<a href="#" rel="noopener noreferrer">${valueToRender}</a>`
-	}
-
 	if (!valueToRender) {
-		isFallback = true
 		valueToRender = fallback || `Dynamic data: ${fieldDescriptor?.label}`
-	}
-
-	if (!isFallback && valueToRender && typeof valueToRender === 'string') {
-		valueToRender = before + valueToRender + after
 	}
 
 	if (has_field_link === 'yes' && has_field_link_wrap_content === 'yes') {
@@ -76,7 +63,7 @@ const CustomTextField = ({
 				style={{
 					...(blockProps.style || {}),
 					...(borderProps.style || {}),
-					...(previewData.style || {}),
+					...(previewData.style || {})
 				}}
 				className={classnames(
 					blockProps.className,

@@ -2,6 +2,10 @@
 
 namespace Blocksy;
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 class ThemeIntegration {
 	public function __construct() {
 		add_action(
@@ -126,6 +130,7 @@ class ThemeIntegration {
 					'global_data' => $global_data,
 
 					'trigger' => 'click',
+					'version' => blocksy_companion_get_version()
 				];
 			}
 
@@ -135,6 +140,7 @@ class ThemeIntegration {
 				'url' => blocksy_cdn_url(
 					BLOCKSY_URL . 'static/bundle/sticky.js'
 				),
+				'version' => blocksy_companion_get_version()
 			];
 
 			return $chunks;
@@ -188,7 +194,7 @@ class ThemeIntegration {
 
 			$file_path = dirname(__FILE__) . '/views/blocksy-posts.php';
 
-			return blocksy_render_view(
+			return blocksy_companion_render_view(
 				$file_path,
 				[
 					'args' => $args,
@@ -248,6 +254,20 @@ class ThemeIntegration {
 				$fields['tiktok'] = __( 'TikTok', 'blocksy-companion' );
 				$fields['mastodon'] = __( 'Mastodon', 'blocksy-companion' );
 
+				/**
+				 * Filters the additional social networks available on the user profile screen.
+				 *
+				 * @since 2.0.1
+				 *
+				 * @param array $additional_fields {
+				 *     Additional social network fields. Entries without an `id` and a `name` are skipped.
+				 *
+				 *     @type array $field {
+				 *         @type string $id   Key the field is stored under in the user meta.
+				 *         @type string $name Field label shown on the profile screen.
+				 *     }
+				 * }
+				 */
 				$additional_fields = apply_filters(
 					'blocksy:author-profile:custom-social-network',
 					[]
@@ -297,7 +317,7 @@ class ThemeIntegration {
 					}
 
 					if (
-						blc_can_use_premium_code()
+						blocksy_companion_can_use_premium_code()
 						&&
 						file_exists(
 							BLOCKSY_PATH . '/framework/premium/changelog.txt'

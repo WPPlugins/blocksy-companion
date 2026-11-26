@@ -2,6 +2,10 @@
 
 namespace Blocksy;
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 class ExtensionsManagerApi {
 	public function __construct() {
 		$this->attach_ajax_actions();
@@ -19,7 +23,9 @@ class ExtensionsManagerApi {
 			wp_send_json_error('nonce');
 		}
 
-		$this->check_capability('edit_theme_options');
+		$this->check_capability(
+			blocksy_companion_get_capabilities()->get_wp_capability_by('dashboard')
+		);
 
 		flush_rewrite_rules();
 
@@ -31,7 +37,9 @@ class ExtensionsManagerApi {
 			wp_send_json_error('nonce');
 		}
 
-		$this->check_capability('edit_theme_options');
+		$this->check_capability(
+			blocksy_companion_get_capabilities()->get_wp_capability_by('dashboard')
+		);
 
 		$manager = Plugin::instance()->extensions;
 
@@ -71,7 +79,9 @@ class ExtensionsManagerApi {
 			wp_send_json_error('nonce');
 		}
 
-		$this->check_capability('edit_theme_options');
+		$this->check_capability(
+			blocksy_companion_get_capabilities()->get_wp_capability_by('dashboard')
+		);
 
 		if (! isset($_POST['ext'])) {
 			wp_send_json_error();
@@ -91,7 +101,9 @@ class ExtensionsManagerApi {
 			wp_send_json_error('nonce');
 		}
 
-		$this->check_capability('edit_theme_options');
+		$this->check_capability(
+			blocksy_companion_get_capabilities()->get_wp_capability_by('dashboard')
+		);
 
 		if (! isset($_POST['ext'])) {
 			wp_send_json_error();

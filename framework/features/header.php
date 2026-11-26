@@ -2,6 +2,10 @@
 
 namespace Blocksy;
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 class HeaderAdditions {
 	private $has_transparent_header = '__DEFAULT__';
 	private $has_sticky_header = '__DEFAULT__';
@@ -64,11 +68,11 @@ class HeaderAdditions {
 		});
 
 		add_filter('blocksy:header:row-wrapper-attr', function ($attr, $row, $device) {
-			if (! blc_theme_functions()->blocksy_manager()) {
+			if (! blocksy_companion_theme_functions()->blocksy_manager()) {
 				return $attr;
 			}
 
-			$current_section = blc_theme_functions()->blocksy_manager()->header_builder->get_current_section();
+			$current_section = blocksy_companion_theme_functions()->blocksy_manager()->header_builder->get_current_section();
 
 			if (!isset($current_section['settings'])) {
 				$current_section['settings'] = [];
@@ -101,7 +105,7 @@ class HeaderAdditions {
 				}
 
 				$start_html = '<div class="ct-sticky-container">';
-				$start_html .= '<div data-sticky="' . $sticky_result['effect'] . '">';
+				$start_html .= '<div data-sticky="' . esc_attr($sticky_result['effect']) . '">';
 
 				$end_html = '</div></div>';
 
@@ -227,7 +231,7 @@ class HeaderAdditions {
 		});
 
 		add_filter('blocksy:header:settings', function ($opt) {
-			$opt = blocksy_get_options(
+			$opt = blocksy_companion_get_options(
 				dirname(__FILE__) . '/header/header-options.php',
 				[],
 				false
@@ -259,7 +263,7 @@ class HeaderAdditions {
 	}
 
 	public function current_screen_has_transparent($check_conditions = true, $current_section_id = null) {
-		if (! blc_theme_functions()->blocksy_manager()) {
+		if (! blocksy_companion_theme_functions()->blocksy_manager()) {
 			return false;
 		}
 
@@ -270,7 +274,7 @@ class HeaderAdditions {
 			||
 			! $check_conditions
 		) {
-			$current_section = blc_theme_functions()->blocksy_manager()->header_builder->get_current_section(
+			$current_section = blocksy_companion_theme_functions()->blocksy_manager()->header_builder->get_current_section(
 				$current_section_id
 			);
 
@@ -280,12 +284,12 @@ class HeaderAdditions {
 
 			$atts = $current_section['settings'];
 
-			if (blocksy_akg('has_transparent_header', $atts, 'no') === 'no') {
+			if (blocksy_companion_akg('has_transparent_header', $atts, 'no') === 'no') {
 				$this->has_transparent_header = false;
 				return false;
 			}
 
-			$transparent_behaviour = blocksy_akg(
+			$transparent_behaviour = blocksy_companion_akg(
 				'transparent_behaviour',
 				$atts,
 				[
@@ -317,7 +321,7 @@ class HeaderAdditions {
 				(
 					($current_section['id'] === 'type-1'
 						&&
-						$conditions_manager->condition_matches(blocksy_akg(
+						$conditions_manager->condition_matches(blocksy_companion_akg(
 							'transparent_conditions',
 							$atts,
 							[
@@ -349,6 +353,18 @@ class HeaderAdditions {
 					!$check_conditions
 				)
 				&&
+				/**
+				 * Filters whether the transparent header is allowed on the current screen.
+				 *
+				 * Returning false makes the header render in its default, non-transparent state.
+				 *
+				 * @since 1.8.0
+				 *
+				 * @param bool  $allowed            Whether the transparent header is allowed. Default true.
+				 * @param array $current_section    The header section descriptor being rendered. Has an `id` key.
+				 * @param array $transparent_result Devices the header is transparent on. Any of 'desktop',
+				 *                                  'tablet' and 'mobile'.
+				 */
 				apply_filters(
 					'blocksy:header:transparent:current-screen-allowed',
 					true,
@@ -372,11 +388,11 @@ class HeaderAdditions {
 			return $this->has_sticky_header;
 		}
 
-		if (! blc_theme_functions()->blocksy_manager()) {
+		if (! blocksy_companion_theme_functions()->blocksy_manager()) {
 			return false;
 		}
 
-		$current_section = blc_theme_functions()->blocksy_manager()->header_builder->get_current_section(
+		$current_section = blocksy_companion_theme_functions()->blocksy_manager()->header_builder->get_current_section(
 			$section_id
 		);
 
@@ -386,12 +402,12 @@ class HeaderAdditions {
 
 		$atts = $current_section['settings'];
 
-		if (blocksy_akg('has_sticky_header', $atts, 'no') === 'no') {
+		if (blocksy_companion_akg('has_sticky_header', $atts, 'no') === 'no') {
 			$has_sticky_header_result = false;
 		} else {
 			$atts = $current_section['settings'];
 
-			$sticky_behaviour = blocksy_akg(
+			$sticky_behaviour = blocksy_companion_akg(
 				'sticky_behaviour',
 				$atts,
 				[
@@ -418,8 +434,8 @@ class HeaderAdditions {
 				// 'behaviour' => 'middle_bottom'
 				// 'behaviour' => 'middle'
 				// 'behaviour' => 'middle_bottom'
-				'behaviour' => blocksy_akg('sticky_rows', $atts, 'middle'),
-				'effect' => blocksy_akg('sticky_effect', $atts, 'shrink')
+				'behaviour' => blocksy_companion_akg('sticky_rows', $atts, 'middle'),
+				'effect' => blocksy_companion_akg('sticky_effect', $atts, 'shrink')
 			];
 
 			foreach ($sticky_behaviour as $device => $value) {
@@ -477,7 +493,7 @@ class HeaderAdditions {
 	}
 
 	public function get_conditions() {
-		$option = blc_theme_functions()->blocksy_get_theme_mod('blocksy_premium_header_conditions', []);
+		$option = blocksy_companion_theme_functions()->blocksy_get_theme_mod('blocksy_premium_header_conditions', []);
 
 		if (empty($option)) {
 			return [];
@@ -511,7 +527,7 @@ class HeaderAdditions {
 
 		$atts = $render->get_item_data_for('account');
 
-		$html = blocksy_render_view(
+		$html = blocksy_companion_render_view(
 			dirname(__FILE__) . '/header/account-modal.php',
 			[
 				'current_url' => blocksy_current_url(),
@@ -554,7 +570,7 @@ class HeaderAdditions {
 
 		$atts = $render->get_item_data_for('account');
 
-		$account_user_visibility = blocksy_akg('account_user_visibility', $atts, [
+		$account_user_visibility = blocksy_companion_akg('account_user_visibility', $atts, [
 			'logged_in' => true,
 			'logged_out' => true,
 		]);
@@ -568,7 +584,7 @@ class HeaderAdditions {
 			return false;
 		}
 
-		if (blocksy_akg('login_account_action', $atts, 'modal') !== 'modal') {
+		if (blocksy_companion_akg('login_account_action', $atts, 'modal') !== 'modal') {
 			$this->has_account_modal = false;
 			return false;
 		}

@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 $options = [
 
 	blocksy_rand_md5() => [
@@ -34,7 +38,7 @@ $options = [
 						// 'SoftwareApplication' => __( 'Software Application', 'blocksy-companion' ),
 					]
 				),
-				'desc' => blc_safe_sprintf(
+				'desc' => blocksy_companion_safe_sprintf(
 					// translators: %1$s and %2$s are HTML tags.
 					__(
 						'More info about review entity and how to choose the right one can be found %1$shere%2$s.',

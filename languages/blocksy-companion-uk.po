@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.1\n"
+"X-Generator: GlotPress/4.1.0\n"
 "Language: uk_UA\n"
 "Project-Id-Version: Blocksy Companion Pro\n"
 
@@ -98,7 +98,7 @@ msgstr "Прогрес <span>%s%%</span>"
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:162
 msgid "Please wait until the WooCommerce product taxonomies lookup table is regenerated."
-msgstr "Зачекайте, поки буде оновлен�� таблицю пошуку таксономій товарів WooCommerce."
+msgstr "Зачекайте, поки буде оновлено таблицю пошуку таксономій товарів WooCommerce."
 
 #: framework/premium/extensions/woocommerce-extra/features/filters/filter-types/taxonomies.php:175
 msgid "Why is the table being regenerated?"
@@ -182,7 +182,7 @@ msgstr "Детальну інформацію про те, як згенерув
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:149
 msgid "White Label Extension"
-msgstr "Розширення White Label"
+msgstr "Роз��ирення White Label"
 
 #: framework/premium/extensions/white-label/dashboard-static/js/AdvancedTab.js:161
 msgid "Please note that disabling this option will hide the white-label extension. To restore it, press the SHIFT key while clicking the dashboard logo."
@@ -290,7 +290,7 @@ msgstr "База знань"
 
 #: static/js/dashboard/helpers/SubmitSupport.js:85
 msgid "Dive in with our documentation and learn tips and tricks about Blocksy and its components."
-msgstr "Ознакомьтесь с нашей документацией и получите советы и реко��ендации по Blocksy и его компонентах."
+msgstr "Ознакомьтесь с нашей документацией и получите советы и рекомендации по Blocksy и его компонентах."
 
 #: static/js/dashboard/helpers/SubmitSupport.js:93
 msgid "View Documentation"
@@ -733,7 +733,7 @@ msgstr "Вкладені блоки займатимуть всю ширину �
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:165
 msgid "Content width"
-msgstr "Ширина вмісту"
+msgstr "Ш��рина вмісту"
 
 #: static/js/editor/blocks/dynamic-data/components/CoverImageControls.js:186
 msgid "Wide width"
@@ -872,7 +872,7 @@ msgstr "Відображення списку товарів, засновано
 #: framework/views/theme-mismatch.php:48
 #: static/js/notifications/VersionMismatchNotice.js:65
 msgid "In order to take full advantage of all features the core has to offer - please install and activate the latest version of %s."
-msgstr "Щоб повною мірою скориста��ися всіма функціями, які може запропонувати ядро теми, встановіть і активуйте останню версію %s."
+msgstr "Щоб повною мірою скористатися всіма функціями, які може запропонувати ядро теми, встанов��ть і активуйте останню версію %s."
 
 #: framework/features/header/account-modal.php:23
 msgid "Account modal"
@@ -938,7 +938,7 @@ msgstr "Таксономії - макет 5"
 
 #: framework/features/header/items/account/options.php:7
 msgid "Logout Action"
-msgstr "Дія виходу з системи"
+msgstr "Дія в��ходу з системи"
 
 #: framework/features/header/items/account/options.php:15
 msgid "User Name"
@@ -970,7 +970,7 @@ msgstr "Видимість значка"
 
 #: framework/features/header/items/account/options.php:662
 msgid "Link to Page"
-msgstr "Посилання на сторінку"
+msgstr "Посила��ня на сторінку"
 
 #: framework/features/header/items/account/options.php:757
 msgid "Top Offset (Sticky State)"
@@ -1113,7 +1113,7 @@ msgstr "Ліміт архіву"
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:575
 msgid "Limit the number of swatches shown on archive pages."
-msgstr "Обмеження кількості зразків, що відображаються на сторінках а��хіву."
+msgstr "Обмеження кількості зразків, що відображаються на сторінках архіву."
 
 #: framework/premium/extensions/woocommerce-extra/features/swatches/options.php:579
 msgid "Product Page Limit"
@@ -1371,7 +1371,7 @@ msgstr "Максимальна ширина форми"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/customizer-options.php:41
 msgid "Enable For Backorders"
-msgstr "Увімкнути для попередніх замовлень"
+msgstr "Увімкнути для попередніх за��овлень"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/customizer-options.php:42
 msgid "Allow users to join the waitlist even if the product is on backorder."
@@ -1743,7 +1743,7 @@ msgstr "Відображення спливаючого вікна динамі�
 
 #: framework/premium/extensions/woocommerce-extra/features/added-to-cart-popup/customizer-options.php:15
 msgid "Trigger Popup On"
-msgstr "Уві��к. тригер вікна"
+msgstr "Увімк. тригер вікна"
 
 #: framework/premium/extensions/woocommerce-extra/features/added-to-cart-popup/customizer-options.php:26
 msgid "Product Page"
@@ -1759,7 +1759,7 @@ msgstr "Кнопка кошика"
 
 #: framework/premium/extensions/woocommerce-extra/features/added-to-cart-popup/customizer-options.php:125
 msgid "Checkout Button"
-msgstr "Кнопка оформлення"
+msgstr "Кно��ка оформлення"
 
 #: framework/premium/extensions/woocommerce-extra/features/added-to-cart-popup/customizer-options.php:134
 msgid "Continue Shopping Button"
@@ -1983,7 +1983,7 @@ msgstr "Колір межі контейнера"
 
 #: framework/extensions/newsletter-subscribe/admin-static/js/newsletter-block/Edit.js:197
 msgid "Container Background Color"
-msgstr "Колір фону контейнера"
+msgstr "Ко��ір фону контейнера"
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:188
 msgid "API Version"
@@ -2859,7 +2859,7 @@ msgstr "Записи - макет 2"
 
 #: framework/features/blocks/query/block-patterns/posts-layout-3.php:4
 msgid "Posts - Layout 3"
-msgstr "��аписи - макет 3"
+msgstr "Записи - макет 3"
 
 #: framework/features/blocks/query/block-patterns/posts-layout-4.php:4
 msgid "Posts - Layout 4"
@@ -2965,7 +2965,7 @@ msgstr "Початковий стан панелі"
 
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:240
 msgid "Closed"
-msgstr "Зачине��о"
+msgstr "Зачинено"
 
 #: framework/premium/extensions/woocommerce-extra/features/offcanvas-filters/options.php:241
 msgid "Opened"
@@ -3751,7 +3751,7 @@ msgstr "Отримання..."
 
 #: framework/premium/extensions/adobe-typekit/dashboard-static/js/AdobeTypekit.js:164
 msgid "Please enter a valid Project ID to get all fonts."
-msgstr "Вве��іть дійсний ID проекту, щоб отримати всі шрифти."
+msgstr "Введіть дійсний ID проекту, щоб отримати всі шрифти."
 
 #: framework/extensions/newsletter-subscribe/dashboard-static/js/EditCredentials.js:302
 msgid "This provider is used only for testing purposes. It doesnt register any real subscribers."
@@ -8045,7 +8045,7 @@ msgstr "Соціальні іконки"
 #. translators: %s is a link to the Customizer section.
 #: framework/features/blocks/about-me/options.php:136
 msgid "You can configure social URLs in %s."
-msgstr "Ви можете налаштувати соціальні URL-адреси у %s."
+msgstr "Ви можете налаштувати соціал��ні URL-адреси у %s."
 
 #: framework/features/blocks/about-me/options.php:168,
 #: framework/features/blocks/socials/options.php:62,

@@ -2,6 +2,10 @@
 
 namespace Blocksy\Editor\Blocks;
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 class BlockWrapper {
 	public function __construct() {
 		add_action('init', [$this, 'blocksy_block_wrapper_block']);
@@ -31,7 +35,6 @@ class BlockWrapper {
 
 	public function blocksy_block_wrapper_block() {
 		$block_data = [
-			'api_version' => 3,
 			'render_callback' => function ($attributes, $content, $block) {
 				if (strpos($content, 'class="ct-') === false) {
 					return '';
@@ -133,7 +136,7 @@ class BlockWrapper {
 					}
 				}
 
-				return blocksy_html_tag(
+				return blocksy_companion_html_tag(
 					'div',
 					array_merge(
 						[
@@ -148,7 +151,10 @@ class BlockWrapper {
 			},
 		];
 
-		register_block_type('blocksy/widgets-wrapper', $block_data);
+		register_block_type(
+			BLOCKSY_PATH . '/static/js/editor/blocks/widgets-wrapper/block.json',
+			$block_data
+		);
 	}
 
 	public function enqueue_admin() {
