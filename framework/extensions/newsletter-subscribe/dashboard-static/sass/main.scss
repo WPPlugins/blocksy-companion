@@ -2,6 +2,11 @@
 	padding-top: 40px;
 	border-top: 1px dashed #eee;
 
+	.ct-newsletter-error {
+		color: #b32d2e;
+		overflow-wrap: anywhere;
+	}
+
 	.ct-newsletter-credentials {
 		display: grid;
 		grid-column-gap: 10px;

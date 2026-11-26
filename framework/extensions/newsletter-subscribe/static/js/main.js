@@ -10,9 +10,16 @@ const submitAjax = (form) => {
 	form.classList.remove('subscribe-error', 'subscribe-success')
 	form.classList.add('subscribe-loading')
 
+	const showError = () => {
+		form.classList.remove('subscribe-loading', 'subscribe-success')
+		form.classList.add('subscribe-error')
+		form.querySelector('.ct-newsletter-subscribe-message').textContent =
+			blocksy_newsletter_subscribe.errorMessage
+	}
+
 	fetch(ct_localizations.ajax_url, {
 		method: 'POST',
-		body,
+		body
 	})
 		.then((r) => r.json())
 		.then(({ data }) => {
@@ -25,22 +32,23 @@ const submitAjax = (form) => {
 				return
 			}
 
-			if (!data || !data.message) {
-				form.classList.add('subscribe-error')
+			if (
+				!data ||
+				!data.message ||
+				!['yes', 'no'].includes(data.result)
+			) {
+				showError()
 				return
 			}
 
 			form.classList.add(
-				data.result === 'no' ? 'subscribe-error' : 'subscribe-success',
+				data.result === 'no' ? 'subscribe-error' : 'subscribe-success'
 			)
 
 			form.querySelector('.ct-newsletter-subscribe-message').innerHTML =
 				data.message
 		})
-		.catch(() => {
-			form.classList.remove('subscribe-loading')
-			form.classList.add('subscribe-error')
-		})
+		.catch(showError)
 }
 
 registerDynamicChunk('blocksy_ext_newsletter_subscribe', {
@@ -48,5 +56,5 @@ registerDynamicChunk('blocksy_ext_newsletter_subscribe', {
 		const form = event.target
 
 		submitAjax(form)
-	},
+	}
 })

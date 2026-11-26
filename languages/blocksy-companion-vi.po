@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: GlotPress/4.0.1\n"
+"X-Generator: GlotPress/4.1.0\n"
 "Language: vi_VN\n"
 "Project-Id-Version: Blocksy Companion Pro\n"
 
@@ -354,7 +354,7 @@ msgstr "Vui lòng nhập URL hợp lệ."
 
 #: framework/theme-integration.php:93
 msgid "Please enter a valid date."
-msgstr "Vui lòng nhập ngày hợp lệ."
+msgstr "Vui lòng nhập ngày h��p lệ."
 
 #: framework/theme-integration.php:94
 msgid "Please enter a valid date (ISO)."
@@ -474,7 +474,7 @@ msgstr "Không tìm thấy tệp xuất tại <code>%s</code>. Có thể nguyên
 #. translators: %s is the WXR version number.
 #: framework/features/demo-install/wp-importer.php:282
 msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
-msgstr "Tệp WXR này (phiên bản %s) có thể không được hỗ trợ bởi phiên bản trình nhập liệu hiện tại. Vui lòng cân nhắc cập nh��t."
+msgstr "Tệp WXR này (phiên bản %s) có thể không được hỗ trợ bởi phiên bản trình nhập liệu hiện tại. Vui lòng cân nhắc cập nhật."
 
 #. translators: %s is the author's display name.
 #: framework/features/demo-install/wp-importer.php:315
@@ -1261,7 +1261,7 @@ msgstr "Xem thêm thông tin về cách tạo danh sách trong FluentCRM %stại
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/AllFonts.js:123
 msgid "Modern Font Stack"
-msgstr "Bộ phông chữ hi��n đại"
+msgstr "Bộ phông chữ hiện đại"
 
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/CustomFonts.js:142
 #: framework/premium/extensions/custom-fonts/dashboard-static/js/Uploader.js:330
@@ -7527,7 +7527,7 @@ msgstr "Sau sản phẩm đơn"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:696
 msgid "Before single product excerpt"
-msgstr "Trước đoạn trích sản phẩm đơn"
+msgstr "Trư��c đoạn trích sản phẩm đơn"
 
 #: framework/premium/features/content-blocks/hooks-manager.php:701
 msgid "After single product excerpt"

@@ -22,6 +22,12 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 	const [listId, setListId] = useState(extension.data.list_id)
 	const [hasList, setHasList] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
+	const [listError, setListError] = useState('')
+	const [saveError, setSaveError] = useState('')
+
+	useEffect(() => {
+		setSaveError('')
+	}, [provider, apiKey, apiUrl, listId])
 
 	const { isPro, showNotice, content } = useProExtensionInFree(extension, {
 		strategy: 'pro'
@@ -42,7 +48,7 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 
 		body.append('provider', provider)
 		body.append('api_key', apiKey)
-		body.append('api_url', apiUrl)
+		body.append('api_url', apiUrl || '')
 		body.append('list_id', listId)
 
 		body.append(
@@ -53,6 +59,11 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 		body.append('nonce', ctDashboardLocalizations.dashboard_actions_nonce)
 
 		setIsLoading(true)
+		setSaveError('')
+		let error = __(
+			'Unable to save newsletter settings. Please try again.',
+			'blocksy-companion'
+		)
 
 		try {
 			const response = await fetch(ctDashboardLocalizations.ajax_url, {
@@ -60,20 +71,29 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 				body
 			})
 
-			if (response.status === 200) {
-				const body = await response.json()
+			const result = await response.json()
 
-				if (body.success) {
-					if (body.data.result !== 'api_key_invalid') {
-						onCredentialsValidated()
-					}
-				}
+			if (
+				response.ok &&
+				result.success &&
+				Array.isArray(result.data?.result)
+			) {
+				onCredentialsValidated()
+				return
 			}
-		} catch (e) {}
 
-		await new Promise((r) => setTimeout(() => r(), 1000))
+			if (
+				typeof result.data?.message === 'string' &&
+				result.data.message
+			) {
+				error = result.data.message
+			}
+		} catch (e) {
+		} finally {
+			setIsLoading(false)
+		}
 
-		setIsLoading(false)
+		setSaveError(error)
 	}
 
 	const providerMap = {
@@ -100,7 +120,8 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 		<div
 			className={classnames(
 				'ct-extension-options ct-newsletter-subscribe-options'
-			)}>
+			)}
+		>
 			<h4>{__('Connect Newsletter Provider', 'blocksy-companion')}</h4>
 
 			<div
@@ -111,7 +132,8 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 						: ['mailpoet', 'fluentcrm'].includes(provider)
 							? 2
 							: 3
-				}>
+				}
+			>
 				<section>
 					<label>{__('Provider', 'blocksy-companion')}</label>
 					<Select
@@ -257,14 +279,21 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 								provider={provider}
 								apiUrl={apiUrl}
 								apiKey={apiKey}
-								onListsLoading={(listsLength) =>
+								onListsLoading={(listsLength, error) => {
 									setHasList(!!listsLength)
-								}
+									setListError(error)
+								}}
 							/>
 						</section>
 					</Fragment>
 				)}
 			</div>
+
+			{(listError || saveError) && (
+				<p className="ct-newsletter-error" role="alert">
+					{listError || saveError}
+				</p>
+			)}
 
 			{provider === 'mailchimp' && (
 				<span
@@ -297,6 +326,24 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 								'<a target="_blank" href="https://www.mailerlite.com/help/where-to-find-the-mailerlite-api-key-and-documentation">',
 								'</a>',
 								'<a target="_blank" href="https://www.mailerlite.com/help/how-to-create-and-use-groups">',
+								'</a>'
+							)
+						}}
+					/>
+				)}
+
+			{ctDashboardLocalizations.plugin_data.is_pro &&
+				provider === 'moosend' && (
+					<span
+						className="ct-option-description"
+						dangerouslySetInnerHTML={{
+							__html: sprintf(
+								__(
+									'More information on how to generate an API key for Moosend can be found %shere%s. Create an email list before connecting.',
+									'blocksy-companion'
+								),
+
+								'<a target="_blank" rel="noopener noreferrer" href="https://docs.moosend.com/user-guide/articles/KnowledgeBase/54498-use-the-api-key-to-connect-to-the-moosend-web-api?lang=en_US">',
 								'</a>'
 							)
 						}}
@@ -467,9 +514,10 @@ const EditCredentials = ({ extension, onCredentialsValidated }) => {
 					!listId ||
 					!hasList ||
 					isLoading ||
-					(!apiUrl && provider === 'activecampaign')
+					(!apiUrl && withApiUrl)
 				}
-				onClick={() => attemptToSaveCredentials()}>
+				onClick={() => attemptToSaveCredentials()}
+			>
 				{isLoading
 					? __('Loading...', 'blocksy-companion')
 					: __('Save Settings', 'blocksy-companion')}

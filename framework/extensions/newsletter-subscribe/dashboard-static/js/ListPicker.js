@@ -1,10 +1,4 @@
-import {
-	createElement,
-	Component,
-	useEffect,
-	useState,
-	Fragment,
-} from '@wordpress/element'
+import { createElement, useEffect, useState } from '@wordpress/element'
 import Downshift from 'downshift'
 import { __ } from 'ct-i18n'
 import classnames from 'classnames'
@@ -15,84 +9,102 @@ const ListPicker = ({
 	apiKey,
 	apiUrl,
 	onChange,
-	onListsLoading,
+	onListsLoading
 }) => {
 	const [lists, setLists] = useState([])
 	const [isLoadingLists, setListsLoading] = useState(false)
 
-	let [{ controller }, setAbortState] = useState({
-		controller: null,
-	})
-
-	const setListsWithPropagation = (lists) => {
-		setLists(lists)
-		onListsLoading(lists.length)
-	}
-
-	const maybeFetchLists = async () => {
-		if (controller) {
-			controller.abort()
-		}
-
-		setListsLoading(true)
-
-		if ('AbortController' in window) {
-			controller = new AbortController()
-
-			setAbortState({
-				controller,
-			})
-		}
-
-		const body = new FormData()
-
-		body.append('api_key', apiKey)
-		body.append('api_url', apiUrl)
-		body.append('provider', provider)
-		body.append(
-			'action',
-			'blocksy_ext_newsletter_subscribe_maybe_get_lists'
-		)
-
-		body.append('nonce', ctDashboardLocalizations.dashboard_actions_nonce)
-
-		try {
-			const response = await fetch(ctDashboardLocalizations.ajax_url, {
-				method: 'POST',
-				signal: controller.signal,
-				body,
-			})
-
-			if (response.status === 200) {
-				const body = await response.json()
-
-				if (body.success) {
-					if (body.data.result !== 'api_key_invalid') {
-						setListsLoading(false)
-						setListsWithPropagation(
-							body.data.result.map((list) => ({
-								...list,
-								id: list.id.toString(),
-							}))
-						)
-
-						return
-					}
-				}
-			}
-		} catch (e) {}
-
-		setListsWithPropagation([])
-		setListsLoading(false)
-	}
+	const [error, setError] = useState('')
 
 	useEffect(() => {
+		let active = true
+		const controller =
+			'AbortController' in window ? new AbortController() : null
+
+		setLists([])
+		setError('')
+		setListsLoading(false)
+		onListsLoading(0, '')
+
 		if (!apiKey && !['mailpoet', 'fluentcrm'].includes(provider)) {
-			setListsWithPropagation([])
 			return
 		}
 
-		maybeFetchLists()
+		const fetchLists = async () => {
+			setListsLoading(true)
+
+			const body = new FormData()
+			body.append('api_key', apiKey)
+			body.append('api_url', apiUrl || '')
+			body.append('provider', provider)
+			body.append(
+				'action',
+				'blocksy_ext_newsletter_subscribe_maybe_get_lists'
+			)
+			body.append(
+				'nonce',
+				ctDashboardLocalizations.dashboard_actions_nonce
+			)
+
+			let error = __(
+				'Unable to fetch lists. Please try again.',
+				'blocksy-companion'
+			)
+
+			try {
+				const response = await fetch(
+					ctDashboardLocalizations.ajax_url,
+					{
+						method: 'POST',
+						signal: controller?.signal,
+						body
+					}
+				)
+				const result = await response.json()
+
+				if (!active) {
+					return
+				}
+
+				if (
+					response.ok &&
+					result.success &&
+					Array.isArray(result.data?.result)
+				) {
+					const lists = result.data.result.map((list) => ({
+						...list,
+						id: list.id.toString()
+					}))
+					setLists(lists)
+					onListsLoading(lists.length, '')
+					return
+				}
+
+				if (
+					typeof result.data?.message === 'string' &&
+					result.data.message
+				) {
+					error = result.data.message
+				}
+			} catch (e) {
+			} finally {
+				if (active) {
+					setListsLoading(false)
+				}
+			}
+
+			if (active) {
+				setError(error)
+				onListsLoading(0, error)
+			}
+		}
+
+		fetchLists()
+
+		return () => {
+			active = false
+			controller?.abort()
+		}
 	}, [provider, apiKey, apiUrl])
 
 	return lists.length === 0 ? (
@@ -100,7 +112,14 @@ const ListPicker = ({
 			<input
 				disabled
 				placeholder={
-					isLoadingLists ? __('Fetching...', 'blocksy-companion') : ''
+					isLoadingLists
+						? __('Fetching...', 'blocksy-companion')
+						: error
+							? __('Unable to load lists', 'blocksy-companion')
+							: apiKey ||
+								  ['mailpoet', 'fluentcrm'].includes(provider)
+								? __('No lists found', 'blocksy-companion')
+								: ''
 				}
 			/>
 		</div>
@@ -110,7 +129,8 @@ const ListPicker = ({
 			onChange={(selection) => onChange(selection)}
 			itemToString={(item) =>
 				item ? (lists.find(({ id }) => id === item) || {}).name : ''
-			}>
+			}
+		>
 			{({
 				getInputProps,
 				getItemProps,
@@ -120,13 +140,13 @@ const ListPicker = ({
 				inputValue,
 				highlightedIndex,
 				selectedItem,
-				openMenu,
+				openMenu
 			}) => (
 				<div className="ct-select-input">
 					<input
 						{...getInputProps({
 							onFocus: () => openMenu(),
-							onClick: () => openMenu(),
+							onClick: () => openMenu()
 						})}
 						placeholder={__('Select list...', 'blocksy-companion')}
 						readOnly
@@ -135,8 +155,9 @@ const ListPicker = ({
 					{isOpen && (
 						<div
 							{...getMenuProps({
-								className: 'ct-select-dropdown',
-							})}>
+								className: 'ct-select-dropdown'
+							})}
+						>
 							{lists.map((item, index) => (
 								<div
 									{...getItemProps({
@@ -149,10 +170,11 @@ const ListPicker = ({
 												active:
 													highlightedIndex === index,
 												selected:
-													selectedItem === item.id,
+													selectedItem === item.id
 											}
-										),
-									})}>
+										)
+									})}
+								>
 									{item.name}
 								</div>
 							))}

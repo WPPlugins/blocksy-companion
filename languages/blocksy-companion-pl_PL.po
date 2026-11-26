@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.1\n"
+"X-Generator: GlotPress/4.1.0\n"
 "Language: pl\n"
 "Project-Id-Version: Blocksy Companion Pro\n"
 
@@ -1466,7 +1466,7 @@ msgstr "Zostałeś dodany na listę oczekujących"
 
 #: framework/premium/extensions/woocommerce-extra/features/product-waitlist/includes/waitlist-dashboard.php:333
 msgid "You have been removed from the waitlist"
-msgstr "Zostałe�� usunięty z listy oczekujących"
+msgstr "Zostałeś usunięty z listy oczekujących"
 
 #. translators: %1$s is the number of users, %2$s is the plural form
 #. (user/users)
@@ -3552,7 +3552,7 @@ msgstr "Wyświetla sekcję szczegółów zamówienia."
 
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/woocommerce-filters/tax-filters/Edit.js:164
 msgid "Filter By"
-msgstr "Filtruj wed��ug"
+msgstr "Filtruj według"
 
 #: framework/features/blocks/dynamic-data/options.php:129
 #: framework/premium/extensions/woocommerce-extra/static/js/blocks/active-filters/index.js:97
@@ -11053,7 +11053,7 @@ msgstr "Etykieta przycisku czytaj więcej"
 #: framework/extensions/product-reviews/metabox.php:153,
 #: framework/extensions/product-reviews/views/single-top.php:167
 msgid "Read More"
-msgstr "Dowiedz się więcej"
+msgstr "Dowiedz się wi��cej"
 
 #: framework/extensions/product-reviews/metabox.php:173
 msgid "Short Description"
