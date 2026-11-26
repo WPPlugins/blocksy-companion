@@ -11,7 +11,7 @@ import {
 import { OptionsPanel } from 'blocksy-options'
 import { useDispatch } from '@wordpress/data'
 
-import { fieldIsImageLike } from '../utils'
+import { fieldIsCustomField, fieldIsImageLike } from '../utils'
 import DimensionControls from './Dimensions'
 import { CoverImageEdit } from './CoverImageControls'
 import ColorsPanel from '../../../components/ColorsPanel'
@@ -57,6 +57,7 @@ const computeValue = (attributes) => {
 const DynamicDataInspectorControls = ({
 	fieldDescriptor,
 	fieldsDescriptor,
+	linkFieldsChoices,
 
 	attributes,
 	setAttributes,
@@ -255,6 +256,7 @@ const DynamicDataInspectorControls = ({
 								{
 									colorValue: linkColor,
 									label: __('Link', 'blocksy-companion'),
+									isShownByDefault: false,
 									enableAlpha: true,
 									onColorChange: setLinkColor,
 								},
@@ -265,6 +267,7 @@ const DynamicDataInspectorControls = ({
 										'Link Hover',
 										'blocksy-companion'
 									),
+									isShownByDefault: false,
 									enableAlpha: true,
 									onColorChange: setHoverLinkColor,
 								},
@@ -273,6 +276,7 @@ const DynamicDataInspectorControls = ({
 								{
 									colorValue: textColor,
 									label: __('Text', 'blocksy-companion'),
+									isShownByDefault: false,
 									enableAlpha: true,
 									onColorChange: setTextColor,
 								},
@@ -288,7 +292,7 @@ const DynamicDataInspectorControls = ({
 						onGradientChange: (newValue) => {
 							setOverlayGradient(newValue)
 						},
-						isShownByDefault: true,
+						isShownByDefault: false,
 						clearable: true,
 					},
 			  ]
@@ -392,6 +396,79 @@ const DynamicDataInspectorControls = ({
 								choices: fieldsChoices,
 								purpose: 'default',
 							},
+
+							...(attributes.field === 'wp:archive_title'
+								? {
+										has_archive_prefix: {
+											type: 'ct-switch',
+											label: __(
+												'Show archive label',
+												'blocksy-companion'
+											),
+											value: 'no',
+										},
+								  }
+								: {}),
+
+							...(fieldIsCustomField(fieldDescriptor)
+								? {
+										has_field_link: {
+											type: 'ct-switch',
+											label: __(
+												'Enable field link',
+												'blocksy-companion'
+											),
+											value: 'no',
+										},
+										...(attributes.has_field_link === 'yes'
+											? {
+													link_source: {
+														type: 'ct-select',
+														label: __(
+															'Link Source',
+															'blocksy-companion'
+														),
+														value: '',
+														search: true,
+														searchPlaceholder: __(
+															'Search for field',
+															'blocksy-companion'
+														),
+														defaultToFirstItem: false,
+														choices:
+															linkFieldsChoices,
+														purpose: 'default',
+													},
+
+													...(attributes?.link_source &&
+													attributes.link_source !==
+														''
+														? {
+																has_field_link_new_tab:
+																	{
+																		type: 'ct-switch',
+																		label: __(
+																			'Open in new tab',
+																			'blocksy-companion'
+																		),
+																		value: 'no',
+																	},
+
+																has_field_link_rel:
+																	{
+																		type: 'text',
+																		label: __(
+																			'Link Rel',
+																			'blocksy-companion'
+																		),
+																		value: '',
+																	},
+														  }
+														: {}),
+											  }
+											: {}),
+								  }
+								: {}),
 
 							...(attributes.field !== 'wp:author_avatar' &&
 							fieldIsImageLike(fieldDescriptor)
@@ -520,6 +597,15 @@ const DynamicDataInspectorControls = ({
 												},
 										  }
 										: {}),
+
+									has_image_caption: {
+										type: 'ct-switch',
+										label: __(
+											'Show Caption',
+											'blocksy-companion'
+										),
+										value: 'no',
+									},
 
 									image_hover_effect: {
 										label: __(
@@ -668,6 +754,21 @@ const DynamicDataInspectorControls = ({
 												},
 										  }
 										: {}),
+
+									has_field_link_wrap_content_condition: {
+										type: 'ct-condition',
+										condition: { has_field_link: 'yes' },
+										options: {
+											has_field_link_wrap_content: {
+												type: 'ct-switch',
+												label: __(
+													'Include Before/After in link',
+													'blocksy-companion'
+												),
+												value: 'no',
+											},
+										},
+									},
 								}}
 								value={attributes}
 								hasRevertButton={false}

@@ -3,7 +3,7 @@ import {
 	useState,
 	useEffect,
 	createElement,
-	Fragment,
+	Fragment
 } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 import saveAs from './file-saver'
@@ -11,16 +11,7 @@ import { Overlay } from 'blocksy-options'
 
 import classnames from 'classnames'
 
-import phpUnserialize from 'phpunserialize'
-
-const safePhpUnserialize = (data) => {
-	const fixed = data.replace(/s:(\d+):"(.*?)";/gs, (_, len, str) => {
-		const actualLength = Buffer.byteLength(str, 'utf8')
-		return `s:${actualLength}:"${str}";`
-	})
-
-	return phpUnserialize(fixed)
-}
+import { safePhpUnserialize } from './utils'
 
 const wipeCaches = () => {
 	return new Promise((resolve) => {
@@ -28,10 +19,11 @@ const wipeCaches = () => {
 
 		body.append('action', 'blocksy_customizer_wipe_caches')
 		body.append('wp_customize', 'on')
+		body.append('nonce', ct_customizer_localizations.customizer_reset_none)
 
 		fetch(window.ajaxurl, {
 			method: 'POST',
-			body,
+			body
 		}).then((response) => {
 			if (response.status === 200) {
 				response.json().then(({ success, data }) => {
@@ -128,11 +120,12 @@ const CustomizerOptionsManager = () => {
 
 				<section>
 					<button
-						className="button-primary"
+						className="ct-ui-button ct-ui-button-primary"
 						onClick={(e) => {
 							e.preventDefault()
 							setIsExporting(true)
-						}}>
+						}}
+					>
 						{__('Export Customizations', 'blocksy-companion')}
 					</button>
 				</section>
@@ -158,18 +151,19 @@ const CustomizerOptionsManager = () => {
 							<button
 								type="button"
 								className={classnames('ct-upload-button', {
-									active: isDraggedOver,
+									active: isDraggedOver
 								})}
 								ref={dropZoneRef}
 								onClick={() => {
 									inputRef.current.click()
-								}}>
+								}}
+							>
 								{futureConfig
 									? futureConfig.name
 									: __(
 											'Click or drop to upload a file...',
 											'blocksy-companion'
-									  )}
+										)}
 							</button>
 						</div>
 
@@ -178,17 +172,20 @@ const CustomizerOptionsManager = () => {
 							type="file"
 							onChange={({
 								target: {
-									files: [config],
-								},
+									files: [config]
+								}
 							}) => {
 								setFutureConfig(config)
 							}}
 						/>
 
 						<button
-							className={classnames('button-primary', {
-								'ct-loading': isImporting,
-							})}
+							className={classnames(
+								'ct-ui-button ct-ui-button-primary',
+								{
+									'ct-loading': isImporting
+								}
+							)}
 							disabled={!futureConfig}
 							onClick={(e) => {
 								e.preventDefault()
@@ -215,11 +212,11 @@ const CustomizerOptionsManager = () => {
 												headers: {
 													Accept: 'application/json',
 													'Content-Type':
-														'application/json',
+														'application/json'
 												},
 												body: JSON.stringify(
 													unserialized
-												),
+												)
 											}
 										).then((response) => {
 											if (response.status === 200) {
@@ -238,25 +235,29 @@ const CustomizerOptionsManager = () => {
 										})
 									} catch (e) {}
 								}
-							}}>
+							}}
+						>
 							{isImporting ? (
 								<svg
 									width="14"
 									height="14"
-									viewBox="0 0 100 100">
+									viewBox="0 0 100 100"
+								>
 									<g transform="translate(50,50)">
 										<g transform="scale(1)">
 											<circle
 												cx="0"
 												cy="0"
 												r="50"
-												fill="currentColor"></circle>
+												fill="currentColor"
+											></circle>
 											<circle
 												cx="0"
 												cy="-26"
 												r="12"
 												fill="var(--ui-accent-color)"
-												transform="rotate(161.634)">
+												transform="rotate(161.634)"
+											>
 												<animateTransform
 													attributeName="transform"
 													type="rotate"
@@ -265,7 +266,8 @@ const CustomizerOptionsManager = () => {
 													keyTimes="0;1"
 													dur="1s"
 													begin="0s"
-													repeatCount="indefinite"></animateTransform>
+													repeatCount="indefinite"
+												></animateTransform>
 											</circle>
 										</g>
 									</g>
@@ -300,7 +302,8 @@ const CustomizerOptionsManager = () => {
 									onClick={(e) => {
 										e.preventDefault()
 										setIsCopyingOptions('child')
-									}}>
+									}}
+								>
 									{__(
 										'Copy From Child Theme',
 										'blocksy-companion'
@@ -320,7 +323,8 @@ const CustomizerOptionsManager = () => {
 									onClick={(e) => {
 										e.preventDefault()
 										setIsCopyingOptions('parent')
-									}}>
+									}}
+								>
 									{__(
 										'Copy From Parent Theme',
 										'blocksy-companion'
@@ -367,14 +371,16 @@ const CustomizerOptionsManager = () => {
 
 						<div
 							className="ct-modal-actions has-divider"
-							data-buttons="2">
+							data-buttons="2"
+						>
 							<button
 								onClick={(e) => {
 									e.preventDefault()
 									e.stopPropagation()
 									setIsCopyingOptions(false)
 								}}
-								className="button">
+								className="button"
+							>
 								{__('Cancel', 'blocksy-companion')}
 							</button>
 
@@ -392,10 +398,13 @@ const CustomizerOptionsManager = () => {
 									body.append('strategy', isCopyingOptions)
 
 									try {
-										fetch(window.ajaxurl, {
-											method: 'POST',
-											body,
-										}).then((response) => {
+										fetch(
+											`${window.ajaxurl}?nonce=${ct_customizer_localizations.customizer_reset_none}`,
+											{
+												method: 'POST',
+												body
+											}
+										).then((response) => {
 											if (response.status === 200) {
 												response
 													.json()
@@ -411,7 +420,8 @@ const CustomizerOptionsManager = () => {
 											}
 										})
 									} catch (e) {}
-								}}>
+								}}
+							>
 								{__('Yes, I am sure', 'blocksy-companion')}
 							</button>
 						</div>
@@ -438,7 +448,8 @@ const CustomizerOptionsManager = () => {
 
 						<div
 							className="ct-checkboxes-container"
-							data-type="grid:bordered">
+							data-type="grid:bordered"
+						>
 							{['options', 'widgets'].map((component) => (
 								<div
 									className="ct-checkbox-container"
@@ -454,23 +465,27 @@ const CustomizerOptionsManager = () => {
 											dataToExport.includes(component)
 												? dataToExport.filter(
 														(c) => c !== component
-												  )
+													)
 												: [...dataToExport, component]
 										)
-									}}>
+									}}
+								>
 									<span
 										className={classnames('ct-checkbox', {
 											active: dataToExport.includes(
 												component
-											),
-										})}>
+											)
+										})}
+									>
 										<svg
 											width="10"
 											height="8"
-											viewBox="0 0 11.2 9.1">
+											viewBox="0 0 11.2 9.1"
+										>
 											<polyline
 												className="check"
-												points="1.2,4.8 4.4,7.9 9.9,1.2 "></polyline>
+												points="1.2,4.8 4.4,7.9 9.9,1.2 "
+											></polyline>
 										</svg>
 									</span>
 									{
@@ -482,7 +497,7 @@ const CustomizerOptionsManager = () => {
 											widgets: __(
 												'Widgets settings',
 												'blocksy-companion'
-											),
+											)
 										}[component]
 									}
 								</div>
@@ -491,14 +506,16 @@ const CustomizerOptionsManager = () => {
 
 						<div
 							className="ct-modal-actions has-divider"
-							data-buttons="2">
+							data-buttons="2"
+						>
 							<button
 								onClick={(e) => {
 									e.preventDefault()
 									e.stopPropagation()
 									setIsExporting(false)
 								}}
-								className="button">
+								className="button"
+							>
 								{__('Cancel', 'blocksy-companion')}
 							</button>
 
@@ -522,10 +539,13 @@ const CustomizerOptionsManager = () => {
 									body.append('wp_customize', 'on')
 
 									try {
-										fetch(window.ajaxurl, {
-											method: 'POST',
-											body,
-										}).then((response) => {
+										fetch(
+											`${window.ajaxurl}?nonce=${ct_customizer_localizations.customizer_reset_none}`,
+											{
+												method: 'POST',
+												body
+											}
+										).then((response) => {
 											if (response.status === 200) {
 												response
 													.json()
@@ -538,7 +558,7 @@ const CustomizerOptionsManager = () => {
 															var blob = new Blob(
 																[data.data],
 																{
-																	type: 'application/octet-stream;charset=utf-8',
+																	type: 'application/octet-stream;charset=utf-8'
 																}
 															)
 
@@ -571,7 +591,8 @@ const CustomizerOptionsManager = () => {
 											}
 										})
 									} catch (e) {}
-								}}>
+								}}
+							>
 								{__('Export', 'blocksy-companion')}
 							</button>
 						</div>

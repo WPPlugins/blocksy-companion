@@ -3,125 +3,207 @@
 namespace Blocksy\Extensions\NewsletterSubscribe;
 
 class MailerliteNewProvider extends Provider {
-	public function fetch_lists($api_key, $api_url = '') {
-		if (! $api_key) {
-			return 'api_key_invalid';
+	private function get_double_optin_status_from_body( $body ) {
+		if ( ! is_array( $body ) ) {
+			return null;
 		}
 
-		$curl = curl_init();
+		if ( isset( $body['enabled'] ) ) {
+			return (bool) $body['enabled'];
+		}
 
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://connect.mailerlite.com/api/groups',
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => "",
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 30,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => "GET",
-			CURLOPT_HTTPHEADER => array(
-				"content-type: application/json",
-				"Authorization: Bearer " . $api_key
+		if ( isset( $body['double_optin'] ) ) {
+			return (bool) $body['double_optin'];
+		}
+
+		if ( isset( $body['data']['enabled'] ) ) {
+			return (bool) $body['data']['enabled'];
+		}
+
+		if ( isset( $body['data']['double_optin'] ) ) {
+			return (bool) $body['data']['double_optin'];
+		}
+
+		if ( isset( $body['settings']['double_optin'] ) ) {
+			return (bool) $body['settings']['double_optin'];
+		}
+
+		if ( isset( $body['data']['settings']['double_optin'] ) ) {
+			return (bool) $body['data']['settings']['double_optin'];
+		}
+
+		return null;
+	}
+
+	private function request( $method, $path, $api_key, $body = null ) {
+		$args = array(
+			'timeout'    => 30,
+			'method'     => $method,
+			'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:87.0) Gecko/20100101 Firefox/87.0',
+			'headers'    => array(
+				'Authorization' => 'Bearer ' . $api_key,
+				'accept'        => 'application/json',
+				'content-type'  => 'application/json',
 			),
-		));
+		);
 
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
-
-		curl_close($curl);
-
-		if ($err) {
-			return 'api_key_invalid';
+		if ( ! is_null( $body ) ) {
+			$args['body'] = wp_json_encode( $body );
 		}
 
-		$response = json_decode($response, true);
+		$response = wp_remote_request(
+			'https://connect.mailerlite.com/api/' . ltrim( $path, '/' ),
+			$args
+		);
 
-		if (
-			isset($response['error'])
-			||
-			! isset($response['data'])
-			||
-			! is_array($response['data'])
-		) {
-			return 'api_key_invalid';
+		if ( is_wp_error( $response ) ) {
+			return array(
+				'error' => $response->get_error_message(),
+				'code'  => 0,
+				'body'  => array(),
+			);
 		}
 
-		return array_map(function($list) {
-			return [
-				'name' => $list['name'],
-				'id' => $list['id'],
-			];
-		}, $response['data']);
+		$decoded_body = json_decode( wp_remote_retrieve_body( $response ), true );
+
+		if ( ! is_array( $decoded_body ) ) {
+			$decoded_body = array();
+		}
+
+		return array(
+			'error' => null,
+			'code'  => wp_remote_retrieve_response_code( $response ),
+			'body'  => $decoded_body,
+		);
 	}
 
-	public function get_form_url_and_gdpr_for($maybe_custom_list = null) {
-		return [
-			'form_url' => '#',
-			'has_gdpr_fields' => false,
-			'provider' => 'mailerlite'
-		];
+	private function fetch_double_optin_status( $api_key ) {
+		if ( ! $api_key ) {
+			return false;
+		}
+
+		$cache_key = 'blocksy_ml_new_doi_' . md5( $api_key );
+		$cached    = get_transient( $cache_key );
+
+		if ( false !== $cached ) {
+			return '1' === $cached;
+		}
+
+		$response   = $this->request( 'GET', 'settings/double_optin', $api_key );
+		$is_enabled = false;
+
+		if ( ! $response['error'] && 200 === $response['code'] ) {
+			$detected = $this->get_double_optin_status_from_body( $response['body'] );
+
+			if ( ! is_null( $detected ) ) {
+				$is_enabled = $detected;
+			}
+		}
+
+		if ( ! $response['error'] && 404 === $response['code'] ) {
+			$response = $this->request( 'GET', 'account', $api_key );
+			$detected = $this->get_double_optin_status_from_body( $response['body'] );
+
+			if (
+				! $response['error']
+				&&
+				200 === $response['code']
+				&&
+				! is_null( $detected )
+			) {
+				$is_enabled = $detected;
+			}
+		}
+
+		set_transient( $cache_key, $is_enabled ? '1' : '0', 5 * MINUTE_IN_SECONDS );
+
+		return $is_enabled;
 	}
 
-	public function subscribe_form($args = []) {
-		$args = wp_parse_args($args, [
-			'email' => '',
-			'name' => '',
-			'group' => ''
-		]);
+	// phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable
+	public function fetch_lists( $api_key, $api_url = '' ) {
+		if ( ! $api_key ) {
+			return new \WP_Error( 'api_key_missing', __( 'Please enter an API key.', 'blocksy-companion' ) );
+		}
+
+		$response = $this->request( 'GET', 'groups', $api_key );
+
+		if ( $response['error'] || 200 !== $response['code'] ) {
+			return $this->get_api_error( $response, $api_key );
+		}
+
+		if ( ! isset( $response['body']['data'] ) || ! is_array( $response['body']['data'] ) ) {
+			return $this->get_api_error( $response, $api_key );
+		}
+
+		$double_optin = $this->fetch_double_optin_status( $api_key );
+
+		return array_map(
+			function ( $mailing_list ) use ( $double_optin ) {
+				return array(
+					'name'         => $mailing_list['name'],
+					'id'           => $mailing_list['id'],
+					'double_optin' => $double_optin,
+				);
+			},
+			$response['body']['data']
+		);
+	}
+
+	public function subscribe_form( $args = array() ) {
+		$args = wp_parse_args(
+			$args,
+			array(
+				'email'        => '',
+				'name'         => '',
+				'group'        => '',
+				'double_optin' => false,
+			)
+		);
 
 		$settings = $this->get_settings();
 
-		$curl = curl_init();
-
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://connect.mailerlite.com/api/subscribers',
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => "",
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 30,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => "POST",
-			CURLOPT_POSTFIELDS => json_encode([
-				'email' => $args['email'],
-				'fields' => [
-					'name' => $args['name']
-				],
-				'groups' => [
-					$args['group']
-				]
-			]),
-			CURLOPT_HTTPHEADER => array(
-				"content-type: application/json",
-				"Authorization: Bearer " . $settings['api_key']
+		$payload = array(
+			'email'  => $args['email'],
+			'fields' => array(
+				'name' => $args['name'],
 			),
-		));
+			'groups' => array(
+				$args['group'],
+			),
+		);
 
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
-
-		curl_close($curl);
-
-		if ($err) {
-			return [
-				'result' => 'no',
-				'error' => $err
-			];
+		if ( $args['double_optin'] ) {
+			$payload['status'] = 'unconfirmed';
 		}
 
-		$response = json_decode($response, true);
+		$response = $this->request(
+			'POST',
+			'subscribers',
+			$settings['api_key'],
+			$payload
+		);
 
-		if (isset($response['error'])) {
-			return [
-				// 'response' => $response,
-				'result' => 'no',
-				'message' => $response['error']['message']
-			];
+		if ( $response['error'] || ! in_array( $response['code'], array( 200, 201 ), true ) ) {
+			return array(
+				'result'  => 'no',
+				'message' => isset( $response['body']['message'] ) ? $response['body']['message'] : NewsletterMessages::unable_to_subscribe(),
+				'error'   => $response['error'],
+			);
 		}
 
-		return [
-			// 'response' => $response,
-			'result' => 'yes',
-			'message' => __('Thank you for subscribing to our newsletter!', 'blocksy-companion')
-		];
+		$status = $response['body']['data']['status'] ?? '';
+
+		if ( 'unconfirmed' === $status ) {
+			return array(
+				'result'  => 'yes',
+				'message' => NewsletterMessages::confirm_subscription(),
+			);
+		}
+
+		return array(
+			'result'  => 'yes',
+			'message' => NewsletterMessages::subscribed_successfully(),
+		);
 	}
 }
-
