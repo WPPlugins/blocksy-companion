@@ -1,4 +1,4 @@
-import { createElement, memo, useState } from '@wordpress/element'
+import { createElement, memo, useState, RawHTML } from '@wordpress/element'
 import { __ } from 'ct-i18n'
 
 import { list, grid } from '@wordpress/icons'
@@ -6,6 +6,7 @@ import { list, grid } from '@wordpress/icons'
 import classnames from 'classnames'
 import { useSelect } from '@wordpress/data'
 import { Spinner, ToolbarGroup, PanelBody } from '@wordpress/components'
+import { OptionsPanel } from 'blocksy-options'
 import { useFlexySlider } from '../../hooks/use-flexy-slider'
 
 import {
@@ -21,7 +22,7 @@ import {
 
 import { useTaxBlockData } from '../tax-query/hooks/use-tax-block-data'
 import RangeControl from '../../components/RangeControl'
-import { SlideshowArrows } from '../post-template/Edit'
+import { SlideshowArrows, SlideshowPills } from '../post-template/Edit'
 import { getVariablesDefinitions } from './variables'
 
 import { getStylesForBlock } from '../../utils/css'
@@ -32,9 +33,17 @@ const TEMPLATE = [
 	// ['core/post-excerpt'],
 ]
 
-export function TaxTemplateInnerBlocks({ isSlideshow, elementDescriptor }) {
+export function TaxTemplateInnerBlocks({
+	isSlideshow,
+	termId,
+	elementDescriptor,
+}) {
 	const innerBlocksProps = useInnerBlocksProps(
-		{ className: 'wp-block-term is-layout-flow' },
+		{
+			className: classnames('wp-block-term is-layout-flow', [
+				// `ct-term-${termId}`,
+			]),
+		},
 		{ template: TEMPLATE, __unstableDisableLayoutClassNames: true }
 	)
 
@@ -58,11 +67,14 @@ function TaxTemplateBlockPreview({
 	isSlideshow,
 	elementDescriptor,
 	setActiveBlockContextId,
+	termId,
 }) {
 	const blockPreviewProps = useBlockPreview({
 		blocks,
 		props: {
-			className: 'wp-block-term is-layout-flow',
+			className: classnames('wp-block-term is-layout-flow', [
+				// `ct-term-${termId}`,
+			]),
 		},
 	})
 
@@ -116,7 +128,13 @@ const Edit = ({
 	context,
 	__unstableLayoutClassNames,
 }) => {
-	const { postId, has_slideshow, has_slideshow_arrows, uniqueId } = context
+	const {
+		postId,
+		has_slideshow,
+		has_slideshow_arrows,
+		has_slideshow_pills,
+		uniqueId,
+	} = context
 
 	const [activeBlockContextId, setActiveBlockContextId] = useState()
 
@@ -148,6 +166,7 @@ const Edit = ({
 
 	const sliderDescriptor = useFlexySlider({
 		isSlideshow,
+		hasSlideshowPills: has_slideshow_pills === 'yes',
 		attributes,
 		context,
 		toWatch: blockData ? blockData.all_terms : {},
@@ -231,6 +250,7 @@ const Edit = ({
 						(activeBlockContextId || blockContexts[0]?.termId) ? (
 							<TaxTemplateInnerBlocks
 								isSlideshow={isSlideshow}
+								termId={blockContext.termId}
 								elementDescriptor={
 									elementDescriptorForIndex
 										? elementDescriptorForIndex(index)
@@ -244,6 +264,7 @@ const Edit = ({
 							blockContextId={blockContext.termId}
 							setActiveBlockContextId={setActiveBlockContextId}
 							isSlideshow={isSlideshow}
+							termId={blockContext.termId}
 							elementDescriptor={
 								elementDescriptorForIndex
 									? elementDescriptorForIndex(index)
@@ -313,6 +334,29 @@ const Edit = ({
 						/>
 					</PanelBody>
 				) : null}
+
+				<PanelBody>
+					<OptionsPanel
+						purpose="gutenberg"
+						onChange={(optionId, optionValue) => {
+							setAttributes({
+								[optionId]: optionValue,
+							})
+						}}
+						options={{
+							has_item_link: {
+								type: 'ct-switch',
+								label: __(
+									'Link to archive page',
+									'blocksy-companion'
+								),
+								value: '',
+							},
+						}}
+						value={attributes}
+						hasRevertButton={false}
+					/>
+				</PanelBody>
 			</InspectorControls>
 
 			<div {...blockProps}>
@@ -340,9 +384,21 @@ const Edit = ({
 								sliderDescriptor={sliderDescriptor}
 							/>
 						</div>
+
+						<SlideshowPills
+							has_slideshow_pills={
+								has_slideshow_pills === 'yes'
+							}
+							sliderDescriptor={sliderDescriptor}
+							pillsCount={blockContexts.length}
+						/>
 					</div>
 				)}
 			</div>
+
+			{blockData && context.has_pagination === 'yes' && !isSlideshow && (
+				<RawHTML>{blockData.pagination_output}</RawHTML>
+			)}
 
 			{blockStyles ? blockStyles : null}
 		</>

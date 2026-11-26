@@ -1,5 +1,9 @@
 <?php
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 $current_screen = get_current_screen();
 
 if ($current_screen && $current_screen->id === 'update-core') {
@@ -25,31 +29,43 @@ if ($is_theme_version_ok && ! $is_companion_version_ok) {
 
 	$slug = plugin_basename(BLOCKSY__FILE__);
 
-	if (blc_can_use_premium_code()) {
+	if (blocksy_companion_can_use_premium_code()) {
 		$product_name = 'Blocksy Companion Pro plugin';
 	}
 }
 
 $messages = [
 	'title' => sprintf(
+		// translators: %s is the product name (theme or plugin)
 		__('Action required - please update %s to the latest version!', 'blocksy-companion'),
 		$product_name
 	),
 
 	'description' => sprintf(
+		// translators: %s is the product name (theme or plugin)
 		__('We detected that you are using an outdated version of %s.', 'blocksy-companion'),
 		$product_name
 	),
 
 	'action' => sprintf(
+		// translators: %s is the product name (theme or plugin)
 		__('In order to take full advantage of all features the core has to offer - please install and activate the latest version of %s.', 'blocksy-companion'),
 		$product_name
 	)
 ];
 
+$notice_attrs = blocksy_companion_attr_to_html([
+	'class' => 'notice notice-blocksy-theme-version-mismatch',
+	'data-slug' => $slug,
+	'data-product-name' => $product_name
+]);
+
 ?>
 
-<div class="notice notice-blocksy-theme-version-mismatch" data-slug="<?php echo $slug ?>" data-product-name="<?php echo $product_name ?>">
+<div <?php
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo $notice_attrs;
+?>>
 	<div class="ct-theme-required">
 		<h2>
 			<span>
@@ -58,15 +74,15 @@ $messages = [
 				</svg>
 			</span>
 
-			<?php echo $messages['title']; ?>
+			<?php echo wp_kses_post($messages['title']); ?>
 		</h2>
 
 		<p>
-			<?php echo $messages['description']; ?>
+			<?php echo wp_kses_post($messages['description']); ?>
 		</p>
 
 		<p>
-			<?php echo $messages['action']; ?>
+			<?php echo wp_kses_post($messages['action']); ?>
 		</p>
 	</div>
 

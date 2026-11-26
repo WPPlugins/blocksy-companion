@@ -1,87 +1,99 @@
 <?php
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound, VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable -- view scope, variables come from blocksy_companion_render_view()
 
-$POSITION_CLASSNAMES = [
-	'top left' => 'is-position-top-left',
-	'top center' => 'is-position-top-center',
-	'top right' => 'is-position-top-right',
-	'center left' => 'is-position-center-left',
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$position_classnames = array(
+	'top left'      => 'is-position-top-left',
+	'top center'    => 'is-position-top-center',
+	'top right'     => 'is-position-top-right',
+	'center left'   => 'is-position-center-left',
 	'center center' => 'is-position-center-center',
-	'center right' => 'is-position-center-right',
-	'bottom left' => 'is-position-bottom-left',
+	'center right'  => 'is-position-center-right',
+	'bottom left'   => 'is-position-bottom-left',
 	'bottom center' => 'is-position-bottom-center',
-	'bottom right' => 'is-position-bottom-right',
-];
+	'bottom right'  => 'is-position-bottom-right',
+);
 
-$wrapper_attr = [
+$wrapper_attr = array(
 	'class' => 'wp-block-cover ct-dynamic-cover',
-	'style' => ''
-];
+	'style' => '',
+);
 
-$aspect_ratio = blocksy_akg('aspectRatio', $attributes, 'auto');
-$minimum_height = blocksy_akg('minimumHeight', $attributes, '');
-$size_slug = blocksy_akg('sizeSlug', $attributes, 'full');
+$aspect_ratio = blocksy_companion_sanitize_aspect_ratio(
+	blocksy_companion_akg( 'aspectRatio', $attributes, 'auto' )
+);
 
-$has_parallax = blocksy_akg('hasParallax', $attributes, false);
-$is_repeated = blocksy_akg('isRepeated', $attributes, false);
-$allow_custom_content_and_wide_size = blocksy_akg('allowCustomContentAndWideSize', $attributes, true);
+if ( ! $aspect_ratio ) {
+	$aspect_ratio = 'auto';
+}
 
-$focal_point = blocksy_akg('focalPoint', $attributes, []);
-$content_position = blocksy_akg('contentPosition', $attributes, 'center center');
+$minimum_height = blocksy_companion_sanitize_css_length(
+	blocksy_companion_akg( 'minimumHeight', $attributes, '' )
+);
+$size_slug      = blocksy_companion_akg( 'sizeSlug', $attributes, 'full' );
+
+$has_parallax                       = blocksy_companion_akg( 'hasParallax', $attributes, false );
+$is_repeated                        = blocksy_companion_akg( 'isRepeated', $attributes, false );
+$allow_custom_content_and_wide_size = blocksy_companion_akg( 'allowCustomContentAndWideSize', $attributes, true );
+
+$focal_point      = blocksy_companion_akg( 'focalPoint', $attributes, array() );
+$content_position = blocksy_companion_akg( 'contentPosition', $attributes, 'center center' );
 
 if (
-	! empty($POSITION_CLASSNAMES[$content_position])
+	! empty( $position_classnames[ $content_position ] )
 	&&
-	$content_position !== 'center center'
+	'center center' !== $content_position
 ) {
-	$wrapper_attr['class'] .= ' has-custom-content-position ' . $POSITION_CLASSNAMES[$content_position];
+	$wrapper_attr['class'] .= ' has-custom-content-position ' . $position_classnames[ $content_position ];
 }
 
 $focal_point_result = '';
 
-if (! empty($focal_point)) {
-	$focal_point_result = $focal_point['x'] * 100 . '% ' . $focal_point['y'] * 100 . '%;';
+if ( ! empty( $focal_point ) ) {
+	$focal_point_result = (float) $focal_point['x'] * 100 . '% ' . (float) $focal_point['y'] * 100 . '%;';
 }
 
-$classes = [];
-
-if ($has_parallax) {
+if ( $has_parallax ) {
 	$wrapper_attr['class'] .= ' has-parallax';
 }
 
-if ($is_repeated) {
+if ( $is_repeated ) {
 	$wrapper_attr['class'] .= ' is-repeated';
 }
 
-if (! empty($attributes['imageAlign'])) {
-	$wrapper_attr['class'] .=  ' align' . $attributes['imageAlign'];
+if ( ! empty( $attributes['imageAlign'] ) ) {
+	$wrapper_attr['class'] .= ' align' . $attributes['imageAlign'];
 }
 
 $border_result = get_block_core_post_featured_image_border_attributes(
 	$attributes
 );
 
-if (! empty($border_result['class'])) {
+if ( ! empty( $border_result['class'] ) ) {
 	$wrapper_attr['class'] .= ' ' . $border_result['class'];
 }
 
-if (! empty($border_result['style'])) {
+if ( ! empty( $border_result['style'] ) ) {
 	$wrapper_attr['style'] .= $border_result['style'];
 }
 
-if ($aspect_ratio !== 'auto') {
+if ( 'auto' !== $aspect_ratio ) {
 	$wrapper_attr['style'] .= 'aspect-ratio: ' . $aspect_ratio . ';';
-	$minimum_height = 'unset';
+	$minimum_height         = 'unset';
 }
 
-if (! empty($minimum_height)) {
+if ( ! empty( $minimum_height ) ) {
 	$wrapper_attr['style'] .= 'min-height: ' . $minimum_height . ';';
 }
 
-$wrapper_attr = get_block_wrapper_attributes($wrapper_attr);
+$wrapper_attr = get_block_wrapper_attributes( $wrapper_attr );
 
-$img_attr = [
+$img_attr = array(
 	'class' => 'wp-block-cover__image-background wp-post-image',
-];
+);
 
 $image_result = '';
 
@@ -90,7 +102,7 @@ if (
 	&&
 	! $is_repeated
 ) {
-	if (! empty($focal_point_result)) {
+	if ( ! empty( $focal_point_result ) ) {
 		$img_attr['style'] = 'object-position: ' . $focal_point_result;
 	}
 
@@ -112,41 +124,41 @@ if (
 		$size_slug
 	);
 
-	$image_result = blocksy_html_tag(
+	$image_result = blocksy_companion_html_tag(
 		'div',
-		[
+		array(
 			'class' => "wp-block-cover__image-background wp-image-{$attachment_id} has-parallax",
-			'style' => 'background-image: url(' . $attachment[0] . ');background-position: 50% 50%;'
-		],
+			'style' => 'background-image: url(' . $attachment[0] . ');background-position: 50% 50%;',
+		),
 		''
 	);
 }
 
-$overlay_classes = [
+$overlay_classes = array(
 	'wp-block-cover__background',
-];
+);
 
-$overlay_atts = [
+$overlay_atts = array(
 	'aria-hidden' => 'true',
-];
+);
 
-$overlay_content = blocksy_html_tag(
+$overlay_content = blocksy_companion_html_tag(
 	'span',
 	array_merge(
-		[
-			'class' => join(' ', $overlay_classes),
-		],
+		array(
+			'class' => join( ' ', $overlay_classes ),
+		),
 		$overlay_atts
 	),
 	''
 );
 
-$inner_classes = [
+$inner_classes = array(
 	'wp-block-cover__inner-container',
-	wp_unique_id('ct-dynamic-cover__inner-')
-];
+	wp_unique_id( 'ct-dynamic-cover__inner-' ),
+);
 
-if ($allow_custom_content_and_wide_size) {
+if ( $allow_custom_content_and_wide_size ) {
 	$inner_classes[] = 'is-layout-constrained';
 	$inner_classes[] = 'wp-block-cover-is-layout-constrained';
 } else {
@@ -154,65 +166,64 @@ if ($allow_custom_content_and_wide_size) {
 	$inner_classes[] = 'wp-block-cover-is-layout-flow';
 }
 
-$content_size = blocksy_akg('contentSize', $attributes, 0);
-$wide_size = blocksy_akg('wideSize', $attributes, 0);
+$content_size = blocksy_companion_akg( 'contentSize', $attributes, 0 );
+$wide_size    = blocksy_companion_akg( 'wideSize', $attributes, 0 );
 
-if (! empty($content_size)) {
-	blc_call_gutenberg_function(
-		'wp_style_engine_get_stylesheet_from_css_rules',
-		[
-			[
-				[
-					'selector' => '.' . join('.', $inner_classes) . ' > :where(:not(.alignleft):not(.alignright):not(.alignfull))',
-					'declarations' => [
-						'max-width' => $content_size,
-						'margin-left' => 'auto !important',
-						'margin-right' => 'auto !important'
-					]
-				]
-			],
-			[
-				'context' => 'block-styles',
-				'prettify' => false,
-				'optimize' => true
-			]
-		]
+if ( ! empty( $content_size ) ) {
+	$css      = new \Blocksy_Css_Injector();
+	$selector = '.' . join( '.', $inner_classes ) . ' > :where(:not(.alignleft):not(.alignright):not(.alignfull))';
+
+	$css->put(
+		$selector,
+		'max-width: ' . $content_size
+	);
+
+	$css->put(
+		$selector,
+		'margin-left: auto !important'
+	);
+
+	$css->put(
+		$selector,
+		'margin-right: auto !important'
+	);
+
+	\Blocksy\Plugin::instance()->inline_styles_collector->add(
+		array(
+			'css' => $css,
+		)
 	);
 }
 
-if (! empty($wide_size)) {
-	blc_call_gutenberg_function(
-		'wp_style_engine_get_stylesheet_from_css_rules',
-		[
-			[
-				[
-					'selector' => '.' . join('.', $inner_classes) . ' > .alignwide',
-					'declarations' => [
-						'max-width' => $wide_size,
-					]
-				]
-			],
-			[
-				'context' => 'block-styles',
-				'prettify' => false,
-				'optimize' => true
-			]
-		]
+if ( ! empty( $wide_size ) ) {
+	$css = new \Blocksy_Css_Injector();
+
+	$css->put(
+		'.' . join( '.', $inner_classes ) . ' > .alignwide',
+		'max-width: ' . $wide_size
+	);
+
+	\Blocksy\Plugin::instance()->inline_styles_collector->add(
+		array(
+			'css' => $css,
+		)
 	);
 }
 
-$content = blocksy_html_tag(
+$content = blocksy_companion_html_tag(
 	'div',
 	$wrapper_attr,
 	$overlay_content .
 	$image_result .
-	blocksy_html_tag(
+	blocksy_companion_html_tag(
 		'div',
-		[
-			'class' => join(' ', $inner_classes)
-		],
+		array(
+			'class' => join( ' ', $inner_classes ),
+		),
 		$content
 	)
 );
 
+wp_enqueue_style( 'wp-block-cover' );
+// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 echo $content;

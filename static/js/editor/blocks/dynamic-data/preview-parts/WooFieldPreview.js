@@ -20,16 +20,28 @@ import SkuPreview from './woo/SkuPreview'
 import BrandsPreview from './woo/BrandsPreview'
 
 import { useBlockSupportsCustom } from '../hooks/use-block-supports-custom'
+import AttributesPreview from './woo/AttributesPreview'
 
-const TextField = ({
+import ContentWithBeforeAndAfter from '../components/ContentWithBeforeAndAfter'
+
+const WooFieldPreviewWithContext = ({
 	fieldDescriptor,
+	fieldsDescriptor,
+
 	attributes,
 	attributes: { align, tagName: TagName, before, after, fallback },
+
 	postId,
 	postType,
 
+	termId,
+	taxonomy,
+
 	colors,
 }) => {
+	const ref = useRef(null)
+	const shadowMutationRef = useRef(null)
+
 	const { product, isLoading } =
 		wc.wcBlocksSharedContext.useProductDataContext()
 
@@ -37,6 +49,7 @@ const TextField = ({
 		className: classnames('ct-dynamic-data', {
 			[`has-text-align-${align}`]: align,
 		}),
+		ref,
 	})
 
 	const uniqueClass = blockProps.className
@@ -77,6 +90,10 @@ const TextField = ({
 		Component = SkuPreview
 	}
 
+	if (fieldDescriptor.id === 'attributes') {
+		Component = AttributesPreview
+	}
+
 	let css = ''
 
 	if (previewData.css) {
@@ -99,17 +116,19 @@ const TextField = ({
 					previewData.className
 				)}>
 				{css && <style>{css}</style>}
-				{before}
 
-				<Component
-					attributes={attributes}
-					postId={postId}
-					postType={postType}
-					fallback={fallback}
-					product={product}
-				/>
-
-				{after}
+				<ContentWithBeforeAndAfter before={before} after={after}>
+					<Component
+						attributes={attributes}
+						postId={postId}
+						postType={postType}
+						termId={termId}
+						taxonomy={taxonomy}
+						fallback={fallback}
+						fieldsDescriptor={fieldsDescriptor}
+						product={product}
+					/>
+				</ContentWithBeforeAndAfter>
 			</TagName>
 		)
 	}
@@ -122,7 +141,7 @@ const WooFieldPreview = (props) => {
 
 	const { withProductDataContext } = wc.wcBlocksSharedHocs
 
-	return withProductDataContext(TextField)({
+	return withProductDataContext(WooFieldPreviewWithContext)({
 		...props,
 		productId: postId,
 	})

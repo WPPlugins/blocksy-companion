@@ -64,6 +64,7 @@ export const getVariablesDefinitions = ({ attributes, context }) => {
 				selector: `[data-id='${uniqueId}']`,
 				variable: 'grid-columns-width',
 				unit: '',
+				responsive: true,
 			},
 
 			value: gridColumnsWidth,
@@ -72,7 +73,8 @@ export const getVariablesDefinitions = ({ attributes, context }) => {
 		if (!isSlideshow) {
 			variables.push({
 				variables: {
-					selector: `.editor-styles-wrapper [data-id='${uniqueId}'] :where(.is-layout-flow > *)`,
+					selector: `[data-id='${uniqueId}'] :where(.wp-block-term)`,
+					variableType: 'property',
 					variable: 'margin-block-end',
 					unit: '',
 				},

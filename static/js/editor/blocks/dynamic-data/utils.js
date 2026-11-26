@@ -1,22 +1,11 @@
+import { __unstableStripHTML as stripHTML } from '@wordpress/dom'
 import { __ } from 'ct-i18n'
 
-export const getLabelForProvider = (provider) => {
-	return (
-		{
-			wp: 'WordPress',
-			woo: 'WooCommerce',
-			acf: 'ACF',
-			metabox: 'MetaBox',
-			custom: __('Custom', 'blocksy-companion'),
-			toolset: 'Toolset',
-			jetengine: 'Jet Engine',
-			pods: 'Pods',
-			acpt: 'ACPT',
-		}[provider] || __('Unknown', 'blocksy-companion')
-	)
-}
-
 export const fieldIsImageLike = (fieldDescriptor) => {
+	if (!fieldDescriptor) {
+		return false
+	}
+
 	if (fieldDescriptor.provider === 'wp') {
 		return (
 			fieldDescriptor.id === 'featured_image' ||
@@ -27,6 +16,16 @@ export const fieldIsImageLike = (fieldDescriptor) => {
 	}
 
 	return fieldDescriptor.type === 'image'
+}
+
+export const fieldIsCustomField = (fieldDescriptor) => {
+	if (!fieldDescriptor) {
+		return false
+	}
+
+	return (
+		fieldDescriptor.provider !== 'wp' && fieldDescriptor.provider !== 'woo'
+	)
 }
 
 const POSITION_CLASSNAMES = {
@@ -72,4 +71,21 @@ export function getPositionClassName(contentPosition) {
 	}
 
 	return POSITION_CLASSNAMES[contentPosition]
+}
+
+/**
+ * Given a string of HTML representing serialized blocks, returns the plain
+ * text extracted after stripping the HTML of any tags and fixing line breaks.
+ *
+ * @param {string} html Serialized blocks.
+ * @return {string} The plain-text content with any html removed.
+ */
+export function toPlainText(html) {
+	// Manually handle BR tags as line breaks prior to `stripHTML` call
+	html = html.replace(/<br>/g, '\n')
+
+	const plainText = stripHTML(html).trim()
+
+	// Merge any consecutive line breaks
+	return plainText.replace(/\n\n+/g, '\n\n')
 }

@@ -24,10 +24,12 @@ const VideoIndicator = () => (
 	</span>
 )
 
+const normalizeCaption = (caption = '') => caption.replace(/<\/?p[^>]*>/g, '')
+
 const ImagePreview = ({
 	media,
 	url,
-	postId,
+	caption,
 
 	attributes,
 	attributes: {
@@ -39,6 +41,7 @@ const ImagePreview = ({
 		// has_field_link,
 		image_hover_effect,
 		videoThumbnail,
+		has_image_caption,
 		minimumHeight,
 		contentPosition,
 
@@ -59,8 +62,10 @@ const ImagePreview = ({
 	const gradientClass = __experimentalGetGradientClass(gradient)
 
 	const blockProps = useBlockProps({
-		className: classnames('ct-dynamic-media', {
+		className: classnames({
+			'ct-dynamic-media': viewType !== 'cover',
 			[`align${imageAlign}`]: imageAlign,
+			'ct-dynamic-cover': viewType === 'cover',
 			'wp-block-cover': viewType === 'cover',
 			'has-parallax': viewType === 'cover' && hasParallax,
 			[getPositionClassName(contentPosition)]:
@@ -124,6 +129,9 @@ const ImagePreview = ({
 	const hasInnerContent =
 		(media?.has_video && videoThumbnail === 'yes') ||
 		image_hover_effect !== 'none'
+
+	const maybeCaption = caption || media?.caption?.rendered
+	const normalizedCaption = normalizeCaption(maybeCaption)
 
 	if (viewType === 'cover') {
 		return (
@@ -195,7 +203,7 @@ const ImagePreview = ({
 		/>
 	)
 
-	if (!url || !postId) {
+	if (!url) {
 		content = (
 			<div
 				className={classnames('ct-dynamic-data-placeholder', {
@@ -210,7 +218,6 @@ const ImagePreview = ({
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 60 60"
 					preserveAspectRatio="none"
-					className="ct-dynamic-data-placeholder-illustration"
 					aria-hidden="true"
 					focusable="false">
 					<path
@@ -244,6 +251,15 @@ const ImagePreview = ({
 
 			{media?.has_video && videoThumbnail === 'yes' ? (
 				<VideoIndicator />
+			) : null}
+
+			{has_image_caption === 'yes' && normalizedCaption ? (
+				<figcaption
+					className="wp-element-caption"
+					dangerouslySetInnerHTML={{
+						__html: normalizedCaption,
+					}}
+				/>
 			) : null}
 		</figure>
 	)

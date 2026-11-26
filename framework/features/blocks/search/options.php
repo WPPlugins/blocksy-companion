@@ -1,6 +1,10 @@
 <?php
 
-$is_pro = function_exists('blc_fs') && blc_fs()->can_use_premium_code();
+if (! defined('ABSPATH')) {
+	exit;
+}
+
+$is_pro = function_exists('blocksy_companion_fs') && blocksy_companion_fs()->can_use_premium_code();
 
 $cpt_choices = [
 	'post' => __('Posts', 'blocksy-companion'),
@@ -17,7 +21,11 @@ if (class_exists('WooCommerce')) {
 	$cpt_options['product'] = true;
 }
 
-$all_cpts = blocksy_manager()->post_types->get_supported_post_types();
+$all_cpts = [];
+
+if (blocksy_companion_theme_functions()->blocksy_manager()) {
+	$all_cpts = blocksy_companion_theme_functions()->blocksy_manager()->post_types->get_supported_post_types();
+}
 
 if (function_exists('is_bbpress')) {
 	$all_cpts[] = 'forum';
@@ -25,11 +33,13 @@ if (function_exists('is_bbpress')) {
 	$all_cpts[] = 'reply';
 }
 
+if (class_exists('Tribe__Events__Main')) {
+	$all_cpts[] = 'tribe_events';
+}
+
 foreach ($all_cpts as $single_cpt) {
 	if (get_post_type_object($single_cpt)) {
-		$cpt_choices[$single_cpt] = get_post_type_labels(
-			get_post_type_object($single_cpt)
-		)->singular_name;
+		$cpt_choices[$single_cpt] = get_post_type_object($single_cpt)->labels->singular_name;
 	} else {
 		$cpt_choices[$single_cpt] = ucfirst($single_cpt);
 	}
@@ -37,7 +47,16 @@ foreach ($all_cpts as $single_cpt) {
 	$cpt_options[$single_cpt] = false;
 }
 
-$is_pro = function_exists('blc_fs') && blc_fs()->can_use_premium_code();
+foreach ($cpt_choices as $cpt => $value) {
+	$post_type_object = get_post_type_object($cpt);
+
+	if ($post_type_object && isset($post_type_object->show_in_rest) && $post_type_object->show_in_rest) {
+		continue;
+	}
+
+	unset($cpt_choices[$cpt]);
+	unset($cpt_options[$cpt]);
+}
 
 $options = [
 

@@ -2,6 +2,10 @@
 
 namespace Blocksy;
 
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 class DynamicCss {
 	private $wp_filesystem = null;
 
@@ -69,12 +73,16 @@ class DynamicCss {
 
 			if ($screen->base === 'plugins') {
 				if (
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					isset($_GET['activate-multi'])
 					||
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					isset($_GET['activate'])
 					||
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					isset($_GET['deactivate'])
 					||
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					isset($_GET['deactivate-multi'])
 				) {
 					$this->generate_css_files();
@@ -94,12 +102,21 @@ class DynamicCss {
 		// Will catch when the import is done and will refresh the dynamic CSS.
 		// All in One WP Migration compatibility.
 		add_action('ai1wm_status_import_done', function () {
+			/**
+			 * Fires when the dynamic CSS caches should be invalidated.
+			 *
+			 * Listeners drop their generated CSS files/transients so the
+			 * next request regenerates them.
+			 *
+			 * @since 1.6.2
+			 * @since 1.8.0 Renamed from `blocksy:dynamic-css:regenere_css_files`.
+			 */
 			do_action('blocksy:dynamic-css:refresh-caches');
 		});
 	}
 
 	public function should_use_files() {
-		return blocksy_get_theme_mod('dynamic_css_file', 'file') === 'file';
+		return blocksy_companion_theme_functions()->blocksy_get_theme_mod('dynamic_css_file', 'file') === 'file';
 	}
 
 	public function get_chunks() {
@@ -113,11 +130,15 @@ class DynamicCss {
 	}
 
 	public function enqueue_dynamic_css() {
-		if (is_admin()) {
+		if (
+			is_admin()
+			||
+			is_login()
+		) {
 			return;
 		}
 
-		if (defined('IFRAME_REQUEST') && IFRAME_REQUEST) {
+		if (! blocksy_companion_theme_functions()->blocksy_has_dynamic_css_in_frontend()) {
 			return;
 		}
 

@@ -1,4 +1,9 @@
 <?php
+
+if (! defined('ABSPATH')) {
+	exit;
+}
+
 /**
  * Options for socials widget.
  *
@@ -19,13 +24,13 @@ $options = [
 		'label' => __('Social Channels', 'blocksy-companion'),
 		'type' => 'ct-layers',
 		'manageable' => true,
-		'desc' => blocksy_safe_sprintf(
+		'desc' => blocksy_companion_safe_sprintf(
 			// translators: placeholder here means the actual URL.
 			__(
-				'Configure the social links in Customizer ➝ General ➝ %sSocial Network Accounts%s.',
+				'Configure the social links in Customizer ➝ General ➝ %1$sSocial Network Accounts%2$s.',
 				'blocksy-companion'
 			),
-			blocksy_safe_sprintf(
+			blocksy_companion_safe_sprintf(
 				'<a href="%s" data-trigger-section="general:social_section_options" target="_blank">',
 				admin_url(
 					'/customize.php?autofocus[section]=general&ct_autofocus=general:social_section_options'
@@ -51,6 +56,19 @@ $options = [
 			],
 		],
 
+		/**
+		 * Filters the social networks available in the block's networks picker.
+		 *
+		 * @since 2.0.49
+		 *
+		 * @param array $networks {
+		 *     Social networks, keyed by network id.
+		 *
+		 *     @type array $network {
+		 *         @type string $label Network label shown in the picker.
+		 *     }
+		 * }
+		 */
 		'settings' => apply_filters(
 			'blocksy:socials:options:icon',
 			blocksy_get_social_networks_list()
